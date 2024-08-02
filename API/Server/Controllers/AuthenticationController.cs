@@ -2,7 +2,7 @@
 
 namespace HealthSync.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/аuthentication")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
