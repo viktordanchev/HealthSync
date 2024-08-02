@@ -1,19 +1,14 @@
-using Infrastructure;
-using Microsoft.AspNetCore.Identity;
 using Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Add services to the container
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationDbContext(builder.Configuration);
-builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<HealthSyncDbContext>();
+builder.Services.AddApplicationAuthentication(builder.Configuration);
+builder.Services.AddApplicationIdentity();
 
 var app = builder.Build();
 
@@ -29,12 +24,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
-
-app.MapIdentityApi<IdentityUser>();
 
 app.Run();
