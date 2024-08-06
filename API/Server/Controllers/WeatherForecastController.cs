@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Server.Models;
 
 namespace HealthSync.Server.Controllers
 {
