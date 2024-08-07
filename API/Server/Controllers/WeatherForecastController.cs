@@ -4,7 +4,7 @@ using Server.Models;
 namespace HealthSync.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("weatherForecast")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

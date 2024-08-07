@@ -24,11 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Client\Client.esproj" />
-    <ProjectReference Include="..\Client\Client.esproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Client\Client.esproj" />
   </ItemGroup>
 
 </Project>

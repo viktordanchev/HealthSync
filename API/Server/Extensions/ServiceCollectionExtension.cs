@@ -1,4 +1,5 @@
 ﻿using Infrastructure;
+using Infrastructure.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace Server.Extensions
 
         public static void AddApplicationIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
