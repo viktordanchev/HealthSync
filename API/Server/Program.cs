@@ -1,4 +1,5 @@
 using Server.Extensions;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,9 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApplicationDbContext(builder.Configuration);
-builder.Services.AddApplicationAuthentication(builder.Configuration);
-builder.Services.AddApplicationIdentity();
+builder.Services.AddDbContext(builder.Configuration);
+builder.Services.AddAuthentication(builder.Configuration);
+builder.Services.AddIdentity();
+builder.Services.Configure<JsonSerializerOptions>(options => new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
 var app = builder.Build();
 

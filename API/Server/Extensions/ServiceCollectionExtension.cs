@@ -10,14 +10,14 @@ namespace Server.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static void AddApplicationDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<HealthSyncDbContext>(options =>
                 options.UseSqlServer(connectionString));
         }
 
-        public static void AddApplicationIdentity(this IServiceCollection services)
+        public static void AddIdentity(this IServiceCollection services)
         {
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -30,7 +30,7 @@ namespace Server.Extensions
             .AddEntityFrameworkStores<HealthSyncDbContext>();
         }
 
-        public static void AddApplicationAuthentication(this IServiceCollection services, IConfiguration configuration)
+        public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(o => o.TokenValidationParameters = new TokenValidationParameters

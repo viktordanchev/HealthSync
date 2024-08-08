@@ -1,8 +1,8 @@
-﻿using Infrastructure;
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Server.Models;
+using Server.Models.Account;
+using static Common.Errors;
 
 namespace HealthSync.Server.Controllers
 {
@@ -12,28 +12,59 @@ namespace HealthSync.Server.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
-        private HealthSyncDbContext _dbContext;
 
         public AccountController(UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager, 
-            HealthSyncDbContext dbContext)
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _dbContext = dbContext;
         }
 
-        [HttpPost]
-        public IActionResult Register([FromBody] UserRegister userRegister)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserRegister userRegister)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return Redirect("https://localhost:7080/weatherForecast");
+                return RedirectToAction("index", "home");
             }
 
-            
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("register");
+            }
 
-            return BadRequest();
+            var user = await _userManager.FindByEmailAsync(userRegister.Email);
+
+            if (user != null)
+            {
+                ModelState.AddModelError("Email", UsedEmail);
+
+                return RedirectToAction("register");
+            }
+
+            user = new ApplicationUser()
+            {
+                UserName = userRegister.Email,
+                Email = userRegister.Email,
+                FirstName = userRegister.FirstName,
+                LastName = userRegister.LastName,
+                //UCN = userRegister.UCN,
+                //PhoneNumber = userRegister.PhoneNumber
+            };
+
+            var result = await _userManager.CreateAsync(user);
+
+            if (!result.Succeeded) 
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                return RedirectToAction("register");
+            }
+
+            return Ok();
         }
     }
 }
