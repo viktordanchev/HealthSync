@@ -9,5 +9,6 @@
         public const string InvalidPhoneNumber = "Phone number is invalid!";
 
         public const string UsedEmail = "This email is already registered!";
+        public const string InvalidLoginData = "Invalid email or password!";
     }
 }
