@@ -2,7 +2,7 @@
 using static Common.Errors;
 using static Common.Validations.User;
 
-namespace Server.Models.Account
+namespace Core.Models.Account
 {
     public class UserRegister
     {
@@ -19,7 +19,7 @@ namespace Server.Models.Account
         public string LastName { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredField)]
-        [StringLength(UNCLength, ErrorMessage = InvalidUNCLength)]
+        [StringLength(UNCLength, MinimumLength = UNCLength, ErrorMessage = InvalidUNCLength)]
         public string UCN { get; set; } = null!;
 
         [Phone(ErrorMessage = InvalidPhoneNumber)]
