@@ -2,7 +2,7 @@
 {
     public static class Validations
     {
-        public static class ApplicationUser 
+        public static class User 
         {
             public const string NameMatch = @"^[A-Z][a-z]+$";
             public const int UNCLength = 10;

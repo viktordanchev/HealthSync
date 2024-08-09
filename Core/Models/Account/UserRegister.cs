@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Errors;
-using static Common.Validations.ApplicationUser;
+using static Common.Validations.User;
 
 namespace Server.Models.Account
 {
