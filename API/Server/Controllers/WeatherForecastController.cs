@@ -4,7 +4,7 @@ using Core.Models;
 namespace HealthSync.Server.Controllers
 {
     [ApiController]
-    [Route("weatherForecast")]
+    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -19,7 +19,7 @@ namespace HealthSync.Server.Controllers
             _logger = logger;
         }
 
-        [HttpGet("get")]
+        [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
