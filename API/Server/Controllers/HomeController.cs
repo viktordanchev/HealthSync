@@ -2,8 +2,8 @@
 
 namespace Server.Controllers
 {
-    [Route("home")]
     [ApiController]
+    [Route("home")]
     public class HomeController : ControllerBase
     {
         public HomeController()

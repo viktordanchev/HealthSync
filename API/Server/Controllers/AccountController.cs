@@ -10,8 +10,8 @@ using static Common.Errors;
 
 namespace HealthSync.Server.Controllers
 {
-    [Route("account")]
     [ApiController]
+    [Route("account")]
     public class AccountController : ControllerBase
     {
         private UserManager<ApplicationUser> _userManager;
