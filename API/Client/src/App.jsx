@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import Navigation from './components/Navigation.jsx';
+import Header from './components/Header.jsx';
 
 function App() {
 
     return (
         <div>
-            <h1>Weather forecast</h1>
-            <Navigation ime="Ivan" />
+            <Header />
         </div>
     );
 }
