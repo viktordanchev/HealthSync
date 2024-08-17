@@ -4,9 +4,11 @@ function Header() {
 
     return (
         <header>
-            <a href="#" class="text-3xl">
+            <a href="#">
                 Logo
             </a>
+            <p className="text-red-600 font-bold">Text</p>
+            <p className="text-red-600 font-bold">Text</p>
         </header>
     );
 }
