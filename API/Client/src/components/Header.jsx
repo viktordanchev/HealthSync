@@ -8,7 +8,7 @@ function Header() {
                 Logo
             </a>
             <p className="text-red-600 font-bold">Text</p>
-            <p className="text-red-600 font-bold">Text</p>
+            <p class="ft">Text</p>
         </header>
     );
 }
