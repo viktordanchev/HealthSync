@@ -42,7 +42,6 @@ export default defineConfig({
         }
     },
     server: {
-        open: 'chrome',
         proxy: {
             '^/weatherforecast': {
                 target,
