@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Header() {
-
     return (
         <header class="bg-maincolor m-6 mx-32 rounded-lg">
             <div class="container mx-auto flex justify-between items-center p-5">
