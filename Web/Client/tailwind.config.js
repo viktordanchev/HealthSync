@@ -5,6 +5,9 @@ module.exports = {
         extend: {
             colors: {
                 maincolor: '#01bfa5',
+            },
+            backgroundImage: {
+                'doctors-img': "url('./assets/doctors.png')"
             }
         }
     },
