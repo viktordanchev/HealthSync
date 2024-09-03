@@ -18,10 +18,6 @@ namespace Core.Models.Account
         [RegularExpression(NameMatch, ErrorMessage = InvalidName)]
         public string LastName { get; set; } = null!;
 
-        [Required(ErrorMessage = RequiredField)]
-        [StringLength(UNCLength, MinimumLength = UNCLength, ErrorMessage = InvalidUNCLength)]
-        public string UCN { get; set; } = null!;
-
         [Phone(ErrorMessage = InvalidPhoneNumber)]
         public string? PhoneNumber { get; set; }
 
