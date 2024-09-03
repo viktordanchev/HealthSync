@@ -30,6 +30,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors(x =>
+{
+    x.WithOrigins("https://localhost:5173");
+    x.AllowAnyHeader();
+    x.AllowAnyMethod();
+});
 
 app.MapFallbackToFile("/index.html");
 

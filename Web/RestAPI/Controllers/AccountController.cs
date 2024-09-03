@@ -55,7 +55,6 @@ namespace HealthSync.Server.Controllers
                 Email = userRegister.Email,
                 FirstName = userRegister.FirstName,
                 LastName = userRegister.LastName,
-                UCN = userRegister.UCN,
                 PhoneNumber = userRegister.PhoneNumber
             };
 
