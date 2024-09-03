@@ -23,14 +23,6 @@ namespace Infrastructure.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
-
-            migrationBuilder.AddColumn<string>(
-                name: "UCN",
-                table: "AspNetUsers",
-                type: "nvarchar(10)",
-                maxLength: 10,
-                nullable: false,
-                defaultValue: "");
         }
 
         /// <inheritdoc />
@@ -42,10 +34,6 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropColumn(
                 name: "LastName",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "UCN",
                 table: "AspNetUsers");
         }
     }

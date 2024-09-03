@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using static Common.Validations.User;
 
 namespace Infrastructure.Entities
 {
@@ -11,9 +10,5 @@ namespace Infrastructure.Entities
 
         [Required]
         public string LastName { get; set; } = null!;
-
-        [Required]
-        [MaxLength(UNCLength)]
-        public string UCN { get; set; } = null!;
     }
 }

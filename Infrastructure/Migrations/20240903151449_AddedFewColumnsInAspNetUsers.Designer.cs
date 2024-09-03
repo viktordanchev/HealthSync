@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20240809131156_AddedFewColumnsInAspNetUsers")]
+    [Migration("20240903151449_AddedFewColumnsInAspNetUsers")]
     partial class AddedFewColumnsInAspNetUsers
     {
         /// <inheritdoc />
@@ -80,11 +80,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UCN")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
