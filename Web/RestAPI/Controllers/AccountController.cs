@@ -1,5 +1,6 @@
 ﻿using Core.Models.Account;
 using Infrastructure.Entities;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -11,7 +12,7 @@ using static Common.Errors;
 namespace HealthSync.Server.Controllers
 {
     [ApiController]
-    [Route("account")]
+    [Route("api/account")]
     public class AccountController : ControllerBase
     {
         private UserManager<ApplicationUser> _userManager;
