@@ -4,6 +4,7 @@ import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(localStorage.jwtToken !== undefined || sessionStorage.jwtToken !== undefined);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -22,7 +23,7 @@ const Header = () => {
                         </a>
                     </li>
                     <li>
-                        <a href="#0" className="relative py-1 text-white font-bold text-xl text-inherit hover:text-gray-200 transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
+                        <a href="/home/da" className="relative py-1 text-white font-bold text-xl text-inherit hover:text-gray-200 transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
                             Home
                         </a>
                     </li>
@@ -37,14 +38,18 @@ const Header = () => {
                         </a>
                     </li>
                 </ul>
-                <div className="flex space-x-4 sm:hidden">
+                {isAuthenticated ? (<div className="flex space-x-4 sm:hidden">
+                    <a href="/account/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
+                        ima
+                    </a>
+                </div>) : (<div className="flex space-x-4 sm:hidden">
                     <a href="/account/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
                         Login
                     </a>
                     <a href="/account/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
                         Register
                     </a>
-                </div>
+                </div>)}
                 <button
                     onClick={toggleMenu}
                     className={`hidden ${isMenuOpen ? 'hidden' : 'sm:block'}`}

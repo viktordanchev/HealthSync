@@ -1,6 +1,16 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/home/da');
+        }
+    }, [navigate]);
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -8,6 +18,7 @@ function Register() {
         password: '',
         confirmPassword: '',
     });
+    const [message, setMessage] = useState('');
 
     const handleChange = (e) => {
         setFormData({
@@ -19,21 +30,41 @@ function Register() {
     const register = async (e) => {
         e.preventDefault();
 
-        await fetch('https://localhost:7080/api/account/register', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
+        try {
+            const response = await fetch('https://localhost:7080/api/account/register', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                setFormData({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                });
+
+                setMessage('Registered user');
+            } else {
+                setMessage('Failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setMessage('Failed');
+        }
+
+        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (
         <>
             {message !== '' ? (
-                <div className="flex justify-center transform translate-y-10 opacity-0 transition-all duration-500 ease-in-out"
-                    style={{ transform: message !== '' ? 'translateY(0)' : 'translateY(40px)', opacity: message !== '' ? 1 : 0 }}>
-                    <div className="w-1/6 text-center text-white text-xl bg-green-500 rounded-xl p-4">
+                <div className="flex justify-center">
+                    <div className="max-w-xs text-center text-white text-xl bg-green-500 rounded-xl p-4">
                         {message}
                     </div>
                 </div>
@@ -53,7 +84,6 @@ function Register() {
                                     className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
                                     type="text"
                                     name="firstName"
-                                    id="firstName"
                                     value={formData.firstName}
                                     onChange={handleChange}
                                     required />
@@ -66,7 +96,6 @@ function Register() {
                                     className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
                                     type="text"
                                     name="lastName"
-                                    id="lastName"
                                     value={formData.lastName}
                                     onChange={handleChange}
                                     required />
@@ -80,7 +109,6 @@ function Register() {
                                 className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
                                 type="email"
                                 name="email"
-                                id="email"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required />
@@ -93,7 +121,6 @@ function Register() {
                                 className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
                                 type="password"
                                 name="password"
-                                id="password"
                                 value={formData.password}
                                 onChange={handleChange}
                                 required />
@@ -106,7 +133,6 @@ function Register() {
                                 className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
                                 type="password"
                                 name="confirmPassword"
-                                id="confirmPassword"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
                                 required />
@@ -122,7 +148,7 @@ function Register() {
                 </div>
             </section>
         </>
-    )
+    );
 }
 
 export default Register;

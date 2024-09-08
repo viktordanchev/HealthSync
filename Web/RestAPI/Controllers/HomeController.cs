@@ -9,5 +9,12 @@ namespace Server.Controllers
         public HomeController()
         {
         }
+
+
+        [HttpGet("da")]
+        public IActionResult Da()
+        {
+            return Ok();
+        }
     }
 }

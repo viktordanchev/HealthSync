@@ -57,8 +57,7 @@ namespace HealthSync.Server.Controllers
                 UserName = userRegister.Email,
                 Email = userRegister.Email,
                 FirstName = userRegister.FirstName,
-                LastName = userRegister.LastName,
-                PhoneNumber = userRegister.PhoneNumber
+                LastName = userRegister.LastName
             };
 
             var result = await _userManager.CreateAsync(user, userRegister.Password);
@@ -73,22 +72,15 @@ namespace HealthSync.Server.Controllers
                 return RedirectToAction("register");
             }
 
-            _logger.LogInformation("Successfully registered user.");
-
             return Ok();
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("index", "home");
-            }
-
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("login");
+                return BadRequest(ModelState);
             }
 
             var user = await _userManager.FindByEmailAsync(userLogin.Email);
@@ -97,7 +89,7 @@ namespace HealthSync.Server.Controllers
             {
                 ModelState.AddModelError("Email", InvalidLoginData);
 
-                return NotFound("nema");
+                return NotFound(ModelState);
             }
 
             var result = await _signInManager
@@ -110,9 +102,14 @@ namespace HealthSync.Server.Controllers
                 return NotFound("login");
             }
 
-            var token = GenerateJWT(user);
+            var jwtToken = GenerateJWT(user);
 
-            return Ok(token);
+            return Ok(
+                new
+                {
+                    redirectTo = "/home/da",
+                    jwtToken
+                });
         }
 
         private string GenerateJWT(ApplicationUser user)
