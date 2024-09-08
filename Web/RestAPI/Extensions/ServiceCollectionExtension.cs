@@ -46,13 +46,15 @@ namespace Server.Extensions
                 });
         }
 
-        public static void AddCorsExtension(this IServiceCollection services)
+        public static void AddCorsExtension(this IServiceCollection services, IConfiguration configuration)
         {
+            var origin = configuration.GetValue<string>("AccessControlAllowOrigin");
+
             services.AddCors(options =>
             {
                 options.AddPolicy("Cors", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins(origin)
                            .AllowAnyMethod()
                            .AllowAnyHeader();
                 });

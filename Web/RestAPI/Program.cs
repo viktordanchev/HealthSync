@@ -9,7 +9,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext(builder.Configuration);
 builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddIdentity();
-builder.Services.AddCorsExtension();
+builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.Configure<JsonSerializerOptions>(options => new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
 var app = builder.Build();

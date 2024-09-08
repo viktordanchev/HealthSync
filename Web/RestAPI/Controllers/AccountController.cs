@@ -1,6 +1,5 @@
 ﻿using Core.Models.Account;
 using Infrastructure.Entities;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -18,14 +17,17 @@ namespace HealthSync.Server.Controllers
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private IConfiguration _configuration;
+        private readonly ILogger<AccountController> _logger;
 
         public AccountController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _logger = logger;
         }
 
         [HttpPost("register")]
@@ -47,7 +49,7 @@ namespace HealthSync.Server.Controllers
             {
                 ModelState.AddModelError("Email", UsedEmail);
 
-                return RedirectToAction("register");
+                return BadRequest(ModelState);
             }
 
             user = new ApplicationUser()
@@ -70,6 +72,8 @@ namespace HealthSync.Server.Controllers
 
                 return RedirectToAction("register");
             }
+
+            _logger.LogInformation("Successfully registered user.");
 
             return Ok();
         }
