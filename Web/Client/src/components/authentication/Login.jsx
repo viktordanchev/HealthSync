@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as Cookies from 'js-cookie';
 
 function Login() {
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const jwtTokenLocal = localStorage.getItem('jwtToken');
-        const jwtTokenSession = sessionStorage.getItem('jwtToken');
-        if (jwtTokenLocal || jwtTokenSession) {
-            navigate('/home/da');
-        }
-    }, [navigate]);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -35,23 +28,18 @@ function Login() {
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
+                credentials: 'include'
             });
 
             if (response.ok) {
                 var data = await response.json();
 
-                if (formData.rememberMe) {
-                    localStorage.setItem('jwtToken', data.jwtToken);
-                } else {
-                    sessionStorage.setItem('jwtToken', data.jwtToken);
-                }
-
                 if (data.redirectTo) {
                     navigate(data.redirectTo);
                 }
             }
-        } catch (error) {
+        } catch (error) {e
             console.error('Error:', error);
         }
     };

@@ -1,20 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Controllers
 {
     [ApiController]
-    [Route("home")]
+    [Route("api/home")]
     public class HomeController : ControllerBase
     {
         public HomeController()
         {
         }
 
-
         [HttpGet("da")]
         public IActionResult Da()
         {
-            return Ok();
+            return Ok(new { data = "text nqkuv" });
         }
     }
 }
