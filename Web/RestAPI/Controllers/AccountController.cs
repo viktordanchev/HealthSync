@@ -102,17 +102,12 @@ namespace HealthSync.Server.Controllers
                 return NotFound("login");
             }
 
-            var jwtToken = GenerateJWT(user);
+            GenerateJWT(user);
 
-            return Ok(
-                new
-                {
-                    redirectTo = "/home/da",
-                    jwtToken
-                });
+            return Ok(new { redirectTo = "/home/da" });
         }
 
-        private string GenerateJWT(ApplicationUser user)
+        private void GenerateJWT(ApplicationUser user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -131,7 +126,17 @@ namespace HealthSync.Server.Controllers
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: credentials);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+            HttpContext.Response.Cookies.Append("jwtToken", jwtToken,
+                new CookieOptions
+                {
+                    Expires = DateTime.Now.AddMinutes(30),
+                    HttpOnly = true,
+                    Secure = true,
+                    IsEssential = true,
+                    SameSite = SameSiteMode.None,
+                });
         }
     }
 }

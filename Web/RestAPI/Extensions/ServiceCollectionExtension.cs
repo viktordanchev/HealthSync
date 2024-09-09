@@ -32,8 +32,18 @@ namespace Server.Extensions
 
         public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(o => o.TokenValidationParameters = new TokenValidationParameters
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddCookie(options =>
+            {
+                options.Cookie.Name = "token";
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     RequireExpirationTime = true,
                     ValidateIssuer = true,
@@ -43,7 +53,16 @@ namespace Server.Extensions
                     ValidIssuer = configuration["Jwt:Issuer"],
                     ValidAudience = configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
-                });
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        context.Token = context.Request.Cookies["jwtToken"];
+                        return Task.CompletedTask;
+                    }
+                };
+            });
         }
 
         public static void AddCorsExtension(this IServiceCollection services, IConfiguration configuration)
@@ -56,7 +75,8 @@ namespace Server.Extensions
                 {
                     builder.WithOrigins(origin)
                            .AllowAnyMethod()
-                           .AllowAnyHeader();
+                           .AllowAnyHeader()
+                           .AllowCredentials();
                 });
             });
         }

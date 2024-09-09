@@ -25,12 +25,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("Cors");
-
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("Cors");
+
+app.UseCookiePolicy();
 
 app.MapFallbackToFile("/index.html");
 
