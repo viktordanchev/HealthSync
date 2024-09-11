@@ -13,7 +13,7 @@ const Header = () => {
     return (
         <header className="relative bg-maincolor mt-6 rounded-xl p-5 mx-32 md:mx-16 sm:mx-6">
             <div className="flex justify-between items-center">
-                <a href="#" className="text-white font-bold text-3xl hover:text-gray-200 transition duration-300 md:text-2xl sm:text-xl">
+                <a href="/home" className="text-white font-bold text-3xl hover:text-gray-200 transition duration-300 md:text-2xl sm:text-xl">
                     HealthSync
                 </a>
                 <ul className="flex flex-row w-2/4 justify-between sm:hidden">
@@ -23,7 +23,7 @@ const Header = () => {
                         </a>
                     </li>
                     <li>
-                        <a href="/home/da" className="relative py-1 text-white font-bold text-xl text-inherit hover:text-gray-200 transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
+                        <a href="#0" className="relative py-1 text-white font-bold text-xl text-inherit hover:text-gray-200 transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
                             Home
                         </a>
                     </li>

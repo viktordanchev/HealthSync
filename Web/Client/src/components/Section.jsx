@@ -4,7 +4,7 @@ function Section() {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        fetch('https://localhost:7080/api/home/da', {
+        fetch('https://localhost:7080/api/home', {
             method: 'GET',
             credentials: 'include'
         })
