@@ -7,8 +7,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext(builder.Configuration);
-builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddIdentity();
+builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.Configure<JsonSerializerOptions>(options => new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
@@ -31,8 +31,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors("Cors");
-
-app.UseCookiePolicy();
 
 app.MapFallbackToFile("/index.html");
 

@@ -37,10 +37,6 @@ namespace Server.Extensions
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddCookie(options =>
-            {
-                options.Cookie.Name = "token";
-            })
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -62,6 +58,15 @@ namespace Server.Extensions
                         return Task.CompletedTask;
                     }
                 };
+            });
+
+            //Configure AspNetCore.Identity.Application cookie to expire when jwtToken expires
+            var expireTime = configuration.GetValue<int>("CookieSettings:ExpireTimeSpanMinutes");
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(expireTime);
             });
         }
 

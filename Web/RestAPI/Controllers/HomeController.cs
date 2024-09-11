@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/home")]
     public class HomeController : ControllerBase
@@ -11,8 +12,8 @@ namespace Server.Controllers
         {
         }
 
-        [HttpGet("da")]
-        public IActionResult Da()
+        [HttpGet]
+        public IActionResult Index()
         {
             return Ok(new { data = "text nqkuv" });
         }

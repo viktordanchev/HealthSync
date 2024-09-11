@@ -11,11 +11,9 @@ namespace Core.Models.Account
         public string Email { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredField)]
-        [RegularExpression(NameMatch, ErrorMessage = InvalidName)]
         public string FirstName { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredField)]
-        [RegularExpression(NameMatch, ErrorMessage = InvalidName)]
         public string LastName { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredField)]
