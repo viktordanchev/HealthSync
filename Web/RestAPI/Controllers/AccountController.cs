@@ -104,13 +104,22 @@ namespace HealthSync.Server.Controllers
 
             GenerateJWT(user);
 
-            return Ok(new { redirectTo = "/home/da" });
+            return Ok(new { redirectTo = "/home" });
+        }
+
+        [HttpGet("isTokenExpired")]
+        public IActionResult IsTokenExpired()
+        {
+            Request.Cookies.TryGetValue("jwtToken", out var token);
+
+            return Ok(new { IsExpired = token == null });
         }
 
         private void GenerateJWT(ApplicationUser user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var expireTime = _configuration.GetValue<int>("CookieSettings:ExpireTimeSpanMinutes");
 
             var claims = new[]
             {
@@ -123,15 +132,15 @@ namespace HealthSync.Server.Controllers
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(expireTime),
                 signingCredentials: credentials);
 
-            var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-            HttpContext.Response.Cookies.Append("jwtToken", jwtToken,
+            HttpContext.Response.Cookies.Append("jwtToken", tokenString,
                 new CookieOptions
                 {
-                    Expires = DateTime.Now.AddMinutes(30),
+                    Expires = DateTime.Now.AddMinutes(expireTime),
                     HttpOnly = true,
                     Secure = true,
                     IsEssential = true,
