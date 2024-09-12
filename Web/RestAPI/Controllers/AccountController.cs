@@ -1,11 +1,10 @@
 ﻿using Core.Models.Account;
+using Core.Services.Contracts;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using static Common.Errors;
 
 namespace HealthSync.Server.Controllers
@@ -17,16 +16,19 @@ namespace HealthSync.Server.Controllers
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private IConfiguration _configuration;
+        private ITokenService _tokenService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration,
+            ITokenService tokenService,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _tokenService = tokenService;
             _logger = logger;
         }
 
@@ -89,62 +91,77 @@ namespace HealthSync.Server.Controllers
             {
                 ModelState.AddModelError("Email", InvalidLoginData);
 
-                return NotFound(ModelState);
+                return Unauthorized(ModelState);
             }
 
             var result = await _signInManager
-                .PasswordSignInAsync(user, userLogin.Password, userLogin.RememberMe, lockoutOnFailure: false);
+                .CheckPasswordSignInAsync(user, userLogin.Password, lockoutOnFailure: false);
 
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("Email", InvalidLoginData);
 
-                return NotFound("login");
+                return Unauthorized(ModelState);
             }
 
-            GenerateJWT(user);
-
-            return Ok(new { redirectTo = "/home" });
-        }
-
-        [HttpGet("isTokenExpired")]
-        public IActionResult IsTokenExpired()
-        {
-            Request.Cookies.TryGetValue("jwtToken", out var token);
-
-            return Ok(new { IsExpired = token == null });
-        }
-
-        private void GenerateJWT(ApplicationUser user)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var expireTime = _configuration.GetValue<int>("CookieSettings:ExpireTimeSpanMinutes");
-
-            var claims = new[]
+            var accessTokenClaims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
                 new Claim(ClaimTypes.Email, user.Email!),
             };
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(expireTime),
-                signingCredentials: credentials);
+            GenerateAccessJWT(accessTokenClaims);
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            if (userLogin.RememberMe)
+            {
+                var refreshTokenClaims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
 
-            HttpContext.Response.Cookies.Append("jwtToken", tokenString,
+                GenerateRefreshJWT(refreshTokenClaims);
+            }
+
+            return Ok(new { redirectTo = "/home" });
+        }
+
+        [HttpGet("isAccessJWTTokenExpired")]
+        public IActionResult IsTokenAccessExpired()
+        {
+            Request.Cookies.TryGetValue("jwtToken", out var token);
+
+            return Ok(new { IsExpired = token == null });
+        }
+
+        private void GenerateRefreshJWT(IEnumerable<Claim> claims)
+        {
+            var tokenString = _tokenService.GenerateRefreshToken(claims);
+
+            HttpContext.Response.Cookies.Append("refreshToken", tokenString,
                 new CookieOptions
                 {
-                    Expires = DateTime.Now.AddMinutes(expireTime),
                     HttpOnly = true,
                     Secure = true,
                     IsEssential = true,
                     SameSite = SameSiteMode.None,
+                    Expires = DateTime.Now.AddMinutes(5),
+                });
+        }
+
+        private void GenerateAccessJWT(IEnumerable<Claim> claims)
+        {
+            var tokenString = _tokenService.GenerateAccessToken(claims);
+
+            HttpContext.Response.Cookies.Append("accessToken", tokenString,
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    IsEssential = true,
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.Now.AddMinutes(1),
                 });
         }
     }

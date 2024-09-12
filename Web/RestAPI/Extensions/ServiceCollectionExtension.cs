@@ -1,4 +1,6 @@
-﻿using Infrastructure;
+﻿using Core.Services;
+using Core.Services.Contracts;
+using Infrastructure;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -54,19 +56,10 @@ namespace Server.Extensions
                 {
                     OnMessageReceived = context =>
                     {
-                        context.Token = context.Request.Cookies["jwtToken"];
+                        context.Token = context.Request.Cookies["accessToken"];
                         return Task.CompletedTask;
                     }
                 };
-            });
-
-            //Configure AspNetCore.Identity.Application cookie to expire when jwtToken expires
-            var expireTime = configuration.GetValue<int>("CookieSettings:ExpireTimeSpanMinutes");
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.SlidingExpiration = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(expireTime);
             });
         }
 
@@ -84,6 +77,11 @@ namespace Server.Extensions
                            .AllowCredentials();
                 });
             });
+        }
+
+        public static void AddServices(this IServiceCollection services)
+        {
+            services.AddSingleton<ITokenService, TokenService>();
         }
     }
 }

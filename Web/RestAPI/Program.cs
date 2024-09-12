@@ -1,3 +1,4 @@
+using RestAPI.Middlewares;
 using Server.Extensions;
 using System.Text.Json;
 
@@ -10,6 +11,7 @@ builder.Services.AddDbContext(builder.Configuration);
 builder.Services.AddIdentity();
 builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddCorsExtension(builder.Configuration);
+builder.Services.AddServices();
 builder.Services.Configure<JsonSerializerOptions>(options => new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
 var app = builder.Build();
@@ -25,12 +27,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<TokenValidationMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
-
 app.UseCors("Cors");
+
+app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
 
