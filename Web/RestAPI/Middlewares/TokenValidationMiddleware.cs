@@ -1,4 +1,6 @@
 ﻿using Core.Services.Contracts;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace RestAPI.Middlewares
 {
@@ -6,13 +8,12 @@ namespace RestAPI.Middlewares
     {
         private readonly RequestDelegate _next;
         private readonly IConfiguration _configuration;
-        private ITokenService _tokenService;
 
-        public TokenValidationMiddleware(RequestDelegate next, IConfiguration configuration, ITokenService tokenService)
+        public TokenValidationMiddleware(RequestDelegate next, 
+            IConfiguration configuration)
         {
             _next = next;
             _configuration = configuration;
-            _tokenService = tokenService;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -22,11 +23,15 @@ namespace RestAPI.Middlewares
 
             if (accessToken == null && refreshToken != null)
             {
-                var claims = context.User.Claims;
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadJwtToken(refreshToken);
+                var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-                var newToken = _tokenService.GenerateAccessToken(claims);
+                var tokenService = context.RequestServices.GetRequiredService<ITokenService>();
 
-                context.Response.Cookies.Append("accessToken", newToken,
+                var newAccessToken = await tokenService.GenerateAccessTokenAsync(userId);
+
+                context.Response.Cookies.Append("accessToken", newAccessToken,
                 new CookieOptions
                 {
                     Expires = DateTime.Now.AddMinutes(1),
@@ -35,6 +40,8 @@ namespace RestAPI.Middlewares
                     IsEssential = true,
                     SameSite = SameSiteMode.None,
                 });
+
+                context.Request.Headers["Authorization"] = "Bearer " + newAccessToken;
             }
 
             await _next(context);

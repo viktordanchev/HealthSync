@@ -3,8 +3,6 @@ using Core.Services.Contracts;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using static Common.Errors;
 
 namespace HealthSync.Server.Controllers
@@ -104,24 +102,13 @@ namespace HealthSync.Server.Controllers
                 return Unauthorized(ModelState);
             }
 
-            var accessTokenClaims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
-                new Claim(ClaimTypes.Email, user.Email!),
-            };
-
-            GenerateAccessJWT(accessTokenClaims);
+            var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
+            AppendTokenToCookie("accessToken", accessToken);
 
             if (userLogin.RememberMe)
             {
-                var refreshTokenClaims = new List<Claim>()
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
-
-                GenerateRefreshJWT(refreshTokenClaims);
+                var refreshToken = _tokenService.GenerateRefreshToken(user.Id);
+                AppendTokenToCookie("refreshToken", refreshToken);
             }
 
             return Ok(new { redirectTo = "/home" });
@@ -135,33 +122,21 @@ namespace HealthSync.Server.Controllers
             return Ok(new { IsExpired = token == null });
         }
 
-        private void GenerateRefreshJWT(IEnumerable<Claim> claims)
+        /// <summary>
+        /// This method appends JWT token to cookie.
+        /// </summary>
+        private void AppendTokenToCookie(string type, string token)
         {
-            var tokenString = _tokenService.GenerateRefreshToken(claims);
+            var expTime = _tokenService.GetTokenExpireTime(token);
 
-            HttpContext.Response.Cookies.Append("refreshToken", tokenString,
+            HttpContext.Response.Cookies.Append(type, token,
                 new CookieOptions
                 {
                     HttpOnly = true,
                     Secure = true,
                     IsEssential = true,
                     SameSite = SameSiteMode.None,
-                    Expires = DateTime.Now.AddMinutes(5),
-                });
-        }
-
-        private void GenerateAccessJWT(IEnumerable<Claim> claims)
-        {
-            var tokenString = _tokenService.GenerateAccessToken(claims);
-
-            HttpContext.Response.Cookies.Append("accessToken", tokenString,
-                new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = true,
-                    IsEssential = true,
-                    SameSite = SameSiteMode.None,
-                    Expires = DateTime.Now.AddMinutes(1),
+                    Expires = expTime,
                 });
         }
     }

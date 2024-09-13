@@ -81,7 +81,7 @@ namespace Server.Extensions
 
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddSingleton<ITokenService, TokenService>();
+            services.AddScoped<ITokenService, TokenService>();
         }
     }
 }
