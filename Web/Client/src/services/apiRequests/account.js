@@ -19,8 +19,8 @@ export const register = async (values) =>
         body: JSON.stringify(values)
     });
 
-export const isJWTTokenExpired = async () =>
-    await fetch(`${url}/isTokenExpired`, {
+export const isAccessTokenExpired = async () =>
+    await fetch(`${url}/isAccessTokenExpired`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

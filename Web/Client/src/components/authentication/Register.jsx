@@ -3,23 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
-import { register, isJWTTokenExpired } from '../../services/apiRequests/account';
+import { register, isAccessTokenExpired } from '../../services/apiRequests/account';
 
 function Register() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const checkJWTTokenExpiration = async () => {
-            const isExpired = await isJWTTokenExpired()
+        const checkAccessToken = async () => {
+            const isExpired = await isAccessTokenExpired()
                 .then(response => response.json())
                 .then(data => data.isExpired);
 
             if (!isExpired) {
                 navigate('/home');
             }
+            else {
+                setLoading(false);
+            }
         }
 
-        checkJWTTokenExpiration();
+        checkAccessToken();
     }, [navigate]);
 
     const validations = Yup.object({
@@ -59,6 +63,10 @@ function Register() {
             setTimeout(() => { setMessage(''); }, 3000);
         }
     };
+
+    if (loading) {
+        return null;
+    }
 
     return (
         <>

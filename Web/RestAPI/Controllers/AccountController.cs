@@ -114,10 +114,10 @@ namespace HealthSync.Server.Controllers
             return Ok(new { redirectTo = "/home" });
         }
 
-        [HttpGet("isAccessJWTTokenExpired")]
-        public IActionResult IsTokenAccessExpired()
+        [HttpGet("isAccessTokenExpired")]
+        public IActionResult IsAccessTokenExpired()
         {
-            Request.Cookies.TryGetValue("jwtToken", out var token);
+            Request.Cookies.TryGetValue("accessToken", out var token);
 
             return Ok(new { IsExpired = token == null });
         }

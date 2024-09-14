@@ -3,23 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
-import { login, isJWTTokenExpired } from '../../services/apiRequests/account';
+import { login, isAccessTokenExpired } from '../../services/apiRequests/account';
 
 function Login() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const checkJWTTokenExpiration = async () => {
-            const isExpired = await isJWTTokenExpired()
+        const checkAccessToken = async () => {
+            const isExpired = await isAccessTokenExpired()
                 .then(response => response.json())
                 .then(data => data.isExpired);
 
             if (!isExpired) {
                 navigate('/home');
             }
+            else {
+                setLoading(false)
+            }
         }
 
-        checkJWTTokenExpiration();
+        checkAccessToken();
     }, [navigate]);
 
     const validations = Yup.object({
@@ -49,6 +53,10 @@ function Login() {
         }
         setSubmitting(false);
     };
+
+    if (loading) {
+        return null;
+    }
 
     return (
         <section className="flex items-center justify-center">
