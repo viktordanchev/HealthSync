@@ -19,8 +19,8 @@ export const register = async (values) =>
         body: JSON.stringify(values)
     });
 
-export const isAccessTokenExpired = async () =>
-    await fetch(`${url}/isAccessTokenExpired`, {
+export const isAuthenticated = async () =>
+    await fetch(`${url}/isAuthenticated`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

@@ -114,8 +114,11 @@ namespace HealthSync.Server.Controllers
             return Ok(new { redirectTo = "/home" });
         }
 
-        [HttpGet("isAccessTokenExpired")]
-        public IActionResult IsAccessTokenExpired()
+        /// <summary>
+        /// This check if there is valid access token.
+        /// </summary>
+        [HttpGet("isAuthenticated")]
+        public IActionResult IsAuthenticated()
         {
             Request.Cookies.TryGetValue("accessToken", out var token);
 

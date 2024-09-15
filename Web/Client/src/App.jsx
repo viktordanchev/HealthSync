@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Login from './components/authentication/Login.jsx';
 import Register from './components/authentication/Register.jsx';
@@ -13,6 +13,7 @@ function App() {
             <Header />
             <Router>
                 <Routes>
+                    <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/account/login" element={<Login />} />
                     <Route path="/account/register" element={<Register />} />
                     <Route path="/home" element={<Section />} />

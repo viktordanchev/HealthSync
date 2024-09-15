@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
-import { register, isAccessTokenExpired } from '../../services/apiRequests/account';
+import { register, isAuthenticated } from '../../services/account';
 
 function Register() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const checkAccessToken = async () => {
-            const isExpired = await isAccessTokenExpired()
+        const checkUserStatus = async () => {
+            const isExpired = await isAuthenticated()
                 .then(response => response.json())
                 .then(data => data.isExpired);
 
@@ -23,22 +23,22 @@ function Register() {
             }
         }
 
-        checkAccessToken();
+        checkUserStatus();
     }, [navigate]);
 
     const validations = Yup.object({
         firstName: Yup.string()
-            .required(authErrors.RequiredField),
+            .required('First name' + authErrors.RequiredField),
         lastName: Yup.string()
-            .required(authErrors.RequiredField),
+            .required('Last name' + authErrors.RequiredField),
         email: Yup.string()
             .email(authErrors.InvalidEmail)
-            .required(authErrors.RequiredField),
+            .required('Email' + authErrors.RequiredField),
         password: Yup.string()
             .min(6, 'Password must be at least 6 characters')
-            .required(authErrors.RequiredField),
+            .required('Password' + authErrors.RequiredField),
         confirmPassword: Yup.string()
-            .required(authErrors.RequiredField),
+            .required('Confirm password' + authErrors.RequiredField),
     });
 
     const [message, setMessage] = useState('');
@@ -97,7 +97,6 @@ function Register() {
                                             type="text"
                                             name="firstName"
                                         />
-                                        <ErrorMessage name="firstName" component="div" className="text-red-500 text-md" />
                                     </div>
                                     <div>
                                         <label className="text-md font-bold">Last name</label>
@@ -106,9 +105,10 @@ function Register() {
                                             type="text"
                                             name="lastName"
                                         />
-                                        <ErrorMessage name="lastName" component="div" className="text-red-500 text-md" />
                                     </div>
                                 </div>
+                                <ErrorMessage name="firstName" component="div" className="text-red-500 text-md" />
+                                <ErrorMessage name="lastName" component="div" className="text-red-500 text-md" />
                                 <div>
                                     <label className="text-md font-bold">Email</label>
                                     <Field

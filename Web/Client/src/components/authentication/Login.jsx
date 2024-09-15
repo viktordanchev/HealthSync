@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
-import { login, isAccessTokenExpired } from '../../services/apiRequests/account';
+import { login, isAuthenticated } from '../../services/account';
 
 function Login() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const checkAccessToken = async () => {
-            const isExpired = await isAccessTokenExpired()
+        const checkUserStatus = async () => {
+            const isExpired = await isAuthenticated()
                 .then(response => response.json())
                 .then(data => data.isExpired);
 
@@ -23,7 +23,7 @@ function Login() {
             }
         }
 
-        checkAccessToken();
+        checkUserStatus();
     }, [navigate]);
 
     const validations = Yup.object({
@@ -93,11 +93,11 @@ function Login() {
                                 <ErrorMessage name="password" component="div" className="text-red-500 text-md" />
                             </div>
                             <div className="flex items-center justify-between">
-                                <label className="inline-flex items-center">
+                                <label className="inline-flex items-center cursor-pointer">
                                     <Field
                                         type="checkbox"
                                         name="rememberMe"
-                                        className="form-checkbox text-blue-600"
+                                        className="form-checkbox text-blue-600 cursor-pointer"
                                     />
                                     <span className="ml-1 text-md text-white">Remember me</span>
                                 </label>
