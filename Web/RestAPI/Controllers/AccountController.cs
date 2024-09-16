@@ -106,7 +106,7 @@ namespace HealthSync.Server.Controllers
                 AppendTokenToCookie("refreshToken", refreshToken);
             }
 
-            return Ok(new { redirectTo = "/home" });
+            return Ok(new {User = user.FirstName + " " + user.LastName});
         }
 
         /// <summary>
@@ -117,11 +117,11 @@ namespace HealthSync.Server.Controllers
         {
             Request.Cookies.TryGetValue("accessToken", out var token);
 
-            return Ok(new { IsExpired = token == null });
+            return Ok(new { IsAuthenticated = token != null });
         }
 
         /// <summary>
-        /// This method appends JWT token to cookie.
+        /// This append JWT token to cookie.
         /// </summary>
         private void AppendTokenToCookie(string type, string token)
         {

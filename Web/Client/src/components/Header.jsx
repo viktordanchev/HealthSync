@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { isAuthenticated } from '../services/account';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(localStorage.jwtToken !== undefined || sessionStorage.jwtToken !== undefined);
+    const [user, setUser] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -38,18 +40,22 @@ const Header = () => {
                         </a>
                     </li>
                 </ul>
-                {isAuthenticated ? (<div className="flex space-x-4 sm:hidden">
-                    <a href="/account/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
-                        ima
-                    </a>
-                </div>) : (<div className="flex space-x-4 sm:hidden">
-                    <a href="/account/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
-                        Login
-                    </a>
-                    <a href="/account/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
-                        Register
-                    </a>
-                </div>)}
+                <div className="flex space-x-4 sm:hidden">
+                    {user ? (
+                        <p className="text-white text-lg font-bold py-2 px-4">
+                            {user}
+                        </p>
+                    ) : (
+                        <>
+                            <a href="/account/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
+                                Login
+                            </a>
+                            <a href="/account/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
+                                Register
+                            </a>
+                        </>
+                    )}
+                </div>
                 <button
                     onClick={toggleMenu}
                     className={`hidden ${isMenuOpen ? 'hidden' : 'sm:block'}`}
