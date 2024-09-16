@@ -44,24 +44,17 @@ function Register() {
     const [message, setMessage] = useState('');
 
     const handleRegister = async (values, { setSubmitting, setErrors }) => {
-        try {
-            const response = await register(values);
+        const response = await register(values);
 
-            if (response.ok) {
-                setSubmitting(false);
-                setMessage('Registered user');
-            } else {
-                setErrors({ general: 'Failed to register' });
-                setMessage('Failed to register');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            setErrors({ general: 'Failed to register' });
-            setMessage('Failed to register');
-        } finally {
-            setSubmitting(false);
-            setTimeout(() => { setMessage(''); }, 3000);
+        if (response.ok) {
+            setMessage('Registered user');
+        } else {
+            const data = await response.json();
+            console.log(data.errors.Email);
+            setMessage(data.errors.Email);
         }
+
+        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     if (loading) {
@@ -72,7 +65,7 @@ function Register() {
         <>
             {message !== '' ? (
                 <div className="flex justify-center">
-                    <div className={`max-w-xs text-center text-white text-xl ${message.includes('Failed') ? 'bg-red-500' : 'bg-green-500'} rounded-xl p-4`}>
+                    <div className={`max-w-xs text-center text-white text-xl ${message.includes('Registered user') ? 'bg-green-500' : 'bg-red-500'} rounded-xl p-4`}>
                         {message}
                     </div>
                 </div>

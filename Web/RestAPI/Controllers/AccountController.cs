@@ -33,14 +33,9 @@ namespace HealthSync.Server.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegister userRegister)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("index", "home");
-            }
-
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("register");
+                return BadRequest(new { Errors = ModelState });
             }
 
             var user = await _userManager.FindByEmailAsync(userRegister.Email);
@@ -49,7 +44,7 @@ namespace HealthSync.Server.Controllers
             {
                 ModelState.AddModelError("Email", UsedEmail);
 
-                return BadRequest(ModelState);
+                return BadRequest(new { Errors = ModelState });
             }
 
             user = new ApplicationUser()
