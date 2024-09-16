@@ -8,6 +8,7 @@ import { register, isAuthenticated } from '../../services/account';
 function Register() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
+    const [messages, setMessage] = useState([]);
 
     useEffect(() => {
         const checkUserStatus = async () => {
@@ -41,17 +42,16 @@ function Register() {
             .required('Confirm password' + authErrors.RequiredField),
     });
 
-    const [message, setMessage] = useState('');
-
     const handleRegister = async (values, { setSubmitting, setErrors }) => {
         const response = await register(values);
 
         if (response.ok) {
-            setMessage('Registered user');
         } else {
-            const data = await response.json();
-            console.log(data.errors.Email);
-            setMessage(data.errors.Email);
+            const errors = await response.json();
+            
+            for (const [key, message] of Object.entries(errors)) {
+                setMessage((prevMessages) => [...prevMessages, message]);
+            }
         }
 
         setTimeout(() => { setMessage(''); }, 3000);
@@ -63,10 +63,14 @@ function Register() {
 
     return (
         <>
-            {message !== '' ? (
-                <div className="flex justify-center">
-                    <div className={`max-w-xs text-center text-white text-xl ${message.includes('Registered user') ? 'bg-green-500' : 'bg-red-500'} rounded-xl p-4`}>
-                        {message}
+            {messages.length > 0 ? (
+                <div className="flex flex-col items-center space-y-4">
+                    <div className="max-w-xs text-center text-xl bg-red-500 rounded-xl p-4">
+                    {messages.map((message) => (
+                        <div className="text-white">
+                            {message}
+                        </div>
+                    ))}
                     </div>
                 </div>
             ) : null}

@@ -35,7 +35,7 @@ namespace HealthSync.Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { Errors = ModelState });
+                return BadRequest(ModelState);
             }
 
             var user = await _userManager.FindByEmailAsync(userRegister.Email);
@@ -44,7 +44,7 @@ namespace HealthSync.Server.Controllers
             {
                 ModelState.AddModelError("Email", UsedEmail);
 
-                return BadRequest(new { Errors = ModelState });
+                return BadRequest(ModelState);
             }
 
             user = new ApplicationUser()
@@ -84,7 +84,7 @@ namespace HealthSync.Server.Controllers
             {
                 ModelState.AddModelError("Email", InvalidLoginData);
 
-                return Unauthorized(ModelState);
+                return BadRequest(ModelState);
             }
 
             var result = await _signInManager
@@ -94,7 +94,7 @@ namespace HealthSync.Server.Controllers
             {
                 ModelState.AddModelError("Email", InvalidLoginData);
 
-                return Unauthorized(ModelState);
+                return BadRequest(ModelState);
             }
 
             var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);

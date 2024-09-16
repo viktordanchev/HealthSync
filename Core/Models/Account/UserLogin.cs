@@ -5,10 +5,10 @@ namespace Core.Models.Account
 {
     public class UserLogin
     {
-        [Required(ErrorMessage = RequiredField)]
+        [Required(ErrorMessage = $"Email {RequiredField}")]
         public string Email { get; set; } = null!;
 
-        [Required(ErrorMessage = RequiredField)]
+        [Required(ErrorMessage = $"Password {RequiredField}")]
         public string Password { get; set; } = null!;
 
         public bool RememberMe { get; set; }

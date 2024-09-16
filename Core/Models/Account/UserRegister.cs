@@ -1,26 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Errors;
-using static Common.Validations.User;
 
 namespace Core.Models.Account
 {
     public class UserRegister
     {
-        [Required(ErrorMessage = RequiredField)]
+        [Required(ErrorMessage = $"Email {RequiredField}")]
         [EmailAddress(ErrorMessage = InvalidEmail)]
         public string Email { get; set; } = null!;
 
-        [Required(ErrorMessage = RequiredField)]
+        [Required(ErrorMessage = $"First name {RequiredField}")]
         public string FirstName { get; set; } = null!;
 
-        [Required(ErrorMessage = RequiredField)]
+        [Required(ErrorMessage = $"Last name {RequiredField}")]
         public string LastName { get; set; } = null!;
 
-        [Required(ErrorMessage = RequiredField)]
+        [Required(ErrorMessage = $"Password {RequiredField}")]
         public string Password { get; set; } = null!;
 
-        [Required(ErrorMessage = RequiredField)]
-        [Compare("Password", ErrorMessage = RequiredField)]
+        [Required(ErrorMessage = $"Confirm password {RequiredField}")]
+        [Compare("Password", ErrorMessage = PasswordMatch)]
         public string ConfirmPassword { get; set; } = null!;
     }
 }
