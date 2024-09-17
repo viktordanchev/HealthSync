@@ -13,11 +13,10 @@ function Register() {
 
     useEffect(() => {
         const checkUserStatus = async () => {
-            const isUserAuthenticated = await isAuthenticated()
-                .then(response => response.json())
-                .then(data => data.isAuthenticated);
+            const response = await isAuthenticated();
+            const data = await response.json();
 
-            if (isUserAuthenticated) {
+            if (data.isAuthenticated) {
                 navigate('/home');
             }
             else {

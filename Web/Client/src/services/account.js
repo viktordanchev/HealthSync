@@ -27,3 +27,12 @@ export const isAuthenticated = async () =>
         },
         credentials: 'include'
     });
+
+export const getUserName = async () =>
+    await fetch(`${url}/getUserName`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    });

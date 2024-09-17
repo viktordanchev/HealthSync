@@ -5,7 +5,6 @@ import { isAuthenticated } from '../services/account';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [user, setUser] = useState('');
     const [loading, setLoading] = useState(true);
 
     const toggleMenu = () => {
@@ -41,20 +40,12 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="flex space-x-4 sm:hidden">
-                    {user ? (
-                        <p className="text-white text-lg font-bold py-2 px-4">
-                            {user}
-                        </p>
-                    ) : (
-                        <>
-                            <a href="/account/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
-                                Login
-                            </a>
-                            <a href="/account/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
-                                Register
-                            </a>
-                        </>
-                    )}
+                    <a href="/account/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
+                        Login
+                    </a>
+                    <a href="/account/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
+                        Register
+                    </a>
                 </div>
                 <button
                     onClick={toggleMenu}
