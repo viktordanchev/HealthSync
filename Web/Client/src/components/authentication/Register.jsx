@@ -8,15 +8,14 @@ import Loading from '../Loading.jsx';
 
 function Register() {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
     const [messages, setMessage] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const checkUserStatus = async () => {
-            const response = await isAuthenticated();
-            const data = await response.json();
+            const isUserAuthenticated = await isAuthenticated();
 
-            if (data.isAuthenticated) {
+            if (isUserAuthenticated) {
                 navigate('/home');
             }
             else {

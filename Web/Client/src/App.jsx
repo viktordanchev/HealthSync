@@ -9,18 +9,16 @@ import Section from './components/Section.jsx';
 function App() {
 
     return (
-        <>
+        <Router>
             <Header />
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Navigate to="/home" />} />
-                    <Route path="/account/login" element={<Login />} />
-                    <Route path="/account/register" element={<Register />} />
-                    <Route path="/home" element={<Section />} />
-                </Routes>
-            </Router >
+            <Routes>
+                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path="/account/login" element={<Login />} />
+                <Route path="/account/register" element={<Register />} />
+                <Route path="/home" element={<Section />} />
+            </Routes>
             <Footer />
-        </>
+        </Router >
     );
 }
 

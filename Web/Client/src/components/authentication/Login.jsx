@@ -8,15 +8,14 @@ import Loading from '../Loading.jsx';
 
 function Login() {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
     const [messages, setMessage] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const checkUserStatus = async () => {
-            const response = await isAuthenticated()
-            const data = await response.json();
-
-            if (data.isAuthenticated) {
+            const isUserAuthenticated = await isAuthenticated();
+            
+            if (isUserAuthenticated) {
                 navigate('/home');
             }
             else {
@@ -37,12 +36,13 @@ function Login() {
 
     const handleLogin = async (values, { setSubmitting, setErrors }) => {
         const response = await login(values);
-        const data = await response.json();
 
         if (response.ok) {
             navigate('/home');
         } else {
-            for (const [key, message] of Object.entries(data)) {
+            const errors = await response.json();
+
+            for (const [key, message] of Object.entries(errors)) {
                 setMessage((prevMessages) => [...prevMessages, message]);
             }
         }

@@ -26,7 +26,8 @@ export const isAuthenticated = async () =>
             'Content-Type': 'application/json'
         },
         credentials: 'include'
-    });
+    }).then(response => response.json())
+        .then(data => data.isAuthenticated);
 
 export const getUserName = async () =>
     await fetch(`${url}/getUserName`, {
@@ -35,4 +36,5 @@ export const getUserName = async () =>
             'Content-Type': 'application/json'
         },
         credentials: 'include'
-    });
+    }).then(response => response.json())
+        .then(data => data.userName);
