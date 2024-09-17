@@ -106,7 +106,7 @@ namespace HealthSync.Server.Controllers
                 AppendTokenToCookie("refreshToken", refreshToken);
             }
 
-            return Ok(new {User = user.FirstName + " " + user.LastName});
+            return Ok();
         }
 
         /// <summary>
@@ -118,6 +118,15 @@ namespace HealthSync.Server.Controllers
             Request.Cookies.TryGetValue("accessToken", out var token);
 
             return Ok(new { IsAuthenticated = token != null });
+        }
+
+        /// <summary>
+        /// This method return current user name.
+        /// </summary>
+        [HttpGet("getUserName")]
+        public IActionResult GetUserName() 
+        {
+            return Ok(new {UserName = User.Identity.Name });
         }
 
         /// <summary>
