@@ -1,19 +1,20 @@
-﻿using Core.Services.Contracts;
+﻿using RestAPI.Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace RestAPI.Middlewares
 {
     public class TokenValidationMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration _config;
 
         public TokenValidationMiddleware(RequestDelegate next, 
-            IConfiguration configuration)
+            IConfiguration config)
         {
             _next = next;
-            _configuration = configuration;
+            _config = config;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -30,16 +31,8 @@ namespace RestAPI.Middlewares
                 var tokenService = context.RequestServices.GetRequiredService<ITokenService>();
 
                 var newAccessToken = await tokenService.GenerateAccessTokenAsync(userId);
-
-                context.Response.Cookies.Append("accessToken", newAccessToken,
-                new CookieOptions
-                {
-                    Expires = DateTime.Now.AddMinutes(1),
-                    HttpOnly = true,
-                    Secure = true,
-                    IsEssential = true,
-                    SameSite = SameSiteMode.None,
-                });
+                var accessTokenExpireTime = tokenService.GetTokenExpireTime(newAccessToken);
+                tokenService.AppendTokenToCookie(context, "accessToken", newAccessToken, accessTokenExpireTime);
 
                 context.Request.Headers["Authorization"] = "Bearer " + newAccessToken;
             }

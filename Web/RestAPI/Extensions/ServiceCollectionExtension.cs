@@ -1,5 +1,5 @@
-﻿using Core.Services;
-using Core.Services.Contracts;
+﻿using RestAPI.Services;
+using RestAPI.Services.Contracts;
 using Infrastructure;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Server.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static void AddDbContext(this IServiceCollection services, IConfiguration config)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<HealthSyncDbContext>(options =>
                 options.UseSqlServer(connectionString));
         }
@@ -32,7 +33,7 @@ namespace Server.Extensions
             .AddEntityFrameworkStores<HealthSyncDbContext>();
         }
 
-        public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
+        public static void AddAuthentication(this IServiceCollection services, IConfiguration config)
         {
             services.AddAuthentication(options =>
             {
@@ -48,9 +49,9 @@ namespace Server.Extensions
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = configuration["Jwt:Issuer"],
-                    ValidAudience = configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+                    ValidIssuer = config["Jwt:Issuer"],
+                    ValidAudience = config["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]))
                 };
                 options.Events = new JwtBearerEvents
                 {
@@ -63,9 +64,9 @@ namespace Server.Extensions
             });
         }
 
-        public static void AddCorsExtension(this IServiceCollection services, IConfiguration configuration)
+        public static void AddCorsExtension(this IServiceCollection services, IConfiguration config)
         {
-            var origin = configuration.GetValue<string>("AccessControlAllowOrigin");
+            var origin = config.GetValue<string>("AccessControlAllowOrigin");
 
             services.AddCors(options =>
             {
@@ -82,6 +83,7 @@ namespace Server.Extensions
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<ITokenService, TokenService>();
+            services.AddTransient<IEmailSender, EmailSender>();
         }
     }
 }

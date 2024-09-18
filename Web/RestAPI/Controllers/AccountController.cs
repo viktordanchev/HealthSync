@@ -1,9 +1,11 @@
 ﻿using Core.Models.Account;
-using Core.Services.Contracts;
+using RestAPI.Services.Contracts;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using static Common.Errors;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace HealthSync.Server.Controllers
 {
@@ -13,20 +15,26 @@ namespace HealthSync.Server.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
-        private IConfiguration _configuration;
+        private IConfiguration _config;
         private ITokenService _tokenService;
+        private IEmailSender _emailSender;
+        private IMemoryCache _cache;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration,
+            IConfiguration config,
             ITokenService tokenService,
+            IEmailSender emailSender,
+            IMemoryCache cache,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _configuration = configuration;
+            _config = config;
             _tokenService = tokenService;
+            _emailSender = emailSender;
+            _cache = cache;
             _logger = logger;
         }
 
@@ -64,10 +72,33 @@ namespace HealthSync.Server.Controllers
                     ModelState.AddModelError(error.Code, error.Description);
                 }
 
-                return RedirectToAction("register");
+                return BadRequest(ModelState);
             }
 
+            var verificationCode = Guid.NewGuid().ToString().Substring(0, 6);
+            _cache.Set(verificationCode, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
+            });
+
+            var subject = "Confirm your registration!";
+            var message = $"Your verification code: <strong>{verificationCode}</strong>";
+            await _emailSender.SendEmailAsync(user.Email, subject, message);
+
             return Ok();
+        }
+
+        [HttpPost("confirmRegistration")]
+        public IActionResult ConfirmRegistration(string verificationCode)
+        {
+            var code = _cache.Get(verificationCode);
+
+            if (code != null && code == verificationCode)
+            {
+                return Ok();
+            }
+
+            return BadRequest(new { Error = "Невалиден код за потвърждение." });
         }
 
         [HttpPost("login")]
@@ -98,12 +129,14 @@ namespace HealthSync.Server.Controllers
             }
 
             var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
-            AppendTokenToCookie("accessToken", accessToken);
+            var accessTokenExpireTime = _tokenService.GetTokenExpireTime(accessToken);
+            _tokenService.AppendTokenToCookie(HttpContext, "accessToken", accessToken, accessTokenExpireTime);
 
             if (userLogin.RememberMe)
             {
                 var refreshToken = _tokenService.GenerateRefreshToken(user.Id);
-                AppendTokenToCookie("refreshToken", refreshToken);
+                var refreshTokenExpireTime = _tokenService.GetTokenExpireTime(refreshToken);
+                _tokenService.AppendTokenToCookie(HttpContext, "refreshToken", refreshToken, refreshTokenExpireTime);
             }
 
             return Ok();
@@ -127,24 +160,6 @@ namespace HealthSync.Server.Controllers
         public IActionResult GetUserName() 
         {
             return Ok(new {UserName = User.Identity.Name });
-        }
-
-        /// <summary>
-        /// This append JWT token to cookie.
-        /// </summary>
-        private void AppendTokenToCookie(string type, string token)
-        {
-            var expTime = _tokenService.GetTokenExpireTime(token);
-
-            HttpContext.Response.Cookies.Append(type, token,
-                new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = true,
-                    IsEssential = true,
-                    SameSite = SameSiteMode.None,
-                    Expires = expTime,
-                });
         }
     }
 }

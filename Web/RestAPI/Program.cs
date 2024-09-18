@@ -12,6 +12,7 @@ builder.Services.AddIdentity();
 builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.AddServices();
+builder.Services.AddMemoryCache();
 builder.Services.Configure<JsonSerializerOptions>(options => new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
 var app = builder.Build();
