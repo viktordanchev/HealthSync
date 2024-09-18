@@ -76,7 +76,7 @@ namespace HealthSync.Server.Controllers
             }
 
             var verificationCode = Guid.NewGuid().ToString().Substring(0, 6);
-            _cache.Set(verificationCode, new MemoryCacheEntryOptions
+            _cache.Set(user.Email, verificationCode, new MemoryCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
             });
@@ -86,19 +86,6 @@ namespace HealthSync.Server.Controllers
             await _emailSender.SendEmailAsync(user.Email, subject, message);
 
             return Ok();
-        }
-
-        [HttpPost("confirmRegistration")]
-        public IActionResult ConfirmRegistration(string verificationCode)
-        {
-            var code = _cache.Get(verificationCode);
-
-            if (code != null && code == verificationCode)
-            {
-                return Ok();
-            }
-
-            return BadRequest(new { Error = "Невалиден код за потвърждение." });
         }
 
         [HttpPost("login")]
@@ -142,6 +129,40 @@ namespace HealthSync.Server.Controllers
             return Ok();
         }
 
+        [HttpPost("confirmRegistration")]
+        public async Task<IActionResult> ConfirmRegistration(string userEmail, string verificationCode)
+        {
+            var code = _cache.Get(userEmail);
+
+            if (code != null && code == verificationCode)
+            {
+                var user = await _userManager.FindByEmailAsync(userEmail);
+                user!.EmailConfirmed = true;
+
+                return Ok();
+            }
+
+            return BadRequest(new { Error = "Invalid verification code!" });
+        }
+
+        [HttpPost("resendVerificationCode")]
+        public async Task<IActionResult> ResendVerificationCode(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            var verificationCode = Guid.NewGuid().ToString().Substring(0, 6);
+            _cache.Set(user.Email, verificationCode, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
+            });
+
+            var subject = "Confirm your registration!";
+            var message = $"Your verification code: <strong>{verificationCode}</strong>";
+            await _emailSender.SendEmailAsync(user.Email, subject, message);
+
+            return Ok(new { Message = "New verification code is sended." });
+        }
+
         /// <summary>
         /// This check if there is valid access token.
         /// </summary>
@@ -157,9 +178,9 @@ namespace HealthSync.Server.Controllers
         /// This method return current user name.
         /// </summary>
         [HttpGet("getUserName")]
-        public IActionResult GetUserName() 
+        public IActionResult GetUserName()
         {
-            return Ok(new {UserName = User.Identity.Name });
+            return Ok(new { UserName = User.Identity.Name });
         }
     }
 }
