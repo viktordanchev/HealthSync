@@ -1,4 +1,4 @@
-﻿using Core.Models.Account;
+﻿using RestAPI.DTOs.Account;
 using RestAPI.Services.Contracts;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -74,7 +74,7 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var vrfCode = _vrfCodeService.GenerateCode(userRegister.Email);
+            var vrfCode = _vrfCodeService.GenerateCode(user.Email);
 
             var subject = "Confirm your registration!";
             var message = $"<h2>Your verification code: <strong>{vrfCode}</strong>.</h2>";
@@ -132,11 +132,11 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpPost("confirmRegistration")]
-        public async Task<IActionResult> ConfirmRegistration(string userEmail, string verificationCode)
+        public async Task<IActionResult> ConfirmRegistration([FromBody] ConfirmRegistrationRequest request)
         {
-            if (_vrfCodeService.ValidateCode(userEmail, verificationCode))
+            if (_vrfCodeService.ValidateCode(request.Email, request.VrfCode))
             {
-                var user = await _userManager.FindByEmailAsync(userEmail);
+                var user = await _userManager.FindByEmailAsync(request.Email);
 
                 user!.EmailConfirmed = true;
                 await _userManager.UpdateAsync(user!);
@@ -148,11 +148,18 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpPost("resendVerificationCode")]
-        public async Task<IActionResult> ResendVerificationCode(string email)
+        public async Task<IActionResult> ResendVerificationCode(string userEmail)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(userEmail);
 
-            var vrfCode = _vrfCodeService.GenerateCode(email);
+            if (user == null) 
+            {
+                ModelState.AddModelError("Email", UsedEmail);
+
+                return BadRequest(ModelState);
+            }
+
+            var vrfCode = _vrfCodeService.GenerateCode(userEmail);
 
             var subject = "Confirm your registration!";
             var message = $"<h2>Your verification code: <strong>{vrfCode}</strong></h2>";

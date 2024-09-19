@@ -3,6 +3,9 @@ using RestAPI.Services.Contracts;
 
 namespace RestAPI.Services
 {
+    /// <summary>
+    /// This class is to manage the verification of registered user.
+    /// </summary>
     public class VerificationCodeService : IVerificationCodeService
     {
         private IMemoryCache _memoryCache;
@@ -27,7 +30,7 @@ namespace RestAPI.Services
         {
             var code = _memoryCache.Get(key);
 
-            return code != null && code.ToString() == vrfCode ? true : false;
+            return code != null && _memoryCache.Get(key)!.ToString() == vrfCode;
         }
     }
 }

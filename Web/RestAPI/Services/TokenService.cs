@@ -9,7 +9,7 @@ using System.Text;
 namespace RestAPI.Services
 {
     /// <summary>
-    /// Responsible for Jwt token.
+    /// This class is responsible for Jwt token.
     /// </summary>
     public class TokenService : ITokenService
     {

@@ -41,10 +41,12 @@ function Register() {
             .required('Confirm password' + authErrors.RequiredField),
     });
 
-    const handleRegister = async (values, { setSubmitting, setErrors }) => {
+    const handleRegister = async (values) => {
         const response = await register(values);
 
         if (response.ok) {
+            localStorage.setItem('email', values.email);
+            navigate('/account/confirmRegistration');
         } else {
             const errors = await response.json();
 
@@ -81,66 +83,62 @@ function Register() {
                                 validationSchema={validations}
                                 onSubmit={handleRegister}
                             >
-                                {({ isSubmitting }) => (
-                                    <Form className="flex flex-col space-y-2">
-                                        <div className="flex flex-row space-x-4">
-                                            <div>
-                                                <label className="text-md font-bold">First name</label>
-                                                <Field
-                                                    className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
-                                                    type="text"
-                                                    name="firstName"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="text-md font-bold">Last name</label>
-                                                <Field
-                                                    className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
-                                                    type="text"
-                                                    name="lastName"
-                                                />
-                                            </div>
-                                        </div>
-                                        <ErrorMessage name="firstName" component="div" className="text-red-500 text-md" />
-                                        <ErrorMessage name="lastName" component="div" className="text-red-500 text-md" />
+                                <Form className="flex flex-col space-y-2">
+                                    <div className="flex flex-row space-x-4">
                                         <div>
-                                            <label className="text-md font-bold">Email</label>
+                                            <label className="text-md font-bold">First name</label>
                                             <Field
                                                 className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
-                                                type="email"
-                                                name="email"
+                                                type="text"
+                                                name="firstName"
                                             />
-                                            <ErrorMessage name="email" component="div" className="text-red-500 text-md" />
                                         </div>
                                         <div>
-                                            <label className="text-md font-bold">Password</label>
+                                            <label className="text-md font-bold">Last name</label>
                                             <Field
                                                 className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
-                                                type="password"
-                                                name="password"
+                                                type="text"
+                                                name="lastName"
                                             />
-                                            <ErrorMessage name="password" component="div" className="text-red-500 text-md" />
                                         </div>
-                                        <div>
-                                            <label className="text-md font-bold">Confirm Password</label>
-                                            <Field
-                                                className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
-                                                type="password"
-                                                name="confirmPassword"
-                                            />
-                                            <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-md" />
-                                        </div>
-                                        <div className="text-center pt-6">
-                                            <button
-                                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                                type="submit"
-                                                disabled={isSubmitting}
-                                            >
-                                                Register
-                                            </button>
-                                        </div>
-                                    </Form>
-                                )}
+                                    </div>
+                                    <ErrorMessage name="firstName" component="div" className="text-red-500 text-md" />
+                                    <ErrorMessage name="lastName" component="div" className="text-red-500 text-md" />
+                                    <div>
+                                        <label className="text-md font-bold">Email</label>
+                                        <Field
+                                            className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                            type="email"
+                                            name="email"
+                                        />
+                                        <ErrorMessage name="email" component="div" className="text-red-500 text-md" />
+                                    </div>
+                                    <div>
+                                        <label className="text-md font-bold">Password</label>
+                                        <Field
+                                            className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                            type="password"
+                                            name="password"
+                                        />
+                                        <ErrorMessage name="password" component="div" className="text-red-500 text-md" />
+                                    </div>
+                                    <div>
+                                        <label className="text-md font-bold">Confirm Password</label>
+                                        <Field
+                                            className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                            type="password"
+                                            name="confirmPassword"
+                                        />
+                                        <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-md" />
+                                    </div>
+                                    <div className="text-center pt-6">
+                                        <button
+                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                            type="submit">
+                                            Register
+                                        </button>
+                                    </div>
+                                </Form>
                             </Formik>
                         </div>
                     </section>
