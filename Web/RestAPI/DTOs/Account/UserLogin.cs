@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Errors;
 
-namespace Core.Models.Account
+namespace RestAPI.DTOs.Account
 {
     public class UserLogin
     {
