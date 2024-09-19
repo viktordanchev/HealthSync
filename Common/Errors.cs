@@ -8,5 +8,6 @@
 
         public const string UsedEmail = "This email is already registered!";
         public const string InvalidLoginData = "Invalid email or password!";
+        public const string NotVerified = "Your email is not verified yet!";
     }
 }

@@ -1,7 +1,6 @@
 ﻿using RestAPI.Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace RestAPI.Middlewares
 {

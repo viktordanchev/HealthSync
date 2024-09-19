@@ -4,10 +4,13 @@ using MailKit.Net.Smtp;
 
 namespace RestAPI.Services
 {
+    /// <summary>
+    /// This class is used for sending emails.
+    /// </summary>
     public class EmailSender : IEmailSender
     {
         private readonly IConfiguration _config;
-
+        
         public EmailSender(IConfiguration config)
         {
             _config = config;

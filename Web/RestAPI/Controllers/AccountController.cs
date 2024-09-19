@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using static Common.Errors;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace HealthSync.Server.Controllers
 {
@@ -18,7 +17,7 @@ namespace HealthSync.Server.Controllers
         private IConfiguration _config;
         private ITokenService _tokenService;
         private IEmailSender _emailSender;
-        private IMemoryCache _cache;
+        private IVerificationCodeService _vrfCodeService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(UserManager<ApplicationUser> userManager,
@@ -26,7 +25,7 @@ namespace HealthSync.Server.Controllers
             IConfiguration config,
             ITokenService tokenService,
             IEmailSender emailSender,
-            IMemoryCache cache,
+            IVerificationCodeService vrfCodeService,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
@@ -34,7 +33,7 @@ namespace HealthSync.Server.Controllers
             _config = config;
             _tokenService = tokenService;
             _emailSender = emailSender;
-            _cache = cache;
+            _vrfCodeService = vrfCodeService;
             _logger = logger;
         }
 
@@ -75,14 +74,10 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var verificationCode = Guid.NewGuid().ToString().Substring(0, 6);
-            _cache.Set(user.Email, verificationCode, new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
-            });
+            var vrfCode = _vrfCodeService.GenerateCode(userRegister.Email);
 
             var subject = "Confirm your registration!";
-            var message = $"Your verification code: <strong>{verificationCode}</strong>";
+            var message = $"<h2>Your verification code: <strong>{vrfCode}</strong>.</h2>";
             await _emailSender.SendEmailAsync(user.Email, subject, message);
 
             return Ok();
@@ -115,6 +110,13 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!user.EmailConfirmed)
+            {
+                ModelState.AddModelError("Email", NotVerified);
+
+                return BadRequest(ModelState);
+            }
+
             var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
             var accessTokenExpireTime = _tokenService.GetTokenExpireTime(accessToken);
             _tokenService.AppendTokenToCookie(HttpContext, "accessToken", accessToken, accessTokenExpireTime);
@@ -132,12 +134,12 @@ namespace HealthSync.Server.Controllers
         [HttpPost("confirmRegistration")]
         public async Task<IActionResult> ConfirmRegistration(string userEmail, string verificationCode)
         {
-            var code = _cache.Get(userEmail);
-
-            if (code != null && code == verificationCode)
+            if (_vrfCodeService.ValidateCode(userEmail, verificationCode))
             {
                 var user = await _userManager.FindByEmailAsync(userEmail);
+
                 user!.EmailConfirmed = true;
+                await _userManager.UpdateAsync(user!);
 
                 return Ok();
             }
@@ -150,14 +152,10 @@ namespace HealthSync.Server.Controllers
         {
             var user = await _userManager.FindByEmailAsync(email);
 
-            var verificationCode = Guid.NewGuid().ToString().Substring(0, 6);
-            _cache.Set(user.Email, verificationCode, new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
-            });
+            var vrfCode = _vrfCodeService.GenerateCode(email);
 
             var subject = "Confirm your registration!";
-            var message = $"Your verification code: <strong>{verificationCode}</strong>";
+            var message = $"<h2>Your verification code: <strong>{vrfCode}</strong></h2>";
             await _emailSender.SendEmailAsync(user.Email, subject, message);
 
             return Ok(new { Message = "New verification code is sended." });

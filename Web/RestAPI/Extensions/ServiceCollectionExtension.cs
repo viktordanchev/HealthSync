@@ -84,6 +84,7 @@ namespace Server.Extensions
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IVerificationCodeService, VerificationCodeService>();
         }
     }
 }

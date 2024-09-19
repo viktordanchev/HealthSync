@@ -8,6 +8,9 @@ using System.Text;
 
 namespace RestAPI.Services
 {
+    /// <summary>
+    /// Responsible for Jwt token.
+    /// </summary>
     public class TokenService : ITokenService
     {
         private UserManager<ApplicationUser> _userManager;
