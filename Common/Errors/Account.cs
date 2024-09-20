@@ -1,6 +1,6 @@
-﻿namespace Common
+﻿namespace Common.Errors
 {
-    public static class Errors
+    public static class Account
     {
         public const string RequiredField = "field is required!";
         public const string InvalidEmail = "This email is invalid!";
@@ -8,6 +8,7 @@
 
         public const string UsedEmail = "This email is already registered!";
         public const string InvalidLoginData = "Invalid email or password!";
-        public const string NotVerified = "Your email is not verified yet!";
+        public const string NotRegistered = "No account found with this email address!";
+        public const string InvalidVrfCode = "Invalid verification code!";
     }
 }
