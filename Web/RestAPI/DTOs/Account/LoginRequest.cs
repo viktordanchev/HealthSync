@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Common.Errors;
+using static Common.Errors.Account;
 
 namespace RestAPI.DTOs.Account
 {

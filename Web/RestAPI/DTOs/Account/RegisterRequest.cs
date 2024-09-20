@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Common.Errors;
+using static Common.Errors.Account;
 
 namespace RestAPI.DTOs.Account
 {
-    public class UserRegister
+    public class RegisterRequest
     {
         [Required(ErrorMessage = $"Email {RequiredField}")]
         [EmailAddress(ErrorMessage = InvalidEmail)]

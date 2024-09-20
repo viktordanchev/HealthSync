@@ -1,8 +1,15 @@
-﻿namespace RestAPI.DTOs.Account
+﻿using System.ComponentModel.DataAnnotations;
+using static Common.Errors.Account;
+
+namespace RestAPI.DTOs.Account
 {
     public class ConfirmRegistrationRequest
     {
-        public string Email { get; set; }
-        public string VrfCode { get; set; }
+        [Required(ErrorMessage = $"Email {RequiredField}")]
+        [EmailAddress(ErrorMessage = InvalidEmail)]
+        public string Email { get; set; } = null!;
+
+        [Required(ErrorMessage = $"Verification code {RequiredField}")]
+        public string VrfCode { get; set; } = null!;
     }
 }
