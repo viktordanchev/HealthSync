@@ -3,8 +3,9 @@ using RestAPI.Services.Contracts;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using static Common.Errors;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using static Common.Errors.Account;
+using static Common.Messages.Account;
 
 namespace HealthSync.Server.Controllers
 {
@@ -38,17 +39,22 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegister userRegister)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _userManager.FindByEmailAsync(userRegister.Email);
+            var user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user != null)
             {
+                if (!user.EmailConfirmed)
+                {
+                    return BadRequest(new { NotVerified = true });
+                }
+
                 ModelState.AddModelError("Email", UsedEmail);
 
                 return BadRequest(ModelState);
@@ -56,13 +62,13 @@ namespace HealthSync.Server.Controllers
 
             user = new ApplicationUser()
             {
-                UserName = userRegister.Email,
-                Email = userRegister.Email,
-                FirstName = userRegister.FirstName,
-                LastName = userRegister.LastName
+                UserName = request.Email,
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName
             };
 
-            var result = await _userManager.CreateAsync(user, userRegister.Password);
+            var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
             {
@@ -84,14 +90,14 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
+        public async Task<IActionResult> Login([FromBody] UserLogin request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _userManager.FindByEmailAsync(userLogin.Email);
+            var user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
             {
@@ -101,7 +107,7 @@ namespace HealthSync.Server.Controllers
             }
 
             var result = await _signInManager
-                .CheckPasswordSignInAsync(user, userLogin.Password, lockoutOnFailure: false);
+                .CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
 
             if (!result.Succeeded)
             {
@@ -112,16 +118,14 @@ namespace HealthSync.Server.Controllers
 
             if (!user.EmailConfirmed)
             {
-                ModelState.AddModelError("Email", NotVerified);
-
-                return BadRequest(ModelState);
+                return BadRequest(new { NotVerified = true });
             }
 
             var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
             var accessTokenExpireTime = _tokenService.GetTokenExpireTime(accessToken);
             _tokenService.AppendTokenToCookie(HttpContext, "accessToken", accessToken, accessTokenExpireTime);
 
-            if (userLogin.RememberMe)
+            if (request.RememberMe)
             {
                 var refreshToken = _tokenService.GenerateRefreshToken(user.Id);
                 var refreshTokenExpireTime = _tokenService.GetTokenExpireTime(refreshToken);
@@ -144,28 +148,26 @@ namespace HealthSync.Server.Controllers
                 return Ok();
             }
 
-            return BadRequest(new { Error = "Invalid verification code!" });
+            return BadRequest(new { Error = InvalidVrfCode });
         }
 
-        [HttpPost("resendVerificationCode")]
-        public async Task<IActionResult> ResendVerificationCode(string userEmail)
+        [HttpPost("resendVrfCode")]
+        public async Task<IActionResult> ResendVerificationCode([FromBody] string email)
         {
-            var user = await _userManager.FindByEmailAsync(userEmail);
+            var user = await _userManager.FindByEmailAsync(email);
 
-            if (user == null) 
+            if (user == null)
             {
-                ModelState.AddModelError("Email", UsedEmail);
-
-                return BadRequest(ModelState);
+                return BadRequest(new { Error = NotRegistered });
             }
 
-            var vrfCode = _vrfCodeService.GenerateCode(userEmail);
+            var vrfCode = _vrfCodeService.GenerateCode(email);
 
             var subject = "Confirm your registration!";
             var message = $"<h2>Your verification code: <strong>{vrfCode}</strong></h2>";
             await _emailSender.SendEmailAsync(user.Email, subject, message);
 
-            return Ok(new { Message = "New verification code is sended." });
+            return Ok(new { Message = NewVrfCode });
         }
 
         /// <summary>

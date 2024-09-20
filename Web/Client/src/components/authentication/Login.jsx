@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
 import { login, isAuthenticated } from '../../services/account';
 import Loading from '../Loading.jsx';
+import Messages from './Messages.jsx';
 
 function Login() {
     const navigate = useNavigate();
@@ -42,6 +43,11 @@ function Login() {
         } else {
             const errors = await response.json();
 
+            if (errors.notVerified) {
+                sessionStorage.setItem('email', values.email);
+                navigate('/account/confirmRegistration');
+            }
+
             for (const [key, message] of Object.entries(errors)) {
                 setMessage((prevMessages) => [...prevMessages, message]);
             }
@@ -55,15 +61,7 @@ function Login() {
             {loading ? <Loading /> :
                 <>
                     {messages.length > 0 ? (
-                        <div className="flex flex-col items-center space-y-4">
-                            <div className="max-w-xs text-center text-xl bg-red-500 rounded-xl p-4">
-                                {messages.map((message) => (
-                                    <div className="text-white">
-                                        {message}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <Messages values={messages} type={'error'} />
                     ) : null}
 
                     <section className="flex items-center justify-center">
