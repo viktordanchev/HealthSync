@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using RestAPI.Services.Contracts;
 using MimeKit;
 using MailKit.Net.Smtp;
 
@@ -16,7 +16,17 @@ namespace RestAPI.Services
             _config = config;
         }
 
-        public async Task SendEmailAsync(string toEmail, string subject, string htmlMessage)
+        public async Task SendVrfCode(string toEmail, string vrfCode)
+        {
+            var subject = "Confirm your registration!";
+            var message = $"<h2>Your verification code: <strong>{vrfCode}</strong>.</h2>";
+            await SendEmailAsync(toEmail, subject, message);
+        }
+
+        /// <summary>
+        /// This method send emails.
+        /// </summary>
+        private async Task SendEmailAsync(string toEmail, string subject, string htmlMessage)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_config["EmailSettings:From"]));

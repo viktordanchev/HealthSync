@@ -3,14 +3,13 @@ using RestAPI.Services.Contracts;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using static Common.Errors.Account;
 using static Common.Messages.Account;
 
 namespace HealthSync.Server.Controllers
 {
     [ApiController]
-    [Route("api/account")]
+    [Route("account")]
     public class AccountController : ControllerBase
     {
         private UserManager<ApplicationUser> _userManager;
@@ -81,10 +80,7 @@ namespace HealthSync.Server.Controllers
             }
 
             var vrfCode = _vrfCodeService.GenerateCode(user.Email);
-
-            var subject = "Confirm your registration!";
-            var message = $"<h2>Your verification code: <strong>{vrfCode}</strong>.</h2>";
-            await _emailSender.SendEmailAsync(user.Email, subject, message);
+            await _emailSender.SendVrfCode(user.Email, vrfCode);
 
             return Ok();
         }
@@ -135,8 +131,8 @@ namespace HealthSync.Server.Controllers
             return Ok();
         }
 
-        [HttpPost("confirmRegistration")]
-        public async Task<IActionResult> ConfirmRegistration([FromBody] ConfirmRegistrationRequest request)
+        [HttpPost("verifyAccount")]
+        public async Task<IActionResult> VerifyAccount([FromBody] ConfirmRegistrationRequest request)
         {
             if (_vrfCodeService.ValidateCode(request.Email, request.VrfCode))
             {
@@ -162,10 +158,7 @@ namespace HealthSync.Server.Controllers
             }
 
             var vrfCode = _vrfCodeService.GenerateCode(email);
-
-            var subject = "Confirm your registration!";
-            var message = $"<h2>Your verification code: <strong>{vrfCode}</strong></h2>";
-            await _emailSender.SendEmailAsync(user.Email, subject, message);
+            await _emailSender.SendVrfCode(user.Email, vrfCode);
 
             return Ok(new { Message = NewVrfCode });
         }

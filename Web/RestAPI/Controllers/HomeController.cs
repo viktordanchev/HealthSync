@@ -5,7 +5,7 @@ namespace Server.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/home")]
+    [Route("home")]
     public class HomeController : ControllerBase
     {
         public HomeController()
