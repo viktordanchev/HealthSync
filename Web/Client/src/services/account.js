@@ -1,4 +1,4 @@
-const url = 'https://localhost:7080/api/account';
+const url = 'https://localhost:7080/account';
 
 export const login = async (values) =>
     await fetch(`${url}/login`, {
@@ -19,8 +19,8 @@ export const register = async (values) =>
         body: JSON.stringify(values)
     });
 
-export const confirmRegistration = async (values) =>
-    await fetch(`${url}/confirmRegistration`, {
+export const verifyAccount = async (values) =>
+    await fetch(`${url}/verifyAccount`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

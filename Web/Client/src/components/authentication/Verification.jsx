@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
-import { confirmRegistration, resendVrfCode } from '../../services/account';
+import { verifyAccount, resendVrfCode } from '../../services/account';
 import Messages from './Messages.jsx';
 
 function Verification() {
@@ -21,20 +21,23 @@ function Verification() {
     });
 
     const handleSubmit = async (values) => {
-        const response = await confirmRegistration(values);
+        const response = await verifyAccount(values);
 
         if (response.ok) {
             navigate('/home');
         }
         else {
             const errors = await response.json();
-            setMessage(errors.error);
+
+            for (const [key, message] of Object.entries(errors)) {
+                setMessage((prevMessages) => [...prevMessages, message]);
+            }
+
             setMessageType('error');
         }
     };
 
     const handleResend = async (email) => {
-        sessionStorage.setItem('email', email);
         const response = await resendVrfCode(email);
         const data = await response.json();
 
@@ -43,6 +46,7 @@ function Verification() {
         }
 
         if (response.ok) {
+            sessionStorage.setItem('email', email);
             setMessageType('message');
         }
         else {
@@ -50,7 +54,6 @@ function Verification() {
         }
 
         setTimeout(() => { setMessage(''); }, 3000);
-        
     };
 
     return (
@@ -70,26 +73,25 @@ function Verification() {
                     >
                         {({ values }) => (
                             <Form>
-                                {userEmail == null ?
-                                    <div>
-                                        <label className="text-md font-bold">Email</label>
-                                        <Field
-                                            className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
-                                            type="email"
-                                            name="email"
-                                        />
-                                        <ErrorMessage name="email" component="div" className="text-red-500 text-md" />
-                                    </div> :
-                                    <div>
-                                        <label className="text-md font-bold">Verification code</label>
-                                        <Field
-                                            className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
-                                            type="text"
-                                            name="vrfCode"
-                                        />
-                                        <ErrorMessage name="vrfCode" component="div" className="text-red-500 text-md" />
-                                        <p className="text-md text-center text-white mt-1">Check your email!</p>
-                                    </div>}
+                                <div>
+                                    <label className="text-md font-bold">Email</label>
+                                    <Field
+                                        className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                        type="email"
+                                        name="email"
+                                    />
+                                    <ErrorMessage name="email" component="div" className="text-red-500 text-md" />
+                                </div>
+                                <div>
+                                    <label className="text-md font-bold">Verification code</label>
+                                    <Field
+                                        className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                        type="text"
+                                        name="vrfCode"
+                                    />
+                                    <ErrorMessage name="vrfCode" component="div" className="text-red-500 text-md" />
+                                    <p className="text-md text-center text-white mt-1">Check your email!</p>
+                                </div>
                                 <div className="flex justify-evenly pt-6">
                                     <button
                                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
