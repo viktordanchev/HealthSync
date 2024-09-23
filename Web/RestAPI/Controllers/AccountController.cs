@@ -15,17 +15,17 @@ namespace HealthSync.Server.Controllers
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private IConfiguration _config;
-        private ITokenService _tokenService;
+        private IJWTTokenService _tokenService;
         private IEmailSender _emailSender;
-        private IVerificationCodeService _vrfCodeService;
+        private IMemoryCacheService _memoryCacheService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IConfiguration config,
-            ITokenService tokenService,
+            IJWTTokenService tokenService,
             IEmailSender emailSender,
-            IVerificationCodeService vrfCodeService,
+            IMemoryCacheService memoryCacheService,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
@@ -33,7 +33,7 @@ namespace HealthSync.Server.Controllers
             _config = config;
             _tokenService = tokenService;
             _emailSender = emailSender;
-            _vrfCodeService = vrfCodeService;
+            _memoryCacheService = memoryCacheService;
             _logger = logger;
         }
 
@@ -79,14 +79,15 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var vrfCode = _vrfCodeService.GenerateCode(user.Email);
-            await _emailSender.SendVrfCode(user.Email, vrfCode);
+            var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
+            _memoryCacheService.Add(user.Email, token, TimeSpan.FromMinutes(1));
+            await _emailSender.SendVrfCode(user.Email, token);
 
             return Ok();
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UserLogin request)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -132,9 +133,9 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpPost("verifyAccount")]
-        public async Task<IActionResult> VerifyAccount([FromBody] ConfirmRegistrationRequest request)
+        public async Task<IActionResult> VerifyAccount([FromBody] VerifyAccountRequest request)
         {
-            if (_vrfCodeService.ValidateCode(request.Email, request.VrfCode))
+            if (_memoryCacheService.Get(request.Email).ToLower() == request.VrfCode.ToLower())
             {
                 var user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -157,10 +158,42 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { Error = NotRegistered });
             }
 
-            var vrfCode = _vrfCodeService.GenerateCode(email);
-            await _emailSender.SendVrfCode(user.Email, vrfCode);
+            var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
+            _memoryCacheService.Add(user.Email, token, TimeSpan.FromMinutes(1));
+            await _emailSender.SendVrfCode(user.Email, token);
 
             return Ok(new { Message = NewVrfCode });
+        }
+
+        [HttpPost("sentRecoverPasswordEmail")]
+        public async Task<IActionResult> SentRecoverPasswordEmail([FromBody] string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return BadRequest(new { Error = NotRegistered });
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            _memoryCacheService.Add(token, email, TimeSpan.FromMinutes(10));
+            await _emailSender.SendPasswordRecoverLink(email, token);
+
+            return Ok();
+        }
+
+        [HttpPost("recoverPassword")]
+        public async Task<IActionResult> RecoverPassword([FromBody] RecoverPasswordRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _userManager.FindByEmailAsync(_memoryCacheService.Get(request.Token).ToString());
+            await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
+
+            return Ok();
         }
 
         /// <summary>

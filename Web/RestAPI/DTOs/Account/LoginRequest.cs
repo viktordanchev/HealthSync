@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using static Common.Errors.Account;
 
 namespace RestAPI.DTOs.Account
 {
-    public class UserLogin
+    public class LoginRequest
     {
         [Required(ErrorMessage = $"Email {RequiredField}")]
         public string Email { get; set; } = null!;

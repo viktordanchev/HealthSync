@@ -29,7 +29,8 @@ namespace Server.Extensions
                 options.Password.RequireLowercase = false;
                 options.Password.RequiredLength = 6;
             })
-            .AddEntityFrameworkStores<HealthSyncDbContext>();
+            .AddEntityFrameworkStores<HealthSyncDbContext>()
+            .AddDefaultTokenProviders();
         }
 
         public static void AddAuthentication(this IServiceCollection services, IConfiguration config)
@@ -81,9 +82,9 @@ namespace Server.Extensions
 
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IJWTTokenService, JWTTokenService>();
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IVerificationCodeService, VerificationCodeService>();
+            services.AddTransient<IMemoryCacheService, MemoryCacheService>();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace RestAPI.Services.Contracts
 {
-    public interface ITokenService
+    public interface IJWTTokenService
     {
         string GenerateRefreshToken(string userId);
         Task<string> GenerateAccessTokenAsync(string userId);

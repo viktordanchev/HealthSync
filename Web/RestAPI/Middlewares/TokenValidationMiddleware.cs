@@ -27,7 +27,7 @@ namespace RestAPI.Middlewares
                 var jsonToken = handler.ReadJwtToken(refreshToken);
                 var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-                var tokenService = context.RequestServices.GetRequiredService<ITokenService>();
+                var tokenService = context.RequestServices.GetRequiredService<IJWTTokenService>();
 
                 var newAccessToken = await tokenService.GenerateAccessTokenAsync(userId);
                 var accessTokenExpireTime = tokenService.GetTokenExpireTime(newAccessToken);

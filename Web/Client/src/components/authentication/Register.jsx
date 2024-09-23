@@ -68,6 +68,7 @@ function Register() {
                                     <label className="text-md font-bold">First name</label>
                                     <Field
                                         className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                        placeholder="Alex"
                                         type="text"
                                         name="firstName"
                                     />
@@ -76,6 +77,7 @@ function Register() {
                                     <label className="text-md font-bold">Last name</label>
                                     <Field
                                         className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                        placeholder="Ivanov"
                                         type="text"
                                         name="lastName"
                                     />
@@ -87,6 +89,7 @@ function Register() {
                                 <label className="text-md font-bold">Email</label>
                                 <Field
                                     className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                    placeholder="user@gmail.com"
                                     type="email"
                                     name="email"
                                 />

@@ -11,12 +11,12 @@ namespace RestAPI.Services
     /// <summary>
     /// This class is responsible for Jwt token.
     /// </summary>
-    public class TokenService : ITokenService
+    public class JWTTokenService : IJWTTokenService
     {
         private UserManager<ApplicationUser> _userManager;
         private IConfiguration _config;
 
-        public TokenService(UserManager<ApplicationUser> userManager,
+        public JWTTokenService(UserManager<ApplicationUser> userManager,
             IConfiguration config)
         {
             _userManager = userManager;

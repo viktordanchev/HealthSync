@@ -77,6 +77,7 @@ function Verification() {
                                     <label className="text-md font-bold">Email</label>
                                     <Field
                                         className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                        placeholder="user@gmail.com"
                                         type="email"
                                         name="email"
                                     />
