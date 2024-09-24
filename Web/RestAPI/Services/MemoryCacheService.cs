@@ -23,7 +23,12 @@ namespace RestAPI.Services
             });
         }
 
-        public string Get(string key) 
+        public bool isExist(string key)
+        {
+            return _memoryCache.Get(key) != null;
+        }
+
+        public string GetValue(string key) 
         {
             return _memoryCache.Get(key) != null ? _memoryCache.Get(key).ToString() : string.Empty;
         }
