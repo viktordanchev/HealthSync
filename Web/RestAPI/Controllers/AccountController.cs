@@ -135,7 +135,7 @@ namespace HealthSync.Server.Controllers
         [HttpPost("verifyAccount")]
         public async Task<IActionResult> VerifyAccount([FromBody] VerifyAccountRequest request)
         {
-            if (_memoryCacheService.Get(request.Email).ToLower() == request.VrfCode.ToLower())
+            if (_memoryCacheService.GetValue(request.Email).ToLower() == request.VrfCode.ToLower())
             {
                 var user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -165,8 +165,8 @@ namespace HealthSync.Server.Controllers
             return Ok(new { Message = NewVrfCode });
         }
 
-        [HttpPost("sentRecoverPasswordEmail")]
-        public async Task<IActionResult> SentRecoverPasswordEmail([FromBody] string email)
+        [HttpPost("sendRecoverPasswordEmail")]
+        public async Task<IActionResult> SendRecoverPasswordEmail([FromBody] string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
 
@@ -179,7 +179,7 @@ namespace HealthSync.Server.Controllers
             _memoryCacheService.Add(token, email, TimeSpan.FromMinutes(10));
             await _emailSender.SendPasswordRecoverLink(email, token);
 
-            return Ok();
+            return Ok(new {Message = "Recover password link was sended to your email."});
         }
 
         [HttpPost("recoverPassword")]
@@ -190,7 +190,12 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _userManager.FindByEmailAsync(_memoryCacheService.Get(request.Token).ToString());
+            if (!_memoryCacheService.isExist(request.Token))
+            {
+                return BadRequest(new {Error = "Invalid token!"});
+            }
+
+            var user = await _userManager.FindByEmailAsync(_memoryCacheService.GetValue(request.Token).ToString());
             await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
 
             return Ok();

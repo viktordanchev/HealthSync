@@ -39,6 +39,26 @@ export const resendVrfCode = async (email) =>
         credentials: 'include'
     });
 
+export const sendRecoverPasswordEmail = async (email) =>
+    await fetch(`${url}/sendRecoverPasswordEmail`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(email),
+        credentials: 'include'
+    });
+
+export const recoverPassword = async (values) =>
+    await fetch(`${url}/recoverPassword`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values),
+        credentials: 'include'
+    });
+
 export const isAuthenticated = async () =>
     await fetch(`${url}/isAuthenticated`, {
         method: 'GET',

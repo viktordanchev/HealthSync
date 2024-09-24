@@ -1,7 +1,6 @@
 ﻿using RestAPI.Services.Contracts;
 using MimeKit;
 using MailKit.Net.Smtp;
-using static System.Net.WebRequestMethods;
 
 namespace RestAPI.Services
 {
@@ -27,7 +26,7 @@ namespace RestAPI.Services
         public async Task SendPasswordRecoverLink(string toEmail, string token)
         {
             var subject = "Password recover!";
-            var message = $"<h2>Your verification code: <a href='https://localhost:5173/account/recoverePassword?token={token}'>.</h2>";
+            var message = $"<a href='https://localhost:5173/account/recoverPassword?token={token}' style='display: inline-block; padding: 10px 20px; background-color: #01bfa5; color: white; text-decoration: none; border-radius: 0.75rem; font-size: 16px;'>Recover Password</a>";
             await SendEmailAsync(toEmail, subject, message);
         }
 

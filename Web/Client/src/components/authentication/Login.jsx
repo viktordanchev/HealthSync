@@ -28,7 +28,7 @@ function Login() {
 
             if (errors.notVerified) {
                 sessionStorage.setItem('email', values.email);
-                navigate('/verifyAccount');
+                navigate('/account/verify');
             }
 
             for (const [key, message] of Object.entries(errors)) {
@@ -87,9 +87,9 @@ function Login() {
                                     />
                                     <span className="ml-1 text-md text-white">Remember me</span>
                                 </label>
-                                <button className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800">
+                                <a href="/account/recoverPassword" className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800">
                                     Forgot Password?
-                                </button>
+                                </a>
                             </div>
                             <div className="text-center pt-6">
                                 <button

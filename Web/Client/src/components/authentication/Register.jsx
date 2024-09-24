@@ -22,7 +22,8 @@ function Register() {
             .min(6, 'Password must be at least 6 characters')
             .required('Password' + authErrors.RequiredField),
         confirmPassword: Yup.string()
-            .required('Confirm password' + authErrors.RequiredField),
+            .required('Confirm password' + authErrors.RequiredField)
+            .oneOf([Yup.ref('password'), null], 'Passwords must match')
     });
 
     const handleRegister = async (values) => {
@@ -30,13 +31,13 @@ function Register() {
 
         if (response.ok) {
             sessionStorage.setItem('email', values.email);
-            navigate('/verifyAccount');
+            navigate('/account/verify');
         } else {
             const errors = await response.json();
 
             if (errors.notVerified) {
                 sessionStorage.setItem('email', values.email);
-                navigate('/verifyAccount');
+                navigate('/account/verify');
             }
 
             for (const [key, message] of Object.entries(errors)) {
