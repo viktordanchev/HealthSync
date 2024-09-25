@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { getUserName } from '../services/account';
 import Loading from './Loading.jsx';
 
 const Header = ({ isAuthenticated }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
-
-    useEffect(() => {
-        const requestUserName = async () => {
-            if (isAuthenticated) {
-                const userName = await getUserName();
-                setUserName(userName);
-            }
-        }
-
-        requestUserName();
-    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);

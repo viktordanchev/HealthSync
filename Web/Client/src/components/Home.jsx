@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-function Section() {
+function Home() {
     const [data, setData] = useState(null);
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
         fetch('https://localhost:7080/home', {
             method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
             credentials: 'include'
         })
             .then(response => response.json())
@@ -19,4 +23,4 @@ function Section() {
     );
 }
 
-export default Section;
+export default Home;

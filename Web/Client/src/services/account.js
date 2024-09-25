@@ -1,7 +1,7 @@
 const url = 'https://localhost:7080/account';
 
 export const login = async (values) =>
-    await fetch(`${url}/login`, {
+    await fetch(`${url}/login1`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -59,22 +59,8 @@ export const recoverPassword = async (values) =>
         credentials: 'include'
     });
 
-export const isAuthenticated = async () =>
-    await fetch(`${url}/isAuthenticated`, {
+export const refreshToken = async () =>
+    await fetch(`${url}/refreshToken`, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         credentials: 'include'
-    }).then(response => response.json())
-        .then(data => data.isAuthenticated);
-
-export const getUserName = async () =>
-    await fetch(`${url}/getUserName`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-    }).then(response => response.json())
-        .then(data => data.userName);
+    });

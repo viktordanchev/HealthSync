@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using static Common.Errors.Account;
 using static Common.Messages.Account;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace HealthSync.Server.Controllers
 {
@@ -119,8 +121,6 @@ namespace HealthSync.Server.Controllers
             }
 
             var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
-            var accessTokenExpireTime = _tokenService.GetTokenExpireTime(accessToken);
-            _tokenService.AppendTokenToCookie(HttpContext, "accessToken", accessToken, accessTokenExpireTime);
 
             if (request.RememberMe)
             {
@@ -129,7 +129,7 @@ namespace HealthSync.Server.Controllers
                 _tokenService.AppendTokenToCookie(HttpContext, "refreshToken", refreshToken, refreshTokenExpireTime);
             }
 
-            return Ok();
+            return Ok(new { Token = accessToken });
         }
 
         [HttpPost("verifyAccount")]
@@ -179,7 +179,7 @@ namespace HealthSync.Server.Controllers
             _memoryCacheService.Add(token, email, TimeSpan.FromMinutes(10));
             await _emailSender.SendPasswordRecoverLink(email, token);
 
-            return Ok(new {Message = "Recover password link was sended to your email."});
+            return Ok(new { Message = "Recover password link was sended to your email." });
         }
 
         [HttpPost("recoverPassword")]
@@ -192,7 +192,7 @@ namespace HealthSync.Server.Controllers
 
             if (!_memoryCacheService.isExist(request.Token))
             {
-                return BadRequest(new {Error = "Invalid token!"});
+                return BadRequest(new { Error = "Invalid token!" });
             }
 
             var user = await _userManager.FindByEmailAsync(_memoryCacheService.GetValue(request.Token).ToString());
@@ -201,24 +201,22 @@ namespace HealthSync.Server.Controllers
             return Ok();
         }
 
-        /// <summary>
-        /// This check if there is valid access token.
-        /// </summary>
-        [HttpGet("isAuthenticated")]
-        public IActionResult IsAuthenticated()
+        [HttpGet("refreshToken")]
+        public IActionResult RefreshToken() 
         {
-            Request.Cookies.TryGetValue("accessToken", out var token);
+            var refreshToken = Request.Cookies["refreshToken"];
 
-            return Ok(new { IsAuthenticated = token != null });
-        }
+            if (refreshToken != null)
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadJwtToken(refreshToken);
+                var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-        /// <summary>
-        /// This method return current user name.
-        /// </summary>
-        [HttpGet("getUserName")]
-        public IActionResult GetUserName()
-        {
-            return Ok(new { UserName = User.Identity.Name });
+                var newAccessToken = _tokenService.GenerateAccessTokenAsync(userId);
+                return Ok(new { Token = newAccessToken });
+            }
+
+            return Unauthorized(new {Error = "Sesson has ended." });
         }
     }
 }

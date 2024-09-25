@@ -20,18 +20,18 @@ function Login() {
 
     const handleLogin = async (values) => {
         const response = await login(values);
+        const data = await response.json();
 
         if (response.ok) {
+            localStorage.setItem('accessToken', data.token);
             navigate('/home');
         } else {
-            const errors = await response.json();
-
-            if (errors.notVerified) {
+            if (data.notVerified) {
                 sessionStorage.setItem('email', values.email);
                 navigate('/account/verify');
             }
 
-            for (const [key, message] of Object.entries(errors)) {
+            for (const [key, message] of Object.entries(data)) {
                 setMessage((prevMessages) => [...prevMessages, message]);
             }
         }
