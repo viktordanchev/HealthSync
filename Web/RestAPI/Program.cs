@@ -1,4 +1,3 @@
-using RestAPI.Middlewares;
 using Server.Extensions;
 using System.Text.Json;
 
@@ -29,8 +28,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("Cors");
-
-app.UseMiddleware<TokenValidationMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
