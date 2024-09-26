@@ -216,7 +216,7 @@ namespace HealthSync.Server.Controllers
                 return Ok(new { Token = newAccessToken });
             }
 
-            return Unauthorized(new {Error = "Sesson has ended." });
+            return Unauthorized(new {Error = "Session has ended." });
         }
     }
 }
