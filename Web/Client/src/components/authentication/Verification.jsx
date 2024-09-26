@@ -57,7 +57,7 @@ function Verification() {
     };
 
     return (
-        <>
+        <div className="flex flex-col space-y-6">
             {messages.length != 0 ? (
                 <Messages values={messages} type={messageType} />
             ) : null}
@@ -111,7 +111,7 @@ function Verification() {
                     </Formik>
                 </div>
             </section>
-        </>
+        </div>
     );
 }
 

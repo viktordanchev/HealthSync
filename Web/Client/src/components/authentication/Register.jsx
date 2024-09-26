@@ -49,8 +49,8 @@ function Register() {
     };
 
     return (
-        <>
-            {messages.length > 0 ? (
+        <div className="flex flex-col space-y-6">
+            {messages.length != 0 ? (
                 <Messages values={messages} type={'error'} />
             ) : null}
 
@@ -125,7 +125,7 @@ function Register() {
                     </Formik>
                 </div>
             </section>
-        </>
+        </div>
     );
 }
 

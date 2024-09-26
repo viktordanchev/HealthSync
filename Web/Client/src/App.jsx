@@ -13,20 +13,30 @@ import useAuth from './hooks/useAuth.js'
 
 function App() {
     const isAuthenticated = useAuth();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
     return (
-        <Router>
-            <Header isAuthenticated={isAuthenticated} />
-            <Routes>
-                <Route path="/" element={<Navigate to="/home" />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/login" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
-                <Route path="/register" element={isAuthenticated ? <Navigate to="/home" /> : <Register />} />
-                <Route path="/account/verify" element={isAuthenticated ? <Navigate to="/home" /> : <Verification />} />
-                <Route path="/account/recoverPassword" element={isAuthenticated ? <Navigate to="/home" /> : <RecoverPassword />} />
-            </Routes>
-            <Footer />
-        </Router >
+        <>
+            {loading ? <Loading /> :
+                <Router>
+                    <Header isAuthenticated={isAuthenticated} />
+                    <main className="grow content-center">
+                        <Routes>
+                            <Route path="/" element={<Navigate to="/home" />} />
+                            <Route path="/home" element={<Home />} />
+                            <Route path="/login" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
+                            <Route path="/register" element={isAuthenticated ? <Navigate to="/home" /> : <Register />} />
+                            <Route path="/account/verify" element={isAuthenticated ? <Navigate to="/home" /> : <Verification />} />
+                            <Route path="/account/recoverPassword" element={isAuthenticated ? <Navigate to="/home" /> : <RecoverPassword />} />
+                        </Routes>
+                    </main>
+                    <Footer />
+                </Router >}
+        </>
     );
 }
 

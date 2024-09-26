@@ -24,7 +24,6 @@ function Login() {
 
         if (response.ok) {
             localStorage.setItem('accessToken', data.token);
-            navigate('/home');
         } else {
             if (data.notVerified) {
                 sessionStorage.setItem('email', values.email);
@@ -40,8 +39,8 @@ function Login() {
     };
 
     return (
-        <>
-            {messages.length > 0 ? (
+        <div className="flex flex-col space-y-6">
+            {messages.length != 0 ? (
                 <Messages values={messages} type={'error'} />
             ) : null}
 
@@ -102,7 +101,7 @@ function Login() {
                     </Formik>
                 </div>
             </section>
-        </>
+        </div>
     );
 }
 

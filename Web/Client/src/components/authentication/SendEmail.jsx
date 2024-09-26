@@ -29,6 +29,8 @@ function SendEmail() {
         for (const [key, message] of Object.entries(data)) {
             setMessage((prevMessages) => [...prevMessages, message]);
         }
+
+        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (
