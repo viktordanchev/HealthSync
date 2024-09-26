@@ -18,6 +18,9 @@ module.exports = {
             },
             transformOrigin: {
                 center: 'center',
+            },
+            textUnderlineOffset: {
+                5: '12px',
             }
         }
     },

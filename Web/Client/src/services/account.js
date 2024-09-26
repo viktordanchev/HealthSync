@@ -1,7 +1,7 @@
 const url = 'https://localhost:7080/account';
 
 export const login = async (values) =>
-    await fetch(`${url}/login1`, {
+    await fetch(`${url}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -63,4 +63,4 @@ export const refreshToken = async () =>
     await fetch(`${url}/refreshToken`, {
         method: 'GET',
         credentials: 'include'
-    });
+    }).then(response => response.json());

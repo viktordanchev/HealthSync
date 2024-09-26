@@ -16,9 +16,14 @@ function useAuth() {
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true);
                 } else {
-                    const response = await refreshToken();
+                    localStorage.removeItem('accessToken');
+                    const data = await refreshToken();
 
-                    if()
+                    if (data.token) {
+                        localStorage.setItem('accessToken', data.token);
+                    } else {
+                        console.log(data.error);
+                    }
                 }
             }
         };
