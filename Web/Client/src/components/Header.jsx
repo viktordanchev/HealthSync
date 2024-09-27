@@ -6,7 +6,6 @@ import { jwtDecode } from 'jwt-decode';
 const Header = ({ isAuthenticated }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -15,8 +14,6 @@ const Header = ({ isAuthenticated }) => {
             const decodedToken = jwtDecode(token);
             setUserName(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']);
         }
-
-        setLoading(false);
     }, []);
 
     const toggleMenu = () => {
@@ -52,23 +49,20 @@ const Header = ({ isAuthenticated }) => {
                     </li>
                 </ul>
                 <div className="flex space-x-4 sm:hidden">
-                    {loading ? <div>Loading..</div> :
+                    {isAuthenticated ? (
+                        <p className="text-white text-lg font-bold py-2 px-4">
+                            {userName}
+                        </p>
+                    ) : (
                         <>
-                            {userName ? (
-                                <p className="text-white text-lg font-bold py-2 px-4">
-                                    {userName}
-                                </p>
-                            ) : (
-                                <>
-                                    <a href="/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
-                                        Login
-                                    </a>
-                                    <a href="/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
-                                        Register
-                                    </a>
-                                </>
-                            )}
-                        </>}
+                            <a href="/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
+                                Login
+                            </a>
+                            <a href="/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
+                                Register
+                            </a>
+                        </>
+                    )}
                 </div>
                 <button
                     onClick={toggleMenu}

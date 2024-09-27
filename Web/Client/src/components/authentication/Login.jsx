@@ -24,6 +24,8 @@ function Login() {
 
         if (response.ok) {
             localStorage.setItem('accessToken', data.token);
+            navigate('/home');
+            window.location.reload();
         } else {
             if (data.notVerified) {
                 sessionStorage.setItem('email', values.email);
