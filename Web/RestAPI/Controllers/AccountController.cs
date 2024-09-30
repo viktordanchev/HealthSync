@@ -157,6 +157,10 @@ namespace HealthSync.Server.Controllers
             {
                 return BadRequest(new { Error = NotRegistered });
             }
+            else if(user.EmailConfirmed)
+            {
+                return BadRequest(new { Error = AlredyVerified });
+            }
 
             var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
             _memoryCacheService.Add(user.Email, token, TimeSpan.FromMinutes(1));
@@ -179,7 +183,7 @@ namespace HealthSync.Server.Controllers
             _memoryCacheService.Add(token, email, TimeSpan.FromMinutes(10));
             await _emailSender.SendPasswordRecoverLink(email, token);
 
-            return Ok(new { Message = "Recover password link was sended to your email." });
+            return Ok(new { Message = SendedPassRecoverLink });
         }
 
         [HttpPost("recoverPassword")]
@@ -192,7 +196,7 @@ namespace HealthSync.Server.Controllers
 
             if (!_memoryCacheService.isExist(request.Token))
             {
-                return BadRequest(new { Error = "Invalid token!" });
+                return BadRequest(new { Error = InvalidToken });
             }
 
             var user = await _userManager.FindByEmailAsync(_memoryCacheService.GetValue(request.Token).ToString());
