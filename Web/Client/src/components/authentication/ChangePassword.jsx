@@ -37,7 +37,7 @@ function ChangePassword({ token }) {
     };
 
     return (
-        <>
+        <div className="flex flex-col space-y-6">
             {messages.length != 0 ? (
                 <Messages values={messages} type={'error'} />
             ) : null}
@@ -81,7 +81,7 @@ function ChangePassword({ token }) {
                     </Formik>
                 </div>
             </section >
-        </>
+        </div>
     );
 }
 

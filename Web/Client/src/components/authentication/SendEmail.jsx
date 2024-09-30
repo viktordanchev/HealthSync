@@ -1,13 +1,18 @@
 import React, { Fragment, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
-import { sendRecoverPasswordEmail } from '../../services/account';
+import { sendRecoverPasswordEmail, resendVrfCode } from '../../services/account';
 import Messages from './Messages.jsx';
+import useTimer from '../../hooks/useTimer.js';
 
 function SendEmail() {
+    const { isButtonDisabled, seconds, resetTimer } = useTimer();
+    const navigate = useNavigate();
     const [messages, setMessage] = useState([]);
     const [messageType, setMessageType] = useState('');
+    const [isVerification, setisVerification] = useState(location.pathname.includes('/verify'));
 
     const validations = Yup.object({
         email: Yup.string()
@@ -16,11 +21,24 @@ function SendEmail() {
     });
 
     const handleSubmit = async (values) => {
-        const response = await sendRecoverPasswordEmail(values.email);
+        let response;
+
+        if (isVerification) {
+            response = await resendVrfCode(values.email);
+        } else {
+            response = await sendRecoverPasswordEmail(values.email);
+        }
+
         const data = await response.json();
 
         if (response.ok) {
+            if (isVerification) {
+                sessionStorage.setItem('email', values.email);
+                window.location.reload();
+            }
+
             setMessageType('message');
+            resetTimer();
         }
         else {
             setMessageType('error');
@@ -41,7 +59,7 @@ function SendEmail() {
 
             <section className="flex items-center justify-center">
                 <div className="w-full max-w-xs bg-maincolor rounded-xl shadow-md px-8 py-8">
-                    <p className="text-3xl text-center text-white">Recover password</p>
+                    <p className="text-3xl text-center text-white">{isVerification ? 'Verify Email' : 'Password Recover Email'}</p>
                     <hr className="my-4" />
                     <Formik
                         initialValues={{ email: '' }}
@@ -61,9 +79,10 @@ function SendEmail() {
                             </div>
                             <div className="flex justify-center">
                                 <button
+                                    disabled={isButtonDisabled}
                                     className="w-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6"
                                     type="submit">
-                                    Send
+                                    {isButtonDisabled ? seconds : "Send"}
                                 </button>
                             </div>
                         </Form>
