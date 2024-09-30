@@ -29,8 +29,8 @@ export const verifyAccount = async (values) =>
         credentials: 'include'
     });
 
-export const resendVrfCode = async (email) =>
-    await fetch(`${url}/resendVrfCode`, {
+export const sendVrfCode = async (email) =>
+    await fetch(`${url}/sendVrfCode`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

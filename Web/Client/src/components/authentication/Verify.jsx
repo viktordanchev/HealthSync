@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
-import { verifyAccount, resendVrfCode } from '../../services/account';
+import { verifyAccount, sendVrfCode } from '../../services/account';
 import Messages from './Messages.jsx';
 import useTimer from '../../hooks/useTimer.js';
 
@@ -42,7 +42,7 @@ function Verify() {
     };
 
     const handleResend = async () => {
-        const response = await resendVrfCode(userEmail);
+        const response = await sendVrfCode(userEmail);
         const data = await response.json();
 
         for (const [key, message] of Object.entries(data)) {

@@ -148,8 +148,8 @@ namespace HealthSync.Server.Controllers
             return BadRequest(new { Error = InvalidVrfCode });
         }
 
-        [HttpPost("resendVrfCode")]
-        public async Task<IActionResult> ResendVerificationCode([FromBody] string email)
+        [HttpPost("sendVrfCode")]
+        public async Task<IActionResult> SendVerificationCode([FromBody] string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
 

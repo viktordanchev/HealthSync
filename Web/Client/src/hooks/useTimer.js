@@ -2,13 +2,13 @@ import { useEffect, useState, useCallback } from 'react';
 
 const useTimer = () => {
     const [seconds, setSeconds] = useState(() => {
-        const savedSeconds = localStorage.getItem('timerSeconds');
-        return savedSeconds ? parseInt(savedSeconds, 10) : 60;
+        const savedSeconds = sessionStorage.getItem('timerSeconds');
+        return savedSeconds ? parseInt(savedSeconds, 10) : 0;
     });
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     useEffect(() => {
-        localStorage.setItem('timerSeconds', seconds);
+        sessionStorage.setItem('timerSeconds', seconds);
 
         if (seconds > 0) {
             const timer = setTimeout(() => {
@@ -18,14 +18,14 @@ const useTimer = () => {
             return () => clearTimeout(timer);
         } else {
             setIsButtonDisabled(false);
-            localStorage.removeItem('timerSeconds');
+            sessionStorage.removeItem('timerSeconds');
         }
     }, [seconds]);
 
     const resetTimer = useCallback(() => {
         setSeconds(60);
         setIsButtonDisabled(true);
-        localStorage.removeItem('timerSeconds');
+        sessionStorage.removeItem('timerSeconds');
     }, []);
 
     return { isButtonDisabled, seconds, resetTimer };

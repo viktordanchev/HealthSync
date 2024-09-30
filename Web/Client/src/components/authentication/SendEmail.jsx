@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authErrors } from '../../constants/errors';
-import { sendRecoverPasswordEmail, resendVrfCode } from '../../services/account';
+import { sendRecoverPasswordEmail, sendVrfCode } from '../../services/account';
 import Messages from './Messages.jsx';
 import useTimer from '../../hooks/useTimer.js';
 
@@ -24,7 +24,7 @@ function SendEmail() {
         let response;
 
         if (isVerification) {
-            response = await resendVrfCode(values.email);
+            response = await sendVrfCode(values.email);
         } else {
             response = await sendRecoverPasswordEmail(values.email);
         }
@@ -36,8 +36,10 @@ function SendEmail() {
                 sessionStorage.setItem('email', values.email);
                 window.location.reload();
             }
+            else {
+                setMessageType('message');
+            }
 
-            setMessageType('message');
             resetTimer();
         }
         else {

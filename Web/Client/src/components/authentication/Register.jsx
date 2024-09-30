@@ -36,7 +36,6 @@ function Register() {
             const errors = await response.json();
 
             if (errors.notVerified) {
-                sessionStorage.setItem('email', values.email);
                 navigate('/account/verify');
             }
 

@@ -28,7 +28,6 @@ function Login() {
             window.location.reload();
         } else {
             if (data.notVerified) {
-                sessionStorage.setItem('email', values.email);
                 navigate('/account/verify');
             }
 
