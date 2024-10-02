@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
-import Home from './components/Home.jsx';
-import Loading from './components/Loading.jsx';
-import Login from './components/authentication/Login.jsx';
-import Register from './components/authentication/Register.jsx';
-import EmailVerification from './components/authentication/EmailVerification.jsx';
-import RecoverPassword from './components/authentication/RecoverPassword.jsx';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './components/Home';
+import Loading from './components/Loading';
+import Login from './components/authentication/Login';
+import Register from './components/authentication/Register';
+import Verification from './components/authentication/Verification';
+import RecoverPassword from './components/authentication/RecoverPassword';
 import { jwtDecode } from 'jwt-decode';
-import useCheckAuth from './hooks/useCheckAuth.js'
+import useCheckAuth from './hooks/useCheckAuth'
 
 function App() {
     const { isAuthenticated, loading } = useCheckAuth();
@@ -25,7 +25,7 @@ function App() {
                             <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
                             <Route path="/login" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
                             <Route path="/register" element={isAuthenticated ? <Navigate to="/home" /> : <Register />} />
-                            <Route path="/account/verify" element={isAuthenticated ? <Navigate to="/home" /> : <EmailVerification />} />
+                            <Route path="/account/verify" element={isAuthenticated ? <Navigate to="/home" /> : <Verification />} />
                             <Route path="/account/recoverPassword" element={isAuthenticated ? <Navigate to="/home" /> : <RecoverPassword />} />
                         </Routes>
                     </main>

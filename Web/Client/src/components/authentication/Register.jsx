@@ -1,50 +1,30 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { authErrors } from '../../constants/errors';
-import { register } from '../../services/account';
-import Messages from './Messages.jsx';
+import { register } from '../../services/apiRequests/account';
+import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../../services/validationSchemas';
+import Messages from './Messages';
 
 function Register() {
     const navigate = useNavigate();
-    const [messages, setMessage] = useState([]);
-
-    const validations = Yup.object({
-        firstName: Yup.string()
-            .required('First name' + authErrors.RequiredField),
-        lastName: Yup.string()
-            .required('Last name' + authErrors.RequiredField),
-        email: Yup.string()
-            .email(authErrors.InvalidEmail)
-            .required('Email' + authErrors.RequiredField),
-        password: Yup.string()
-            .min(6, 'Password must be at least 6 characters')
-            .required('Password' + authErrors.RequiredField),
-        confirmPassword: Yup.string()
-            .required('Confirm password' + authErrors.RequiredField)
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    });
+    const [messages, setMessages] = useState([]);
 
     const handleRegister = async (values) => {
         const response = await register(values);
 
         if (response.ok) {
-            sessionStorage.setItem('email', values.email);
             navigate('/account/verify');
         } else {
             const errors = await response.json();
-
+            console.log(errors);
             if (errors.notVerified) {
                 navigate('/account/verify');
             }
 
-            for (const [key, message] of Object.entries(errors)) {
-                setMessage((prevMessages) => [...prevMessages, message]);
-            }
+            setMessages(errors);
         }
 
-        setTimeout(() => { setMessage(''); }, 3000);
+        setTimeout(() => { setMessages(''); }, 3000);
     };
 
     return (
@@ -59,7 +39,12 @@ function Register() {
                     <hr className="my-4" />
                     <Formik
                         initialValues={{ firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }}
-                        validationSchema={validations}
+                        validationSchema={
+                            validateFirstName,
+                            validateLastName,
+                            validateEmail,
+                            validatePassword,
+                            validateConfirmPassword}
                         onSubmit={handleRegister}
                     >
                         <Form className="flex flex-col space-y-2">

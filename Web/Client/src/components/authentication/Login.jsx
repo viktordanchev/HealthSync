@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { authErrors } from '../../constants/errors';
-import { login } from '../../services/account';
+import { login } from '../../services/apiRequests/account';
+import { validateEmail, validatePassword } from '../../services/validationSchemas';
 import Messages from './Messages.jsx';
 
 function Login() {
+    const [messages, setMessages] = useState([]);
     const navigate = useNavigate();
-    const [messages, setMessage] = useState([]);
-
-    const validations = Yup.object({
-        email: Yup.string()
-            .email(authErrors.InvalidEmail)
-            .required('Email' + authErrors.RequiredField),
-        password: Yup.string()
-            .required('Password' + authErrors.RequiredField),
-    });
 
     const handleLogin = async (values) => {
         const response = await login(values);
@@ -31,19 +22,15 @@ function Login() {
                 navigate('/account/verify');
             }
 
-            for (const [key, message] of Object.entries(data)) {
-                setMessage((prevMessages) => [...prevMessages, message]);
-            }
+            setMessages(data);
         }
 
-        setTimeout(() => { setMessage(''); }, 3000);
+        setTimeout(() => { setMessages(''); }, 3000);
     };
 
     return (
         <div className="flex flex-col space-y-6">
-            {messages.length != 0 ? (
-                <Messages values={messages} type={'error'} />
-            ) : null}
+            <Messages data={messages} type={'error'} />
 
             <section className="flex items-center justify-center">
                 <div className="w-full max-w-xs bg-maincolor rounded-xl shadow-md px-8 py-8">
@@ -51,7 +38,9 @@ function Login() {
                     <hr className="my-4" />
                     <Formik
                         initialValues={{ email: '', password: '', rememberMe: false }}
-                        validationSchema={validations}
+                        validationSchema={
+                            validateEmail,
+                            validatePassword}
                         onSubmit={handleLogin}
                     >
                         <Form className="flex flex-col space-y-2">
