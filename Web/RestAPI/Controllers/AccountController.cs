@@ -56,9 +56,7 @@ namespace HealthSync.Server.Controllers
                     return BadRequest(new { NotVerified = true });
                 }
 
-                ModelState.AddModelError("Email", UsedEmail);
-
-                return BadRequest(ModelState);
+                return BadRequest(new { Error = UsedEmail });
             }
 
             user = new ApplicationUser()
@@ -80,10 +78,6 @@ namespace HealthSync.Server.Controllers
 
                 return BadRequest(ModelState);
             }
-
-            var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
-            _memoryCacheService.Add(user.Email, token, TimeSpan.FromMinutes(1));
-            await _emailSender.SendVrfCode(user.Email, token);
 
             return Ok();
         }

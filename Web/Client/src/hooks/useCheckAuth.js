@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { refreshToken } from '../services/account';
+import { refreshToken } from '../services/apiRequests/account';
 
 const useAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
