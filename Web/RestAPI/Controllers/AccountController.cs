@@ -44,7 +44,14 @@ namespace HealthSync.Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        ms => ms.Key,
+                        ms => ms.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(errors);
             }
 
             var user = await _userManager.FindByEmailAsync(request.Email);
@@ -87,7 +94,14 @@ namespace HealthSync.Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        ms => ms.Key,
+                        ms => ms.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(errors);
             }
 
             var user = await _userManager.FindByEmailAsync(request.Email);
@@ -104,9 +118,7 @@ namespace HealthSync.Server.Controllers
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("Email", InvalidLoginData);
-
-                return BadRequest(ModelState);
+                return BadRequest(new { Error = InvalidLoginData });
             }
 
             if (!user.EmailConfirmed)
@@ -129,6 +141,18 @@ namespace HealthSync.Server.Controllers
         [HttpPost("verifyAccount")]
         public async Task<IActionResult> VerifyAccount([FromBody] VerifyAccountRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        ms => ms.Key,
+                        ms => ms.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(errors);
+            }
+
             if (_memoryCacheService.GetValue(request.Email).ToLower() == request.VrfCode.ToLower())
             {
                 var user = await _userManager.FindByEmailAsync(request.Email);
@@ -151,7 +175,7 @@ namespace HealthSync.Server.Controllers
             {
                 return BadRequest(new { Error = NotRegistered });
             }
-            else if(user.EmailConfirmed)
+            else if (user.EmailConfirmed)
             {
                 return BadRequest(new { Error = AlredyVerified });
             }
@@ -185,7 +209,14 @@ namespace HealthSync.Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        ms => ms.Key,
+                        ms => ms.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(errors);
             }
 
             if (!_memoryCacheService.isExist(request.Token))
@@ -200,7 +231,7 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpGet("refreshToken")]
-        public IActionResult RefreshToken() 
+        public async Task<IActionResult> RefreshToken()
         {
             var refreshToken = Request.Cookies["refreshToken"];
 
@@ -208,13 +239,13 @@ namespace HealthSync.Server.Controllers
             {
                 var handler = new JwtSecurityTokenHandler();
                 var jsonToken = handler.ReadJwtToken(refreshToken);
-                var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+                var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == "Identifier").Value;
 
-                var newAccessToken = _tokenService.GenerateAccessTokenAsync(userId);
+                var newAccessToken = await _tokenService.GenerateAccessTokenAsync(userId);
                 return Ok(new { Token = newAccessToken });
             }
 
-            return Unauthorized(new {Error = "Session has ended." });
+            return Unauthorized(new { Error = "Session has ended." });
         }
     }
 }

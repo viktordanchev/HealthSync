@@ -34,8 +34,8 @@ namespace RestAPI.Services
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("Identifier", userId),
+                new Claim("JWTId", Guid.NewGuid().ToString()),
             };
 
             var token = new JwtSecurityToken(
@@ -61,9 +61,9 @@ namespace RestAPI.Services
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, userData.FirstName + " " + userData.LastName),
-                new Claim(ClaimTypes.Email, userData.Email),
+                new Claim("Identifier", userId),
+                new Claim("Name", userData.FirstName + " " + userData.LastName),
+                new Claim("Email", userData.Email),
             };
 
             var token = new JwtSecurityToken(
