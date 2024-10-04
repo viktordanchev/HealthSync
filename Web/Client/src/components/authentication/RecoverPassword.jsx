@@ -15,9 +15,11 @@ function RecoverPassword() {
     const query = new URLSearchParams(useLocation().search);
     const token = query.get('token') ? query.get('token').replace(/ /g, '+') : null;
 
-    const validationPasswordSchema = Yup.object({
-        ...validatePassword.fields,
-        ...validateConfirmPassword.fields,
+    const validationEmailSchema = Yup.object().shape({ email: validateEmail });
+
+    const validationPasswordSchema = Yup.object().shape({
+        password: validatePassword,
+        confirmPassword: validateConfirmPassword
     });
 
     const submitPassword = async (values) => {
@@ -63,7 +65,7 @@ function RecoverPassword() {
                     <hr className="my-4" />
                     <Formik
                         initialValues={token ? { password: '', confirmPassword: '', token: token } : { email: '' }}
-                        validationSchema={token ? validationPasswordSchema : validateEmail}
+                        validationSchema={token ? validationPasswordSchema : validationEmailSchema}
                         onSubmit={token ? submitPassword : (values) => sendLink(values.email)}
                     >
                         <Form>

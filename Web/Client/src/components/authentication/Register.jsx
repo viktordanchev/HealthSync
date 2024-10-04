@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { register } from '../../services/apiRequests/account';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../../services/validationSchemas';
 import Messages from './Messages';
@@ -8,6 +9,14 @@ import Messages from './Messages';
 function Register() {
     const navigate = useNavigate();
     const [messages, setMessages] = useState([]);
+
+    const validationSchema = Yup.object({
+        firstName: validateFirstName,
+        lastName: validateLastName,
+        email: validateEmail,
+        password: validatePassword,
+        confirmPassword: validateConfirmPassword
+    });
 
     const handleRegister = async (values) => {
         const response = await register(values);
@@ -39,12 +48,7 @@ function Register() {
                     <hr className="my-4" />
                     <Formik
                         initialValues={{ firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }}
-                        validationSchema={
-                            validateFirstName,
-                            validateLastName,
-                            validateEmail,
-                            validatePassword,
-                            validateConfirmPassword}
+                        validationSchema={validationSchema}
                         onSubmit={handleRegister}
                     >
                         <Form className="flex flex-col space-y-2">

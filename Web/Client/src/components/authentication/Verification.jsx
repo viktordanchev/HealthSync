@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { verifyAccount, sendVrfCode } from '../../services/apiRequests/account';
 import { validateEmail, validateVrfCode } from '../../services/validationSchemas';
 import Messages from './Messages';
@@ -11,7 +12,11 @@ function Verification() {
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
     const [messages, setMessages] = useState([]);
     const [messageType, setMessageType] = useState('');
-    const userEmail = sessionStorage.getItem('email');
+    const userEmail = sessionStorage.getItem('email') || '';
+
+    const validationEmailSchema = Yup.object().shape({ email: validateEmail });
+
+    const validationVrfCodeSchema = Yup.object().shape({ vrfCode: validateVrfCode });
 
     const submitCode = async (values) => {
         const response = await verifyAccount(values);
@@ -57,9 +62,7 @@ function Verification() {
                     <hr className="my-4" />
                     <Formik
                         initialValues={{ email: userEmail || '', vrfCode: '' }}
-                        validationSchema={
-                            validateEmail,
-                            userEmail ? validateVrfCode : null}
+                        validationSchema={userEmail ? validationVrfCodeSchema : validationEmailSchema}
                         onSubmit={userEmail ? submitCode : (values) => sendCode(values.email)}
                     >
                         <Form>

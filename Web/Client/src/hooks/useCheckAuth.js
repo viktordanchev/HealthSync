@@ -5,10 +5,11 @@ import { refreshToken } from '../services/apiRequests/account';
 const useAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const checkAuth = async () => {
-            const token = localStorage.getItem('accessToken');
+            const token = sessionStorage.getItem('accessToken');
 
             if (token) {
                 const decodedToken = jwtDecode(token);
@@ -17,15 +18,22 @@ const useAuth = () => {
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true);
                 } else {
-                    localStorage.removeItem('accessToken');
+                    sessionStorage.removeItem('accessToken');
                     const data = await refreshToken();
 
                     if (data.token) {
-                        localStorage.setItem('accessToken', data.token);
+                        sessionStorage.setItem('accessToken', data.token);
                         setIsAuthenticated(true);
                     } else {
-                        console.log(data.error);
+                        setError(data.error);
                     }
+                }
+            } else {
+                const data = await refreshToken();
+
+                if (data.token) {
+                    sessionStorage.setItem('accessToken', data.token);
+                    setIsAuthenticated(true);
                 }
             }
 
@@ -35,7 +43,7 @@ const useAuth = () => {
         checkAuth();
     }, []);
 
-    return { isAuthenticated, loading };
+    return { isAuthenticated, loading, error };
 };
 
 export default useAuth;

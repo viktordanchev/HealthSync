@@ -23,7 +23,7 @@ const useTimer = () => {
     }, [seconds]);
 
     const resetTimer = useCallback(() => {
-        setSeconds(10);
+        setSeconds(60);
         setIsButtonDisabled(true);
         sessionStorage.removeItem('timerSeconds');
     }, []);

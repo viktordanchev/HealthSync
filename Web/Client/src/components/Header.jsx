@@ -8,11 +8,11 @@ const Header = ({ isAuthenticated }) => {
     const [userName, setUserName] = useState('');
 
     useEffect(() => {
-        const token = localStorage.getItem('accessToken');
+        const token = sessionStorage.getItem('accessToken');
 
         if (token) {
             const decodedToken = jwtDecode(token);
-            setUserName(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']);
+            setUserName(decodedToken['Name']);
         }
     }, []);
 
@@ -21,7 +21,7 @@ const Header = ({ isAuthenticated }) => {
     };
 
     return (
-        <header className="relative bg-maincolor my-6 rounded-xl p-5 mx-32 md:mx-16 sm:mx-6">
+        <header className="relative bg-maincolor mt-6 rounded-xl p-5 mx-32 md:mx-16 sm:mx-6">
             <div className="flex justify-between items-center">
                 <a href="/home" className="text-white font-bold text-3xl hover:text-gray-200 transition duration-300 md:text-2xl sm:text-xl">
                     HealthSync
@@ -55,7 +55,7 @@ const Header = ({ isAuthenticated }) => {
                         </p>
                     ) : (
                         <>
-                            <a href="/login" className="text-white text-lg font-bold py-2 px-4 rounded hover:bg-slate-200 transition duration-300 sm:text-base">
+                            <a href="/login" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
                                 Login
                             </a>
                             <a href="/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">

@@ -4,7 +4,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                maincolor: '#01bfa5',
+                maincolor: '#01bfa5'
             },
             backgroundImage: {
                 'doctors-img': "url('./assets/doctors.png')"
@@ -24,6 +24,6 @@ module.exports = {
             }
         }
     },
-    plugins: [],
+    plugins: [require('tailwind-scrollbar')({ nocompatible: true, preferredStrategy: 'pseudoelements' })],
 }
 

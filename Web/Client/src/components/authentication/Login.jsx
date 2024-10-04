@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { login } from '../../services/apiRequests/account';
 import { validateEmail, validatePassword } from '../../services/validationSchemas';
 import Messages from './Messages.jsx';
@@ -9,12 +10,17 @@ function Login() {
     const [messages, setMessages] = useState([]);
     const navigate = useNavigate();
 
+    const validationSchema = Yup.object({
+        email: validateEmail,
+        password: validatePassword
+    });
+
     const handleLogin = async (values) => {
         const response = await login(values);
         const data = await response.json();
 
         if (response.ok) {
-            localStorage.setItem('accessToken', data.token);
+            sessionStorage.setItem('accessToken', data.token);
             navigate('/home');
             window.location.reload();
         } else {
@@ -38,9 +44,7 @@ function Login() {
                     <hr className="my-4" />
                     <Formik
                         initialValues={{ email: '', password: '', rememberMe: false }}
-                        validationSchema={
-                            validateEmail,
-                            validatePassword}
+                        validationSchema={validationSchema}
                         onSubmit={handleLogin}
                     >
                         <Form className="flex flex-col space-y-2">
