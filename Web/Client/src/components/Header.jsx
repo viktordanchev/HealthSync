@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { jwtDecode } from 'jwt-decode';
+import useCheckAuth from '../hooks/useCheckAuth';
 
-const Header = ({ isAuthenticated }) => {
+const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
+    const { isAuthenticated } = useCheckAuth();
 
     useEffect(() => {
-        const token = sessionStorage.getItem('accessToken');
-
-        if (token) {
+        if (isAuthenticated) {
+            const token = sessionStorage.getItem('accessToken');
             const decodedToken = jwtDecode(token);
             setUserName(decodedToken['Name']);
         }
-    }, []);
+    }, [isAuthenticated, location]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);

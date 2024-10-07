@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { refreshToken } from '../services/apiRequests/account';
 
-const useAuth = () => {
+const useCheckAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -18,7 +18,6 @@ const useAuth = () => {
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true);
                 } else {
-                    sessionStorage.removeItem('accessToken');
                     const data = await refreshToken();
 
                     if (data.token) {
@@ -30,7 +29,7 @@ const useAuth = () => {
                 }
             } else {
                 const data = await refreshToken();
-
+                
                 if (data.token) {
                     sessionStorage.setItem('accessToken', data.token);
                     setIsAuthenticated(true);
@@ -46,4 +45,4 @@ const useAuth = () => {
     return { isAuthenticated, loading, error };
 };
 
-export default useAuth;
+export default useCheckAuth;
