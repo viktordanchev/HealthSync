@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Loading() {
+function ComponentLoading() {
     return (
         <div className="flex items-center justify-center">
             <div>
@@ -13,4 +13,4 @@ function Loading() {
     );
 }
 
-export default Loading;
+export default ComponentLoading;

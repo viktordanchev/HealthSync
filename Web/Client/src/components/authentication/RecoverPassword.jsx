@@ -7,7 +7,7 @@ import { validateEmail, validatePassword, validateConfirmPassword } from '../../
 import useTimer from '../../hooks/useTimer';
 import useCheckAuth from '../../hooks/useCheckAuth';
 import Messages from './Messages';
-import Loading from '../Loading';
+import ComponentLoading from '../ComponentLoading';
 
 function RecoverPassword() {
     const navigate = useNavigate();
@@ -64,7 +64,7 @@ function RecoverPassword() {
 
     return (
         <>
-            {loading ? <Loading /> :
+            {loading ? <ComponentLoading /> :
                 <div className="flex flex-col space-y-6">
                     <Messages data={messages} type={messageType} />
 

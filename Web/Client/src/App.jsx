@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
-import Loading from './components/Loading';
 import SessionMessage from './components/SessionMessage';
 import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
@@ -16,7 +15,7 @@ function App() {
 
     return (
         <>
-            {error ? <SessionMessage /> : null}
+            {error ? <SessionMessage error={error} /> : null}
             <Router>
                 <Header />
                 <main className="grow content-center my-6">

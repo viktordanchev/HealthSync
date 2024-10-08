@@ -6,7 +6,7 @@ import { login } from '../../services/apiRequests/account';
 import { validateEmail, validatePassword } from '../../services/validationSchemas';
 import useCheckAuth from '../../hooks/useCheckAuth';
 import Messages from './Messages';
-import Loading from '../Loading';
+import ComponentLoading from '../ComponentLoading';
 
 function Login() {
     const navigate = useNavigate();
@@ -43,7 +43,7 @@ function Login() {
 
     return (
         <>
-            {loading ? <Loading /> : 
+            {loading ? <ComponentLoading /> : 
                 <div className="flex flex-col space-y-6">
                     <Messages data={messages} type={'error'} />
 

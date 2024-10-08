@@ -7,7 +7,7 @@ import useCheckAuth from '../hooks/useCheckAuth';
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
-    const { isAuthenticated } = useCheckAuth();
+    const { isAuthenticated, loading } = useCheckAuth();
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -50,20 +50,29 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="flex space-x-4 sm:hidden">
-                    {isAuthenticated ? (
-                        <p className="text-white text-lg font-bold py-2 px-4">
-                            {userName}
-                        </p>
-                    ) : (
+                    {loading ?
+                        <div className="flex items-center justify-center">
+                            <p className="text-xl font-bold text-white">Loading</p>
+                            <div className="flex justify-center">
+                                <div className="w-6 h-6 border-4 border-white border-dotted rounded-full animate-spin"></div>
+                            </div>
+                        </div> :
                         <>
-                            <a href="/login" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
-                                Login
-                            </a>
-                            <a href="/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
-                                Register
-                            </a>
-                        </>
-                    )}
+                            {isAuthenticated ? (
+                                <p className="text-white text-lg font-bold py-2 px-4">
+                                    {userName}
+                                </p>
+                            ) : (
+                                <>
+                                    <a href="/login" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
+                                        Login
+                                    </a>
+                                    <a href="/register" className="bg-blue-500 text-white text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
+                                        Register
+                                    </a>
+                                </>
+                            )}
+                        </>}
                 </div>
                 <button
                     onClick={toggleMenu}
