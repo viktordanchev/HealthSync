@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using static Common.Errors.Account;
 using static Common.Messages.Account;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace HealthSync.Server.Controllers
 {
