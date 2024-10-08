@@ -10,5 +10,11 @@ namespace Infrastructure.Entities
 
         [ForeignKey(nameof(IdenitityId))]
         public ApplicationUser Identity { get; set; } = null!;
+
+        [Required]
+        public string HospitalId { get; set; } = null!;
+
+        [ForeignKey(nameof(HospitalId))]
+        public Hospital Hospital { get; set; } = null!;
     }
 }
