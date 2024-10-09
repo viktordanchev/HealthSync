@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241009132637_AddedNewTables")]
+    [Migration("20241009152539_AddedNewTables")]
     partial class AddedNewTables
     {
         /// <inheritdoc />
@@ -171,6 +171,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("DoctorId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("Reviewer")
                         .IsRequired()

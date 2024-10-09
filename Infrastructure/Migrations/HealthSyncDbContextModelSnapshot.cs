@@ -169,6 +169,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.Property<string>("Reviewer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
