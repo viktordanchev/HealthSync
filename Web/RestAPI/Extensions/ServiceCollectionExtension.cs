@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Core.Services.Contracts;
+using Core.Services;
 
 namespace Server.Extensions
 {
@@ -77,6 +79,7 @@ namespace Server.Extensions
             services.AddScoped<IJWTTokenService, JWTTokenService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IMemoryCacheService, MemoryCacheService>();
+            services.AddScoped<IDoctorService, DoctorService>();
         }
     }
 }
