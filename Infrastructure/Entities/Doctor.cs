@@ -3,8 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entities
 {
-    class Doctor
+    public class Doctor
     {
+        public Doctor()
+        {
+            Meetings = new List<Meeting>();
+            Reviews = new List<Review>();
+        }
+
+        [Key]
+        public string Id { get; set; } = null!;
+
         [Required]
         public string IdenitityId { get; set; } = null!;
 
@@ -16,5 +25,8 @@ namespace Infrastructure.Entities
 
         [ForeignKey(nameof(HospitalId))]
         public Hospital Hospital { get; set; } = null!;
+
+        public IEnumerable<Meeting> Meetings { get; set; } 
+        public IEnumerable<Review> Reviews { get; set; } 
     }
 }
