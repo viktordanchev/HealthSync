@@ -15,7 +15,7 @@ const Header = () => {
             const decodedToken = jwtDecode(token);
             setUserName(decodedToken['Name']);
         }
-    }, [isAuthenticated, location]);
+    }, [isAuthenticated]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -30,7 +30,7 @@ const Header = () => {
                 <ul className="flex flex-row w-2/4 justify-between sm:hidden">
                     <li>
                         <a href="#0" className="relative py-1 text-white font-bold text-xl text-inherit hover:text-gray-200 transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
-                            Products
+                            Doctors
                         </a>
                     </li>
                     <li>
@@ -50,13 +50,7 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="flex space-x-4 sm:hidden">
-                    {loading ?
-                        <div className="flex items-center justify-center">
-                            <p className="text-xl font-bold text-white">Loading</p>
-                            <div className="flex justify-center">
-                                <div className="w-6 h-6 border-4 border-white border-dotted rounded-full animate-spin"></div>
-                            </div>
-                        </div> :
+                    {loading ? <div>Loading...</div> :
                         <>
                             {isAuthenticated ? (
                                 <p className="text-white text-lg font-bold py-2 px-4">

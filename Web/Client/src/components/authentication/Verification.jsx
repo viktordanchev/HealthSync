@@ -7,7 +7,7 @@ import { validateEmail, validateVrfCode } from '../../services/validationSchemas
 import useTimer from '../../hooks/useTimer';
 import useCheckAuth from '../../hooks/useCheckAuth';
 import Messages from './Messages';
-import ComponentLoading from '../ComponentLoading';
+import Loading from '../Loading';
 
 function Verification() {
     const navigate = useNavigate();
@@ -61,7 +61,7 @@ function Verification() {
 
     return (
         <>
-            {loading ? <ComponentLoading /> :
+            {loading ? <Loading /> :
                 <div className="flex flex-col space-y-6">
                     <Messages data={messages} type={messageType} />
 

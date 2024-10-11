@@ -6,7 +6,7 @@ import { register } from '../../services/apiRequests/account';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../../services/validationSchemas';
 import useCheckAuth from '../../hooks/useCheckAuth';
 import Messages from './Messages';
-import ComponentLoading from '../ComponentLoading';
+import Loading from '../Loading';
 
 function Register() {
     const navigate = useNavigate();
@@ -45,7 +45,7 @@ function Register() {
 
     return (
         <>
-            {loading ? <ComponentLoading /> :
+            {loading ? <Loading /> :
                 <div className="flex flex-col space-y-6">
                     <Messages data={messages} type={'error'} />
 
