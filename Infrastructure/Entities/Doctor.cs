@@ -26,6 +26,12 @@ namespace Infrastructure.Entities
         [ForeignKey(nameof(HospitalId))]
         public Hospital Hospital { get; set; } = null!;
 
+        [Required]
+        public string SpecialtyId { get; set; } = null!;
+
+        [ForeignKey(nameof(SpecialtyId))]
+        public Specialty Specialty { get; set; } = null!;
+
         public IEnumerable<Meeting> Meetings { get; set; } 
         public IEnumerable<Review> Reviews { get; set; } 
     }

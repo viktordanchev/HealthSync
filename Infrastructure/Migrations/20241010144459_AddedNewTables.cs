@@ -25,12 +25,25 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Specialties",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Specialties", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Doctors",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IdenitityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    HospitalId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    HospitalId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    SpecialtyId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,6 +58,12 @@ namespace Infrastructure.Migrations
                         name: "FK_Doctors_Hospitals_HospitalId",
                         column: x => x.HospitalId,
                         principalTable: "Hospitals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Doctors_Specialties_SpecialtyId",
+                        column: x => x.SpecialtyId,
+                        principalTable: "Specialties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -102,6 +121,11 @@ namespace Infrastructure.Migrations
                 column: "IdenitityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Doctors_SpecialtyId",
+                table: "Doctors",
+                column: "SpecialtyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Meetings_DoctorId",
                 table: "Meetings",
                 column: "DoctorId");
@@ -126,6 +150,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Hospitals");
+
+            migrationBuilder.DropTable(
+                name: "Specialties");
         }
     }
 }

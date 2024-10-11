@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241009152539_AddedNewTables")]
+    [Migration("20241010144459_AddedNewTables")]
     partial class AddedNewTables
     {
         /// <inheritdoc />
@@ -111,11 +111,17 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("SpecialtyId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("HospitalId");
 
                     b.HasIndex("IdenitityId");
+
+                    b.HasIndex("SpecialtyId");
 
                     b.ToTable("Doctors");
                 });
@@ -188,6 +194,20 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Specialties");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -337,9 +357,17 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Infrastructure.Entities.Specialty", "Specialty")
+                        .WithMany("Doctors")
+                        .HasForeignKey("SpecialtyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Hospital");
 
                     b.Navigation("Identity");
+
+                    b.Navigation("Specialty");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
@@ -423,6 +451,11 @@ namespace Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Hospital", b =>
+                {
+                    b.Navigation("Doctors");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
                 {
                     b.Navigation("Doctors");
                 });

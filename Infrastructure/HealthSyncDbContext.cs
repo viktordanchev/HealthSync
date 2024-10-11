@@ -14,5 +14,6 @@ namespace Infrastructure
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Specialty> Specialties { get; set; }
     }
 }
