@@ -1,9 +1,9 @@
-﻿using Core.Models.Doctor;
+﻿using Core.DTOs.Doctor;
 
 namespace Core.Services.Contracts
 {
     public interface IDoctorService
     {
-        Task<IEnumerable<DoctorDto>> GetAll();
+        Task<IEnumerable<DoctorProfileDto>> GetDoctors(string sorting, string filter, string search);
     }
 }
