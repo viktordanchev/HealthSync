@@ -21,7 +21,22 @@ module.exports = {
             },
             textUnderlineOffset: {
                 5: '12px',
-            }
+            },
+            animation: {
+                grow: 'grow 1.2s ease-in-out infinite',
+            },
+            keyframes: {
+                grow: {
+                    '0%, 100%': {
+                        transform: 'scale(1)',
+                        opacity: '0.8',
+                    },
+                    '50%': {
+                        transform: 'scale(1.5)',
+                        opacity: '1',
+                    },
+                },
+            },
         }
     },
     plugins: [require('tailwind-scrollbar')({ nocompatible: true, preferredStrategy: 'pseudoelements' })],

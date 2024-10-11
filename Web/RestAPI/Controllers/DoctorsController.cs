@@ -1,5 +1,6 @@
 ﻿using Core.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using RestAPI.DTOs.Doctors;
 
 namespace RestAPI.Controllers
 {
@@ -14,10 +15,13 @@ namespace RestAPI.Controllers
             _doctorService = doctorService;
         }
 
-        [HttpGet("all")]
-        public async Task<IActionResult> Index()
+        [HttpPost("all")]
+        public async Task<IActionResult> Index([FromBody] AllDoctorsRequest request)
         {
-            var doctors = await _doctorService.GetAll();
+            var doctors = await _doctorService.GetDoctors(request.Sorting.ToString(), 
+                request.Filter, 
+                request.Search.ToLower());
+
             return Ok(doctors);
         }
     }
