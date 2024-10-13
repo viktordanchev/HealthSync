@@ -1,6 +1,6 @@
 const url = 'https://localhost:7080/doctors';
 
-export const allDoctors = async (values) =>
+export const getAllDoctors = async (values) =>
     await fetch(`${url}/all`, {
         method: 'POST',
         headers: {
