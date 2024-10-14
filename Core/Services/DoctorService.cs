@@ -24,6 +24,7 @@ namespace Core.Services
                 .Select(d => new DoctorProfileDto()
                 {
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
+                    ImgUrl = d.ImgUrl,
                     Specialty = d.Specialty.Type,
                     Hospital = d.Hospital.Name,
                     Raiting = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,

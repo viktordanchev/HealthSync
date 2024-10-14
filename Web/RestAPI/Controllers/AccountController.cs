@@ -179,9 +179,9 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { Error = AlredyVerified });
             }
 
-            //var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
-            _memoryCacheService.Add(user.Email, "test", TimeSpan.FromMinutes(1));
-            //await _emailSender.SendVrfCode(user.Email, token);
+            var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
+            _memoryCacheService.Add(user.Email, token, TimeSpan.FromMinutes(1));
+            await _emailSender.SendVrfCode(user.Email, token);
 
             return Ok(new { Message = NewVrfCode });
         }
