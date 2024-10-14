@@ -32,6 +32,8 @@ namespace Infrastructure.Entities
         [ForeignKey(nameof(SpecialtyId))]
         public Specialty Specialty { get; set; } = null!;
 
+        public string? ImgUrl { get; set; } 
+
         public IEnumerable<Meeting> Meetings { get; set; } 
         public IEnumerable<Review> Reviews { get; set; } 
     }

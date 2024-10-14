@@ -1,4 +1,5 @@
-﻿using Infrastructure.Entities;
+﻿using Infrastructure.Configurations;
+using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,5 +16,16 @@ namespace Infrastructure
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new ApplicationUserConfig());
+            builder.ApplyConfiguration(new SpecialtyConfig());
+            builder.ApplyConfiguration(new HospitalConfig());
+            builder.ApplyConfiguration(new DoctorConfig());
+            builder.ApplyConfiguration(new ReviewConfig());
+
+            base.OnModelCreating(builder);
+        }
     }
 }
