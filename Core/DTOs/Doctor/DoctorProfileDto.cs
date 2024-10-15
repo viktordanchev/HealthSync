@@ -2,10 +2,7 @@
 {
     public class DoctorProfileDto
     {
-        public DoctorProfileDto()
-        {
-            Reviews = new List<ReviewDto>();
-        }
+        public string Id { get; set; } = null!;
 
         public string Name { get; set; } = null!;
 
@@ -18,7 +15,5 @@
         public double Raiting { get; set; }
 
         public int TotalReviews { get; set; }
-
-        public IEnumerable<ReviewDto> Reviews { get; set; }
     }
 }

@@ -23,21 +23,12 @@ namespace Core.Services
                     || d.Hospital.Name.Contains(search))
                 .Select(d => new DoctorProfileDto()
                 {
+                    Id = d.Id,
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
                     Specialty = d.Specialty.Type,
                     Hospital = d.Hospital.Name,
                     Raiting = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,
-                    Reviews = d.Reviews.Any() ? d.Reviews
-                        .Select(r => new ReviewDto()
-                        {
-                            Text = r.Text,
-                            Rating = r.Rating,
-                            Date = r.Date,
-                            Reviewer = r.Reviewer
-                        })
-                        .OrderByDescending(r => r.Date)
-                        .ToList() : new List<ReviewDto>(),
                     TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
                 })
                 .ToListAsync();
@@ -59,6 +50,24 @@ namespace Core.Services
             }
 
             return doctors;
+        }
+
+        public async Task<IEnumerable<ReviewDto>> GetDoctorReviews(string doctorId)
+        {
+            var reviews = await _context.Reviews
+                .AsNoTracking()
+                .Where(r => r.DoctorId ==  doctorId)
+                .Select(r => new ReviewDto()
+                {
+                    Text = r.Text,
+                    Rating = r.Rating,
+                    Date = r.Date,
+                    Reviewer = r.Reviewer
+                })
+                .OrderByDescending(r => r.Date)
+                .ToListAsync();
+
+            return reviews;
         }
     }
 }
