@@ -8,3 +8,12 @@ export const getAllDoctors = async (values) =>
         },
         body: JSON.stringify(values)
     });
+
+export const getReviews = async (doctorId) =>
+    await fetch(`${url}/getReviews`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(doctorId)
+    });

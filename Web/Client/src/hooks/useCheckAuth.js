@@ -6,7 +6,6 @@ const useCheckAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [user, setUser] = useState(false);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -23,7 +22,6 @@ const useCheckAuth = () => {
 
                     if (data.token) {
                         sessionStorage.setItem('accessToken', data.token);
-                        setUser(true);
                         setIsAuthenticated(true);
                     } else {
                         setError(data.error);
@@ -34,7 +32,6 @@ const useCheckAuth = () => {
                 
                 if (data.token) {
                     sessionStorage.setItem('accessToken', data.token);
-                    setUser(true);
                     setIsAuthenticated(true);
                 }
             }
@@ -45,7 +42,7 @@ const useCheckAuth = () => {
         checkAuth();
     }, []);
 
-    return { isAuthenticated, loading, error, user };
+    return { isAuthenticated, loading, error };
 };
 
 export default useCheckAuth;
