@@ -24,5 +24,13 @@ namespace RestAPI.Controllers
 
             return Ok(doctors);
         }
+
+        [HttpPost("getReviews")]
+        public async Task<IActionResult> GetReviews([FromBody] string doctorId)
+        {
+            var reviews = await _doctorService.GetDoctorReviews(doctorId);
+
+            return Ok(reviews);
+        }
     }
 }
