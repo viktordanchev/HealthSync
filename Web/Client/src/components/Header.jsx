@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { jwtDecode } from 'jwt-decode';
 import useCheckAuth from '../hooks/useCheckAuth';
+import Loading from './Loading';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,14 +51,7 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="flex space-x-4 w-52 sm:hidden">
-                    {loading ?
-                        <div className="basis-full flex items-center justify-center">
-                            <div className="flex space-x-2">
-                                <div className="w-3 h-6 bg-blue-500 animate-grow"></div>
-                                <div className="w-3 h-6 bg-blue-500 animate-grow" style={{ animationDelay: '0.4s' }}></div>
-                                <div className="w-3 h-6 bg-blue-500 animate-grow" style={{ animationDelay: '0.8s' }}></div>
-                            </div>
-                        </div> :
+                    {loading ? <Loading type={'small'} /> :
                         <>
                             {isAuthenticated ? (
                                 <p className="basis-full text-white text-center text-lg font-bold py-2 px-4">
@@ -65,10 +59,10 @@ const Header = () => {
                                 </p>
                             ) : (
                                 <>
-                                        <a href="/login" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
+                                    <a href="/login" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
                                         Login
                                     </a>
-                                        <a href="/register" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
+                                    <a href="/register" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 sm:text-base">
                                         Register
                                     </a>
                                 </>

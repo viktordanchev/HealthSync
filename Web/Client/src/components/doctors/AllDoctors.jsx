@@ -67,7 +67,7 @@ function AllDoctors() {
                     </button>
                 </div>
             </article>
-            {loading ? <Loading /> :
+            {loading ? <Loading type={'big'} /> :
                 <article className="flex flex-wrap justify-center w-full h-full">
                     {doctors.length == 0 ?
                         <div className="text-3xl font-bold">No doctors found!</div> :

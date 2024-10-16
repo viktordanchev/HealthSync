@@ -59,7 +59,6 @@ namespace Core.Services
                 .Where(r => r.DoctorId ==  doctorId)
                 .Select(r => new ReviewDto()
                 {
-                    Text = r.Text,
                     Rating = r.Rating,
                     Date = r.Date,
                     Reviewer = r.Reviewer

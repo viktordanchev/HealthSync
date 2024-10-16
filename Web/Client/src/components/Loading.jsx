@@ -1,15 +1,18 @@
 ﻿import React from 'react';
 
-function ComponentLoading() {
+function Loading({ type }) {
+    const widthClass = type === "small" ? "w-3" : "w-5";
+    const heightClass = type === "small" ? "h-6" : "h-10";
+
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+        <div className="basis-full flex items-center justify-center">
             <div className="flex space-x-3">
-                <div className="w-5 h-10 bg-blue-500 animate-grow"></div>
-                <div className="w-5 h-10 bg-blue-500 animate-grow" style={{ animationDelay: '0.4s' }}></div>
-                <div className="w-5 h-10 bg-blue-500 animate-grow" style={{ animationDelay: '0.8s' }}></div>
+                <div className={`${widthClass} ${heightClass} bg-blue-500 animate-grow`}></div>
+                <div className={`${widthClass} ${heightClass} bg-blue-500 animate-grow`} style={{ animationDelay: '0.4s' }}></div>
+                <div className={`${widthClass} ${heightClass} bg-blue-500 animate-grow`} style={{ animationDelay: '0.8s' }}></div>
             </div>
         </div>
     );
 }
 
-export default ComponentLoading;
+export default Loading;

@@ -64,7 +64,7 @@ function RecoverPassword() {
 
     return (
         <>
-            {loading ? <Loading /> :
+            {loading ? <Loading type={'big'} /> :
                 <div className="flex flex-col space-y-6">
                     <Messages data={messages} type={messageType} />
 
