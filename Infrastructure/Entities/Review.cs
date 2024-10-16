@@ -15,9 +15,6 @@ namespace Infrastructure.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        public string Text { get; set; } = null!;
-
-        [Required]
         [Range(1, 5)]
         public int Rating { get; set; }
 
