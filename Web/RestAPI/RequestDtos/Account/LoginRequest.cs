@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Common.Errors.Account;
+using static Common.Errors;
 
-namespace RestAPI.DTOs.Account
+namespace RestAPI.RequestDtos.Account
 {
     public class LoginRequest
     {

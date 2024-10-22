@@ -13,19 +13,18 @@ function AllDoctors() {
     const [doctors, setDoctors] = useState([]);
 
     useEffect(() => {
+        setLoading(true);
+
         const getDoctors = async () => {
-            const object = {
+            const dto = {
+                index: 0,
                 sorting: order,
                 filter: '',
                 search: searchField
             };
 
-            const response = await getAllDoctors(object);
-
-            if (response.ok) {
-                var data = await response.json();
-                setDoctors(data);
-            }
+            const doctors = await getAllDoctors(dto);
+            setDoctors(doctors);
 
             setLoading(false);
         };
@@ -41,8 +40,8 @@ function AllDoctors() {
     };
 
     return (
-        <section className="mx-64 flex flex-col h-full items-center">
-            <article className="rounded-full bg-maincolor w-1/2 h-14 my-6 px-2 flex justify-between items-center">
+        <section className="mx-32 flex flex-col h-full items-center lg:mx-16 md:mx-6 sm:mx-6">
+            <article className="rounded-full bg-maincolor w-1/2 my-6 p-2 flex justify-between items-center lg:w-2/3 sm:w-full md:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2">
                 <select className="bg-white h-8 rounded-full text-center focus:outline-none"
                     defaultValue=""
                     onChange={(e) => setOrder(e.target.value)}
@@ -53,10 +52,10 @@ function AllDoctors() {
                     <option value="RatingAsc">RatingAsc</option>
                     <option value="RatingDesc">RatingDesc</option>
                 </select>
-                <div className="flex items-center">
+                <div className="flex items-center sm:w-full">
                     <input
                         placeholder="Search..."
-                        className="text-lg rounded-s-3xl bg-white h-8 w-56 pl-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        className="text-lg rounded-s-3xl bg-white h-8 p-4 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-full"
                         onChange={(e) => setSearchField(e.target.value)}
                         onKeyDown={handleKeyDown}
                     >

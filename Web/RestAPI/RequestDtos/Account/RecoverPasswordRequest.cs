@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static Common.Errors;
 using static Common.Errors.Account;
 
-namespace RestAPI.DTOs.Account
+namespace RestAPI.RequestDtos.Account
 {
     public class RecoverPasswordRequest
     {

@@ -59,8 +59,21 @@ export const recoverPassword = async (values) =>
         credentials: 'include'
     });
 
-export const refreshToken = async () =>
-    await fetch(`${url}/refreshToken`, {
-        method: 'GET',
-        credentials: 'include'
-    }).then(response => response.json());
+export const refreshToken = async () => {
+    try {
+        const response =
+            await fetch(`${url}/refreshToken`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch');
+        }
+        
+        const data = await response.json();
+        return data.token;
+    } catch (error) {
+        console.error(error.message);
+    }
+};

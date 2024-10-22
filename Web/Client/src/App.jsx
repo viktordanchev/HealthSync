@@ -16,7 +16,7 @@ function App() {
 
     return (
         <>
-            {error ? <SessionMessage error={error} /> : null}
+            {error ? <SessionMessage message={error} /> : null}
             <Router>
                 <Header />
                 <main className="grow content-center my-6">

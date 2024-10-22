@@ -55,6 +55,21 @@ namespace Server.Extensions
                     ValidAudience = config["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]))
                 };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = async context =>
+                    {
+                        var userId = context.Principal.FindFirst("Identifier").Value;
+                        var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
+                        var user = await userManager.FindByIdAsync(userId);
+
+                        if (user == null)
+                        {
+                            context.Fail("Unauthorized user");
+                        }
+                    }
+                };
             });
         }
 

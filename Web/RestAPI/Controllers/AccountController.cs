@@ -1,4 +1,4 @@
-﻿using RestAPI.DTOs.Account;
+﻿using RestAPI.RequestDtos.Account;
 using RestAPI.Services.Contracts;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -233,6 +233,7 @@ namespace HealthSync.Server.Controllers
         public async Task<IActionResult> RefreshToken()
         {
             var refreshToken = Request.Cookies["refreshToken"];
+            var newAccessToken = string.Empty;
 
             if (refreshToken != null)
             {
@@ -240,11 +241,10 @@ namespace HealthSync.Server.Controllers
                 var jsonToken = handler.ReadJwtToken(refreshToken);
                 var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == "Identifier").Value;
 
-                var newAccessToken = await _tokenService.GenerateAccessTokenAsync(userId);
-                return Ok(new { Token = newAccessToken });
+                newAccessToken = await _tokenService.GenerateAccessTokenAsync(userId);
             }
 
-            return Unauthorized(new { Error = "Session has ended." });
+            return Ok(new { Token = newAccessToken });
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Core.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.DTOs.Doctors;
+using RestAPI.RequestDtos.Doctors;
 
 namespace RestAPI.Controllers
 {
@@ -18,19 +19,43 @@ namespace RestAPI.Controllers
         [HttpPost("all")]
         public async Task<IActionResult> Index([FromBody] AllDoctorsRequest request)
         {
-            var doctors = await _doctorService.GetDoctors(request.Sorting.ToString(), 
-                request.Filter, 
+            var doctors = await _doctorService.GetDoctors(request.Index,
+                request.Sorting.ToString(),
+                request.Filter,
                 request.Search.ToLower());
 
             return Ok(doctors);
         }
 
         [HttpPost("getReviews")]
-        public async Task<IActionResult> GetReviews([FromBody] string doctorId)
+        public async Task<IActionResult> GetReviews([FromBody] GetReviewsRequest request)
         {
-            var reviews = await _doctorService.GetDoctorReviews(doctorId);
+            var reviews = await _doctorService.GetDoctorReviews(request.Index, request.DoctorId);
 
             return Ok(reviews);
+        }
+
+        [HttpPost("addReview")]
+        [Authorize]
+        public async Task<IActionResult> AddReview([FromBody] AddReviewRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
+                    .ToArray();
+
+                return BadRequest(errors);
+            }
+
+            if (!await _doctorService.IsDoctorExist(request.DoctorId))
+            {
+                return BadRequest();
+            }
+
+            await _doctorService.AddReview(request.DoctorId, request.Rating, request.Reviewer);
+
+            return Ok();
         }
     }
 }

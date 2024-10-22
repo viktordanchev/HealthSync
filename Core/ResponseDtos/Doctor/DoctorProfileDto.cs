@@ -1,4 +1,4 @@
-﻿namespace Core.DTOs.Doctor
+﻿namespace Core.ResponseDtos.Doctor
 {
     public class DoctorProfileDto
     {
@@ -12,7 +12,7 @@
 
         public string Hospital { get; set; } = null!;
 
-        public double Raiting { get; set; }
+        public double Rating { get; set; }
 
         public int TotalReviews { get; set; }
     }

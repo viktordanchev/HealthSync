@@ -1,4 +1,4 @@
-﻿namespace RestAPI.DTOs.Enums
+﻿namespace RestAPI.RequestDtos.Enums
 {
     public enum SortingOption
     {

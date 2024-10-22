@@ -1,10 +1,12 @@
-﻿using Core.DTOs.Doctor;
+﻿using Core.ResponseDtos.Doctor;
 
 namespace Core.Services.Contracts
 {
     public interface IDoctorService
     {
-        Task<IEnumerable<DoctorProfileDto>> GetDoctors(string sorting, string filter, string search);
-        Task<IEnumerable<ReviewDto>> GetDoctorReviews(string doctorId);
+        Task<IEnumerable<DoctorProfileDto>> GetDoctors(int index, string sorting, string filter, string search);
+        Task<IEnumerable<ReviewDto>> GetDoctorReviews(int index, string doctorId);
+        Task<bool> IsDoctorExist(string doctorId);
+        Task AddReview(string doctorId, int rating, string reviewer);
     }
 }

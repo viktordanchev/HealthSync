@@ -1,9 +1,11 @@
-﻿using RestAPI.DTOs.Enums;
+﻿using RestAPI.RequestDtos.Enums;
 
-namespace RestAPI.DTOs.Doctors
+namespace RestAPI.RequestDtos.Doctors
 {
     public class AllDoctorsRequest
     {
+        public int Index { get; set; }
+
         public SortingOption Sorting { get; set; }
 
         public string Filter { get; set; } = string.Empty;

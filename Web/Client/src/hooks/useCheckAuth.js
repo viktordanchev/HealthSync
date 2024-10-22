@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { refreshToken } from '../services/apiRequests/account';
+import { authErrors } from '../constants/errors';
 
 const useCheckAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,20 +19,20 @@ const useCheckAuth = () => {
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true);
                 } else {
-                    const data = await refreshToken();
+                    const token = await refreshToken();
 
-                    if (data.token) {
-                        sessionStorage.setItem('accessToken', data.token);
+                    if (token) {
+                        sessionStorage.setItem('accessToken', token);
                         setIsAuthenticated(true);
                     } else {
-                        setError(data.error);
+                        setError(authErrors.SessionEnd);
                     }
                 }
             } else {
-                const data = await refreshToken();
+                const token = await refreshToken();
                 
-                if (data.token) {
-                    sessionStorage.setItem('accessToken', data.token);
+                if (token) {                    
+                    sessionStorage.setItem('accessToken', token);
                     setIsAuthenticated(true);
                 }
             }

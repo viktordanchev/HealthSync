@@ -10,8 +10,9 @@ module.exports = {
                 'doctors-img': "url('./assets/doctors.png')"
             },
             screens: {
-                sm: { min: '0px', max: '600px' },
-                md: { min: '601px', max: '1280px' }
+                sm: { min: '0px', max: '500px' },
+                md: { min: '501px', max: '900px' },
+                lg: { min: '901px', max: '1300px' },
             },
             transitionProperty: {
                 'opacity-transform': 'opacity, transform',

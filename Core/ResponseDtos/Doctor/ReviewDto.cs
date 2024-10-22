@@ -1,9 +1,7 @@
-﻿namespace Core.DTOs.Doctor
+﻿namespace Core.ResponseDtos.Doctor
 {
     public class ReviewDto
     {
-        public string Text { get; set; } = null!;
-
         public int Rating { get; set; }
 
         public DateTime Date { get; set; }
