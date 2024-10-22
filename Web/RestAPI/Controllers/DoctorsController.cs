@@ -57,5 +57,13 @@ namespace RestAPI.Controllers
 
             return Ok();
         }
+
+        [HttpGet("getSpecialties")]
+        public async Task<IActionResult> GetSpecialties()
+        {
+            var specialties = await _doctorService.GetSpecialties();
+
+            return Ok(specialties);
+        }
     }
 }

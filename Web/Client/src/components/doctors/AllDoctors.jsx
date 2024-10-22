@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { getAllDoctors } from '../../services/apiRequests/doctors';
+import { getAllDoctors, getSpecialties } from '../../services/apiRequests/doctors';
 import DoctorCard from './DoctorCard';
 import Loading from '../Loading';
 
@@ -11,6 +11,8 @@ function AllDoctors() {
     const [isSearching, setIsSearching] = useState(false);
     const [loading, setLoading] = useState(true);
     const [doctors, setDoctors] = useState([]);
+    const [specialties, setSpecialties] = useState([]);
+    const [filter, setFilter] = useState('');
 
     useEffect(() => {
         setLoading(true);
@@ -19,9 +21,13 @@ function AllDoctors() {
             const dto = {
                 index: 0,
                 sorting: order,
-                filter: '',
+                filter: filter,
                 search: searchField
             };
+            console.log(dto);
+
+            const specialtiesData = await getSpecialties();
+            setSpecialties(specialtiesData);
 
             const doctors = await getAllDoctors(dto);
             setDoctors(doctors);
@@ -31,7 +37,7 @@ function AllDoctors() {
 
         getDoctors();
         setIsSearching(false);
-    }, [order, isSearching]);
+    }, [order, isSearching, filter]);
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
@@ -41,17 +47,30 @@ function AllDoctors() {
 
     return (
         <section className="mx-32 flex flex-col h-full items-center lg:mx-16 md:mx-6 sm:mx-6">
-            <article className="rounded-full bg-maincolor w-1/2 my-6 p-2 flex justify-between items-center lg:w-2/3 sm:w-full md:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2">
-                <select className="bg-white h-8 rounded-full text-center focus:outline-none"
-                    defaultValue=""
-                    onChange={(e) => setOrder(e.target.value)}
-                >
-                    <option value="" disabled hidden>Order</option>
-                    <option value="NameAsc">NameAsc</option>
-                    <option value="NameDesc">NameDesc</option>
-                    <option value="RatingAsc">RatingAsc</option>
-                    <option value="RatingDesc">RatingDesc</option>
-                </select>
+            <article className="rounded-full bg-maincolor w-100 my-6 p-2 flex justify-between items-center sm:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2">
+                <div className="flex space-x-3 sm:justify-between">
+                    <select className="bg-white h-8 rounded-full text-center focus:outline-none"
+                        defaultValue=""
+                        onChange={(e) => setOrder(e.target.value)}
+                    >
+                        <option value="" disabled hidden>Order</option>
+                        <option value="NameAsc">NameAsc</option>
+                        <option value="NameDesc">NameDesc</option>
+                        <option value="RatingAsc">RatingAsc</option>
+                        <option value="RatingDesc">RatingDesc</option>
+                    </select>
+                    <select className="bg-white h-8 rounded-full text-center focus:outline-none"
+                        defaultValue=""
+                        onChange={(e) => setFilter(e.target.value)}
+                    >
+                        <option value="" disabled hidden>Filter</option>
+                        <>
+                            {specialties.map((specialty, index) => (
+                                <option key={index} value={specialty}>{specialty}</option>
+                            ))}
+                        </>
+                    </select>
+                </div>
                 <div className="flex items-center sm:w-full">
                     <input
                         placeholder="Search..."

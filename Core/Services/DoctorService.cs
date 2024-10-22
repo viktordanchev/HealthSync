@@ -19,9 +19,10 @@ namespace Core.Services
         {
             var doctors = await _context.Doctors
                 .AsNoTracking()
-                .Where(d => d.Identity.FirstName.Contains(search) 
-                    || d.Identity.LastName.Contains(search) 
-                    || d.Hospital.Name.Contains(search))
+                .Where(d => (string.IsNullOrEmpty(search) ||
+                    d.Identity.FirstName.Contains(search) ||
+                    d.Identity.LastName.Contains(search)) &&
+                    (string.IsNullOrEmpty(filter) || d.Specialty.Type == filter))
                 .Skip(index * 10)
                 .Take(10)
                 .Select(d => new DoctorProfileDto()
@@ -59,7 +60,7 @@ namespace Core.Services
         {
             var reviews = await _context.Reviews
                 .AsNoTracking()
-                .Where(r => r.DoctorId ==  doctorId)
+                .Where(r => r.DoctorId == doctorId)
                 .OrderByDescending(r => r.Date)
                 .Skip(index * 3)
                 .Take(3)
@@ -94,6 +95,17 @@ namespace Core.Services
 
             await _context.Reviews.AddAsync(reveiew);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<string>> GetSpecialties()
+        {
+            var specialties = await _context.Specialties
+                .AsNoTracking()
+                .OrderBy(s => s.Type)
+                .Select(s => s.Type)
+                .ToListAsync();
+
+            return specialties;
         }
     }
 }

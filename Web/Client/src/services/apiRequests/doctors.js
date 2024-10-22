@@ -71,3 +71,23 @@ export const addReview = async (values, jwtToken) => {
         console.error(error.message);
     }
 };
+
+export const getSpecialties = async () => {
+    try {
+        const response =
+            await fetch(`${url}/getSpecialties`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch specialties');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error(error.message);
+    }
+};

@@ -8,5 +8,6 @@ namespace Core.Services.Contracts
         Task<IEnumerable<ReviewDto>> GetDoctorReviews(int index, string doctorId);
         Task<bool> IsDoctorExist(string doctorId);
         Task AddReview(string doctorId, int rating, string reviewer);
+        Task<IEnumerable<string>> GetSpecialties();
     }
 }

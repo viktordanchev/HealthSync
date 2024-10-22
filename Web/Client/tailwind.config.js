@@ -14,6 +14,9 @@ module.exports = {
                 md: { min: '501px', max: '900px' },
                 lg: { min: '901px', max: '1300px' },
             },
+            spacing: {
+                '100': '36rem',
+            },
             transitionProperty: {
                 'opacity-transform': 'opacity, transform',
             },
