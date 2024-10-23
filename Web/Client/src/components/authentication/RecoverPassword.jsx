@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { recoverPassword, sendRecoverPasswordEmail } from '../../services/apiRequests/account';
@@ -14,8 +14,8 @@ function RecoverPassword() {
     const { isAuthenticated } = useCheckAuth();
     const [messages, setMessages] = useState([]);
     const [messageType, setMessageType] = useState('');
-    const query = new URLSearchParams(useLocation().search);
-    const token = query.get('token') ? query.get('token').replace(/ /g, '+') : null;
+    const searchParams = useSearchParams();
+    const token = searchParams.get('token') ? searchParams.get('token').replace(/ /g, '+') : null;
 
     if (isAuthenticated) {
         navigate('/home');

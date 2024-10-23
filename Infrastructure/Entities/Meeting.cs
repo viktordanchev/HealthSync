@@ -17,6 +17,7 @@ namespace Infrastructure.Entities
         [Required]
         public DateTime Date { get; set; }
 
-        public string? Comment { get; set; }
+        [Required]
+        public string Patient { get; set; } = null!;
     }
 }

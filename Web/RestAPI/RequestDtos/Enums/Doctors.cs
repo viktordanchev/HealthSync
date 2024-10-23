@@ -2,6 +2,7 @@
 {
     public enum SortingOption
     {
+        None,
         NameAsc,
         NameDesc,
         RatingAsc, 

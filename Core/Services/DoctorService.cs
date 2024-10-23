@@ -19,9 +19,8 @@ namespace Core.Services
         {
             var doctors = await _context.Doctors
                 .AsNoTracking()
-                .Where(d => (string.IsNullOrEmpty(search) ||
-                    d.Identity.FirstName.Contains(search) ||
-                    d.Identity.LastName.Contains(search)) &&
+                .Where(d => (string.IsNullOrEmpty(search) || 
+                    string.Concat(d.Identity.FirstName, " ", d.Identity.LastName).Contains(search)) &&
                     (string.IsNullOrEmpty(filter) || d.Specialty.Type == filter))
                 .Skip(index * 10)
                 .Take(10)
