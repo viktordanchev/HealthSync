@@ -1,0 +1,1 @@
+D:\Programming\HealthSync\Web\Client\obj\Debug\Client.esproj.CoreCompileInputs.cache

@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:5173",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "D:\\Programming\\HealthSync\\Web\\RestAPI\\..\\Client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}
