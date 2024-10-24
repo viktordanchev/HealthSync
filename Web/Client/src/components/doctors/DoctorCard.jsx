@@ -13,24 +13,24 @@ function DoctorCard({ data }) {
     return (
         <>
             <div
-                className={`relative bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center shadow-md shadow-gray-400
+                className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center shadow-md shadow-gray-400
                 transition-all duration-700 ease-in-out
-                ${isOpen ? 'bg-opacity-85 z-20 sm:justify-normal sm:w-full' : 'w-64 h-80 bg-opacity-35 sm:w-full'}`}
+                ${isOpen ? 'fixed bg-opacity-85 z-20 sm:justify-normal sm:w-full scale-150 md:scale-100 md:relative sm:scale-100 sm:relative' : 'scale-100 relative w-64 h-80 bg-opacity-35 sm:w-full'}`}
             >
                 {isOpen && (
                     <button
                         onClick={toggleDetails}
                         className="w-full text-right focus:outline-none"
                     >
-                        <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
+                        <FontAwesomeIcon icon={faXmark} className="text-white text-2xl" />
                     </button>
                 )}
                 <div className={`flex flex-col items-center space-y-2 ${isOpen ? 'text-white' : 'text-gray-700'}`}>
                     <img
                         src={data.imgUrl ? data.imgUrl : '/profile.jpg'}
-                        className="rounded-full object-cover w-24 h-24"
+                        className={`rounded-full object-cover ${isOpen ? 'w-16 h-16 md:w-20 md:h-20 sm:w-24 sm:h-24' : 'w-24 h-24'}`}
                     />
-                    <div className="text-center text-xl">
+                    <div className={`text-center ${isOpen ? 'text-base sm:text-xl' : 'text-xl'}`}>
                         <p>{data.name}</p>
                         <p className="font-bold">{data.specialty}</p>
                     </div>
@@ -53,7 +53,12 @@ function DoctorCard({ data }) {
                         >
                             Details
                         </button>
-                    </> : <DoctorDetails doctorId={data.id} rating={data.rating} />}
+                    </> :
+                    <DoctorDetails
+                        doctorId={data.id}
+                        rating={data.rating}
+                        hospitalName={data.hospital}
+                    />}
             </div>
 
             {isOpen && (

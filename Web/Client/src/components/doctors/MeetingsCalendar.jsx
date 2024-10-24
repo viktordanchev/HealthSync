@@ -67,13 +67,13 @@ const MeetingsCalendar = () => {
 
     return (
         <>
-            <div className="bg-white rounded-xl">
+            <div className="bg-white rounded-xl text-xs md:text-base sm:text-base">
                 <div className="flex items-center rounded-t-xl justify-evenly bg-zinc-700 py-1">
                     <button onClick={handlePreviousMonth} className="text-white">Previous</button>
                     <h2 className="text-white">{monthNames[currentMonth]} {currentYear}</h2>
                     <button onClick={handleNextMonth} className="text-white">Next</button>
                 </div>
-                <div className="grid grid-cols-7 gap-1 p-2 text-center" id="calendar">
+                <div className="grid grid-cols-7 gap-1 p-2 text-center sm:gap-2" id="calendar">
                     {daysOfWeek.map((day, index) => (
                         <div key={index} className="text-center">{day}</div>
                     ))}

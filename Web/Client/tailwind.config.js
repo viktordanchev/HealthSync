@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+﻿/** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
@@ -40,7 +40,14 @@ module.exports = {
                         opacity: '1',
                     },
                 },
+                bounceLeftRight: {
+                    '0%, 100%': { transform: 'translateX(0)' }, 
+                    '50%': { transform: 'translateX(3%)' }
+                }
             },
+            animation: {
+                'bounce-left-right': 'bounceLeftRight 0.2s ease-in-out 3',
+            }
         }
     },
     plugins: [require('tailwind-scrollbar')({ nocompatible: true, preferredStrategy: 'pseudoelements' })],
