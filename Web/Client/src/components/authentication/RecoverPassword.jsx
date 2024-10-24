@@ -14,7 +14,7 @@ function RecoverPassword() {
     const { isAuthenticated } = useCheckAuth();
     const [messages, setMessages] = useState([]);
     const [messageType, setMessageType] = useState('');
-    const searchParams = useSearchParams();
+    const [searchParams] = useSearchParams();
     const token = searchParams.get('token') ? searchParams.get('token').replace(/ /g, '+') : null;
 
     if (isAuthenticated) {
@@ -65,8 +65,8 @@ function RecoverPassword() {
         <div className="flex flex-col space-y-6">
             <Messages data={messages} type={messageType} />
 
-            <section className="flex items-center justify-center">
-                <div className="w-full max-w-xs bg-maincolor rounded-xl shadow-md px-8 py-8">
+            <section className="flex items-center justify-center mx-6">
+                <div className="w-80 bg-maincolor rounded-xl shadow-md px-8 py-8 sm:w-full">
                     <p className="text-3xl text-center text-white">{token ? "Recover password" : "Send recover link"}</p>
                     <hr className="my-4" />
                     <Formik

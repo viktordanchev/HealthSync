@@ -44,8 +44,8 @@ function Login() {
         <div className="flex flex-col space-y-6">
             <Messages data={messages} type={'error'} />
 
-            <section className="flex items-center justify-center">
-                <div className="w-full max-w-xs bg-maincolor rounded-xl shadow-md px-8 py-8">
+            <section className="flex items-center justify-center mx-6">
+                <div className="w-80 bg-maincolor rounded-xl shadow-md px-8 py-8 sm:w-full">
                     <p className="text-3xl text-center text-white">Login</p>
                     <hr className="my-4" />
                     <Formik
@@ -60,7 +60,7 @@ function Login() {
                                 </label>
                                 <Field
                                     className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
-                                    placeholder="user@gmail.com"
+                                    placeholder="user@mail.com"
                                     type="email"
                                     name="email"
                                 />

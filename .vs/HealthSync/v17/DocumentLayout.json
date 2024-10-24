@@ -1,12 +1,181 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Programming\\HealthSync\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\header.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\header.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\authentication\\recoverpassword.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\authentication\\recoverpassword.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\authentication\\login.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\authentication\\login.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\doctors\\alldoctors.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\doctors\\alldoctors.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\authentication\\verification.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\authentication\\verification.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\authentication\\register.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\authentication\\register.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\doctors\\doctordetails.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\doctors\\doctordetails.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\doctors\\doctorcard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\doctors\\doctorcard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Header.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\Header.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\Header.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\Header.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\Header.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-24T07:58:31.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Verification.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Verification.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\authentication\\Verification.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Verification.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\authentication\\Verification.jsx",
+              "ViewState": "AgIAADsAAAAAAAAAAAAQwEEAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-24T07:55:30.644Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RecoverPassword.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\RecoverPassword.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\authentication\\RecoverPassword.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\RecoverPassword.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\authentication\\RecoverPassword.jsx",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAQwA4AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-24T07:44:29.198Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Register.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Register.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\authentication\\Register.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Register.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\authentication\\Register.jsx",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAAAFQAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-24T07:38:40.956Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "index.html",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\index.html",
+              "RelativeDocumentMoniker": "Web\\Client\\index.html",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\index.html",
+              "RelativeToolTip": "Web\\Client\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-10-24T07:23:11.592Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AllDoctors.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\doctors\\AllDoctors.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\doctors\\AllDoctors.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\doctors\\AllDoctors.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\doctors\\AllDoctors.jsx",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-24T07:21:25.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DoctorCard.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\doctors\\DoctorCard.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\doctors\\DoctorCard.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\doctors\\DoctorCard.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\doctors\\DoctorCard.jsx",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-24T07:19:30.104Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DoctorDetails.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\doctors\\DoctorDetails.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\doctors\\DoctorDetails.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\doctors\\DoctorDetails.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\doctors\\DoctorDetails.jsx",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAcAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-24T07:18:50.753Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\App.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\App.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\App.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\App.jsx",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABwAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-23T20:15:11.323Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.jsx",
+              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Login.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\authentication\\Login.jsx",
+              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Login.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\authentication\\Login.jsx",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAC8AAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-10-23T20:13:31.539Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
