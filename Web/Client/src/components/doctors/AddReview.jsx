@@ -37,20 +37,20 @@ function AddReview({ doctorId }) {
                 </p>
             )}
             {isVisible ?
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-1/2 w-1/2 rounded-xl bg-maincolor p-4 flex flex-col justify-between">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-xl bg-maincolor p-4 flex flex-col justify-between space-y-3 sm:w-1/2">
                     <div className="w-full text-right">
                         <button
                             onClick={() => { setIsVisible(false) }}>
-                            <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
+                            <FontAwesomeIcon icon={faXmark} className="text-white text-xl" />
                         </button>
                     </div>
                     <div className="flex flex-col items-center">
-                        <p className="font-bold text-white text-2xl mb-4">Rating: {rating}</p>
-                        <div className="flex w-full justify-evenly">
+                        <p className="font-bold text-white text-base mb-1">Rating: {rating}</p>
+                        <div className="flex w-full justify-between space-x-3 sm:space-x-2">
                             {Array.from({ length: 5 }, (_, i) => (
                                 <svg
                                     key={i}
-                                    className={`w-9 h-9 cursor-pointer ${i === 0 ? 'text-yellow-400' : (i < rating ? 'text-yellow-400' : 'text-white')}`}
+                                    className={`w-5 h-5 cursor-pointer ${i === 0 ? 'text-yellow-400' : (i < rating ? 'text-yellow-400' : 'text-white')}`}
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="currentColor"
@@ -64,7 +64,7 @@ function AddReview({ doctorId }) {
                     </div>
                     <button
                         onClick={add}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-blue-500 hover:bg-blue-700 text-white text-xs font-bold py-1 rounded focus:outline-none focus:shadow-outline"
                     >
                         Add
                     </button>

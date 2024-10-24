@@ -6,13 +6,13 @@ import { verifyAccount, sendVrfCode } from '../../services/apiRequests/account';
 import { validateEmail, validateVrfCode } from '../../services/validationSchemas';
 import useTimer from '../../hooks/useTimer';
 import useCheckAuth from '../../hooks/useCheckAuth';
-import Messages from './Messages';
+import Message from './Message';
 
 function Verification() {
     const navigate = useNavigate();
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
     const { isAuthenticated } = useCheckAuth();
-    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState('');
     const [messageType, setMessageType] = useState('');
     const userEmail = sessionStorage.getItem('email') || '';
 
@@ -25,14 +25,12 @@ function Verification() {
     const validationVrfCodeSchema = Yup.object().shape({ vrfCode: validateVrfCode });
 
     const submitCode = async (values) => {
-        const response = await verifyAccount(values);
+        const data = await verifyAccount(values);
 
-        if (response.ok) {
+        if (!data) {
             navigate('/home');
-        }
-        else {
-            const error = await response.json();
-            setMessages(error);
+        } else {
+            setMessage(data.error);
             setMessageType('error');
         }
 
@@ -40,27 +38,26 @@ function Verification() {
     };
 
     const sendCode = async (email) => {
-        const response = await sendVrfCode(email);
-        const data = await response.json();
+        const data = await sendVrfCode(email);
 
-        setMessages(data);
-
-        if (response.ok) {
+        if (data.error) {
+            setMessageType('error');
+            setMessage(data.error);
+        } else {
             sessionStorage.setItem('email', email);
 
             setMessageType('message');
+            setMessage(data.message);
+
             resetTimer();
         }
-        else {
-            setMessageType('error');
-        }
 
-        setTimeout(() => { setMessages(''); }, 3000);
+        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (
         <div className="flex flex-col space-y-6">
-            <Messages data={messages} type={messageType} />
+            <Message message={message} type={messageType} />
 
             <section className="flex items-center justify-center mx-6">
                 <div className="w-80 bg-maincolor rounded-xl shadow-md px-8 py-8 sm:w-full">

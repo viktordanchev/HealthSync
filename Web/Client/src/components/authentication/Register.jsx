@@ -5,11 +5,11 @@ import * as Yup from 'yup';
 import { register } from '../../services/apiRequests/account';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../../services/validationSchemas';
 import useCheckAuth from '../../hooks/useCheckAuth';
-import Messages from './Messages';
+import Message from './Message';
 
 function Register() {
     const navigate = useNavigate();
-    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState('');
     const { isAuthenticated } = useCheckAuth();
 
     if (isAuthenticated) {
@@ -25,26 +25,20 @@ function Register() {
     });
 
     const handleRegister = async (values) => {
-        const response = await register(values);
+        const data = await register(values);
 
-        if (response.ok) {
+        if (!data) {
             navigate('/account/verify');
         } else {
-            const errors = await response.json();
-            console.log(errors);
-            if (errors.notVerified) {
-                navigate('/account/verify');
-            }
-
-            setMessages(errors);
+            setMessage(data.error);
         }
 
-        setTimeout(() => { setMessages(''); }, 3000);
+        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (
         <div className="flex flex-col space-y-6">
-            <Messages data={messages} type={'error'} />
+            <Message message={message} type={'error'} />
 
             <section className="flex items-center justify-center mx-6">
                 <div className="w-80 bg-maincolor rounded-xl shadow-md px-8 py-8 sm:w-full">

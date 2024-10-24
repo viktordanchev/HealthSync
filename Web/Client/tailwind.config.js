@@ -28,6 +28,7 @@ module.exports = {
             },
             animation: {
                 grow: 'grow 1.2s ease-in-out infinite',
+                'bounce-left-right': 'bounceLeftRight 0.2s ease-in-out 3'
             },
             keyframes: {
                 grow: {
@@ -44,9 +45,6 @@ module.exports = {
                     '0%, 100%': { transform: 'translateX(0)' }, 
                     '50%': { transform: 'translateX(3%)' }
                 }
-            },
-            animation: {
-                'bounce-left-right': 'bounceLeftRight 0.2s ease-in-out 3',
             }
         }
     },

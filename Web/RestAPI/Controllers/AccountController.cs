@@ -44,11 +44,8 @@ namespace HealthSync.Server.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
-                    .Where(ms => ms.Value.Errors.Count > 0)
-                    .ToDictionary(
-                        ms => ms.Key,
-                        ms => ms.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-                    );
+                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
+                    .ToArray();
 
                 return BadRequest(errors);
             }
@@ -59,7 +56,7 @@ namespace HealthSync.Server.Controllers
             {
                 if (!user.EmailConfirmed)
                 {
-                    return BadRequest(new { NotVerified = true });
+                    return Ok();
                 }
 
                 return BadRequest(new { Error = UsedEmail });
@@ -82,7 +79,11 @@ namespace HealthSync.Server.Controllers
                     ModelState.AddModelError(error.Code, error.Description);
                 }
 
-                return BadRequest(ModelState);
+                var errors = ModelState
+                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
+                    .ToArray();
+
+                return BadRequest(errors);
             }
 
             return Ok();
@@ -94,11 +95,8 @@ namespace HealthSync.Server.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
-                    .Where(ms => ms.Value.Errors.Count > 0)
-                    .ToDictionary(
-                        ms => ms.Key,
-                        ms => ms.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-                    );
+                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
+                    .ToArray();
 
                 return BadRequest(errors);
             }
@@ -107,9 +105,7 @@ namespace HealthSync.Server.Controllers
 
             if (user == null)
             {
-                ModelState.AddModelError("Email", InvalidLoginData);
-
-                return BadRequest(ModelState);
+                return Unauthorized(new { Error = InvalidLoginData });
             }
 
             var result = await _signInManager
@@ -117,7 +113,7 @@ namespace HealthSync.Server.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(new { Error = InvalidLoginData });
+                return Unauthorized(new { Error = InvalidLoginData });
             }
 
             if (!user.EmailConfirmed)
@@ -143,11 +139,8 @@ namespace HealthSync.Server.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
-                    .Where(ms => ms.Value.Errors.Count > 0)
-                    .ToDictionary(
-                        ms => ms.Key,
-                        ms => ms.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-                    );
+                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
+                    .ToArray();
 
                 return BadRequest(errors);
             }
@@ -172,7 +165,7 @@ namespace HealthSync.Server.Controllers
 
             if (user == null)
             {
-                return BadRequest(new { Error = NotRegistered });
+                return Unauthorized(new { Error = NotRegistered });
             }
             else if (user.EmailConfirmed)
             {
@@ -209,11 +202,8 @@ namespace HealthSync.Server.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
-                    .Where(ms => ms.Value.Errors.Count > 0)
-                    .ToDictionary(
-                        ms => ms.Key,
-                        ms => ms.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-                    );
+                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
+                    .ToArray();
 
                 return BadRequest(errors);
             }

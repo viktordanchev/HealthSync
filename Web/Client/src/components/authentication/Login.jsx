@@ -5,11 +5,11 @@ import * as Yup from 'yup';
 import { login } from '../../services/apiRequests/account';
 import { validateEmail, validatePassword } from '../../services/validationSchemas';
 import useCheckAuth from '../../hooks/useCheckAuth';
-import Messages from './Messages';
+import Message from './Message';
 
 function Login() {
     const navigate = useNavigate();
-    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState('');
     const { isAuthenticated } = useCheckAuth();
 
     if (isAuthenticated) {
@@ -22,10 +22,9 @@ function Login() {
     });
 
     const handleLogin = async (values) => {
-        const response = await login(values);
-        const data = await response.json();
+        const data = await login(values);
 
-        if (response.ok) {
+        if (data.token) {
             sessionStorage.setItem('accessToken', data.token);
             navigate('/home');
             window.location.reload();
@@ -34,15 +33,15 @@ function Login() {
                 navigate('/account/verify');
             }
 
-            setMessages(data);
+            setMessage(data.error);
         }
 
-        setTimeout(() => { setMessages(''); }, 3000);
+        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (
         <div className="flex flex-col space-y-6">
-            <Messages data={messages} type={'error'} />
+            <Message message={message} type={'error'} />
 
             <section className="flex items-center justify-center mx-6">
                 <div className="w-80 bg-maincolor rounded-xl shadow-md px-8 py-8 sm:w-full">

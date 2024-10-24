@@ -6,13 +6,13 @@ import { recoverPassword, sendRecoverPasswordEmail } from '../../services/apiReq
 import { validateEmail, validatePassword, validateConfirmPassword } from '../../services/validationSchemas';
 import useTimer from '../../hooks/useTimer';
 import useCheckAuth from '../../hooks/useCheckAuth';
-import Messages from './Messages';
+import Message from './Message';
 
 function RecoverPassword() {
     const navigate = useNavigate();
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
     const { isAuthenticated } = useCheckAuth();
-    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState('');
     const [messageType, setMessageType] = useState('');
     const [searchParams] = useSearchParams();
     const token = searchParams.get('token') ? searchParams.get('token').replace(/ /g, '+') : null;
@@ -29,41 +29,39 @@ function RecoverPassword() {
     });
 
     const submitPassword = async (values) => {
-        const response = await recoverPassword(values);
+        const data = await recoverPassword(values);
 
-        if (response.ok) {
-            navigate("/login");
-        }
-        else {
-            const data = await response.json();
-            setMessages(data);
-        }
-
-        setTimeout(() => { setMessages(''); }, 3000);
-    };
-
-    const sendLink = async (email) => {
-        const response = await sendRecoverPasswordEmail(email);
-        const data = await response.json();
-
-        setMessages(data);
-
-        if (response.ok) {
-            sessionStorage.setItem('email', email);
-
-            setMessageType('message');
-            resetTimer();
-        }
-        else {
+        if (!data) {
+            navigate('/home');
+        } else {
+            setMessage(data.error);
             setMessageType('error');
         }
 
-        setTimeout(() => { setMessages(''); }, 3000);
+        setTimeout(() => { setMessage(''); }, 3000);
+    };
+
+    const sendLink = async (email) => {
+        const data = await sendRecoverPasswordEmail(email);
+
+        if (data.error) {
+            setMessage(data.error);
+            setMessageType('error');
+        } else {
+            sessionStorage.setItem('email', email);
+
+            setMessage(data.message);
+            setMessageType('message');
+
+            resetTimer();
+        }
+
+        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (
         <div className="flex flex-col space-y-6">
-            <Messages data={messages} type={messageType} />
+            <Message message={message} type={messageType} />
 
             <section className="flex items-center justify-center mx-6">
                 <div className="w-80 bg-maincolor rounded-xl shadow-md px-8 py-8 sm:w-full">
