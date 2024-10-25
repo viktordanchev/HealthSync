@@ -1,30 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Programming\\HealthSync\\",
+  "WorkspaceRootPath": "E:\\Programming\\HealthSync\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\authentication\\verification.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\authentication\\verification.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\authentication\\recoverpassword.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\authentication\\recoverpassword.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\services\\apirequests\\account.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\services\\apirequests\\account.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E25E4AF-631D-4000-BD55-CD56CD113192}|Web\\RestAPI\\RestAPI.csproj|d:\\programming\\healthsync\\web\\restapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E25E4AF-631D-4000-BD55-CD56CD113192}|Web\\RestAPI\\RestAPI.csproj|solutionrelative:web\\restapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\components\\authentication\\register.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\authentication\\register.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|d:\\programming\\healthsync\\web\\client\\src\\services\\apirequests\\doctors.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\services\\apirequests\\doctors.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|e:\\programming\\healthsync\\web\\client\\src\\components\\doctors\\doctorcard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{95BA1372-777D-4084-BA28-1110FE3D0549}|Web\\Client\\Client.esproj|solutionrelative:web\\client\\src\\components\\doctors\\doctorcard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,79 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Verification.jsx",
-              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Verification.jsx",
-              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\authentication\\Verification.jsx",
-              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Verification.jsx",
-              "RelativeToolTip": "Web\\Client\\src\\components\\authentication\\Verification.jsx",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAB0AAAAUAAAAAAAAAA==",
+              "Title": "DoctorCard.jsx",
+              "DocumentMoniker": "E:\\Programming\\HealthSync\\Web\\Client\\src\\components\\doctors\\DoctorCard.jsx",
+              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\doctors\\DoctorCard.jsx",
+              "ToolTip": "E:\\Programming\\HealthSync\\Web\\Client\\src\\components\\doctors\\DoctorCard.jsx",
+              "RelativeToolTip": "Web\\Client\\src\\components\\doctors\\DoctorCard.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAClAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2024-10-24T15:44:44.594Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RecoverPassword.jsx",
-              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\RecoverPassword.jsx",
-              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\authentication\\RecoverPassword.jsx",
-              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\RecoverPassword.jsx",
-              "RelativeToolTip": "Web\\Client\\src\\components\\authentication\\RecoverPassword.jsx",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAACMAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2024-10-24T15:44:12.53Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Register.jsx",
-              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Register.jsx",
-              "RelativeDocumentMoniker": "Web\\Client\\src\\components\\authentication\\Register.jsx",
-              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\components\\authentication\\Register.jsx",
-              "RelativeToolTip": "Web\\Client\\src\\components\\authentication\\Register.jsx",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2024-10-24T15:39:50.072Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\RestAPI\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "Web\\RestAPI\\Controllers\\AccountController.cs",
-              "ToolTip": "D:\\Programming\\HealthSync\\Web\\RestAPI\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "Web\\RestAPI\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAA9wCgAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T15:24:58.814Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "doctors.js",
-              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\services\\apiRequests\\doctors.js",
-              "RelativeDocumentMoniker": "Web\\Client\\src\\services\\apiRequests\\doctors.js",
-              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\services\\apiRequests\\doctors.js",
-              "RelativeToolTip": "Web\\Client\\src\\services\\apiRequests\\doctors.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-10-24T15:16:50.06Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "account.js",
-              "DocumentMoniker": "D:\\Programming\\HealthSync\\Web\\Client\\src\\services\\apiRequests\\account.js",
-              "RelativeDocumentMoniker": "Web\\Client\\src\\services\\apiRequests\\account.js",
-              "ToolTip": "D:\\Programming\\HealthSync\\Web\\Client\\src\\services\\apiRequests\\account.js",
-              "RelativeToolTip": "Web\\Client\\src\\services\\apiRequests\\account.js",
-              "ViewState": "AgIAAHAAAAAAAAAAAAAAAIYAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-10-24T15:11:49.682Z",
+              "WhenOpened": "2024-10-25T16:15:13.731Z",
               "EditorCaption": ""
             }
           ]
