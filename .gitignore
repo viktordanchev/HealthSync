@@ -400,3 +400,4 @@ FodyWeavers.xsd
 # ASP.NET Core
 appsettings.json
 appsettings.Development.json
+Web/RestAPI/appsettings.json
