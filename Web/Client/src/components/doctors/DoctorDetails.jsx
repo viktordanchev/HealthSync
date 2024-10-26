@@ -51,26 +51,26 @@ function DoctorDetails({ doctorId, rating, hospitalName }) {
 
     return (
         <div className="flex flex-col items-center mt-6 w-full">
-            <div className="flex flex-col text-center text-white bg-zinc-700 p-3 rounded-xl text-xs md:w-full sm:w-full md:text-lg sm:text-lg">
+            <div className="flex flex-col text-center text-white bg-zinc-700 p-3 rounded-xl text-lg md:w-full sm:w-full">
                 <p className="font-bold">Hospital</p>
                 <hr className="border-e border-white w-full my-2" />
                 <div className="flex space-x-3 justify-evenly items-center sm:flex-col sm:space-x-0 sm:space-y-3">
-                    <div className="w-32 md:w-40">
+                    <div className="w-40">
                         <p className="font-bold">Name</p>
                         <p>{hospitalName}</p>
                     </div>
-                    <div className="w-32 md:w-40">
+                    <div className="w-40">
                         <p className="font-bold">Address</p>
                         <p>{hospitalName}</p>
                     </div>
                 </div>
             </div>
             <div className="w-full mt-4 flex items-end space-x-4 sm:flex-col sm:space-y-4">
-                <div className="w-1/2 flex flex-col justify-between md:w-full sm:w-full">
-                    <p className="text-center mb-1 text-white text-base md:text-lg sm:text-lg">Reviews</p>
+                <div className="flex flex-col justify-between md:w-full sm:w-full">
+                    <p className="text-center mb-1 text-white text-xl font-bold">Reviews</p>
                     <div
                         ref={scrollContainerRef}
-                        className="h-40 flex flex-col bg-zinc-700 space-y-2 p-2 overflow-auto scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-blue-500 scrollbar-track-gray-200 rounded-xl md:h-52 sm:h-52">
+                        className="h-52 flex flex-col bg-zinc-700 space-y-2 p-2 overflow-auto scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-blue-500 scrollbar-track-gray-200 rounded-xl md:h-52 sm:h-52">
                         <AddReview doctorId={doctorId} />
                         {loading ? <Loading type={'small'} /> :
                             <>
@@ -93,8 +93,8 @@ function DoctorDetails({ doctorId, rating, hospitalName }) {
                             </>}
                     </div>
                 </div>
-                <div className="w-1/2 flex flex-col justify-end md:w-full sm:w-full md:text-sm sm:text-sm">
-                    <p className="text-center mb-1 text-white text-base md:text-lg sm:text-lg">Meetings</p>
+                <div className="flex flex-col justify-end md:w-full sm:w-full md:text-sm sm:text-sm">
+                    <p className="text-center mb-1 text-white text-xl font-bold">Meetings</p>
                     <MeetingsCalendar />
                 </div>
             </div>

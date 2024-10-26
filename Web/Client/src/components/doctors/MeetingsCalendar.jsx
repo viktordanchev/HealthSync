@@ -9,7 +9,7 @@ const MeetingsCalendar = () => {
     const [days, setDays] = useState([]);
 
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
     useEffect(() => {
         generateCalendar(currentYear, currentMonth);
@@ -18,7 +18,7 @@ const MeetingsCalendar = () => {
     const generateCalendar = (year, month) => {
         const firstDayOfMonth = new Date(year, month, 1);
         const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDayOfWeek = firstDayOfMonth.getDay();
+        const firstDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7;
 
         let tempDays = [];
 
@@ -67,7 +67,7 @@ const MeetingsCalendar = () => {
 
     return (
         <>
-            <div className="bg-white rounded-xl text-xs md:text-base sm:text-base">
+            <div className="bg-white rounded-xl text-base">
                 <div className="flex items-center rounded-t-xl justify-evenly bg-zinc-700 py-1">
                     <button onClick={handlePreviousMonth} className="text-white">Previous</button>
                     <h2 className="text-white">{monthNames[currentMonth]} {currentYear}</h2>

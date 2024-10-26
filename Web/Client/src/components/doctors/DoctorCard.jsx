@@ -15,7 +15,7 @@ function DoctorCard({ data }) {
             <div
                 className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center shadow-md shadow-gray-400
                 transition-all duration-700 ease-in-out
-                ${isOpen ? 'fixed bg-opacity-85 z-20 scale-150 sm:justify-normal sm:w-full md:relative sm:relative' : 'relative w-64 h-80 bg-opacity-35 sm:w-full'}`}
+                ${isOpen ? 'fixed inset-0 bg-opacity-85 z-20 sm:top-0 sm:left-0 sm:transform-none sm:justify-normal sm:w-full sm:relative' : 'relative w-64 h-80 bg-opacity-35 sm:w-full'}`}
             >
                 {isOpen && (
                     <button
@@ -28,9 +28,9 @@ function DoctorCard({ data }) {
                 <div className={`flex flex-col items-center space-y-2 ${isOpen ? 'text-white' : 'text-gray-700'}`}>
                     <img
                         src={data.imgUrl ? data.imgUrl : '/profile.jpg'}
-                        className={`rounded-full object-cover ${isOpen ? 'w-16 h-16 md:w-20 md:h-20 sm:w-24 sm:h-24' : 'w-24 h-24'}`}
+                        className="rounded-full object-cover w-24 h-24"
                     />
-                    <div className={`text-center ${isOpen ? 'text-base sm:text-xl' : 'text-xl'}`}>
+                    <div className="text-center text-xl">
                         <p>{data.name}</p>
                         <p className="font-bold">{data.specialty}</p>
                     </div>
