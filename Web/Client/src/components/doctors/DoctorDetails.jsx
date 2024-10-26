@@ -65,8 +65,8 @@ function DoctorDetails({ doctorId, rating, hospitalName }) {
                     </div>
                 </div>
             </div>
-            <div className="w-full mt-4 flex items-end space-x-4 sm:flex-col sm:space-y-4">
-                <div className="flex flex-col justify-between md:w-full sm:w-full">
+            <div className="w-full mt-4 flex items-end space-x-4 md:flex-col md:space-y-4 sm:flex-col sm:space-y-4">
+                <div className="w-72 flex flex-col justify-between md:w-full sm:w-full">
                     <p className="text-center mb-1 text-white text-xl font-bold">Reviews</p>
                     <div
                         ref={scrollContainerRef}
@@ -93,7 +93,7 @@ function DoctorDetails({ doctorId, rating, hospitalName }) {
                             </>}
                     </div>
                 </div>
-                <div className="flex flex-col justify-end md:w-full sm:w-full md:text-sm sm:text-sm">
+                <div className="w-72 flex flex-col justify-end md:w-full sm:w-full md:text-sm sm:text-sm">
                     <p className="text-center mb-1 text-white text-xl font-bold">Meetings</p>
                     <MeetingsCalendar />
                 </div>
