@@ -15,7 +15,7 @@ function DoctorCard({ data }) {
             <div
                 className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center shadow-md shadow-gray-400
                 transition-all duration-700 ease-in-out
-                ${isOpen ? 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-85 z-20 sm:justify-normal sm:w-full md:relative sm:relative' : 'relative w-64 h-80 bg-opacity-35 sm:w-full'}`}
+                ${isOpen ? 'fixed bg-opacity-85 z-20 scale-150 sm:justify-normal sm:w-full md:relative sm:relative' : 'relative w-64 h-80 bg-opacity-35 sm:w-full'}`}
             >
                 {isOpen && (
                     <button
