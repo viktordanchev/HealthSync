@@ -13,9 +13,7 @@ function DoctorCard({ data }) {
     return (
         <>
             <div
-                className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center shadow-md shadow-gray-400
-                transition-all duration-700 ease-in-out
-                ${isOpen ? 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-85 z-20 sm:w-full sm:relative sm:top-0 sm:left-0 sm:translate-x-0 sm:translate-y-0' : 'relative w-64 h-80 bg-opacity-35 sm:w-full'}`}
+                className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center transition-all duration-700 ease-in-out ${isOpen ? 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-85 z-20 sm:w-full sm:relative sm:top-0 sm:left-0 sm:translate-x-0 sm:translate-y-0' : 'relative w-64 h-80 bg-opacity-35 shadow-md shadow-gray-400 sm:w-full'}`}
             >
                 {isOpen && (
                     <button

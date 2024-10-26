@@ -59,10 +59,12 @@ export const addReview = async (values, jwtToken) => {
         
         if (!response.ok) {
             const errorData = await response.json();
-            let errorMessage = 'Failed to add review';
+            let errorMessage;
 
             if (Array.isArray(errorData)) {
                 errorMessage = errorData.join('\n');
+            } else {
+                errorMessage = errorData.error;
             }
 
             throw new Error(errorMessage);

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.RequestDtos.Doctors;
+using static Common.Errors.Doctors;
 
 namespace RestAPI.Controllers
 {
@@ -50,7 +51,7 @@ namespace RestAPI.Controllers
 
             if (!await _doctorService.IsDoctorExist(request.DoctorId))
             {
-                return BadRequest();
+                return BadRequest(new { Error = InvalidDoctorId });
             }
 
             await _doctorService.AddReview(request.DoctorId, request.Rating, request.Reviewer);

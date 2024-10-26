@@ -32,25 +32,25 @@ function AddReview({ doctorId }) {
     return (
         <>
             {isAdded && (
-                <p className="absolute top-6 left-1/2 transform -translate-x-1/2 rounded-xl bg-maincolor text-white text-2xl p-4 flex flex-col justify-between">
-                    Added new rating
+                <p className="absolute top-6 left-1/2 transform -translate-x-1/2 rounded-xl bg-green-500 border border-white text-white text-2xl p-4 flex flex-col justify-between">
+                    Rating was added
                 </p>
             )}
             {isVisible ?
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-xl bg-maincolor p-4 flex flex-col justify-between space-y-3 sm:w-1/2">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-xl bg-zinc-700 bg-opacity-95 border border-white p-4 flex flex-col justify-between space-y-6 sm:w-1/2">
                     <div className="w-full text-right">
                         <button
                             onClick={() => { setIsVisible(false) }}>
-                            <FontAwesomeIcon icon={faXmark} className="text-white text-xl" />
+                            <FontAwesomeIcon icon={faXmark} className="text-white text-2xl" />
                         </button>
                     </div>
-                    <div className="flex flex-col items-center">
-                        <p className="font-bold text-white text-base mb-1">Rating: {rating}</p>
+                    <div className="flex flex-col items-center text-xl">
+                        <p className="font-bold text-white mb-1">Rating: {rating}</p>
                         <div className="flex w-full justify-between space-x-3 sm:space-x-2">
                             {Array.from({ length: 5 }, (_, i) => (
                                 <svg
                                     key={i}
-                                    className={`w-5 h-5 cursor-pointer ${i === 0 ? 'text-yellow-400' : (i < rating ? 'text-yellow-400' : 'text-white')}`}
+                                    className={`w-5 h-5 cursor-pointer ${i === 0 ? 'text-yellow-400' : (i < rating ? 'text-yellow-400' : 'text-gray-300')}`}
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="currentColor"
@@ -64,7 +64,7 @@ function AddReview({ doctorId }) {
                     </div>
                     <button
                         onClick={add}
-                        className="bg-blue-500 hover:bg-blue-700 text-white text-xs font-bold py-1 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 rounded focus:outline-none focus:shadow-outline"
                     >
                         Add
                     </button>

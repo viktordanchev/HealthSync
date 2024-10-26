@@ -19,6 +19,7 @@
         public static class Doctors
         {
             public const string InvalidRating = "Rating must be between 1 and 5!";
+            public const string InvalidDoctorId = "This doctor id is invalid!";
         }
     }
 }
