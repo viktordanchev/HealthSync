@@ -7,7 +7,7 @@ namespace RestAPI.RequestDtos.Doctors
     public class AddReviewRequest
     {
         [Required(ErrorMessage = $"DoctorId {RequiredField}")]
-        public string DoctorId { get; set; } = null!;
+        public int DoctorId { get; set; }
 
         [Required(ErrorMessage = $"Rating {RequiredField}")]
         [Range(1, 5, ErrorMessage = InvalidRating)]

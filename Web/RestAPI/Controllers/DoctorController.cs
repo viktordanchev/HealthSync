@@ -7,12 +7,12 @@ using static Common.Errors.Doctors;
 namespace RestAPI.Controllers
 {
     [ApiController]
-    [Route("doctors")]
-    public class DoctorsController : ControllerBase
+    [Route("doctor")]
+    public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
 
-        public DoctorsController(IDoctorService doctorService)
+        public DoctorController(IDoctorService doctorService)
         {
             _doctorService = doctorService;
         }

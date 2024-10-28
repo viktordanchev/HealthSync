@@ -31,6 +31,7 @@ namespace Core.Services
                     ImgUrl = d.ImgUrl,
                     Specialty = d.Specialty.Type,
                     Hospital = d.Hospital.Name,
+                    HospitalAddress = d.Hospital.Address,
                     Rating = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,
                     TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
                 })
@@ -55,7 +56,7 @@ namespace Core.Services
             return doctors;
         }
 
-        public async Task<IEnumerable<ReviewDto>> GetDoctorReviews(int index, string doctorId)
+        public async Task<IEnumerable<ReviewDto>> GetDoctorReviews(int index, int doctorId)
         {
             var reviews = await _context.Reviews
                 .AsNoTracking()
@@ -74,18 +75,17 @@ namespace Core.Services
             return reviews;
         }
 
-        public async Task<bool> IsDoctorExist(string doctorId)
+        public async Task<bool> IsDoctorExist(int doctorId)
         {
             var doctor = await _context.Doctors.FirstOrDefaultAsync(d => d.Id == doctorId);
 
             return doctor != null;
         }
 
-        public async Task AddReview(string doctorId, int rating, string reviewer)
+        public async Task AddReview(int doctorId, int rating, string reviewer)
         {
             var reveiew = new Review()
             {
-                Id = Guid.NewGuid().ToString(),
                 DoctorId = doctorId,
                 Rating = rating,
                 Date = DateTime.Now,

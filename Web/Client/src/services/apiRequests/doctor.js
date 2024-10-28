@@ -1,4 +1,4 @@
-const url = 'https://localhost:7080/doctors';
+const url = 'https://localhost:7080/doctor';
 
 export const getAllDoctors = async (values) => {
     try {

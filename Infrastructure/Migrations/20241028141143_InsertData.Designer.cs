@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241023150045_InsertData")]
+    [Migration("20241028141143_InsertData")]
     partial class InsertData
     {
         /// <inheritdoc />
@@ -102,7 +102,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a459b61c-cf0c-4c32-acb3-0c6181cab47e",
+                            ConcurrencyStamp = "3a6bf2ff-9ff7-4e83-ac25-a88a57384603",
                             Email = "i.ivanov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivan",
@@ -110,9 +110,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOV@MAIL.COM",
                             NormalizedUserName = "I.IVANOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELIgs921MICrbsvHlhXu8JUywlZD+3HJJGr043npw2512sXEDR+w0/viRvACSABxUA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIYGun306a+4uSyxyomt/L/0ip1NMItjiKf8RxGj8uVpwaRRk8GjbdHW46q0BauqOg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b0ca130b-c15f-4b86-a816-876dc1bd5825",
+                            SecurityStamp = "dcfc584e-1663-4657-af7c-1c9118c03238",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanov@mail.com"
                         },
@@ -120,7 +120,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "02efdcf8-50ab-46f7-a873-129c35a665ed",
+                            ConcurrencyStamp = "e98a533d-3c08-4eea-842a-8e3af6f90282",
                             Email = "m.marinova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Maria",
@@ -128,9 +128,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.MARINOVA@MAIL.COM",
                             NormalizedUserName = "M.MARINOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFMIpeqk08LVOKPnEPty4i2ky49QGTN+ierwjSwFqljWRhVRbZ0nnlBdtlbssgwTlw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOOLKCYIXb2iaA6p/amepPRtH2annbdR4LhfiER7lFcJeyhhbdB40uWzvXoUdw1Mww==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "58c42a9d-731f-43e7-bef3-644e48509cd7",
+                            SecurityStamp = "ae88f4e4-5464-4935-bb11-c4222904e522",
                             TwoFactorEnabled = false,
                             UserName = "m.marinova@mail.com"
                         },
@@ -138,7 +138,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "88cd5a7b-01d8-49b4-8688-35cd23751532",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f7667197-9666-48d4-b554-70a72f212e44",
+                            ConcurrencyStamp = "3f4125ce-d9e7-41b9-897c-a379632dea71",
                             Email = "a.kirilov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Aleks",
@@ -146,9 +146,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "A.KIRILOV@MAIL.COM",
                             NormalizedUserName = "A.KIRILOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMbbr650RgqCHgzpLgJc1kqH0xe2YRs4cexF+7XHI/yQ04qHMckKnkbWwZNzbJZn2A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG9dnefoFO2y5kzC298VE+jJNdiUaUxtpYaqVlDWuHRfxfXe9+ACguI2yJGAZAUIxg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6bf9ebd8-73e9-40a4-a6ea-a215ce4151af",
+                            SecurityStamp = "77502d98-e14e-4855-919f-946d53f4c250",
                             TwoFactorEnabled = false,
                             UserName = "a.kirilov@mail.com"
                         },
@@ -156,7 +156,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "57f30552-5e97-4bef-a75a-15d7407a6afd",
+                            ConcurrencyStamp = "789720af-619a-4f0c-b215-72cc495c8f9d",
                             Email = "k.conev@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Kiril",
@@ -164,9 +164,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "K.CONEV@MAIL.COM",
                             NormalizedUserName = "K.CONEV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECIJUr87ERn0kCTnGXOLhgS/wNVUTPDn5SUvefwKNQY+jwg2zqsCTT/v67mx2b/KhQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGBUVbrAHGQX8b4g0eNDY4xjPuDvP8fWGHTyAH0Rr7DvG0k+/6jCyjhH5IdWxdAcDg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e35bca95-e6d6-49ea-89b5-d76a74be8aeb",
+                            SecurityStamp = "27aa44ed-6f77-46da-9928-b1edda517fdd",
                             TwoFactorEnabled = false,
                             UserName = "k.conev@mail.com"
                         },
@@ -174,7 +174,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "71769f68-8f2b-49e3-8b30-4325fb69fd2c",
+                            ConcurrencyStamp = "b4755bfd-ef61-4eef-aad9-a0645a2f0f3c",
                             Email = "i.ivanova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivana",
@@ -182,9 +182,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOVA@MAIL.COM",
                             NormalizedUserName = "I.IVANOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKaF5SmwHlOF8EBl3d38CXpd38Pp4yicYDTZ6A+VpE4/HSA5eWp6CgkHYtOY5H6tAQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED+366NtrovV84kuAJccUdgU4b3hmS5f5A9zNu6G5uBp4neI6ItE8G0lNSCCXDyLbA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "705a53ae-2a80-4ca2-bd67-320f32d8c602",
+                            SecurityStamp = "b13e4d93-39e0-4b05-a42d-7fb5d1309cb4",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanova@mail.com"
                         },
@@ -192,7 +192,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ddd3b61d-4267-4bdb-9607-6ffc12d7fb11",
+                            ConcurrencyStamp = "5cf17c3e-f976-459a-afe7-af2af18aeaf6",
                             Email = "m.kirilova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Monika",
@@ -200,9 +200,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.KIRILOVA@MAIL.COM",
                             NormalizedUserName = "M.KIRILOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMRAeXfipOIIDMEaChZv6j2koS2g1GPKHu/Pxhf2c0ptI0jTOqSHKUQqSMRXZ5jiVw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDzkJfvRBuv/6sIK6qZKUS3+0jLPF45Y68mhVqRY6bgPKJC5EIPsGT0MOvjFBnI8LA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "29ef2d16-8b08-4045-b3aa-217d8fcc5787",
+                            SecurityStamp = "b58ef2ac-ecc8-47d4-983b-be9ef6fb1e68",
                             TwoFactorEnabled = false,
                             UserName = "m.kirilova@mail.com"
                         },
@@ -210,7 +210,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "78850da7-a0ff-42f3-a862-d162457910a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4fadfe12-4079-4565-9d97-deb8108ed090",
+                            ConcurrencyStamp = "7cabb2cb-d0e3-4b66-a456-e576a57af25f",
                             Email = "v.yankova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Vanya",
@@ -218,9 +218,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "V.YANKOVA@MAIL.COM",
                             NormalizedUserName = "V.YANKOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAnkVzM52wuZVZSsL97C5FxJtCaYSc8KlVreISablLsioqROPNdnhAwhPEkk+Pb/lg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECfPgKR+LkKEGPy01BtU+H+NpEotCvqETYdNRLdiEK0SERKatq+BV7wmPm42UDgtCQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "62c478c9-cbfe-4056-a835-dc69476783ec",
+                            SecurityStamp = "d5cebd4a-c0da-43fb-93c1-162585fba0e6",
                             TwoFactorEnabled = false,
                             UserName = "v.yankova@mail.com"
                         });
@@ -228,29 +228,30 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("HospitalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("IdenitityId")
+                    b.Property<int>("HospitalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdentityId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ImgUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SpecialtyId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("SpecialtyId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("HospitalId");
 
-                    b.HasIndex("IdenitityId");
+                    b.HasIndex("IdentityId");
 
                     b.HasIndex("SpecialtyId");
 
@@ -259,65 +260,68 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "44a35b22-2cdb-44bd-8286-d7ec7eaa2248",
-                            HospitalId = "505d9322-7cca-4bca-ae59-683ff3089872",
-                            IdenitityId = "a3717562-385e-41ce-9eff-0f1b994e5548",
+                            Id = 1,
+                            HospitalId = 1,
+                            IdentityId = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/ivan-ivanov.jpg",
-                            SpecialtyId = "d50a6c34-f6d3-4ff8-b1ad-299dcb776789"
+                            SpecialtyId = 1
                         },
                         new
                         {
-                            Id = "43eb5263-a106-4d5b-909f-92294b21f360",
-                            HospitalId = "505d9322-7cca-4bca-ae59-683ff3089872",
-                            IdenitityId = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
+                            Id = 2,
+                            HospitalId = 1,
+                            IdentityId = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/maria-marinova.jpg",
-                            SpecialtyId = "c3a9d3e1-5b4b-4ae1-b96c-8ef6bdb17c0d"
+                            SpecialtyId = 2
                         },
                         new
                         {
-                            Id = "4411897e-f897-404e-95bd-85e683b34ff5",
-                            HospitalId = "505d9322-7cca-4bca-ae59-683ff3089872",
-                            IdenitityId = "88cd5a7b-01d8-49b4-8688-35cd23751532",
+                            Id = 3,
+                            HospitalId = 1,
+                            IdentityId = "88cd5a7b-01d8-49b4-8688-35cd23751532",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/aleks-kirilov.jpg",
-                            SpecialtyId = "c3a9d3e1-5b4b-4ae1-b96c-8ef6bdb17c0d"
+                            SpecialtyId = 2
                         },
                         new
                         {
-                            Id = "97e6c00a-664f-4861-8976-4058aed9cdb0",
-                            HospitalId = "505d9322-7cca-4bca-ae59-683ff3089872",
-                            IdenitityId = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
+                            Id = 4,
+                            HospitalId = 1,
+                            IdentityId = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/kiril-conev.jpg",
-                            SpecialtyId = "f24f8a2e-2f91-4be1-85a9-f1e6b4f82b74"
+                            SpecialtyId = 3
                         },
                         new
                         {
-                            Id = "702abf92-a237-460a-94b5-5763127fb627",
-                            HospitalId = "710649bb-deb0-4271-a97f-6e5cde3d2fe6",
-                            IdenitityId = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
+                            Id = 5,
+                            HospitalId = 2,
+                            IdentityId = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/ivana-ivanova.jpg",
-                            SpecialtyId = "01b2c6e4-cf32-4b44-84ae-4e4e2c17d8f9"
+                            SpecialtyId = 4
                         },
                         new
                         {
-                            Id = "77bb4f69-7cb7-4a8d-acb2-5464b74cfff1",
-                            HospitalId = "710649bb-deb0-4271-a97f-6e5cde3d2fe6",
-                            IdenitityId = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
+                            Id = 6,
+                            HospitalId = 2,
+                            IdentityId = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/monika-kirilova.jpg",
-                            SpecialtyId = "f24f8a2e-2f91-4be1-85a9-f1e6b4f82b74"
+                            SpecialtyId = 3
                         },
                         new
                         {
-                            Id = "6ba6d91c-3c17-4a90-a73b-87085a17861a",
-                            HospitalId = "710649bb-deb0-4271-a97f-6e5cde3d2fe6",
-                            IdenitityId = "78850da7-a0ff-42f3-a862-d162457910a0",
-                            SpecialtyId = "d50a6c34-f6d3-4ff8-b1ad-299dcb776789"
+                            Id = 7,
+                            HospitalId = 2,
+                            IdentityId = "78850da7-a0ff-42f3-a862-d162457910a0",
+                            SpecialtyId = 1
                         });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Hospital", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -334,13 +338,13 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "505d9322-7cca-4bca-ae59-683ff3089872",
+                            Id = 1,
                             Address = "456 Sunrise Avenue, Clearwater, FL 33759, USA",
                             Name = "Sunnybrook General Hospital"
                         },
                         new
                         {
-                            Id = "710649bb-deb0-4271-a97f-6e5cde3d2fe6",
+                            Id = 2,
                             Address = "321 Maple Street, Boulder, CO 80301, USA",
                             Name = "Pine Hills Medical Center"
                         });
@@ -348,38 +352,44 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
+                    b.Property<string>("PatientId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Patient")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("WorkScheduleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("WorkScheduleId");
 
                     b.ToTable("Meetings");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Review", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -397,73 +407,73 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ba9d730a-fcf5-4662-adfd-23bfa49e10f1",
+                            Id = 1,
                             Date = new DateTime(2024, 10, 14, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "44a35b22-2cdb-44bd-8286-d7ec7eaa2248",
+                            DoctorId = 1,
                             Rating = 5,
                             Reviewer = "Aleks Petrov"
                         },
                         new
                         {
-                            Id = "4d3e3800-b989-4406-85cc-f0ecd1080b88",
+                            Id = 2,
                             Date = new DateTime(2024, 9, 19, 10, 32, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "44a35b22-2cdb-44bd-8286-d7ec7eaa2248",
+                            DoctorId = 1,
                             Rating = 2,
                             Reviewer = "Maria Kostova"
                         },
                         new
                         {
-                            Id = "1f4ac07c-673a-4936-b0e4-196dd7488192",
+                            Id = 3,
                             Date = new DateTime(2023, 1, 24, 19, 52, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "44a35b22-2cdb-44bd-8286-d7ec7eaa2248",
+                            DoctorId = 1,
                             Rating = 4,
                             Reviewer = "Kristin Angelova"
                         },
                         new
                         {
-                            Id = "bd5b349e-9eba-4778-91cc-9ea18d3a41a3",
+                            Id = 4,
                             Date = new DateTime(2023, 1, 25, 13, 12, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "44a35b22-2cdb-44bd-8286-d7ec7eaa2248",
+                            DoctorId = 1,
                             Rating = 3,
                             Reviewer = "Angel Bogdanski"
                         },
                         new
                         {
-                            Id = "2c840f56-b9b4-414e-976c-c694dc4e5e80",
+                            Id = 5,
                             Date = new DateTime(2024, 7, 20, 18, 52, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "44a35b22-2cdb-44bd-8286-d7ec7eaa2248",
+                            DoctorId = 1,
                             Rating = 6,
                             Reviewer = "Kosta Adamovich"
                         },
                         new
                         {
-                            Id = "2ba604e3-80d8-40cb-8861-5d07ba7107e7",
+                            Id = 6,
                             Date = new DateTime(2024, 8, 4, 7, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "44a35b22-2cdb-44bd-8286-d7ec7eaa2248",
+                            DoctorId = 1,
                             Rating = 6,
                             Reviewer = "Kristian Ivanov"
                         },
                         new
                         {
-                            Id = "d6a1dcfd-418b-4304-8744-d341beab0cf6",
+                            Id = 7,
                             Date = new DateTime(2024, 6, 15, 22, 12, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "44a35b22-2cdb-44bd-8286-d7ec7eaa2248",
+                            DoctorId = 1,
                             Rating = 2,
                             Reviewer = "Viktor Terziev"
                         },
                         new
                         {
-                            Id = "c6f58c38-5d0c-4006-8697-ac72ee11fe29",
+                            Id = 8,
                             Date = new DateTime(2024, 4, 2, 8, 2, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "43eb5263-a106-4d5b-909f-92294b21f360",
+                            DoctorId = 2,
                             Rating = 5,
                             Reviewer = "Yordan Angelov"
                         },
                         new
                         {
-                            Id = "b2089e63-a041-4638-b308-c3ab8b6551ea",
+                            Id = 9,
                             Date = new DateTime(2022, 12, 12, 10, 43, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "43eb5263-a106-4d5b-909f-92294b21f360",
+                            DoctorId = 2,
                             Rating = 5,
                             Reviewer = "Kristian Ivanov"
                         });
@@ -471,8 +481,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -485,24 +498,75 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d50a6c34-f6d3-4ff8-b1ad-299dcb776789",
+                            Id = 1,
                             Type = "Orthodontist"
                         },
                         new
                         {
-                            Id = "c3a9d3e1-5b4b-4ae1-b96c-8ef6bdb17c0d",
+                            Id = 2,
                             Type = "Endocrinologist"
                         },
                         new
                         {
-                            Id = "f24f8a2e-2f91-4be1-85a9-f1e6b4f82b74",
+                            Id = 3,
                             Type = "Cardiologist"
                         },
                         new
                         {
-                            Id = "01b2c6e4-cf32-4b44-84ae-4e4e2c17d8f9",
+                            Id = 4,
                             Type = "Neurologist"
                         });
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Day")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("End")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("IsWorkingDay")
+                        .HasColumnType("bit");
+
+                    b.Property<TimeSpan>("Start")
+                        .HasColumnType("time");
+
+                    b.Property<int>("WorkScheduleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkScheduleId");
+
+                    b.ToTable("WorkDays");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MeetingTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("WorkSchedules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -648,7 +712,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Infrastructure.Entities.ApplicationUser", "Identity")
                         .WithMany()
-                        .HasForeignKey("IdenitityId")
+                        .HasForeignKey("IdentityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -667,8 +731,27 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                    b.HasOne("Infrastructure.Entities.ApplicationUser", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Infrastructure.Entities.WorkSchedule", "WorkSchedule")
                         .WithMany("Meetings")
+                        .HasForeignKey("WorkScheduleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("WorkSchedule");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.Review", b =>
+                {
+                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                        .WithMany("Reviews")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -676,10 +759,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Review", b =>
+            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
+                {
+                    b.HasOne("Infrastructure.Entities.WorkSchedule", "WorkSchedule")
+                        .WithMany("WorkDays")
+                        .HasForeignKey("WorkScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkSchedule");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
                 {
                     b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
-                        .WithMany("Reviews")
+                        .WithMany()
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -740,8 +834,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
                 {
-                    b.Navigation("Meetings");
-
                     b.Navigation("Reviews");
                 });
 
@@ -753,6 +845,13 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
                 {
                     b.Navigation("Doctors");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
+                {
+                    b.Navigation("Meetings");
+
+                    b.Navigation("WorkDays");
                 });
 #pragma warning restore 612, 618
         }

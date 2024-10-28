@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241010144459_AddedNewTables")]
+    [Migration("20241028140821_AddedNewTables")]
     partial class AddedNewTables
     {
         /// <inheritdoc />
@@ -100,26 +100,30 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("HospitalId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("HospitalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdentityId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("IdenitityId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SpecialtyId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("SpecialtyId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("HospitalId");
 
-                    b.HasIndex("IdenitityId");
+                    b.HasIndex("IdentityId");
 
                     b.HasIndex("SpecialtyId");
 
@@ -128,8 +132,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Hospital", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -146,46 +153,49 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
+                    b.Property<string>("PatientId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("WorkScheduleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("WorkScheduleId");
 
                     b.ToTable("Meetings");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Review", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Reviewer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -198,8 +208,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -208,6 +221,57 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Specialties");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Day")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("End")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("IsWorkingDay")
+                        .HasColumnType("bit");
+
+                    b.Property<TimeSpan>("Start")
+                        .HasColumnType("time");
+
+                    b.Property<int>("WorkScheduleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkScheduleId");
+
+                    b.ToTable("WorkDays");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MeetingTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("WorkSchedules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -353,7 +417,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Infrastructure.Entities.ApplicationUser", "Identity")
                         .WithMany()
-                        .HasForeignKey("IdenitityId")
+                        .HasForeignKey("IdentityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -372,8 +436,27 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                    b.HasOne("Infrastructure.Entities.ApplicationUser", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Infrastructure.Entities.WorkSchedule", "WorkSchedule")
                         .WithMany("Meetings")
+                        .HasForeignKey("WorkScheduleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("WorkSchedule");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.Review", b =>
+                {
+                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                        .WithMany("Reviews")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -381,10 +464,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Review", b =>
+            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
+                {
+                    b.HasOne("Infrastructure.Entities.WorkSchedule", "WorkSchedule")
+                        .WithMany("WorkDays")
+                        .HasForeignKey("WorkScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkSchedule");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
                 {
                     b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
-                        .WithMany("Reviews")
+                        .WithMany()
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -445,8 +539,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
                 {
-                    b.Navigation("Meetings");
-
                     b.Navigation("Reviews");
                 });
 
@@ -458,6 +550,13 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
                 {
                     b.Navigation("Doctors");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
+                {
+                    b.Navigation("Meetings");
+
+                    b.Navigation("WorkDays");
                 });
 #pragma warning restore 612, 618
         }

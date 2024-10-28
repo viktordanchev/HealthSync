@@ -16,6 +16,8 @@ namespace Infrastructure
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
+        public DbSet<WorkDay> WorkDays { get; set; }
+        public DbSet<WorkSchedule> WorkSchedules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,7 +26,8 @@ namespace Infrastructure
             builder.ApplyConfiguration(new HospitalConfig());
             builder.ApplyConfiguration(new DoctorConfig());
             builder.ApplyConfiguration(new ReviewConfig());
-
+            builder.ApplyConfiguration(new MeetingConfig());
+        
             base.OnModelCreating(builder);
         }
     }

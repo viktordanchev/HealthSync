@@ -56,6 +56,7 @@ function DoctorCard({ data }) {
                         doctorId={data.id}
                         rating={data.rating}
                         hospitalName={data.hospital}
+                        hospitalAddress={data.hospitalAddress}
                     />}
             </div>
 

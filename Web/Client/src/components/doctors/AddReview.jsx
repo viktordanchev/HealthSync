@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { addReview } from '../../services/apiRequests/doctors';
+import { addReview } from '../../services/apiRequests/doctor';
 import useCheckAuth from '../../hooks/useCheckAuth';
 import { jwtDecode } from 'jwt-decode';
 

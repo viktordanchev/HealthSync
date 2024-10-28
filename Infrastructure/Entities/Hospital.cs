@@ -10,7 +10,7 @@ namespace Infrastructure.Entities
         }
 
         [Key]
-        public string Id { get; set; } = null!;
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; } = null!;

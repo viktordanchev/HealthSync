@@ -2,7 +2,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { getAllDoctors, getSpecialties } from '../../services/apiRequests/doctors';
+import { getAllDoctors, getSpecialties } from '../../services/apiRequests/doctor';
 import DoctorCard from './DoctorCard';
 import Loading from '../Loading';
 
@@ -90,7 +90,7 @@ function AllDoctors() {
 
     return (
         <section className="mx-32 flex flex-col h-full items-center lg:mx-16 md:mx-6 sm:mx-6">
-            <article className="rounded-full bg-maincolor my-6 p-2 flex justify-between items-center space-x-6 sm:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2">
+            <article className="rounded-full bg-maincolor my-6 p-2 flex justify-between items-center space-x-6 sm:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2 sm:space-x-0">
                 <div className="flex space-x-3 sm:justify-between">
                     <select className="bg-white h-8 rounded-full text-center focus:outline-none"
                         value={order}

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entities
 {
-    public class Meeting
+    public class WorkDay
     {
         [Key]
         public int Id { get; set; }
@@ -15,12 +15,13 @@ namespace Infrastructure.Entities
         public WorkSchedule WorkSchedule { get; set; } = null!;
 
         [Required]
-        public string PatientId { get; set; } = null!;
+        public DayOfWeek Day { get; set; }
 
-        [ForeignKey(nameof(PatientId))]
-        public ApplicationUser Patient { get; set; } = null!;
+        public TimeSpan Start { get; set; }
+
+        public TimeSpan End { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public bool IsWorkingDay { get; set; }
     }
 }

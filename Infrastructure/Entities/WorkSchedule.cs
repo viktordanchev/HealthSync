@@ -3,8 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entities
 {
-    public class Review
+    public class WorkSchedule
     {
+        public WorkSchedule()
+        {
+            Meetings = new List<Meeting>();
+            WorkDays = new List<WorkDay>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -15,13 +21,9 @@ namespace Infrastructure.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        [Range(1, 5)]
-        public int Rating { get; set; }
+        public int MeetingTime { get; set; }
 
-        [Required]
-        public DateTime Date { get; set; }
-
-        [Required]
-        public string Reviewer { get; set; } = null!;
+        public IEnumerable<Meeting> Meetings { get; set; }
+        public IEnumerable<WorkDay> WorkDays { get; set; }
     }
 }

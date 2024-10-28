@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { getReviews } from '../../services/apiRequests/doctors';
+import { getReviews } from '../../services/apiRequests/doctor';
 import Loading from '../Loading';
 import ReviewCard from './ReviewCard';
 import MeetingsCalendar from './MeetingsCalendar';
 import AddReview from './AddReview';
 
-function DoctorDetails({ doctorId, rating, hospitalName }) {
+function DoctorDetails({ doctorId, rating, hospitalName, hospitalAddress }) {
     const scrollContainerRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(true);
@@ -61,7 +61,7 @@ function DoctorDetails({ doctorId, rating, hospitalName }) {
                     </div>
                     <div className="w-40">
                         <p className="font-bold">Address</p>
-                        <p>{hospitalName}</p>
+                        <p>{hospitalAddress}</p>
                     </div>
                 </div>
             </div>
