@@ -1,7 +1,7 @@
 ﻿using Core.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.RequestDtos.Doctors;
+using RestAPI.RequestDtos.Doctor;
 using static Common.Errors.Doctors;
 
 namespace RestAPI.Controllers
@@ -65,6 +65,28 @@ namespace RestAPI.Controllers
             var specialties = await _doctorService.GetSpecialties();
 
             return Ok(specialties);
+        }
+
+        [HttpGet("getMeetings")]
+        public async Task<IActionResult> GetMeetings([FromBody] GetMeetingsRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
+                    .ToArray();
+
+                return BadRequest(errors);
+            }
+
+            if (!await _doctorService.IsDoctorExist(request.DoctorId))
+            {
+                return BadRequest(new { Error = InvalidDoctorId });
+            }
+
+            var meetings = _doctorService.GetMeetings(request.DoctorId, request.DayOfWeek);
+
+            return Ok(meetings);
         }
     }
 }

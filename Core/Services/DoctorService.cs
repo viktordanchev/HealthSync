@@ -15,7 +15,7 @@ namespace Core.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<DoctorProfileDto>> GetDoctors(int index, string sorting, string filter, string search)
+        public async Task<IEnumerable<DoctorProfileResponse>> GetDoctors(int index, string sorting, string filter, string search)
         {
             var doctors = await _context.Doctors
                 .AsNoTracking()
@@ -24,7 +24,7 @@ namespace Core.Services
                     (string.IsNullOrEmpty(filter) || d.Specialty.Type == filter))
                 .Skip(index * 10)
                 .Take(10)
-                .Select(d => new DoctorProfileDto()
+                .Select(d => new DoctorProfileResponse()
                 {
                     Id = d.Id,
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
@@ -56,7 +56,7 @@ namespace Core.Services
             return doctors;
         }
 
-        public async Task<IEnumerable<ReviewDto>> GetDoctorReviews(int index, int doctorId)
+        public async Task<IEnumerable<ReviewResponse>> GetDoctorReviews(int index, int doctorId)
         {
             var reviews = await _context.Reviews
                 .AsNoTracking()
@@ -64,7 +64,7 @@ namespace Core.Services
                 .OrderByDescending(r => r.Date)
                 .Skip(index * 3)
                 .Take(3)
-                .Select(r => new ReviewDto()
+                .Select(r => new ReviewResponse()
                 {
                     Rating = r.Rating,
                     Date = r.Date,
@@ -105,6 +105,18 @@ namespace Core.Services
                 .ToListAsync();
 
             return specialties;
+        }
+
+        public async Task<IEnumerable<TimeSpan>> GetMeetings(int doctorId, DayOfWeek dayOfWeek)
+        {
+            //var meetings = await _context.WorkDays
+            //    .AsNoTracking()
+            //    .Where(m => m.WorkSchedule.DoctorId == doctorId
+            //        && m.Day == dayOfWeek)
+            //    .ToListAsync();
+
+            Console.WriteLine();
+            return null;
         }
     }
 }

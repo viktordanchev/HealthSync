@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241028140821_AddedNewTables")]
+    [Migration("20241029095433_AddedNewTables")]
     partial class AddedNewTables
     {
         /// <inheritdoc />
@@ -24,6 +24,21 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DayOffDoctor", b =>
+                {
+                    b.Property<int>("DaysOffId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DaysOffId", "DoctorsId");
+
+                    b.HasIndex("DoctorsId");
+
+                    b.ToTable("DayOffDoctor");
+                });
 
             modelBuilder.Entity("Infrastructure.Entities.ApplicationUser", b =>
                 {
@@ -98,6 +113,22 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Infrastructure.Entities.DayOff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DaysOff");
+                });
+
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
                 {
                     b.Property<int>("Id")
@@ -115,6 +146,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ImgUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MeetingTime")
+                        .HasColumnType("int");
 
                     b.Property<int>("SpecialtyId")
                         .HasColumnType("int");
@@ -162,18 +196,18 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PatientId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("WorkScheduleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("DoctorId");
 
-                    b.HasIndex("WorkScheduleId");
+                    b.HasIndex("PatientId");
 
                     b.ToTable("Meetings");
                 });
@@ -234,44 +268,20 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Day")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("End")
-                        .HasColumnType("time");
-
-                    b.Property<bool>("IsWorkingDay")
-                        .HasColumnType("bit");
-
-                    b.Property<TimeSpan>("Start")
-                        .HasColumnType("time");
-
-                    b.Property<int>("WorkScheduleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkScheduleId");
-
-                    b.ToTable("WorkDays");
-                });
-
-            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MeetingTime")
-                        .HasColumnType("int");
+                    b.Property<TimeSpan>("End")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("Start")
+                        .HasColumnType("time");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("WorkSchedules");
+                    b.ToTable("WorkDays");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -407,6 +417,21 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DayOffDoctor", b =>
+                {
+                    b.HasOne("Infrastructure.Entities.DayOff", null)
+                        .WithMany()
+                        .HasForeignKey("DaysOffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Infrastructure.Entities.Doctor", null)
+                        .WithMany()
+                        .HasForeignKey("DoctorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
                 {
                     b.HasOne("Infrastructure.Entities.Hospital", "Hospital")
@@ -436,21 +461,21 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.ApplicationUser", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
+                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                        .WithMany("Meetings")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Entities.WorkSchedule", "WorkSchedule")
+                    b.HasOne("Infrastructure.Entities.ApplicationUser", "Patient")
                         .WithMany("Meetings")
-                        .HasForeignKey("WorkScheduleId")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Patient");
+                    b.Navigation("Doctor");
 
-                    b.Navigation("WorkSchedule");
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Review", b =>
@@ -466,19 +491,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.WorkSchedule", "WorkSchedule")
-                        .WithMany("WorkDays")
-                        .HasForeignKey("WorkScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WorkSchedule");
-                });
-
-            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
-                {
                     b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
-                        .WithMany()
+                        .WithMany("WorkDays")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -537,9 +551,18 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Infrastructure.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Meetings");
+                });
+
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
                 {
+                    b.Navigation("Meetings");
+
                     b.Navigation("Reviews");
+
+                    b.Navigation("WorkDays");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Hospital", b =>
@@ -550,13 +573,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
                 {
                     b.Navigation("Doctors");
-                });
-
-            modelBuilder.Entity("Infrastructure.Entities.WorkSchedule", b =>
-                {
-                    b.Navigation("Meetings");
-
-                    b.Navigation("WorkDays");
                 });
 #pragma warning restore 612, 618
         }

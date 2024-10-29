@@ -5,11 +5,11 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import SessionMessage from './components/SessionMessage';
-import Login from './components/authentication/Login';
-import Register from './components/authentication/Register';
-import Verification from './components/authentication/Verification';
-import RecoverPassword from './components/authentication/RecoverPassword';
-import AllDoctors from './components/doctors/AllDoctors';
+import Login from './components/account/Login';
+import Register from './components/account/Register';
+import Verification from './components/account/Verification';
+import RecoverPassword from './components/account/RecoverPassword';
+import AllDoctors from './components/doctor/AllDoctors';
 
 function App() {
     const { error } = useCheckAuth();

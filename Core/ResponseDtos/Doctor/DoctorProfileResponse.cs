@@ -1,6 +1,6 @@
 ﻿namespace Core.ResponseDtos.Doctor
 {
-    public class DoctorProfileDto
+    public class DoctorProfileResponse
     {
         public int Id { get; set; }
 

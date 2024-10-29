@@ -9,8 +9,13 @@ namespace Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<Meeting> builder)
         {
             builder
-                .HasOne(m => m.WorkSchedule)
-                .WithMany(ws => ws.Meetings)
+                .HasOne(m => m.Doctor)
+                .WithMany(d => d.Meetings)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasOne(m => m.Patient)
+                .WithMany(p => p.Meetings)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

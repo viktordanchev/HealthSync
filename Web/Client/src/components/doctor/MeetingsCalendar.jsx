@@ -1,12 +1,14 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import AddMeeting from './AddMeeting';
 
 const MeetingsCalendar = () => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [selectedDate, setSelectedDate] = useState(null);
     const [days, setDays] = useState([]);
+    const [dayOfWeek, setDayOfWeek] = useState('');
 
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -57,6 +59,8 @@ const MeetingsCalendar = () => {
         if (day) {
             const selectedDate = new Date(currentYear, currentMonth, day);
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+            setDayOfWeek(selectedDate.toLocaleDateString(undefined, { weekday: 'long' }));
             setSelectedDate(selectedDate.toLocaleDateString(undefined, options));
         }
     };
@@ -95,8 +99,9 @@ const MeetingsCalendar = () => {
                             <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
                         </button>
                     </div>
-                    <p className="text-2xl font-bold">Selected Date</p>
-                    <div className="text-xl font-semibold">{selectedDate}</div>
+                    <AddMeeting
+                        dayOfWeek={dayOfWeek}
+                    />
                 </div>
             )}
         </>

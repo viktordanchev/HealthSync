@@ -17,7 +17,7 @@ namespace Infrastructure
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<WorkDay> WorkDays { get; set; }
-        public DbSet<WorkSchedule> WorkSchedules { get; set; }
+        public DbSet<DayOff> DaysOff { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -9,10 +9,10 @@ namespace Infrastructure.Entities
         public int Id { get; set; }
 
         [Required]
-        public int WorkScheduleId { get; set; }
+        public int DoctorId { get; set; }
 
-        [ForeignKey(nameof(WorkScheduleId))]
-        public WorkSchedule WorkSchedule { get; set; } = null!;
+        [ForeignKey(nameof(DoctorId))]
+        public Doctor Doctor { get; set; } = null!;
 
         [Required]
         public string PatientId { get; set; } = null!;

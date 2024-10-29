@@ -26,9 +26,9 @@ function DoctorDetails({ doctorId, rating, hospitalName, hospitalAddress }) {
                 setReviews(prevReviews => [...prevReviews, ...reviews]);
             } else {
                 setHasMore(false);
-                setLoadingMore(false);
             }
 
+            setLoadingMore(false);
             setLoading(false);
         };
 
@@ -41,6 +41,7 @@ function DoctorDetails({ doctorId, rating, hospitalName, hospitalAddress }) {
         const handleScroll = () => {
             if (container.scrollTop + container.clientHeight >= container.scrollHeight && hasMore) {
                 setIndex(prevIndex => prevIndex + 1);
+                setLoadingMore(true);
             }
         };
 

@@ -1,6 +1,6 @@
 ﻿namespace Core.ResponseDtos.Doctor
 {
-    public class ReviewDto
+    public class ReviewResponse
     {
         public int Rating { get; set; }
 

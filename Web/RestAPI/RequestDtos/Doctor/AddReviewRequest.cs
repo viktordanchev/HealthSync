@@ -2,7 +2,7 @@
 using static Common.Errors;
 using static Common.Errors.Doctors;
 
-namespace RestAPI.RequestDtos.Doctors
+namespace RestAPI.RequestDtos.Doctor
 {
     public class AddReviewRequest
     {

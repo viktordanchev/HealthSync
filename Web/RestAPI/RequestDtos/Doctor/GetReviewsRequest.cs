@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Errors;
 
-namespace RestAPI.RequestDtos.Doctors
+namespace RestAPI.RequestDtos.Doctor
 {
     public class GetReviewsRequest
     {
