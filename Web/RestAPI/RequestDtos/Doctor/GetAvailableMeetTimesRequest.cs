@@ -3,12 +3,12 @@ using static Common.Errors;
 
 namespace RestAPI.RequestDtos.Doctor
 {
-    public class GetMeetingsRequest
+    public class GetAvailableMeetTimesRequest
     {
         [Required(ErrorMessage = $"DoctorId {RequiredField}")]
         public int DoctorId { get; set; }
 
-        [Required(ErrorMessage = $"DayOfWeek {RequiredField}")]
-        public DayOfWeek DayOfWeek { get; set; }
+        [Required(ErrorMessage = $"Date {RequiredField}")]
+        public DateTime Date { get; set; }
     }
 }

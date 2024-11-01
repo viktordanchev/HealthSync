@@ -16,7 +16,7 @@ namespace Infrastructure
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
-        public DbSet<WorkDay> WorkDays { get; set; }
+        public DbSet<WeekDay> WeekDays { get; set; }
         public DbSet<DayOff> DaysOff { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -26,6 +26,8 @@ namespace Infrastructure
             builder.ApplyConfiguration(new HospitalConfig());
             builder.ApplyConfiguration(new DoctorConfig());
             builder.ApplyConfiguration(new ReviewConfig());
+            builder.ApplyConfiguration(new WeekDayConfig());
+            builder.ApplyConfiguration(new DayOffConfig());
             builder.ApplyConfiguration(new MeetingConfig());
         
             base.OnModelCreating(builder);

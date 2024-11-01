@@ -67,8 +67,40 @@ namespace RestAPI.Controllers
             return Ok(specialties);
         }
 
-        [HttpGet("getMeetings")]
-        public async Task<IActionResult> GetMeetings([FromBody] GetMeetingsRequest request)
+        [HttpPost("getAvailableMeetTimes")]
+        public async Task<IActionResult> GetAvailableMeetTimes([FromBody] GetAvailableMeetTimesRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
+                    .ToArray();
+
+                return BadRequest(errors);
+            }
+
+            if (request.Date <= DateTime.Now.Date)
+            {
+                return BadRequest(new { ServerError = InvalidDate });
+            }
+
+            if (!await _doctorService.IsDoctorExist(request.DoctorId))
+            {
+                return BadRequest(new { ServerError = InvalidDoctorId });
+            }
+
+            if (await _doctorService.IsDayOff(request.DoctorId, request.Date))
+            {
+                return BadRequest(new { Error = ItsDayOff });
+            }
+
+            var times = await _doctorService.GetAvailableMeetings(request.DoctorId, request.Date);
+
+            return Ok(times);
+        }
+
+        [HttpPost("getDaysOffByMonth")]
+        public async Task<IActionResult> GetDaysOffByMonth([FromBody] GetDaysOffByMonthRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -81,12 +113,12 @@ namespace RestAPI.Controllers
 
             if (!await _doctorService.IsDoctorExist(request.DoctorId))
             {
-                return BadRequest(new { Error = InvalidDoctorId });
+                return BadRequest(new { ServerError = InvalidDoctorId });
             }
 
-            var meetings = _doctorService.GetMeetings(request.DoctorId, request.DayOfWeek);
+            var daysOff = await _doctorService.GetDaysOffByMonth(request.DoctorId, request.Month, request.Year);
 
-            return Ok(meetings);
+            return Ok(daysOff);
         }
     }
 }

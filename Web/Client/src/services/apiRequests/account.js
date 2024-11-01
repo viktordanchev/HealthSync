@@ -14,9 +14,9 @@ export const login = async (values) => {
         const data = await response.json();
 
         if (Array.isArray(data)) {
-            let errorMessage = 'Failed attempt to login';
+            let errorMessage;
 
-            errorMessage = errorData.join('\n');
+            errorMessage = data.join('\n');
 
             throw new Error(errorMessage);
         }
@@ -45,9 +45,9 @@ export const register = async (values) => {
         const data = await response.json();
 
         if (Array.isArray(data)) {
-            let errorMessage = 'Failed attempt to register';
+            let errorMessage;
 
-            errorMessage = errorData.join('\n');
+            errorMessage = data.join('\n');
 
             throw new Error(errorMessage);
         }
@@ -77,9 +77,9 @@ export const verifyAccount = async (values) => {
         const data = await response.json();
 
         if (Array.isArray(data)) {
-            let errorMessage = 'Failed account verification';
+            let errorMessage;
 
-            errorMessage = errorData.join('\n');
+            errorMessage = data.join('\n');
 
             throw new Error(errorMessage);
         }
@@ -150,9 +150,9 @@ export const recoverPassword = async (values) => {
         const data = await response.json();
 
         if (Array.isArray(data)) {
-            let errorMessage = 'Failed password recovering';
+            let errorMessage;
 
-            errorMessage = errorData.join('\n');
+            errorMessage = data.join('\n');
 
             throw new Error(errorMessage);
         }

@@ -93,3 +93,61 @@ export const getSpecialties = async () => {
         console.error(error.message);
     }
 };
+
+export const getAvailableMeetTimes = async (values) => {
+    try {
+        const response =
+            await fetch(`${url}/getAvailableMeetTimes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            });
+
+        const data = await response.json();
+
+        if (response.status !== 200 && Array.isArray(data)) {
+            let errorMessage;
+
+            errorMessage = data.join('\n');
+
+            throw new Error(errorMessage);
+        } else if (data.serverError) {
+            throw new Error(data.serverError);
+        }
+
+        return data;
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+export const getDaysOffByMonth = async (values) => {
+    try {
+        const response =
+            await fetch(`${url}/getDaysOffByMonth`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            });
+
+        const data = await response.json();
+
+        if (response.status !== 200 && Array.isArray(data)) {
+            let errorMessage;
+
+            errorMessage = data.join('\n');
+
+            throw new Error(errorMessage);
+        } else if (data.serverError) {
+            throw new Error(data.serverError);
+        }
+
+        return data;
+    } catch (error) {
+        console.error(error.message);
+    }
+};

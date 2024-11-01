@@ -9,7 +9,7 @@ namespace Infrastructure.Entities
         {
             Reviews = new List<Review>();
             Meetings = new List<Meeting>();
-            WorkDays = new List<WorkDay>();
+            WorkWeek = new List<WeekDay>();
             DaysOff = new List<DayOff>();
         }
 
@@ -35,13 +35,13 @@ namespace Infrastructure.Entities
         public Specialty Specialty { get; set; } = null!;
 
         [Required]
-        public int MeetingTime { get; set; }
+        public int MeetingTimeMinutes { get; set; }
 
         public string? ImgUrl { get; set; } 
 
         public IEnumerable<Review> Reviews { get; set; }
         public IEnumerable<Meeting> Meetings { get; set; }
-        public IEnumerable<WorkDay> WorkDays { get; set; }
+        public IEnumerable<WeekDay> WorkWeek { get; set; }
         public IEnumerable<DayOff> DaysOff { get; set; }
     }
 }

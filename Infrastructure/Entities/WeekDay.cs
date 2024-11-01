@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entities
 {
-    public class WorkDay
+    public class WeekDay
     {
         [Key]
         public int Id { get; set; }
@@ -16,6 +16,9 @@ namespace Infrastructure.Entities
 
         [Required]
         public DayOfWeek Day { get; set; }
+
+        [Required]
+        public bool IsWorkDay { get; set; }
 
         public TimeSpan Start { get; set; }
 

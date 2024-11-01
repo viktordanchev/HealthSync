@@ -16,13 +16,13 @@ function AddReview({ doctorId }) {
     const add = async () => {
         const token = sessionStorage.getItem('accessToken');
         const decodedToken = jwtDecode(token);
-        const obj = {
+        const dto = {
             doctorId: doctorId,
             rating: rating,
             reviewer: decodedToken['Name']
         };
 
-        await addReview(obj, token);
+        await addReview(dto, token);
 
         setIsAdded(true);
         setIsVisible(false);

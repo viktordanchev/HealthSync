@@ -96,7 +96,7 @@ function DoctorDetails({ doctorId, rating, hospitalName, hospitalAddress }) {
                 </div>
                 <div className="w-72 flex flex-col justify-end md:w-full sm:w-full md:text-sm sm:text-sm">
                     <p className="text-center mb-1 text-white text-xl font-bold">Meetings</p>
-                    <MeetingsCalendar />
+                    <MeetingsCalendar doctorId={doctorId} />
                 </div>
             </div>
         </div>
