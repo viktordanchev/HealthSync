@@ -4,7 +4,6 @@ using Core.Services.Contracts;
 using Infrastructure;
 using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 
 namespace Core.Services
 {
@@ -151,9 +150,9 @@ namespace Core.Services
             return availableMeetings;
         }
 
-        public async Task<IEnumerable<string>> GetDaysOffByMonth(int doctorId, int month, int year)
+        public async Task<IEnumerable<DayOfWeekModel>> GetDaysInMonth(int doctorId, int month, int year)
         {
-            var daysOffd = await _context.Doctors
+            var daysOff = await _context.Doctors
                 .AsNoTracking()
                 .Where(d => d.Id == doctorId)
                 .Select(d => new Model()
@@ -168,21 +167,28 @@ namespace Core.Services
                 })
                 .FirstAsync();
 
-            int days = DateTime.DaysInMonth(year, month);
+            int daysInMonthNum = DateTime.DaysInMonth(year, month);
 
-            var daysOff = new List<string>();
+            var daysInMonth = new List<DayOfWeekModel>();
+            bool isWorkDay;
 
-            for (int day = 1; day <= days; day++)
+            for (int day = 1; day <= daysInMonthNum; day++)
             {
                 var date = new DateTime(year, month, day);
 
-                if(daysOffd.DaysOff.Contains(date) || daysOffd.WeeklyDaysOff.Contains(date.DayOfWeek))
+                if(daysOff.DaysOff.Contains(date) || daysOff.WeeklyDaysOff.Contains(date.DayOfWeek))
                 {
-                    daysOff.Add(date.ToString("yyyy-MM-dd"));
+                    isWorkDay = false;
                 }
+                else
+                {
+                    isWorkDay = true;
+                }
+
+                daysInMonth.Add(new DayOfWeekModel(date.ToString("yyyy-MM-dd"), isWorkDay));
             }
 
-            return daysOff;
+            return daysInMonth;
         }
     }
 }

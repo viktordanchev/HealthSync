@@ -3,7 +3,7 @@ using static Common.Errors;
 
 namespace RestAPI.RequestDtos.Doctor
 {
-    public class GetDaysOffByMonthRequest
+    public class GetDaysInMonthRequest
     {
         [Required(ErrorMessage = $"DoctorId {RequiredField}")]
         public int DoctorId { get; set; }

@@ -1,4 +1,5 @@
-﻿using Core.Models.ResponseDtos.Doctor;
+﻿using Core.Models.Doctor;
+using Core.Models.ResponseDtos.Doctor;
 
 namespace Core.Services.Contracts
 {
@@ -11,6 +12,6 @@ namespace Core.Services.Contracts
         Task<IEnumerable<string>> GetSpecialties();
         Task<bool> IsDayOff(int doctorId, DateTime date);
         Task<IEnumerable<string>> GetAvailableMeetings(int doctorId, DateTime date);
-        Task<IEnumerable<string>> GetDaysOffByMonth(int doctorId, int month, int year);
+        Task<IEnumerable<DayOfWeekModel>> GetDaysInMonth(int doctorId, int month, int year);
     }
 }

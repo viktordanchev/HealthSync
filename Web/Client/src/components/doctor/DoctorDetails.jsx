@@ -71,7 +71,7 @@ function DoctorDetails({ doctorId, rating, hospitalName, hospitalAddress }) {
                     <p className="text-center mb-1 text-white text-xl font-bold">Reviews</p>
                     <div
                         ref={scrollContainerRef}
-                        className="h-52 flex flex-col bg-zinc-700 space-y-2 p-2 overflow-auto scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-blue-500 scrollbar-track-gray-200 rounded-xl md:h-52 sm:h-52">
+                        className="h-52 flex flex-col bg-zinc-700 space-y-2 p-2 overflow-auto scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-blue-500 scrollbar-track-gray-200 rounded-xl">
                         <AddReview doctorId={doctorId} />
                         {loading ? <Loading type={'small'} /> :
                             <>

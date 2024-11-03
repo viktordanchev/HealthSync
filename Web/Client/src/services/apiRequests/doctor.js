@@ -123,10 +123,10 @@ export const getAvailableMeetTimes = async (values) => {
     }
 };
 
-export const getDaysOffByMonth = async (values) => {
+export const getDaysInMonth = async (values) => {
     try {
         const response =
-            await fetch(`${url}/getDaysOffByMonth`, {
+            await fetch(`${url}/getDaysInMonth`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

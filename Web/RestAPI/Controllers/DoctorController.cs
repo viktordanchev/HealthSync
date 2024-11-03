@@ -99,8 +99,8 @@ namespace RestAPI.Controllers
             return Ok(times);
         }
 
-        [HttpPost("getDaysOffByMonth")]
-        public async Task<IActionResult> GetDaysOffByMonth([FromBody] GetDaysOffByMonthRequest request)
+        [HttpPost("getDaysInMonth")]
+        public async Task<IActionResult> GetDaysInMonth([FromBody] GetDaysInMonthRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -116,9 +116,9 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidDoctorId });
             }
 
-            var daysOff = await _doctorService.GetDaysOffByMonth(request.DoctorId, request.Month, request.Year);
+            var daysInMonth = await _doctorService.GetDaysInMonth(request.DoctorId, request.Month, request.Year);
 
-            return Ok(daysOff);
+            return Ok(daysInMonth);
         }
     }
 }

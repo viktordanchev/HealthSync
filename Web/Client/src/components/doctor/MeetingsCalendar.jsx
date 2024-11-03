@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { getAvailableMeetTimes, getDaysOffByMonth } from '../../services/apiRequests/doctor';
+import { getAvailableMeetTimes, getDaysInMonth } from '../../services/apiRequests/doctor';
 import AddMeeting from './AddMeeting';
 import Loading from '../Loading';
 
@@ -11,8 +11,6 @@ const MeetingsCalendar = ({ doctorId }) => {
     const [meetingTimes, setMeetingTimes] = useState(null);
     const [date, setDate] = useState(null);
     const [days, setDays] = useState([]);
-    const [daysOff, setDaysOff] = useState([]);
-
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -26,8 +24,14 @@ const MeetingsCalendar = ({ doctorId }) => {
 
             //await new Promise(res => setTimeout(res, 3000));
 
-            const data = await getDaysOffByMonth(dto);
-            setDaysOff(data);
+            const data = await getDaysInMonth(dto);
+
+            const transformedData = data.map(item => ({
+                ...item,
+                date: new Date(item.date)
+            }));
+
+            setDays(transformedData);
 
             generateCalendar(currentYear, currentMonth);
         };
@@ -40,17 +44,13 @@ const MeetingsCalendar = ({ doctorId }) => {
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const firstDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7;
         
-        let tempDays = [];
+        let emptySpaces = [];
 
         for (let i = 0; i < firstDayOfWeek; i++) {
-            tempDays.push(null);
-        }
-
-        for (let day = 1; day <= daysInMonth; day++) {
-            tempDays.push(new Date(Date.UTC(year, month, day)));
+            emptySpaces.push(null);
         }
         
-        setDays(tempDays);
+        setDays(prevDays => [...emptySpaces, ...prevDays]);
     };
 
     const handlePreviousMonth = () => {
@@ -73,17 +73,17 @@ const MeetingsCalendar = ({ doctorId }) => {
         }
     };
 
-    const handleDayClick = async (date) => {
-        if (date > new Date() && !daysOff.some((d) => d === date.toISOString().split('T')[0])) {
+    const handleDayClick = async (day) => {
+        if (day && day.date > new Date() && day.isWorkDay) {
             const dto = {
                 doctorId: doctorId,
-                date: date.toISOString()
+                date: day.date.toISOString()
             };
 
             const response = await getAvailableMeetTimes(dto);
 
             setMeetingTimes(response);
-            setDate(date);
+            setDate(day.date);
         }
     };
 
@@ -105,13 +105,13 @@ const MeetingsCalendar = ({ doctorId }) => {
                     ))}
                     {days.length == 0 ? <Loading type={'small'} /> :
                     <>
-                        {days.map((date, index) => (
+                        {days.map((day, index) => (
                             <div
                                 key={index}
-                                onClick={() => handleDayClick(date)}
-                                className={`text-center rounded-full ${date && new Date().getDate() === date.getDate() && new Date().getFullYear() === currentYear && new Date().getMonth() === currentMonth ? 'bg-blue-500 text-white' : 'bg-gray-200'} ${new Date() >= date || daysOff.some((d) => d === date.toISOString().split('T')[0]) ? 'opacity-55 cursor-default' : 'cursor-pointer'}`}
+                                onClick={() => handleDayClick(day)}
+                                className={`text-center rounded-full ${day && new Date().getDate() === day.date.getDate() && new Date().getFullYear() === currentYear && new Date().getMonth() === currentMonth ? 'bg-blue-500 text-white' : 'bg-gray-200'} ${day && new Date() < day.date && day.isWorkDay ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}
                             >
-                                {date ? date.getDate() : ''}
+                                {day ? day.date.getDate() : ''}
                             </div>
                         ))}
                     </>}
