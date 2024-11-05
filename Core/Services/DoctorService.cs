@@ -110,12 +110,9 @@ namespace Core.Services
 
         public async Task<bool> IsDayOff(int doctorId, DateTime date)
         {
-            var doctor = await _context.Doctors
-                .AsNoTracking()
-                .Where(d => d.Id == doctorId)
-                .FirstAsync();
+            var daysOff = await GetDaysOff(doctorId);
 
-            return doctor.DaysOff.Any(d => d.Date == date);
+            return daysOff.DaysOff.Any(d => d.Date == date) || daysOff.WeeklyDaysOff.Any(d => d == date.DayOfWeek);
         }
 
         public async Task<IEnumerable<string>> GetAvailableMeetings(int doctorId, DateTime date)
@@ -152,20 +149,7 @@ namespace Core.Services
 
         public async Task<IEnumerable<DayOfWeekModel>> GetDaysInMonth(int doctorId, int month, int year)
         {
-            var daysOff = await _context.Doctors
-                .AsNoTracking()
-                .Where(d => d.Id == doctorId)
-                .Select(d => new Model()
-                {
-                    DaysOff = d.DaysOff
-                        .Select(doff => doff.Date)
-                        .ToList(),
-                    WeeklyDaysOff = d.WorkWeek
-                        .Where(wk => !wk.IsWorkDay)
-                        .Select(wk => wk.Day)
-                        .ToList()
-                })
-                .FirstAsync();
+            var daysOff = await GetDaysOff(doctorId);
 
             int daysInMonthNum = DateTime.DaysInMonth(year, month);
 
@@ -189,6 +173,24 @@ namespace Core.Services
             }
 
             return daysInMonth;
+        }
+
+        private async Task<Model> GetDaysOff(int doctorId)
+        {
+            return await _context.Doctors
+                .AsNoTracking()
+                .Where(d => d.Id == doctorId)
+                .Select(d => new Model()
+                {
+                    DaysOff = d.DaysOff
+                        .Select(doff => doff.Date)
+                        .ToList(),
+                    WeeklyDaysOff = d.WorkWeek
+                        .Where(wk => !wk.IsWorkDay)
+                        .Select(wk => wk.Day)
+                        .ToList()
+                })
+                .FirstAsync();
         }
     }
 }

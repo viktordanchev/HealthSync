@@ -40,21 +40,12 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> AddReview([FromBody] AddReviewRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToArray();
-
-                return BadRequest(errors);
-            }
-
             if (!await _doctorService.IsDoctorExist(request.DoctorId))
             {
                 return BadRequest(new { Error = InvalidDoctorId });
             }
-
-            await _doctorService.AddReview(request.DoctorId, request.Rating, request.Reviewer);
+            
+            await _doctorService.AddReview(request.DoctorId, request.Rating, User.Identity.Name);
 
             return Ok();
         }
@@ -68,22 +59,9 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost("getAvailableMeetTimes")]
+        [Authorize]
         public async Task<IActionResult> GetAvailableMeetTimes([FromBody] GetAvailableMeetTimesRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToArray();
-
-                return BadRequest(errors);
-            }
-
-            if (request.Date <= DateTime.Now.Date)
-            {
-                return BadRequest(new { ServerError = InvalidDate });
-            }
-
             if (!await _doctorService.IsDoctorExist(request.DoctorId))
             {
                 return BadRequest(new { ServerError = InvalidDoctorId });
@@ -91,7 +69,7 @@ namespace RestAPI.Controllers
 
             if (await _doctorService.IsDayOff(request.DoctorId, request.Date))
             {
-                return BadRequest(new { Error = ItsDayOff });
+                return BadRequest(new { ServerError = InvalidDate });
             }
 
             var times = await _doctorService.GetAvailableMeetings(request.DoctorId, request.Date);
@@ -102,15 +80,6 @@ namespace RestAPI.Controllers
         [HttpPost("getDaysInMonth")]
         public async Task<IActionResult> GetDaysInMonth([FromBody] GetDaysInMonthRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToArray();
-
-                return BadRequest(errors);
-            }
-
             if (!await _doctorService.IsDoctorExist(request.DoctorId))
             {
                 return BadRequest(new { ServerError = InvalidDoctorId });
@@ -120,5 +89,9 @@ namespace RestAPI.Controllers
 
             return Ok(daysInMonth);
         }
+
+        //public async Task<IActionResult> AddMeeting([FromBody] AddMeetingRequest request)
+        //{
+        //}
     }
 }

@@ -15,6 +15,9 @@ export const validatePassword = Yup.string()
     .min(6, 'Password must be at least 6 characters')
     .required('Password' + authErrors.RequiredField);
 
+export const validateLoginPassword = Yup.string()
+    .required('Password' + authErrors.RequiredField);
+
 export const validateConfirmPassword = Yup.string()
     .required('Confirm password' + authErrors.RequiredField)
     .oneOf([Yup.ref('password'), null], 'Passwords must match');

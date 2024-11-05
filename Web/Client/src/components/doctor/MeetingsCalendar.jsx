@@ -1,14 +1,14 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { getAvailableMeetTimes, getDaysInMonth } from '../../services/apiRequests/doctor';
+import { getDaysInMonth } from '../../services/apiRequests/doctor';
 import AddMeeting from './AddMeeting';
 import Loading from '../Loading';
 
 const MeetingsCalendar = ({ doctorId }) => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-    const [meetingTimes, setMeetingTimes] = useState(null);
+    const [isVisible, setIsVisible] = useState(false);
     const [date, setDate] = useState(null);
     const [days, setDays] = useState([]);
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -21,8 +21,6 @@ const MeetingsCalendar = ({ doctorId }) => {
                 month: currentMonth + 1,
                 year: currentYear
             }
-
-            //await new Promise(res => setTimeout(res, 3000));
 
             const data = await getDaysInMonth(dto);
 
@@ -73,22 +71,11 @@ const MeetingsCalendar = ({ doctorId }) => {
         }
     };
 
-    const handleDayClick = async (day) => {
+    const handleDayClick = (day) => {
         if (day && day.date > new Date() && day.isWorkDay) {
-            const dto = {
-                doctorId: doctorId,
-                date: day.date.toISOString()
-            };
-
-            const response = await getAvailableMeetTimes(dto);
-
-            setMeetingTimes(response);
             setDate(day.date);
+            setIsVisible(true);
         }
-    };
-
-    const closeModal = () => {
-        setMeetingTimes(null);
     };
 
     return (
@@ -117,15 +104,15 @@ const MeetingsCalendar = ({ doctorId }) => {
                     </>}
                 </div>
             </div>
-            {meetingTimes && (
+            {isVisible && (
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-95 border border-white rounded-xl bg-zinc-700 p-4 flex flex-col space-y-4 sm:w-full">
                     <div className="w-full text-right">
-                        <button onClick={closeModal}>
+                        <button onClick={() => setIsVisible(false)}>
                             <FontAwesomeIcon icon={faXmark} className="text-white text-2xl" />
                         </button>
                     </div>
                     <AddMeeting
-                        meetingTimes={meetingTimes}
+                        doctorId={doctorId}
                         date={date}
                     />
                 </div>

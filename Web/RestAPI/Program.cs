@@ -1,23 +1,14 @@
 using Server.Extensions;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers()
-    .ConfigureApiBehaviorOptions(options =>
-    {
-        options.SuppressModelStateInvalidFilter = true;
-    })
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
+builder.Services.AddControllersExtension();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext(builder.Configuration);
-builder.Services.AddIdentity();
-builder.Services.AddAuthentication(builder.Configuration);
+builder.Services.AddDbContextExtension(builder.Configuration);
+builder.Services.AddIdentityExtension();
+builder.Services.AddAuthenticationExtension(builder.Configuration);
 builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.AddServices();
 builder.Services.AddMemoryCache();

@@ -21,7 +21,8 @@
             public const string InvalidRating = "Rating must be between 1 and 5!";
             public const string InvalidDoctorId = "This doctor id is invalid!";
             public const string ItsDayOff = "Sorry, but today is a holiday!";
-            public const string InvalidDate = "Date must be greater than today!";
+            public const string InvalidDate = "Date must be valid!";
+            public const string InvalidMonthRange = "Month must be between 1 and 12!";
         }
     }
 }

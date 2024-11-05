@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { jwtDecode } from 'jwt-decode';
 import useCheckAuth from '../hooks/useCheckAuth';
 import Loading from './Loading';
 
 const Header = () => {
+    const { isAuthenticated, loading, decodedJwtToken } = useCheckAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
-    const { isAuthenticated, loading } = useCheckAuth();
-
+    
     useEffect(() => {
         if (isAuthenticated) {
-            const token = sessionStorage.getItem('accessToken');
-            const decodedToken = jwtDecode(token);
-            setUserName(decodedToken['Name']);
+            setUserName(decodedJwtToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']);
         }
     }, [isAuthenticated]);
 

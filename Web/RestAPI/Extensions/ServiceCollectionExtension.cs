@@ -9,19 +9,22 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Core.Services.Contracts;
 using Core.Services;
+using RestAPI.Filters;
+using System.Text.Json.Serialization;
+using System.Security.Claims;
 
 namespace Server.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static void AddDbContext(this IServiceCollection services, IConfiguration config)
+        public static void AddDbContextExtension(this IServiceCollection services, IConfiguration config)
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<HealthSyncDbContext>(options =>
                 options.UseSqlServer(connectionString));
         }
 
-        public static void AddIdentity(this IServiceCollection services)
+        public static void AddIdentityExtension(this IServiceCollection services)
         {
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -35,7 +38,7 @@ namespace Server.Extensions
             .AddDefaultTokenProviders();
         }
 
-        public static void AddAuthentication(this IServiceCollection services, IConfiguration config)
+        public static void AddAuthenticationExtension(this IServiceCollection services, IConfiguration config)
         {
             services.AddAuthentication(options =>
             {
@@ -60,7 +63,7 @@ namespace Server.Extensions
                 {
                     OnTokenValidated = async context =>
                     {
-                        var userId = context.Principal.FindFirst("Identifier").Value;
+                        var userId = context.Principal.FindFirst(ClaimTypes.NameIdentifier).Value;
                         var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
                         var user = await userManager.FindByIdAsync(userId);
 
@@ -86,6 +89,22 @@ namespace Server.Extensions
                            .AllowAnyHeader()
                            .AllowCredentials();
                 });
+            });
+        }
+
+        public static void AddControllersExtension(this IServiceCollection services)
+        {
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<ModelStateValidationFilter>();
+            })
+            .ConfigureApiBehaviorOptions(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            })
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
         }
 

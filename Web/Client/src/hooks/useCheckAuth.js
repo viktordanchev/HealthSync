@@ -1,39 +1,41 @@
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { refreshToken } from '../services/apiRequests/account';
-import { authErrors } from '../constants/errors';
 
 const useCheckAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const [isSessionEnd, setIsSessionEnd] = useState(false);
+    const [jwtToken, setJwtToken] = useState('');
+    const [decodedJwtToken, setDecodedJwtToken] = useState('');
 
     useEffect(() => {
         const checkAuth = async () => {
             const token = sessionStorage.getItem('accessToken');
+            setJwtToken(token);
 
             if (token) {
                 const decodedToken = jwtDecode(token);
                 const currentTime = Date.now() / 1000;
 
+                setDecodedJwtToken(decodedToken);
+
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true);
                 } else {
-                    const token = await refreshToken();
+                    const newJwtToken = await refreshToken();
 
-                    if (token) {
-                        sessionStorage.setItem('accessToken', token);
-                        setIsAuthenticated(true);
+                    if (newJwtToken) {
+                        setNewJwtToken(newJwtToken);
                     } else {
-                        setError(authErrors.SessionEnd);
+                        setIsSessionEnd(true);
                     }
                 }
             } else {
-                const token = await refreshToken();
+                const newJwtToken = await refreshToken();
                 
-                if (token) {                    
-                    sessionStorage.setItem('accessToken', token);
-                    setIsAuthenticated(true);
+                if (newJwtToken) {                    
+                    setNewJwtToken(newJwtToken);
                 }
             }
 
@@ -43,7 +45,13 @@ const useCheckAuth = () => {
         checkAuth();
     }, []);
 
-    return { isAuthenticated, loading, error };
+    const setNewJwtToken = (jwtToken) => {
+        sessionStorage.setItem('accessToken', jwtToken);
+        setJwtToken(token);
+        setIsAuthenticated(true);
+    };
+
+    return { isAuthenticated, loading, isSessionEnd, jwtToken, decodedJwtToken };
 };
 
 export default useCheckAuth;

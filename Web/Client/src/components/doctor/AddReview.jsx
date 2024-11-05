@@ -4,36 +4,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { addReview } from '../../services/apiRequests/doctor';
 import useCheckAuth from '../../hooks/useCheckAuth';
-import { jwtDecode } from 'jwt-decode';
 
 function AddReview({ doctorId }) {
     const navigate = useNavigate();
+    const { isAuthenticated, jwtToken } = useCheckAuth();
     const [isVisible, setIsVisible] = useState(false);
-    const [isAdded, setIsAdded] = useState(false);
+    const [message, setMessage] = useState('');
     const [rating, setRating] = useState(1);
-    const { isAuthenticated } = useCheckAuth();
 
     const add = async () => {
-        const token = sessionStorage.getItem('accessToken');
-        const decodedToken = jwtDecode(token);
         const dto = {
             doctorId: doctorId,
-            rating: rating,
-            reviewer: decodedToken['Name']
+            rating: rating
         };
 
-        await addReview(dto, token);
+        var response = await addReview(dto, jwtToken);
 
-        setIsAdded(true);
+        setMessage(response);
         setIsVisible(false);
-        setTimeout(() => { setIsAdded(false); }, 3000);
+        setTimeout(() => { setMessage('') }, 3000);
     };
 
     return (
         <>
-            {isAdded && (
+            {message && (
                 <p className="absolute top-6 left-1/2 transform -translate-x-1/2 rounded-xl bg-green-500 border border-white text-white text-2xl p-4 flex flex-col justify-between">
-                    Rating was added
+                    {message}
                 </p>
             )}
             {isVisible ?

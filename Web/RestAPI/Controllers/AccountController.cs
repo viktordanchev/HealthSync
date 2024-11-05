@@ -41,15 +41,6 @@ namespace HealthSync.Server.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToArray();
-
-                return BadRequest(errors);
-            }
-
             var user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user != null)
@@ -92,15 +83,6 @@ namespace HealthSync.Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToArray();
-
-                return BadRequest(errors);
-            }
-
             var user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
@@ -136,15 +118,6 @@ namespace HealthSync.Server.Controllers
         [HttpPost("verifyAccount")]
         public async Task<IActionResult> VerifyAccount([FromBody] VerifyAccountRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToArray();
-
-                return BadRequest(errors);
-            }
-
             if (_memoryCacheService.GetValue(request.Email).ToLower() == request.VrfCode.ToLower())
             {
                 var user = await _userManager.FindByEmailAsync(request.Email);
@@ -199,15 +172,6 @@ namespace HealthSync.Server.Controllers
         [HttpPost("recoverPassword")]
         public async Task<IActionResult> RecoverPassword([FromBody] RecoverPasswordRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToArray();
-
-                return BadRequest(errors);
-            }
-
             if (!_memoryCacheService.isExist(request.Token))
             {
                 return BadRequest(new { Error = InvalidToken });

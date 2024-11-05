@@ -12,11 +12,11 @@ import RecoverPassword from './components/account/RecoverPassword';
 import AllDoctors from './components/doctor/AllDoctors';
 
 function App() {
-    const { error } = useCheckAuth();
+    const { isSessionEnd } = useCheckAuth();
 
     return (
         <>
-            {error ? <SessionMessage message={error} /> : null}
+            {isSessionEnd ? <SessionMessage /> : null}
             <Router>
                 <Header />
                 <main className="grow content-center my-6">

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Errors;
+using static Common.Errors.Doctors;
 
 namespace RestAPI.RequestDtos.Doctor
 {
@@ -9,6 +10,7 @@ namespace RestAPI.RequestDtos.Doctor
         public int DoctorId { get; set; }
 
         [Required(ErrorMessage = $"Month {RequiredField}")]
+        [Range(1, 12, ErrorMessage = InvalidMonthRange)]
         public int Month { get; set; }
 
         [Required(ErrorMessage = $"Year {RequiredField}")]

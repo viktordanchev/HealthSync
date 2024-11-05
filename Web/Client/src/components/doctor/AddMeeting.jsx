@@ -1,19 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { getAvailableMeetTimes } from '../../services/apiRequests/doctor';
+import useCheckAuth from '../../hooks/useCheckAuth';
 
-function AddMeeting({ meetingTimes, date }) {
+function AddMeeting({ doctorId, date }) {
+    const navigate = useNavigate();
+    const { isAuthenticated, jwtToken, loading } = useCheckAuth();
     const [isChoosed, setIsChoosed] = useState(false);
     const [meetingDate, setMeetingDate] = useState('');
+    const [meetingTimes, setMeetingTimes] = useState([]);
+
+    if (!isAuthenticated && !loading) {
+        navigate('/login');
+    }
+
+    useEffect(() => {
+        const getMeetingTimes = async () => {
+            const dto = {
+                doctorId: doctorId,
+                date: date.toISOString()
+            };
+
+            const response = await getAvailableMeetTimes(dto, jwtToken);
+            setMeetingTimes(response);
+        };
+
+        if (jwtToken) {
+            getMeetingTimes();
+        }
+    }, [loading]);
 
     const handleMeeting = (time) => {
         const [hour, minutes] = time.split(" : ").map(Number);
 
         date.setHours(hour);
         date.setMinutes(minutes);
-        
+
         setIsChoosed(true);
-        setMeetingDate(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0') }`);
+        setMeetingDate(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`);
     };
 
     return (
@@ -39,15 +63,19 @@ function AddMeeting({ meetingTimes, date }) {
                 : <div className="flex flex-col items-center space-y-4">
                     <p className="font-bold text-white text-xl">Choose meeting time</p>
                     <div className="grid grid-cols-3 gap-2">
-                        {meetingTimes.map((meetingTime, index) => (
-                            <div
-                                key={index}
-                                onClick={() => handleMeeting(meetingTime)}
-                                className="flex justify-center items-center text-white text-lg font-bold border-2 border-maincolor rounded-xl p-2 cursor-pointer hover:bg-maincolor"
-                            >
-                                {meetingTime}
-                            </div>
-                        ))}
+                        {meetingTimes && (
+                            <>
+                                {meetingTimes.map((meetingTime, index) => (
+                                    <div
+                                        key={index}
+                                        onClick={() => handleMeeting(meetingTime)}
+                                        className="flex justify-center items-center text-white text-lg font-bold border-2 border-maincolor rounded-xl p-2 cursor-pointer hover:bg-maincolor"
+                                    >
+                                        {meetingTime}
+                                    </div>
+                                ))}
+                            </>
+                        )}
                     </div>
                 </div>}
         </>

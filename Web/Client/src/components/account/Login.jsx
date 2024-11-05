@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { login } from '../../services/apiRequests/account';
-import { validateEmail, validatePassword } from '../../services/validationSchemas';
+import { validateEmail, validateLoginPassword } from '../../services/validationSchemas';
 import useCheckAuth from '../../hooks/useCheckAuth';
 import Message from './Message';
 
@@ -18,7 +18,7 @@ function Login() {
 
     const validationSchema = Yup.object({
         email: validateEmail,
-        password: validatePassword
+        password: validateLoginPassword
     });
 
     const handleLogin = async (values) => {

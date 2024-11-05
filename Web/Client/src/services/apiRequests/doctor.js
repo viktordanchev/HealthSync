@@ -1,3 +1,5 @@
+import { doctorMessages } from '../../constants/messages';
+
 const url = 'https://localhost:7080/doctor';
 
 export const getAllDoctors = async (values) => {
@@ -56,8 +58,10 @@ export const addReview = async (values, jwtToken) => {
                 body: JSON.stringify(values),
                 credentials: 'include'
             });
-        
-        if (!response.ok) {
+
+        if (response.ok) {
+            return doctorMessages.AddedRating;
+        } else {
             const errorData = await response.json();
             let errorMessage;
 
@@ -94,15 +98,17 @@ export const getSpecialties = async () => {
     }
 };
 
-export const getAvailableMeetTimes = async (values) => {
+export const getAvailableMeetTimes = async (values, jwtToken) => {
     try {
         const response =
             await fetch(`${url}/getAvailableMeetTimes`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`
                 },
-                body: JSON.stringify(values)
+                body: JSON.stringify(values),
+                credentials: 'include'
             });
 
         const data = await response.json();
