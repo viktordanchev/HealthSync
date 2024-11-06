@@ -19,7 +19,8 @@ namespace Infrastructure.Configurations
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 Date = new DateTime(2024, 10, 14, 9, 0, 0),
                 Rating = 5,
-                Reviewer = "Aleks Petrov"
+                Reviewer = "Aleks Petrov",
+                Comment = "I'm truly grateful for the care and expertise you provided. You made a stressful experience much more manageable, and I felt completely confident in your hands. Thank you!"
             };
 
             var review2 = new Review()
@@ -28,7 +29,8 @@ namespace Infrastructure.Configurations
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 Date = new DateTime(2024, 9, 19, 10, 32, 0),
                 Rating = 2,
-                Reviewer = "Maria Kostova"
+                Reviewer = "Maria Kostova",
+                Comment = "Some of my questions felt unanswered clearer explanations would be appreciated."
             };
 
             var review3 = new Review()
@@ -37,7 +39,8 @@ namespace Infrastructure.Configurations
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 Date = new DateTime(2023, 1, 24, 19, 52, 0),
                 Rating = 4,
-                Reviewer = "Kristin Angelova"
+                Reviewer = "Kristin Angelova",
+                Comment = "Your attention and compassion made a huge difference!"
             };
 
             var review4 = new Review()
@@ -46,7 +49,8 @@ namespace Infrastructure.Configurations
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 Date = new DateTime(2023, 1, 25, 13, 12, 0),
                 Rating = 3,
-                Reviewer = "Angel Bogdanski"
+                Reviewer = "Angel Bogdanski",
+                Comment = "I’d appreciate simpler language for medical terms next time."
             };
 
             var review5 = new Review()
@@ -54,8 +58,9 @@ namespace Infrastructure.Configurations
                 Id = 5,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 Date = new DateTime(2024, 7, 20, 18, 52, 0),
-                Rating = 6,
-                Reviewer = "Kosta Adamovich"
+                Rating = 5,
+                Reviewer = "Kosta Adamovich",
+                Comment = "Your dedication and support mean so much—thank you!"
             };
 
             var review6 = new Review()
@@ -63,8 +68,9 @@ namespace Infrastructure.Configurations
                 Id = 6,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 Date = new DateTime(2024, 8, 4, 7, 0, 0),
-                Rating = 6,
-                Reviewer = "Kristian Ivanov"
+                Rating = 5,
+                Reviewer = "Kristian Ivanov",
+                Comment = "Your empathy and expertise are truly appreciated!"
             };
 
             var review7 = new Review()
@@ -73,7 +79,8 @@ namespace Infrastructure.Configurations
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 Date = new DateTime(2024, 6, 15, 22, 12, 0),
                 Rating = 2,
-                Reviewer = "Viktor Terziev"
+                Reviewer = "Viktor Terziev",
+                Comment = "More guidance on the next steps for my treatment would be helpful."
             };
 
             var review8 = new Review()
@@ -82,7 +89,8 @@ namespace Infrastructure.Configurations
                 DoctorId = 2, //Maria Marinova, m.marinova@mail.com
                 Date = new DateTime(2024, 4, 2, 8, 2, 0),
                 Rating = 5,
-                Reviewer = "Yordan Angelov"
+                Reviewer = "Yordan Angelov",
+                Comment = "Thank you for your exceptional care and expertise!"
             };
 
             var review9 = new Review()
@@ -91,7 +99,8 @@ namespace Infrastructure.Configurations
                 DoctorId = 2, //Maria Marinova, m.marinova@mail.com
                 Date = new DateTime(2022, 12, 12, 10, 43, 0),
                 Rating = 5,
-                Reviewer = "Kristian Ivanov"
+                Reviewer = "Kristian Ivanov",
+                Comment = "I couldn't be more pleased with the level of care I received. Your attentiveness, kindness, and expertise made a world of difference."
             };
 
             return [review1, review2, review3, review4, review5, review6, review7, review8, review9];

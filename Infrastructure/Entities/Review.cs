@@ -23,5 +23,7 @@ namespace Infrastructure.Entities
 
         [Required]
         public string Reviewer { get; set; } = null!;
+
+        public string? Comment { get; set; }
     }
 }

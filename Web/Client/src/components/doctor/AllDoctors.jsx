@@ -135,7 +135,7 @@ function AllDoctors() {
                         <div className="text-3xl font-bold">No doctors found!</div> :
                         <>
                             {doctors.map((doctor, index) => (
-                                <DoctorCard key={index} data={doctor} />
+                                <DoctorCard key={index} doctor={doctor} />
                             ))}
                         </>
                     }

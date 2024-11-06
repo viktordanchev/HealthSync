@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241101135348_AddedNewTables")]
+    [Migration("20241106082756_AddedNewTables")]
     partial class AddedNewTables
     {
         /// <inheritdoc />
@@ -111,6 +111,134 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a3717562-385e-41ce-9eff-0f1b994e5548",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1208e5df-6011-43ed-aa87-2a7e0b320665",
+                            Email = "i.ivanov@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Ivan",
+                            LastName = "Ivanov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "I.IVANOV@MAIL.COM",
+                            NormalizedUserName = "I.IVANOV@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBMvM2jUOKRNDCmnd12UhK3fFsqDFiXNFMQzXCE0XRbddHKcl1ILuDBR5LaL3F4lTQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e0d3f231-8ac0-44e1-8e4f-099f462a12fa",
+                            TwoFactorEnabled = false,
+                            UserName = "i.ivanov@mail.com"
+                        },
+                        new
+                        {
+                            Id = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7c62c02a-86a8-4422-a776-61f8abf401c4",
+                            Email = "m.marinova@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Maria",
+                            LastName = "Marinova",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "M.MARINOVA@MAIL.COM",
+                            NormalizedUserName = "M.MARINOVA@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDfWFoZX8WVZd5s99Ndu6EF29J+mNJ5qVSB8RLuElEDi9oYOotTgdP+SRvB5a0DOwQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "31d0e619-00ad-44fa-b326-275b828ec4fd",
+                            TwoFactorEnabled = false,
+                            UserName = "m.marinova@mail.com"
+                        },
+                        new
+                        {
+                            Id = "88cd5a7b-01d8-49b4-8688-35cd23751532",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "eadc9883-7ac4-43de-87a9-c52ed3fc3edb",
+                            Email = "a.kirilov@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Aleks",
+                            LastName = "Kirilov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "A.KIRILOV@MAIL.COM",
+                            NormalizedUserName = "A.KIRILOV@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOuayPZU5VHxlJ8UoBnJbRoHthCGYGb5oG/JP6zqX6mnNhGh/LVR55QciAGST/0mfg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e958b355-b095-4199-99b7-7b94d3124524",
+                            TwoFactorEnabled = false,
+                            UserName = "a.kirilov@mail.com"
+                        },
+                        new
+                        {
+                            Id = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4f43e02f-ee5a-4da2-8304-959a1cd68979",
+                            Email = "k.conev@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Kiril",
+                            LastName = "Conev",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "K.CONEV@MAIL.COM",
+                            NormalizedUserName = "K.CONEV@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOhAVZL9hAlD3OkpfEiT1S7zh/ogrs188Cy/VW6qjwOwnrQQWU0VPo3NmlvOcuaAFw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "96bf3000-1b4c-461d-af35-9e7768033388",
+                            TwoFactorEnabled = false,
+                            UserName = "k.conev@mail.com"
+                        },
+                        new
+                        {
+                            Id = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d46af53d-392a-47eb-9a8d-d4199ceec807",
+                            Email = "i.ivanova@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Ivana",
+                            LastName = "Ivanova",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "I.IVANOVA@MAIL.COM",
+                            NormalizedUserName = "I.IVANOVA@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDSvVNja7sqlL2MwxJa1q5OnOBsiAsiU4kzRkq2dV/d4+HveUUHGlrFcYOMK+TXozg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "177fef02-7832-4f9c-8040-f0d311215777",
+                            TwoFactorEnabled = false,
+                            UserName = "i.ivanova@mail.com"
+                        },
+                        new
+                        {
+                            Id = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "77218cd5-2d13-4343-b0f1-c5fe04b86acc",
+                            Email = "m.kirilova@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Monika",
+                            LastName = "Kirilova",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "M.KIRILOVA@MAIL.COM",
+                            NormalizedUserName = "M.KIRILOVA@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIaKRZKqbwhw8lboSmKwaDvVJI7UP8ZUCjLJ7FqOyS3dirH+Be5BR5/bWrctOYMhhA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6645da89-7083-4764-a292-fa645f97d8b4",
+                            TwoFactorEnabled = false,
+                            UserName = "m.kirilova@mail.com"
+                        },
+                        new
+                        {
+                            Id = "78850da7-a0ff-42f3-a862-d162457910a0",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5204edd2-6848-4808-b317-efc2d8be77d1",
+                            Email = "v.yankova@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Vanya",
+                            LastName = "Yankova",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "V.YANKOVA@MAIL.COM",
+                            NormalizedUserName = "V.YANKOVA@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFELHAtvCKWKsvgxJ/HDa2jK1fsNtxL9uHJn5UUHQnvi1kFuqOY5fFY3wfrYwpNxSA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e2703c01-3b25-41f8-a132-bd7ea0477832",
+                            TwoFactorEnabled = false,
+                            UserName = "v.yankova@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.DayOff", b =>
@@ -127,6 +255,13 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DaysOff");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
@@ -162,6 +297,70 @@ namespace Infrastructure.Migrations
                     b.HasIndex("SpecialtyId");
 
                     b.ToTable("Doctors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HospitalId = 1,
+                            IdentityId = "a3717562-385e-41ce-9eff-0f1b994e5548",
+                            ImgUrl = "https://storage.cloud.google.com/healthsync/ivan-ivanov.jpg",
+                            MeetingTimeMinutes = 30,
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            HospitalId = 1,
+                            IdentityId = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
+                            ImgUrl = "https://storage.cloud.google.com/healthsync/maria-marinova.jpg",
+                            MeetingTimeMinutes = 30,
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            HospitalId = 1,
+                            IdentityId = "88cd5a7b-01d8-49b4-8688-35cd23751532",
+                            ImgUrl = "https://storage.cloud.google.com/healthsync/aleks-kirilov.jpg",
+                            MeetingTimeMinutes = 15,
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            HospitalId = 1,
+                            IdentityId = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
+                            ImgUrl = "https://storage.cloud.google.com/healthsync/kiril-conev.jpg",
+                            MeetingTimeMinutes = 15,
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            HospitalId = 2,
+                            IdentityId = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
+                            ImgUrl = "https://storage.cloud.google.com/healthsync/ivana-ivanova.jpg",
+                            MeetingTimeMinutes = 20,
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            HospitalId = 2,
+                            IdentityId = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
+                            ImgUrl = "https://storage.cloud.google.com/healthsync/monika-kirilova.jpg",
+                            MeetingTimeMinutes = 30,
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            HospitalId = 2,
+                            IdentityId = "78850da7-a0ff-42f3-a862-d162457910a0",
+                            MeetingTimeMinutes = 10,
+                            SpecialtyId = 1
+                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Hospital", b =>
@@ -183,6 +382,20 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Hospitals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "456 Sunrise Avenue, Clearwater, FL 33759, USA",
+                            Name = "Sunnybrook General Hospital"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "321 Maple Street, Boulder, CO 80301, USA",
+                            Name = "Pine Hills Medical Center"
+                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
@@ -220,6 +433,9 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -238,6 +454,80 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("Reviews");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2024, 10, 14, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Rating = 5,
+                            Reviewer = "Aleks Petrov"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2024, 9, 19, 10, 32, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Rating = 2,
+                            Reviewer = "Maria Kostova"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2023, 1, 24, 19, 52, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Rating = 4,
+                            Reviewer = "Kristin Angelova"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateTime(2023, 1, 25, 13, 12, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Rating = 3,
+                            Reviewer = "Angel Bogdanski"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Date = new DateTime(2024, 7, 20, 18, 52, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Rating = 6,
+                            Reviewer = "Kosta Adamovich"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Date = new DateTime(2024, 8, 4, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Rating = 6,
+                            Reviewer = "Kristian Ivanov"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Date = new DateTime(2024, 6, 15, 22, 12, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Rating = 2,
+                            Reviewer = "Viktor Terziev"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Date = new DateTime(2024, 4, 2, 8, 2, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 2,
+                            Rating = 5,
+                            Reviewer = "Yordan Angelov"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Date = new DateTime(2022, 12, 12, 10, 43, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 2,
+                            Rating = 5,
+                            Reviewer = "Kristian Ivanov"
+                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
@@ -255,6 +545,28 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Specialties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Type = "Orthodontist"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Type = "Endocrinologist"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Type = "Cardiologist"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Type = "Neurologist"
+                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.WeekDay", b =>
@@ -285,6 +597,71 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("WeekDays");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Day = 1,
+                            DoctorId = 1,
+                            End = new TimeSpan(0, 17, 30, 0, 0),
+                            IsWorkDay = true,
+                            Start = new TimeSpan(0, 9, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Day = 2,
+                            DoctorId = 1,
+                            End = new TimeSpan(0, 17, 30, 0, 0),
+                            IsWorkDay = true,
+                            Start = new TimeSpan(0, 12, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Day = 3,
+                            DoctorId = 1,
+                            End = new TimeSpan(0, 17, 30, 0, 0),
+                            IsWorkDay = true,
+                            Start = new TimeSpan(0, 9, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Day = 4,
+                            DoctorId = 1,
+                            End = new TimeSpan(0, 17, 30, 0, 0),
+                            IsWorkDay = true,
+                            Start = new TimeSpan(0, 12, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Day = 5,
+                            DoctorId = 1,
+                            End = new TimeSpan(0, 17, 30, 0, 0),
+                            IsWorkDay = true,
+                            Start = new TimeSpan(0, 9, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Day = 6,
+                            DoctorId = 1,
+                            End = new TimeSpan(0, 0, 0, 0, 0),
+                            IsWorkDay = false,
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Day = 0,
+                            DoctorId = 1,
+                            End = new TimeSpan(0, 0, 0, 0, 0),
+                            IsWorkDay = false,
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
