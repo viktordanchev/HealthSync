@@ -24,6 +24,28 @@ export const getAllDoctors = async (values) => {
     }
 };
 
+export const getDoctorDetails = async (doctorId) => {
+    try {
+        const response =
+            await fetch(`${url}/getDoctorDetails`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(doctorId)
+            });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch doctors');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error(error.message);
+        return [];
+    }
+};
+
 export const getReviews = async (values) => {
     try {
         const response =

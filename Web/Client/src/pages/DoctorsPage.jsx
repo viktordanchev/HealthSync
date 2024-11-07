@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getAllDoctors } from '../services/apiRequests/doctor';
+import apiRequest from '../services/apiRequest';
 import DoctorCard from '../components/doctor/DoctorCard';
 import Loading from '../components/Loading';
 import DoctorsNavBar from '../components/doctor/DoctorsNavBar';
@@ -62,7 +62,7 @@ function DoctorsPage() {
                 filter: filter
             };
 
-            const doctors = await getAllDoctors(dto);
+            const response = await apiRequest('doctor', 'all', dto, undefined, 'POST', false);
             setDoctors(doctors);
 
             setLoading(false);

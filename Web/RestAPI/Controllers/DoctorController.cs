@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.RequestDtos.Doctor;
-using static Common.Errors.Doctor;
+using static Common.Errors;
 
 namespace RestAPI.Controllers
 {
@@ -28,9 +28,27 @@ namespace RestAPI.Controllers
             return Ok(doctors);
         }
 
+        [HttpPost("getDoctorDetails")]
+        public async Task<IActionResult> GetDoctorDetails([FromBody] int doctorId)
+        {
+            if (!await _doctorService.IsDoctorExist(doctorId))
+            {
+                return BadRequest(new { ServerError = InvalidRequest });
+            }
+
+            var doctor = await _doctorService.GetDoctor(doctorId);
+
+            return Ok(doctor);
+        }
+
         [HttpPost("getReviews")]
         public async Task<IActionResult> GetReviews([FromBody] GetReviewsRequest request)
         {
+            if (!await _doctorService.IsDoctorExist(request.DoctorId))
+            {
+                return BadRequest(new { ServerError = InvalidRequest });
+            }
+
             var reviews = await _doctorService.GetDoctorReviews(request.Index, request.DoctorId);
 
             return Ok(reviews);
@@ -42,7 +60,7 @@ namespace RestAPI.Controllers
         {
             if (!await _doctorService.IsDoctorExist(request.DoctorId))
             {
-                return BadRequest(new { Error = InvalidDoctorId });
+                return BadRequest(new { ServerError = InvalidRequest });
             }
             
             await _doctorService.AddReview(request.DoctorId, request.Rating, request.Comment, User.Identity.Name);
@@ -64,12 +82,12 @@ namespace RestAPI.Controllers
         {
             if (!await _doctorService.IsDoctorExist(request.DoctorId))
             {
-                return BadRequest(new { ServerError = InvalidDoctorId });
+                return BadRequest(new { ServerError = InvalidRequest });
             }
 
             if (await _doctorService.IsDayOff(request.DoctorId, request.Date))
             {
-                return BadRequest(new { ServerError = InvalidDate });
+                return BadRequest(new { ServerError = InvalidRequest });
             }
 
             var times = await _doctorService.GetAvailableMeetings(request.DoctorId, request.Date);
@@ -82,7 +100,7 @@ namespace RestAPI.Controllers
         {
             if (!await _doctorService.IsDoctorExist(request.DoctorId))
             {
-                return BadRequest(new { ServerError = InvalidDoctorId });
+                return BadRequest(new { ServerError = InvalidRequest });
             }
 
             var daysInMonth = await _doctorService.GetDaysInMonth(request.DoctorId, request.Month, request.Year);

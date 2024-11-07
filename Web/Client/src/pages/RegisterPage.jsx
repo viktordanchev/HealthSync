@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { register } from '../services/apiRequests/account';
+import apiRequest from '../services/apiRequest';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import useCheckAuth from '../hooks/useCheckAuth';
 import Message from '../components/account/Message';
@@ -25,12 +25,12 @@ function RegisterPage() {
     });
 
     const handleRegister = async (values) => {
-        const data = await register(values);
+        const response = await apiRequest('account', 'register', values, undefined, 'POST', false);
 
-        if (!data) {
+        if (!response) {
             navigate('/account/verify');
         } else {
-            setMessage(data.error);
+            setMessage(response.error);
         }
 
         setTimeout(() => { setMessage(''); }, 3000);

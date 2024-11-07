@@ -1,6 +1,6 @@
 ﻿namespace Core.Models.ResponseDtos.Doctor
 {
-    public class DoctorProfileResponse
+    public class DoctorResponse
     {
         public int Id { get; set; }
 
@@ -8,13 +8,7 @@
 
         public string ImgUrl { get; set; } = string.Empty;
 
-        public string Information { get; set; } = string.Empty;
-
         public string Specialty { get; set; } = null!;
-
-        public string Hospital { get; set; } = null!;
-
-        public string HospitalAddress { get; set; } = null!;
 
         public double Rating { get; set; }
 

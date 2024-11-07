@@ -2,16 +2,19 @@
 {
     public static class Constants
     {
+        public const int MonthRangeMin = 1;
+        public const int MonthRangeMax = 12;
+
         public static class Review
         {
-            public const int RatingMin = 1;
-            public const int RatingMax = 5;
+            public const int RatingRangeMin = 1;
+            public const int RatingRangeMax = 5;
             public const int CommentMaxLength = 160;
         }
 
         public static class Doctor
         {
-            public const int InformationMaxLength = 200;
+            public const int InformationMaxLength = 300;
         }
     }
 }

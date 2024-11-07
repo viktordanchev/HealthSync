@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { verifyAccount, sendVrfCode } from '../services/apiRequests/account';
+import apiRequest from '../services/apiRequest';
 import { validateEmail, validateVrfCode } from '../services/validationSchemas';
 import useTimer from '../hooks/useTimer';
 import useCheckAuth from '../hooks/useCheckAuth';
@@ -25,12 +25,12 @@ function VerificationPage() {
     const validationVrfCodeSchema = Yup.object().shape({ vrfCode: validateVrfCode });
 
     const submitCode = async (values) => {
-        const data = await verifyAccount(values);
+        const response = await apiRequest('account', 'verifyAccount', values, undefined, 'POST', false);
 
-        if (!data) {
+        if (!response) {
             navigate('/home');
         } else {
-            setMessage(data.error);
+            setMessage(response.error);
             setMessageType('error');
         }
 
@@ -38,16 +38,16 @@ function VerificationPage() {
     };
 
     const sendCode = async (email) => {
-        const data = await sendVrfCode(email);
+        const response = await apiRequest('account', 'sendVrfCode', values, undefined, 'POST', false);
 
-        if (data.error) {
+        if (response.error) {
             setMessageType('error');
-            setMessage(data.error);
+            setMessage(response.error);
         } else {
             sessionStorage.setItem('email', email);
 
             setMessageType('message');
-            setMessage(data.message);
+            setMessage(response.message);
 
             resetTimer();
         }

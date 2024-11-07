@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { refreshToken } from '../services/apiRequests/account';
+import apiRequest from '../services/apiRequest';
 
 const useCheckAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,7 +23,7 @@ const useCheckAuth = () => {
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true);
                 } else {
-                    const newJwtToken = await refreshToken();
+                    const newJwtToken = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
 
                     if (newJwtToken) {
                         setNewJwtToken(newJwtToken);
@@ -32,7 +32,7 @@ const useCheckAuth = () => {
                     }
                 }
             } else {
-                const newJwtToken = await refreshToken();
+                const newJwtToken = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
                 
                 if (newJwtToken) {                    
                     setNewJwtToken(newJwtToken);

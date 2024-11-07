@@ -62,7 +62,7 @@ namespace Infrastructure.Migrations
                     SpecialtyId = table.Column<int>(type: "int", nullable: false),
                     MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false),
                     ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Information = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
+                    Information = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {

@@ -16,7 +16,7 @@ namespace Core.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<DoctorProfileResponse>> GetDoctors(int index, string sorting, string filter, string search)
+        public async Task<IEnumerable<DoctorResponse>> GetDoctors(int index, string sorting, string filter, string search)
         {
             var doctors = await _context.Doctors
                 .AsNoTracking()
@@ -25,15 +25,12 @@ namespace Core.Services
                     (string.IsNullOrEmpty(filter) || d.Specialty.Type == filter))
                 .Skip(index * 10)
                 .Take(10)
-                .Select(d => new DoctorProfileResponse()
+                .Select(d => new DoctorResponse()
                 {
                     Id = d.Id,
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
-                    Information = d.Information,
                     Specialty = d.Specialty.Type,
-                    Hospital = d.Hospital.Name,
-                    HospitalAddress = d.Hospital.Address,
                     Rating = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,
                     TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
                 })
@@ -56,6 +53,23 @@ namespace Core.Services
             }
 
             return doctors;
+        }
+
+        public async Task<DoctorDetailsResponse> GetDoctor(int doctorId)
+        {
+            var doctor = await _context.Doctors
+                .AsNoTracking()
+                .Where(d => d.Id == doctorId)
+                .Select(d => new DoctorDetailsResponse() 
+                { 
+                    HospitalName = d.Hospital.Name,
+                    HospitalAddress = d.Hospital.Address,
+                    Information = d.Information,
+                    PhoneNumber = d.Identity.PhoneNumber
+                })
+                .FirstAsync();
+
+            return doctor;
         }
 
         public async Task<IEnumerable<ReviewResponse>> GetDoctorReviews(int index, int doctorId)

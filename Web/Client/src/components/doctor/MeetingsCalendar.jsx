@@ -22,7 +22,7 @@ const MeetingsCalendar = ({ doctorId }) => {
                 year: currentYear
             }
 
-            const data = await getDaysInMonth(dto);
+            const data = await apiRequest('doctor', 'getDaysInMonth', dto, undefined, 'POST', false);
 
             const transformedData = data.map(item => ({
                 ...item,

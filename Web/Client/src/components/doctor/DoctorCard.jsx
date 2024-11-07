@@ -24,7 +24,7 @@ function DoctorCard({ doctor }) {
     return (
         <>
             <div
-                className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center transition-all duration-700 ease-in-out ${isOpen ? 'h-3/4 w-3/4 fixed inset-0 m-auto bg-opacity-85 z-20 sm:relative sm:h-doctorCardSm sm:w-full sm:m-2' : 'relative w-64 h-80 bg-opacity-35 shadow-md shadow-gray-400 sm:w-full'}`}
+                className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center transition-all duration-700 ease-in-out ${isOpen ? 'h-3/4 w-3/5 fixed inset-0 m-auto bg-opacity-85 z-20 lg:w-3/4 sm:relative sm:h-doctorCardSm sm:w-full sm:m-2' : 'relative w-64 h-80 bg-opacity-35 shadow-md shadow-gray-400 sm:w-full'}`}
             >
                 {isOpen && (
                     <button
@@ -37,7 +37,7 @@ function DoctorCard({ doctor }) {
                 <div className={`flex flex-col items-center space-y-2 ${isOpen ? 'text-white' : 'text-gray-700'}`}>
                     <img
                         src={doctor.imgUrl ? doctor.imgUrl : '/profile.jpg'}
-                        className="rounded-full object-cover w-24 h-24"
+                        className={`rounded-full object-cover ${isOpen ? 'w-20 h-20' : 'w-24 h-24'}`}
                     />
                     <div className="text-center text-xl">
                         <p>{doctor.name}</p>
@@ -63,13 +63,7 @@ function DoctorCard({ doctor }) {
                             Details
                         </button>
                     </> :
-                    <DoctorDetails
-                        doctorId={doctor.id}
-                        doctorName={doctor.name}
-                        rating={doctor.rating}
-                        hospitalName={doctor.hospital}
-                        hospitalAddress={doctor.hospitalAddress}
-                    />}
+                    <DoctorDetails doctorId={doctor.id} />}
             </div>
 
             {isOpen && (

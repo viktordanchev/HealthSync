@@ -1,19 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Common.Errors;
-using static Common.Errors.Doctor;
+using static Common.Constants;
 
 namespace RestAPI.RequestDtos.Doctor
 {
     public class GetDaysInMonthRequest
     {
-        [Required(ErrorMessage = $"DoctorId {RequiredField}")]
+        [Required]
         public int DoctorId { get; set; }
 
-        [Required(ErrorMessage = $"Month {RequiredField}")]
-        [Range(1, 12, ErrorMessage = InvalidMonthRange)]
+        [Required]
+        [Range(MonthRangeMin, MonthRangeMax)]
         public int Month { get; set; }
 
-        [Required(ErrorMessage = $"Year {RequiredField}")]
+        [Required]
         public int Year { get; set; }
     }
 }

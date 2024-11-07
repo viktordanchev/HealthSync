@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { login } from '../services/apiRequests/account';
+import apiRequest from '../services/apiRequest';
 import { validateEmail, validateLoginPassword } from '../services/validationSchemas';
 import useCheckAuth from '../hooks/useCheckAuth';
 import Message from '../components/account/Message';
@@ -22,18 +22,18 @@ function LoginPage() {
     });
 
     const handleLogin = async (values) => {
-        const data = await login(values);
+        const response = await apiRequest('account', 'login', values, undefined, 'POST', false);
 
-        if (data.token) {
-            sessionStorage.setItem('accessToken', data.token);
+        if (response.token) {
+            sessionStorage.setItem('accessToken', response.token);
             navigate('/home');
             window.location.reload();
         } else {
-            if (data.notVerified) {
+            if (response.notVerified) {
                 navigate('/account/verify');
             }
 
-            setMessage(data.error);
+            setMessage(response.error);
         }
 
         setTimeout(() => { setMessage(''); }, 3000);

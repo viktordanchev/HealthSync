@@ -5,7 +5,7 @@ import ReviewCard from './ReviewCard';
 import MeetingsCalendar from './MeetingsCalendar';
 import AddReview from './AddReview';
 
-function DoctorDetails({ doctorId, rating, hospitalName, hospitalAddress }) {
+function DoctorDetails({ doctorId }) {
     const scrollContainerRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(true);
@@ -51,18 +51,15 @@ function DoctorDetails({ doctorId, rating, hospitalName, hospitalAddress }) {
     }, [hasMore]);
 
     return (
-        <div className="flex flex-col items-center mt-6 w-full">
-            <div className="flex flex-col text-center text-white bg-zinc-700 p-3 rounded-xl text-lg md:w-full sm:w-full">
-                <p className="font-bold">Hospital</p>
-                <hr className="border-e border-white w-full my-2" />
-                <div className="flex space-x-3 justify-evenly items-center sm:flex-col sm:space-x-0 sm:space-y-3">
-                    <div className="w-40">
-                        <p className="font-bold">Name</p>
-                        <p>{hospitalName}</p>
+        <div className="h-full w-full flex flex-col items-center mt-6">
+            <div className="h-full w-full flex flex-col space-y-2 text-center text-white bg-zinc-700 p-3 rounded-xl md:w-full sm:w-full">
+                <p className="font-bold text-xl">Personal Information</p>
+                <div className="h-full w-full flex space-x-3">
+                    <div className="h-full w-1/2 rounded-xl bg-blue-500 bg-opacity-55 flex items-center justify-center">
+                        <p>{doctorInfo ? doctorInfo : 'There is no given information.'}</p>
                     </div>
-                    <div className="w-40">
-                        <p className="font-bold">Address</p>
-                        <p>{hospitalAddress}</p>
+                    <div className="h-full w-1/2 rounded-xl bg-blue-500 bg-opacity-55 flex items-center justify-center">
+                        <p>Hospital</p>
                     </div>
                 </div>
             </div>

@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Common.Errors;
 
 namespace RestAPI.RequestDtos.Doctor
 {
     public class AddMeetingRequest
     {
-        [Required(ErrorMessage = $"DoctorId {RequiredField}")]
+        [Required]
         public int DoctorId { get; set; }
 
-        [Required(ErrorMessage = $"Date {RequiredField}")]
+        [Required]
         public DateTime Date { get; set; }
     }
 }

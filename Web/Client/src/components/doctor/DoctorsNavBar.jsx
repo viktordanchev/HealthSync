@@ -9,8 +9,8 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
 
     useEffect(() => {
         const receiveSpecialties = async () => {
-            const specialtiesData = await getSpecialties();
-            setSpecialties(specialtiesData);
+            const response = await apiRequest('doctor', 'getSpecialties', undefined, undefined, 'GET', false);
+            setSpecialties(response);
         };
 
         receiveSpecialties();

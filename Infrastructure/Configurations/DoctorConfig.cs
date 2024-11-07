@@ -20,7 +20,8 @@ namespace Infrastructure.Configurations
                 HospitalId = 1, //Sunnybrook General Hospital
                 SpecialtyId = 1, //Orthodontist
                 MeetingTimeMinutes = 30,
-                ImgUrl = "https://storage.cloud.google.com/healthsync/ivan-ivanov.jpg"
+                ImgUrl = "https://storage.cloud.google.com/healthsync/ivan-ivanov.jpg",
+                Information = "Dr. Ivanov is a highly skilled orthodontist with a dental degree from Sofia Medical University. After specializing in orthodontics, he completed his residency at St. Ivan Rilski Hospital. He is committed to providing exceptional care and creating beautiful, healthy smiles for his patients."
             };
 
             var doctor2 = new Doctor()

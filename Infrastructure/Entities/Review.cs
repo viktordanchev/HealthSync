@@ -16,7 +16,7 @@ namespace Infrastructure.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        [Range(RatingMin, RatingMax)]
+        [Range(RatingRangeMin, RatingRangeMax)]
         public int Rating { get; set; }
 
         [Required]

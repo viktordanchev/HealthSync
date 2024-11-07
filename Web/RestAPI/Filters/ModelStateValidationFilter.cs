@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
+using static Common.Errors;
 
 namespace RestAPI.Filters
 {
@@ -9,11 +10,7 @@ namespace RestAPI.Filters
         {
             if (!context.ModelState.IsValid)
             {
-                var errors = context.ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToList();
-
-                context.Result = new BadRequestObjectResult(errors);
+                context.Result = new BadRequestObjectResult(new { ServerError = InvalidRequest });
             }
         }
 

@@ -4,6 +4,7 @@ using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using static Common.Errors.Account;
+using static Common.Errors;
 using static Common.Messages.Account;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -65,16 +66,7 @@ namespace HealthSync.Server.Controllers
 
             if (!result.Succeeded)
             {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(error.Code, error.Description);
-                }
-
-                var errors = ModelState
-                    .SelectMany(ms => ms.Value.Errors.Select(e => e.ErrorMessage))
-                    .ToArray();
-
-                return BadRequest(errors);
+                return BadRequest(new {ServerError = InvalidRequest});
             }
 
             return Ok();
@@ -90,17 +82,17 @@ namespace HealthSync.Server.Controllers
                 return Unauthorized(new { Error = InvalidLoginData });
             }
 
+            if (!user.EmailConfirmed)
+            {
+                return BadRequest(new { NotVerified = true });
+            }
+
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
 
             if (!result.Succeeded)
             {
-                return Unauthorized(new { Error = InvalidLoginData });
-            }
-
-            if (!user.EmailConfirmed)
-            {
-                return BadRequest(new { NotVerified = true });
+                return BadRequest(new { ServerError = InvalidRequest });
             }
 
             var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
@@ -152,7 +144,7 @@ namespace HealthSync.Server.Controllers
             return Ok(new { Message = NewVrfCode });
         }
 
-        [HttpPost("sendRecoverPasswordEmail")]
+        [HttpPost("sendRecoverPassEmail")]
         public async Task<IActionResult> SendRecoverPasswordEmail([FromBody] string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -169,7 +161,7 @@ namespace HealthSync.Server.Controllers
             return Ok(new { Message = SendedPassRecoverLink });
         }
 
-        [HttpPost("recoverPassword")]
+        [HttpPost("recoverPass")]
         public async Task<IActionResult> RecoverPassword([FromBody] RecoverPasswordRequest request)
         {
             if (!_memoryCacheService.isExist(request.Token))

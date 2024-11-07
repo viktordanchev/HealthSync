@@ -1,26 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Common.Errors;
-using static Common.Errors.Account;
 
 namespace RestAPI.RequestDtos.Account
 {
     public class RegisterRequest
     {
-        [Required(ErrorMessage = $"Email {RequiredField}")]
-        [EmailAddress(ErrorMessage = InvalidEmail)]
+        [Required]
+        [EmailAddress]
         public string Email { get; set; } = null!;
 
-        [Required(ErrorMessage = $"First name {RequiredField}")]
+        [Required]
         public string FirstName { get; set; } = null!;
 
-        [Required(ErrorMessage = $"Last name {RequiredField}")]
+        [Required]
         public string LastName { get; set; } = null!;
 
-        [Required(ErrorMessage = $"Password {RequiredField}")]
+        [Required]
         public string Password { get; set; } = null!;
 
-        [Required(ErrorMessage = $"Confirm password {RequiredField}")]
-        [Compare("Password", ErrorMessage = PasswordMatch)]
+        [Required]
+        [Compare("Password")]
         public string ConfirmPassword { get; set; } = null!;
     }
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { recoverPassword, sendRecoverPasswordEmail } from '../services/apiRequests/account';
+import apiRequest from '../services/apiRequest';
 import { validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import useTimer from '../hooks/useTimer';
 import useCheckAuth from '../hooks/useCheckAuth';
@@ -29,12 +29,12 @@ function RecoverPassPage() {
     });
 
     const submitPassword = async (values) => {
-        const data = await recoverPassword(values);
+        const response = await apiRequest('account', 'recoverPass', values, undefined, 'POST', false);
 
-        if (!data) {
+        if (!response) {
             navigate('/home');
         } else {
-            setMessage(data.error);
+            setMessage(response.error);
             setMessageType('error');
         }
 
@@ -42,15 +42,15 @@ function RecoverPassPage() {
     };
 
     const sendLink = async (email) => {
-        const data = await sendRecoverPasswordEmail(email);
+        const response = await apiRequest('account', 'sendRecoverPassEmail', values, undefined, 'POST', false);
 
-        if (data.error) {
-            setMessage(data.error);
+        if (response.error) {
+            setMessage(response.error);
             setMessageType('error');
         } else {
             sessionStorage.setItem('email', email);
 
-            setMessage(data.message);
+            setMessage(response.message);
             setMessageType('message');
 
             resetTimer();
