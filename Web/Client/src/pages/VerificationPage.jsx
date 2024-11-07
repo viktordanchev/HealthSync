@@ -1,14 +1,14 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { verifyAccount, sendVrfCode } from '../../services/apiRequests/account';
-import { validateEmail, validateVrfCode } from '../../services/validationSchemas';
-import useTimer from '../../hooks/useTimer';
-import useCheckAuth from '../../hooks/useCheckAuth';
-import Message from './Message';
+import { verifyAccount, sendVrfCode } from '../services/apiRequests/account';
+import { validateEmail, validateVrfCode } from '../services/validationSchemas';
+import useTimer from '../hooks/useTimer';
+import useCheckAuth from '../hooks/useCheckAuth';
+import Message from '../components/account/Message';
 
-function Verification() {
+function VerificationPage() {
     const navigate = useNavigate();
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
     const { isAuthenticated } = useCheckAuth();
@@ -112,4 +112,4 @@ function Verification() {
     );
 }
 
-export default Verification;
+export default VerificationPage;

@@ -1,14 +1,14 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { recoverPassword, sendRecoverPasswordEmail } from '../../services/apiRequests/account';
-import { validateEmail, validatePassword, validateConfirmPassword } from '../../services/validationSchemas';
-import useTimer from '../../hooks/useTimer';
-import useCheckAuth from '../../hooks/useCheckAuth';
-import Message from './Message';
+import { recoverPassword, sendRecoverPasswordEmail } from '../services/apiRequests/account';
+import { validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
+import useTimer from '../hooks/useTimer';
+import useCheckAuth from '../hooks/useCheckAuth';
+import Message from '../components/account/Message';
 
-function RecoverPassword() {
+function RecoverPassPage() {
     const navigate = useNavigate();
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
     const { isAuthenticated } = useCheckAuth();
@@ -120,4 +120,4 @@ function RecoverPassword() {
     );
 }
 
-export default RecoverPassword;
+export default RecoverPassPage;

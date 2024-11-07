@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { login } from '../../services/apiRequests/account';
-import { validateEmail, validateLoginPassword } from '../../services/validationSchemas';
-import useCheckAuth from '../../hooks/useCheckAuth';
-import Message from './Message';
+import { login } from '../services/apiRequests/account';
+import { validateEmail, validateLoginPassword } from '../services/validationSchemas';
+import useCheckAuth from '../hooks/useCheckAuth';
+import Message from '../components/account/Message';
 
-function Login() {
+function LoginPage() {
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
     const { isAuthenticated } = useCheckAuth();
@@ -104,4 +104,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default LoginPage;

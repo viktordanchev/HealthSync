@@ -23,7 +23,7 @@ namespace RestAPI.Controllers
             var doctors = await _doctorService.GetDoctors(request.Index,
                 request.Sorting.ToString(),
                 request.Filter,
-                request.Search.ToLower());
+                request.Search.Trim().ToLower());
 
             return Ok(doctors);
         }
