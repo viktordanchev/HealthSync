@@ -61,8 +61,8 @@ function AllDoctors() {
             const dto = {
                 index: 0,
                 sorting: order,
-                filter: filter,
-                search: search
+                search: search,
+                filter: filter
             };
 
             const specialtiesData = await getSpecialties();
@@ -132,7 +132,7 @@ function AllDoctors() {
             {loading ? <Loading type={'big'} /> :
                 <article className="flex flex-wrap justify-center w-full h-full">
                     {doctors.length == 0 ?
-                        <div className="text-3xl font-bold">No doctors found!</div> :
+                        <div className="text-3xl">No doctors found!</div> :
                         <>
                             {doctors.map((doctor, index) => (
                                 <DoctorCard key={index} doctor={doctor} />

@@ -20,7 +20,7 @@ namespace Infrastructure.Configurations
                 Date = new DateTime(2024, 10, 14, 9, 0, 0),
                 Rating = 5,
                 Reviewer = "Aleks Petrov",
-                Comment = "I'm truly grateful for the care and expertise you provided. You made a stressful experience much more manageable, and I felt completely confident in your hands. Thank you!"
+                Comment = "I'm truly grateful for the care and expertise you provided."
             };
 
             var review2 = new Review()

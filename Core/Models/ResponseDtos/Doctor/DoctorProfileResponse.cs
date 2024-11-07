@@ -8,6 +8,8 @@
 
         public string ImgUrl { get; set; } = string.Empty;
 
+        public string Information { get; set; } = string.Empty;
+
         public string Specialty { get; set; } = null!;
 
         public string Hospital { get; set; } = null!;

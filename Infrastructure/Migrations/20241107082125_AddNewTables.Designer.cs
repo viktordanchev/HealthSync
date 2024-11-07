@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241106083449_InsertData")]
-    partial class InsertData
+    [Migration("20241107082125_AddNewTables")]
+    partial class AddNewTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,134 +111,6 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a3717562-385e-41ce-9eff-0f1b994e5548",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "5bdcdd0c-4a7a-4af3-bc9d-0c5ba6e22ae0",
-                            Email = "i.ivanov@mail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Ivan",
-                            LastName = "Ivanov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "I.IVANOV@MAIL.COM",
-                            NormalizedUserName = "I.IVANOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAOpvQgOnUNj6EbCntqDJWkaP/vGc8HIOKo1/vELhraj30bk3f1A8M2ttR9X8EGNAw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "1b7aa091-28b1-4bc5-b503-38c8adb174b7",
-                            TwoFactorEnabled = false,
-                            UserName = "i.ivanov@mail.com"
-                        },
-                        new
-                        {
-                            Id = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "9dc1418b-23c6-4f8f-96d5-94df34c9cda4",
-                            Email = "m.marinova@mail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Maria",
-                            LastName = "Marinova",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "M.MARINOVA@MAIL.COM",
-                            NormalizedUserName = "M.MARINOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMqmhzCGar2xMxh4sp01VG5fpaxU0oKrlMATbxM6AUXeqceps6Zsiw0f48DqWJmkmw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "1d0e120c-d055-4ba9-99fe-7d39eab31bac",
-                            TwoFactorEnabled = false,
-                            UserName = "m.marinova@mail.com"
-                        },
-                        new
-                        {
-                            Id = "88cd5a7b-01d8-49b4-8688-35cd23751532",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "58db29c5-9667-46b4-a30f-69ba14fa168e",
-                            Email = "a.kirilov@mail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Aleks",
-                            LastName = "Kirilov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "A.KIRILOV@MAIL.COM",
-                            NormalizedUserName = "A.KIRILOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJwmEDrcfULQ4gMqMo/ecXtwhlxHU4CZlyKcRrf6aowwZ7G8sHfvP+VepgqUHaxOQw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7ddc1bec-d5d5-4c31-b6c8-bba4e0be267b",
-                            TwoFactorEnabled = false,
-                            UserName = "a.kirilov@mail.com"
-                        },
-                        new
-                        {
-                            Id = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c9c6e7a8-3c1c-40ce-80d7-e9a029dc4a73",
-                            Email = "k.conev@mail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Kiril",
-                            LastName = "Conev",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "K.CONEV@MAIL.COM",
-                            NormalizedUserName = "K.CONEV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPY6kQ0EGDSUkEyyitgvpg/daVpzq/LiX0/yiQF2h11KqPui84M4nZ3Bc4ABowXZfw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "c9367697-86a7-4305-b517-749c810a6113",
-                            TwoFactorEnabled = false,
-                            UserName = "k.conev@mail.com"
-                        },
-                        new
-                        {
-                            Id = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "fccd7883-cbe9-4895-90d4-84837691d5ee",
-                            Email = "i.ivanova@mail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Ivana",
-                            LastName = "Ivanova",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "I.IVANOVA@MAIL.COM",
-                            NormalizedUserName = "I.IVANOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOBYJReiNv2mjCP/lmgeK8UVatjqw4zVDWjCuvS0v5J+kZpoQupqnmQqunLuHiDXKw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "d0e16340-2341-4531-a37c-7001f3c0a4e4",
-                            TwoFactorEnabled = false,
-                            UserName = "i.ivanova@mail.com"
-                        },
-                        new
-                        {
-                            Id = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "9e3595c9-97b7-44bc-a52f-0563854eaafb",
-                            Email = "m.kirilova@mail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Monika",
-                            LastName = "Kirilova",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "M.KIRILOVA@MAIL.COM",
-                            NormalizedUserName = "M.KIRILOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHI4wvk/28oINLQeVNsyhAWmj91UwtE8Be+1MBNyRYx4X3wrf8KzAC01xlltS/uQlg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "5b0e76f8-4143-463b-b6c7-9f3aa9686753",
-                            TwoFactorEnabled = false,
-                            UserName = "m.kirilova@mail.com"
-                        },
-                        new
-                        {
-                            Id = "78850da7-a0ff-42f3-a862-d162457910a0",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "41d64ef0-6085-4f86-b63d-ce4ec6b84bf4",
-                            Email = "v.yankova@mail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Vanya",
-                            LastName = "Yankova",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "V.YANKOVA@MAIL.COM",
-                            NormalizedUserName = "V.YANKOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEB7bqcJ4ww5V2ouUgqRgvaToS19AcDz1JSffKlj6o6zdO92ZjJgex9F/QKGQY+NikQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "89120e83-c9ba-480d-b103-5f0a68d40357",
-                            TwoFactorEnabled = false,
-                            UserName = "v.yankova@mail.com"
-                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.DayOff", b =>
@@ -255,13 +127,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DaysOff");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
@@ -282,6 +147,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ImgUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Information")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<int>("MeetingTimeMinutes")
                         .HasColumnType("int");
 
@@ -297,70 +166,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("SpecialtyId");
 
                     b.ToTable("Doctors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            HospitalId = 1,
-                            IdentityId = "a3717562-385e-41ce-9eff-0f1b994e5548",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/ivan-ivanov.jpg",
-                            MeetingTimeMinutes = 30,
-                            SpecialtyId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            HospitalId = 1,
-                            IdentityId = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/maria-marinova.jpg",
-                            MeetingTimeMinutes = 30,
-                            SpecialtyId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            HospitalId = 1,
-                            IdentityId = "88cd5a7b-01d8-49b4-8688-35cd23751532",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/aleks-kirilov.jpg",
-                            MeetingTimeMinutes = 15,
-                            SpecialtyId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            HospitalId = 1,
-                            IdentityId = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/kiril-conev.jpg",
-                            MeetingTimeMinutes = 15,
-                            SpecialtyId = 3
-                        },
-                        new
-                        {
-                            Id = 5,
-                            HospitalId = 2,
-                            IdentityId = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/ivana-ivanova.jpg",
-                            MeetingTimeMinutes = 20,
-                            SpecialtyId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            HospitalId = 2,
-                            IdentityId = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/monika-kirilova.jpg",
-                            MeetingTimeMinutes = 30,
-                            SpecialtyId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            HospitalId = 2,
-                            IdentityId = "78850da7-a0ff-42f3-a862-d162457910a0",
-                            MeetingTimeMinutes = 10,
-                            SpecialtyId = 1
-                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Hospital", b =>
@@ -382,20 +187,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Hospitals");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "456 Sunrise Avenue, Clearwater, FL 33759, USA",
-                            Name = "Sunnybrook General Hospital"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "321 Maple Street, Boulder, CO 80301, USA",
-                            Name = "Pine Hills Medical Center"
-                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
@@ -434,7 +225,8 @@ namespace Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -454,89 +246,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("Reviews");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Comment = "I'm truly grateful for the care and expertise you provided. You made a stressful experience much more manageable, and I felt completely confident in your hands. Thank you!",
-                            Date = new DateTime(2024, 10, 14, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Rating = 5,
-                            Reviewer = "Aleks Petrov"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Comment = "Some of my questions felt unanswered clearer explanations would be appreciated.",
-                            Date = new DateTime(2024, 9, 19, 10, 32, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Rating = 2,
-                            Reviewer = "Maria Kostova"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Comment = "Your attention and compassion made a huge difference!",
-                            Date = new DateTime(2023, 1, 24, 19, 52, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Rating = 4,
-                            Reviewer = "Kristin Angelova"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Comment = "I’d appreciate simpler language for medical terms next time.",
-                            Date = new DateTime(2023, 1, 25, 13, 12, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Rating = 3,
-                            Reviewer = "Angel Bogdanski"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Comment = "Your dedication and support mean so much—thank you!",
-                            Date = new DateTime(2024, 7, 20, 18, 52, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Rating = 5,
-                            Reviewer = "Kosta Adamovich"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Comment = "Your empathy and expertise are truly appreciated!",
-                            Date = new DateTime(2024, 8, 4, 7, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Rating = 5,
-                            Reviewer = "Kristian Ivanov"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Comment = "More guidance on the next steps for my treatment would be helpful.",
-                            Date = new DateTime(2024, 6, 15, 22, 12, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Rating = 2,
-                            Reviewer = "Viktor Terziev"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Comment = "Thank you for your exceptional care and expertise!",
-                            Date = new DateTime(2024, 4, 2, 8, 2, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 2,
-                            Rating = 5,
-                            Reviewer = "Yordan Angelov"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Comment = "I couldn't be more pleased with the level of care I received. Your attentiveness, kindness, and expertise made a world of difference.",
-                            Date = new DateTime(2022, 12, 12, 10, 43, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 2,
-                            Rating = 5,
-                            Reviewer = "Kristian Ivanov"
-                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
@@ -554,28 +263,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Specialties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Type = "Orthodontist"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Type = "Endocrinologist"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Type = "Cardiologist"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Type = "Neurologist"
-                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.WeekDay", b =>
@@ -606,71 +293,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("WeekDays");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Day = 1,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            Start = new TimeSpan(0, 9, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Day = 2,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            Start = new TimeSpan(0, 12, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Day = 3,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            Start = new TimeSpan(0, 9, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Day = 4,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            Start = new TimeSpan(0, 12, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Day = 5,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            Start = new TimeSpan(0, 9, 30, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Day = 6,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 0, 0, 0, 0),
-                            IsWorkDay = false,
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Day = 0,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 0, 0, 0, 0),
-                            IsWorkDay = false,
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

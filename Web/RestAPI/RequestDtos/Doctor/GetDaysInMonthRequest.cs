@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Errors;
-using static Common.Errors.Doctors;
+using static Common.Errors.Doctor;
 
 namespace RestAPI.RequestDtos.Doctor
 {

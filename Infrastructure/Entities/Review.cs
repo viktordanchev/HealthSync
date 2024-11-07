@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Common.Constants.Review;
 
 namespace Infrastructure.Entities
 {
@@ -15,7 +16,7 @@ namespace Infrastructure.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        [Range(1, 5)]
+        [Range(RatingMin, RatingMax)]
         public int Rating { get; set; }
 
         [Required]
@@ -24,6 +25,7 @@ namespace Infrastructure.Entities
         [Required]
         public string Reviewer { get; set; } = null!;
 
+        [MaxLength(CommentMaxLength)]
         public string? Comment { get; set; }
     }
 }

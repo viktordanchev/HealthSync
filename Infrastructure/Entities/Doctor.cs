@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Common.Constants.Doctor;
 
 namespace Infrastructure.Entities
 {
@@ -37,7 +38,10 @@ namespace Infrastructure.Entities
         [Required]
         public int MeetingTimeMinutes { get; set; }
 
-        public string? ImgUrl { get; set; } 
+        public string? ImgUrl { get; set; }
+
+        [MaxLength(InformationMaxLength)]
+        public string? Information { get; set; }
 
         public IEnumerable<Review> Reviews { get; set; }
         public IEnumerable<Meeting> Meetings { get; set; }

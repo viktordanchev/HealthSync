@@ -30,6 +30,7 @@ namespace Core.Services
                     Id = d.Id,
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
+                    Information = d.Information,
                     Specialty = d.Specialty.Type,
                     Hospital = d.Hospital.Name,
                     HospitalAddress = d.Hospital.Address,
@@ -69,6 +70,7 @@ namespace Core.Services
                 {
                     Rating = r.Rating,
                     Date = r.Date,
+                    Comment = r.Comment,
                     Reviewer = r.Reviewer
                 })
                 .ToListAsync();
@@ -83,13 +85,14 @@ namespace Core.Services
             return doctor != null;
         }
 
-        public async Task AddReview(int doctorId, int rating, string reviewer)
+        public async Task AddReview(int doctorId, int rating, string comment, string reviewer)
         {
             var reveiew = new Review()
             {
                 DoctorId = doctorId,
                 Rating = rating,
                 Date = DateTime.Now,
+                Comment = comment,
                 Reviewer = reviewer
             };
 

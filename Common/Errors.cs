@@ -16,13 +16,14 @@
             public const string InvalidToken = "This token is invalid!";
         }
 
-        public static class Doctors
+        public static class Doctor
         {
             public const string InvalidRating = "Rating must be between 1 and 5!";
             public const string InvalidDoctorId = "This doctor id is invalid!";
             public const string ItsDayOff = "Sorry, but today is a holiday!";
             public const string InvalidDate = "Date must be valid!";
             public const string InvalidMonthRange = "Month must be between 1 and 12!";
+            public const string InvalidCommentLength = "Comment must contains maximum 160 symbols!";
         }
     }
 }

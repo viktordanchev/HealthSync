@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import useCheckAuth from './hooks/useCheckAuth';
 import Header from './components/Header';
@@ -13,10 +13,15 @@ import AllDoctors from './components/doctor/AllDoctors';
 
 function App() {
     const { isSessionEnd } = useCheckAuth();
+    const [showSessionMessage, setShowSessionMessage] = useState();
+
+    useEffect(() => {
+        setShowSessionMessage(isSessionEnd);
+    }, [isSessionEnd]);
 
     return (
         <>
-            {isSessionEnd ? <SessionMessage /> : null}
+            {showSessionMessage && <SessionMessage close={() => setShowSessionMessage(false)} />}
             <Router>
                 <Header />
                 <main className="grow content-center my-6">

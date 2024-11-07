@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Errors;
-using static Common.Errors.Doctors;
+using static Common.Errors.Doctor;
+using static Common.Constants.Review;
 
 namespace RestAPI.RequestDtos.Doctor
 {
@@ -10,7 +11,10 @@ namespace RestAPI.RequestDtos.Doctor
         public int DoctorId { get; set; }
 
         [Required(ErrorMessage = $"Rating {RequiredField}")]
-        [Range(1, 5, ErrorMessage = InvalidRating)]
+        [Range(RatingMin, RatingMax, ErrorMessage = InvalidRating)]
         public int Rating { get; set; }
+
+        [MaxLength(CommentMaxLength, ErrorMessage = InvalidCommentLength)]
+        public string Comment { get; set; } = string.Empty;
     }
 }

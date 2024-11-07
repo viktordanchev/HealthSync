@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.RequestDtos.Doctor;
-using static Common.Errors.Doctors;
+using static Common.Errors.Doctor;
 
 namespace RestAPI.Controllers
 {
@@ -45,7 +45,7 @@ namespace RestAPI.Controllers
                 return BadRequest(new { Error = InvalidDoctorId });
             }
             
-            await _doctorService.AddReview(request.DoctorId, request.Rating, User.Identity.Name);
+            await _doctorService.AddReview(request.DoctorId, request.Rating, request.Comment, User.Identity.Name);
 
             return Ok();
         }
