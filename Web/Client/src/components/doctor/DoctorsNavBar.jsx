@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { getSpecialties } from '../../services/apiRequests/doctor';
+import apiRequest from '../../services/apiRequest';
+import Loading from '../Loading';
 
 function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }) {
     const [specialties, setSpecialties] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [searchOnChange, setSearchOnChange] = useState('');
 
     useEffect(() => {
         const receiveSpecialties = async () => {
+            await new Promise(res => setTimeout(res, 3000));
             const response = await apiRequest('doctor', 'getSpecialties', undefined, undefined, 'GET', false);
             setSpecialties(response);
+            setLoading(false);
         };
 
         receiveSpecialties();
@@ -44,12 +48,15 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
                 >
-                    <option value="" disabled hidden>Filter</option>
-                    <>
-                        {specialties.map((specialty, index) => (
-                            <option key={index} value={specialty}>{specialty}</option>
-                        ))}
-                    </>
+                    {loading ? <Loading type={'small'} /> :
+                        <>
+                            <option value="" disabled hidden>Filter</option>
+                            <>
+                                {specialties.map((specialty, index) => (
+                                    <option key={index} value={specialty}>{specialty}</option>
+                                ))}
+                            </>
+                        </>}
                 </select>
             </div>
             <div className="flex items-center sm:w-full">

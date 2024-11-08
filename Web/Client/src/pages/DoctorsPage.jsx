@@ -63,7 +63,7 @@ function DoctorsPage() {
             };
 
             const response = await apiRequest('doctor', 'all', dto, undefined, 'POST', false);
-            setDoctors(doctors);
+            setDoctors(response);
 
             setLoading(false);
         };

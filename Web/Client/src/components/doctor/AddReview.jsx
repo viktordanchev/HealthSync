@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { addReview } from '../../services/apiRequests/doctor';
+import apiRequest from '../../services/apiRequest';
 import useCheckAuth from '../../hooks/useCheckAuth';
 
 function AddReview({ doctorId }) {
@@ -18,7 +18,7 @@ function AddReview({ doctorId }) {
             rating: rating
         };
 
-        var response = await addReview(dto, jwtToken);
+        const response = await apiRequest('doctor', 'addReview', dto, jwtToken, 'POST', true);
 
         setMessage(response);
         setIsVisible(false);

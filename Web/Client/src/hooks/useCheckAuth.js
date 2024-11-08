@@ -23,19 +23,19 @@ const useCheckAuth = () => {
                 if (decodedToken.exp > currentTime) {
                     setIsAuthenticated(true);
                 } else {
-                    const newJwtToken = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
+                    const response = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
 
-                    if (newJwtToken) {
-                        setNewJwtToken(newJwtToken);
+                    if (response.token) {
+                        setNewJwtToken(response.token);
                     } else {
                         setIsSessionEnd(true);
                     }
                 }
             } else {
-                const newJwtToken = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
+                const response = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
                 
-                if (newJwtToken) {                    
-                    setNewJwtToken(newJwtToken);
+                if (response.token) {                    
+                    setNewJwtToken(response.token);
                 }
             }
 

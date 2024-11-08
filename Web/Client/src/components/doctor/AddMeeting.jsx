@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAvailableMeetTimes } from '../../services/apiRequests/doctor';
+import apiRequest from '../../services/apiRequest';
 import useCheckAuth from '../../hooks/useCheckAuth';
 
 function AddMeeting({ doctorId, date }) {
@@ -21,7 +21,7 @@ function AddMeeting({ doctorId, date }) {
                 date: date.toISOString()
             };
 
-            const response = await getAvailableMeetTimes(dto, jwtToken);
+            const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, jwtToken, 'POST', true);
             setMeetingTimes(response);
         };
 
