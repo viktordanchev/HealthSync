@@ -1,0 +1,1 @@
+export const reviewCommentLength = 160;

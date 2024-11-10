@@ -15,7 +15,8 @@ module.exports = {
                 lg: { min: '901px', max: '1300px' },
             },
             spacing: {
-                'doctorCardSm': '70rem',
+                'doctorCardSm': '90rem',
+                '19/20': '95%',
             },
             transitionProperty: {
                 'opacity-transform': 'opacity, transform',

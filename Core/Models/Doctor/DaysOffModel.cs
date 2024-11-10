@@ -1,8 +1,8 @@
 ﻿namespace Core.Models.Doctor
 {
-    public class Model
+    public class DaysOffModel
     {
-        public Model()
+        public DaysOffModel()
         {
             DaysOff = new List<DateTime>();
             WeeklyDaysOff = new List<DayOfWeek>();

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
-import Loading from '../Loading';
 
 function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }) {
     const [specialties, setSpecialties] = useState([]);
@@ -11,8 +10,8 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
 
     useEffect(() => {
         const receiveSpecialties = async () => {
-            await new Promise(res => setTimeout(res, 3000));
             const response = await apiRequest('doctor', 'getSpecialties', undefined, undefined, 'GET', false);
+
             setSpecialties(response);
             setLoading(false);
         };
@@ -48,14 +47,15 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
                 >
-                    {loading ? <Loading type={'small'} /> :
+                    <option value="" disabled hidden>Filter</option>
+                    {loading ? 
+                        <option disabled value="">
+                            Loading...
+                        </option> :
                         <>
-                            <option value="" disabled hidden>Filter</option>
-                            <>
-                                {specialties.map((specialty, index) => (
-                                    <option key={index} value={specialty}>{specialty}</option>
-                                ))}
-                            </>
+                            {specialties.map((specialty, index) => (
+                                <option key={index} value={specialty}>{specialty}</option>
+                            ))}
                         </>}
                 </select>
             </div>

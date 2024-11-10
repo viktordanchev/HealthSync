@@ -82,6 +82,7 @@ namespace Core.Services
                 .Take(3)
                 .Select(r => new ReviewResponse()
                 {
+                    Id = r.Id,
                     Rating = r.Rating,
                     Date = r.Date,
                     Comment = r.Comment,
@@ -167,9 +168,7 @@ namespace Core.Services
         public async Task<IEnumerable<DayOfWeekModel>> GetDaysInMonth(int doctorId, int month, int year)
         {
             var daysOff = await GetDaysOff(doctorId);
-
             int daysInMonthNum = DateTime.DaysInMonth(year, month);
-
             var daysInMonth = new List<DayOfWeekModel>();
             bool isWorkDay;
 
@@ -177,14 +176,7 @@ namespace Core.Services
             {
                 var date = new DateTime(year, month, day);
 
-                if(daysOff.DaysOff.Contains(date) || daysOff.WeeklyDaysOff.Contains(date.DayOfWeek))
-                {
-                    isWorkDay = false;
-                }
-                else
-                {
-                    isWorkDay = true;
-                }
+                isWorkDay = daysOff.DaysOff.Contains(date) || daysOff.WeeklyDaysOff.Contains(date.DayOfWeek) ? false : true;
 
                 daysInMonth.Add(new DayOfWeekModel(date.ToString("yyyy-MM-dd"), isWorkDay));
             }
@@ -192,12 +184,12 @@ namespace Core.Services
             return daysInMonth;
         }
 
-        private async Task<Model> GetDaysOff(int doctorId)
+        private async Task<DaysOffModel> GetDaysOff(int doctorId)
         {
             return await _context.Doctors
                 .AsNoTracking()
                 .Where(d => d.Id == doctorId)
-                .Select(d => new Model()
+                .Select(d => new DaysOffModel()
                 {
                     DaysOff = d.DaysOff
                         .Select(doff => doff.Date)

@@ -57,14 +57,20 @@ namespace RestAPI.Services
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var expireTime = int.Parse(_config["CookieSettings:AccessJWTTokenMinutes"]);
 
-            var userData = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId);
 
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, userData.FirstName + " " + userData.LastName),
-                new Claim(ClaimTypes.Email, userData.Email),
+                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
+                new Claim(ClaimTypes.Email, user.Email),
             };
+
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],

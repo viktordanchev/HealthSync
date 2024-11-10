@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241107145649_AddNewTables")]
+    [Migration("20241109151702_AddNewTables")]
     partial class AddNewTables
     {
         /// <inheritdoc />
@@ -24,21 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("DayOffDoctor", b =>
-                {
-                    b.Property<int>("DaysOffId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DoctorsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DaysOffId", "DoctorsId");
-
-                    b.HasIndex("DoctorsId");
-
-                    b.ToTable("DayOffDoctor");
-                });
 
             modelBuilder.Entity("Infrastructure.Entities.ApplicationUser", b =>
                 {
@@ -124,7 +109,12 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("DaysOff");
                 });
@@ -428,19 +418,15 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("DayOffDoctor", b =>
+            modelBuilder.Entity("Infrastructure.Entities.DayOff", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.DayOff", null)
-                        .WithMany()
-                        .HasForeignKey("DaysOffId")
+                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                        .WithMany("DaysOff")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Entities.Doctor", null)
-                        .WithMany()
-                        .HasForeignKey("DoctorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
@@ -569,6 +555,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
                 {
+                    b.Navigation("DaysOff");
+
                     b.Navigation("Meetings");
 
                     b.Navigation("Reviews");

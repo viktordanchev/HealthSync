@@ -11,10 +11,10 @@ function DoctorCard({ doctor }) {
     const toggleDetails = () => {
         const newSearchParams = new URLSearchParams(searchParams);
 
-        if (newSearchParams.has('doctor')) {
-            newSearchParams.delete('doctor');
+        if (newSearchParams.has('name')) {
+            newSearchParams.delete('name');
         } else {
-            newSearchParams.set('doctor', doctor.name);
+            newSearchParams.set('name', doctor.name);
         }
 
         setSearchParams(newSearchParams);
@@ -24,22 +24,22 @@ function DoctorCard({ doctor }) {
     return (
         <>
             <div
-                className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center transition-all duration-700 ease-in-out ${isOpen ? 'h-3/4 w-3/5 fixed inset-0 m-auto bg-opacity-85 z-20 lg:w-3/4 sm:relative sm:h-doctorCardSm sm:w-full sm:m-2' : 'relative w-64 h-80 bg-opacity-35 shadow-md shadow-gray-400 sm:w-full'}`}
+                className={`bg-zinc-700 rounded-xl m-2 p-4 flex flex-col justify-between items-center transition-all duration-700 ease-in-out sm:m-0 sm:mb-4 ${isOpen ? 'h-4/5 w-3/4 fixed inset-0 m-auto bg-opacity-85 z-20 text-base lg:h-5/6 lg:w-5/6 md:h-19/20 md:w-19/20 md:text-sm sm:relative sm:h-doctorCardSm sm:w-full sm:text-sm' : 'relative w-64 h-80 bg-opacity-35 shadow-md shadow-gray-400 text-lg sm:w-full'}`}
             >
                 {isOpen && (
                     <button
                         onClick={toggleDetails}
                         className="w-full text-right focus:outline-none"
                     >
-                        <FontAwesomeIcon icon={faXmark} className="text-white text-2xl" />
+                        <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
                     </button>
                 )}
                 <div className={`flex flex-col items-center space-y-2 ${isOpen ? 'text-white' : 'text-gray-700'}`}>
                     <img
                         src={doctor.imgUrl ? doctor.imgUrl : '/profile.jpg'}
-                        className={`rounded-full object-cover ${isOpen ? 'w-20 h-20' : 'w-24 h-24'}`}
+                        className="rounded-full object-cover w-20 h-20"
                     />
-                    <div className="text-center text-xl">
+                    <div className="text-center text-lg md:text-base sm:text-base">
                         <p>{doctor.name}</p>
                         <p className="font-bold">{doctor.specialty}</p>
                     </div>
@@ -47,11 +47,11 @@ function DoctorCard({ doctor }) {
                 {!isOpen ?
                     <>
                         <div className="w-full flex justify-evenly text-gray-700">
-                            <div className="flex flex-col items-center text-xl">
+                            <div className="flex flex-col items-center">
                                 <p>Rating</p>
                                 <p className="font-bold">{doctor.rating > 0 ? doctor.rating : 0} / 5</p>
                             </div>
-                            <div className="flex flex-col items-center text-xl">
+                            <div className="flex flex-col items-center">
                                 <p>Reviews</p>
                                 <p className="font-bold">{doctor.totalReviews > 0 ? doctor.totalReviews : 0}</p>
                             </div>

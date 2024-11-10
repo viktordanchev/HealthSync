@@ -18,19 +18,14 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "b9995cfc-74aa-468f-a2e5-ae4c0d4c7144", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEO5k+Xs3cmzOasFsDonsmT+Lh9nQjsxpmqYjetdd+OunTs74d1jonvViHLvYUu/YwQ==", null, false, "11904922-1815-4ad4-bad1-341b84f8d2cc", false, "m.marinova@mail.com" },
-                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "2d61045b-dda1-4df7-9e21-ed549339110b", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEMFBL9jjO6eGHNmmdhf1/1zinC23p5Z7oI35OVtNCSqMb3GSBzF0L4qhSMuFfLp0SA==", null, false, "7da4f982-93f5-4251-bfcc-3dd13822147e", false, "v.yankova@mail.com" },
-                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "4c903d82-cedc-40b5-867c-253cdef13df9", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEIpEGP3DF00BDFFc3nl5i8o6ih5S9Ij4s+Zx7UsSeF4xsWtF+bZCqivOftRTkx4Gkg==", null, false, "85a23199-5407-4beb-a3f8-194bd17a5243", false, "a.kirilov@mail.com" },
-                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "ae224938-2296-4f8d-a85a-20335e5d2b1b", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEFqDwNN8/HGkzEpKhH+5poAVlXYPWs3lqAqjWYbadVTBsyCt5LI9+bRAA2+gBvGSkg==", null, false, "0ddf3e1b-94c1-4997-9179-1f33cbcf54cd", false, "k.conev@mail.com" },
-                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "9a0d4b82-4d00-440c-84a2-10f480184d48", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEOZl/olTk2vMyZOtI/atxvd3881ZKb/DeQiG7PW2kfa/Cc+hlo60RERp1grqO3kQUw==", null, false, "ece190ca-aa50-4710-ade0-d888dd89558f", false, "i.ivanov@mail.com" },
-                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "4ab8d08c-5af1-4d8e-88c8-02430127dec1", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEOuNQY/SKRWKSkMiFN4zDUsGZgk6rkB0yboLZP4lpyQjTCjgEJUJ5F4TQ6d/ETSOjQ==", null, false, "9b55785b-7c87-41ff-817f-4af0ec9ce700", false, "m.kirilova@mail.com" },
-                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "b88886e0-af0f-461f-af78-76d18fcd2605", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEA9QK2myCWi3NU5gaL02d7pGFDPbUqX3HU+VoJeTieK07cPYqlimlCDaGMXfXBblxA==", null, false, "dcb08e0f-2b87-4a64-a2e5-66ea269a5211", false, "i.ivanova@mail.com" }
+                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "ab847f48-6ef0-483f-b0d9-0fda95f2f911", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEB3Sw4AHs8PGdEGXvHxOUBaH7r+KQ9THfwXYJnxu97GiOtqV/JpFirUD1wSxJ3yIKQ==", null, false, "aed9da52-139f-41ab-b5a5-56a3db0689b1", false, "m.marinova@mail.com" },
+                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "b4660c66-71c2-46c3-b329-3931efca7919", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEA2oHprymTevTm/VClHzIGLiv9ha6mMbG0HdCj9gvv31jECPPQ98LOwl8DHutGspsA==", null, false, "631df377-419e-4e6d-81af-1d6696954a1e", false, "v.yankova@mail.com" },
+                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "f3cdc944-6bac-4c22-8b33-4a1554ced2b4", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEHAEfqT73VLYCzzdHx1NFooQtvlcx4Xuq4+JLTC0HEHoJwBxI2rt+nLkw5/Cz7DRNg==", null, false, "e11139ad-f06c-4db7-9498-54258d849239", false, "a.kirilov@mail.com" },
+                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "ba1ddf13-61d5-425f-8523-887c27f3b9a5", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEIZdATwi+wr26yjnG1/inVfbLtz52xQFbURSJuf3JNwdE3lpMC7TVKOn0trym3bDnA==", null, false, "07feed7b-6b92-4990-a878-a183b9153ac7", false, "k.conev@mail.com" },
+                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "d2498b5c-35cd-4c7a-abea-8351b71f0462", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEFkgIRPsojaRDKtXwO5aEkMX0R+VNLyWeXzWWGq0LbxhNEmqdiQJ6EE5tbRkI1BlPw==", null, false, "908a7886-9d5a-4ec4-adb2-cd680e122653", false, "i.ivanov@mail.com" },
+                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "a0337321-3a1b-41bb-8351-d24b8bfffcc5", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEImg3lZvPhp1qtyjk8O5w6I5yZR8OvW1RJm+or3FVR+hv7A6Jj7i0if83T4OeyiIjA==", null, false, "d2e072ee-ed1f-43b5-8cdd-384d158561b8", false, "m.kirilova@mail.com" },
+                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "20805e6e-d2a9-4365-b08d-861838bfd292", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEFXFZJcac8iHrQ7SmJH14EKRQ8EYHrLWkx9jrE6Va9SaQDD0615z9+E2vmjHObAYeA==", null, false, "2baae19f-edb9-47ca-877c-025807d2a357", false, "i.ivanova@mail.com" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "DaysOff",
-                columns: new[] { "Id", "Date" },
-                values: new object[] { 1, new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Hospitals",
@@ -65,6 +60,11 @@ namespace Infrastructure.Migrations
                     { 6, 2, "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", "https://storage.cloud.google.com/healthsync/monika-kirilova.jpg", null, 30, 3 },
                     { 7, 2, "78850da7-a0ff-42f3-a862-d162457910a0", null, null, 10, 1 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "DaysOff",
+                columns: new[] { "Id", "Date", "DoctorId" },
+                values: new object[] { 1, new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
 
             migrationBuilder.InsertData(
                 table: "Reviews",

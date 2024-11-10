@@ -16,6 +16,7 @@ namespace Infrastructure.Configurations
             var dayOff1 = new DayOff()
             {
                 Id = 1,
+                DoctorId = 1,
                 Date = new DateTime(2024, 12, 25, 0, 0, 0)
             };
 
