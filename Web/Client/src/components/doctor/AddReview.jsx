@@ -67,6 +67,7 @@ function AddReview({ doctorId }) {
                 </button>
             </div>
         </>
+    );
 }
 
 export default AddReview;
