@@ -61,13 +61,19 @@ namespace Core.Services
                 .AsNoTracking()
                 .Where(d => d.Id == doctorId)
                 .Select(d => new DoctorDetailsResponse() 
-                { 
+                {
+                    Id = d.Id,
+                    Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
+                    ImgUrl = d.ImgUrl,
+                    Specialty = d.Specialty.Type,
+                    Rating = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,
+                    TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count(),
                     HospitalName = d.Hospital.Name,
                     HospitalAddress = d.Hospital.Address,
                     Information = d.Information,
                     PhoneNumber = d.Identity.PhoneNumber
                 })
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
             return doctor;
         }

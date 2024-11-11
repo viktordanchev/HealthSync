@@ -7,7 +7,6 @@ import { reviewCommentLength } from '../../constants/constants';
 function AddReview({ doctorId }) {
     const navigate = useNavigate();
     const { isAuthenticated, jwtToken } = useCheckAuth();
-    const [isVisible, setIsVisible] = useState(false);
     const [message, setMessage] = useState('');
     const [rating, setRating] = useState(1);
 
@@ -20,7 +19,7 @@ function AddReview({ doctorId }) {
         const response = await apiRequest('doctor', 'addReview', dto, jwtToken, 'POST', true);
 
         setMessage(response);
-        setIsVisible(false);
+        
         setTimeout(() => { setMessage('') }, 3000);
     };
 

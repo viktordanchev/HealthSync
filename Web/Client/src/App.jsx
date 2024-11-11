@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import SessionMessage from './components/SessionMessage';
+import NotFound from './components/NotFound';
+import DoctorDetails from './components/doctor/DoctorDetails';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import VerificationPage from './pages/VerificationPage';
@@ -33,6 +35,8 @@ function App() {
                         <Route path="/account/verify" element={<VerificationPage />} />
                         <Route path="/account/recoverPassword" element={<RecoverPassPage />} />
                         <Route path="/doctors" element={<DoctorsPage />} />
+                        <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </main>
                 <Footer />

@@ -8,6 +8,7 @@ import Loading from '../Loading';
 
 function DoctorReviews({ doctorId }) {
     const scrollContainerRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(true);
     const [reviews, setReviews] = useState([]);

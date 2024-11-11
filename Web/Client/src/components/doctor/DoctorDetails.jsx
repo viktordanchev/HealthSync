@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import apiRequest from '../../services/apiRequest';
 import Loading from '../Loading';
 import MeetingsCalendar from './MeetingsCalendar';
 import DoctorReviews from './DoctorReviews';
 
-function DoctorDetails({ doctorId }) {
+function DoctorDetails() {
+    const location = useLocation();
     const [loading, setLoading] = useState(true);
     const [doctor, setDoctor] = useState({});
+    const doctorId = location.state?.doctorId;
 
     useEffect(() => {
         const receiveDoctorDetails = async () => {
