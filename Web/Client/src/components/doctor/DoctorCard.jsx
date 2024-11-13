@@ -29,7 +29,7 @@ function DoctorCard({ doctor }) {
                 </div>
             </div>
             <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-2 rounded"
                 onClick={() => navigate(`/doctors/${pathDoctorName}/${pathDoctorSpecialty}`, { state: { doctorId: doctor.id } })}
             >
                 Details

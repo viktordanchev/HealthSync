@@ -1,4 +1,4 @@
-﻿using RestAPI.RequestDtos.Enums;
+﻿using RestAPI.RequestDtos.DoctorEnums;
 
 namespace RestAPI.RequestDtos.Doctor
 {

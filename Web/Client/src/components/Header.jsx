@@ -56,10 +56,10 @@ const Header = () => {
                                 </p>
                             ) : (
                                 <>
-                                        <a href="/login" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 md:text-base sm:text-base">
+                                        <a href="/login" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded border-2 border-blue-500 hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
                                         Login
                                     </a>
-                                        <a href="/register" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 md:text-base sm:text-base">
+                                        <a href="/register" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded border-2 border-blue-500 hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
                                         Register
                                     </a>
                                 </>
