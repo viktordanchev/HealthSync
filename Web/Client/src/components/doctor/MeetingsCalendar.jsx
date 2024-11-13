@@ -22,7 +22,7 @@ const MeetingsCalendar = ({ doctorId }) => {
                 month: currentMonth + 1,
                 year: currentYear
             }
-            
+
             const response = await apiRequest('doctor', 'getDaysInMonth', dto, undefined, 'POST', false);
 
             const transformedData = response.map(item => ({
@@ -81,58 +81,56 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     return (
-        <article className="w-1/2 flex flex-col justify-end md:w-full sm:w-full">
-            <p className="text-center mb-1 text-white text-lg font-bold md:text-base sm:text-base">Meetings</p>
-            {loading ?
-                <div className="h-52 flex items-center">
-                    <Loading type={'small'} />
-                </div> :
-                <div className="h-60">
-                    <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-zinc-700 py-1">
-                        {new Date() <= new Date(currentYear, currentMonth) ?
-                            <button onClick={handlePreviousMonth} className="w-1/3 text-white">
-                                Previous
-                            </button> :
-                            <div className="w-1/3">
-                            </div>}
-                        <div className="w-1/3 text-white text-center flex justify-center space-x-1">
-                            <p>{monthNames[currentMonth]}</p>
-                            <p>{currentYear}</p>
+        <>
+            <div className="h-full">
+                {loading ? <Loading type={'small'} /> :
+                    <>
+                        <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
+                            {new Date() <= new Date(currentYear, currentMonth) ?
+                                <button onClick={handlePreviousMonth} className="w-1/3">
+                                    Previous
+                                </button> :
+                                <div className="w-1/3">
+                                </div>}
+                            <div className="w-1/3 text-center flex justify-center space-x-1">
+                                <p>{monthNames[currentMonth]}</p>
+                                <p>{currentYear}</p>
+                            </div>
+                            <button onClick={handleNextMonth} className="w-1/3">Next</button>
                         </div>
-                        <button onClick={handleNextMonth} className="w-1/3 text-white">Next</button>
+                        <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-1 text-center text-sm p-1 sm:gap-2" id="calendar">
+                            {daysOfWeek.map((day, index) => (
+                                <div key={index} className="text-center">{day}</div>
+                            ))}
+                            {days.length == 0 ? <Loading type={'small'} /> :
+                                <>
+                                    {days.map((day, index) => (
+                                        <div
+                                            key={index}
+                                            onClick={() => handleDayClick(day)}
+                                            className={`rounded-full flex items-center justify-center ${day && new Date().getDate() === day.date.getDate() && new Date().getFullYear() === currentYear && new Date().getMonth() === currentMonth ? 'bg-blue-500 text-white' : 'bg-gray-200'} ${day && new Date() < day.date && day.isWorkDay ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}
+                                        >
+                                            <p>{day ? day.date.getDate() : ''}</p>
+                                        </div>
+                                    ))}
+                                </>}
+                        </div>
+                    </>}
+                {isVisible && (
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-95 border border-white rounded-xl bg-zinc-700 p-4 flex flex-col space-y-4 sm:w-full">
+                        <div className="w-full text-right">
+                            <button onClick={() => setIsVisible(false)}>
+                                <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
+                            </button>
+                        </div>
+                        <AddMeeting
+                            doctorId={doctorId}
+                            date={date}
+                        />
                     </div>
-                    <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-1 text-center text-sm p-2 sm:gap-2" id="calendar">
-                        {daysOfWeek.map((day, index) => (
-                            <div key={index} className="text-center">{day}</div>
-                        ))}
-                        {days.length == 0 ? <Loading type={'small'} /> :
-                            <>
-                                {days.map((day, index) => (
-                                    <div
-                                        key={index}
-                                        onClick={() => handleDayClick(day)}
-                                        className={`rounded-full flex items-center justify-center ${day && new Date().getDate() === day.date.getDate() && new Date().getFullYear() === currentYear && new Date().getMonth() === currentMonth ? 'bg-blue-500 text-white' : 'bg-gray-200'} ${day && new Date() < day.date && day.isWorkDay ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}
-                                    >
-                                        <p>{day ? day.date.getDate() : ''}</p>
-                                    </div>
-                                ))}
-                            </>}
-                    </div>
-                </div>}
-            {isVisible && (
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-95 border border-white rounded-xl bg-zinc-700 p-4 flex flex-col space-y-4 sm:w-full">
-                    <div className="w-full text-right">
-                        <button onClick={() => setIsVisible(false)}>
-                            <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
-                        </button>
-                    </div>
-                    <AddMeeting
-                        doctorId={doctorId}
-                        date={date}
-                    />
-                </div>
-            )}
-        </article>
+                )}
+            </div>
+        </>
     );
 };
 
