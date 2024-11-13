@@ -20,7 +20,7 @@ namespace Infrastructure.Configurations
                 Date = new DateTime(2024, 10, 14, 9, 0, 0),
                 Rating = 5,
                 Reviewer = "Aleks Petrov",
-                Comment = "I'm truly grateful for the care and expertise you provided."
+                Comment = "Dr. Ivanov went above and beyond in providing exceptional care. He took the time to listen to all my concerns, explained each step of the treatment, and made me feel at ease throughout the process. His professionalism, kindness, and dedication are truly appreciated. Highly recommended!"
             };
 
             var review2 = new Review()

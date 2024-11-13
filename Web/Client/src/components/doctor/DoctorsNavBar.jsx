@@ -31,7 +31,7 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
     };
 
     return (
-        <article className="rounded-full bg-maincolor my-6 p-2 flex justify-between items-center space-x-6 sm:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2 sm:space-x-0">
+        <article className="rounded-full bg-maincolor p-2 flex justify-between items-center space-x-6 sm:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2 sm:space-x-0">
             <div className="flex space-x-3 sm:justify-between">
                 <select className="bg-white h-8 rounded-full text-center focus:outline-none"
                     value={order}

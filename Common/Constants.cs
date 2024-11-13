@@ -9,12 +9,12 @@
         {
             public const int RatingRangeMin = 1;
             public const int RatingRangeMax = 5;
-            public const int CommentMaxLength = 160;
+            public const int CommentMaxLength = 300;
         }
 
         public static class Doctor
         {
-            public const int InformationMaxLength = 300;
+            public const int InformationMaxLength = 1000;
         }
     }
 }

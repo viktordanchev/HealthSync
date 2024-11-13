@@ -21,7 +21,7 @@ namespace Infrastructure.Configurations
                 SpecialtyId = 1, //Orthodontist
                 MeetingTimeMinutes = 30,
                 ImgUrl = "https://storage.cloud.google.com/healthsync/ivan-ivanov.jpg",
-                Information = "Dr. Ivanov is a highly skilled orthodontist with a dental degree from Sofia Medical University. After specializing in orthodontics, he completed his residency at St. Ivan Rilski Hospital. He is committed to providing exceptional care and creating beautiful, healthy smiles for his patients."
+                Information = "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care."
             };
 
             var doctor2 = new Doctor()

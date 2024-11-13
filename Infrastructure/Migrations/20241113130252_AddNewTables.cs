@@ -49,7 +49,7 @@ namespace Infrastructure.Migrations
                     SpecialtyId = table.Column<int>(type: "int", nullable: false),
                     MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false),
                     ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Information = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
+                    Information = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -130,7 +130,7 @@ namespace Infrastructure.Migrations
                     Rating = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Reviewer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(160)", maxLength: 160, nullable: true)
+                    Comment = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {

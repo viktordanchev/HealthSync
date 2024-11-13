@@ -32,7 +32,7 @@ function DoctorDetails() {
     return (
         <>
             {loading ? <Loading type={'big'} /> :
-                <section className="h-full m-20">
+                <section className="h-full bg-red-500">
                     <div>
                         <img
                             src={doctor.imgUrl ? doctor.imgUrl : '/profile.jpg'}
