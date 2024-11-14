@@ -82,7 +82,7 @@ const MeetingsCalendar = ({ doctorId }) => {
 
     return (
         <>
-            <div className="h-full">
+            <div className="h-80">
                 {loading ? <Loading type={'small'} /> :
                     <>
                         <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
@@ -98,7 +98,7 @@ const MeetingsCalendar = ({ doctorId }) => {
                             </div>
                             <button onClick={handleNextMonth} className="w-1/3">Next</button>
                         </div>
-                        <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-1 text-center text-sm p-1 sm:gap-2" id="calendar">
+                        <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
                             {daysOfWeek.map((day, index) => (
                                 <div key={index} className="text-center">{day}</div>
                             ))}

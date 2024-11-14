@@ -1,1 +1,1 @@
-export const reviewCommentLength = 160;
+export const reviewCommentLength = 300;

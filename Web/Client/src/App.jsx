@@ -26,7 +26,7 @@ function App() {
             {showSessionMessage && <SessionMessage close={() => setShowSessionMessage(false)} />}
             <Router>
                 <Header />
-                <main className="grow content-center my-6">
+                <main className="my-6">
                     <Routes>
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<Home />} />

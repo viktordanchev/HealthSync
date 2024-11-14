@@ -72,7 +72,7 @@ function DoctorsPage() {
     }, [order, search, filter]);
 
     return (
-        <section className="h-full mx-32 flex flex-col items-center space-y-4 lg:mx-16 md:mx-6 sm:mx-6">
+        <section className="mx-32 flex flex-col items-center space-y-4 lg:mx-16 md:mx-6 sm:mx-6">
             <DoctorsNavBar
                 order={order}
                 setOrder={setOrder}
