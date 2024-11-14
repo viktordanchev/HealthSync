@@ -33,7 +33,7 @@ function DoctorDetails() {
     return (
         <>
             {loading ? <Loading type={'big'} /> :
-                <section className="h-full flex space-x-6 mx-44 text-gray-700">
+                <section className="h-full flex space-x-6 mx-44 text-gray-700 lg:mx-16 md:mx-6">
                     <article className="h-full w-1/4 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col items-center">
                         <div className="flex flex-col items-center space-y-3">
                             <img
