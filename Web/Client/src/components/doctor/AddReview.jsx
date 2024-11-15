@@ -4,21 +4,28 @@ import apiRequest from '../../services/apiRequest';
 import useCheckAuth from '../../hooks/useCheckAuth';
 import { reviewCommentLength } from '../../constants/constants';
 
-function AddReview({ doctorId }) {
+function AddReview({ doctorId, setMessage }) {
     const navigate = useNavigate();
     const { isAuthenticated, jwtToken } = useCheckAuth();
     const [rating, setRating] = useState(1);
+    const [comment, setComment] = useState('');
     const [isOpen, setIsOpen] = useState(false);
 
     const add = async () => {
         const dto = {
             doctorId: doctorId,
-            rating: rating
+            rating: rating,
+            comment: comment
         };
 
-        const response = await apiRequest('doctor', 'addReview', dto, jwtToken, 'POST', true);
+        var response = await apiRequest('doctor', 'addReview', dto, jwtToken, 'POST', true);
 
-        setIsOpen(false);
+        if (response.message) {
+            setMessage(response.message);
+            setIsOpen(false);
+
+            setTimeout(() => { setMessage(''); }, 3000);
+        }
     };
 
     return (
@@ -59,7 +66,10 @@ function AddReview({ doctorId }) {
                             </div>
                             <div className="w-full">
                                 <p className="font-bold">Comment</p>
-                                <textarea maxLength={reviewCommentLength} className="h-24 w-full px-1 resize-none bg-white text-black rounded-xl border-2 focus:outline-none focus:border-blue-500 scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-blue-500 scrollbar-track-gray-200"></textarea>
+                                <textarea
+                                    onChange={(e) => setComment(e.target.value)}
+                                    maxLength={reviewCommentLength}
+                                    className="h-24 w-full px-1 resize-none bg-white text-black rounded-xl border-2 focus:outline-none focus:border-blue-500 scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-blue-500 scrollbar-track-gray-200"></textarea>
                             </div>
                         </div>
                         <div className="w-full flex justify-evenly">

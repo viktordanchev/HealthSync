@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import useCheckAuth from '../hooks/useCheckAuth';
-import Message from '../components/account/Message';
+import Message from '../components/Message';
 
 function RegisterPage() {
     const navigate = useNavigate();
@@ -32,12 +32,10 @@ function RegisterPage() {
         } else {
             setMessage(response.error);
         }
-
-        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (
-        <div className="flex flex-col space-y-6">
+        <>
             <Message message={message} type={'error'} />
 
             <section className="flex items-center justify-center">
@@ -111,7 +109,7 @@ function RegisterPage() {
                     </Formik>
                 </div>
             </section>
-        </div>
+        </>
     );
 }
 

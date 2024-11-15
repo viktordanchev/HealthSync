@@ -5,11 +5,13 @@ import Loading from '../Loading';
 import MeetingsCalendar from './MeetingsCalendar';
 import DoctorReviews from './DoctorReviews';
 import AddReview from './AddReview';
+import Message from '../Message';
 
 function DoctorDetails() {
     const navigate = useNavigate();
     const location = useLocation();
     const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState('');
     const [doctor, setDoctor] = useState({});
     const doctorId = location.state?.doctorId;
 
@@ -32,6 +34,8 @@ function DoctorDetails() {
 
     return (
         <>
+            <Message message={message} type={'message'} />
+
             {loading ? <Loading type={'big'} /> :
                 <section className="h-full flex space-x-6 mx-20 text-gray-700 lg:mx-16 lg:flex-col lg:space-x-0 lg:space-y-6 md:mx-6 md:flex-col md:space-x-0 md:space-y-6 sm:mx-6 sm:flex-col sm:space-x-0 sm:space-y-6">
                     <article className="w-1/4 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
@@ -48,7 +52,7 @@ function DoctorDetails() {
                             </div>
                         </div>
                         <hr className="border-e border-white w-full my-3" />
-                        <div className="h-full flex flex-col justify-evenly space-y-3 lg:flex-row lg:space-y-0 lg:space-x-3 lg:w-full lg:h-40 md:flex-row md:space-y-0 md:space-x-3 md:w-full md:h-52">
+                        <div className="h-full flex flex-col justify-evenly space-y-3 lg:flex-row lg:space-y-0 lg:space-x-3 lg:w-full lg:h-40 md:flex-row md:space-y-0 md:space-x-3 md:w-full md:h-64 sm:h-96">
                             <div className="h-1/2 w-full p-2 flex flex-col justify-evenly space-y-3 text-center bg-maincolor bg-opacity-65 rounded-xl lg:h-full md:h-full sm:h-full">
                                 <p className="font-bold underline text-xl">Personal info</p>
                                 <div className="flex flex-row text-sm">
@@ -85,7 +89,7 @@ function DoctorDetails() {
                         <div className="h-1/2 w-full flex space-x-6 md:flex-col md:space-x-0 md:space-y-6 sm:flex-col sm:space-x-0 sm:space-y-6">
                             <div className="w-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-between space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Reviews</p>
-                                <AddReview doctorId={doctorId} />
+                                <AddReview doctorId={doctorId} setMessage={setMessage} />
                                 <DoctorReviews doctorId={doctorId} />
                             </div>
                             <div className="w-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-evenly space-y-3 text-center md:w-full sm:w-full">

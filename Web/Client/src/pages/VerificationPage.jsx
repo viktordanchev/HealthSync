@@ -6,7 +6,7 @@ import apiRequest from '../services/apiRequest';
 import { validateEmail, validateVrfCode } from '../services/validationSchemas';
 import useTimer from '../hooks/useTimer';
 import useCheckAuth from '../hooks/useCheckAuth';
-import Message from '../components/account/Message';
+import Message from '../components/Message';
 
 function VerificationPage() {
     const navigate = useNavigate();
@@ -56,7 +56,7 @@ function VerificationPage() {
     };
 
     return (
-        <div className="flex flex-col space-y-6">
+        <>
             <Message message={message} type={messageType} />
 
             <section className="flex items-center justify-center">
@@ -108,7 +108,7 @@ function VerificationPage() {
                     </Formik>
                 </div>
             </section>
-        </div>
+        </>
     );
 }
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.RequestDtos.Doctor;
 using static Common.Errors;
+using static Common.Messages.Doctor;
 
 namespace RestAPI.Controllers
 {
@@ -62,10 +63,10 @@ namespace RestAPI.Controllers
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
-            
+
             await _doctorService.AddReview(request.DoctorId, request.Rating, request.Comment, User.Identity.Name);
 
-            return Ok();
+            return Ok(new { Message = AddedReview });
         }
 
         [HttpGet("getSpecialties")]

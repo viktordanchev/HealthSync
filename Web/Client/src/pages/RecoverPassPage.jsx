@@ -6,7 +6,7 @@ import apiRequest from '../services/apiRequest';
 import { validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import useTimer from '../hooks/useTimer';
 import useCheckAuth from '../hooks/useCheckAuth';
-import Message from '../components/account/Message';
+import Message from '../components/Message';
 
 function RecoverPassPage() {
     const navigate = useNavigate();
@@ -60,7 +60,7 @@ function RecoverPassPage() {
     };
 
     return (
-        <div className="flex flex-col space-y-6">
+        <>
             <Message message={message} type={messageType} />
 
             <section className="flex items-center justify-center">
@@ -116,7 +116,7 @@ function RecoverPassPage() {
                     </Formik>
                 </div>
             </section>
-        </div>
+        </>
     );
 }
 

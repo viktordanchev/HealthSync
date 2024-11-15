@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateEmail, validateLoginPassword } from '../services/validationSchemas';
 import useCheckAuth from '../hooks/useCheckAuth';
-import Message from '../components/account/Message';
+import Message from '../components/Message';
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ function LoginPage() {
     };
 
     return (
-        <div className="flex flex-col space-y-6">
+        <>
             <Message message={message} type={'error'} />
 
             <section className="flex items-center justify-center">
@@ -100,7 +100,7 @@ function LoginPage() {
                     </Formik>
                 </div>
             </section>
-        </div>
+        </>
     );
 }
 
