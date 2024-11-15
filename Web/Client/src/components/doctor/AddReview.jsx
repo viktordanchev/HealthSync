@@ -39,7 +39,7 @@ function AddReview({ doctorId }) {
                             <hr className="border-e border-white w-full my-2" />
                         </div>
                         <div className="w-full flex flex-col items-center md:space-y-3 sm:space-y-3">
-                            <div className="w-1/3">
+                            <div className="w-1/3 lg:w-1/2 md:w-2/3 sm:w-2/3">
                                 <p className="font-bold">Rating: {rating}</p>
                                 <div className="flex justify-between space-x-3 sm:space-x-2">
                                     {Array.from({ length: 5 }, (_, i) => (

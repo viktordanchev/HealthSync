@@ -38,7 +38,7 @@ namespace Server.Extensions
             .AddDefaultTokenProviders();
         }
 
-        public static void AddAuthenticationExtension(this IServiceCollection services, IConfiguration config)
+        public static void AddJWTAuthentication(this IServiceCollection services, IConfiguration config)
         {
             services.AddAuthentication(options =>
             {
@@ -56,7 +56,8 @@ namespace Server.Extensions
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = config["Jwt:Issuer"],
                     ValidAudience = config["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"])),
+                    ClockSkew = TimeSpan.Zero
                 };
 
                 options.Events = new JwtBearerEvents

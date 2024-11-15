@@ -8,7 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextExtension(builder.Configuration);
 builder.Services.AddIdentityExtension();
-builder.Services.AddAuthenticationExtension(builder.Configuration);
+builder.Services.AddJWTAuthentication(builder.Configuration);
 builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.AddServices();
 builder.Services.AddMemoryCache();
