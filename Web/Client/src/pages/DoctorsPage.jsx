@@ -91,6 +91,14 @@ function DoctorsPage() {
                             ))}
                         </>
                     }
+                    {doctors.length == 0 ?
+                        <div className="text-3xl">No doctors found!</div> :
+                        <>
+                            {doctors.map((doctor) => (
+                                <DoctorCard key={doctor.id} doctor={doctor} />
+                            ))}
+                        </>
+                    }
                 </article>}
         </section>
     );

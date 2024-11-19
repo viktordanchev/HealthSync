@@ -1,6 +1,4 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
 import AddMeeting from './AddMeeting';
 import Loading from '../Loading';
@@ -8,7 +6,7 @@ import Loading from '../Loading';
 const MeetingsCalendar = ({ doctorId }) => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-    const [isVisible, setIsVisible] = useState(false);
+    const [isDateChoosed, setIsDateChoosed] = useState(false);
     const [loading, setLoading] = useState(true);
     const [date, setDate] = useState(null);
     const [days, setDays] = useState([]);
@@ -74,62 +72,61 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     const handleDayClick = (day) => {
-        if (day && day.date > new Date() && day.isWorkDay) {
+        if (day && day.date > new Date() && day.isAvailable) {
             setDate(day.date);
-            setIsVisible(true);
+            setIsDateChoosed(true);
         }
     };
 
     return (
         <>
-            <div className="h-80">
-                {loading ? <Loading type={'small'} /> :
-                    <>
-                        <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
-                            {new Date() <= new Date(currentYear, currentMonth) ?
-                                <button onClick={handlePreviousMonth} className="w-1/3">
-                                    Previous
-                                </button> :
-                                <div className="w-1/3">
-                                </div>}
-                            <div className="w-1/3 text-center flex justify-center space-x-1">
-                                <p>{monthNames[currentMonth]}</p>
-                                <p>{currentYear}</p>
+            {!isDateChoosed ?
+                <div className="h-80">
+                    {loading ? <Loading type={'small'} /> :
+                        <>
+                            <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
+                                {new Date() <= new Date(currentYear, currentMonth) ?
+                                    <button onClick={handlePreviousMonth} className="w-1/3">
+                                        Previous
+                                    </button> :
+                                    <div className="w-1/3">
+                                    </div>}
+                                <div className="w-1/3 text-center flex justify-center space-x-1">
+                                    <p>{monthNames[currentMonth]}</p>
+                                    <p>{currentYear}</p>
+                                </div>
+                                <button onClick={handleNextMonth} className="w-1/3">Next</button>
                             </div>
-                            <button onClick={handleNextMonth} className="w-1/3">Next</button>
-                        </div>
-                        <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
-                            {daysOfWeek.map((day, index) => (
-                                <div key={index} className="text-center">{day}</div>
-                            ))}
-                            {days.length == 0 ? <Loading type={'small'} /> :
-                                <>
-                                    {days.map((day, index) => (
-                                        <div
-                                            key={index}
-                                            onClick={() => handleDayClick(day)}
-                                            className={`rounded-full flex items-center justify-center ${day && new Date().getDate() === day.date.getDate() && new Date().getFullYear() === currentYear && new Date().getMonth() === currentMonth ? 'bg-blue-500 text-white' : 'bg-gray-200'} ${day && new Date() < day.date && day.isWorkDay ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}
-                                        >
-                                            <p>{day ? day.date.getDate() : ''}</p>
-                                        </div>
-                                    ))}
-                                </>}
-                        </div>
-                    </>}
-                {isVisible && (
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-95 border border-white rounded-xl bg-zinc-700 p-4 flex flex-col space-y-4 sm:w-full">
-                        <div className="w-full text-right">
-                            <button onClick={() => setIsVisible(false)}>
-                                <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
-                            </button>
-                        </div>
-                        <AddMeeting
-                            doctorId={doctorId}
-                            date={date}
-                        />
-                    </div>
-                )}
-            </div>
+                            <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
+                                {daysOfWeek.map((day, index) => (
+                                    <div key={index} className="text-center">{day}</div>
+                                ))}
+                                {days.length == 0 ? <Loading type={'small'} /> :
+                                    <>
+                                        {days.map((day, index) => (
+                                            <div
+                                                key={index}
+                                                onClick={() => handleDayClick(day)}
+                                                className={`rounded-full flex items-center justify-center 
+                                                ${day && new Date().getDate() === day.date.getDate() &&
+                                                    new Date().getFullYear() === currentYear &&
+                                                    new Date().getMonth() === currentMonth
+                                                    ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
+                                                ${day && new Date() < day.date &&
+                                                    day.isAvailable
+                                                    ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}>
+                                                <p>{day ? day.date.getDate() : ''}</p>
+                                            </div>
+                                        ))}
+                                    </>}
+                            </div>
+                        </>}
+                </div> :
+                <AddMeeting
+                        doctorId={doctorId}
+                        date={date}
+                        setIsDateChoosed={setIsDateChoosed}
+                    />}
         </>
     );
 };

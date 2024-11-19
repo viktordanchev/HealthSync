@@ -21,7 +21,7 @@ namespace RestAPI.Controllers
         [HttpPost("all")]
         public async Task<IActionResult> Index([FromBody] AllDoctorsRequest request)
         {
-            var doctors = await _doctorService.GetDoctors(request.Index,
+            var doctors = await _doctorService.GetDoctorsAsync(request.Index,
                 request.Sorting.ToString(),
                 request.Filter,
                 request.Search.Trim().ToLower());
@@ -32,12 +32,12 @@ namespace RestAPI.Controllers
         [HttpPost("getDoctorDetails")]
         public async Task<IActionResult> GetDoctorDetails([FromBody] int doctorId)
         {
-            if (!await _doctorService.IsDoctorExist(doctorId))
+            if (!await _doctorService.IsDoctorExistAsync(doctorId))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var doctor = await _doctorService.GetDoctor(doctorId);
+            var doctor = await _doctorService.GetDoctorAsync(doctorId);
 
             return Ok(doctor);
         }
@@ -45,12 +45,12 @@ namespace RestAPI.Controllers
         [HttpPost("getReviews")]
         public async Task<IActionResult> GetReviews([FromBody] GetReviewsRequest request)
         {
-            if (!await _doctorService.IsDoctorExist(request.DoctorId))
+            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var reviews = await _doctorService.GetDoctorReviews(request.Index, request.DoctorId);
+            var reviews = await _doctorService.GetDoctorReviewsAsync(request.Index, request.DoctorId);
 
             return Ok(reviews);
         }
@@ -59,12 +59,12 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> AddReview([FromBody] AddReviewRequest request)
         {
-            if (!await _doctorService.IsDoctorExist(request.DoctorId))
+            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            await _doctorService.AddReview(request.DoctorId, request.Rating, request.Comment, User.Identity.Name);
+            await _doctorService.AddReviewAsync(request.DoctorId, request.Rating, request.Comment, User.Identity.Name);
 
             return Ok(new { Message = AddedReview });
         }
@@ -72,7 +72,7 @@ namespace RestAPI.Controllers
         [HttpGet("getSpecialties")]
         public async Task<IActionResult> GetSpecialties()
         {
-            var specialties = await _doctorService.GetSpecialties();
+            var specialties = await _doctorService.GetSpecialtiesAsync();
 
             return Ok(specialties);
         }
@@ -81,17 +81,17 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> GetAvailableMeetTimes([FromBody] GetAvailableMeetTimesRequest request)
         {
-            if (!await _doctorService.IsDoctorExist(request.DoctorId))
+            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            if (await _doctorService.IsDayOff(request.DoctorId, request.Date))
+            if (await _doctorService.IsDayOffAsync(request.DoctorId, request.Date))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var times = await _doctorService.GetAvailableMeetings(request.DoctorId, request.Date);
+            var times = await _doctorService.GetAvailableMeetingsAsync(request.DoctorId, request.Date);
 
             return Ok(times);
         }
@@ -99,12 +99,12 @@ namespace RestAPI.Controllers
         [HttpPost("getDaysInMonth")]
         public async Task<IActionResult> GetDaysInMonth([FromBody] GetDaysInMonthRequest request)
         {
-            if (!await _doctorService.IsDoctorExist(request.DoctorId))
+            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var daysInMonth = await _doctorService.GetDaysInMonth(request.DoctorId, request.Month, request.Year);
+            var daysInMonth = await _doctorService.GetDaysInMonthAsync(request.DoctorId, request.Month, request.Year);
 
             return Ok(daysInMonth);
         }

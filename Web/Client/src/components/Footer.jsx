@@ -4,7 +4,7 @@ import { faSquareFacebook, faInstagram, faTiktok } from '@fortawesome/free-brand
 
 function Footer() {
     return (
-        <footer className="bg-maincolor rounded-t-xl p-8 text-white sm:text-center">
+        <footer className="w-full bg-maincolor rounded-t-xl p-8 text-white sm:text-center">
             <div className="flex flex-row justify-evenly sm:flex-col sm:space-y-6">
                 <div>
                     <p className="font-bold text-xl mb-3 underline underline-offset-4">Contact us</p>

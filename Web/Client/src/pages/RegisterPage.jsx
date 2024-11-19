@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -32,6 +32,8 @@ function RegisterPage() {
         } else {
             setMessage(response.error);
         }
+
+        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (

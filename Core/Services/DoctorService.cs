@@ -16,7 +16,7 @@ namespace Core.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<DoctorResponse>> GetDoctors(int index, string sorting, string filter, string search)
+        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(int index, string sorting, string filter, string search)
         {
             var doctors = await _context.Doctors
                 .AsNoTracking()
@@ -55,7 +55,7 @@ namespace Core.Services
             return doctors;
         }
 
-        public async Task<DoctorDetailsResponse> GetDoctor(int doctorId)
+        public async Task<DoctorDetailsResponse> GetDoctorAsync(int doctorId)
         {
             var doctor = await _context.Doctors
                 .AsNoTracking()
@@ -78,7 +78,7 @@ namespace Core.Services
             return doctor;
         }
 
-        public async Task<IEnumerable<ReviewResponse>> GetDoctorReviews(int index, int doctorId)
+        public async Task<IEnumerable<ReviewResponse>> GetDoctorReviewsAsync(int index, int doctorId)
         {
             var reviews = await _context.Reviews
                 .AsNoTracking()
@@ -99,14 +99,14 @@ namespace Core.Services
             return reviews;
         }
 
-        public async Task<bool> IsDoctorExist(int doctorId)
+        public async Task<bool> IsDoctorExistAsync(int doctorId)
         {
             var doctor = await _context.Doctors.FirstOrDefaultAsync(d => d.Id == doctorId);
 
             return doctor != null;
         }
 
-        public async Task AddReview(int doctorId, int rating, string comment, string reviewer)
+        public async Task AddReviewAsync(int doctorId, int rating, string comment, string reviewer)
         {
             var reveiew = new Review()
             {
@@ -121,7 +121,7 @@ namespace Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<string>> GetSpecialties()
+        public async Task<IEnumerable<string>> GetSpecialtiesAsync()
         {
             var specialties = await _context.Specialties
                 .AsNoTracking()
@@ -132,14 +132,14 @@ namespace Core.Services
             return specialties;
         }
 
-        public async Task<bool> IsDayOff(int doctorId, DateTime date)
+        public async Task<bool> IsDayOffAsync(int doctorId, DateTime date)
         {
-            var daysOff = await GetDaysOff(doctorId);
+            var daysOff = await GetDaysOffAsync(doctorId);
 
             return daysOff.DaysOff.Any(d => d.Date == date) || daysOff.WeeklyDaysOff.Any(d => d == date.DayOfWeek);
         }
 
-        public async Task<IEnumerable<string>> GetAvailableMeetings(int doctorId, DateTime date)
+        public async Task<IEnumerable<string>> GetAvailableMeetingsAsync(int doctorId, DateTime date)
         {
             var workTime = await _context.Doctors
                 .AsNoTracking()
@@ -171,31 +171,36 @@ namespace Core.Services
             return availableMeetings;
         }
 
-        public async Task<IEnumerable<DayOfWeekModel>> GetDaysInMonth(int doctorId, int month, int year)
+        public async Task<IEnumerable<DayInMonthModel>> GetDaysInMonthAsync(int doctorId, int month, int year)
         {
-            var daysOff = await GetDaysOff(doctorId);
+            var busyDays = await GetBusyDaysAsync(doctorId, month, year);
+            var daysOff = await GetDaysOffAsync(doctorId);
             int daysInMonthNum = DateTime.DaysInMonth(year, month);
-            var daysInMonth = new List<DayOfWeekModel>();
-            bool isWorkDay;
+            var daysInMonth = new List<DayInMonthModel>();
+            bool isAvailable;
 
             for (int day = 1; day <= daysInMonthNum; day++)
             {
                 var date = new DateTime(year, month, day);
 
-                isWorkDay = daysOff.DaysOff.Contains(date) || daysOff.WeeklyDaysOff.Contains(date.DayOfWeek) ? false : true;
+                isAvailable = 
+                    daysOff.DaysOff.Contains(date) || 
+                    daysOff.WeeklyDaysOff.Contains(date.DayOfWeek) ||
+                    busyDays.Contains(date)
+                    ? false : true;
 
-                daysInMonth.Add(new DayOfWeekModel(date.ToString("yyyy-MM-dd"), isWorkDay));
+                daysInMonth.Add(new DayInMonthModel(date.ToString("yyyy-MM-dd"), isAvailable));
             }
 
             return daysInMonth;
         }
 
-        private async Task<DaysOffModel> GetDaysOff(int doctorId)
+        private async Task<UnavailableDaysModel> GetDaysOffAsync(int doctorId)
         {
             return await _context.Doctors
                 .AsNoTracking()
                 .Where(d => d.Id == doctorId)
-                .Select(d => new DaysOffModel()
+                .Select(d => new UnavailableDaysModel()
                 {
                     DaysOff = d.DaysOff
                         .Select(doff => doff.Date)
@@ -206,6 +211,47 @@ namespace Core.Services
                         .ToList()
                 })
                 .FirstAsync();
+        }
+
+        private async Task<IEnumerable<DateTime>> GetBusyDaysAsync(int doctorId, int month, int year)
+        {
+            var shedule = await _context.Doctors
+                    .AsNoTracking()
+                    .Where(d => d.Id == doctorId)
+                    .Select(d => new MonthSheduleModel()
+                    {
+                        MeetingTimeMinutes = d.MeetingTimeMinutes,
+                        AllMeetings = d.Meetings
+                            .Where(m => m.Date.Month == month && m.Date.Year == year)
+                            .Select(m => m.Date),
+                        WeekDays = d.WorkWeek
+                            .Where(wk => wk.IsWorkDay)
+                            .Select(wk => new WeekDayModel()
+                            {
+                                Day = wk.Day,
+                                WorkDayStart = wk.Start,
+                                WorkDayEnd = wk.End
+                            })
+                    })
+                    .FirstAsync();
+
+            var meetingDays = shedule.AllMeetings
+                .Select(am => am.Date)
+                .ToHashSet();
+
+            foreach (var meetingDay in meetingDays)
+            {
+                var allMeetingsByDay = shedule.AllMeetings.Where(am => am.Date == meetingDay).Count();
+                var dayOfWeek = shedule.WeekDays.FirstOrDefault(ww => ww.Day == meetingDay.DayOfWeek);
+                var count = (dayOfWeek.WorkDayEnd - dayOfWeek.WorkDayStart).TotalMinutes / shedule.MeetingTimeMinutes + 1;
+
+                if(allMeetingsByDay != count)
+                {
+                    meetingDays.Remove(meetingDay);
+                }
+            }
+
+            return meetingDays;
         }
     }
 }

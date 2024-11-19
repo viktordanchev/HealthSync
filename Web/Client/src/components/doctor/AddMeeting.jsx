@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
 import useCheckAuth from '../../hooks/useCheckAuth';
 
-function AddMeeting({ doctorId, date }) {
+function AddMeeting({ doctorId, date, setIsDateChoosed }) {
     const navigate = useNavigate();
     const { isAuthenticated, jwtToken, loading } = useCheckAuth();
-    const [isChoosed, setIsChoosed] = useState(false);
+    const [isTimeChoosed, setIsTimeChoosed] = useState(false);
     const [meetingDate, setMeetingDate] = useState('');
     const [meetingTimes, setMeetingTimes] = useState([]);
 
@@ -20,9 +22,12 @@ function AddMeeting({ doctorId, date }) {
                 doctorId: doctorId,
                 date: date.toISOString()
             };
-
+            
             const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, jwtToken, 'POST', true);
-            setMeetingTimes(response);
+            
+            if (response) {
+                setMeetingTimes(response);
+            }
         };
 
         if (jwtToken) {
@@ -36,19 +41,24 @@ function AddMeeting({ doctorId, date }) {
         date.setHours(hour);
         date.setMinutes(minutes);
 
-        setIsChoosed(true);
+        setIsTimeChoosed(true);
         setMeetingDate(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`);
     };
 
     return (
-        <>
-            {isChoosed ?
+        <div className="min-h-80 bg-opacity-95 border border-white rounded-xl bg-zinc-700 p-4 flex flex-col space-y-4 sm:w-full">
+            <div className="w-full text-right">
+                <button onClick={() => setIsDateChoosed(false)}>
+                    <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
+                </button>
+            </div>
+            {isTimeChoosed ?
                 <div className="text-white font-bold flex flex-col items-center space-y-3">
                     <p className="text-2xl text-center">Are you sure for this date?</p>
                     <p className="text-xl">{meetingDate}</p>
                     <div className="flex space-x-4 w-40 text-xl">
                         <button
-                            onClick={() => setIsChoosed(false)}
+                            onClick={() => setIsTimeChoosed(false)}
                             className="w-1/2 p-1 bg-blue-500 hover:bg-blue-700 rounded focus:outline-none focus:shadow-outline"
                         >
                             No
@@ -60,25 +70,21 @@ function AddMeeting({ doctorId, date }) {
                         </button>
                     </div>
                 </div>
-                : <div className="flex flex-col items-center space-y-4">
+                : <div className="flex flex-col items-center space-y-2">
                     <p className="font-bold text-white text-xl">Choose meeting time</p>
-                    <div className="grid grid-cols-3 gap-2">
-                        {meetingTimes && (
-                            <>
-                                {meetingTimes.map((meetingTime, index) => (
-                                    <div
-                                        key={index}
-                                        onClick={() => handleMeeting(meetingTime)}
-                                        className="flex justify-center items-center text-white text-lg font-bold border-2 border-maincolor rounded-xl p-2 cursor-pointer hover:bg-maincolor"
-                                    >
-                                        {meetingTime}
-                                    </div>
-                                ))}
-                            </>
-                        )}
+                    <div className="flex justify-center items-center flex-wrap text-white">
+                        {meetingTimes.map((meetingTime, index) => (
+                            <div
+                                key={index}
+                                onClick={() => handleMeeting(meetingTime)}
+                                className="flex justify-center items-center m-1 text-base font-bold border-2 border-maincolor rounded-xl p-2 cursor-pointer hover:bg-maincolor"
+                            >
+                                {meetingTime}
+                            </div>
+                        ))}
                     </div>
                 </div>}
-        </>
+        </div>
     );
 }
 

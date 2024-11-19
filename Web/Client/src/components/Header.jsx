@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import useCheckAuth from '../hooks/useCheckAuth';
@@ -6,23 +7,41 @@ import Loading from './Loading';
 
 const Header = () => {
     const { isAuthenticated, loading, decodedJwtToken } = useCheckAuth();
+    const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
+    const [isFixed, setIsFixed] = useState(false);
     
     useEffect(() => {
         if (isAuthenticated) {
             setUserName(decodedJwtToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']);
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, location]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 100) {
+                setIsFixed(true);
+            } else {
+                setIsFixed(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
     return (
-        <header className="h-20 flex relative bg-maincolor mt-6 rounded-xl p-5 mx-32 lg:mx-16 md:mx-6 sm:mx-6">
+        <header className={`${isFixed ? 'fixed h-20 w-4/5 mt-6 rounded-xl p-5 shadow-xl border border-white sm:w-11/12' : 'h-24 w-full rounded-b-xl p-6'} flex bg-maincolor`}>
             <div className="flex basis-full justify-between items-center">
-                <a href="/home" className="text-white font-bold text-3xl hover:text-gray-200 transition duration-300 lg:text-2xl md:text-2xl sm:text-2xl">
+                <a href="/home" className={`${isFixed ? 'text-3xl' : 'text-4xl'} text-white font-bold hover:text-gray-200 transition duration-300 lg:text-2xl md:text-2xl sm:text-2xl`}>
                     HealthSync
                 </a>
                 <ul className="flex flex-row w-2/4 justify-between md:hidden sm:hidden">

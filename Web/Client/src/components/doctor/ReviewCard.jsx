@@ -7,7 +7,7 @@ function ReviewCard({ data }) {
             <p>{format(data.date, 'dd.MM.yyyy HH:mm')}</p>
             <hr className="border-e border-white w-full my-1" />
             <div className="w-full space-y-3">
-                <div className="flex justify-evenly sm:justify-evenly">
+                <div className="flex justify-evenly sm:flex-col sm:space-y-3">
                     <div className="flex flex-col justify-center items-center space-y-1">
                         <p>Rating</p>
                         <div className="flex items-center">
