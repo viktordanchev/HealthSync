@@ -14,7 +14,7 @@ function AddReview({ doctorId, setMessage }) {
     const add = async () => {
         const dto = {
             doctorId: doctorId,
-            rating: 10,
+            rating: rating,
             comment: comment
         };
 

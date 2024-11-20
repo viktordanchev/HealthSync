@@ -22,7 +22,7 @@ function App() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 100) {
+            if (window.scrollY > 300) {
                 setShowButton(true);
             } else {
                 setShowButton(false);
@@ -52,7 +52,7 @@ function App() {
             {showSessionMessage && <SessionMessage close={() => setShowSessionMessage(false)} />}
             <Router>
                 <Header />
-                <main className="my-6">
+                <main className="w-full my-6">
                     <Routes>
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<Home />} />
@@ -64,13 +64,11 @@ function App() {
                         <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
-                    {showButton && (
-                        <button
-                            onClick={scrollToTop}
-                            className="fixed bottom-16 right-16 bg-zinc-700 h-16 w-16 rounded-full shadow-xl hover:bg-zinc-600 md:bottom-12 md:right-12 md:h-14 md:w-14 sm:bottom-8 sm:right-8 sm:h-11 sm:w-11">
-                            <FontAwesomeIcon icon={faAngleUp} className="text-white text-4xl md:text-3xl sm:text-xl"/>
-                        </button>
-                    )}
+                    <button
+                        onClick={scrollToTop}
+                        className={`fixed bottom-16 right-16 bg-zinc-700 h-16 w-16 rounded-full shadow-xl hover:bg-zinc-600 transition-opacity duration-300 md:bottom-12 md:right-12 md:h-14 md:w-14 sm:bottom-8 sm:right-8 sm:h-11 sm:w-11 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                        <FontAwesomeIcon icon={faAngleUp} className="text-white text-4xl md:text-3xl sm:text-xl" />
+                    </button>
                 </main>
                 <Footer />
             </Router>

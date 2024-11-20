@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.RequestDtos.Doctor;
+using System.Security.Claims;
 using static Common.Errors;
 using static Common.Messages.Doctor;
 
@@ -109,8 +110,21 @@ namespace RestAPI.Controllers
             return Ok(daysInMonth);
         }
 
-        //public async Task<IActionResult> AddMeeting([FromBody] AddMeetingRequest request)
-        //{
-        //}
+        [HttpPost("addMeeting")]
+        [Authorize]
+        public async Task<IActionResult> AddMeeting([FromBody] AddMeetingRequest request)
+        {
+            var localDateTime = request.Date.ToLocalTime();
+
+            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) || 
+                !await _doctorService.IsDateValidAsync(request.DoctorId, localDateTime))
+            {
+                return BadRequest(new { ServerError = InvalidRequest });
+            }
+
+            await _doctorService.AddMeetingAsync(request.DoctorId, localDateTime, User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            return Ok(new { Message = AddedMeeting });
+        }
     }
 }

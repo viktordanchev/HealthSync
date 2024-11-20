@@ -195,6 +195,30 @@ namespace Core.Services
             return daysInMonth;
         }
 
+        public async Task AddMeetingAsync(int doctorId, DateTime date, string patientId)
+        {
+            var meeting = new Meeting()
+            {
+                DoctorId = doctorId,
+                Date = date,
+                PatientId = patientId
+            };
+
+            await _context.Meetings.AddAsync(meeting);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsDateValidAsync(int doctorId, DateTime date)
+        {
+            var busyDays = await GetBusyDaysAsync(doctorId, date.Month, date.Year);
+            var daysOff = await GetDaysOffAsync(doctorId);
+
+            return daysOff.DaysOff.Contains(date) ||
+                    daysOff.WeeklyDaysOff.Contains(date.DayOfWeek) ||
+                    busyDays.Contains(date)
+                    ? false : true;
+        }
+
         private async Task<UnavailableDaysModel> GetDaysOffAsync(int doctorId)
         {
             return await _context.Doctors

@@ -11,7 +11,7 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
     const [isFixed, setIsFixed] = useState(false);
-    
+
     useEffect(() => {
         if (isAuthenticated) {
             setUserName(decodedJwtToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']);
@@ -39,7 +39,7 @@ const Header = () => {
     };
 
     return (
-        <header className={`${isFixed ? 'fixed h-20 w-4/5 mt-6 rounded-xl p-5 shadow-xl border border-white sm:w-11/12' : 'h-24 w-full rounded-b-xl p-6'} flex bg-maincolor`}>
+        <header className={`transition-all duration-300 transform flex bg-maincolor ${isFixed ? 'sticky top-0 h-20 w-4/5 rounded-xl p-5 shadow-xl border border-white sm:w-11/12 translate-y-6' : 'h-24 w-full p-6 translate-y-0'}`}>
             <div className="flex basis-full justify-between items-center">
                 <a href="/home" className={`${isFixed ? 'text-3xl' : 'text-4xl'} text-white font-bold hover:text-gray-200 transition duration-300 lg:text-2xl md:text-2xl sm:text-2xl`}>
                     HealthSync

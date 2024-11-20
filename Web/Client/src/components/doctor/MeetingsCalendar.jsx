@@ -3,7 +3,7 @@ import apiRequest from '../../services/apiRequest';
 import AddMeeting from './AddMeeting';
 import Loading from '../Loading';
 
-const MeetingsCalendar = ({ doctorId }) => {
+const MeetingsCalendar = ({ doctorId, setMessage }) => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [isDateChoosed, setIsDateChoosed] = useState(false);
@@ -109,12 +109,12 @@ const MeetingsCalendar = ({ doctorId }) => {
                                                 onClick={() => handleDayClick(day)}
                                                 className={`rounded-full flex items-center justify-center 
                                                 ${day && new Date().getDate() === day.date.getDate() &&
-                                                    new Date().getFullYear() === currentYear &&
-                                                    new Date().getMonth() === currentMonth
-                                                    ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
+                                                        new Date().getFullYear() === currentYear &&
+                                                        new Date().getMonth() === currentMonth
+                                                        ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
                                                 ${day && new Date() < day.date &&
-                                                    day.isAvailable
-                                                    ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}>
+                                                        day.isAvailable
+                                                        ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}>
                                                 <p>{day ? day.date.getDate() : ''}</p>
                                             </div>
                                         ))}
@@ -123,10 +123,11 @@ const MeetingsCalendar = ({ doctorId }) => {
                         </>}
                 </div> :
                 <AddMeeting
-                        doctorId={doctorId}
-                        date={date}
-                        setIsDateChoosed={setIsDateChoosed}
-                    />}
+                    doctorId={doctorId}
+                    date={date}
+                    setIsDateChoosed={setIsDateChoosed}
+                    setMessage={setMessage}
+                />}
         </>
     );
 };

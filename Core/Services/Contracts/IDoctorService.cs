@@ -14,5 +14,7 @@ namespace Core.Services.Contracts
         Task<bool> IsDayOffAsync(int doctorId, DateTime date);
         Task<IEnumerable<string>> GetAvailableMeetingsAsync(int doctorId, DateTime date);
         Task<IEnumerable<DayInMonthModel>> GetDaysInMonthAsync(int doctorId, int month, int year);
+        Task AddMeetingAsync(int doctorId, DateTime date, string patientId);
+        Task<bool> IsDateValidAsync(int doctorId, DateTime date);
     }
 }

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import apiRequest from '../../services/apiRequest';
 import Loading from '../Loading';
 import MeetingsCalendar from './MeetingsCalendar';
-import DoctorReviews from './DoctorReviews';
+import ReviewsSection from './ReviewsSection';
 import AddReview from './AddReview';
 import Message from '../Message';
 
@@ -90,11 +90,11 @@ function DoctorDetails() {
                             <div className="w-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-between space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Reviews</p>
                                 <AddReview doctorId={doctorId} setMessage={setMessage} />
-                                <DoctorReviews doctorId={doctorId} />
+                                <ReviewsSection doctorId={doctorId} />
                             </div>
                             <div className="w-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-evenly space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Meetings</p>
-                                <MeetingsCalendar doctorId={doctorId} />
+                                <MeetingsCalendar doctorId={doctorId} setMessage={setMessage} />
                             </div>
                         </div>
                     </article>

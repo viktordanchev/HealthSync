@@ -92,7 +92,7 @@ namespace HealthSync.Server.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(new { ServerError = InvalidRequest });
+                return BadRequest(new { Error = InvalidLoginData });
             }
 
             var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);

@@ -11,6 +11,7 @@
         public static class Doctor
         {
             public const string AddedReview = "Rating was added successfully.";
+            public const string AddedMeeting = "Meeting was added successfully.";
         }
     }
 }
