@@ -82,12 +82,8 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> GetAvailableMeetTimes([FromBody] GetAvailableMeetTimesRequest request)
         {
-            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
-            {
-                return BadRequest(new { ServerError = InvalidRequest });
-            }
-
-            if (await _doctorService.IsDayOffAsync(request.DoctorId, request.Date))
+            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
+                await _doctorService.IsDayOffAsync(request.DoctorId, request.Date))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }

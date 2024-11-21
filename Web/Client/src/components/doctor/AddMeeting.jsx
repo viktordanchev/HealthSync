@@ -52,11 +52,13 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
         };
         
         const response = await apiRequest('doctor', 'addMeeting', dto, jwtToken, 'POST', true);
-        
-        setMessage(response.message);
-        setIsDateChoosed(false);
-        
-        setTimeout(() => { setMessage(''); }, 3000);
+
+        if (response) {
+            setMessage(response.message);
+            setIsDateChoosed(false);
+
+            setTimeout(() => { setMessage(''); }, 3000);
+        }
     };
 
     return (
