@@ -29,34 +29,42 @@ function RecoverPassPage() {
     });
 
     const submitPassword = async (values) => {
-        const response = await apiRequest('account', 'recoverPass', values, undefined, 'POST', false);
+        try {
+            const response = await apiRequest('account', 'recoverPass', values, undefined, 'POST', false);
 
-        if (!response) {
-            navigate('/home');
-        } else {
-            setMessage(response.error);
-            setMessageType('error');
+            if (response.error) {
+                setMessage(response.error);
+                setMessageType('error');
+            } else {
+                navigate('/home');
+            }
+
+            setTimeout(() => { setMessage(''); }, 3000);
+        } catch (error) {
+            console.error(error);
         }
-
-        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     const sendLink = async (email) => {
-        const response = await apiRequest('account', 'sendRecoverPassEmail', values, undefined, 'POST', false);
+        try {
+            const response = await apiRequest('account', 'sendRecoverPassEmail', values, undefined, 'POST', false);
 
-        if (response.error) {
-            setMessage(response.error);
-            setMessageType('error');
-        } else {
-            sessionStorage.setItem('email', email);
+            if (response.error) {
+                setMessage(response.error);
+                setMessageType('error');
+            } else {
+                sessionStorage.setItem('email', email);
 
-            setMessage(response.message);
-            setMessageType('message');
+                setMessage(response.message);
+                setMessageType('message');
 
-            resetTimer();
+                resetTimer();
+            }
+
+            setTimeout(() => { setMessage(''); }, 3000);
+        } catch (error) {
+            console.error(error);
         }
-
-        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (

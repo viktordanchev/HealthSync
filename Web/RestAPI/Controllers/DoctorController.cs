@@ -93,8 +93,8 @@ namespace RestAPI.Controllers
             return Ok(times);
         }
 
-        [HttpPost("getDaysInMonth")]
-        public async Task<IActionResult> GetDaysInMonth([FromBody] GetDaysInMonthRequest request)
+        [HttpPost("getMonthShedule")]
+        public async Task<IActionResult> GetMonthSchedule([FromBody] GetMonthScheduleRequest request)
         {
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
             {

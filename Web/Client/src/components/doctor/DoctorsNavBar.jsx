@@ -10,10 +10,14 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
 
     useEffect(() => {
         const receiveSpecialties = async () => {
-            const response = await apiRequest('doctor', 'getSpecialties', undefined, undefined, 'GET', false);
+            try {
+                const response = await apiRequest('doctor', 'getSpecialties', undefined, undefined, 'GET', false);
 
-            setSpecialties(response);
-            setLoading(false);
+                setSpecialties(response);
+                setLoading(false);
+            } catch (error) {
+                console.error(error);
+            }
         };
 
         receiveSpecialties();
@@ -48,7 +52,7 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                     onChange={(e) => setFilter(e.target.value)}
                 >
                     <option value="" disabled hidden>Filter</option>
-                    {loading ? 
+                    {loading ?
                         <option disabled value="">
                             Loading...
                         </option> :

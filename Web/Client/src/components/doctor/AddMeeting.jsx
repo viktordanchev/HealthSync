@@ -22,11 +22,13 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
                 doctorId: doctorId,
                 date: date.toISOString()
             };
-            
-            const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, jwtToken, 'POST', true);
-            
-            if (response) {
+
+            try {
+                const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, jwtToken, 'POST', true);
+
                 setMeetingTimes(response);
+            } catch (error) {
+                console.error(error);
             }
         };
 
@@ -50,14 +52,16 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
             doctorId: doctorId,
             date: date
         };
-        
-        const response = await apiRequest('doctor', 'addMeeting', dto, jwtToken, 'POST', true);
 
-        if (response) {
+        try {
+            const response = await apiRequest('doctor', 'addMeeting', dto, jwtToken, 'POST', true);
+
             setMessage(response.message);
             setIsDateChoosed(false);
 
             setTimeout(() => { setMessage(''); }, 3000);
+        } catch (error) {
+            console.error(error);
         }
     };
 

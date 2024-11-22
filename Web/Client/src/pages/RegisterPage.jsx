@@ -25,15 +25,19 @@ function RegisterPage() {
     });
 
     const handleRegister = async (values) => {
-        const response = await apiRequest('account', 'register', values, undefined, 'POST', false);
+        try {
+            const response = await apiRequest('account', 'register', values, undefined, 'POST', false);
 
-        if (!response) {
-            navigate('/account/verify');
-        } else {
-            setMessage(response.error);
+            if (response.error) {
+                setMessage(response.error);
+            } else {
+                navigate('/account/verify');
+            }
+
+            setTimeout(() => { setMessage(''); }, 3000);
+        } catch (error) {
+            console.error(error);
         }
-
-        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (

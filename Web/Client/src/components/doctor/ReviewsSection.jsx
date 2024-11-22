@@ -18,16 +18,20 @@ function DoctorReviews({ doctorId }) {
                 doctorId: doctorId
             };
 
-            const response = await apiRequest('doctor', 'getReviews', dto, undefined, 'POST', false);
+            try {
+                const response = await apiRequest('doctor', 'getReviews', dto, undefined, 'POST', false);
+                
+                if (response.length != 0) {
+                    setReviews(prevReviews => [...prevReviews, ...response]);
+                } else {
+                    setHasMore(false);
+                }
 
-            if (response.length != 0) {
-                setReviews(prevReviews => [...prevReviews, ...response]);
-            } else {
-                setHasMore(false);
+                setLoadingMore(false);
+                setLoading(false);
+            } catch (error) {
+                console.error(error);
             }
-
-            setLoadingMore(false);
-            setLoading(false);
         };
 
         receiveReviews(doctorId);
@@ -37,7 +41,7 @@ function DoctorReviews({ doctorId }) {
         const container = scrollContainerRef.current;
 
         const handleScroll = () => {
-            if (container.scrollTop + container.clientHeight >= container.scrollHeight && hasMore) {
+            if (container.scrollTop + 30 + container.clientHeight >= container.scrollHeight && hasMore) {
                 setIndex(prevIndex => prevIndex + 1);
                 setLoadingMore(true);
             }
@@ -55,7 +59,7 @@ function DoctorReviews({ doctorId }) {
             {loading ? <Loading type={'small'} /> :
                 <>
                     {reviews.length == 0 ?
-                        <p className="text-white text-xl">Be the first reviewer</p>:
+                        <p className="text-white text-xl">Be the first reviewer</p> :
                         <>
                             {reviews.map((review) => (
                                 <ReviewCard key={review.id} data={review} />

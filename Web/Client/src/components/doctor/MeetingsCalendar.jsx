@@ -21,17 +21,22 @@ const MeetingsCalendar = ({ doctorId, setMessage }) => {
                 year: currentYear
             }
 
-            const response = await apiRequest('doctor', 'getDaysInMonth', dto, undefined, 'POST', false);
+            try {
+                const response = await apiRequest('doctor', 'getMonthShedule', dto, undefined, 'POST', false);
 
-            const transformedData = response.map(item => ({
-                ...item,
-                date: new Date(item.date)
-            }));
+                const dates = response.map(item => ({
+                    ...item,
+                    date: new Date(item.date)
+                }));
 
-            setDays(transformedData);
-            setLoading(false);
+                setDays(dates);
+                setLoading(false);
 
-            generateCalendar(currentYear, currentMonth);
+                generateCalendar(currentYear, currentMonth);
+            }
+            catch (error) {
+                console.error(error);
+            }
         };
 
         getDaysOff();
@@ -39,7 +44,6 @@ const MeetingsCalendar = ({ doctorId, setMessage }) => {
 
     const generateCalendar = (year, month) => {
         const firstDayOfMonth = new Date(year, month, 1);
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
         const firstDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7;
 
         let emptySpaces = [];
@@ -53,6 +57,7 @@ const MeetingsCalendar = ({ doctorId, setMessage }) => {
 
     const handlePreviousMonth = () => {
         let newMonth = currentMonth - 1;
+
         if (newMonth < 0) {
             setCurrentMonth(11);
             setCurrentYear(currentYear - 1);
@@ -63,6 +68,7 @@ const MeetingsCalendar = ({ doctorId, setMessage }) => {
 
     const handleNextMonth = () => {
         let newMonth = currentMonth + 1;
+
         if (newMonth > 11) {
             setCurrentMonth(0);
             setCurrentYear(currentYear + 1);

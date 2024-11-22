@@ -3,7 +3,7 @@ using static Common.Constants;
 
 namespace RestAPI.RequestDtos.Doctor
 {
-    public class GetDaysInMonthRequest
+    public class GetMonthScheduleRequest
     {
         [Required]
         public int DoctorId { get; set; }

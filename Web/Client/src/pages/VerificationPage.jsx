@@ -25,34 +25,42 @@ function VerificationPage() {
     const validationVrfCodeSchema = Yup.object().shape({ vrfCode: validateVrfCode });
 
     const submitCode = async (values) => {
-        const response = await apiRequest('account', 'verifyAccount', values, undefined, 'POST', false);
+        try {
+            const response = await apiRequest('account', 'verifyAccount', values, undefined, 'POST', false);
 
-        if (!response) {
-            navigate('/home');
-        } else {
-            setMessage(response.error);
-            setMessageType('error');
+            if (response.error) {
+                setMessage(response.error);
+                setMessageType('error');
+            } else {
+                navigate('/home');
+            }
+
+            setTimeout(() => { setMessages(''); }, 3000);
+        } catch (error) {
+            console.error(error);
         }
-
-        setTimeout(() => { setMessages(''); }, 3000);
     };
 
     const sendCode = async (email) => {
-        const response = await apiRequest('account', 'sendVrfCode', values, undefined, 'POST', false);
+        try {
+            const response = await apiRequest('account', 'sendVrfCode', values, undefined, 'POST', false);
 
-        if (response.error) {
-            setMessageType('error');
-            setMessage(response.error);
-        } else {
-            sessionStorage.setItem('email', email);
+            if (response.error) {
+                setMessageType('error');
+                setMessage(response.error);
+            } else {
+                sessionStorage.setItem('email', email);
 
-            setMessageType('message');
-            setMessage(response.message);
+                setMessageType('message');
+                setMessage(response.message);
 
-            resetTimer();
+                resetTimer();
+            }
+
+            setTimeout(() => { setMessage(''); }, 3000);
+        } catch (error) {
+            console.error(error);
         }
-
-        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (

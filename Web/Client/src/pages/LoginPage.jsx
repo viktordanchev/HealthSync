@@ -22,21 +22,25 @@ function LoginPage() {
     });
 
     const handleLogin = async (values) => {
-        const response = await apiRequest('account', 'login', values, undefined, 'POST', false);
+        try {
+            const response = await apiRequest('account', 'login', values, undefined, 'POST', false);
 
-        if (response.token) {
-            sessionStorage.setItem('accessToken', response.token);
-            navigate('/home');
-            window.location.reload();
-        } else {
-            if (response.notVerified) {
-                navigate('/account/verify');
+            if (response.token) {
+                sessionStorage.setItem('accessToken', response.token);
+                navigate('/home');
+                window.location.reload();
+            } else {
+                if (response.notVerified) {
+                    navigate('/account/verify');
+                }
+
+                setMessage(response.error);
             }
 
-            setMessage(response.error);
+            setTimeout(() => { setMessage(''); }, 3000);
+        } catch (error) {
+            console.error(error);
         }
-
-        setTimeout(() => { setMessage(''); }, 3000);
     };
 
     return (

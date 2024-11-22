@@ -10,7 +10,7 @@ namespace RestAPI.Filters
         {
             if (!context.ModelState.IsValid)
             {
-                context.Result = new UnauthorizedObjectResult(new { ServerError = InvalidRequest });
+                context.Result = new BadRequestObjectResult(new { ServerError = InvalidRequest });
             }
         }
 

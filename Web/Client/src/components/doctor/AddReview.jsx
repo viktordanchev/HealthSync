@@ -18,13 +18,15 @@ function AddReview({ doctorId, setMessage }) {
             comment: comment
         };
 
-        var response = await apiRequest('doctor', 'addReview', dto, jwtToken, 'POST', true);
+        try {
+            var response = await apiRequest('doctor', 'addReview', dto, jwtToken, 'POST', true);
 
-        if (response) {
             setMessage(response.message);
             setIsOpen(false);
 
             setTimeout(() => { setMessage(''); }, 3000);
+        } catch (error) {
+            console.error(error);
         }
     };
 
