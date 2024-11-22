@@ -5,13 +5,13 @@ import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import useTimer from '../hooks/useTimer';
-import useCheckAuth from '../hooks/useCheckAuth';
+import useAuth from '../hooks/useAuth';
 import Message from '../components/Message';
 
 function RecoverPassPage() {
     const navigate = useNavigate();
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
-    const { isAuthenticated } = useCheckAuth();
+    const { isAuthenticated } = useAuth();
     const [message, setMessage] = useState('');
     const [messageType, setMessageType] = useState('');
     const [searchParams] = useSearchParams();

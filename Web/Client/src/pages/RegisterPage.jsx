@@ -4,13 +4,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
-import useCheckAuth from '../hooks/useCheckAuth';
+import useAuth from '../hooks/useAuth';
 import Message from '../components/Message';
 
 function RegisterPage() {
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
-    const { isAuthenticated } = useCheckAuth();
+    const { isAuthenticated } = useAuth();
 
     if (isAuthenticated) {
         navigate('/home');

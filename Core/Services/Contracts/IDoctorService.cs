@@ -5,7 +5,7 @@ namespace Core.Services.Contracts
 {
     public interface IDoctorService
     {
-        Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(int index, string sorting, string filter, string search);
+        Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(int index, string sorting, string filter, string search, string doctorIdentityId);
         Task<DoctorDetailsResponse> GetDoctorAsync(int doctorId);
         Task<IEnumerable<ReviewResponse>> GetDoctorReviewsAsync(int index, int doctorId);
         Task<bool> IsDoctorExistAsync(int doctorId);

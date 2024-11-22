@@ -62,10 +62,14 @@ function DoctorsPage() {
                 filter: filter
             };
 
-            const response = await apiRequest('doctor', 'all', dto, undefined, 'POST', false);
-            setDoctors(response);
+            try {
+                const response = await apiRequest('doctor', 'all', dto, localStorage.getItem('accessToken'), 'POST', false);
 
-            setLoading(false);
+                setDoctors(response);
+                setLoading(false);
+            } catch (error) {
+                console.error(error);
+            }
         };
 
         receiveDoctors();

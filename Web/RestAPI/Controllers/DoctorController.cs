@@ -25,7 +25,8 @@ namespace RestAPI.Controllers
             var doctors = await _doctorService.GetDoctorsAsync(request.Index,
                 request.Sorting.ToString(),
                 request.Filter,
-                request.Search.Trim().ToLower());
+                request.Search.Trim().ToLower(),
+                User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             return Ok(doctors);
         }
@@ -118,7 +119,7 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            await _doctorService.AddMeetingAsync(request.DoctorId, localDateTime, User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            await _doctorService.AddMeetingAsync(request.DoctorId, localDateTime, User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             return Ok(new { Message = AddedMeeting });
         }

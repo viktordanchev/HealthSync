@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import useCheckAuth from '../hooks/useCheckAuth';
+import useAuth from '../hooks/useAuth';
+import jwtDecoder from '../services/jwtDecoder';
 import Loading from './Loading';
 
 const Header = () => {
-    const { isAuthenticated, loading, decodedJwtToken } = useCheckAuth();
+    const { isAuthenticated, loading } = useAuth();
     const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
@@ -14,7 +15,9 @@ const Header = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            setUserName(decodedJwtToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']);
+            const { claimName } = jwtDecoder(localStorage.getItem('accessToken'));
+
+            setUserName(claimName);
         }
     }, [isAuthenticated, location]);
 

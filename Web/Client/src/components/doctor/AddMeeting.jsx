@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
-import useCheckAuth from '../../hooks/useCheckAuth';
+import useAuth from '../../hooks/useAuth';
 
 function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
     const navigate = useNavigate();
-    const { isAuthenticated, jwtToken, loading } = useCheckAuth();
+    const { isAuthenticated, loading } = useAuth();
     const [isTimeChoosed, setIsTimeChoosed] = useState(false);
     const [meetingDate, setMeetingDate] = useState('');
     const [meetingTimes, setMeetingTimes] = useState([]);
@@ -24,7 +24,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
             };
 
             try {
-                const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, jwtToken, 'POST', true);
+                const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, localStorage.getItem('accessToken'), 'POST', true);
 
                 setMeetingTimes(response);
             } catch (error) {
@@ -32,7 +32,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
             }
         };
 
-        if (jwtToken) {
+        if (isAuthenticated) {
             getMeetingTimes();
         }
     }, [loading]);
@@ -54,7 +54,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
         };
 
         try {
-            const response = await apiRequest('doctor', 'addMeeting', dto, jwtToken, 'POST', true);
+            const response = await apiRequest('doctor', 'addMeeting', dto, localStorage.getItem('accessToken'), 'POST', true);
 
             setMessage(response.message);
             setIsDateChoosed(false);

@@ -1,12 +1,12 @@
 ﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiRequest from '../../services/apiRequest';
-import useCheckAuth from '../../hooks/useCheckAuth';
+import useAuth from '../../hooks/useAuth';
 import { reviewCommentLength } from '../../constants/constants';
 
 function AddReview({ doctorId, setMessage }) {
     const navigate = useNavigate();
-    const { isAuthenticated, jwtToken } = useCheckAuth();
+    const { isAuthenticated } = useAuth();
     const [rating, setRating] = useState(1);
     const [comment, setComment] = useState('');
     const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ function AddReview({ doctorId, setMessage }) {
         };
 
         try {
-            var response = await apiRequest('doctor', 'addReview', dto, jwtToken, 'POST', true);
+            var response = await apiRequest('doctor', 'addReview', dto, localStorage.getItem('accessToken'), 'POST', true);
 
             setMessage(response.message);
             setIsOpen(false);

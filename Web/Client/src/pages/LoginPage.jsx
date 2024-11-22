@@ -4,13 +4,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateEmail, validateLoginPassword } from '../services/validationSchemas';
-import useCheckAuth from '../hooks/useCheckAuth';
+import useAuth from '../hooks/useAuth';
 import Message from '../components/Message';
 
 function LoginPage() {
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
-    const { isAuthenticated } = useCheckAuth();
+    const { isAuthenticated } = useAuth();
 
     if (isAuthenticated) {
         navigate('/home');
@@ -26,9 +26,8 @@ function LoginPage() {
             const response = await apiRequest('account', 'login', values, undefined, 'POST', false);
 
             if (response.token) {
-                sessionStorage.setItem('accessToken', response.token);
+                localStorage.setItem('accessToken', response.token);
                 navigate('/home');
-                window.location.reload();
             } else {
                 if (response.notVerified) {
                     navigate('/account/verify');

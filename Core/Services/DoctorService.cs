@@ -16,13 +16,14 @@ namespace Core.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(int index, string sorting, string filter, string search)
+        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(int index, string sorting, string filter, string search, string doctorIdentityId)
         {
             var doctors = await _context.Doctors
                 .AsNoTracking()
-                .Where(d => (string.IsNullOrEmpty(search) ||
+                .Where(d => ((string.IsNullOrEmpty(search) ||
                     string.Concat(d.Identity.FirstName, " ", d.Identity.LastName).Contains(search)) &&
-                    (string.IsNullOrEmpty(filter) || d.Specialty.Type == filter))
+                    (string.IsNullOrEmpty(filter) || d.Specialty.Type == filter)) &&
+                    d.IdentityId != doctorIdentityId)
                 .Skip(index * 10)
                 .Take(10)
                 .Select(d => new DoctorResponse()

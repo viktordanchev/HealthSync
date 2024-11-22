@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import useCheckAuth from './hooks/useCheckAuth';
+import useAuth from './hooks/useAuth';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -16,7 +16,7 @@ import RecoverPassPage from './pages/RecoverPassPage';
 import DoctorsPage from './pages/DoctorsPage';
 
 function App() {
-    const { isSessionEnd } = useCheckAuth();
+    const { isSessionEnd } = useAuth();
     const [showSessionMessage, setShowSessionMessage] = useState();
     const [showButton, setShowButton] = useState(false);
 
