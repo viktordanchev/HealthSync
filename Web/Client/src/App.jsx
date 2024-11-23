@@ -66,7 +66,7 @@ function App() {
                     </Routes>
                     <button
                         onClick={scrollToTop}
-                        className={`fixed bottom-16 right-16 bg-zinc-700 h-16 w-16 rounded-full shadow-xl hover:bg-zinc-600 transition-opacity duration-300 md:bottom-12 md:right-12 md:h-14 md:w-14 sm:bottom-8 sm:right-8 sm:h-11 sm:w-11 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                        className={`fixed bottom-16 right-16 bg-zinc-600 h-16 w-16 rounded-full shadow-xl hover:bg-zinc-500 transition-opacity duration-300 md:bottom-12 md:right-12 md:h-14 md:w-14 sm:bottom-8 sm:right-8 sm:h-11 sm:w-11 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                         <FontAwesomeIcon icon={faAngleUp} className="text-white text-4xl md:text-3xl sm:text-xl" />
                     </button>
                 </main>
