@@ -55,7 +55,7 @@ function DoctorDetails() {
                         </div>
                         <hr className="border-e border-white w-full my-3" />
                         <div className="h-full flex flex-col justify-evenly space-y-3 lg:flex-row lg:space-y-0 lg:space-x-3 lg:w-full lg:h-40 md:flex-row md:space-y-0 md:space-x-3 md:w-full md:h-64 sm:h-96">
-                            <div className="h-1/2 w-full p-2 flex flex-col justify-evenly space-y-3 text-center bg-maincolor bg-opacity-65 rounded-xl lg:h-full md:h-full sm:h-full">
+                            <div className="h-1/2 w-full p-2 flex flex-col justify-evenly space-y-3 text-center bg-maincolor bg-opacity-100 rounded-xl lg:h-full md:h-full sm:h-full">
                                 <p className="font-bold underline text-xl">Personal info</p>
                                 <div className="flex flex-row text-sm space-x-3">
                                     <div className="w-1/2">

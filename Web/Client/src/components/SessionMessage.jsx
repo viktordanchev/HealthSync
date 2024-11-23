@@ -2,7 +2,7 @@ import React from 'react';
 
 function SessionMessage({ close }) {
     const handleClose = () => {
-        sessionStorage.removeItem('accessToken');
+        localStorage.removeItem('accessToken');
         close();
     };
 

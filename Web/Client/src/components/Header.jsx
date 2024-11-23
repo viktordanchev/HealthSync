@@ -42,7 +42,7 @@ const Header = () => {
     };
 
     return (
-        <header className={`transition-all duration-300 transform flex bg-maincolor ${isFixed ? 'sticky top-0 z-40 h-20 w-4/5 rounded-xl p-5 shadow-xl border border-zinc-700 md:w-11/12 sm:w-11/12 translate-y-6' : 'h-24 w-full p-6 translate-y-0'}`}>
+        <header className={`transition-all duration-300 transform flex bg-maincolor ${isFixed ? 'sticky top-0 z-40 h-20 w-4/5 rounded-xl p-5 shadow-xl border-2 border-white md:w-11/12 sm:w-11/12 translate-y-6' : 'h-24 w-full p-6 translate-y-0'}`}>
             <div className="flex basis-full justify-between items-center">
                 <a href="/home" className={`${isFixed ? 'text-3xl' : 'text-4xl'} text-white font-bold hover:text-gray-200 transition duration-300 lg:text-2xl md:text-2xl sm:text-2xl`}>
                     HealthSync

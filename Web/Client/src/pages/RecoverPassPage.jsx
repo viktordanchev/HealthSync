@@ -80,13 +80,13 @@ function RecoverPassPage() {
                         validationSchema={token ? validationPasswordSchema : validationEmailSchema}
                         onSubmit={token ? submitPassword : (values) => sendLink(values.email)}
                     >
-                        <Form>
+                        <Form className="text-gray-700">
                             {token ?
                                 <>
                                     <div>
                                         <label className="text-md font-bold">Password</label>
                                         <Field
-                                            className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                            className="rounded w-full py-1 px-2 focus:outline-none"
                                             type="password"
                                             name="password"
                                         />
@@ -106,7 +106,7 @@ function RecoverPassPage() {
                                     <label className="text-md font-bold">Email</label>
                                     <Field
                                         placeholder="user@gmail.com"
-                                        className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                        className="rounded w-full py-1 px-2 focus:outline-none"
                                         type="email"
                                         name="email"
                                     />

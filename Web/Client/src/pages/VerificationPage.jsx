@@ -76,12 +76,12 @@ function VerificationPage() {
                         validationSchema={userEmail ? validationVrfCodeSchema : validationEmailSchema}
                         onSubmit={userEmail ? submitCode : (values) => sendCode(values.email)}
                     >
-                        <Form>
+                        <Form className="text-gray-700">
                             {userEmail ?
                                 <div>
                                     <label className="text-md font-bold">Code</label>
                                     <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                        className="rounded w-full py-1 px-2 focus:outline-none"
                                         type="text"
                                         name="vrfCode"
                                     />
@@ -91,7 +91,7 @@ function VerificationPage() {
                                     <label className="text-md font-bold">Email</label>
                                     <Field
                                         placeholder="user@gmail.com"
-                                        className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none"
+                                        className="rounded w-full py-1 px-2 focus:outline-none"
                                         type="email"
                                         name="email"
                                     />

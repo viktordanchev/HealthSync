@@ -53,7 +53,7 @@ function RegisterPage() {
                         validationSchema={validationSchema}
                         onSubmit={handleRegister}
                     >
-                        <Form className="flex flex-col space-y-2">
+                        <Form className="flex flex-col space-y-2 text-gray-700">
                             <div className="flex flex-row space-x-4">
                                 <div>
                                     <label className="text-md font-bold">First name</label>
@@ -106,7 +106,7 @@ function RegisterPage() {
                             </div>
                             <div className="text-center pt-6">
                                 <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-2 rounded"
                                     type="submit">
                                     Register
                                 </button>
