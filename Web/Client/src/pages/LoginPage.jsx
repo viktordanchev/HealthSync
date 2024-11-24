@@ -88,7 +88,7 @@ function LoginPage() {
                                     />
                                     <span className="ml-1 text-md text-white">Remember me</span>
                                 </label>
-                                <a href="/account/recoverPassword" className="inline-block align-baseline text-sm text-blue-500 hover:text-blue-800">
+                                <a href="/account/recoverPassword" className="inline-block align-baseline text-sm text-blue-500 underline hover:text-blue-800">
                                     Forgot Password?
                                 </a>
                             </div>

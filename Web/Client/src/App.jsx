@@ -16,7 +16,7 @@ import RecoverPassPage from './pages/RecoverPassPage';
 import DoctorsPage from './pages/DoctorsPage';
 
 function App() {
-    const { isSessionEnd } = useAuth();
+    const { isAuthenticated, isSessionEnd } = useAuth();
     const [showSessionMessage, setShowSessionMessage] = useState();
     const [showButton, setShowButton] = useState(false);
 
@@ -38,7 +38,7 @@ function App() {
 
     useEffect(() => {
         setShowSessionMessage(isSessionEnd);
-    }, [isSessionEnd]);
+    }, [isAuthenticated, isSessionEnd]);
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -51,7 +51,7 @@ function App() {
         <>
             {showSessionMessage && <SessionMessage close={() => setShowSessionMessage(false)} />}
             <Router>
-                <Header />
+                <Header isAuthenticated={isAuthenticated} />
                 <main className="w-full my-6">
                     <Routes>
                         <Route path="/" element={<Navigate to="/home" />} />
