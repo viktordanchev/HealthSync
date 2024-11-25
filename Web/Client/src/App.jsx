@@ -2,7 +2,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import useAuth from './hooks/useAuth';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -14,10 +13,9 @@ import RegisterPage from './pages/RegisterPage';
 import VerificationPage from './pages/VerificationPage';
 import RecoverPassPage from './pages/RecoverPassPage';
 import DoctorsPage from './pages/DoctorsPage';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
-    const { isAuthenticated, isSessionEnd } = useAuth();
-    const [showSessionMessage, setShowSessionMessage] = useState();
     const [showButton, setShowButton] = useState(false);
 
     useEffect(() => {
@@ -36,10 +34,6 @@ function App() {
         };
     }, []);
 
-    useEffect(() => {
-        setShowSessionMessage(isSessionEnd);
-    }, [isAuthenticated, isSessionEnd]);
-
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -48,12 +42,13 @@ function App() {
     };
 
     return (
-        <>
-            {showSessionMessage && <SessionMessage close={() => setShowSessionMessage(false)} />}
+        <AuthProvider>
+            <SessionMessage />
             <Router>
-                <Header isAuthenticated={isAuthenticated} />
+                <Header />
                 <main className="w-full my-6">
                     <Routes>
+                        <Route path="*" element={<NotFound />} />
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/login" element={<LoginPage />} />
@@ -62,7 +57,6 @@ function App() {
                         <Route path="/account/recoverPassword" element={<RecoverPassPage />} />
                         <Route path="/doctors" element={<DoctorsPage />} />
                         <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
-                        <Route path="*" element={<NotFound />} />
                     </Routes>
                     <button
                         onClick={scrollToTop}
@@ -72,7 +66,7 @@ function App() {
                 </main>
                 <Footer />
             </Router>
-        </>
+        </AuthProvider>
     );
 }
 

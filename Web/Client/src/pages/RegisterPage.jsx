@@ -4,17 +4,11 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
-import useAuth from '../hooks/useAuth';
 import Message from '../components/Message';
 
 function RegisterPage() {
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
-    const { isAuthenticated } = useAuth();
-
-    if (isAuthenticated) {
-        navigate('/home');
-    }
 
     const validationSchema = Yup.object({
         firstName: validateFirstName,

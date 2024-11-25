@@ -5,21 +5,15 @@ import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import useTimer from '../hooks/useTimer';
-import useAuth from '../hooks/useAuth';
 import Message from '../components/Message';
 
 function RecoverPassPage() {
     const navigate = useNavigate();
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
-    const { isAuthenticated } = useAuth();
     const [message, setMessage] = useState('');
     const [messageType, setMessageType] = useState('');
     const [searchParams] = useSearchParams();
     const token = searchParams.get('token') ? searchParams.get('token').replace(/ /g, '+') : null;
-
-    if (isAuthenticated) {
-        navigate('/home');
-    }
 
     const validationEmailSchema = Yup.object().shape({ email: validateEmail });
 

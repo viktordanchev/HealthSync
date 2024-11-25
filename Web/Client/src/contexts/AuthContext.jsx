@@ -1,15 +1,18 @@
-﻿import { useEffect, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import jwtDecoder from '../services/jwtDecoder';
 import apiRequest from '../services/apiRequest';
 
-const useAuth = () => {
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isSessionEnd, setIsSessionEnd] = useState(false);
     const [loading, setLoading] = useState(true);
-    const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
         const checkAuth = async () => {
+            const accessToken = localStorage.getItem('accessToken');
+
             if (accessToken) {
                 const { expTime } = jwtDecoder();
 
@@ -32,18 +35,27 @@ const useAuth = () => {
         setLoading(false);
     }, []);
 
-    return { isAuthenticated, isSessionEnd, loading };
+    const refreshAccessToken = async () => {
+        try {
+            const response = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
+
+            return response.token ? response.token : undefined;
+        } catch (error) {
+            console.error(error);
+            return undefined;
+        }
+    };
+
+    return (
+        <>
+            {loading ? null :
+                <AuthContext.Provider value={{ isAuthenticated, isSessionEnd }}>
+                    {children}
+                </AuthContext.Provider>}
+        </>
+    );
 };
 
-export default useAuth;
-
-const refreshAccessToken = async () => {
-    try {
-        const response = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
-
-        return response.token ? response.token : undefined;
-    } catch (error) {
-        console.error(error);
-        return undefined;
-    }
+export const useAuthContext = () => {
+    return useContext(AuthContext);
 };

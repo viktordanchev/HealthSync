@@ -1,8 +1,8 @@
 import { jwtDecode } from 'jwt-decode';
 
-function jwtDecoder(token) {
+function jwtDecoder() {
     try {
-        const decodedToken = jwtDecode(token);
+        const decodedToken = jwtDecode(localStorage.getItem('accessToken'));
 
         const claimName = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
         const expTime = decodedToken.exp;

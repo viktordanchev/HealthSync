@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateEmail, validateLoginPassword } from '../services/validationSchemas';
-import useAuth from '../hooks/useAuth';
 import Message from '../components/Message';
 
 function LoginPage() {
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
-    const { isAuthenticated } = useAuth();
-
-    if (isAuthenticated) {
-        navigate('/home');
-    }
 
     const validationSchema = Yup.object({
         email: validateEmail,

@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import useAuth from '../hooks/useAuth';
 import jwtDecoder from '../services/jwtDecoder';
-import Loading from './Loading';
+import { useAuthContext } from '../contexts/AuthContext';
 
 const Header = () => {
-    const { isAuthenticated, loading } = useAuth();
     const location = useLocation();
+    const { isAuthenticated } = useAuthContext();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
     const [isFixed, setIsFixed] = useState(false);
 
     useEffect(() => {
+        console.log(isAuthenticated);
         if (isAuthenticated) {
-            const { claimName } = jwtDecoder(localStorage.getItem('accessToken'));
+            const { claimName } = jwtDecoder();
 
             setUserName(claimName);
         }
-    }, [isAuthenticated, location]);
+    }, [location.pathname]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -55,23 +55,20 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="flex space-x-4 w-52 md:hidden sm:hidden">
-                    {loading ? <Loading type={'small'} /> :
+                    {isAuthenticated ? (
+                        <p className="basis-full text-white text-center text-lg font-bold py-2 px-4">
+                            {userName}
+                        </p>
+                    ) : (
                         <>
-                            {isAuthenticated ? (
-                                <p className="basis-full text-white text-center text-lg font-bold py-2 px-4">
-                                    {userName}
-                                </p>
-                            ) : (
-                                <>
-                                        <a href="/login" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded border-2 border-blue-500 hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
-                                        Login
-                                    </a>
-                                        <a href="/register" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded border-2 border-blue-500 hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
-                                        Register
-                                    </a>
-                                </>
-                            )}
-                        </>}
+                            <a href="/login" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded border-2 border-blue-500 hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
+                                Login
+                            </a>
+                            <a href="/register" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded border-2 border-blue-500 hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
+                                Register
+                            </a>
+                        </>
+                    )}
                 </div>
                 <button
                     onClick={toggleMenu}
