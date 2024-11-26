@@ -4,10 +4,12 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateEmail, validateLoginPassword } from '../services/validationSchemas';
+import { useAuthContext } from '../contexts/AuthContext';
 import Message from '../components/Message';
 
 function LoginPage() {
     const navigate = useNavigate();
+    const { login } = useAuthContext();
     const [message, setMessage] = useState('');
 
     const validationSchema = Yup.object({
@@ -17,10 +19,10 @@ function LoginPage() {
 
     const handleLogin = async (values) => {
         try {
-            const response = await apiRequest('account', 'login', values, undefined, 'POST', false);
+            const response = await apiRequest('account', 'login', values, undefined, 'POST', true);
 
             if (response.token) {
-                localStorage.setItem('accessToken', response.token);
+                login(response.token);
                 navigate('/home');
             } else {
                 if (response.notVerified) {

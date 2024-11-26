@@ -1,12 +1,13 @@
-﻿using RestAPI.RequestDtos.Account;
-using RestAPI.Services.Contracts;
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using static Common.Errors.Account;
-using static Common.Errors;
-using static Common.Messages.Account;
+using RestAPI.RequestDtos.Account;
+using RestAPI.Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using static Common.Errors;
+using static Common.Errors.Account;
+using static Common.Messages.Account;
 
 namespace HealthSync.Server.Controllers
 {
@@ -16,7 +17,6 @@ namespace HealthSync.Server.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
-        private IConfiguration _config;
         private IJWTTokenService _tokenService;
         private IEmailSender _emailSender;
         private IMemoryCacheService _memoryCacheService;
@@ -24,7 +24,6 @@ namespace HealthSync.Server.Controllers
 
         public AccountController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration config,
             IJWTTokenService tokenService,
             IEmailSender emailSender,
             IMemoryCacheService memoryCacheService,
@@ -32,7 +31,6 @@ namespace HealthSync.Server.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _config = config;
             _tokenService = tokenService;
             _emailSender = emailSender;
             _memoryCacheService = memoryCacheService;
@@ -101,7 +99,7 @@ namespace HealthSync.Server.Controllers
             {
                 var refreshToken = _tokenService.GenerateRefreshToken(user.Id);
                 var refreshTokenExpireTime = _tokenService.GetTokenExpireTime(refreshToken);
-                _tokenService.AppendTokenToCookie(HttpContext, "refreshToken", refreshToken, refreshTokenExpireTime);
+                _tokenService.AppendRefreshTokenToCookie(HttpContext, refreshToken, refreshTokenExpireTime);
             }
 
             return Ok(new { Token = accessToken });
@@ -185,7 +183,7 @@ namespace HealthSync.Server.Controllers
             {
                 var handler = new JwtSecurityTokenHandler();
                 var jsonToken = handler.ReadJwtToken(refreshToken);
-                var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == "Identifier").Value;
+                var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
                 newAccessToken = await _tokenService.GenerateAccessTokenAsync(userId);
             }

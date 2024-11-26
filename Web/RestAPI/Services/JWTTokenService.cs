@@ -95,9 +95,9 @@ namespace RestAPI.Services
         /// <summary>
         /// Append current JWT token to cookie.
         /// </summary>
-        public void AppendTokenToCookie(HttpContext context, string type, string token, DateTime expTime)
+        public void AppendRefreshTokenToCookie(HttpContext context, string token, DateTime expTime)
         {
-            context.Response.Cookies.Append(type, token,
+            context.Response.Cookies.Append("refreshToken", token,
                 new CookieOptions
                 {
                     HttpOnly = true,

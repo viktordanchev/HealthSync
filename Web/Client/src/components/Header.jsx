@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import jwtDecoder from '../services/jwtDecoder';
 import { useAuthContext } from '../contexts/AuthContext';
 
 const Header = () => {
-    const location = useLocation();
     const { isAuthenticated } = useAuthContext();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
     const [isFixed, setIsFixed] = useState(false);
 
     useEffect(() => {
-        console.log(isAuthenticated);
         if (isAuthenticated) {
             const { claimName } = jwtDecoder();
 
             setUserName(claimName);
         }
-    }, [location.pathname]);
+    }, [isAuthenticated]);
 
     useEffect(() => {
         const handleScroll = () => {

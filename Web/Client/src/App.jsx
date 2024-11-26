@@ -46,7 +46,7 @@ function App() {
             <SessionMessage />
             <Router>
                 <Header />
-                <main className="w-full my-6">
+                <main className="my-6 md:mx-6 sm:mx-6">
                     <Routes>
                         <Route path="*" element={<NotFound />} />
                         <Route path="/" element={<Navigate to="/home" />} />

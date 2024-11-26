@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import jwtDecoder from '../services/jwtDecoder';
 import apiRequest from '../services/apiRequest';
+import Loading from '../components/Loading';
 
 const AuthContext = createContext();
 
@@ -29,13 +30,16 @@ export const AuthProvider = ({ children }) => {
                     }
                 }
             }
+
+            setLoading(false);
         };
 
         checkAuth();
-        setLoading(false);
     }, []);
 
     const refreshAccessToken = async () => {
+        setLoading(true);
+
         try {
             const response = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
 
@@ -43,13 +47,20 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             console.error(error);
             return undefined;
+        } finally {
+            setLoading(false);
         }
+    };
+
+    const login = (token) => {
+        localStorage.setItem('accessToken', token);
+        setIsAuthenticated(true);
     };
 
     return (
         <>
             {loading ? null :
-                <AuthContext.Provider value={{ isAuthenticated, isSessionEnd }}>
+                <AuthContext.Provider value={{ isAuthenticated, isSessionEnd, login }}>
                     {children}
                 </AuthContext.Provider>}
         </>
