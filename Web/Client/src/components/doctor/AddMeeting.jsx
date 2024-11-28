@@ -3,18 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
-import useAuth from '../../hooks/useAuth';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
     const navigate = useNavigate();
-    const { isAuthenticated, loading } = useAuth();
+    const { isAuthenticated, isStillAuth } = useAuthContext();
     const [isTimeChoosed, setIsTimeChoosed] = useState(false);
     const [meetingDate, setMeetingDate] = useState('');
     const [meetingTimes, setMeetingTimes] = useState([]);
-
-    if (!isAuthenticated && !loading) {
-        navigate('/login');
-    }
 
     useEffect(() => {
         const getMeetingTimes = async () => {
@@ -34,8 +30,10 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
 
         if (isAuthenticated) {
             getMeetingTimes();
+        } else {
+            navigate('/login');
         }
-    }, [loading]);
+    }, [isAuthenticated]);
 
     const handleMeeting = (time) => {
         const [hour, minutes] = time.split(" : ").map(Number);
@@ -48,21 +46,24 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
     };
 
     const confirmMeeting = async () => {
-        const dto = {
-            doctorId: doctorId,
-            date: date
-        };
+        const isAuth = await isStillAuth();
+        console.log(isAuth);
 
-        try {
-            const response = await apiRequest('doctor', 'addMeeting', dto, localStorage.getItem('accessToken'), 'POST', true);
-
-            setMessage(response.message);
-            setIsDateChoosed(false);
-
-            setTimeout(() => { setMessage(''); }, 3000);
-        } catch (error) {
-            console.error(error);
-        }
+        //const dto = {
+        //    doctorId: doctorId,
+        //    date: date
+        //};
+        //
+        //try {
+        //    const response = await apiRequest('doctor', 'addMeeting', dto, localStorage.getItem('accessToken'), 'POST', true);
+        //
+        //    setMessage(response.message);
+        //    setIsDateChoosed(false);
+        //
+        //    setTimeout(() => { setMessage(''); }, 3000);
+        //} catch (error) {
+        //    console.error(error);
+        //}
     };
 
     return (

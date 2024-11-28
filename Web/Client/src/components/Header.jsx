@@ -9,7 +9,7 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
     const [isFixed, setIsFixed] = useState(false);
-
+    
     useEffect(() => {
         if (isAuthenticated) {
             const { claimName } = jwtDecoder();

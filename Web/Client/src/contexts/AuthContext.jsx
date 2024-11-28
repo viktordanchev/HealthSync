@@ -1,69 +1,71 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import jwtDecoder from '../services/jwtDecoder';
-import apiRequest from '../services/apiRequest';
-import Loading from '../components/Loading';
+import useAuth from '../hooks/useAuth';
+import useRefreshToken from '../hooks/useRefreshToken';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const isAuth = useAuth();
+    const { refreshAccessToken } = useRefreshToken();
+    const [isAuthenticated, setIsAuthenticated] = useState(isAuth);
     const [isSessionEnd, setIsSessionEnd] = useState(false);
-    const [loading, setLoading] = useState(true);
-
+    const [isLoading, setIsLoading] = useState(false);
+    
     useEffect(() => {
-        const checkAuth = async () => {
-            const accessToken = localStorage.getItem('accessToken');
+        const tryRefreshToken = async () => {
+            setIsLoading(true);
+            await new Promise(res => setTimeout(res, 1000));
+            const isRefreshed = await refreshAccessToken();
 
-            if (accessToken) {
-                const { expTime } = jwtDecoder();
-
-                if (expTime * 1000 > Date.now()) {
-                    setIsAuthenticated(true);
-                } else {
-                    const newToken = await refreshAccessToken();
-
-                    if (newToken) {
-                        localStorage.setItem('accessToken', newToken);
-                        setIsAuthenticated(true);
-                    } else {
-                        setIsSessionEnd(true);
-                    }
-                }
+            if (isRefreshed) {
+                setIsAuthenticated(true);
+            } else {
+                setIsSessionEnd(localStorage.getItem('accessToken'));
+                setIsAuthenticated(false);
             }
 
-            setLoading(false);
+            setIsLoading(false);
         };
 
-        checkAuth();
-    }, []);
-
-    const refreshAccessToken = async () => {
-        setLoading(true);
-
-        try {
-            const response = await apiRequest('account', 'refreshToken', undefined, undefined, 'GET', true);
-
-            return response.token ? response.token : undefined;
-        } catch (error) {
-            console.error(error);
-            return undefined;
-        } finally {
-            setLoading(false);
+        if (!isAuth) {
+            tryRefreshToken();
         }
-    };
+    }, []);
 
     const login = (token) => {
         localStorage.setItem('accessToken', token);
         setIsAuthenticated(true);
     };
 
+    const logout = () => {
+        localStorage.removeItem('accessToken');
+    };
+
+    const isStillAuth = async () => {
+        let isStill = false;
+        const isAuth = useAuth();
+
+        if (!isAuth) {
+            setIsLoading(true);
+            await new Promise(res => setTimeout(res, 1000));
+            const isRefreshed = await refreshAccessToken();
+
+            if (isRefreshed) {
+                isStill = true;
+            }
+        } else {
+            isStill = true;
+        }
+
+        setIsLoading(false);
+        return isStill;
+    };
+
     return (
-        <>
-            {loading ? null :
-                <AuthContext.Provider value={{ isAuthenticated, isSessionEnd, login }}>
-                    {children}
-                </AuthContext.Provider>}
-        </>
+        <AuthContext.Provider value={{ isAuthenticated, isSessionEnd, login, logout, isStillAuth }}>
+            {isLoading && (<div className="fixed z-50 w-full h-1 bg-red-500"></div>)}
+            {children}
+        </AuthContext.Provider>
     );
 };
 

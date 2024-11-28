@@ -1,17 +1,22 @@
 ﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiRequest from '../../services/apiRequest';
-import useAuth from '../../hooks/useAuth';
+import { useAuthContext } from '../../contexts/AuthContext';
 import { reviewCommentLength } from '../../constants/constants';
 
 function AddReview({ doctorId, setMessage }) {
     const navigate = useNavigate();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAuthContext();
     const [rating, setRating] = useState(1);
     const [comment, setComment] = useState('');
     const [isOpen, setIsOpen] = useState(false);
 
     const add = async () => {
+        if (!isAuthenticated) {
+            navigate('/login');
+            return;
+        }
+
         const dto = {
             doctorId: doctorId,
             rating: rating,

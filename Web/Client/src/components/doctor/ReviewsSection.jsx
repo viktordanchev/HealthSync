@@ -55,7 +55,7 @@ function DoctorReviews({ doctorId }) {
     return (
         <div
             ref={scrollContainerRef}
-            className="h-60 flex-col bg-zinc-700 space-y-2 p-2 overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thumb-zinc-500 scrollbar-track-gray-200 rounded md:h-80 sm:h-80">
+            className="h-60 flex-col bg-zinc-700 space-y-2 p-2 overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thumb-zinc-500 scrollbar-track-gray-300 rounded md:h-80 sm:h-80">
             {loading ? <Loading type={'small'} /> :
                 <>
                     {reviews.length == 0 ?

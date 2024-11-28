@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import SessionMessage from './components/SessionMessage';
 import NotFound from './components/NotFound';
+import GuestOnly from './components/GuestOnly';
 import DoctorDetails from './components/doctor/DoctorDetails';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -42,19 +43,21 @@ function App() {
     };
 
     return (
-        <AuthProvider>
-            <SessionMessage />
-            <Router>
+        <Router>
+            <AuthProvider>
+                <SessionMessage />
                 <Header />
                 <main className="my-6 md:mx-6 sm:mx-6">
                     <Routes>
                         <Route path="*" element={<NotFound />} />
+
+                        <Route path="/login" element={<GuestOnly><LoginPage /></GuestOnly>} />
+                        <Route path="/register" element={<GuestOnly><RegisterPage /></GuestOnly>} />
+                        <Route path="/account/verify" element={<GuestOnly><VerificationPage /></GuestOnly>} />
+                        <Route path="/account/recoverPassword" element={<GuestOnly><RecoverPassPage /></GuestOnly>} />
+
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<Home />} />
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route path="/account/verify" element={<VerificationPage />} />
-                        <Route path="/account/recoverPassword" element={<RecoverPassPage />} />
                         <Route path="/doctors" element={<DoctorsPage />} />
                         <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
                     </Routes>
@@ -65,8 +68,8 @@ function App() {
                     </button>
                 </main>
                 <Footer />
-            </Router>
-        </AuthProvider>
+            </AuthProvider>
+        </Router>
     );
 }
 
