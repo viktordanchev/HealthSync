@@ -21,7 +21,7 @@ function UserManage({ userName }) {
                 </button>
             </div>
             <div
-                className={`absolute right-0 z-40 w-52 rounded-xl bg-gray-200 bg-opacity-85 border-2 border-zinc-500 transition-all duration-300 transform ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'
+                className={`absolute right-0 z-40 w-52 rounded-xl shadow-xl bg-gray-200 bg-opacity-85 border border-zinc-500 transition-all duration-300 transform ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'
                     }`}
             >
                 <ul className="text-center text-gray-700 text-xl">
