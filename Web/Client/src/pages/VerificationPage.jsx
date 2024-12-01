@@ -7,7 +7,7 @@ import { validateEmail, validateVrfCode } from '../services/validationSchemas';
 import useTimer from '../hooks/useTimer';
 import Message from '../components/Message';
 
-function VerificationPage() {
+function VerificationPage({ setIsLoading }) {
     const navigate = useNavigate();
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
     const [message, setMessage] = useState('');
@@ -20,6 +20,8 @@ function VerificationPage() {
 
     const submitCode = async (values) => {
         try {
+            setIsLoading(true);
+
             const response = await apiRequest('account', 'verifyAccount', values, undefined, 'POST', false);
 
             if (response.error) {
@@ -32,11 +34,15 @@ function VerificationPage() {
             setTimeout(() => { setMessages(''); }, 3000);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const sendCode = async (email) => {
         try {
+            setIsLoading(true);
+
             const response = await apiRequest('account', 'sendVrfCode', values, undefined, 'POST', false);
 
             if (response.error) {
@@ -54,6 +60,8 @@ function VerificationPage() {
             setTimeout(() => { setMessage(''); }, 3000);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 

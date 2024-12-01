@@ -6,13 +6,16 @@ import { reviewCommentLength } from '../../constants/constants';
 
 function AddReview({ doctorId, setMessage }) {
     const navigate = useNavigate();
-    const { isAuthenticated } = useAuthContext();
+    const { isStillAuth } = useAuthContext();
     const [rating, setRating] = useState(1);
     const [comment, setComment] = useState('');
+    const [commentLength, setCommentLength] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
 
     const add = async () => {
-        if (!isAuthenticated) {
+        const isAuth = await isStillAuth();
+
+        if (!isAuth) {
             navigate('/login');
             return;
         }
@@ -38,13 +41,7 @@ function AddReview({ doctorId, setMessage }) {
     return (
         <div className="flex justify-center items-center">
             <div
-                onClick={() => {
-                    if (isAuthenticated) {
-                        setIsOpen(true);
-                    } else {
-                        navigate('/login');
-                    }
-                }}
+                onClick={() => setIsOpen(true)}
                 className={`${isOpen ? 'w-full h-80 rounded-xl bg-maincolor' : 'w-1/2 h-10 cursor-pointer rounded bg-blue-500 text-white text-lg font-bold py-1 text-center border-2 border-blue-500 hover:bg-white hover:text-blue-500'} transition-[width,height] duration-500 ease-in-out`}>
                 {!isOpen ? 'Add Review' :
                     <div className="h-full flex flex-col justify-between items-center p-4">
@@ -73,10 +70,16 @@ function AddReview({ doctorId, setMessage }) {
                             </div>
                             <div className="w-full">
                                 <p className="font-bold">Comment</p>
-                                <textarea
-                                    onChange={(e) => setComment(e.target.value)}
-                                    maxLength={reviewCommentLength}
-                                    className="h-24 w-full px-1 resize-none bg-white text-black rounded-xl border-2 focus:outline-none focus:border-blue-500 scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-blue-500 scrollbar-track-gray-200"></textarea>
+                                <div>
+                                    <textarea
+                                        onChange={(e) => {
+                                            setComment(e.target.value);
+                                            setCommentLength(e.target.value.length);
+                                        }}
+                                        maxLength={reviewCommentLength}
+                                        className="h-24 w-full px-1 resize-none bg-white text-black rounded-xl border-2 focus:outline-none focus:border-blue-500 scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-zinc-500 scrollbar-track-gray-300"></textarea>
+                                    <p className="text-right text-sm">{commentLength}/{reviewCommentLength}</p>
+                                </div>
                             </div>
                         </div>
                         <div className="w-full flex justify-evenly">
@@ -85,7 +88,7 @@ function AddReview({ doctorId, setMessage }) {
                                     e.stopPropagation();
                                     add();
                                 }}
-                                className="w-1/4 bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-2 rounded">
+                                className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-4 rounded">
                                 Add
                             </button>
                             <button
@@ -93,7 +96,7 @@ function AddReview({ doctorId, setMessage }) {
                                     e.stopPropagation();
                                     setIsOpen(false);
                                 }}
-                                className="w-1/4 bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-2 rounded">
+                                className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-4 rounded">
                                 Close
                             </button>
                         </div>

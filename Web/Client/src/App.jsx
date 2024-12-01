@@ -8,6 +8,7 @@ import Home from './components/Home';
 import SessionMessage from './components/SessionMessage';
 import NotFound from './components/NotFound';
 import GuestOnly from './components/GuestOnly';
+import LoadingGlobal from './components/LoadingGlobal';
 import DoctorDetails from './components/doctor/DoctorDetails';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -18,7 +19,8 @@ import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
     const [showButton, setShowButton] = useState(false);
-
+    const [isLoading, setIsLoading] = useState(false);
+    
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 300) {
@@ -44,6 +46,7 @@ function App() {
 
     return (
         <Router>
+            {isLoading && <LoadingGlobal />}
             <AuthProvider>
                 <SessionMessage />
                 <Header />
@@ -51,7 +54,7 @@ function App() {
                     <Routes>
                         <Route path="*" element={<NotFound />} />
 
-                        <Route path="/login" element={<GuestOnly><LoginPage /></GuestOnly>} />
+                        <Route path="/login" element={<GuestOnly><LoginPage setIsLoading={setIsLoading} /></GuestOnly>} />
                         <Route path="/register" element={<GuestOnly><RegisterPage /></GuestOnly>} />
                         <Route path="/account/verify" element={<GuestOnly><VerificationPage /></GuestOnly>} />
                         <Route path="/account/recoverPassword" element={<GuestOnly><RecoverPassPage /></GuestOnly>} />
@@ -67,8 +70,8 @@ function App() {
                         <FontAwesomeIcon icon={faAngleUp} className="text-white text-4xl md:text-3xl sm:text-xl" />
                     </button>
                 </main>
-                <Footer />
             </AuthProvider>
+            <Footer />
         </Router>
     );
 }

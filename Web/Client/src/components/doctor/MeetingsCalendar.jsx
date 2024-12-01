@@ -7,7 +7,7 @@ const MeetingsCalendar = ({ doctorId, setMessage }) => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [isDateChoosed, setIsDateChoosed] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [date, setDate] = useState(null);
     const [days, setDays] = useState([]);
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -30,7 +30,7 @@ const MeetingsCalendar = ({ doctorId, setMessage }) => {
                 }));
 
                 setDays(dates);
-                setLoading(false);
+                setIsLoading(false);
 
                 generateCalendar(currentYear, currentMonth);
             }
@@ -88,7 +88,7 @@ const MeetingsCalendar = ({ doctorId, setMessage }) => {
         <>
             {!isDateChoosed ?
                 <div className="h-80">
-                    {loading ? <Loading type={'small'} /> :
+                    {isLoading ? <Loading type={'small'} /> :
                         <>
                             <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
                                 {new Date() <= new Date(currentYear, currentMonth) ?

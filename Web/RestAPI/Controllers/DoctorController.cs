@@ -80,7 +80,6 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost("getAvailableMeetTimes")]
-        [Authorize]
         public async Task<IActionResult> GetAvailableMeetTimes([FromBody] GetAvailableMeetTimesRequest request)
         {
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||

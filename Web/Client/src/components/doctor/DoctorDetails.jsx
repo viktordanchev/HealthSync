@@ -10,7 +10,7 @@ import Message from '../Message';
 function DoctorDetails() {
     const navigate = useNavigate();
     const location = useLocation();
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [message, setMessage] = useState('');
     const [doctor, setDoctor] = useState({});
     const doctorId = location.state?.doctorId;
@@ -21,7 +21,7 @@ function DoctorDetails() {
                 const response = await apiRequest('doctor', 'getDoctorDetails', doctorId, undefined, 'POST', false);
 
                 setDoctor(response);
-                setLoading(false);
+                setIsLoading(false);
             } catch (error) {
                 console.error(error);
             }
@@ -38,7 +38,7 @@ function DoctorDetails() {
         <>
             <Message message={message} type={'message'} />
 
-            {loading ? <Loading type={'big'} /> :
+            {isLoading ? <Loading type={'big'} /> :
                 <section className="h-full flex space-x-6 mx-20 text-gray-700 lg:mx-16 lg:flex-col lg:space-x-0 lg:space-y-6 md:mx-6 md:flex-col md:space-x-0 md:space-y-6 sm:mx-6 sm:flex-col sm:space-x-0 sm:space-y-6">
                     <article className="w-1/4 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
                         <div className="flex flex-col items-center space-y-3">

@@ -5,7 +5,7 @@ import Loading from '../Loading';
 
 function DoctorReviews({ doctorId }) {
     const scrollContainerRef = useRef(null);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(true);
     const [reviews, setReviews] = useState([]);
     const [index, setIndex] = useState(0);
@@ -28,7 +28,7 @@ function DoctorReviews({ doctorId }) {
                 }
 
                 setLoadingMore(false);
-                setLoading(false);
+                setIsLoading(false);
             } catch (error) {
                 console.error(error);
             }
@@ -56,7 +56,7 @@ function DoctorReviews({ doctorId }) {
         <div
             ref={scrollContainerRef}
             className="h-60 flex-col bg-zinc-700 space-y-2 p-2 overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thumb-zinc-500 scrollbar-track-gray-300 rounded md:h-80 sm:h-80">
-            {loading ? <Loading type={'small'} /> :
+            {isLoading ? <Loading type={'small'} /> :
                 <>
                     {reviews.length == 0 ?
                         <p className="text-white text-xl">Be the first reviewer</p> :

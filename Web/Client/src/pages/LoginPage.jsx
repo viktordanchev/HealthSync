@@ -7,7 +7,7 @@ import { validateEmail, validateLoginPassword } from '../services/validationSche
 import { useAuthContext } from '../contexts/AuthContext';
 import Message from '../components/Message';
 
-function LoginPage() {
+function LoginPage({ setIsLoading }) {
     const navigate = useNavigate();
     const { login } = useAuthContext();
     const [message, setMessage] = useState('');
@@ -19,6 +19,8 @@ function LoginPage() {
 
     const handleLogin = async (values) => {
         try {
+            setIsLoading(true);
+            
             const response = await apiRequest('account', 'login', values, undefined, 'POST', true);
 
             if (response.token) {
@@ -35,6 +37,8 @@ function LoginPage() {
             setTimeout(() => { setMessage(''); }, 3000);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 

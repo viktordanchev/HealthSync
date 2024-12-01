@@ -6,7 +6,7 @@ import apiRequest from '../services/apiRequest';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import Message from '../components/Message';
 
-function RegisterPage() {
+function RegisterPage({ setIsLoading }) {
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
 
@@ -20,6 +20,8 @@ function RegisterPage() {
 
     const handleRegister = async (values) => {
         try {
+            setIsLoading(true);
+
             const response = await apiRequest('account', 'register', values, undefined, 'POST', false);
 
             if (response.error) {
@@ -31,6 +33,8 @@ function RegisterPage() {
             setTimeout(() => { setMessage(''); }, 3000);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 

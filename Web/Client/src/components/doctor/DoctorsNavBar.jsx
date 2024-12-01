@@ -5,7 +5,7 @@ import apiRequest from '../../services/apiRequest';
 
 function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }) {
     const [specialties, setSpecialties] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [searchOnChange, setSearchOnChange] = useState('');
 
     useEffect(() => {
@@ -14,7 +14,7 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                 const response = await apiRequest('doctor', 'getSpecialties', undefined, undefined, 'GET', false);
 
                 setSpecialties(response);
-                setLoading(false);
+                setIsLoading(false);
             } catch (error) {
                 console.error(error);
             }
@@ -52,7 +52,7 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                     onChange={(e) => setFilter(e.target.value)}
                 >
                     <option value="" disabled hidden>Filter</option>
-                    {loading ?
+                    {isLoading ?
                         <option disabled value="">
                             Loading...
                         </option> :

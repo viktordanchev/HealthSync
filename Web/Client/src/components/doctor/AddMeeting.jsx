@@ -4,11 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
 import { useAuthContext } from '../../contexts/AuthContext';
+import Loading from '../Loading';
 
 function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
     const navigate = useNavigate();
-    const { isAuthenticated, isStillAuth } = useAuthContext();
+    const { isStillAuth } = useAuthContext();
     const [isTimeChoosed, setIsTimeChoosed] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [meetingDate, setMeetingDate] = useState('');
     const [meetingTimes, setMeetingTimes] = useState([]);
 
@@ -20,20 +22,20 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
             };
 
             try {
-                const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, localStorage.getItem('accessToken'), 'POST', true);
+                setIsLoading(true);
+
+                const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, undefined, 'POST', false);
 
                 setMeetingTimes(response);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
-        if (isAuthenticated) {
-            getMeetingTimes();
-        } else {
-            navigate('/login');
-        }
-    }, [isAuthenticated]);
+        getMeetingTimes();
+    }, []);
 
     const handleMeeting = (time) => {
         const [hour, minutes] = time.split(" : ").map(Number);
@@ -47,27 +49,31 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
 
     const confirmMeeting = async () => {
         const isAuth = await isStillAuth();
-        console.log(isAuth);
 
-        //const dto = {
-        //    doctorId: doctorId,
-        //    date: date
-        //};
-        //
-        //try {
-        //    const response = await apiRequest('doctor', 'addMeeting', dto, localStorage.getItem('accessToken'), 'POST', true);
-        //
-        //    setMessage(response.message);
-        //    setIsDateChoosed(false);
-        //
-        //    setTimeout(() => { setMessage(''); }, 3000);
-        //} catch (error) {
-        //    console.error(error);
-        //}
+        if (!isAuth) {
+            navigate('/login');
+            return;
+        }
+
+        const dto = {
+            doctorId: doctorId,
+            date: date
+        };
+
+        try {
+            const response = await apiRequest('doctor', 'addMeeting', dto, localStorage.getItem('accessToken'), 'POST', false);
+
+            setMessage(response.message);
+            setIsDateChoosed(false);
+
+            setTimeout(() => { setMessage(''); }, 3000);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
-        <div className="min-h-80 bg-opacity-95 border border-white rounded-xl bg-zinc-700 p-4 flex flex-col space-y-4 sm:w-full">
+        <div className="min-h-80 bg-opacity-95 border border-white rounded-xl bg-zinc-700 p-4 flex flex-col sm:w-full">
             <div className="w-full text-right">
                 <button onClick={() => setIsDateChoosed(false)}>
                     <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
@@ -92,18 +98,21 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
                         </button>
                     </div>
                 </div>
-                : <div className="flex flex-col items-center space-y-2">
+                : <div className="h-full flex flex-col items-center space-y-2">
                     <p className="font-bold text-white text-xl">Choose meeting time</p>
-                    <div className="flex justify-center items-center flex-wrap text-white">
-                        {meetingTimes.map((meetingTime, index) => (
-                            <div
-                                key={index}
-                                onClick={() => handleMeeting(meetingTime)}
-                                className="flex justify-center items-center m-1 text-base font-bold border-2 border-maincolor rounded-xl p-2 cursor-pointer hover:bg-maincolor"
-                            >
-                                {meetingTime}
-                            </div>
-                        ))}
+                    <div className="h-full flex justify-center items-center text-white">
+                        {isLoading ? <Loading type={'small'} /> :
+                            <div className="flex justify-center flex-wrap">
+                                {meetingTimes.map((meetingTime, index) => (
+                                    <div
+                                        key={index}
+                                        onClick={() => handleMeeting(meetingTime)}
+                                        className="flex justify-center items-center m-1 text-base font-bold border-2 border-maincolor rounded-xl p-2 cursor-pointer hover:bg-maincolor"
+                                    >
+                                        {meetingTime}
+                                    </div>
+                                ))}
+                            </div>}
                     </div>
                 </div>}
         </div>

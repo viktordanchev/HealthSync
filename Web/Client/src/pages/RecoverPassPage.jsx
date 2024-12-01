@@ -7,7 +7,7 @@ import { validateEmail, validatePassword, validateConfirmPassword } from '../ser
 import useTimer from '../hooks/useTimer';
 import Message from '../components/Message';
 
-function RecoverPassPage() {
+function RecoverPassPage({ setIsLoading }) {
     const navigate = useNavigate();
     const { isButtonDisabled, seconds, resetTimer } = useTimer();
     const [message, setMessage] = useState('');
@@ -24,6 +24,8 @@ function RecoverPassPage() {
 
     const submitPassword = async (values) => {
         try {
+            setIsLoading(true);
+
             const response = await apiRequest('account', 'recoverPass', values, undefined, 'POST', false);
 
             if (response.error) {
@@ -36,11 +38,15 @@ function RecoverPassPage() {
             setTimeout(() => { setMessage(''); }, 3000);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const sendLink = async (email) => {
         try {
+            setIsLoading(true);
+
             const response = await apiRequest('account', 'sendRecoverPassEmail', values, undefined, 'POST', false);
 
             if (response.error) {
@@ -58,6 +64,8 @@ function RecoverPassPage() {
             setTimeout(() => { setMessage(''); }, 3000);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
