@@ -1,19 +1,17 @@
 ﻿import React, { createContext, useContext, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import useRefreshToken from '../hooks/useRefreshToken';
-import Loading from '../components/Loading';
-import LoadingGlobal from '../components/LoadingGlobal';
+import { useLoading } from '../contexts/LoadingContext';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const { isLoading, setIsLoading } = useLoading();
     const isAuth = useAuth();
     const { refreshAccessToken } = useRefreshToken();
     const isTokenExist = !!localStorage.getItem('accessToken');
     const [isAuthenticated, setIsAuthenticated] = useState(isAuth);
     const [isSessionEnd, setIsSessionEnd] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isStillAuthLoading, setIsStillAuthLoading] = useState(false);
 
     useEffect(() => {
         const tryRefreshToken = async () => {
@@ -52,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         const isAuth = useAuth();
 
         if (!isAuth && isTokenExist) {
-            setIsStillAuthLoading(true);
+            setIsLoading(true);
 
             await new Promise(res => setTimeout(res, 3000));
             const isRefreshed = await refreshAccessToken();
@@ -60,7 +58,7 @@ export const AuthProvider = ({ children }) => {
             if (isRefreshed) {
                 isStill = true;
             }
-            setIsStillAuthLoading(false);
+            setIsLoading(false);
         } else {
             isStill = true;
         }
@@ -73,8 +71,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, isSessionEnd, login, logout, isStillAuth }}>
-            {isStillAuthLoading && <LoadingGlobal />}
-            {isLoading ? <Loading type='big' /> : children}
+            {!isLoading && children}
         </AuthContext.Provider>
     );
 };

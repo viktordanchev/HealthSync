@@ -23,18 +23,21 @@ async function apiRequest(controller, action, values, jwtToken, method, credenti
 
     try {
         const response = await fetch(`${url}/${controller}/${action}`, requestOptions);
+        let data = null;
 
         if (response.status >= 500) {
             throw new Error(fetchError);
         }
 
-        const data = await response.json();
-        
-        if (data.serverError) {
-            throw new Error(data.serverError);
+        if (response.status == 200) {
+            data = await response.json();
+
+            if (data.serverError) {
+                throw new Error(data.serverError);
+            }
         }
 
-        return data;
+        return data ? data : true;
     } catch (error) {
         throw error.message;
     }

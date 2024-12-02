@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.RequestDtos.Account;
@@ -64,7 +65,7 @@ namespace HealthSync.Server.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(new {ServerError = InvalidRequest});
+                return BadRequest(new { ServerError = InvalidRequest });
             }
 
             return Ok();
@@ -103,6 +104,23 @@ namespace HealthSync.Server.Controllers
             }
 
             return Ok(new { Token = accessToken });
+        }
+
+        [HttpGet("logout")]
+        [Authorize]
+        public IActionResult Logout()
+        {
+            if (Request.Cookies.ContainsKey("refreshToken"))
+            {
+                Response.Cookies.Append("refreshToken", "", new CookieOptions
+                {
+                    Expires = DateTime.UtcNow.AddDays(-1),
+                    HttpOnly = true,
+                    Secure = true,
+                });
+            }
+
+            return NoContent();
         }
 
         [HttpPost("verifyAccount")]

@@ -5,11 +5,13 @@ import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateEmail, validateLoginPassword } from '../services/validationSchemas';
 import { useAuthContext } from '../contexts/AuthContext';
+import { useLoading } from '../contexts/LoadingContext';
 import Message from '../components/Message';
 
-function LoginPage({ setIsLoading }) {
+function LoginPage() {
     const navigate = useNavigate();
     const { login } = useAuthContext();
+    const { setIsLoading } = useLoading();
     const [message, setMessage] = useState('');
 
     const validationSchema = Yup.object({
