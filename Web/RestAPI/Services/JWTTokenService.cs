@@ -76,7 +76,7 @@ namespace RestAPI.Services
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(1),
+                expires: DateTime.Now.AddSeconds(20),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

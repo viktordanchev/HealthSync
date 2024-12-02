@@ -2,20 +2,22 @@
 import useAuth from '../hooks/useAuth';
 import useRefreshToken from '../hooks/useRefreshToken';
 import { useLoading } from '../contexts/LoadingContext';
+import Loading from '../components/Loading';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const { isLoading, setIsLoading } = useLoading();
+    const { setIsLoading } = useLoading();
     const isAuth = useAuth();
     const { refreshAccessToken } = useRefreshToken();
     const isTokenExist = !!localStorage.getItem('accessToken');
     const [isAuthenticated, setIsAuthenticated] = useState(isAuth);
     const [isSessionEnd, setIsSessionEnd] = useState(false);
+    const [isAuthLoading, setIsAuthLoading] = useState(false);
 
     useEffect(() => {
         const tryRefreshToken = async () => {
-            setIsLoading(true);
+            setIsAuthLoading(true);
 
             await new Promise(res => setTimeout(res, 3000));
             const isRefreshed = await refreshAccessToken();
@@ -27,7 +29,7 @@ export const AuthProvider = ({ children }) => {
                 setIsAuthenticated(false);
             }
 
-            setIsLoading(false);
+            setIsAuthLoading(false);
         };
 
         if (!isAuth && isTokenExist) {
@@ -71,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, isSessionEnd, login, logout, isStillAuth }}>
-            {!isLoading && children}
+            {isAuthLoading ? <div className="fixed h-full w-full"><Loading type={'big'} /></div> : children}
         </AuthContext.Provider>
     );
 };
