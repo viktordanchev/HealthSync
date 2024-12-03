@@ -57,8 +57,13 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                             Loading...
                         </option> :
                         <>
-                            {specialties.map((specialty, index) => (
-                                <option key={index} value={specialty}>{specialty}</option>
+                            {specialties.map((specialty) => (
+                                <option
+                                    key={specialty.id}
+                                    value={specialty.type}
+                                >
+                                    {specialty.type}
+                                </option>
                             ))}
                         </>}
                 </select>

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestAPI.RequestDtos.Doctor
+namespace RestAPI.Dtos.RequestDtos.Doctor
 {
     public class GetReviewsRequest
     {

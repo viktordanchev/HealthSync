@@ -3,7 +3,7 @@ import apiRequest from '../../services/apiRequest';
 import AddMeeting from './AddMeeting';
 import Loading from '../Loading';
 
-const MeetingsCalendar = ({ doctorId, setMessage }) => {
+const MeetingsCalendar = ({ doctorId }) => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [isDateChoosed, setIsDateChoosed] = useState(false);
@@ -132,7 +132,6 @@ const MeetingsCalendar = ({ doctorId, setMessage }) => {
                     doctorId={doctorId}
                     date={date}
                     setIsDateChoosed={setIsDateChoosed}
-                    setMessage={setMessage}
                 />}
         </>
     );

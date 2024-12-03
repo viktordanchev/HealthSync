@@ -6,6 +6,7 @@
         {
             public const string NewVrfCode = "Verification code is sended.";
             public const string SendedPassRecoverLink = "Recover password link was sended to your email.";
+            public const string UserDataUpdated = "Updated successfully.";
         }
 
         public static class Doctor

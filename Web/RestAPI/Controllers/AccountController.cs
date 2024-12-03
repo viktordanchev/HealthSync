@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.RequestDtos.Account;
+using RestAPI.Dtos.RequestDtos.Account;
+using RestAPI.Dtos.ResponseDtos.Account;
 using RestAPI.Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -189,6 +190,56 @@ namespace HealthSync.Server.Controllers
             await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
 
             return Ok();
+        }
+
+        [HttpGet("getUserData")]
+        [Authorize]
+        public async Task<IActionResult> GetUserData()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+
+            var userData = new UserDataResponse()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
+            };
+
+            return Ok(userData);
+        }
+
+        [HttpPut("updateUser")]
+        [Authorize]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+
+            var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.CurrentPassword);
+            if (!isPasswordValid)
+            {
+                return BadRequest(new { Error = InvalidCurrentPassword });
+            }
+
+            if (request.CurrentPassword == request.NewPassword)
+            {
+                return BadRequest(new { Error = SamePassword });
+            }
+
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.PhoneNumber = request.PhoneNumber;
+
+            if (request.CurrentPassword != string.Empty)
+            {
+                await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+            }
+
+            await _userManager.UpdateAsync(user);
+
+            return Ok(new { Message = UserDataUpdated });
         }
 
         [HttpGet("refreshToken")]

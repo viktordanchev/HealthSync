@@ -5,13 +5,11 @@ import Loading from '../Loading';
 import MeetingsCalendar from './MeetingsCalendar';
 import ReviewsSection from './ReviewsSection';
 import AddReview from './AddReview';
-import Message from '../Message';
 
 function DoctorDetails() {
     const navigate = useNavigate();
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(true);
-    const [message, setMessage] = useState('');
     const [doctor, setDoctor] = useState({});
     const doctorId = location.state?.doctorId;
 
@@ -36,8 +34,6 @@ function DoctorDetails() {
 
     return (
         <>
-            <Message message={message} type={'message'} />
-
             {isLoading ? <Loading type={'big'} /> :
                 <section className="h-full flex space-x-6 mx-20 text-gray-700 lg:mx-16 lg:flex-col lg:space-x-0 lg:space-y-6 md:mx-6 md:flex-col md:space-x-0 md:space-y-6 sm:mx-6 sm:flex-col sm:space-x-0 sm:space-y-6">
                     <article className="w-1/4 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
@@ -91,12 +87,12 @@ function DoctorDetails() {
                         <div className="h-1/2 w-full flex space-x-6 md:flex-col md:space-x-0 md:space-y-6 sm:flex-col sm:space-x-0 sm:space-y-6">
                             <div className="w-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-between space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Reviews</p>
-                                <AddReview doctorId={doctorId} setMessage={setMessage} />
+                                <AddReview doctorId={doctorId} />
                                 <ReviewsSection doctorId={doctorId} />
                             </div>
                             <div className="w-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-evenly space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Meetings</p>
-                                <MeetingsCalendar doctorId={doctorId} setMessage={setMessage} />
+                                <MeetingsCalendar doctorId={doctorId} />
                             </div>
                         </div>
                     </article>

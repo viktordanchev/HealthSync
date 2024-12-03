@@ -5,8 +5,10 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
 import { useAuthContext } from '../../contexts/AuthContext';
 import Loading from '../Loading';
+import { useMessage } from '../../contexts/MessageContext';
 
-function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
+function AddMeeting({ doctorId, date, setIsDateChoosed }) {
+    const { showMessage } = useMessage();
     const navigate = useNavigate();
     const { isStillAuth } = useAuthContext();
     const [isTimeChoosed, setIsTimeChoosed] = useState(false);
@@ -63,10 +65,8 @@ function AddMeeting({ doctorId, date, setIsDateChoosed, setMessage }) {
         try {
             const response = await apiRequest('doctor', 'addMeeting', dto, localStorage.getItem('accessToken'), 'POST', false);
 
-            setMessage(response.message);
+            showMessage(response.message, 'message');
             setIsDateChoosed(false);
-
-            setTimeout(() => { setMessage(''); }, 3000);
         } catch (error) {
             console.error(error);
         }

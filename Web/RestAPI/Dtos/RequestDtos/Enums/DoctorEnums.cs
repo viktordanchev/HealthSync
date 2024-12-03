@@ -1,11 +1,11 @@
-﻿namespace RestAPI.RequestDtos.DoctorEnums
+﻿namespace RestAPI.Dtos.RequestDtos.Enums
 {
     public enum SortingOption
     {
         None,
         NameAsc,
         NameDesc,
-        RatingAsc, 
+        RatingAsc,
         RatingDesc
     }
 }

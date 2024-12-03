@@ -27,9 +27,7 @@ async function apiRequest(controller, action, values, jwtToken, method, credenti
 
         if (response.status >= 500) {
             throw new Error(fetchError);
-        }
-
-        if (response.status == 200) {
+        } else {
             data = await response.json();
 
             if (data.serverError) {

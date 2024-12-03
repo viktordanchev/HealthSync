@@ -122,12 +122,15 @@ namespace Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<string>> GetSpecialtiesAsync()
+        public async Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync()
         {
             var specialties = await _context.Specialties
                 .AsNoTracking()
-                .OrderBy(s => s.Type)
-                .Select(s => s.Type)
+                .Select(s => new SpecialtyResponse()
+                {
+                    Id = s.Id,
+                    Type = s.Type
+                })
                 .ToListAsync();
 
             return specialties;

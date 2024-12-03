@@ -1,7 +1,7 @@
 ﻿using Core.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.RequestDtos.Doctor;
+using RestAPI.Dtos.RequestDtos.Doctor;
 using System.Security.Claims;
 using static Common.Errors;
 using static Common.Messages.Doctor;
