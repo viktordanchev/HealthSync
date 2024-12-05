@@ -116,7 +116,7 @@ function UserSettingsPage() {
                                 <div className="w-1/2 sm:w-full">
                                     <label className="text-md font-bold">First name</label>
                                     <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none focus:shadow-md focus:shadow-gray-500"
+                                        className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                         type="text"
                                         name="firstName"
                                     />
@@ -124,7 +124,7 @@ function UserSettingsPage() {
                                 <div className="w-1/2 sm:w-full">
                                     <label className="text-md font-bold">Last name</label>
                                     <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none focus:shadow-md focus:shadow-gray-500"
+                                        className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                         type="text"
                                         name="lastName"
                                     />
@@ -136,7 +136,7 @@ function UserSettingsPage() {
                                 <div className="w-1/2 sm:w-full">
                                     <label className="text-md font-bold">Email</label>
                                     <Field
-                                        className="opacity-75 rounded w-full py-1 px-2 text-gray-700 cursor-default focus:outline-none"
+                                        className="opacity-75 rounded w-full py-1 px-2 text-gray-700 border-2 border-white cursor-default focus:outline-none"
                                         type="email"
                                         name="email"
                                         readOnly
@@ -145,7 +145,7 @@ function UserSettingsPage() {
                                 <div className="w-1/2 sm:w-full">
                                     <label className="text-md font-bold">Phone number</label>
                                     <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none focus:shadow-md focus:shadow-gray-500"
+                                        className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                         type="tel"
                                         name="phoneNumber"
                                     />
@@ -156,7 +156,7 @@ function UserSettingsPage() {
                             <div>
                                 <label className="text-md font-bold">Current Password</label>
                                 <Field
-                                    className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none focus:shadow-md focus:shadow-gray-500"
+                                    className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                     type="password"
                                     name="currentPassword"
                                 />
@@ -165,7 +165,7 @@ function UserSettingsPage() {
                             <div>
                                 <label className="text-md font-bold">New Password</label>
                                 <Field
-                                    className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none focus:shadow-md focus:shadow-gray-500"
+                                    className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                     type="password"
                                     name="newPassword"
                                 />
@@ -174,7 +174,7 @@ function UserSettingsPage() {
                             <div>
                                 <label className="text-md font-bold">Confirm Password</label>
                                 <Field
-                                    className="rounded w-full py-1 px-2 text-gray-700 focus:outline-none focus:shadow-md focus:shadow-gray-500"
+                                    className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                     type="password"
                                     name="confirmPassword"
                                 />

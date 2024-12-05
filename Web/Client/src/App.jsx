@@ -54,7 +54,7 @@ function App() {
                 <AuthProvider>
                     <SessionMessage />
                     <Header />
-                    <main className="my-6 md:mx-6 sm:mx-6">
+                    <main className="h-full w-full flex flex-col justify-center items-center my-6 md:px-6 sm:px-6">
                         <MessageProvider>
                             <Routes>
                                 <Route path="*" element={<NotFound />} />
