@@ -99,7 +99,7 @@ function RegisterPage({ setIsLoading }) {
                         </div>
                         <div className="text-center pt-6">
                             <button
-                                className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-2 rounded"
+                                className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                                 type="submit">
                                 Register
                             </button>

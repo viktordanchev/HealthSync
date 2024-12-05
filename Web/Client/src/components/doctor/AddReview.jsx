@@ -18,7 +18,7 @@ function AddReview({ doctorId }) {
         const isAuth = await isStillAuth();
 
         if (!isAuth) {
-            navigate('/login');
+            navigate('/home');
             return;
         }
 

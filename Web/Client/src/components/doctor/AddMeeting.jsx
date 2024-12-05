@@ -53,7 +53,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
         const isAuth = await isStillAuth();
 
         if (!isAuth) {
-            navigate('/login');
+            navigate('/home');
             return;
         }
 

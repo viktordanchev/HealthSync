@@ -12,7 +12,7 @@ export const validateEmail = Yup.string()
     .required('Email' + authErrors.RequiredField);
 
 export const validatePassword = Yup.string()
-    .min(6, 'Password must be at least 6 characters')
+    .min(6, authErrors.InvalidPass)
     .required('Password' + authErrors.RequiredField);
 
 export const validateLoginPassword = Yup.string()
@@ -20,7 +20,7 @@ export const validateLoginPassword = Yup.string()
 
 export const validateConfirmPassword = Yup.string()
     .required('Confirm password' + authErrors.RequiredField)
-    .oneOf([Yup.ref('password'), null], 'Passwords must match');
+    .oneOf([Yup.ref('password'), null], authErrors.PassMatch);
 
 export const validateVrfCode = Yup.string()
     .required('Code is required');

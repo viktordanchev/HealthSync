@@ -8,7 +8,6 @@ import Home from './components/Home';
 import SessionMessage from './components/SessionMessage';
 import NotFound from './components/NotFound';
 import GuestOnly from './components/GuestOnly';
-import LoadingGlobal from './components/LoadingGlobal';
 import ProtectedRoute from './components/ProtectedRoute';
 import DoctorDetails from './components/doctor/DoctorDetails';
 import LoginPage from './pages/LoginPage';
@@ -50,7 +49,6 @@ function App() {
     return (
         <LoadingProvider>
             <Router>
-                <LoadingGlobal />
                 <AuthProvider>
                     <SessionMessage />
                     <Header />

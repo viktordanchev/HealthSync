@@ -48,7 +48,9 @@ function UserManage({ userName }) {
             >
                 <ul className="text-center text-gray-700 text-xl">
                     <li className="py-1 border-b border-zinc-500 cursor-pointer">info</li>
-                    <li className="py-1 border-b border-zinc-500 cursor-pointer">Settings</li>
+                    <li className="py-1 border-b border-zinc-500 cursor-pointer">
+                        <a href="/account/settings">Settings</a>
+                    </li>
                     <li
                         onClick={handleLogout}
                         className="py-1 font-bold cursor-pointer"

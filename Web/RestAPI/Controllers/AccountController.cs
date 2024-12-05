@@ -217,29 +217,34 @@ namespace HealthSync.Server.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
 
-            var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.CurrentPassword);
-            if (!isPasswordValid)
+            if (request.CurrentPassword != string.Empty)
             {
-                return BadRequest(new { Error = InvalidCurrentPassword });
-            }
+                var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.CurrentPassword);
+                if (!isPasswordValid)
+                {
+                    return BadRequest(new { Error = InvalidCurrentPassword });
+                }
 
-            if (request.CurrentPassword == request.NewPassword)
-            {
-                return BadRequest(new { Error = SamePassword });
+                if (request.CurrentPassword == request.NewPassword)
+                {
+                    return BadRequest(new { Error = SamePassword });
+                }
+
+                await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
             }
 
             user.FirstName = request.FirstName;
             user.LastName = request.LastName;
             user.PhoneNumber = request.PhoneNumber;
 
-            if (request.CurrentPassword != string.Empty)
-            {
-                await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
-            }
-
             await _userManager.UpdateAsync(user);
 
-            return Ok(new { Message = UserDataUpdated });
+            var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
+
+            return Ok(new { 
+                Message = UserDataUpdated,
+                Token = accessToken
+            });
         }
 
         [HttpGet("refreshToken")]

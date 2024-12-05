@@ -6,7 +6,7 @@ function ProtectedRoute({ children, ...props }) {
     const { isAuthenticated } = useAuthContext();
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/home" replace />;
     }
 
     return React.cloneElement(children, props);

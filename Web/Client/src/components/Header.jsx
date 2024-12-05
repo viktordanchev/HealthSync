@@ -17,7 +17,7 @@ const Header = () => {
 
             setUserName(claimName);
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, localStorage.getItem('accessToken')]);
 
     useEffect(() => {
         const handleScroll = () => {

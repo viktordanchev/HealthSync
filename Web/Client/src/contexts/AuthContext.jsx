@@ -40,11 +40,16 @@ export const AuthProvider = ({ children }) => {
     const login = (token) => {
         localStorage.setItem('accessToken', token);
         setIsAuthenticated(true);
+        setIsSessionEnd(false);
     };
 
     const logout = () => {
         localStorage.removeItem('accessToken');
         setIsAuthenticated(false);
+    };
+
+    const update = (token) => {
+        localStorage.setItem('accessToken', token);
     };
 
     const isStillAuth = async () => {
@@ -72,7 +77,15 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, isSessionEnd, login, logout, isStillAuth }}>
+        <AuthContext.Provider value={{
+            isAuthenticated,
+            isSessionEnd,
+            setIsSessionEnd,
+            login,
+            logout,
+            update,
+            isStillAuth
+        }}>
             {isAuthLoading ? <div className="fixed h-full w-full"><Loading type={'big'} /></div> : children}
         </AuthContext.Provider>
     );
