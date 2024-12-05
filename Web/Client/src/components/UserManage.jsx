@@ -17,7 +17,7 @@ function UserManage({ userName }) {
             setIsLoading(true);
 
             const response = await apiRequest('account', 'logout', undefined, localStorage.getItem('accessToken'), 'GET', true);
-            
+
             if (response) {
                 logout();
                 navigate('/home');
@@ -43,17 +43,22 @@ function UserManage({ userName }) {
                 </button>
             </div>
             <div
-                className={`absolute right-0 z-40 w-52 rounded-xl shadow-xl bg-white bg-opacity-100 border border-zinc-500 transition-all duration-300 transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'
+                className={`absolute right-0 z-40 w-52 rounded-xl shadow-2xl shadow-gray-400 bg-white bg-opacity-100 border border-zinc-500 transition-all duration-300 transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px]'
                     }`}
             >
                 <ul className="text-center text-gray-700 text-xl">
-                    <li className="py-1 border-b border-zinc-500 cursor-pointer">info</li>
-                    <li className="py-1 border-b border-zinc-500 cursor-pointer">
-                        <a href="/account/settings">Settings</a>
+                    <li className="py-1 rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">info</li>
+                    <li className="py-1 border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
+                        <a
+                            className="h-full w-full"
+                            href="/account/settings"
+                        >
+                            Settings
+                        </a>
                     </li>
                     <li
                         onClick={handleLogout}
-                        className="py-1 font-bold cursor-pointer"
+                        className="py-1 rounded-b-xl font-bold cursor-pointer hover:bg-gray-200"
                     >
                         Logout
                     </li>

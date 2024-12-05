@@ -63,7 +63,7 @@ function RecoverPassPage({ setIsLoading }) {
 
     return (
         <section className="flex items-center justify-center">
-            <div className="w-80 bg-maincolor rounded-xl shadow-md px-8 py-8 sm:w-full">
+            <div className="w-80 bg-maincolor rounded-xl shadow-2xl shadow-gray-400 px-8 py-8 sm:w-full">
                 <p className="text-3xl text-center text-white">{token ? "Recover password" : "Send recover link"}</p>
                 <hr className="my-4" />
                 <Formik

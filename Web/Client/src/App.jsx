@@ -9,6 +9,7 @@ import SessionMessage from './components/SessionMessage';
 import NotFound from './components/NotFound';
 import GuestOnly from './components/GuestOnly';
 import ProtectedRoute from './components/ProtectedRoute';
+import ParticlesBg from './components/ParticlesBg';
 import DoctorDetails from './components/doctor/DoctorDetails';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -48,6 +49,7 @@ function App() {
 
     return (
         <LoadingProvider>
+            <ParticlesBg />
             <Router>
                 <AuthProvider>
                     <SessionMessage />

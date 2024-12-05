@@ -35,8 +35,8 @@ function DoctorDetails() {
     return (
         <>
             {isLoading ? <Loading type={'big'} /> :
-                <section className="h-full flex space-x-6 mx-20 text-gray-700 lg:mx-16 lg:flex-col lg:space-x-0 lg:space-y-6 md:mx-6 md:flex-col md:space-x-0 md:space-y-6 sm:mx-6 sm:flex-col sm:space-x-0 sm:space-y-6">
-                    <article className="w-1/4 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
+                <section className="h-full flex space-x-6 mx-20 text-gray-700 lg:mx-16 lg:flex-col lg:space-x-0 lg:space-y-6 md:mx-0 md:flex-col md:space-x-0 md:space-y-6 sm:mx-0 sm:flex-col sm:space-x-0 sm:space-y-6">
+                    <article className="w-1/4 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
                         <div className="flex flex-col items-center space-y-3">
                             <div className="w-32 h-32 flex justify-center items-center bg-zinc-700 rounded-full border-2 border-maincolor">
                                 <img
@@ -80,18 +80,19 @@ function DoctorDetails() {
                         </div>
                     </article>
                     <article className="h-full w-3/4 flex flex-col space-y-6 lg:w-full md:w-full sm:w-full">
-                        <div className="h-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-evenly text-center space-y-3">
+                        <div className="h-1/2 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col justify-evenly text-center space-y-3">
                             <p className="font-bold underline text-xl">Doctor information</p>
                             <p>{doctor.information ? doctor.information : 'No given information.'}</p>
                         </div>
                         <div className="h-1/2 w-full flex space-x-6 md:flex-col md:space-x-0 md:space-y-6 sm:flex-col sm:space-x-0 sm:space-y-6">
-                            <div className="w-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-between space-y-3 text-center md:w-full sm:w-full">
+                            <div className="w-1/2 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col justify-between space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Reviews</p>
                                 <AddReview doctorId={doctorId} />
                                 <ReviewsSection doctorId={doctorId} />
                             </div>
-                            <div className="w-1/2 p-4 bg-zinc-700 bg-opacity-35 shadow-md shadow-gray-400 rounded-xl flex flex-col justify-evenly space-y-3 text-center md:w-full sm:w-full">
+                            <div className="w-1/2 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col justify-evenly space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Meetings</p>
+                                <p className="font-thin">You can schedule an appointment with this doctor on a day that is convenient for you.</p>
                                 <MeetingsCalendar doctorId={doctorId} />
                             </div>
                         </div>

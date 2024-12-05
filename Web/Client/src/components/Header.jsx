@@ -40,7 +40,7 @@ const Header = () => {
     };
 
     return (
-        <header className={`transition-all duration-300 transform flex bg-maincolor ${isFixed ? 'sticky top-0 z-40 h-20 w-4/5 rounded-xl p-5 shadow-xl border-2 border-white translate-y-6 sm:translate-y-3 sm:w-[calc(100%-24px)]' : 'h-24 w-full p-6 translate-y-0'}`}>
+        <header className={`transition-all duration-300 transform flex bg-maincolor ${isFixed ? 'sticky top-0 z-40 h-20 w-4/5 rounded-xl p-5 shadow-2xl shadow-gray-500 translate-y-6 sm:translate-y-3 sm:w-[calc(100%-24px)]' : 'h-24 w-full p-6 translate-y-0'}`}>
             <div className="flex basis-full justify-between items-center">
                 <a href="/home" className={`${isFixed ? 'text-3xl' : 'text-4xl'} text-white font-bold hover:text-gray-200 transition duration-300 lg:text-2xl md:text-2xl sm:text-2xl`}>
                     HealthSync
@@ -78,7 +78,7 @@ const Header = () => {
                 </button>
             </div>
 
-            <div className={`absolute top-full left-0 right-0 bg-maincolor p-5 rounded-xl mt-2 z-40 border-2 border-white hidden transition-all duration-500 ease-in-out transform md:block sm:block ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] hidden'} ${isFixed ? '' : 'mx-3'}`}>
+            <div className={`absolute top-full left-0 right-0 bg-maincolor p-5 rounded-xl mt-2 z-40 hidden transition-all duration-500 ease-in-out transform md:block sm:block ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] hidden'} ${isFixed ? '' : 'mx-3'}`}>
                 <ul className="flex flex-col items-center space-y-4 mb-4">
                     <li>
                         <a href="/doctors/all" className="relative py-1 text-white font-bold text-xl">
