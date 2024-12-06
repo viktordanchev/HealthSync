@@ -48,7 +48,7 @@ namespace HealthSync.Server.Controllers
             {
                 if (!user.EmailConfirmed)
                 {
-                    return Ok();
+                    return NoContent();
                 }
 
                 return BadRequest(new { Error = UsedEmail });
@@ -69,7 +69,7 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            return Ok();
+            return NoContent();
         }
 
         [HttpPost("login")]

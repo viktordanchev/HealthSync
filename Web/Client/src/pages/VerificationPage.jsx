@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
+import useTimer from '../hooks/useTimer';
 import { validateVrfCode } from '../services/validationSchemas';
 import { useMessage } from '../contexts/MessageContext';
 import { useLoading } from '../contexts/LoadingContext';
@@ -10,10 +11,11 @@ import SendEmail from '../components/SendEmail';
 
 function VerificationPage() {
     const navigate = useNavigate();
+    const { isButtonDisabled, seconds, resetTimer } = useTimer();
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
     const userEmail = sessionStorage.getItem('email') || '';
-
+    
     const validationVrfCodeSchema = Yup.object().shape({ vrfCode: validateVrfCode });
 
     const submitCode = async (values) => {
@@ -26,6 +28,25 @@ function VerificationPage() {
                 showMessage(response.error, 'error');
             } else {
                 navigate('/home');
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const resendCode = async () => {
+        try {
+            setIsLoading(true);
+
+            const response = await apiRequest('account', 'sendVrfCode', userEmail, undefined, 'POST', false);
+
+            if (response.error) {
+                showMessage(response.error, 'error');
+            } else {
+                showMessage(response.message, 'message');
+                resetTimer();
             }
         } catch (error) {
             console.error(error);
@@ -57,6 +78,13 @@ function VerificationPage() {
                                     <ErrorMessage name="vrfCode" component="div" className="text-red-500 text-md" />
                                 </div>
                                 <div className="flex justify-evenly pt-6">
+                                    <button
+                                        disabled={isButtonDisabled}
+                                        className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
+                                        onClick={resendCode}
+                                    >
+                                        {isButtonDisabled ? seconds: "Send"}
+                                    </button>
                                     <button
                                         className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                                         type="submit"

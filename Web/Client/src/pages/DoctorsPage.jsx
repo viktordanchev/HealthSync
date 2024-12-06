@@ -76,14 +76,14 @@ function DoctorsPage() {
     }, [order, search, filter]);
 
     return (
-        <section className="mx-32 flex flex-col items-center space-y-4 lg:mx-16 md:mx-0 sm:mx-0">
+        <section className="mx-32 flex flex-col items-center space-y-4 text-gray-700 lg:mx-16 md:mx-0 sm:mx-0">
             <DoctorsNavBar
                 order={order}
                 setOrder={setOrder}
                 filter={filter}
                 setFilter={setFilter}
-                search={search}
                 setSearch={setSearch}
+                setSearchParams={setSearchParams}
             />
             {loading ? <Loading type={'big'} /> :
                 <article className="flex flex-wrap justify-center w-full h-full">

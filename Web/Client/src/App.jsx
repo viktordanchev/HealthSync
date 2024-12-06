@@ -6,7 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import SessionMessage from './components/SessionMessage';
-import NotFound from './components/NotFound';
+import NotFound404 from './components/NotFound404';
 import GuestOnly from './components/GuestOnly';
 import ProtectedRoute from './components/ProtectedRoute';
 import ParticlesBg from './components/ParticlesBg';
@@ -57,7 +57,7 @@ function App() {
                     <main className="h-full w-full flex flex-col justify-center items-center my-6 md:px-6 sm:px-6">
                         <MessageProvider>
                             <Routes>
-                                <Route path="*" element={<NotFound />} />
+                                <Route path="*" element={<NotFound404 />} />
 
                                 <Route path="/login" element={<GuestOnly><LoginPage /></GuestOnly>} />
                                 <Route path="/register" element={<GuestOnly><RegisterPage /></GuestOnly>} />

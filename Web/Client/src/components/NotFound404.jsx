@@ -1,11 +1,11 @@
 import React from 'react';
 
-function NotFound() {
+function NotFound404() {
     return (
         <div className="flex justify-center items-center">
-            <h1 className="text-4xl font-bold">404 - Page Not Found</h1>
+            <img src="/404Page.png" className="h-notFoundPng"/>
         </div>
     );
 }
 
-export default NotFound;
+export default NotFound404;

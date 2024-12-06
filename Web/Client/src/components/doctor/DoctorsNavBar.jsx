@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
 
-function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }) {
+function DoctorsNavBar({ order, setOrder, filter, setFilter, setSearch, setSearchParams }) {
     const [specialties, setSpecialties] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchOnChange, setSearchOnChange] = useState('');
@@ -34,10 +34,17 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
         setSearchOnChange('');
     };
 
+    const handleClear = () => {
+        setSearchParams({});
+        setOrder('None');
+        setFilter('');
+        setSearch('');
+    };
+
     return (
         <article className="rounded-full bg-maincolor p-2 flex justify-between items-center space-x-6 shadow-md shadow-gray-400 md:flex-col md:py-2 md:rounded-xl md:space-y-2 md:space-x-0 sm:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2 sm:space-x-0">
-            <div className="flex space-x-3 md:justify-between sm:justify-between">
-                <select className="bg-white h-8 rounded-full text-center focus:outline-none"
+            <div className="flex space-x-3 md:justify-between sm:flex-col sm:space-x-0 sm:space-y-2">
+                <select className="bg-white h-8 rounded-full text-center hover:bg-gray-200 hover:cursor-pointer focus:outline-none"
                     value={order}
                     onChange={(e) => setOrder(e.target.value)}
                 >
@@ -47,7 +54,7 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                     <option value="RatingAsc">RatingAsc</option>
                     <option value="RatingDesc">RatingDesc</option>
                 </select>
-                <select className="bg-white h-8 rounded-full text-center focus:outline-none"
+                <select className="bg-white h-8 rounded-full text-center hover:bg-gray-200 hover:cursor-pointer focus:outline-none"
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
                 >
@@ -67,6 +74,12 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                             ))}
                         </>}
                 </select>
+                <button
+                    className="bg-white h-8 px-4 rounded-full text-center hover:bg-gray-200"
+                    onClick={handleClear}
+                >
+                    Clear
+                </button>
             </div>
             <div className="flex items-center sm:w-full">
                 <input
@@ -77,7 +90,7 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, search, setSearch }
                     onKeyDown={handleEnterPress}
                 >
                 </input>
-                <button className="bg-blue-500 h-8 w-9 rounded-e-3xl"
+                <button className="bg-blue-500 h-8 w-9 rounded-e-3xl hover:scale-110"
                     onClick={handleSearch}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white text-xl" />
                 </button>

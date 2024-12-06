@@ -23,4 +23,4 @@ export const validateConfirmPassword = Yup.string()
     .oneOf([Yup.ref('password'), null], authErrors.PassMatch);
 
 export const validateVrfCode = Yup.string()
-    .required('Code is required');
+    .required('Code' + authErrors.RequiredField);

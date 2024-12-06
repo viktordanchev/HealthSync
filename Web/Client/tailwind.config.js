@@ -17,6 +17,7 @@ module.exports = {
             spacing: {
                 'doctorCardSm': '90rem',
                 '19/20': '95%',
+                'notFoundPng': '34rem' 
             },
             transitionProperty: {
                 'opacity-transform': 'opacity, transform',

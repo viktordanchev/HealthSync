@@ -41,7 +41,6 @@ function SendEmail({ type }) {
                 sessionStorage.setItem('email', values.email);
 
                 showMessage(response.message, 'message');
-
                 resetTimer();
             }
         } catch (error) {
@@ -53,7 +52,10 @@ function SendEmail({ type }) {
 
     return (
         <section className="w-80 bg-maincolor rounded-xl shadow-2xl shadow-gray-400 px-8 py-8 sm:w-full">
-            <p className="text-3xl text-center text-white">Send {typeText}</p>
+            <div className="text-3xl text-center text-white flex flex-col">
+                <p>Send</p>
+                <p className="font-thin">{typeText}</p>
+            </div>
             <hr className="my-4" />
             <Formik
                 initialValues={{ email: '' }}

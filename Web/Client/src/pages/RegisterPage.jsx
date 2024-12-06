@@ -5,8 +5,10 @@ import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import { useMessage } from '../contexts/MessageContext';
+import { useLoading } from '../contexts/LoadingContext';
 
-function RegisterPage({ setIsLoading }) {
+function RegisterPage() {
+    const { setIsLoading } = useLoading();
     const { showMessage } = useMessage();
     const navigate = useNavigate();
 

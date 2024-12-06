@@ -29,7 +29,7 @@ function AddReview({ doctorId }) {
         };
 
         try {
-            var response = await apiRequest('doctor', 'addReview', dto, localStorage.getItem('accessToken'), 'POST', true);
+            const response = await apiRequest('doctor', 'addReview', dto, localStorage.getItem('accessToken'), 'POST', true);
 
             showMessage(response.message, 'message');
             setIsOpen(false);

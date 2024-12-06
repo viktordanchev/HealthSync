@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
         const tryRefreshToken = async () => {
             setIsAuthLoading(true);
 
-            await new Promise(res => setTimeout(res, 3000));
             const isRefreshed = await refreshAccessToken();
 
             if (isRefreshed) {
@@ -59,7 +58,6 @@ export const AuthProvider = ({ children }) => {
         if (!isAuth && isTokenExist) {
             setIsLoading(true);
 
-            await new Promise(res => setTimeout(res, 3000));
             const isRefreshed = await refreshAccessToken();
 
             if (isRefreshed) {
