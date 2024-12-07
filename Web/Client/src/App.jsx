@@ -61,7 +61,7 @@ function App() {
 
                                 <Route path="/login" element={<GuestOnly><LoginPage /></GuestOnly>} />
                                 <Route path="/register" element={<GuestOnly><RegisterPage /></GuestOnly>} />
-                                <Route path="/account/verify" element={<GuestOnly><VerificationPage /></GuestOnly>} />
+                                <Route path="/account/verify" element={<VerificationPage />} />
                                 <Route path="/account/recoverPassword" element={<GuestOnly><RecoverPassPage /></GuestOnly>} />
                                 <Route path="/account/settings" element={<ProtectedRoute><UserSettingsPage /></ProtectedRoute>} />
 

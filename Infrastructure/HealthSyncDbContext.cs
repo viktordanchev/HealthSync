@@ -29,6 +29,8 @@ namespace Infrastructure
             builder.ApplyConfiguration(new WeekDayConfig());
             builder.ApplyConfiguration(new DayOffConfig());
             builder.ApplyConfiguration(new MeetingConfig());
+            builder.ApplyConfiguration(new IdentityRoleConfig());
+            builder.ApplyConfiguration(new IdentityUserRoleConfig());
         
             base.OnModelCreating(builder);
         }

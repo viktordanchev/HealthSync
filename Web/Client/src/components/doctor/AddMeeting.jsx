@@ -6,11 +6,12 @@ import apiRequest from '../../services/apiRequest';
 import { useAuthContext } from '../../contexts/AuthContext';
 import Loading from '../Loading';
 import { useMessage } from '../../contexts/MessageContext';
+import jwtDecoder from '../../services/jwtDecoder';
 
 function AddMeeting({ doctorId, date, setIsDateChoosed }) {
-    const { showMessage } = useMessage();
     const navigate = useNavigate();
-    const { isStillAuth } = useAuthContext();
+    const { showMessage } = useMessage();
+    const { isAuthenticated, isStillAuth } = useAuthContext();
     const [isTimeChoosed, setIsTimeChoosed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [meetingDate, setMeetingDate] = useState('');
@@ -38,6 +39,20 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
 
         getMeetingTimes();
     }, []);
+
+    const handleConfirmMeetingButton = () => {
+        if (isAuthenticated) {
+            const { isEmailConfirmed } = jwtDecoder();
+
+            if (isEmailConfirmed) {
+                confirmMeeting();
+            } else {
+                navigate('/account/verify');
+            }
+        } else {
+            navigate('/login');
+        }
+    };
 
     const handleMeeting = (time) => {
         const [hour, minutes] = time.split(" : ").map(Number);
@@ -81,18 +96,18 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
             </div>
             {isTimeChoosed ?
                 <div className="text-white font-bold flex flex-col items-center space-y-3">
-                    <p className="text-2xl text-center">Are you sure for this date?</p>
+                    <p className="text-2xl text-center">Please confirm the meeting date?</p>
                     <p className="text-xl">{meetingDate}</p>
-                    <div className="flex space-x-4 w-40 text-xl">
+                    <div className="flex justify-evenly space-x-4 w-40 text-xl">
                         <button
                             onClick={() => setIsTimeChoosed(false)}
-                            className="w-1/2 p-1 bg-blue-500 hover:bg-blue-700 rounded focus:outline-none focus:shadow-outline"
+                            className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                         >
                             No
                         </button>
                         <button
-                            onClick={confirmMeeting}
-                            className="w-1/2 p-1 bg-blue-500 hover:bg-blue-700 rounded focus:outline-none focus:shadow-outline"
+                            onClick={handleConfirmMeetingButton}
+                            className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                         >
                             Yes
                         </button>

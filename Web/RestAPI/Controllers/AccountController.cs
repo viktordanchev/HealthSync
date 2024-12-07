@@ -46,11 +46,6 @@ namespace HealthSync.Server.Controllers
 
             if (user != null)
             {
-                if (!user.EmailConfirmed)
-                {
-                    return NoContent();
-                }
-
                 return BadRequest(new { Error = UsedEmail });
             }
 
@@ -82,11 +77,6 @@ namespace HealthSync.Server.Controllers
                 return Unauthorized(new { Error = InvalidLoginData });
             }
 
-            if (!user.EmailConfirmed)
-            {
-                return BadRequest(new { NotVerified = true });
-            }
-
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
 
@@ -100,8 +90,7 @@ namespace HealthSync.Server.Controllers
             if (request.RememberMe)
             {
                 var refreshToken = _tokenService.GenerateRefreshToken(user.Id);
-                var refreshTokenExpireTime = _tokenService.GetTokenExpireTime(refreshToken);
-                _tokenService.AppendRefreshTokenToCookie(HttpContext, refreshToken, refreshTokenExpireTime);
+                _tokenService.AppendRefreshTokenToCookie(HttpContext, refreshToken);
             }
 
             return Ok(new { Token = accessToken });
@@ -189,11 +178,11 @@ namespace HealthSync.Server.Controllers
             var user = await _userManager.FindByEmailAsync(_memoryCacheService.GetValue(request.Token).ToString());
             await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
 
-            return Ok();
+            return NoContent();
         }
 
         [HttpGet("getUserData")]
-        [Authorize]
+        [Authorize(Policy = "EmailConfirmed")]
         public async Task<IActionResult> GetUserData()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -211,7 +200,7 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpPut("updateUser")]
-        [Authorize]
+        [Authorize(Policy = "EmailConfirmed")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

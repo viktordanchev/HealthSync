@@ -29,7 +29,7 @@ function RecoverPassPage() {
             if (response.error) {
                 showMessage(response.error, 'error');
             } else {
-                navigate('/home');
+                navigate('/login');
             }
         } catch (error) {
             console.error(error);

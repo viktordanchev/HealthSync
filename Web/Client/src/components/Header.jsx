@@ -55,10 +55,10 @@ const Header = () => {
                 <div className="flex justify-end space-x-4 w-52 md:hidden sm:hidden">
                     {isAuthenticated ? <UserManage userName={userName} /> :
                         <>
-                            <a href="/login" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded border-2 border-blue-500 hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
+                            <a href="/login" className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-2 px-3 rounded hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
                                 Login
                             </a>
-                            <a href="/register" className="basis-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded border-2 border-blue-500 hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
+                            <a href="/register" className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-2 px-3 rounded hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
                                 Register
                             </a>
                         </>}
@@ -81,34 +81,21 @@ const Header = () => {
             <div className={`absolute top-full left-0 right-0 bg-maincolor p-5 rounded-xl mt-2 z-40 hidden transition-all duration-500 ease-in-out transform md:block sm:block ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] hidden'} ${isFixed ? '' : 'mx-3'}`}>
                 <ul className="flex flex-col items-center space-y-4 mb-4">
                     <li>
-                        <a href="/doctors/all" className="relative py-1 text-white font-bold text-xl">
+                        <a href="/doctors" className="relative py-1 text-white font-bold text-xl">
                             Doctors
                         </a>
                     </li>
-                    <li>
-                        <a href="#0" className="relative py-1 text-white font-bold text-xl">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#0" className="relative py-1 text-white font-bold text-xl">
-                            Products
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#0" className="relative py-1 text-white font-bold text-xl">
-                            Products
-                        </a>
-                    </li>
                 </ul>
-                <div className="flex flex-row justify-center space-x-6">
-                    <a href="/login" className="w-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-                        Login
-                    </a>
-                    <a href="/register" className="w-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-                        Register
-                    </a>
-                </div>
+                <hr className="border-e border-white w-full my-3" />
+                {isAuthenticated ? <UserManage userName={userName} /> :
+                    <div className="flex flex-row justify-center space-x-6">
+                        <a href="/login" className="w-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+                            Login
+                        </a>
+                        <a href="/register" className="w-1/2 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+                            Register
+                        </a>
+                    </div>}
             </div>
         </header>
     );

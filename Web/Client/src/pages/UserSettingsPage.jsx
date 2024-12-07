@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { validateFirstName, validateLastName } from '../services/validationSchemas';
@@ -10,7 +11,8 @@ import { useAuthContext } from '../contexts/AuthContext';
 import Loading from '../components/Loading';
 
 function UserSettingsPage() {
-    const { update } = useAuthContext();
+    const navigate = useNavigate();
+    const { update, isStillAuth } = useAuthContext();
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
     const [userData, setUserData] = useState({});
@@ -64,6 +66,13 @@ function UserSettingsPage() {
     }, []);
 
     const handleSubmit = async (values, { resetForm }) => {
+        const isAuth = await isStillAuth();
+
+        if (!isAuth) {
+            navigate('/home');
+            return;
+        }
+
         try {
             setIsLoading(true);
 

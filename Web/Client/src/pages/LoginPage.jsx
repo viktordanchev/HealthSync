@@ -7,6 +7,7 @@ import { validateEmail, validateLoginPassword } from '../services/validationSche
 import { useAuthContext } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadingContext';
 import { useMessage } from '../contexts/MessageContext';
+import jwtDecoder from '../services/jwtDecoder';
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -27,12 +28,15 @@ function LoginPage() {
 
             if (response.token) {
                 login(response.token);
-                navigate('/home');
-            } else {
-                if (response.notVerified) {
-                    navigate('/account/verify');
-                }
 
+                const { isEmailConfirmed } = jwtDecoder();
+                
+                if (!isEmailConfirmed) {
+                    navigate('/account/verify');
+                } else {
+                    navigate('/home');
+                }
+            } else {
                 showMessage(response.error, 'error');
             }
         } catch (error) {

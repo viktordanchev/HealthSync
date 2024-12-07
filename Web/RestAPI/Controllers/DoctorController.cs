@@ -58,7 +58,7 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost("addReview")]
-        [Authorize]
+        [Authorize(Policy = "EmailConfirmed")]
         public async Task<IActionResult> AddReview([FromBody] AddReviewRequest request)
         {
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
@@ -107,7 +107,7 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost("addMeeting")]
-        [Authorize]
+        [Authorize(Policy = "EmailConfirmed")]
         public async Task<IActionResult> AddMeeting([FromBody] AddMeetingRequest request)
         {
             var localDateTime = request.Date.ToLocalTime();

@@ -63,7 +63,7 @@ namespace RestAPI.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, userId),
                 new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("EmailConfirmed", user.EmailConfirmed.ToString())
             };
 
             var roles = await _userManager.GetRolesAsync(user);
@@ -83,19 +83,9 @@ namespace RestAPI.Services
         }
 
         /// <summary>
-        /// Receive JWT token expiration time.
-        /// </summary>
-        public DateTime GetTokenExpireTime(string token)
-        {
-            var handler = new JwtSecurityTokenHandler();
-            var jwtToken = handler.ReadJwtToken(token);
-            return jwtToken.ValidTo;
-        }
-
-        /// <summary>
         /// Append current JWT token to cookie.
         /// </summary>
-        public void AppendRefreshTokenToCookie(HttpContext context, string token, DateTime expTime)
+        public void AppendRefreshTokenToCookie(HttpContext context, string token)
         {
             context.Response.Cookies.Append("refreshToken", token,
                 new CookieOptions
@@ -104,7 +94,7 @@ namespace RestAPI.Services
                     Secure = true,
                     IsEssential = true,
                     SameSite = SameSiteMode.None,
-                    Expires = expTime,
+                    Expires = DateTime.Now.AddMinutes(5),
                 });
         }
     }

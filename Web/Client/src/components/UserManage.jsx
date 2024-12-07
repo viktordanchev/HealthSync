@@ -8,11 +8,25 @@ import apiRequest from '../services/apiRequest';
 
 function UserManage({ userName }) {
     const navigate = useNavigate();
-    const { logout } = useAuthContext();
+    const { logout, isStillAuth } = useAuthContext();
     const { setIsLoading } = useLoading();
     const [isOpen, setIsOpen] = useState(false);
+    userName = userName.split(' ')
+        .map((part, index) => {
+        if (index === 0) {
+            return `${part.charAt(0)}.`;
+        }
+        return part;
+    }).join(' ');
 
     const handleLogout = async () => {
+        const isAuth = await isStillAuth();
+
+        if (!isAuth) {
+            navigate('/home');
+            return;
+        }
+
         try {
             setIsLoading(true);
 
@@ -33,9 +47,9 @@ function UserManage({ userName }) {
         <article className="relative">
             <div
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-xl flex justify-between items-center text-white hover:cursor-pointer group"
+                className="text-xl flex justify-between items-center text-white hover:cursor-pointer group sm:justify-center"
             >
-                <p className="basis-full text-center font-bold py-2 px-4">
+                <p className="text-center font-bold py-2 px-4">
                     {userName}
                 </p>
                 <button className="group-hover:text-blue-500">
@@ -43,11 +57,18 @@ function UserManage({ userName }) {
                 </button>
             </div>
             <div
-                className={`absolute right-0 z-40 w-52 rounded-xl shadow-2xl shadow-gray-400 bg-white bg-opacity-100 border border-zinc-500 transition-all duration-300 transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px]'
+                className={`absolute right-0 z-40 w-52 rounded-xl shadow-2xl shadow-gray-400 bg-white bg-opacity-100 border border-zinc-500 transition-all duration-300 transform sm:w-full ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px]'
                     }`}
             >
                 <ul className="text-center text-gray-700 text-xl">
-                    <li className="py-1 rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">info</li>
+                    <li className="py-1 rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
+                        <a
+                            className="h-full w-full"
+                            href="/account/settings"
+                        >
+                            Become a Doctor
+                        </a>
+                    </li>
                     <li className="py-1 border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
                         <a
                             className="h-full w-full"

@@ -43,7 +43,13 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, setSearch, setSearc
 
     return (
         <article className="rounded-full bg-maincolor p-2 flex justify-between items-center space-x-6 shadow-md shadow-gray-400 md:flex-col md:py-2 md:rounded-xl md:space-y-2 md:space-x-0 sm:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2 sm:space-x-0">
-            <div className="flex space-x-3 md:justify-between sm:flex-col sm:space-x-0 sm:space-y-2">
+            <div className="flex space-x-2 md:justify-between sm:flex-col sm:space-x-0 sm:space-y-2">
+                <button
+                    className="bg-white h-8 px-4 rounded-full text-center hover:bg-gray-200"
+                    onClick={handleClear}
+                >
+                    Clear
+                </button>
                 <select className="bg-white h-8 rounded-full text-center hover:bg-gray-200 hover:cursor-pointer focus:outline-none"
                     value={order}
                     onChange={(e) => setOrder(e.target.value)}
@@ -74,12 +80,6 @@ function DoctorsNavBar({ order, setOrder, filter, setFilter, setSearch, setSearc
                             ))}
                         </>}
                 </select>
-                <button
-                    className="bg-white h-8 px-4 rounded-full text-center hover:bg-gray-200"
-                    onClick={handleClear}
-                >
-                    Clear
-                </button>
             </div>
             <div className="flex items-center sm:w-full">
                 <input

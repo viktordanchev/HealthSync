@@ -4,17 +4,32 @@ import apiRequest from '../../services/apiRequest';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { reviewCommentLength } from '../../constants/constants';
 import { useMessage } from '../../contexts/MessageContext';
+import jwtDecoder from '../../services/jwtDecoder';
 
 function AddReview({ doctorId }) {
-    const { showMessage } = useMessage();
     const navigate = useNavigate();
-    const { isStillAuth } = useAuthContext();
+    const { showMessage } = useMessage();
+    const { isAuthenticated, isStillAuth } = useAuthContext();
     const [rating, setRating] = useState(1);
     const [comment, setComment] = useState('');
     const [commentLength, setCommentLength] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
 
-    const add = async () => {
+    const handleAddReviewButton = () => {
+        if (isAuthenticated) {
+            const { isEmailConfirmed } = jwtDecoder();
+
+            if (isEmailConfirmed) {
+                setIsOpen(true);
+            } else {
+                navigate('/account/verify');
+            }
+        } else {
+            navigate('/login');
+        }
+    };
+
+    const addReview = async () => {
         const isAuth = await isStillAuth();
 
         if (!isAuth) {
@@ -41,7 +56,7 @@ function AddReview({ doctorId }) {
     return (
         <div className="flex justify-center items-center">
             <div
-                onClick={() => setIsOpen(true)}
+                onClick={handleAddReviewButton}
                 className={`${isOpen ? 'w-full h-80 rounded-xl bg-maincolor' : 'w-1/2 h-10 cursor-pointer rounded bg-blue-500 text-white text-lg font-bold py-1 text-center border-2 border-blue-500 hover:bg-white hover:text-blue-500'} transition-[width,height] duration-500 ease-in-out`}>
                 {!isOpen ? 'Add Review' :
                     <div className="h-full flex flex-col justify-between items-center p-4">
@@ -86,7 +101,7 @@ function AddReview({ doctorId }) {
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    add();
+                                    addReview();
                                 }}
                                 className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-4 rounded">
                                 Add

@@ -77,6 +77,19 @@ namespace Server.Extensions
             });
         }
 
+        public static void AddAuthorizationExtension(this IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("EmailConfirmed", policy =>
+                    policy.RequireAssertion(context =>
+                    {
+                        var emailConfirmedClaim = context.User.FindFirstValue("EmailConfirmed");
+                        return emailConfirmedClaim == "True";
+                    }));
+            });
+        }
+
         public static void AddCorsExtension(this IServiceCollection services, IConfiguration config)
         {
             var origin = config.GetValue<string>("AccessControlAllowOrigin");

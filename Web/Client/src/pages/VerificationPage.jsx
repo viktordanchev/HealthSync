@@ -83,7 +83,7 @@ function VerificationPage() {
                                         className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                                         onClick={resendCode}
                                     >
-                                        {isButtonDisabled ? seconds: "Send"}
+                                        {isButtonDisabled ? seconds: "Resend"}
                                     </button>
                                     <button
                                         className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
