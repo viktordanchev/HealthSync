@@ -6,7 +6,6 @@ import apiRequest from '../../services/apiRequest';
 import { useAuthContext } from '../../contexts/AuthContext';
 import Loading from '../Loading';
 import { useMessage } from '../../contexts/MessageContext';
-import jwtDecoder from '../../services/jwtDecoder';
 
 function AddMeeting({ doctorId, date, setIsDateChoosed }) {
     const navigate = useNavigate();
@@ -42,13 +41,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
 
     const handleConfirmMeetingButton = () => {
         if (isAuthenticated) {
-            const { isEmailConfirmed } = jwtDecoder();
-
-            if (isEmailConfirmed) {
-                confirmMeeting();
-            } else {
-                navigate('/account/verify');
-            }
+            confirmMeeting();
         } else {
             navigate('/login');
         }

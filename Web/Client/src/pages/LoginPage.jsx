@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
@@ -14,6 +16,7 @@ function LoginPage() {
     const { login } = useAuthContext();
     const { setIsLoading } = useLoading();
     const { showMessage } = useMessage();
+    const [showPassword, setShowPassword] = useState(false);
 
     const validationSchema = Yup.object({
         email: validateEmail,
@@ -30,7 +33,7 @@ function LoginPage() {
                 login(response.token);
 
                 const { isEmailConfirmed } = jwtDecoder();
-                
+
                 if (!isEmailConfirmed) {
                     navigate('/account/verify');
                 } else {
@@ -72,11 +75,18 @@ function LoginPage() {
                         <label className="text-md font-bold">
                             Password
                         </label>
-                        <Field
-                            className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none"
-                            type="password"
-                            name="password"
-                        />
+                        <div className="relative">
+                            <Field
+                                className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none pr-8"
+                                type={showPassword ? 'text' : 'password'}
+                                name="password"
+                            />
+                            <FontAwesomeIcon
+                                icon={showPassword ? faEye : faEyeSlash}
+                                className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                                onClick={() => setShowPassword(!showPassword)}
+                            />
+                        </div>
                         <ErrorMessage name="password" component="div" className="text-red-500 text-md" />
                     </div>
                     <div className="flex items-center justify-between">

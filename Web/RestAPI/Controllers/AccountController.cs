@@ -49,12 +49,18 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { Error = UsedEmail });
             }
 
+            if (_memoryCacheService.GetValue(request.Email) != request.VrfCode.ToLower())
+            {
+                return BadRequest(new { Error = InvalidVrfCode });
+            }
+
             user = new ApplicationUser()
             {
                 UserName = request.Email,
                 Email = request.Email,
                 FirstName = request.FirstName,
-                LastName = request.LastName
+                LastName = request.LastName,
+                EmailConfirmed = true
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -113,22 +119,6 @@ namespace HealthSync.Server.Controllers
             return NoContent();
         }
 
-        [HttpPost("verifyAccount")]
-        public async Task<IActionResult> VerifyAccount([FromBody] VerifyAccountRequest request)
-        {
-            if (_memoryCacheService.GetValue(request.Email).ToLower() == request.VrfCode.ToLower())
-            {
-                var user = await _userManager.FindByEmailAsync(request.Email);
-
-                user!.EmailConfirmed = true;
-                await _userManager.UpdateAsync(user!);
-
-                return Ok();
-            }
-
-            return BadRequest(new { Error = InvalidVrfCode });
-        }
-
         [HttpPost("sendVrfCode")]
         public async Task<IActionResult> SendVerificationCode([FromBody] string email)
         {
@@ -144,7 +134,7 @@ namespace HealthSync.Server.Controllers
             }
 
             var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
-            _memoryCacheService.Add(user.Email, token, TimeSpan.FromMinutes(1));
+            _memoryCacheService.Add(user.Email, token.ToLower(), TimeSpan.FromMinutes(1));
             await _emailSender.SendVrfCode(user.Email, token);
 
             return Ok(new { Message = NewVrfCode });
@@ -182,7 +172,7 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpGet("getUserData")]
-        [Authorize(Policy = "EmailConfirmed")]
+        [Authorize]
         public async Task<IActionResult> GetUserData()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -200,7 +190,7 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpPut("updateUser")]
-        [Authorize(Policy = "EmailConfirmed")]
+        [Authorize]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

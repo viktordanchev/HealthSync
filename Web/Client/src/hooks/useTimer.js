@@ -1,34 +1,25 @@
 import { useEffect, useState, useCallback } from 'react';
 
 const useTimer = () => {
-    const [seconds, setSeconds] = useState(() => {
-        const savedSeconds = sessionStorage.getItem('timerSeconds');
-        return savedSeconds ? parseInt(savedSeconds, 10) : 0;
-    });
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
+    const [secondsLeft, setSecondsLeft] = useState(0);
+    
     useEffect(() => {
-        sessionStorage.setItem('timerSeconds', seconds);
-
-        if (seconds > 0) {
-            const timer = setTimeout(() => {
-                setSeconds(seconds - 1);
-            }, 1000);
-
-            return () => clearTimeout(timer);
-        } else {
-            setIsButtonDisabled(false);
-            sessionStorage.removeItem('timerSeconds');
+        if (secondsLeft <= 0) {
+            return;
         }
-    }, [seconds]);
 
-    const resetTimer = useCallback(() => {
-        setSeconds(60);
-        setIsButtonDisabled(true);
-        sessionStorage.removeItem('timerSeconds');
-    }, []);
+        const timeout = setTimeout(() => {
+            setSecondsLeft(secondsLeft - 1);
+        }, 1000);
 
-    return { isButtonDisabled, seconds, resetTimer };
+        return () => clearTimeout(timeout);
+    }, [secondsLeft]);
+
+    const start = (sec) => {
+        setSecondsLeft(sec);
+    };
+
+    return { secondsLeft, start };
 };
 
 export default useTimer;

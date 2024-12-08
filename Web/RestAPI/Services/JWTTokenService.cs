@@ -62,8 +62,7 @@ namespace RestAPI.Services
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
-                new Claim("EmailConfirmed", user.EmailConfirmed.ToString())
+                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName)
             };
 
             var roles = await _userManager.GetRolesAsync(user);

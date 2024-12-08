@@ -9,6 +9,9 @@ namespace RestAPI.Dtos.RequestDtos.Account
         public string Email { get; set; } = null!;
 
         [Required]
+        public string VrfCode { get; set; } = null!;
+
+        [Required]
         public string FirstName { get; set; } = null!;
 
         [Required]

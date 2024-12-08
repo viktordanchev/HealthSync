@@ -10,15 +10,11 @@ import { useLoading } from '../contexts/LoadingContext';
 function SendEmail({ type }) {
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
-    const { isButtonDisabled, seconds, resetTimer } = useTimer();
+    const { secondsLeft, start } = useTimer();
     let action;
     let typeText;
 
     switch (type) {
-        case 'vrfCode':
-            action = 'sendVrfCode';
-            typeText = 'Verification code';
-            break;
         case 'recoverPass':
             action = 'sendRecoverPassEmail';
             typeText = 'Recover password';
@@ -38,10 +34,10 @@ function SendEmail({ type }) {
             if (response.error) {
                 showMessage(response.error, 'error');
             } else {
-                sessionStorage.setItem('email', values.email);
-
+                start(60);
                 showMessage(response.message, 'message');
-                resetTimer();
+
+                sessionStorage.setItem('email', values.email);
             }
         } catch (error) {
             console.error(error);
@@ -77,10 +73,10 @@ function SendEmail({ type }) {
                     </div>
                     <div className="flex justify-evenly pt-6">
                         <button
-                            disabled={isButtonDisabled}
+                            disabled={secondsLeft > 0}
                             className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                             type="submit">
-                            {isButtonDisabled ? seconds : "Send"}
+                            {secondsLeft > 0 ? secondsLeft : "Send"}
                         </button>
                     </div>
                 </Form>

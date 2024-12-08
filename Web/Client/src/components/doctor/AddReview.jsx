@@ -4,7 +4,6 @@ import apiRequest from '../../services/apiRequest';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { reviewCommentLength } from '../../constants/constants';
 import { useMessage } from '../../contexts/MessageContext';
-import jwtDecoder from '../../services/jwtDecoder';
 
 function AddReview({ doctorId }) {
     const navigate = useNavigate();
@@ -17,13 +16,7 @@ function AddReview({ doctorId }) {
 
     const handleAddReviewButton = () => {
         if (isAuthenticated) {
-            const { isEmailConfirmed } = jwtDecoder();
-
-            if (isEmailConfirmed) {
-                setIsOpen(true);
-            } else {
-                navigate('/account/verify');
-            }
+            setIsOpen(true);
         } else {
             navigate('/login');
         }

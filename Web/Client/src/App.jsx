@@ -13,7 +13,6 @@ import ParticlesBg from './components/ParticlesBg';
 import DoctorDetails from './components/doctor/DoctorDetails';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import VerificationPage from './pages/VerificationPage';
 import RecoverPassPage from './pages/RecoverPassPage';
 import DoctorsPage from './pages/DoctorsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
@@ -61,7 +60,6 @@ function App() {
 
                                 <Route path="/login" element={<GuestOnly><LoginPage /></GuestOnly>} />
                                 <Route path="/register" element={<GuestOnly><RegisterPage /></GuestOnly>} />
-                                <Route path="/account/verify" element={<VerificationPage />} />
                                 <Route path="/account/recoverPassword" element={<GuestOnly><RecoverPassPage /></GuestOnly>} />
                                 <Route path="/account/settings" element={<ProtectedRoute><UserSettingsPage /></ProtectedRoute>} />
 

@@ -9,7 +9,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextExtension(builder.Configuration);
 builder.Services.AddIdentityExtension();
 builder.Services.AddJWTAuthentication(builder.Configuration);
-builder.Services.AddAuthorizationExtension();
 builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.AddServices();
 builder.Services.AddMemoryCache();
