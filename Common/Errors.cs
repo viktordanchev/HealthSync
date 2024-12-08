@@ -16,7 +16,6 @@
             public const string InvalidLoginData = "Invalid email or password!";
             public const string NotRegistered = "No account found with this email address!";
             public const string InvalidVrfCode = "Invalid verification code!";
-            public const string AlredyVerified = "This email already is verified!";
             public const string InvalidToken = "This token is invalid!";
         }
     }

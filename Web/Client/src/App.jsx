@@ -1,24 +1,25 @@
-﻿import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+﻿import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import Header from './components/Header';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
-import Home from './components/Home';
-import SessionMessage from './components/SessionMessage';
-import NotFound404 from './components/NotFound404';
 import GuestOnly from './components/GuestOnly';
-import ProtectedRoute from './components/ProtectedRoute';
+import Header from './components/Header';
+import Home from './components/Home';
+import NotFound404 from './components/NotFound404';
 import ParticlesBg from './components/ParticlesBg';
+import ProtectedRoute from './components/ProtectedRoute';
+import SessionMessage from './components/SessionMessage';
 import DoctorDetails from './components/doctor/DoctorDetails';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import RecoverPassPage from './pages/RecoverPassPage';
-import DoctorsPage from './pages/DoctorsPage';
-import UserSettingsPage from './pages/UserSettingsPage';
 import { AuthProvider } from './contexts/AuthContext';
 import { LoadingProvider } from './contexts/LoadingContext';
 import { MessageProvider } from './contexts/MessageContext';
+import DoctorsPage from './pages/DoctorsPage';
+import LoginPage from './pages/LoginPage';
+import RecoverPassPage from './pages/RecoverPassPage';
+import RegisterPage from './pages/RegisterPage';
+import UserSettingsPage from './pages/UserSettingsPage';
+import UserMeetingsPage from './pages/UserMeetingsPage';
 
 function App() {
     const [showButton, setShowButton] = useState(false);
@@ -67,6 +68,7 @@ function App() {
                                 <Route path="/home" element={<Home />} />
                                 <Route path="/doctors" element={<DoctorsPage />} />
                                 <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
+                                <Route path="/meetings" element={<UserMeetingsPage />} />
                             </Routes>
                         </MessageProvider>
                         <button

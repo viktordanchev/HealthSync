@@ -49,7 +49,7 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { Error = UsedEmail });
             }
 
-            if (_memoryCacheService.GetValue(request.Email) != request.VrfCode.ToLower())
+            if (!_memoryCacheService.isExist(request.VrfCode.ToLower()))
             {
                 return BadRequest(new { Error = InvalidVrfCode });
             }
@@ -122,20 +122,9 @@ namespace HealthSync.Server.Controllers
         [HttpPost("sendVrfCode")]
         public async Task<IActionResult> SendVerificationCode([FromBody] string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-
-            if (user == null)
-            {
-                return Unauthorized(new { Error = NotRegistered });
-            }
-            else if (user.EmailConfirmed)
-            {
-                return BadRequest(new { Error = AlredyVerified });
-            }
-
             var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
-            _memoryCacheService.Add(user.Email, token.ToLower(), TimeSpan.FromMinutes(1));
-            await _emailSender.SendVrfCode(user.Email, token);
+            _memoryCacheService.Add(token.ToLower(), email, TimeSpan.FromMinutes(1));
+            await _emailSender.SendVrfCode(email, token);
 
             return Ok(new { Message = NewVrfCode });
         }

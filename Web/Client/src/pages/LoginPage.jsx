@@ -9,7 +9,6 @@ import { validateEmail, validateLoginPassword } from '../services/validationSche
 import { useAuthContext } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadingContext';
 import { useMessage } from '../contexts/MessageContext';
-import jwtDecoder from '../services/jwtDecoder';
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -31,14 +30,7 @@ function LoginPage() {
 
             if (response.token) {
                 login(response.token);
-
-                const { isEmailConfirmed } = jwtDecoder();
-
-                if (!isEmailConfirmed) {
-                    navigate('/account/verify');
-                } else {
-                    navigate('/home');
-                }
+                navigate('/home');
             } else {
                 showMessage(response.error, 'error');
             }
@@ -96,9 +88,9 @@ function LoginPage() {
                                 name="rememberMe"
                                 className="form-checkbox text-blue-600 cursor-pointer"
                             />
-                            <span className="ml-1 text-md text-white">Remember me</span>
+                            <span className="ml-1 text-md text-white hover:text-gray-200">Remember me</span>
                         </label>
-                        <a href="/account/recoverPassword" className="inline-block align-baseline text-sm text-blue-500 underline hover:text-blue-800">
+                        <a href="/account/recoverPassword" className="inline-block align-baseline text-sm text-blue-600 underline hover:text-blue-800">
                             Forgot Password?
                         </a>
                     </div>

@@ -113,7 +113,7 @@ const MeetingsCalendar = ({ doctorId }) => {
                                             <div
                                                 key={index}
                                                 onClick={() => handleDayClick(day)}
-                                                className={`rounded-full flex items-center justify-center 
+                                                className={`rounded-full flex items-center justify-center hover:bg-gray-300
                                                 ${day && new Date().getDate() === day.date.getDate() &&
                                                         new Date().getFullYear() === currentYear &&
                                                         new Date().getMonth() === currentMonth
