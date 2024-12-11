@@ -37,7 +37,7 @@ function AddReview({ doctorId }) {
         };
 
         try {
-            const response = await apiRequest('doctor', 'addReview', dto, localStorage.getItem('accessToken'), 'POST', true);
+            const response = await apiRequest('reviews', 'addDoctorReview', dto, localStorage.getItem('accessToken'), 'POST', true);
 
             showMessage(response.message, 'message');
             setIsOpen(false);

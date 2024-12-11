@@ -9,10 +9,15 @@
             public const string UserDataUpdated = "Updated successfully.";
         }
 
-        public static class Doctor
+        public static class Meetings
+        {
+            public const string AddedMeeting = "Meeting was added successfully.";
+            public const string DeletedMeeting = "Meeting was deleted successfully.";
+        }
+
+        public static class Reviews
         {
             public const string AddedReview = "Rating was added successfully.";
-            public const string AddedMeeting = "Meeting was added successfully.";
         }
     }
 }

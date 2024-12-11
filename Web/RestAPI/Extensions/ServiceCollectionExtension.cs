@@ -114,7 +114,10 @@ namespace Server.Extensions
             services.AddScoped<IJWTTokenService, JWTTokenService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IMemoryCacheService, MemoryCacheService>();
-            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IDoctorsService, DoctorsService>();
+            services.AddScoped<IMeetingsService, MeetingsService>();
+            services.AddScoped<IReviewsService, ReviewsService>();
+            services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
         }
     }
 }

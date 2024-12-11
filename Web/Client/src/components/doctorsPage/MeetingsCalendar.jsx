@@ -22,7 +22,7 @@ const MeetingsCalendar = ({ doctorId }) => {
             }
 
             try {
-                const response = await apiRequest('doctor', 'getMonthShedule', dto, undefined, 'POST', false);
+                const response = await apiRequest('doctors', 'getMonthShedule', dto, undefined, 'POST', false);
 
                 const dates = response.map(item => ({
                     ...item,

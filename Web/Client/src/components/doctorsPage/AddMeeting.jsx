@@ -26,7 +26,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
             try {
                 setIsLoading(true);
 
-                const response = await apiRequest('doctor', 'getAvailableMeetTimes', dto, undefined, 'POST', false);
+                const response = await apiRequest('doctors', 'getAvailableMeetingHours', dto, undefined, 'POST', false);
 
                 setMeetingTimes(response);
             } catch (error) {
@@ -71,7 +71,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
         };
 
         try {
-            const response = await apiRequest('doctor', 'addMeeting', dto, localStorage.getItem('accessToken'), 'POST', false);
+            const response = await apiRequest('meetings', 'addDoctorMeeting', dto, localStorage.getItem('accessToken'), 'POST', false);
 
             showMessage(response.message, 'message');
             setIsDateChoosed(false);

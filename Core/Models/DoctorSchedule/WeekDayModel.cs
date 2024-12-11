@@ -1,4 +1,4 @@
-﻿namespace Core.Models.Doctor
+﻿namespace Core.Models.DoctorSchedule
 {
     public class WeekDayModel
     {

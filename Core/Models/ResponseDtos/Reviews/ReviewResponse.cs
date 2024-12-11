@@ -1,4 +1,4 @@
-﻿namespace Core.Models.ResponseDtos.Doctor
+﻿namespace Core.Models.ResponseDtos.Reviews
 {
     public class ReviewResponse
     {

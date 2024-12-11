@@ -16,7 +16,7 @@ function DoctorDetails() {
     useEffect(() => {
         const receiveDoctorDetails = async () => {
             try {
-                const response = await apiRequest('doctor', 'getDoctorDetails', doctorId, undefined, 'POST', false);
+                const response = await apiRequest('doctors', 'getDoctorDetails', doctorId, undefined, 'POST', false);
 
                 setDoctor(response);
                 setIsLoading(false);

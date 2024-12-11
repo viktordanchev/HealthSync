@@ -1,8 +1,8 @@
-﻿namespace Core.Models.Doctor
+﻿namespace Core.Models.ResponseDtos.DoctorSchedule
 {
-    public class UnavailableDaysModel
+    public class UnavailableDaysResponse
     {
-        public UnavailableDaysModel()
+        public UnavailableDaysResponse()
         {
             DaysOff = new List<DateTime>();
             WeeklyDaysOff = new List<DayOfWeek>();

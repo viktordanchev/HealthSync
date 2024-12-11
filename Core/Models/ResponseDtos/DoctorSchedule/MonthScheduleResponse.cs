@@ -1,8 +1,8 @@
-﻿namespace Core.Models.Doctor
+﻿namespace Core.Models.ResponseDtos.DoctorSchedule
 {
-    public class DayInMonthModel
+    public class MonthScheduleResponse
     {
-        public DayInMonthModel(string date, bool isAvailable)
+        public MonthScheduleResponse(string date, bool isAvailable)
         {
             Date = date;
             IsAvailable = isAvailable;

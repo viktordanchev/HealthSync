@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import apiRequest from '../services/apiRequest';
-import DoctorCard from '../components/doctor/DoctorCard';
+import DoctorCard from '../components/doctorsPage/DoctorCard';
 import Loading from '../components/Loading';
-import DoctorsNavBar from '../components/doctor/DoctorsNavBar';
+import DoctorsNavBar from '../components/doctorsPage/DoctorsNavBar';
 
 function DoctorsPage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -63,7 +63,7 @@ function DoctorsPage() {
             };
 
             try {
-                const response = await apiRequest('doctor', 'all', dto, localStorage.getItem('accessToken'), 'POST', false);
+                const response = await apiRequest('doctors', 'getDoctors', dto, localStorage.getItem('accessToken'), 'POST', false);
 
                 setDoctors(response);
                 setLoading(false);

@@ -70,7 +70,7 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpPost("login")]

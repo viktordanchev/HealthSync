@@ -1,10 +1,8 @@
-﻿using Infrastructure.Entities;
-
-namespace Core.Models.Doctor
+﻿namespace Core.Models.DoctorSchedule
 {
-    class DoctorModel
+    class DoctorWorkTimeModel
     {
-        public DoctorModel()
+        public DoctorWorkTimeModel()
         {
             Meetings = new List<TimeSpan>();
         }

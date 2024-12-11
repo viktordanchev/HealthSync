@@ -19,7 +19,7 @@ function DoctorReviews({ doctorId }) {
             };
 
             try {
-                const response = await apiRequest('doctor', 'getReviews', dto, undefined, 'POST', false);
+                const response = await apiRequest('reviews', 'getDoctorReviews', dto, undefined, 'POST', false);
                 
                 if (response.length != 0) {
                     setReviews(prevReviews => [...prevReviews, ...response]);

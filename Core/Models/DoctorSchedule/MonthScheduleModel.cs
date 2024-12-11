@@ -1,8 +1,8 @@
-﻿namespace Core.Models.Doctor
+﻿namespace Core.Models.DoctorSchedule
 {
-    public class MonthSheduleModel
+    public class MonthScheduleModel
     {
-        public MonthSheduleModel()
+        public MonthScheduleModel()
         {
             AllMeetings = new List<DateTime>();
             WeekDays = new List<WeekDayModel>();

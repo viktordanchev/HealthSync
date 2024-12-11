@@ -10,7 +10,7 @@ import NotFound404 from './components/NotFound404';
 import ParticlesBg from './components/ParticlesBg';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionMessage from './components/SessionMessage';
-import DoctorDetails from './components/doctor/DoctorDetails';
+import DoctorDetails from './components/doctorsPage/DoctorDetails';
 import { AuthProvider } from './contexts/AuthContext';
 import { LoadingProvider } from './contexts/LoadingContext';
 import { MessageProvider } from './contexts/MessageContext';
