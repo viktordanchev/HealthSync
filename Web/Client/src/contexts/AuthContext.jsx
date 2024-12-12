@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
         const tryRefreshToken = async () => {
             setIsAuthLoading(true);
 
-            await new Promise(res => setTimeout(res, 1000));
             const isRefreshed = await refreshAccessToken();
 
             if (isRefreshed) {

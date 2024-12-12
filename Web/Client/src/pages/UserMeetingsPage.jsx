@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import apiRequest from '../services/apiRequest';
 import Loading from '../components/Loading';
-import MeetingCard from '../components/MeetingCard';
+import MeetingCard from '../components/userMeetingsPage/MeetingCard';
 import jwtDecoder from '../services/jwtDecoder';
 
 function UserMeetingsPage() {
@@ -15,7 +15,7 @@ function UserMeetingsPage() {
                 setIsLoading(true);
 
                 const { userId } = jwtDecoder();
-                
+
                 const response = await apiRequest('meetings', 'getUserMeetings', userId, localStorage.getItem('accessToken'), 'POST', false);
 
                 setMeetings(response);
@@ -35,7 +35,7 @@ function UserMeetingsPage() {
             {isLoading ? <Loading type={'big'} /> :
                 <article className="flex flex-wrap justify-center">
                     {meetings.length == 0 ?
-                        <div className="text-3xl">You have no active meetings.</div> :
+                        <div className="text-3xl text-center">You have no active meetings.</div> :
                         <>
                             {meetings.map((meeting) => (
                                 <MeetingCard

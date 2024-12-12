@@ -51,11 +51,12 @@ const Header = () => {
                             Doctors
                         </a>
                     </li>
-                    <li>
+                    {isAuthenticated && (
+                        <li>
                         <a href="/meetings" className="relative py-1 text-white font-bold text-xl transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
                             Meetings
                         </a>
-                    </li>
+                        </li>)}
                 </ul>
                 <div className="flex justify-end space-x-4 w-52 md:hidden sm:hidden">
                     {isAuthenticated ? <UserManage userName={userName} /> :
@@ -90,6 +91,13 @@ const Header = () => {
                             Doctors
                         </a>
                     </li>
+                    {isAuthenticated && (
+                        <li>
+                            <a href="/meetings" className="relative py-1 text-white font-bold text-xl">
+                                Meetings
+                            </a>
+                        </li>
+                    )}
                 </ul>
                 <hr className="border-e border-white w-full my-3" />
                 {isAuthenticated ? <UserManage userName={userName} /> :

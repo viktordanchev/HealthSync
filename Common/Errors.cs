@@ -18,5 +18,10 @@
             public const string InvalidVrfCode = "Invalid verification code!";
             public const string InvalidToken = "This token is invalid!";
         }
+
+        public static class Meetings
+        {
+            public const string ExistingMeeting = "You’ve already booked a meeting with this doctor!";
+        }
     }
 }

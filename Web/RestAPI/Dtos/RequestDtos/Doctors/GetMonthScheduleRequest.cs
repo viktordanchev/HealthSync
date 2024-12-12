@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Constants;
 
-namespace RestAPI.Dtos.RequestDtos.Doctor
+namespace RestAPI.Dtos.RequestDtos.Doctors
 {
     public class GetMonthScheduleRequest
     {

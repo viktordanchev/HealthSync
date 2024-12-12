@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Common.Constants.Review;
 
-namespace RestAPI.Dtos.RequestDtos.Doctor
+namespace RestAPI.Dtos.RequestDtos.Reviews
 {
     public class AddReviewRequest
     {

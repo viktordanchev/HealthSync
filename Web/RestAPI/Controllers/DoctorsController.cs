@@ -1,6 +1,6 @@
 ﻿using Core.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.Dtos.RequestDtos.Doctor;
+using RestAPI.Dtos.RequestDtos.Doctors;
 using System.Security.Claims;
 using static Common.Errors;
 
@@ -20,7 +20,7 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost("getDoctors")]
-        public async Task<IActionResult> GetDoctors([FromBody] AllDoctorsRequest request)
+        public async Task<IActionResult> GetDoctors([FromBody] GetDoctorsRequest request)
         {
             var doctors = await _doctorService.GetDoctorsAsync(request.Index,
                 request.Sorting.ToString(),
@@ -53,7 +53,7 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost("getAvailableMeetingHours")]
-        public async Task<IActionResult> GetAvailableMeetingHours([FromBody] GetAvailableMeetTimesRequest request)
+        public async Task<IActionResult> GetAvailableMeetingHours([FromBody] GetAvailableMeetingHours request)
         {
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
                 await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.Date))

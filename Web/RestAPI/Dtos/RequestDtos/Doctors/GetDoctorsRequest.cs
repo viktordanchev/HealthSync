@@ -1,8 +1,8 @@
-﻿using RestAPI.Dtos.RequestDtos.Enums;
+﻿using RestAPI.Dtos.Enums;
 
-namespace RestAPI.Dtos.RequestDtos.Doctor
+namespace RestAPI.Dtos.RequestDtos.Doctors
 {
-    public class AllDoctorsRequest
+    public class GetDoctorsRequest
     {
         public int Index { get; set; }
 

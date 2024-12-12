@@ -85,7 +85,7 @@ function AddReview({ doctorId }) {
                                             setCommentLength(e.target.value.length);
                                         }}
                                         maxLength={reviewCommentLength}
-                                        className="h-24 w-full px-1 resize-none bg-white text-black rounded-xl border-2 focus:outline-none focus:border-blue-500 scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-zinc-500 scrollbar-track-gray-300"></textarea>
+                                        className="h-24 w-full px-1 resize-none bg-white text-black rounded-xl border-2 border-white focus:outline-none focus:border-blue-500 scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-zinc-500 scrollbar-track-gray-300"></textarea>
                                     <p className="text-right text-sm">{commentLength}/{reviewCommentLength}</p>
                                 </div>
                             </div>

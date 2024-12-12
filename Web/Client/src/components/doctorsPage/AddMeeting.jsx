@@ -6,6 +6,7 @@ import apiRequest from '../../services/apiRequest';
 import { useAuthContext } from '../../contexts/AuthContext';
 import Loading from '../Loading';
 import { useMessage } from '../../contexts/MessageContext';
+import jwtDecoder from '../../services/jwtDecoder';
 
 function AddMeeting({ doctorId, date, setIsDateChoosed }) {
     const navigate = useNavigate();
@@ -54,7 +55,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
         date.setMinutes(minutes);
 
         setIsTimeChoosed(true);
-        setMeetingDate(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`);
+        setMeetingDate(`${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`);
     };
 
     const confirmMeeting = async () => {
@@ -65,16 +66,24 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
             return;
         }
 
+        const { userId } = jwtDecoder();
+
         const dto = {
             doctorId: doctorId,
-            date: date
+            date: date,
+            userId: userId
         };
-
+        
         try {
             const response = await apiRequest('meetings', 'addDoctorMeeting', dto, localStorage.getItem('accessToken'), 'POST', false);
 
-            showMessage(response.message, 'message');
-            setIsDateChoosed(false);
+            if (response.error) {
+                showMessage(response.error, 'error');
+                navigate('/meetings');
+            } else {
+                showMessage(response.message, 'message');
+                setIsDateChoosed(false);
+            }
         } catch (error) {
             console.error(error);
         }

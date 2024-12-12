@@ -9,5 +9,8 @@ namespace RestAPI.Dtos.RequestDtos.Meetings
 
         [Required]
         public DateTime Date { get; set; }
+
+        [Required]
+        public string UserId { get; set; } = null!;
     }
 }

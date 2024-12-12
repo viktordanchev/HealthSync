@@ -12,6 +12,6 @@
 
         public string HospitalAddress { get; set; } = null!;
 
-        public DateTime DateAndTime { get; set; }
+        public string DateAndTime { get; set; } = null!;
     }
 }

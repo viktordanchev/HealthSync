@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RestAPI.Dtos.RequestDtos.Meetings;
 using System.Security.Claims;
 using static Common.Errors;
+using static Common.Errors.Meetings;
 using static Common.Messages.Meetings;
 
 namespace RestAPI.Controllers
@@ -37,6 +38,11 @@ namespace RestAPI.Controllers
                 !await _doctorScheduleService.IsDateValidAsync(request.DoctorId, localDateTime))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
+            }
+
+            if(await _meetingsService.IsUserHasMeetingAsync(request.UserId, request.DoctorId))
+            {
+                return BadRequest(new { Error = ExistingMeeting });
             }
 
             await _meetingsService.AddDoctorMeetingAsync(request.DoctorId, localDateTime, User.FindFirstValue(ClaimTypes.NameIdentifier));

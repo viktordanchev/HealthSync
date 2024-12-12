@@ -3,8 +3,6 @@ using Core.Services.Contracts;
 using Infrastructure;
 using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
-using static Common.Constants;
-using static Common.Messages;
 
 namespace Core.Services
 {
@@ -43,7 +41,7 @@ namespace Core.Services
                     ImgUrl = m.Doctor.ImgUrl,
                     Hospital = m.Doctor.Hospital.Name,
                     HospitalAddress = m.Doctor.Hospital.Address,
-                    DateAndTime = m.Date
+                    DateAndTime = m.Date.ToString("dd.MM.yyyy HH:mm")
                 })
                 .ToListAsync();
 
@@ -62,6 +60,13 @@ namespace Core.Services
         public async Task<bool> IsMeetingExistAsync(int meetingId)
         {
             var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.Id == meetingId);
+
+            return meeting != null;
+        }
+
+        public async Task<bool> IsUserHasMeetingAsync(string userId, int doctorId)
+        {
+            var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.PatientId == userId && m.DoctorId == doctorId);
 
             return meeting != null;
         }

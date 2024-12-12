@@ -68,7 +68,7 @@ function App() {
                                 <Route path="/home" element={<Home />} />
                                 <Route path="/doctors" element={<DoctorsPage />} />
                                 <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
-                                <Route path="/meetings" element={<UserMeetingsPage />} />
+                                <Route path="/meetings" element={<ProtectedRoute><UserMeetingsPage /></ProtectedRoute>} />
                             </Routes>
                         </MessageProvider>
                         <button

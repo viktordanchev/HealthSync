@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestAPI.Dtos.RequestDtos.Doctor
+namespace RestAPI.Dtos.RequestDtos.Doctors
 {
-    public class GetAvailableMeetTimesRequest
+    public class GetAvailableMeetingHours
     {
         [Required]
         public int DoctorId { get; set; }

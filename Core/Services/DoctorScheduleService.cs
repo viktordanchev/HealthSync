@@ -33,7 +33,7 @@ namespace Core.Services
                     WorkDayStart = d.WorkWeek.First(wd => wd.Day == date.DayOfWeek).Start,
                     WorkDayEnd = d.WorkWeek.First(wd => wd.Day == date.DayOfWeek).End,
                     Meetings = d.Meetings
-                        .Where(m => m.Date.Date == date)
+                        .Where(m => m.Date.Date == date.Date)
                         .Select(m => m.Date.TimeOfDay)
                         .ToList()
                 })
