@@ -8,7 +8,7 @@ import apiRequest from '../services/apiRequest';
 
 function UserManage({ userName }) {
     const navigate = useNavigate();
-    const { logout, isStillAuth } = useAuthContext();
+    const { logout } = useAuthContext();
     const { setIsLoading } = useLoading();
     const [isOpen, setIsOpen] = useState(false);
     userName = userName.split(' ')
@@ -20,17 +20,10 @@ function UserManage({ userName }) {
     }).join(' ');
 
     const handleLogout = async () => {
-        const isAuth = await isStillAuth();
-
-        if (!isAuth) {
-            navigate('/home');
-            return;
-        }
-
         try {
             setIsLoading(true);
 
-            const response = await apiRequest('account', 'logout', undefined, localStorage.getItem('accessToken'), 'GET', true);
+            const response = await apiRequest('account', 'logout', undefined, undefined, 'GET', true);
 
             if (response) {
                 logout();

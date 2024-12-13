@@ -103,7 +103,6 @@ namespace HealthSync.Server.Controllers
         }
 
         [HttpGet("logout")]
-        [Authorize]
         public IActionResult Logout()
         {
             if (Request.Cookies.ContainsKey("refreshToken"))

@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useMessage } from '../../contexts/MessageContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 function MeetingCard({ meeting, isDeleted, setIsDeleted }) {
+    const navigate = useNavigate();
     const { setIsLoading } = useLoading();
     const { showMessage } = useMessage();
+    const { isStillAuth } = useAuthContext();
 
     const handleDelete = async (meetingId) => {
+        const isAuth = await isStillAuth();
+
+        if (!isAuth) {
+            navigate('/home');
+            return;
+        }
+
         try {
             setIsLoading(true);
 
