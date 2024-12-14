@@ -20,6 +20,7 @@ import RecoverPassPage from './pages/RecoverPassPage';
 import RegisterPage from './pages/RegisterPage';
 import UserMeetingsPage from './pages/UserMeetingsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
+import BecomeDoctorPage from './pages/BecomeDoctorPage';
 
 function App() {
     const [showButton, setShowButton] = useState(false);
@@ -69,6 +70,7 @@ function App() {
                                 <Route path="/doctors" element={<DoctorsPage />} />
                                 <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
                                 <Route path="/meetings" element={<ProtectedRoute><UserMeetingsPage /></ProtectedRoute>} />
+                                <Route path="/becomeDoctor" element={<ProtectedRoute><BecomeDoctorPage /></ProtectedRoute>} />
                             </Routes>
                         </MessageProvider>
                         <button
