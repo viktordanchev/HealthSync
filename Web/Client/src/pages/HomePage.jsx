@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Home() {
+function HomePage() {
     return (
         <section className="flex flex-col items-center text-maincolor">
             <p className="text-4xl">Welcome to</p>
@@ -9,4 +9,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default HomePage;

@@ -76,7 +76,7 @@ function DoctorsPage() {
     }, [order, search, filter]);
 
     return (
-        <section className="mx-32 flex flex-col items-center space-y-4 text-gray-700 lg:mx-16 md:mx-0 sm:mx-0">
+        <section className="mx-32 flex flex-col items-center space-y-6 text-gray-700 lg:mx-16 md:mx-0 sm:mx-0">
             <DoctorsNavBar
                 order={order}
                 setOrder={setOrder}
@@ -86,7 +86,7 @@ function DoctorsPage() {
                 setSearchParams={setSearchParams}
             />
             {loading ? <Loading type={'big'} /> :
-                <article className="flex flex-wrap justify-center w-full h-full">
+                <article className="flex flex-wrap gap-4 justify-center w-full h-full">
                     {doctors.length == 0 ?
                         <div className="text-3xl">No doctors found!</div> :
                         <>

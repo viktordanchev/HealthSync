@@ -8,7 +8,7 @@ function DoctorCard({ doctor }) {
 
     return (
         <article
-            className="bg-zinc-400 rounded-xl m-2 p-4 flex flex-col justify-between items-center space-y-2 text-gray-700 w-64 h-80 bg-opacity-75 shadow-xl shadow-gray-300 text-lg sm:m-0 sm:mb-4 sm:w-full"
+            className="bg-zinc-400 rounded-xl p-4 flex flex-col justify-between items-center space-y-2 text-gray-700 w-64 h-80 bg-opacity-75 shadow-xl shadow-gray-300 text-lg sm:m-0 sm:w-full"
         >
             <img
                 src={doctor.imgUrl ? doctor.imgUrl : '/profile.jpg'}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NotFound404() {
+function NotFoundPage() {
     return (
         <div className="flex justify-center items-center">
             <img src="/404Page.png" className="h-notFoundPng"/>
@@ -8,4 +8,4 @@ function NotFound404() {
     );
 }
 
-export default NotFound404;
+export default NotFoundPage;

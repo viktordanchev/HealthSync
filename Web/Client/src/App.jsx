@@ -5,8 +5,6 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-d
 import Footer from './components/Footer';
 import GuestOnly from './components/GuestOnly';
 import Header from './components/Header';
-import Home from './components/Home';
-import NotFound404 from './components/NotFound404';
 import ParticlesBg from './components/ParticlesBg';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionMessage from './components/SessionMessage';
@@ -15,11 +13,13 @@ import { AuthProvider } from './contexts/AuthContext';
 import { LoadingProvider } from './contexts/LoadingContext';
 import { MessageProvider } from './contexts/MessageContext';
 import DoctorsPage from './pages/DoctorsPage';
+import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import NotFoundPage from './pages/NotFoundPage';
 import RecoverPassPage from './pages/RecoverPassPage';
 import RegisterPage from './pages/RegisterPage';
-import UserSettingsPage from './pages/UserSettingsPage';
 import UserMeetingsPage from './pages/UserMeetingsPage';
+import UserSettingsPage from './pages/UserSettingsPage';
 
 function App() {
     const [showButton, setShowButton] = useState(false);
@@ -57,7 +57,7 @@ function App() {
                     <main className="h-full w-full flex flex-col justify-center items-center my-6 md:px-6 sm:px-6">
                         <MessageProvider>
                             <Routes>
-                                <Route path="*" element={<NotFound404 />} />
+                                <Route path="*" element={<NotFoundPage />} />
 
                                 <Route path="/login" element={<GuestOnly><LoginPage /></GuestOnly>} />
                                 <Route path="/register" element={<GuestOnly><RegisterPage /></GuestOnly>} />
@@ -65,7 +65,7 @@ function App() {
                                 <Route path="/account/settings" element={<ProtectedRoute><UserSettingsPage /></ProtectedRoute>} />
 
                                 <Route path="/" element={<Navigate to="/home" />} />
-                                <Route path="/home" element={<Home />} />
+                                <Route path="/home" element={<HomePage />} />
                                 <Route path="/doctors" element={<DoctorsPage />} />
                                 <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
                                 <Route path="/meetings" element={<ProtectedRoute><UserMeetingsPage /></ProtectedRoute>} />
