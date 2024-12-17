@@ -70,7 +70,7 @@ function App() {
                                 <Route path="/doctors" element={<DoctorsPage />} />
                                 <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
                                 <Route path="/meetings" element={<ProtectedRoute><UserMeetingsPage /></ProtectedRoute>} />
-                                <Route path="/becomeDoctor" element={<ProtectedRoute><BecomeDoctorPage /></ProtectedRoute>} />
+                                <Route path="/becomeDoctor" element={<BecomeDoctorPage />} />
                             </Routes>
                         </MessageProvider>
                         <button

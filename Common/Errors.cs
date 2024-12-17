@@ -4,7 +4,6 @@
     {
         public const string RequiredField = "field is required!";
         public const string InvalidRequest = "Something went wrong!";
-        public const string SessionEnd = "Something went wrong!";
 
         public static class Account
         {

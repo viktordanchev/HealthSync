@@ -1,6 +1,7 @@
-﻿using Core.Models.ResponseDtos.Doctor;
+﻿using Core.Models.ResponseDtos.Doctors;
 using Core.Services.Contracts;
 using Infrastructure;
+using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
@@ -84,6 +85,13 @@ namespace Core.Services
             return doctor != null;
         }
 
+        public async Task<bool> IsSpecialtyExistAsync(int specialtyId)
+        {
+            var specialty = await _context.Specialties.FirstOrDefaultAsync(s => s.Id == specialtyId);
+
+            return specialty != null;
+        }
+
         public async Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync()
         {
             var specialties = await _context.Specialties
@@ -91,7 +99,7 @@ namespace Core.Services
                 .Select(s => new SpecialtyResponse()
                 {
                     Id = s.Id,
-                    Type = s.Type
+                    Name = s.Type
                 })
                 .ToListAsync();
 

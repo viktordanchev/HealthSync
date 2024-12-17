@@ -7,7 +7,7 @@ import { useLoading } from '../../contexts/LoadingContext';
 import { useMessage } from '../../contexts/MessageContext';
 import { useAuthContext } from '../../contexts/AuthContext';
 
-function MeetingCard({ meeting, isDeleted, setIsDeleted }) {
+function MeetingCard({ meeting, setIsDeleted }) {
     const navigate = useNavigate();
     const { setIsLoading } = useLoading();
     const { showMessage } = useMessage();

@@ -1,4 +1,4 @@
-﻿namespace Core.Models.ResponseDtos.Doctor
+﻿namespace Core.Models.ResponseDtos.Doctors
 {
     public class DoctorDetailsResponse : DoctorResponse
     {

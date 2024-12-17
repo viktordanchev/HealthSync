@@ -41,7 +41,6 @@ function UserMeetingsPage() {
                                 <MeetingCard
                                     key={meeting.id}
                                     meeting={meeting}
-                                    isDeleted={isDeleted}
                                     setIsDeleted={setIsDeleted} />
                             ))}
                         </>}
