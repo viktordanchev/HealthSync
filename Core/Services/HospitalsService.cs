@@ -21,8 +21,7 @@ namespace Core.Services
                 .Select(h => new HospitalResponse()
                 {
                     Id = h.Id,
-                    Name = h.Name,
-                    Address = h.Address
+                    Name = h.Name
                 })
                 .ToListAsync();
 

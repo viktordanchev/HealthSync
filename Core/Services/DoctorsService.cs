@@ -3,6 +3,7 @@ using Core.Services.Contracts;
 using Infrastructure;
 using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using static Common.Constants;
 
 namespace Core.Services
 {
@@ -71,7 +72,8 @@ namespace Core.Services
                     HospitalName = d.Hospital.Name,
                     HospitalAddress = d.Hospital.Address,
                     Information = d.Information,
-                    PhoneNumber = d.Identity.PhoneNumber
+                    ContactEmail = d.ContactEmail,
+                    ContactPhoneNumber = d.ContactPhoneNumber
                 })
                 .FirstOrDefaultAsync();
 
@@ -104,6 +106,21 @@ namespace Core.Services
                 .ToListAsync();
 
             return specialties;
+        }
+
+        public async Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber)
+        {
+            var doctor = new Infrastructure.Entities.Doctor()
+            {
+                IdentityId = userId,
+                HospitalId = hospitalId,
+                SpecialtyId = specialtyId,
+                ContactEmail = contactEmail,
+                ContactPhoneNumber = contactPhoneNumber
+            };
+
+            await _context.Doctors.AddAsync(doctor);
+            await _context.SaveChangesAsync();
         }
     }
 }

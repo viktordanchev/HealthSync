@@ -56,11 +56,11 @@ function DoctorDetails() {
                                 <div className="flex flex-row text-sm space-x-3">
                                     <div className="w-1/2">
                                         <p className="text-base font-bold">Phone number</p>
-                                        <p>{doctor.phoneNumber ? doctor.phoneNumber : 'Missing'}</p>
+                                        <p>{doctor.contactPhoneNumber ? doctor.contactPhoneNumber : 'Missing'}</p>
                                     </div>
                                     <div className="w-1/2">
                                         <p className="text-base font-bold">Email</p>
-                                        <p>{doctor.email ? doctor.email : 'Missing'}</p>
+                                        <p>{doctor.contactEmail ? doctor.contactEmail : 'Missing'}</p>
                                     </div>
                                 </div>
                             </div>

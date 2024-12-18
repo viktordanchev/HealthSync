@@ -31,7 +31,7 @@ namespace Infrastructure
             builder.ApplyConfiguration(new MeetingConfig());
             builder.ApplyConfiguration(new IdentityRoleConfig());
             builder.ApplyConfiguration(new IdentityUserRoleConfig());
-        
+
             base.OnModelCreating(builder);
         }
     }

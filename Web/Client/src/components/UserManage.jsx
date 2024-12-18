@@ -57,7 +57,7 @@ function UserManage({ userName }) {
                     <li className="py-1 rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
                         <a
                             className="h-full w-full"
-                            href="/account/settings"
+                            href="/becomeDoctor"
                         >
                             Become a Doctor
                         </a>

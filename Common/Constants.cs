@@ -15,6 +15,8 @@
         public static class Doctor
         {
             public const int InformationMaxLength = 1000;
+            public const int MeetingTimeMinutesMin = 5;
+            public const int MeetingTimeMinutesMax = 60;
         }
     }
 }

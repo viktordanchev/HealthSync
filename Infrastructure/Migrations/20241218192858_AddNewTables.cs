@@ -47,6 +47,8 @@ namespace Infrastructure.Migrations
                     IdentityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HospitalId = table.Column<int>(type: "int", nullable: false),
                     SpecialtyId = table.Column<int>(type: "int", nullable: false),
+                    ContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false),
                     ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Information = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)

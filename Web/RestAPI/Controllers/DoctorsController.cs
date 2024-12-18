@@ -12,11 +12,13 @@ namespace RestAPI.Controllers
     {
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
+        private readonly IHospitalsService _hospitalsService;
 
-        public DoctorsController(IDoctorsService doctorService, IDoctorScheduleService doctorScheduleService)
+        public DoctorsController(IDoctorsService doctorService, IDoctorScheduleService doctorScheduleService, IHospitalsService hospitalsService)
         {
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
+            _hospitalsService = hospitalsService;
         }
 
         [HttpPost("getDoctors")]
@@ -77,6 +79,18 @@ namespace RestAPI.Controllers
             var daysInMonth = await _doctorScheduleService.GetMonthScheduleAsync(request.DoctorId, request.Month, request.Year);
 
             return Ok(daysInMonth);
+        }
+
+        [HttpPost("becomeDoctor")]
+        public async Task<IActionResult> BecomeDoctor([FromBody] BecomeDoctorRequest request)
+        {
+            if (!await _hospitalsService.IsHospitalExistAsync(request.HospitalId) || 
+                !await _doctorService.IsSpecialtyExistAsync(request.SpecialtyId))
+            {
+                return BadRequest(new { ServerError = InvalidRequest });
+            }
+
+            return Ok();
         }
     }
 }

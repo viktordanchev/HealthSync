@@ -8,6 +8,8 @@
 
         public string Information { get; set; } = string.Empty;
 
-        public string PhoneNumber { get; set; } = string.Empty;
+        public string ContactEmail { get; set; } = string.Empty;
+
+        public string ContactPhoneNumber { get; set; } = string.Empty;
     }
 }

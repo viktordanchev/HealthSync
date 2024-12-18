@@ -1,26 +1,34 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
 import DropdownMenu from '../components/becomeDoctorPage/DropdownMenu';
+import ProfilePhoto from '../components/becomeDoctorPage/ProfilePhoto';
 import Loading from '../components/Loading';
+import { validateContactEmail, validateHospital, validateSpecialty } from '../services/validationSchemas';
 
 function BecomeDoctorPage() {
-    const [imageSrc, setImageSrc] = useState("/profile.jpg");
     const [isLoadingOnReceive, setIsLoadingOnReceive] = useState(true);
     const [hospitals, setHospitals] = useState([]);
     const [specialties, setSpecialties] = useState([]);
+    const [userData, setUserData] = useState({});
+
+    const validationSchema = Yup.object({
+        email: validateContactEmail,
+        hospitalId: validateHospital,
+        specialtyId: validateSpecialty
+    });
 
     useEffect(() => {
         const receiveUserData = async () => {
             try {
                 setIsLoadingOnReceive(true);
 
+                const userData = await apiRequest('account', 'getUserData', undefined, localStorage.getItem('accessToken'), 'GET', false);
                 const hospitals = await apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false);
                 const specialties = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
 
+                setUserData(userData);
                 setHospitals(hospitals);
                 setSpecialties(specialties);
             } catch (error) {
@@ -33,22 +41,8 @@ function BecomeDoctorPage() {
         receiveUserData();
     }, []);
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = (event) => {
-                setImageSrc(event.target.result);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    };
-
     const handleSubmit = (values) => {
-        
+        console.log(values);
     };
 
     return (
@@ -56,44 +50,17 @@ function BecomeDoctorPage() {
             <h2 className="text-center text-4xl font-thin underline-thin">Become part of us!</h2>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
                 <article className="w-2/3 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl space-y-4 md:w-full sm:w-full">
-                    <div className="flex flex-col items-center">
-                        <h2 className="text-lg font-bold">Profile Photo</h2>
-                        <div className="relative group">
-                            <div className="w-36 h-36 flex justify-center items-center bg-zinc-700 rounded-full sm:w-28 sm:h-28">
-                                <img
-                                    src={imageSrc}
-                                    className="w-32 h-32 object-cover rounded-full sm:w-24 sm:h-24"
-                                />
-                            </div>
-                            <label
-                                className="absolute top-0 right-0 text-white bg-zinc-700 w-9 h-9 flex items-center justify-center rounded-full text-base cursor-pointer opacity-0 transition-opacity duration-200 group-hover:opacity-100 sm:opacity-100"
-                            >
-                                <FontAwesomeIcon icon={faCamera} />
-                                <input
-                                    type="file"
-                                    accept="image/jpeg, image/png, image/jpg"
-                                    className="hidden"
-                                    onChange={handleFileChange}
-                                />
-                            </label>
-                            <label
-                                className="absolute top-0 left-0 text-white bg-zinc-700 w-9 h-9 flex items-center justify-center rounded-full text-xl cursor-pointer opacity-0 transition-opacity duration-200 group-hover:opacity-100 sm:opacity-100"
-                                onClick={() => setImageSrc("/profile.jpg")}
-                            >
-                                <FontAwesomeIcon icon={faXmark} />
-                            </label>
-                        </div>
-                    </div>
+                    <ProfilePhoto />
                     <Formik
                         initialValues={{
-                            firstName: '',
-                            lastName: '',
-                            email: '',
-                            phoneNumber: '',
+                            firstName: userData.firstName,
+                            lastName: userData.lastName,
+                            email: userData.email || '',
+                            phoneNumber: userData.phoneNumber || '',
                             hospitalId: '',
                             specialtyId: ''
                         }}
-
+                        validationSchema={validationSchema}
                         onSubmit={handleSubmit}
                     >
                         {({ setFieldValue }) => (

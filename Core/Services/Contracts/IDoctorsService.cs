@@ -9,5 +9,6 @@ namespace Core.Services.Contracts
         Task<bool> IsDoctorExistAsync(int doctorId);
         Task<bool> IsSpecialtyExistAsync(int specialtyId);
         Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync();
+        Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber);
     }
 }

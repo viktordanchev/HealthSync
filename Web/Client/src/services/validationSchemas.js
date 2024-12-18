@@ -11,6 +11,9 @@ export const validateEmail = Yup.string()
     .email(authErrors.InvalidEmail)
     .required('Email' + authErrors.RequiredField);
 
+export const validateContactEmail = Yup.string()
+    .email(authErrors.InvalidEmail);
+
 export const validatePassword = Yup.string()
     .min(6, authErrors.InvalidPass)
     .required('Password' + authErrors.RequiredField);
@@ -24,3 +27,9 @@ export const validateConfirmPassword = Yup.string()
 
 export const validateVrfCode = Yup.string()
     .required('Verification code' + authErrors.RequiredField);
+
+export const validateHospital = Yup.string()
+    .required('Hospital' + authErrors.RequiredField);
+
+export const validateSpecialty = Yup.string()
+    .required('Specialty' + authErrors.RequiredField);

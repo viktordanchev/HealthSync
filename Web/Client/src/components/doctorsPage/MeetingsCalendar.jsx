@@ -24,18 +24,19 @@ const MeetingsCalendar = ({ doctorId }) => {
             try {
                 const response = await apiRequest('doctors', 'getMonthShedule', dto, undefined, 'POST', false);
 
-                const dates = response.map(item => ({
-                    ...item,
-                    date: new Date(item.date)
-                }));
+                if (response) {
+                    const dates = response.map(item => ({
+                        ...item,
+                        date: new Date(item.date)
+                    }));
 
-                setDays(dates);
-                setIsLoading(false);
-
-                generateCalendar(currentYear, currentMonth);
-            }
-            catch (error) {
+                    setDays(dates);
+                    generateCalendar(currentYear, currentMonth);
+                }
+            } catch (error) {
                 console.error(error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -90,42 +91,48 @@ const MeetingsCalendar = ({ doctorId }) => {
                 <div className="h-80">
                     {isLoading ? <Loading type={'small'} /> :
                         <>
-                            <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
-                                {new Date() <= new Date(currentYear, currentMonth) ?
-                                    <button onClick={handlePreviousMonth} className="w-1/3">
-                                        Previous
-                                    </button> :
-                                    <div className="w-1/3">
-                                    </div>}
-                                <div className="w-1/3 text-center flex justify-center space-x-1">
-                                    <p>{monthNames[currentMonth]}</p>
-                                    <p>{currentYear}</p>
-                                </div>
-                                <button onClick={handleNextMonth} className="w-1/3">Next</button>
-                            </div>
-                            <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
-                                {daysOfWeek.map((day, index) => (
-                                    <div key={index} className="text-center">{day}</div>
-                                ))}
-                                {days.length == 0 ? <Loading type={'small'} /> :
-                                    <>
-                                        {days.map((day, index) => (
-                                            <div
-                                                key={index}
-                                                onClick={() => handleDayClick(day)}
-                                                className={`rounded-full flex items-center justify-center hover:bg-gray-300
-                                                ${day && new Date().getDate() === day.date.getDate() &&
-                                                        new Date().getFullYear() === currentYear &&
-                                                        new Date().getMonth() === currentMonth
-                                                        ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
-                                                ${day && new Date() < day.date &&
-                                                        day.isAvailable
-                                                        ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}>
-                                                <p>{day ? day.date.getDate() : ''}</p>
-                                            </div>
+                            {days.length == 0 ?
+                                <div className="font-bold text-2xl text-center">
+                                    No working schedule provided yet
+                                </div> :
+                                <>
+                                    <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
+                                        {new Date() <= new Date(currentYear, currentMonth) ?
+                                            <button onClick={handlePreviousMonth} className="w-1/3">
+                                                Previous
+                                            </button> :
+                                            <div className="w-1/3">
+                                            </div>}
+                                        <div className="w-1/3 text-center flex justify-center space-x-1">
+                                            <p>{monthNames[currentMonth]}</p>
+                                            <p>{currentYear}</p>
+                                        </div>
+                                        <button onClick={handleNextMonth} className="w-1/3">Next</button>
+                                    </div>
+                                    <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
+                                        {daysOfWeek.map((day, index) => (
+                                            <div key={index} className="text-center">{day}</div>
                                         ))}
-                                    </>}
-                            </div>
+                                        {days.length == 0 ? <Loading type={'small'} /> :
+                                            <>
+                                                {days.map((day, index) => (
+                                                    <div
+                                                        key={index}
+                                                        onClick={() => handleDayClick(day)}
+                                                        className={`rounded-full flex items-center justify-center hover:bg-gray-300
+                                                ${day && new Date().getDate() === day.date.getDate() &&
+                                                                new Date().getFullYear() === currentYear &&
+                                                                new Date().getMonth() === currentMonth
+                                                                ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
+                                                ${day && new Date() < day.date &&
+                                                                day.isAvailable
+                                                                ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}>
+                                                        <p>{day ? day.date.getDate() : ''}</p>
+                                                    </div>
+                                                ))}
+                                            </>}
+                                    </div>
+                                </>}
                         </>}
                 </div> :
                 <AddMeeting

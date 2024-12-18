@@ -35,7 +35,10 @@ namespace Infrastructure.Entities
         [ForeignKey(nameof(SpecialtyId))]
         public Specialty Specialty { get; set; } = null!;
 
-        [Required]
+        public string? ContactEmail { get; set; }
+
+        public string? ContactPhoneNumber { get; set; }
+
         public int MeetingTimeMinutes { get; set; }
 
         public string? ImgUrl { get; set; }
