@@ -17,7 +17,7 @@ namespace Core.Services
 
         public async Task<bool> IsDayOffAsync(int doctorId, DateTime date)
         {
-            var daysOff = await GetDaysOffAsync(doctorId);
+            var daysOff = await GetDaysOffAsync(doctorId, date.Month);
 
             return daysOff.DaysOff.Any(d => d.Date == date) || daysOff.WeeklyDaysOff.Any(d => d == date.DayOfWeek);
         }
@@ -57,22 +57,25 @@ namespace Core.Services
         public async Task<IEnumerable<MonthScheduleResponse>> GetMonthScheduleAsync(int doctorId, int month, int year)
         {
             var busyDays = await GetBusyDaysAsync(doctorId, month, year);
-            var daysOff = await GetDaysOffAsync(doctorId);
+            var daysOff = await GetDaysOffAsync(doctorId, month);
             int daysInMonthNum = DateTime.DaysInMonth(year, month);
             var daysInMonth = new List<MonthScheduleResponse>();
             bool isAvailable;
 
-            for (int day = 1; day <= daysInMonthNum; day++)
+            if (daysOff.WeeklyDaysOff.Count() > 0)
             {
-                var date = new DateTime(year, month, day);
+                for (int day = 1; day <= daysInMonthNum; day++)
+                {
+                    var date = new DateTime(year, month, day);
 
-                isAvailable =
-                    daysOff.DaysOff.Contains(date) ||
-                    daysOff.WeeklyDaysOff.Contains(date.DayOfWeek) ||
-                    busyDays.Contains(date)
-                    ? false : true;
+                    isAvailable =
+                        daysOff.DaysOff.Contains(date) ||
+                        daysOff.WeeklyDaysOff.Contains(date.DayOfWeek) ||
+                        busyDays.Contains(date)
+                        ? false : true;
 
-                daysInMonth.Add(new MonthScheduleResponse(date.ToString("yyyy-MM-dd"), isAvailable));
+                    daysInMonth.Add(new MonthScheduleResponse(date.ToString("yyyy-MM-dd"), isAvailable));
+                }
             }
 
             return daysInMonth;
@@ -81,7 +84,7 @@ namespace Core.Services
         public async Task<bool> IsDateValidAsync(int doctorId, DateTime date)
         {
             var busyDays = await GetBusyDaysAsync(doctorId, date.Month, date.Year);
-            var daysOff = await GetDaysOffAsync(doctorId);
+            var daysOff = await GetDaysOffAsync(doctorId, date.Month);
 
             return daysOff.DaysOff.Contains(date) ||
                     daysOff.WeeklyDaysOff.Contains(date.DayOfWeek) ||
@@ -89,7 +92,7 @@ namespace Core.Services
                     ? false : true;
         }
 
-        private async Task<UnavailableDaysResponse> GetDaysOffAsync(int doctorId)
+        private async Task<UnavailableDaysResponse> GetDaysOffAsync(int doctorId, int month)
         {
             return await _context.Doctors
                 .AsNoTracking()
@@ -97,6 +100,7 @@ namespace Core.Services
                 .Select(d => new UnavailableDaysResponse()
                 {
                     DaysOff = d.DaysOff
+                        .Where(d => d.Date.Month == month)
                         .Select(doff => doff.Date)
                         .ToList(),
                     WeeklyDaysOff = d.WorkWeek

@@ -23,8 +23,8 @@ const MeetingsCalendar = ({ doctorId }) => {
 
             try {
                 const response = await apiRequest('doctors', 'getMonthShedule', dto, undefined, 'POST', false);
-
-                if (response) {
+                
+                if (response.length > 0) {
                     const dates = response.map(item => ({
                         ...item,
                         date: new Date(item.date)
@@ -79,10 +79,8 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     const handleDayClick = (day) => {
-        if (day && day.date > new Date() && day.isAvailable) {
-            setDate(day.date);
-            setIsDateChoosed(true);
-        }
+        setDate(day.date);
+        setIsDateChoosed(true);
     };
 
     return (
