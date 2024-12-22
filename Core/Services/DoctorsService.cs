@@ -122,5 +122,12 @@ namespace Core.Services
             await _context.Doctors.AddAsync(doctor);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> IsUserDoctorAsync(string userId)
+        {
+            var doctor = await _context.Doctors.FirstOrDefaultAsync(d => d.IdentityId == userId);
+
+            return doctor != null;
+        }
     }
 }

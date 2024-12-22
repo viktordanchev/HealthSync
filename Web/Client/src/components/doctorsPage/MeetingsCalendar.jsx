@@ -79,8 +79,10 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     const handleDayClick = (day) => {
-        setDate(day.date);
-        setIsDateChoosed(true);
+        if (day && day.date > new Date() && day.isAvailable) {
+            setDate(day.date);
+            setIsDateChoosed(true);
+        }
     };
 
     return (
@@ -117,14 +119,14 @@ const MeetingsCalendar = ({ doctorId }) => {
                                                     <div
                                                         key={index}
                                                         onClick={() => handleDayClick(day)}
-                                                        className={`rounded-full flex items-center justify-center hover:bg-gray-300
+                                                        className={`rounded-full flex items-center justify-center
                                                 ${day && new Date().getDate() === day.date.getDate() &&
                                                                 new Date().getFullYear() === currentYear &&
                                                                 new Date().getMonth() === currentMonth
                                                                 ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
                                                 ${day && new Date() < day.date &&
                                                                 day.isAvailable
-                                                                ? 'cursor-pointer' : 'opacity-35 cursor-default'}`}>
+                                                            ? 'cursor-pointer hover:bg-gray-300' : 'opacity-35 cursor-default'}`}>
                                                         <p>{day ? day.date.getDate() : ''}</p>
                                                     </div>
                                                 ))}

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static Common.Constants.Doctor;
+using static Common.Constants.Doctors;
 
 namespace Infrastructure.Entities
 {

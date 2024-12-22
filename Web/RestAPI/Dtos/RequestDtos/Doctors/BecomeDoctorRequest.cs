@@ -4,11 +4,28 @@ namespace RestAPI.Dtos.RequestDtos.Doctors
 {
     public class BecomeDoctorRequest
     {
+        private string contactEmail;
+        private string contactPhoneNumber;
+
         [EmailAddress]
-        public string ContactEmail { get; set; } = string.Empty;
+        public string? ContactEmail
+        {
+            get { return contactEmail; }
+            set
+            {
+                contactEmail = string.IsNullOrEmpty(value) ? null : value;
+            }
+        }
 
         [Phone]
-        public string ContactPhoneNumber { get; set; } = string.Empty;
+        public string? ContactPhoneNumber 
+        {
+            get { return contactPhoneNumber; }
+            set
+            {
+                contactPhoneNumber = string.IsNullOrEmpty(value) ? null : value;
+            }
+        }
 
         [Required]
         public int HospitalId { get; set; }

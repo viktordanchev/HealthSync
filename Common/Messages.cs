@@ -19,5 +19,10 @@
         {
             public const string AddedReview = "Rating was added successfully.";
         }
+
+        public static class Doctors
+        {
+            public const string RegisteredDoctor = "You are doctor now.";
+        }
     }
 }

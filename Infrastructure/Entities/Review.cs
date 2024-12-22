@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static Common.Constants.Review;
+using static Common.Constants.Reviews;
 
 namespace Infrastructure.Entities
 {

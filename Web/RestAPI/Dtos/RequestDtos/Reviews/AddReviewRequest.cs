@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Common.Constants.Review;
+using static Common.Constants.Reviews;
 
 namespace RestAPI.Dtos.RequestDtos.Reviews
 {

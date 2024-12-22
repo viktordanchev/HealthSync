@@ -1,4 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
@@ -6,8 +7,15 @@ import DropdownMenu from '../components/becomeDoctorPage/DropdownMenu';
 import ProfilePhoto from '../components/becomeDoctorPage/ProfilePhoto';
 import Loading from '../components/Loading';
 import { validateContactEmail, validateHospital, validateSpecialty } from '../services/validationSchemas';
+import { useLoading } from '../contexts/LoadingContext';
+import { useMessage } from '../contexts/MessageContext';
+import { useAuthContext } from '../contexts/AuthContext';
 
 function BecomeDoctorPage() {
+    const navigate = useNavigate();
+    const { isStillAuth } = useAuthContext();
+    const { showMessage } = useMessage();
+    const { setIsLoading } = useLoading();
     const [isLoadingOnReceive, setIsLoadingOnReceive] = useState(true);
     const [hospitals, setHospitals] = useState([]);
     const [specialties, setSpecialties] = useState([]);
@@ -41,8 +49,26 @@ function BecomeDoctorPage() {
         receiveUserData();
     }, []);
 
-    const handleSubmit = (values) => {
-        console.log(values);
+    const handleSubmit = async (values) => {
+        const { firstName, lastName, ...dto } = values;
+        const isAuth = await isStillAuth();
+        
+        if (!isAuth) {
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            
+            const response = await apiRequest('doctors', 'becomeDoctor', dto, localStorage.getItem('accessToken'), 'POST', false);
+            
+            showMessage(response.message, 'message');
+            navigate('/home');
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -55,8 +81,8 @@ function BecomeDoctorPage() {
                         initialValues={{
                             firstName: userData.firstName,
                             lastName: userData.lastName,
-                            email: userData.email || '',
-                            phoneNumber: userData.phoneNumber || '',
+                            contactEmail: userData.email || '',
+                            contactPhoneNumber: userData.phoneNumber || '',
                             hospitalId: '',
                             specialtyId: ''
                         }}
@@ -91,18 +117,18 @@ function BecomeDoctorPage() {
                                         <Field
                                             className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                             type="email"
-                                            name="email"
+                                            name="contactEmail"
                                         />
-                                        <ErrorMessage name="currentPassword" component="div" className="text-red-500 text-md" />
+                                        <ErrorMessage name="contactEmail" component="div" className="text-red-500 text-md" />
                                     </div>
                                     <div className="w-1/2 sm:w-full">
                                         <label className="text-base font-bold">Phone number</label>
                                         <Field
                                             className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                             type="tel"
-                                            name="phoneNumber"
+                                            name="contactPhoneNumber"
                                         />
-                                        <ErrorMessage name="newPassword" component="div" className="text-red-500 text-md" />
+                                        <ErrorMessage name="contactPhoneNumber" component="div" className="text-red-500 text-md" />
                                     </div>
                                 </div>
                                 <div>

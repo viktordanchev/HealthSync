@@ -1,17 +1,17 @@
-﻿using RestAPI.Services;
-using RestAPI.Services.Contracts;
+﻿using Core.Services;
+using Core.Services.Contracts;
 using Infrastructure;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Core.Services.Contracts;
-using Core.Services;
 using RestAPI.Filters;
-using System.Text.Json.Serialization;
+using RestAPI.Services;
+using RestAPI.Services.Contracts;
 using System.Security.Claims;
+using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Server.Extensions
 {

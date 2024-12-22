@@ -1,8 +1,10 @@
 ﻿using Core.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.Dtos.RequestDtos.Doctors;
 using System.Security.Claims;
 using static Common.Errors;
+using static Common.Messages.Doctors;
 
 namespace RestAPI.Controllers
 {
@@ -82,15 +84,25 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost("becomeDoctor")]
+        [Authorize]
         public async Task<IActionResult> BecomeDoctor([FromBody] BecomeDoctorRequest request)
         {
-            if (!await _hospitalsService.IsHospitalExistAsync(request.HospitalId) || 
+            if (await _doctorService.IsUserDoctorAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)) ||
+                !await _hospitalsService.IsHospitalExistAsync(request.HospitalId) ||
                 !await _doctorService.IsSpecialtyExistAsync(request.SpecialtyId))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            return Ok();
+            await _doctorService.AddDoctorAsync(
+                User.FindFirstValue(ClaimTypes.NameIdentifier),
+                request.HospitalId,
+                request.SpecialtyId,
+                request.ContactEmail,
+                request.ContactPhoneNumber);
+
+
+            return Ok(new { Message = RegisteredDoctor });
         }
     }
 }
