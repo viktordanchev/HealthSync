@@ -121,6 +121,13 @@ namespace HealthSync.Server.Controllers
         [HttpPost("sendVrfCode")]
         public async Task<IActionResult> SendVerificationCode([FromBody] string email)
         {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user != null)
+            {
+                return BadRequest(new { Error = UsedEmail });
+            }
+
             var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
             _memoryCacheService.Add(token.ToLower(), email, TimeSpan.FromMinutes(1));
             await _emailSender.SendVrfCode(email, token);

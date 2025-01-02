@@ -48,7 +48,7 @@ function RegisterPage() {
 
         try {
             setIsLoading(true);
-        
+
             const response = await apiRequest('account', 'sendVrfCode', email, undefined, 'POST', false);
         
             if (response.error) {
