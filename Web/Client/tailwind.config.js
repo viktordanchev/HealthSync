@@ -47,6 +47,9 @@ module.exports = {
                     '0%, 100%': { transform: 'translateX(0)' }, 
                     '50%': { transform: 'translateX(3%)' }
                 }
+            },
+            cursor: {
+                'not-allowed': 'not-allowed',
             }
         }
     },

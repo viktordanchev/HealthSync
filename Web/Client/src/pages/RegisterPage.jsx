@@ -117,7 +117,8 @@ function RegisterPage() {
                                     maxLength="6"
                                 />
                                 <button
-                                    className="w-1/2 bg-blue-500 border-2 border-blue-500 text-white font-bold rounded-r hover:bg-white hover:text-blue-500"
+                                    className={`w-1/2 bg-blue-500 border-2 border-blue-500 text-white font-bold rounded-r 
+                                    ${secondsLeft > 0 ? 'cursor-not-allowed' : 'cursor-pointer hover:bg-white hover:text-blue-500'}`}
                                     disabled={secondsLeft > 0}
                                     type="button"
                                     onClick={() => {
