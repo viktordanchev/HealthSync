@@ -45,7 +45,7 @@ const Header = () => {
                 <a href="/home" className={`${isFixed ? 'text-3xl' : 'text-4xl'} text-white font-bold hover:text-gray-200 transition duration-300 lg:text-2xl md:text-2xl sm:text-2xl`}>
                     HealthSync
                 </a>
-                <ul className="flex flex-row w-2/4 justify-between md:hidden sm:hidden">
+                <ul className="flex flex-row w-2/4 space-x-20 md:hidden sm:hidden">
                     <li>
                         <a href="/doctors" className="relative py-1 text-white font-bold text-xl transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
                             Doctors

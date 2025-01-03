@@ -52,16 +52,16 @@ function BecomeDoctorPage() {
     const handleSubmit = async (values) => {
         const { firstName, lastName, ...dto } = values;
         const isAuth = await isStillAuth();
-        
+
         if (!isAuth) {
             return;
         }
 
         try {
             setIsLoading(true);
-            
+
             const response = await apiRequest('doctors', 'becomeDoctor', dto, localStorage.getItem('accessToken'), 'POST', false);
-            
+
             showMessage(response.message, 'message');
             navigate('/home');
         } catch (error) {

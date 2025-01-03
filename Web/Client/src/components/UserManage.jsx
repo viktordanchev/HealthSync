@@ -56,7 +56,7 @@ function UserManage({ userName }) {
                 <ul className="text-center text-gray-700 text-xl">
                     <li className="py-1 rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
                         <a
-                            className="h-full w-full"
+                            className="block"
                             href="/becomeDoctor"
                         >
                             Become a Doctor
@@ -64,7 +64,7 @@ function UserManage({ userName }) {
                     </li>
                     <li className="py-1 border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
                         <a
-                            className="h-full w-full"
+                            className="block"
                             href="/account/settings"
                         >
                             Settings

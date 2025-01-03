@@ -1,4 +1,5 @@
 ﻿import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useRefreshToken from '../hooks/useRefreshToken';
 import { useLoading } from '../contexts/LoadingContext';
@@ -7,6 +8,7 @@ import Loading from '../components/Loading';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const navigate = useNavigate();
     const { setIsLoading } = useLoading();
     const isAuth = useAuth();
     const { refreshAccessToken } = useRefreshToken();
@@ -14,11 +16,12 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(isAuth);
     const [isSessionEnd, setIsSessionEnd] = useState(false);
     const [isAuthLoading, setIsAuthLoading] = useState(false);
-
+    
     useEffect(() => {
         const tryRefreshToken = async () => {
             setIsAuthLoading(true);
 
+            await new Promise(res => setTimeout(res, 1000));
             const isRefreshed = await refreshAccessToken();
 
             if (isRefreshed) {
@@ -26,11 +29,12 @@ export const AuthProvider = ({ children }) => {
             } else {
                 setIsSessionEnd(isTokenExist);
                 setIsAuthenticated(false);
+                navigate('/home');
             }
 
             setIsAuthLoading(false);
         };
-
+        
         if (!isAuth && isTokenExist) {
             tryRefreshToken();
         }
