@@ -65,7 +65,7 @@ function UserSettingsPage() {
 
     const handleSubmit = async (values, { resetForm }) => {
         const isAuth = await isStillAuth();
-
+        
         if (!isAuth) {
             return;
         }
