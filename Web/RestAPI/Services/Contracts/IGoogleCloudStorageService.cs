@@ -2,6 +2,6 @@
 {
     public interface IGoogleCloudStorageService
     {
-        Task<string> UploadFileAsync(IFormFile file);
+        Task<string> UploadProfileImageAsync(IFormFile file);
     }
 }

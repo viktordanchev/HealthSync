@@ -7,7 +7,11 @@ function jwtDecoder() {
         const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
         const claimName = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
         const expTime = decodedToken.exp;
-        const roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+        let roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+        
+        if (typeof roles === 'string') {
+            roles = [roles];
+        }
 
         return { userId, claimName, expTime, roles };
     } catch (error) {

@@ -15,22 +15,33 @@ namespace RestAPI.Services
             _storageClient = StorageClient.Create(credentials);
         }
 
-        public async Task<string> UploadFileAsync(IFormFile file)
+        public async Task<string> UploadProfileImageAsync(IFormFile file)
         {
             var fileName = Path.GetFileName(file.FileName);
-            var uniqueFileName = $"{Guid.NewGuid()}_{fileName}";
+            var uniqueFileName = $"{Guid.NewGuid()}-{fileName}";
+            var destinationPath = $"profile-images/{uniqueFileName}";
 
             using (var stream = file.OpenReadStream())
             {
-                var uploadObject = await _storageClient.UploadObjectAsync(
+                await UploadFileAsync(
                     _bucketName,
-                    $"profile-images/{uniqueFileName}",
+                    destinationPath,
                     file.ContentType,
                     stream
                 );
-
-                return $"https://storage.cloud.google.com/healthsync/profile-images/{uniqueFileName}";
             }
+
+            return $"https://storage.cloud.google.com/healthsync/profile-images/{uniqueFileName}";
+        }
+
+        private async Task UploadFileAsync(string bucketName, string destinationPath, string contentType, Stream fileStream)
+        {
+            await _storageClient.UploadObjectAsync(
+                    bucketName,
+                    destinationPath,
+                    contentType,
+                    fileStream
+                );
         }
     }
 }

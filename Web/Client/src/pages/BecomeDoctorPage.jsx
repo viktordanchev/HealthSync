@@ -13,7 +13,7 @@ import { useAuthContext } from '../contexts/AuthContext';
 
 function BecomeDoctorPage() {
     const navigate = useNavigate();
-    const { isStillAuth } = useAuthContext();
+    const { isStillAuth, update } = useAuthContext();
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
     const [isLoadingOnReceive, setIsLoadingOnReceive] = useState(true);
@@ -64,9 +64,7 @@ function BecomeDoctorPage() {
             formData.append('contactPhoneNumber', values.contactPhoneNumber);
             formData.append('hospitalId', values.hospitalId);
             formData.append('specialtyId', values.specialtyId);
-            formData.forEach((value, key) => {
-                console.log(key, value);
-            });
+            
             setIsLoading(true);
 
             const token = localStorage.getItem('accessToken');
@@ -80,7 +78,9 @@ function BecomeDoctorPage() {
 
             const data = await response.json();
 
+            update(data.token);
             showMessage(data.message, 'message');
+
             navigate('/home');
         } catch (error) {
             console.error(error);

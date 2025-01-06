@@ -111,7 +111,7 @@ namespace Server.Extensions
 
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSenderService, EmailSenderService>();
             services.AddTransient<IMemoryCacheService, MemoryCacheService>();
             services.AddScoped<IJWTTokenService, JWTTokenService>();
             services.AddSingleton<IGoogleCloudStorageService, GoogleCloudStorageService>();

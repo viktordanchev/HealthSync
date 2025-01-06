@@ -65,7 +65,7 @@ function UserSettingsPage() {
 
     const handleSubmit = async (values, { resetForm }) => {
         const isAuth = await isStillAuth();
-        
+
         if (!isAuth) {
             return;
         }
@@ -74,15 +74,15 @@ function UserSettingsPage() {
             setIsLoading(true);
 
             const response = await apiRequest('account', 'updateUser', values, localStorage.getItem('accessToken'), 'PUT', true);
-            
+
             if (response.error) {
                 showMessage(response.error, 'error');
             } else {
                 update(response.token);
-            
+
                 setUserData(response);
                 showMessage(response.message, 'message');
-            
+
                 resetForm({
                     values: {
                         ...values,
@@ -103,7 +103,7 @@ function UserSettingsPage() {
         <section className="text-gray-700 space-y-4 flex flex-col justify-center items-center">
             <h2 className="text-center text-4xl font-thin underline-thin">Change settings</h2>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
-                <article className="w-2/3 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl md:w-full sm:w-full">
+                <article className="w-4/6 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl md:w-full sm:w-full">
                     <Formik
                         initialValues={{
                             firstName: userData.firstName,
@@ -138,27 +138,25 @@ function UserSettingsPage() {
                             </div>
                             <ErrorMessage name="firstName" component="div" className="text-red-500 text-md" />
                             <ErrorMessage name="lastName" component="div" className="text-red-500 text-md" />
-                            <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
-                                <div className="w-1/2 sm:w-full">
-                                    <label className="text-md font-bold">Email</label>
-                                    <Field
-                                        className="opacity-75 rounded w-full py-1 px-2 text-gray-700 border-2 border-white cursor-default focus:outline-none"
-                                        type="email"
-                                        name="email"
-                                        readOnly
-                                    />
-                                </div>
-                                <div className="w-1/2 sm:w-full">
-                                    <label className="text-md font-bold">Phone number</label>
-                                    <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
-                                        type="tel"
-                                        name="phoneNumber"
-                                    />
-                                </div>
+                            <div>
+                                <label className="text-md font-bold">Email</label>
+                                <Field
+                                    className="opacity-75 rounded w-full py-1 px-2 text-gray-700 border-2 border-white cursor-default focus:outline-none"
+                                    type="email"
+                                    name="email"
+                                    readOnly
+                                />
+                                <ErrorMessage name="email" component="div" className="text-red-500 text-md" />
                             </div>
-                            <ErrorMessage name="email" component="div" className="text-red-500 text-md" />
-                            <ErrorMessage name="phoneNumber" component="div" className="text-red-500 text-md" />
+                            <div>
+                                <label className="text-md font-bold">Phone number</label>
+                                <Field
+                                    className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                    type="tel"
+                                    name="phoneNumber"
+                                />
+                                <ErrorMessage name="phoneNumber" component="div" className="text-red-500 text-md" />
+                            </div>
                             <div>
                                 <label className="text-md font-bold">Current Password</label>
                                 <Field

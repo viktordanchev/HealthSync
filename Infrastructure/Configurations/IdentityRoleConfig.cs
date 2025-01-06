@@ -21,7 +21,14 @@ namespace Infrastructure.Configurations
                 NormalizedName = "DOCTOR"
             };
 
-            return [role1];
+            var role2 = new IdentityRole()
+            {
+                Id = "bd4718fa-f25a-40ab-abce-8261cc3ea8e8",
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            };
+
+            return [role1, role2];
         }
     }
 }

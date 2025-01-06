@@ -83,8 +83,8 @@ const Header = () => {
                     <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
                 </button>
             </div>
-
-            <div className={`absolute top-full left-0 right-0 bg-maincolor p-5 rounded-xl mt-2 z-40 hidden transition-all duration-500 ease-in-out transform md:block sm:block ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] hidden'} ${isFixed ? '' : 'mx-3'}`}>
+            
+            <div className={`absolute top-full left-0 right-0 bg-maincolor p-5 rounded-xl mt-2 transition-all duration-500 ease-in-out transform md:block sm:block ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] pointer-events-none'} ${isFixed ? '' : 'mx-3'}`}>
                 <ul className="flex flex-col items-center space-y-4 mb-4">
                     <li>
                         <a href="/doctors" className="relative py-1 text-white font-bold text-xl">

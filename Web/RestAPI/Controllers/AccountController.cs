@@ -19,21 +19,22 @@ namespace HealthSync.Server.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
-        private IJWTTokenService _tokenService;
-        private IEmailSender _emailSender;
+        private IJWTTokenService _jwtService;
+        private IEmailSenderService _emailSender;
         private IMemoryCacheService _memoryCacheService;
         private readonly ILogger<AccountController> _logger;
 
-        public AccountController(UserManager<ApplicationUser> userManager,
+        public AccountController(
+            UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IJWTTokenService tokenService,
-            IEmailSender emailSender,
+            IJWTTokenService jwtService,
+            IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _tokenService = tokenService;
+            _jwtService = jwtService;
             _emailSender = emailSender;
             _memoryCacheService = memoryCacheService;
             _logger = logger;
@@ -91,12 +92,12 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { Error = InvalidLoginData });
             }
 
-            var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
+            var accessToken = await _jwtService.GenerateAccessTokenAsync(user.Id);
 
             if (request.RememberMe)
             {
-                var refreshToken = _tokenService.GenerateRefreshToken(user.Id);
-                _tokenService.AppendRefreshTokenToCookie(HttpContext, refreshToken);
+                var refreshToken = _jwtService.GenerateRefreshToken(user.Id);
+                _jwtService.AppendRefreshTokenToCookie(HttpContext, refreshToken);
             }
 
             return Ok(new { Token = accessToken });
@@ -213,12 +214,14 @@ namespace HealthSync.Server.Controllers
 
             await _userManager.UpdateAsync(user);
 
-            var accessToken = await _tokenService.GenerateAccessTokenAsync(user.Id);
+            var accessToken = await _jwtService.GenerateAccessTokenAsync(user.Id);
 
-            return Ok(new { 
-                Message = UserDataUpdated,
-                Token = accessToken
-            });
+            return Ok(
+                new
+                {
+                    Message = UserDataUpdated,
+                    Token = accessToken
+                });
         }
 
         [HttpGet("refreshToken")]
@@ -233,7 +236,7 @@ namespace HealthSync.Server.Controllers
                 var jsonToken = handler.ReadJwtToken(refreshToken);
                 var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-                newAccessToken = await _tokenService.GenerateAccessTokenAsync(userId);
+                newAccessToken = await _jwtService.GenerateAccessTokenAsync(userId);
             }
 
             return Ok(new { Token = newAccessToken });

@@ -7,11 +7,11 @@ namespace RestAPI.Services
     /// <summary>
     /// This class is used for sending emails.
     /// </summary>
-    public class EmailSender : IEmailSender
+    public class EmailSenderService : IEmailSenderService
     {
         private readonly IConfiguration _config;
         
-        public EmailSender(IConfiguration config)
+        public EmailSenderService(IConfiguration config)
         {
             _config = config;
         }

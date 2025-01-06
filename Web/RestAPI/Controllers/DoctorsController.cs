@@ -1,5 +1,7 @@
 ﻿using Core.Services.Contracts;
+using Infrastructure.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.Dtos.RequestDtos.Doctors;
 using RestAPI.Services.Contracts;
@@ -13,17 +15,27 @@ namespace RestAPI.Controllers
     [Route("doctors")]
     public class DoctorsController : ControllerBase
     {
+        private UserManager<ApplicationUser> _userManager;
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
         private readonly IHospitalsService _hospitalsService;
         private readonly IGoogleCloudStorageService _GCSService;
+        private readonly IJWTTokenService _jwtService;
 
-        public DoctorsController(IDoctorsService doctorService, IDoctorScheduleService doctorScheduleService, IHospitalsService hospitalsService, IGoogleCloudStorageService googleCloudStorage)
+        public DoctorsController(
+            IDoctorsService doctorService,
+            IDoctorScheduleService doctorScheduleService,
+            IHospitalsService hospitalsService,
+            IGoogleCloudStorageService googleCloudStorage,
+            UserManager<ApplicationUser> userManager,
+            IJWTTokenService jwtService)
         {
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
             _hospitalsService = hospitalsService;
             _GCSService = googleCloudStorage;
+            _userManager = userManager;
+            _jwtService = jwtService;
         }
 
         [HttpPost("getDoctors")]
@@ -101,7 +113,7 @@ namespace RestAPI.Controllers
 
             if (request.ProfilePhoto != null)
             {
-                imgUrl = await _GCSService.UploadFileAsync(request.ProfilePhoto);
+                imgUrl = await _GCSService.UploadProfileImageAsync(request.ProfilePhoto);
             }
 
             await _doctorService.AddDoctorAsync(
@@ -112,7 +124,18 @@ namespace RestAPI.Controllers
                 request.ContactPhoneNumber,
                 imgUrl);
 
-            return Ok(new { Message = RegisteredDoctor });
+            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            await _userManager.AddToRoleAsync(user, "Doctor");
+
+            var accessToken = await _jwtService.GenerateAccessTokenAsync(user.Id);
+
+            return Ok(
+                new
+                {
+                    Message = RegisteredDoctor,
+                    Token = accessToken
+                });
         }
     }
 }

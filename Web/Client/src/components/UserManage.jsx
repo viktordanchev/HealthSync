@@ -5,19 +5,21 @@ import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useAuthContext } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadingContext';
 import apiRequest from '../services/apiRequest';
+import jwtDecoder from '../services/jwtDecoder';
 
 function UserManage({ userName }) {
     const navigate = useNavigate();
     const { logout } = useAuthContext();
     const { setIsLoading } = useLoading();
+    const { roles } = jwtDecoder();
     const [isOpen, setIsOpen] = useState(false);
     userName = userName.split(' ')
         .map((part, index) => {
-        if (index === 0) {
-            return `${part.charAt(0)}.`;
-        }
-        return part;
-    }).join(' ');
+            if (index === 0) {
+                return `${part.charAt(0)}.`;
+            }
+            return part;
+        }).join(' ');
 
     const handleLogout = async () => {
         try {
@@ -50,16 +52,16 @@ function UserManage({ userName }) {
                 </button>
             </div>
             <div
-                className={`absolute right-0 z-40 w-52 rounded-xl shadow-2xl shadow-gray-400 bg-white bg-opacity-100 border border-zinc-500 transition-all duration-300 transform sm:w-full ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px]'
+                className={`absolute right-0 z-40 w-52 rounded-xl shadow-2xl shadow-gray-400 bg-white bg-opacity-100 border border-zinc-500 transition-all duration-300 transform sm:w-full ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] pointer-events-none'
                     }`}
             >
                 <ul className="text-center text-gray-700 text-xl">
                     <li className="py-1 rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
                         <a
                             className="block"
-                            href="/becomeDoctor"
+                            href={`${roles.includes('Doctor') ? '/home' : '/becomeDoctor'}`}
                         >
-                            Become a Doctor
+                            {`${roles.includes('Doctor') ? 'Doctor profile' : 'Become a Doctor'}`}
                         </a>
                     </li>
                     <li className="py-1 border-b border-zinc-500 cursor-pointer hover:bg-gray-200">

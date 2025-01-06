@@ -14,7 +14,9 @@ namespace RestAPI.Controllers
         private readonly IDoctorsService _doctorService;
         private readonly IReviewsService _reviewsService;
 
-        public ReviewsController(IDoctorsService doctorService, IReviewsService reviewsService)
+        public ReviewsController(
+            IDoctorsService doctorService, 
+            IReviewsService reviewsService)
         {
             _doctorService = doctorService;
             _reviewsService = reviewsService;

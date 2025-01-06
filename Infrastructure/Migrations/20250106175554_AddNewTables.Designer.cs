@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20241218192858_AddNewTables")]
+    [Migration("20250106175554_AddNewTables")]
     partial class AddNewTables
     {
         /// <inheritdoc />

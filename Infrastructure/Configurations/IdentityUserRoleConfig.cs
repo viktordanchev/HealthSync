@@ -55,7 +55,13 @@ namespace Infrastructure.Configurations
                 UserId = "78850da7-a0ff-42f3-a862-d162457910a0" //Vanya Yankova
             };
 
-            return [userRole1, userRole2, userRole3, userRole4, userRole5, userRole6, userRole7];
+            var userRole8 = new IdentityUserRole<string>()
+            {
+                RoleId = "bd4718fa-f25a-40ab-abce-8261cc3ea8e8", //Admin
+                UserId = "a3717562-385e-41ce-9eff-0f1b994e5548" //Ivan Ivanov
+            };
+
+            return [userRole1, userRole2, userRole3, userRole4, userRole5, userRole6, userRole7, userRole8];
         }
     }
 }

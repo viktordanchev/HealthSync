@@ -20,7 +20,11 @@ namespace RestAPI.Controllers
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
 
-        public MeetingsController(UserManager<ApplicationUser> userManager, IMeetingsService meetingsService, IDoctorsService doctorService, IDoctorScheduleService doctorScheduleService)
+        public MeetingsController(
+            UserManager<ApplicationUser> userManager, 
+            IMeetingsService meetingsService, 
+            IDoctorsService doctorService, 
+            IDoctorScheduleService doctorScheduleService)
         {
             _userManager = userManager;
             _meetingsService = meetingsService;
