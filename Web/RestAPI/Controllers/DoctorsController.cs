@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.Dtos.RequestDtos.Doctors;
+using RestAPI.Services.Contracts;
 using System.Security.Claims;
 using static Common.Errors;
 using static Common.Messages.Doctors;
@@ -15,12 +16,14 @@ namespace RestAPI.Controllers
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
         private readonly IHospitalsService _hospitalsService;
+        private readonly IGoogleCloudStorageService _GCSService;
 
-        public DoctorsController(IDoctorsService doctorService, IDoctorScheduleService doctorScheduleService, IHospitalsService hospitalsService)
+        public DoctorsController(IDoctorsService doctorService, IDoctorScheduleService doctorScheduleService, IHospitalsService hospitalsService, IGoogleCloudStorageService googleCloudStorage)
         {
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
             _hospitalsService = hospitalsService;
+            _GCSService = googleCloudStorage;
         }
 
         [HttpPost("getDoctors")]
@@ -85,7 +88,7 @@ namespace RestAPI.Controllers
 
         [HttpPost("becomeDoctor")]
         [Authorize]
-        public async Task<IActionResult> BecomeDoctor([FromBody] BecomeDoctorRequest request)
+        public async Task<IActionResult> BecomeDoctor([FromForm] BecomeDoctorRequest request)
         {
             if (await _doctorService.IsUserDoctorAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)) ||
                 !await _hospitalsService.IsHospitalExistAsync(request.HospitalId) ||
@@ -94,13 +97,20 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
+            string? imgUrl = null;
+
+            if (request.ProfilePhoto != null)
+            {
+                imgUrl = await _GCSService.UploadFileAsync(request.ProfilePhoto);
+            }
+
             await _doctorService.AddDoctorAsync(
                 User.FindFirstValue(ClaimTypes.NameIdentifier),
                 request.HospitalId,
                 request.SpecialtyId,
                 request.ContactEmail,
-                request.ContactPhoneNumber);
-
+                request.ContactPhoneNumber,
+                imgUrl);
 
             return Ok(new { Message = RegisteredDoctor });
         }

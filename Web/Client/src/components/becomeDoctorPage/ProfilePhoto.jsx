@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faXmark } from '@fortawesome/free-solid-svg-icons';
 
-function ProfilePhoto() {
+function ProfilePhoto({ setProfilePhoto }) {
     const [imageSrc, setImageSrc] = useState("/profile.jpg");
 
     const handleFileChange = (e) => {
@@ -13,6 +13,7 @@ function ProfilePhoto() {
 
             reader.onload = (event) => {
                 setImageSrc(event.target.result);
+                setProfilePhoto(file);
             };
 
             reader.readAsDataURL(file);

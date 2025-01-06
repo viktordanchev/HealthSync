@@ -20,6 +20,7 @@ function BecomeDoctorPage() {
     const [hospitals, setHospitals] = useState([]);
     const [specialties, setSpecialties] = useState([]);
     const [userData, setUserData] = useState({});
+    const [profilePhoto, setProfilePhoto] = useState(null);
 
     const validationSchema = Yup.object({
         email: validateContactEmail,
@@ -50,7 +51,6 @@ function BecomeDoctorPage() {
     }, []);
 
     const handleSubmit = async (values) => {
-        const { firstName, lastName, ...dto } = values;
         const isAuth = await isStillAuth();
 
         if (!isAuth) {
@@ -58,11 +58,29 @@ function BecomeDoctorPage() {
         }
 
         try {
+            const formData = new FormData();
+            formData.append('profilePhoto', profilePhoto);
+            formData.append('contactEmail', values.contactEmail);
+            formData.append('contactPhoneNumber', values.contactPhoneNumber);
+            formData.append('hospitalId', values.hospitalId);
+            formData.append('specialtyId', values.specialtyId);
+            formData.forEach((value, key) => {
+                console.log(key, value);
+            });
             setIsLoading(true);
 
-            const response = await apiRequest('doctors', 'becomeDoctor', dto, localStorage.getItem('accessToken'), 'POST', false);
+            const token = localStorage.getItem('accessToken');
+            const response = await fetch('https://localhost:7080/doctors/becomeDoctor', {
+                method: 'POST',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: formData,
+            });
 
-            showMessage(response.message, 'message');
+            const data = await response.json();
+
+            showMessage(data.message, 'message');
             navigate('/home');
         } catch (error) {
             console.error(error);
@@ -76,7 +94,7 @@ function BecomeDoctorPage() {
             <h2 className="text-center text-4xl font-thin underline-thin">Become part of us!</h2>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
                 <article className="w-2/3 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl space-y-4 md:w-full sm:w-full">
-                    <ProfilePhoto />
+                    <ProfilePhoto setProfilePhoto={setProfilePhoto} />
                     <Formik
                         initialValues={{
                             firstName: userData.firstName,

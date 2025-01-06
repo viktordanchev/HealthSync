@@ -20,7 +20,7 @@ namespace Infrastructure.Configurations
                 HospitalId = 1, //Sunnybrook General Hospital
                 SpecialtyId = 1, //Orthodontist
                 MeetingTimeMinutes = 30,
-                ImgUrl = "https://storage.cloud.google.com/healthsync/ivan-ivanov.jpg",
+                ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Ivan-Ivanov.jpg",
                 Information = "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care."
             };
 
@@ -31,7 +31,7 @@ namespace Infrastructure.Configurations
                 HospitalId = 1, //Sunnybrook General Hospital
                 SpecialtyId = 2, //Endocrinologist
                 MeetingTimeMinutes = 30,
-                ImgUrl = "https://storage.cloud.google.com/healthsync/maria-marinova.jpg"
+                ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Maria-Marinova.jpg"
             };
 
             var doctor3 = new Doctor()
@@ -41,7 +41,7 @@ namespace Infrastructure.Configurations
                 HospitalId = 1, //Sunnybrook General Hospital
                 SpecialtyId = 2, //Endocrinologist
                 MeetingTimeMinutes = 15,
-                ImgUrl = "https://storage.cloud.google.com/healthsync/aleks-kirilov.jpg"
+                ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Aleks-Kirilov.jpg"
             };
 
             var doctor4 = new Doctor()
@@ -51,7 +51,7 @@ namespace Infrastructure.Configurations
                 HospitalId = 1, //Sunnybrook General Hospital
                 SpecialtyId = 3, //Cardiologist
                 MeetingTimeMinutes = 15,
-                ImgUrl = "https://storage.cloud.google.com/healthsync/kiril-conev.jpg"
+                ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Kiril-Conev.jpg"
             };
 
             var doctor5 = new Doctor()
@@ -61,7 +61,7 @@ namespace Infrastructure.Configurations
                 HospitalId = 2, //Pine Hills Medical Center
                 SpecialtyId = 4, //Neurologist
                 MeetingTimeMinutes = 20,
-                ImgUrl = "https://storage.cloud.google.com/healthsync/ivana-ivanova.jpg"
+                ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Ivana-Ivanova.jpg"
             };
 
             var doctor6 = new Doctor()
@@ -71,7 +71,7 @@ namespace Infrastructure.Configurations
                 HospitalId = 2, //Pine Hills Medical Center
                 SpecialtyId = 3, //Cardiologist
                 MeetingTimeMinutes = 30,
-                ImgUrl = "https://storage.cloud.google.com/healthsync/monika-kirilova.jpg"
+                ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Monika-Kirilova.jpg"
             };
 
             var doctor7 = new Doctor()

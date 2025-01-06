@@ -3,7 +3,6 @@ using Core.Services.Contracts;
 using Infrastructure;
 using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
-using static Common.Constants;
 
 namespace Core.Services
 {
@@ -108,15 +107,16 @@ namespace Core.Services
             return specialties;
         }
 
-        public async Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber)
+        public async Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber, string? imgUrl)
         {
-            var doctor = new Infrastructure.Entities.Doctor()
+            var doctor = new Doctor()
             {
                 IdentityId = userId,
                 HospitalId = hospitalId,
                 SpecialtyId = specialtyId,
                 ContactEmail = contactEmail,
-                ContactPhoneNumber = contactPhoneNumber
+                ContactPhoneNumber = contactPhoneNumber,
+                ImgUrl = imgUrl
             };
 
             await _context.Doctors.AddAsync(doctor);

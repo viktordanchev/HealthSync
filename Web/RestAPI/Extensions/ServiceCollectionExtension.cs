@@ -111,9 +111,10 @@ namespace Server.Extensions
 
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IJWTTokenService, JWTTokenService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IMemoryCacheService, MemoryCacheService>();
+            services.AddScoped<IJWTTokenService, JWTTokenService>();
+            services.AddSingleton<IGoogleCloudStorageService, GoogleCloudStorageService>();
             services.AddScoped<IDoctorsService, DoctorsService>();
             services.AddScoped<IMeetingsService, MeetingsService>();
             services.AddScoped<IReviewsService, ReviewsService>();

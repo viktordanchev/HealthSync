@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Extensions.FileProviders;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestAPI.Dtos.RequestDtos.Doctors
 {
@@ -32,5 +33,7 @@ namespace RestAPI.Dtos.RequestDtos.Doctors
 
         [Required]
         public int SpecialtyId { get; set; }
+
+        public IFormFile? ProfilePhoto { get; set; }
     }
 }
