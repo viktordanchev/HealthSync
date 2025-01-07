@@ -21,6 +21,7 @@ import RegisterPage from './pages/RegisterPage';
 import UserMeetingsPage from './pages/UserMeetingsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
 import BecomeDoctorPage from './pages/BecomeDoctorPage';
+import DoctorProfile from './pages/DoctorProfile';
 
 function App() {
     const [showButton, setShowButton] = useState(false);
@@ -71,6 +72,7 @@ function App() {
                                 <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
                                 <Route path="/meetings" element={<ProtectedRoute><UserMeetingsPage /></ProtectedRoute>} />
                                 <Route path="/becomeDoctor" element={<ProtectedRoute><BecomeDoctorPage /></ProtectedRoute>} />
+                                <Route path="/doctorProfile" element={<ProtectedRoute roleNeeded={'Doctor'}><DoctorProfile /></ProtectedRoute>} />
                             </Routes>
                         </MessageProvider>
                         <button

@@ -27,13 +27,13 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "cbc8eb1c-107a-4f44-a8b2-c4493697c87f", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEHi65cXyuZxxeOx0dRvM/1qhE52IPm1jNaOSiK9OagJyEqoZdyV2dnUKw8SNzsa2RQ==", null, false, "831f8005-7144-4af4-a4ef-3a50b574653c", false, "m.marinova@mail.com" },
-                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "9e7a2077-74c0-4600-9477-0b45799e191f", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEPjbizcvbKCad7mb/VqVOzUpzR7s+sYo79Gfe/o5w8Wtd1pZoUiiRi+45YRbgQnulw==", null, false, "2e58f25f-3603-49de-98bf-b06644405f5c", false, "v.yankova@mail.com" },
-                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "d20e299c-999f-4bc0-be4d-8e942a9a32bb", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEDYv+7BO8oIRVQTZWd2Ojf1/H77QVk24Z8JrGclJYXmkYMFIa/YU4bNUvHS7DRI7jA==", null, false, "4332ea93-52ab-4967-a3b8-501f7c731987", false, "a.kirilov@mail.com" },
-                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "8429501f-f0bc-4b55-ae7b-9cc7a095f757", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEI2FCBrc5HLrg1xehFFUe4opyWvc1/NPmuNdCsKdq9MBoTMx2IzkjGfAgQ9dLWXpzw==", null, false, "3320aae6-a9ed-4375-a10f-0ba55b6e80a5", false, "k.conev@mail.com" },
-                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "2038d2db-12fa-4a82-9c6a-2c604ef7a64d", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEEsA3lVSNfvgk63wP+hQ7k0+NLJhlvDkHzxhtZjeOXbcDI4VPDMy10/A1V20Xhrhgg==", null, false, "f6d1fc4e-89e9-43af-9246-70b47cc319bc", false, "i.ivanov@mail.com" },
-                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "7122b824-975f-41d4-bafd-0d20d765b497", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEOrR7VsSv4m8y0++6/aqIxTyBad3iXHsZpZSpi8Hu5i9lNJy/Cv+dRR9vrEJTr4wIg==", null, false, "170a7c2c-6b86-40c6-87b5-7ca9484d78f4", false, "m.kirilova@mail.com" },
-                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "f8ff16e2-bc8a-4bc8-924e-d31d532cf81b", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEGwMURmbBshFHOCDkqnE9lZ74h/ic8wtf5qMms0Wmk1D3ArdontFFiR3K8dQ78lX3g==", null, false, "72464f4e-b1f2-47aa-8696-535b51644031", false, "i.ivanova@mail.com" }
+                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "a128967a-4ebe-48e6-aec3-828ee90f3ba8", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEPJfcfadAyhNpxDDrtgG+3ZpTZi+j8zr9VPAZ5XUwyXLDZx0YyHO/6DdCCyKn1pnLQ==", null, false, "47ed9454-75a1-4179-8754-0769469a4c5e", false, "m.marinova@mail.com" },
+                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "d74e79b1-e462-4360-b135-2aeac054628a", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAECpDn8OlPosAGeEtIG5XmFHvJUDKO5adsZFlN78fK6G0+sRGlhWYQaqSNjvAgpCp8w==", null, false, "dae11c0b-3a89-45bd-8d9b-40925c1f034a", false, "v.yankova@mail.com" },
+                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "108e58d7-469c-4a70-8746-e56bb36427c3", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAECQVz1FRrU1Vn16aO8UuQqwqpomFvZzJFNcr494UFNM/aLamQ13Nk6RIaVGa2b30KQ==", null, false, "91eb4fb6-aacc-494c-853c-8264be6c1c20", false, "a.kirilov@mail.com" },
+                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "5822cd37-c759-4792-9da7-02ec7fb88574", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEI0lVWW/Y8kyQ4FRx6byDCR2H5aPrCE9Fq/V8tzqE1XArsgO001eV61jJf/SODUmxA==", null, false, "c16e48bf-98d7-4b0e-9502-a85c6b4c8852", false, "k.conev@mail.com" },
+                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "9e5f3f5a-db72-43e5-b09f-511239d3a58d", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEHOmK10feioV1kZYQchSqpH83hAe4S2offD7JcgpYd0+ynlQ0fwGc2GkrcC1K+DA8Q==", null, false, "89cdfbc8-d24d-40a5-a15e-d402fa9cc9f2", false, "i.ivanov@mail.com" },
+                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "1bc630ba-e72e-4a71-8623-d7e0ec0c2e1f", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEKW4AnIMHjE6ip923C4CkOIxF2b+TV9kZkj8buDLHwldZ903ASCwzCdkKijjm9forg==", null, false, "cce1bfa8-a48d-4fc4-95ba-189fb938006a", false, "m.kirilova@mail.com" },
+                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "803333de-bd22-4be5-a32b-9f345d52699c", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEB+br0oW3f5OBne40TDGKXvZi+XzITi8sAWy4w5iUO/dqleKXEj8+09jmQDuWin81w==", null, false, "2f5c6bbe-e5c8-4260-a978-d2079e8e3bff", false, "i.ivanova@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -66,7 +66,6 @@ namespace Infrastructure.Migrations
                     { "a550b411-e5c7-407f-aaba-35161bab127e", "88cd5a7b-01d8-49b4-8688-35cd23751532" },
                     { "a550b411-e5c7-407f-aaba-35161bab127e", "95189f02-fb1a-4700-95e3-6146b8aa8b15" },
                     { "a550b411-e5c7-407f-aaba-35161bab127e", "a3717562-385e-41ce-9eff-0f1b994e5548" },
-                    { "bd4718fa-f25a-40ab-abce-8261cc3ea8e8", "a3717562-385e-41ce-9eff-0f1b994e5548" },
                     { "a550b411-e5c7-407f-aaba-35161bab127e", "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35" },
                     { "a550b411-e5c7-407f-aaba-35161bab127e", "f37b43ca-86a2-4b11-972d-5e0569f4deb3" }
                 });
@@ -125,6 +124,11 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "bd4718fa-f25a-40ab-abce-8261cc3ea8e8");
+
+            migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
                 keyValues: new object[] { "a550b411-e5c7-407f-aaba-35161bab127e", "4d650e24-6b66-41e3-8391-efab8c31a1dd" });
@@ -148,11 +152,6 @@ namespace Infrastructure.Migrations
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
                 keyValues: new object[] { "a550b411-e5c7-407f-aaba-35161bab127e", "a3717562-385e-41ce-9eff-0f1b994e5548" });
-
-            migrationBuilder.DeleteData(
-                table: "AspNetUserRoles",
-                keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "bd4718fa-f25a-40ab-abce-8261cc3ea8e8", "a3717562-385e-41ce-9eff-0f1b994e5548" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
@@ -278,11 +277,6 @@ namespace Infrastructure.Migrations
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "a550b411-e5c7-407f-aaba-35161bab127e");
-
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "bd4718fa-f25a-40ab-abce-8261cc3ea8e8");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
