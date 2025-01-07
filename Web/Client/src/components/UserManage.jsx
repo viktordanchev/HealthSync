@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useAuthContext } from '../contexts/AuthContext';
@@ -8,18 +7,10 @@ import apiRequest from '../services/apiRequest';
 import jwtDecoder from '../services/jwtDecoder';
 
 function UserManage({ userName }) {
-    const navigate = useNavigate();
     const { logout } = useAuthContext();
     const { setIsLoading } = useLoading();
     const { roles } = jwtDecoder();
     const [isOpen, setIsOpen] = useState(false);
-    userName = userName.split(' ')
-        .map((part, index) => {
-            if (index === 0) {
-                return `${part.charAt(0)}.`;
-            }
-            return part;
-        }).join(' ');
 
     const handleLogout = async () => {
         try {
@@ -29,7 +20,6 @@ function UserManage({ userName }) {
 
             if (response) {
                 logout();
-                navigate('/home');
             }
         } catch (error) {
             console.error(error);
