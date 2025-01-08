@@ -5,6 +5,7 @@ import Loading from '../components/Loading';
 import MeetingsCalendar from '../components/doctorsPage/MeetingsCalendar';
 import ReviewsSection from '../components/doctorsPage/ReviewsSection';
 import AddReview from '../components/doctorsPage/AddReview';
+import doctorProfile from '../assets/images/doctor-profile.jpg';
 
 function DoctorDetailsPage() {
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ function DoctorDetailsPage() {
                         <div className="flex flex-col items-center space-y-3">
                             <div className="w-32 h-32 flex justify-center items-center bg-zinc-700 rounded-full border-2 border-maincolor">
                                 <img
-                                    src={doctor.imgUrl ? doctor.imgUrl : '/profile.jpg'}
+                                    src={doctor.imgUrl ? doctor.imgUrl : doctorProfile}
                                     className="object-cover w-28 h-28 rounded-full"
                                 />
                             </div>

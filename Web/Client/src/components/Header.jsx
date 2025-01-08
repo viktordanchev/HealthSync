@@ -12,7 +12,7 @@ const Header = () => {
     const [userName, setUserName] = useState('');
     const [isFixed, setIsFixed] = useState(false);
     const [userRoles, setUserRoles] = useState([]);
-
+    
     useEffect(() => {
         if (isAuthenticated) {
             const { claimName, roles } = jwtDecoder();
@@ -23,9 +23,12 @@ const Header = () => {
                     }
                     return part;
                 }).join(' ');
-
+            
             setUserName(splitedName);
-            setUserRoles(roles);
+
+            if (roles) {
+                setUserRoles(roles);
+            }
         }
     }, [isAuthenticated, localStorage.getItem('accessToken')]);
 
@@ -50,7 +53,7 @@ const Header = () => {
     };
 
     return (
-        <header className={`relative z-40 transition-all duration-300 transform flex bg-maincolor ${isFixed ? 'sticky top-0 h-20 w-4/5 rounded-xl p-5 shadow-2xl shadow-gray-500 translate-y-6 sm:translate-y-3 sm:w-[calc(100%-24px)]' : 'h-24 w-full p-6 translate-y-0'}`}>
+        <header className={`relative z-40 transition-all duration-300 transform flex bg-maincolor ${isFixed ? 'sticky top-0 h-20 w-4/5 rounded-xl p-5 shadow-2xl shadow-gray-500 translate-y-6 border border-zinc-500 sm:translate-y-3 sm:w-[calc(100%-24px)]' : 'h-24 w-full p-6 translate-y-0'}`}>
             <article className="flex basis-full justify-between items-center">
                 <a href="/home" className={`${isFixed ? 'text-3xl' : 'text-4xl'} text-white font-bold hover:text-gray-200 transition duration-300 lg:text-2xl md:text-2xl sm:text-2xl`}>
                     HealthSync
@@ -67,7 +70,7 @@ const Header = () => {
                             Meetings
                         </a>
                         </li>)}
-                    {isAuthenticated && userRoles.includes('Doctor') && (
+                    {(isAuthenticated && userRoles.includes('Doctor')) && (
                         <li>
                             <a href="/workSchedule" className="relative py-1 text-white font-bold text-xl transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
                                 Work Schedule

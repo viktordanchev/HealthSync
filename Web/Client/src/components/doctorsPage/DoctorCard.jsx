@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import doctorProfile from '../../assets/images/doctor-profile.jpg';
 
 function DoctorCard({ doctor }) {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ function DoctorCard({ doctor }) {
             className="bg-zinc-400 rounded-xl p-4 flex flex-col justify-between items-center space-y-2 text-gray-700 w-64 h-80 bg-opacity-75 shadow-xl shadow-gray-300 text-lg sm:m-0 sm:w-full"
         >
             <img
-                src={doctor.imgUrl ? doctor.imgUrl : '/profile.jpg'}
+                src={doctor.imgUrl ? doctor.imgUrl : doctorProfile}
                 className="rounded-full object-cover w-20 h-20"
             />
             <div className="text-center text-lg md:text-base sm:text-base">

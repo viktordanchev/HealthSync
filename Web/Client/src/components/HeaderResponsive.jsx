@@ -22,11 +22,11 @@ function HeaderResponsive({ isMenuOpen, isFixed, isAuthenticated, userName, user
             setIsLoading(false);
         }
     };
-
+    
     return (
-        <article className={`absolute top-full left-0 right-0 m-3 p-3 bg-maincolor rounded-xl transition-all duration-500 ease-in-out transform space-y-3
+        <article className={`absolute top-full left-0 right-0 p-3 bg-maincolor rounded-xl transition-all duration-500 ease-in-out transform space-y-3 border border-zinc-500
         ${isMenuOpen ? 'opacity-100 translate-y-0 shadow-2xl shadow-gray-500' : 'opacity-0 translate-y-[-10px] pointer-events-none'} 
-        ${isFixed && 'm-0 mt-3'}`}>
+        ${isFixed ? 'mt-3' : 'm-3'}`}>
             {isAuthenticated ?
                 <div className="text-white font-bold text-xl space-y-3">
                     <p className="text-center">{userName}</p>
@@ -55,17 +55,17 @@ function HeaderResponsive({ isMenuOpen, isFixed, isAuthenticated, userName, user
             <hr className="border-e border-white w-full" />
             <ul className="flex flex-col items-center space-y-3 text-white font-bold text-xl">
                 <li>
-                    <a href="/doctors">
-                        Doctors
-                    </a>
+                    <a href="/doctors">Doctors</a>
                 </li>
                 {isAuthenticated && (
                     <li>
-                        <a href="/meetings">
-                            Meetings
-                        </a>
+                        <a href="/meetings">Meetings</a>
                     </li>
                 )}
+                {isAuthenticated && userRoles.includes('Doctor') && (
+                    <li>
+                        <a href="/workSchedule">Work Schedule</a>
+                    </li>)}
             </ul>
         </article>
     );

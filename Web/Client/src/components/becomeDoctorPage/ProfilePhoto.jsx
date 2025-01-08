@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faXmark } from '@fortawesome/free-solid-svg-icons';
+import doctorProfile from '../../assets/images/doctor-profile.jpg';
 
 function ProfilePhoto({ setProfilePhoto }) {
-    const [imageSrc, setImageSrc] = useState("/profile.jpg");
+    const [imageSrc, setImageSrc] = useState(doctorProfile);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -18,6 +19,8 @@ function ProfilePhoto({ setProfilePhoto }) {
 
             reader.readAsDataURL(file);
         }
+
+        e.target.value = '';
     };
 
     return (
@@ -43,7 +46,7 @@ function ProfilePhoto({ setProfilePhoto }) {
                 </label>
                 <label
                     className="absolute top-0 left-0 text-white bg-zinc-700 w-9 h-9 flex items-center justify-center rounded-full text-xl cursor-pointer opacity-0 transition-opacity duration-200 group-hover:opacity-100 sm:opacity-100"
-                    onClick={() => setImageSrc("/profile.jpg")}
+                    onClick={() => setImageSrc(doctorProfile)}
                 >
                     <FontAwesomeIcon icon={faXmark} />
                 </label>
