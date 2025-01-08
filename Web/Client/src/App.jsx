@@ -1,17 +1,15 @@
-﻿import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Footer from './components/Footer';
-import GuestOnly from './components/GuestOnly';
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Header from './components/Header';
+import Footer from './components/Footer';
 import ParticlesBg from './components/ParticlesBg';
+import GuestOnly from './components/GuestOnly';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionMessage from './components/SessionMessage';
-import DoctorDetails from './components/doctorsPage/DoctorDetails';
-import { AuthProvider } from './contexts/AuthContext';
-import { LoadingProvider } from './contexts/LoadingContext';
-import { MessageProvider } from './contexts/MessageContext';
+
 import DoctorsPage from './pages/DoctorsPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -22,6 +20,12 @@ import UserMeetingsPage from './pages/UserMeetingsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
 import BecomeDoctorPage from './pages/BecomeDoctorPage';
 import DoctorProfile from './pages/DoctorProfile';
+import DoctorDetailsPage from './pages/DoctorDetailsPage';
+import WorkSchedulePage from './pages/WorkSchedulePage';
+
+import { AuthProvider } from './contexts/AuthContext';
+import { LoadingProvider } from './contexts/LoadingContext';
+import { MessageProvider } from './contexts/MessageContext';
 
 function App() {
     const [showButton, setShowButton] = useState(false);
@@ -69,10 +73,11 @@ function App() {
                                 <Route path="/" element={<Navigate to="/home" />} />
                                 <Route path="/home" element={<HomePage />} />
                                 <Route path="/doctors" element={<DoctorsPage />} />
-                                <Route path="/doctors/:name/:specialty" element={<DoctorDetails />} />
+                                <Route path="/doctors/:name/:specialty" element={<DoctorDetailsPage />} />
                                 <Route path="/meetings" element={<ProtectedRoute><UserMeetingsPage /></ProtectedRoute>} />
                                 <Route path="/becomeDoctor" element={<ProtectedRoute><BecomeDoctorPage /></ProtectedRoute>} />
                                 <Route path="/doctorProfile" element={<ProtectedRoute roleNeeded={'Doctor'}><DoctorProfile /></ProtectedRoute>} />
+                                <Route path="/workSchedule" element={<ProtectedRoute roleNeeded={'Doctor'}><WorkSchedulePage /></ProtectedRoute>} />
                             </Routes>
                         </MessageProvider>
                         <button

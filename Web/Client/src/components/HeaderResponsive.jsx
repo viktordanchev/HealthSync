@@ -2,17 +2,10 @@ import React from 'react';
 import { useAuthContext } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadingContext';
 import apiRequest from '../services/apiRequest';
-import jwtDecoder from '../services/jwtDecoder';
 
-function HeaderResponsive({ isMenuOpen, isFixed, isAuthenticated, userName }) {
+function HeaderResponsive({ isMenuOpen, isFixed, isAuthenticated, userName, userRoles }) {
     const { logout } = useAuthContext();
     const { setIsLoading } = useLoading();
-    let userRoles;
-
-    if (isAuthenticated) {
-        const { roles } = jwtDecoder();
-        userRoles = roles;
-    }
 
     const handleLogout = async () => {
         try {

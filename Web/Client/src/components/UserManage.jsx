@@ -4,12 +4,10 @@ import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useAuthContext } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadingContext';
 import apiRequest from '../services/apiRequest';
-import jwtDecoder from '../services/jwtDecoder';
 
-function UserManage({ userName }) {
+function UserManage({ userName, userRoles }) {
     const { logout } = useAuthContext();
     const { setIsLoading } = useLoading();
-    const { roles } = jwtDecoder();
     const [isOpen, setIsOpen] = useState(false);
 
     const handleLogout = async () => {
@@ -49,9 +47,9 @@ function UserManage({ userName }) {
                     <li className="py-1 rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
                         <a
                             className="block"
-                            href={`${roles.includes('Doctor') ? '/home' : '/becomeDoctor'}`}
+                            href={`${userRoles.includes('Doctor') ? '/doctorProfile' : '/becomeDoctor'}`}
                         >
-                            {`${roles.includes('Doctor') ? 'Doctor profile' : 'Become a Doctor'}`}
+                            {`${userRoles.includes('Doctor') ? 'Doctor profile' : 'Become a Doctor'}`}
                         </a>
                     </li>
                     <li className="py-1 border-b border-zinc-500 cursor-pointer hover:bg-gray-200">

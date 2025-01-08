@@ -11,10 +11,11 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userName, setUserName] = useState('');
     const [isFixed, setIsFixed] = useState(false);
+    const [userRoles, setUserRoles] = useState([]);
 
     useEffect(() => {
         if (isAuthenticated) {
-            const { claimName } = jwtDecoder();
+            const { claimName, roles } = jwtDecoder();
             const splitedName = claimName.split(' ')
                 .map((part, index) => {
                     if (index === 0) {
@@ -24,6 +25,7 @@ const Header = () => {
                 }).join(' ');
 
             setUserName(splitedName);
+            setUserRoles(roles);
         }
     }, [isAuthenticated, localStorage.getItem('accessToken')]);
 
@@ -65,9 +67,15 @@ const Header = () => {
                             Meetings
                         </a>
                         </li>)}
+                    {isAuthenticated && userRoles.includes('Doctor') && (
+                        <li>
+                            <a href="/workSchedule" className="relative py-1 text-white font-bold text-xl transition duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.1em] after:bg-white after:opacity-0 after:transition-opacity after:transition-transform after:duration-300 after:scale-0 after:origin-center hover:after:opacity-100 hover:after:scale-100 focus:after:opacity-100 focus:after:scale-100">
+                                Work Schedule
+                            </a>
+                        </li>)}
                 </ul>
                 <div className="flex justify-end space-x-4 w-52 md:hidden sm:hidden">
-                    {isAuthenticated ? <UserManage userName={userName} /> :
+                    {isAuthenticated ? <UserManage userName={userName} userRoles={userRoles} /> :
                         <>
                             <a href="/login" className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-2 px-3 rounded hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
                                 Login
@@ -97,6 +105,7 @@ const Header = () => {
                 isFixed={isFixed}
                 isAuthenticated={isAuthenticated}
                 userName={userName}
+                userRoles={userRoles}
             />
         </header>
     );

@@ -1,12 +1,12 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import apiRequest from '../../services/apiRequest';
-import Loading from '../Loading';
-import MeetingsCalendar from './MeetingsCalendar';
-import ReviewsSection from './ReviewsSection';
-import AddReview from './AddReview';
+import apiRequest from '../services/apiRequest';
+import Loading from '../components/Loading';
+import MeetingsCalendar from '../components/doctorsPage/MeetingsCalendar';
+import ReviewsSection from '../components/doctorsPage/ReviewsSection';
+import AddReview from '../components/doctorsPage/AddReview';
 
-function DoctorDetails() {
+function DoctorDetailsPage() {
     const navigate = useNavigate();
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(true);
@@ -102,4 +102,4 @@ function DoctorDetails() {
     );
 }
 
-export default DoctorDetails;
+export default DoctorDetailsPage;
