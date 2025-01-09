@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static Common.Constants.User;
 
 namespace RestAPI.Dtos.RequestDtos.Account
 {
@@ -12,9 +13,11 @@ namespace RestAPI.Dtos.RequestDtos.Account
         public string VrfCode { get; set; } = null!;
 
         [Required]
+        [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
         public string FirstName { get; set; } = null!;
 
         [Required]
+        [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
         public string LastName { get; set; } = null!;
 
         [Required]

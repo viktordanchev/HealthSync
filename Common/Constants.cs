@@ -5,6 +5,12 @@
         public const int MonthRangeMin = 1;
         public const int MonthRangeMax = 12;
 
+        public static class User
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 30;
+        }
+
         public static class Reviews
         {
             public const int RatingRangeMin = 1;

@@ -5,8 +5,8 @@ namespace RestAPI.Dtos.RequestDtos.Doctors
 {
     public class BecomeDoctorRequest
     {
-        private string contactEmail;
-        private string contactPhoneNumber;
+        private string? contactEmail;
+        private string? contactPhoneNumber;
 
         [EmailAddress]
         public string? ContactEmail
