@@ -17,7 +17,8 @@ namespace Infrastructure.Configurations
             {
                 Id = 1,
                 DoctorId = 1,
-                Date = new DateTime(2024, 12, 25, 0, 0, 0)
+                Month = 12,
+                Day = 25,
             };
 
             return [dayOff1];

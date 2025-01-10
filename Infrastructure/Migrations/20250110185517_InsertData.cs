@@ -27,13 +27,13 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "5017b1f9-eb97-4ab2-97c8-7535210f5297", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAENsdm02Ynu2e/JO//n4cOInw/oBB2gOQm42m0hhw5x8gwREHHRXiTmMden9uhO+gXg==", null, false, "48a91b18-7e4c-4bc0-b5c6-f7e195563e72", false, "m.marinova@mail.com" },
-                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "ee17c1c7-5578-4b43-8c2f-f30ec0ec4c34", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAECCDRJskc9ovSKCxm+9d5i4zdjwKX+Ko4u0+xBFoPTHytpDvSWJ//6ZDzj/wOgjy1A==", null, false, "a882e8ce-a25c-4bb1-9b89-82e5b6125516", false, "v.yankova@mail.com" },
-                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "1bb76201-f2b3-41b6-a28c-18836cad8387", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEJpE8k8nWw+sf4Tz8kk2wkTUm2T+jpf+nOUqeOyWJ1IROtbmjQgbxsoN18EN4qxvNg==", null, false, "f3027496-d477-44e1-ac75-4112408a6602", false, "a.kirilov@mail.com" },
-                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "9d53e66a-27b2-48ff-b3f2-022eef8d43ac", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEGOsqpzAcmb1d+ia6BUg/O5olo6uT/K+vMCUZ1Wz4OkXmW9PmmZr2P/6t+gLxvwi9w==", null, false, "901cc420-e000-43b7-a20d-7676fd16781a", false, "k.conev@mail.com" },
-                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "3454b7f9-96e0-4226-b335-86d738ce08bb", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEPpYz2DdViGxVqxczVsM8iG5ARayu5xnO/ZeaK8xvQgT7s6W8FT5/3tNNhcd+pKEYA==", null, false, "090ea097-ffc8-4298-9d22-e59a26c19bea", false, "i.ivanov@mail.com" },
-                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "cf513c5d-dc02-4cec-82dd-6b72a4f62e5f", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEC1X3PGan2D0jv8CwOj8aF/cAVLjKccG76LaKWRZ/3tlrQqhf+m2IgPUCaGzgH0zBA==", null, false, "c9cd1a8e-bc77-4e4d-ba0e-fd836d087566", false, "m.kirilova@mail.com" },
-                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "c7b895cd-c686-4dec-9ad6-b2a1ef5d397f", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAENTeucylB/cmn+9GCSGJ6wqPxziyvVSw/GnUJHo7Ep/pa2a3uV0WgpX8ZapTmi4Ajg==", null, false, "7856bbc6-eb75-4d91-84cd-2ab91c9887d2", false, "i.ivanova@mail.com" }
+                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "d3dd8419-60f5-4a36-bc78-0b0fe7e692e6", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEOc1YBJ/h2APChjPQ0RHN6w2AxR/SW/69+xJmSpkVVE8pn0sjV5XEEmuEiQLYrfMUA==", null, false, "e90f3b17-f178-4a39-9ca9-c2d5682bb622", false, "m.marinova@mail.com" },
+                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "11a87a05-4231-4e75-9c92-10767d5cdf46", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEM1rrSZzb9gr+3FNemtuh7gpk5AqMv6YSqdBVTL3j4b8kVGmE+6JunWnnFAV0yG56A==", null, false, "709d91db-4aa5-4473-b4d2-13977ef9503f", false, "v.yankova@mail.com" },
+                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "06c9c641-c815-4689-83ce-c40b71e5fb00", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAENKePjjp6X8umq0sin4xpOO3zOaZ+7AdWK1m4o/vQU4K79NTRNvGQWyJHhofifKbrQ==", null, false, "f13cbf59-e1a6-42d8-bd36-1f8f92b7d198", false, "a.kirilov@mail.com" },
+                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "152c9e40-5248-4060-9e2c-d93b6ad86466", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEJnGCXX+XC1pKp++/CDcdyuj/AgyQEHhrVuUm6mMQiJunTTldt+1elrwEv567D6b5A==", null, false, "a5655114-4675-4220-947f-6169c9498cec", false, "k.conev@mail.com" },
+                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "b54f2ed2-e313-4f03-809d-b951dd3a0429", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEE9fI8MpLjnKtmt2ULcIatIoZdrkE9mrzXMQ2TcJkjCJaRs90uk1grJMSaLXlzcLwg==", null, false, "86e67a98-aee3-4910-af99-f22882dc2e4f", false, "i.ivanov@mail.com" },
+                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "dd61cf22-ade4-4eee-87f6-ebbaf6895d4d", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEFOc96cV3EpN2DF5N7T5P4DNhC3uK0nrSU9ItJUYa0tgV8uHggRKy/R5a+OcNbU+bg==", null, false, "21102956-e072-4bb8-902f-12380a13a41e", false, "m.kirilova@mail.com" },
+                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "6280cf66-fcf1-47ce-935b-32549be39ed4", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEB402r3XhZZDU+1yVz273Sxxikw+aQq9rx4xZTKftxu/1D7lEtrCrypAVfOO1nOjJA==", null, false, "46b51fa8-c41f-4b38-8fa4-cac156b30eb5", false, "i.ivanova@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -86,8 +86,8 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "DaysOff",
-                columns: new[] { "Id", "Date", "DoctorId" },
-                values: new object[] { 1, new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
+                columns: new[] { "Id", "Day", "DoctorId", "Month" },
+                values: new object[] { 1, 25, 1, 12 });
 
             migrationBuilder.InsertData(
                 table: "Reviews",

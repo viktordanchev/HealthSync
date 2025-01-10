@@ -15,6 +15,9 @@ namespace Infrastructure.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        public DateTime Date { get; set; }
+        public int Month { get; set; }
+
+        [Required]
+        public int Day { get; set; }
     }
 }

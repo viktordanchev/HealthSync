@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20250109091006_AddNewTables")]
+    [Migration("20250110185432_AddNewTables")]
     partial class AddNewTables
     {
         /// <inheritdoc />
@@ -108,10 +108,13 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Day")
+                        .HasColumnType("int");
 
                     b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Month")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
