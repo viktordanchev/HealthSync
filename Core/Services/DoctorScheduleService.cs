@@ -1,4 +1,5 @@
 ﻿using Core.Models.DoctorSchedule;
+using Core.Models.ResponseDtos.DoctorSchedule;
 using Core.Services.Contracts;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -53,20 +54,29 @@ namespace Core.Services
             return availableMeetings;
         }
 
-        public async Task<IEnumerable<DateTime>> GetMonthUnavailableDaysAsync(int doctorId, int month, int year)
+        public async Task<IEnumerable<MonthScheduleResponse>> GetMonthScheduleAsync(int doctorId, int month, int year)
         {
             var busyDays = await GetBusyDaysAsync(doctorId, month, year);
             var daysOff = await GetDaysOffAsync(doctorId, month, year);
             var daysInMonth = DateTime.DaysInMonth(year, month);
-            var unavailableDays = new List<DateTime>();
+            var monthSchedule = new List<MonthScheduleResponse>();
 
             if (daysInMonth != daysOff.Count())
             {
-                unavailableDays.AddRange(busyDays);
-                unavailableDays.AddRange(daysOff);
+                for (int day = 1; day <= daysInMonth; day++)
+                {
+                    var date = new DateTime(year, month, day);
+
+                    var isAvailable =
+                        daysOff.Contains(date) ||
+                        busyDays.Contains(date)
+                        ? false : true;
+
+                    monthSchedule.Add(new MonthScheduleResponse(date, isAvailable));
+                }
             }
 
-            return unavailableDays;
+            return monthSchedule;
         }
 
         public async Task<bool> IsDateValidAsync(int doctorId, DateTime date)

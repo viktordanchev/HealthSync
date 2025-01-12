@@ -53,9 +53,6 @@ const MeetingsCalendar = ({ doctorId }) => {
         for (let day = 1; day <= daysInMonth; day++) {
             const date = new Date(year, month, day);
 
-            if (daysOff.includes(date)) {
-                days.push(date);
-            }
         }
 
         setDays(days);

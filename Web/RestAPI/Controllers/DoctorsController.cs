@@ -85,17 +85,17 @@ namespace RestAPI.Controllers
             return Ok(times);
         }
 
-        [HttpPost("getMonthDaysOff")]
-        public async Task<IActionResult> GetMonthDaysOff([FromBody] GetMonthDaysOffRequest request)
+        [HttpPost("getMonthSchedule")]
+        public async Task<IActionResult> GetMonthSchedule([FromBody] GetMonthDaysOffRequest request)
         {
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var daysInMonth = await _doctorScheduleService.GetMonthUnavailableDaysAsync(request.DoctorId, request.Month, request.Year);
+            var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request.DoctorId, request.Month, request.Year);
 
-            return Ok(daysInMonth);
+            return Ok(monthSchedule);
         }
 
         [HttpPost("becomeDoctor")]
