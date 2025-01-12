@@ -22,12 +22,16 @@ const MeetingsCalendar = ({ doctorId }) => {
             }
 
             try {
-                const response = await apiRequest('doctors', 'getMonthDaysOff', dto, undefined, 'POST', false);
+                const response = await apiRequest('doctors', 'getMonthSchedule', dto, undefined, 'POST', false);
                 
                 if (response.length > 0) {
-                    const daysOff = response.map(date => (new Date(date)));
-                   
-                    generateCalendar(currentYear, currentMonth, daysOff);
+                    const dates = response.map(item => ({
+                        ...item,
+                        date: new Date(item.date)
+                    }));
+
+                    setDays(dates);
+                    generateCalendar(currentYear, currentMonth);
                 }
             } catch (error) {
                 console.error(error);
@@ -39,23 +43,16 @@ const MeetingsCalendar = ({ doctorId }) => {
         getDaysOff();
     }, [currentYear, currentMonth]);
 
-    const generateCalendar = (year, month, daysOff) => {
+    const generateCalendar = (year, month) => {
         const firstDayOfMonth = new Date(year, month, 1);
         const firstDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7;
-        let days = [];
+        let emptySpaces = [];
 
         for (let i = 0; i < firstDayOfWeek; i++) {
-            days.push(null);
+            emptySpaces.push(null);
         }
 
-        const daysInMonth = new Date(year, month, 0);
-
-        for (let day = 1; day <= daysInMonth; day++) {
-            const date = new Date(year, month, day);
-
-        }
-
-        setDays(days);
+        setDays(prevDays => [...emptySpaces, ...prevDays]);
     };
 
     const handlePreviousMonth = () => {
@@ -122,11 +119,11 @@ const MeetingsCalendar = ({ doctorId }) => {
                                                         key={index}
                                                         onClick={() => handleDayClick(day)}
                                                         className={`rounded-full flex items-center justify-center
-                                                ${day && new Date().getDate() === day.getDate() &&
+                                                ${day && new Date().getDate() === day.date.getDate() &&
                                                                 new Date().getFullYear() === currentYear &&
                                                                 new Date().getMonth() === currentMonth
                                                                 ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
-                                                ${day && new Date() < day ? 'cursor-pointer hover:bg-gray-300' : 'opacity-35 cursor-default'}`}>
+                                                ${day && new Date() < day.date && day.isAvailable ? 'cursor-pointer hover:bg-gray-300' : 'opacity-35 cursor-default'}`}>
                                                         <p>{day ? day.date.getDate() : ''}</p>
                                                     </div>
                                                 ))}
