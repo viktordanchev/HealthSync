@@ -8,7 +8,7 @@ import Loading from '../Loading';
 import { useMessage } from '../../contexts/MessageContext';
 import jwtDecoder from '../../services/jwtDecoder';
 
-function AddMeeting({ doctorId, date, setIsDateChoosed }) {
+function AddMeeting({ doctorId, date, setDate }) {
     const navigate = useNavigate();
     const { showMessage } = useMessage();
     const { isAuthenticated, isStillAuth } = useAuthContext();
@@ -82,7 +82,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
                 navigate('/meetings');
             } else {
                 showMessage(response.message, 'message');
-                setIsDateChoosed(false);
+                setDate(null);
             }
         } catch (error) {
             console.error(error);
@@ -92,7 +92,7 @@ function AddMeeting({ doctorId, date, setIsDateChoosed }) {
     return (
         <div className="min-h-80 bg-opacity-95 border border-white rounded-xl bg-zinc-700 p-4 flex flex-col sm:w-full">
             <div className="w-full text-right">
-                <button onClick={() => setIsDateChoosed(false)}>
+                <button onClick={() => setDate(null)}>
                     <FontAwesomeIcon icon={faXmark} className="text-white text-3xl" />
                 </button>
             </div>
