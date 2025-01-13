@@ -22,7 +22,7 @@ const MeetingsCalendar = ({ doctorId }) => {
 
             try {
                 const response = await apiRequest('doctors', 'getMonthSchedule', dto, undefined, 'POST', false);
-                
+
                 if (response.length > 0) {
                     const dates = response.map(item => ({
                         ...item,
@@ -84,54 +84,56 @@ const MeetingsCalendar = ({ doctorId }) => {
 
     return (
         <>
-            <div className="h-80">
-                {isLoading ? <Loading type={'small'} /> :
-                    <>
-                        {days.length == 0 ?
-                            <div className="font-bold text-2xl text-center">
-                                No working schedule provided yet
-                            </div> :
-                            <>
-                                <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
-                                    {new Date() <= new Date(currentYear, currentMonth) &&
-                                        <button onClick={handlePreviousMonth} className="w-1/3">
-                                            Previous
-                                        </button>}
-                                    <div className="w-1/3 text-center flex justify-center space-x-1">
-                                        <p>{monthNames[currentMonth]}</p>
-                                        <p>{currentYear}</p>
+            {date ?
+                <AddMeeting
+                    doctorId={doctorId}
+                    date={date}
+                    setDate={setDate}
+                /> :
+                <div className="h-80">
+                    {isLoading ? <Loading type={'small'} /> :
+                        <>
+                            {days.length == 0 ?
+                                <div className="font-bold text-2xl text-center">
+                                    No working schedule provided yet
+                                </div> :
+                                <>
+                                    <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
+                                        {new Date() <= new Date(currentYear, currentMonth) ?
+                                            <button onClick={handlePreviousMonth} className="w-1/3">
+                                                Previous
+                                            </button> :
+                                            <div className="w-1/3"></div>}
+                                        <div className="w-1/3 text-center flex justify-center space-x-1">
+                                            <p>{monthNames[currentMonth]}</p>
+                                            <p>{currentYear}</p>
+                                        </div>
+                                        <button onClick={handleNextMonth} className="w-1/3">Next</button>
                                     </div>
-                                    <button onClick={handleNextMonth} className="w-1/3">Next</button>
-                                </div>
-                                <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
-                                    {daysOfWeek.map((day, index) => (
-                                        <div key={index} className="text-center">{day}</div>
-                                    ))}
-                                    {days.length == 0 ? <Loading type={'small'} /> :
-                                        <>
-                                            {days.map((day, index) => (
-                                                <div
-                                                    key={index}
-                                                    onClick={() => handleDayClick(day)}
-                                                    className={`rounded-full flex items-center justify-center
+                                    <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
+                                        {daysOfWeek.map((day, index) => (
+                                            <div key={index} className="text-center">{day}</div>
+                                        ))}
+                                        {days.length == 0 ? <Loading type={'small'} /> :
+                                            <>
+                                                {days.map((day, index) => (
+                                                    <div
+                                                        key={index}
+                                                        onClick={() => handleDayClick(day)}
+                                                        className={`rounded-full flex items-center justify-center
                                                 ${day && new Date().getDate() === day.date.getDate() &&
-                                                            new Date().getFullYear() === currentYear &&
-                                                            new Date().getMonth() === currentMonth
-                                                            ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
+                                                                new Date().getFullYear() === currentYear &&
+                                                                new Date().getMonth() === currentMonth
+                                                                ? 'bg-blue-500 text-white' : 'bg-gray-200'} 
                                                 ${day && new Date() < day.date && day.isAvailable ? 'cursor-pointer hover:bg-gray-300' : 'opacity-35 cursor-default'}`}>
-                                                    <p>{day ? day.date.getDate() : ''}</p>
-                                                </div>
-                                            ))}
-                                        </>}
-                                </div>
-                            </>}
-                    </>}
-            </div>
-            {date && <AddMeeting
-                doctorId={doctorId}
-                date={date}
-                setDate={setDate}
-            />}
+                                                        <p>{day ? day.date.getDate() : ''}</p>
+                                                    </div>
+                                                ))}
+                                            </>}
+                                    </div>
+                                </>}
+                        </>}
+                </div>}
         </>
     );
 };

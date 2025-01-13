@@ -36,10 +36,10 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> AddDoctorMeeting([FromBody] AddMeetingRequest request)
         {
-            var localDateTime = request.Date.ToLocalTime();
+            var date = DateTime.Parse(request.Date);
 
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                !await _doctorScheduleService.IsDateValidAsync(request.DoctorId, localDateTime))
+                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, date))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
@@ -49,7 +49,7 @@ namespace RestAPI.Controllers
                 return BadRequest(new { Error = ExistingMeeting });
             }
 
-            await _meetingsService.AddDoctorMeetingAsync(request.DoctorId, localDateTime, User.FindFirstValue(ClaimTypes.NameIdentifier));
+            await _meetingsService.AddDoctorMeetingAsync(request.DoctorId, date, User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             return Ok(new { Message = AddedMeeting });
         }

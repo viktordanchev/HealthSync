@@ -8,7 +8,7 @@ namespace RestAPI.Dtos.RequestDtos.Meetings
         public int DoctorId { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public string Date { get; set; } = null!;
 
         [Required]
         public string UserId { get; set; } = null!;

@@ -32,7 +32,7 @@ namespace Core.Services
                 {
                     WorkDay = d.WorkWeek.FirstOrDefault(w => w.Day == date.DayOfWeek),
                     Meetings = d.Meetings
-                        .Where(m => m.Date == date)
+                        .Where(m => m.Date.Date == date.Date)
                         .Select(m => m.Date.TimeOfDay)
                         .ToList()
                 })
