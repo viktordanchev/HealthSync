@@ -20,7 +20,7 @@ namespace Infrastructure.Entities
         public int Rating { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime DateAndTime { get; set; }
 
         [Required]
         public string Reviewer { get; set; } = null!;

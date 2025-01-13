@@ -122,7 +122,7 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
                     PatientId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateAndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -148,7 +148,7 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateAndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Reviewer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
                 },
@@ -170,7 +170,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
-                    Day = table.Column<int>(type: "int", nullable: false),
+                    WeekDay = table.Column<int>(type: "int", nullable: false),
                     IsWorkDay = table.Column<bool>(type: "bit", nullable: false),
                     Start = table.Column<TimeSpan>(type: "time", nullable: false),
                     End = table.Column<TimeSpan>(type: "time", nullable: false),

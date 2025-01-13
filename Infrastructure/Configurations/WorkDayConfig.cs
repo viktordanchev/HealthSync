@@ -17,7 +17,7 @@ namespace Infrastructure.Configurations
             {
                 Id = 1,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
-                Day = DayOfWeek.Monday,
+                WeekDay = DayOfWeek.Monday,
                 IsWorkDay = true,
                 Start = new TimeSpan(9, 30, 0),
                 End = new TimeSpan(17, 30, 0),
@@ -28,7 +28,7 @@ namespace Infrastructure.Configurations
             {
                 Id = 2,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
-                Day = DayOfWeek.Tuesday,
+                WeekDay = DayOfWeek.Tuesday,
                 IsWorkDay = true,
                 Start = new TimeSpan(12, 30, 0),
                 End = new TimeSpan(17, 30, 0),
@@ -39,7 +39,7 @@ namespace Infrastructure.Configurations
             {
                 Id = 3,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
-                Day = DayOfWeek.Wednesday,
+                WeekDay = DayOfWeek.Wednesday,
                 IsWorkDay = true,
                 Start = new TimeSpan(9, 30, 0),
                 End = new TimeSpan(17, 30, 0),
@@ -50,7 +50,7 @@ namespace Infrastructure.Configurations
             {
                 Id = 4,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
-                Day = DayOfWeek.Thursday,
+                WeekDay = DayOfWeek.Thursday,
                 IsWorkDay = true,
                 Start = new TimeSpan(12, 30, 0),
                 End = new TimeSpan(17, 30, 0),
@@ -61,7 +61,7 @@ namespace Infrastructure.Configurations
             {
                 Id = 5,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
-                Day = DayOfWeek.Friday,
+                WeekDay = DayOfWeek.Friday,
                 IsWorkDay = true,
                 Start = new TimeSpan(9, 30, 0),
                 End = new TimeSpan(17, 30, 0),
@@ -72,7 +72,7 @@ namespace Infrastructure.Configurations
             {
                 Id = 6,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
-                Day = DayOfWeek.Saturday,
+                WeekDay = DayOfWeek.Saturday,
                 IsWorkDay = false
             };
 
@@ -80,7 +80,7 @@ namespace Infrastructure.Configurations
             {
                 Id = 7,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
-                Day = DayOfWeek.Sunday,
+                WeekDay = DayOfWeek.Sunday,
                 IsWorkDay = false
             };
 

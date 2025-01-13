@@ -21,6 +21,6 @@ namespace Infrastructure.Entities
         public ApplicationUser Patient { get; set; } = null!;
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime DateAndTime { get; set; }
     }
 }

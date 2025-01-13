@@ -21,7 +21,7 @@ namespace Core.Services
             {
                 DoctorId = doctorId,
                 Rating = rating,
-                Date = DateTime.Now,
+                DateAndTime = DateTime.Now,
                 Comment = comment,
                 Reviewer = reviewer
             };
@@ -35,14 +35,14 @@ namespace Core.Services
             var reviews = await _context.Reviews
                 .AsNoTracking()
                 .Where(r => r.DoctorId == doctorId)
-                .OrderByDescending(r => r.Date)
+                .OrderByDescending(r => r.DateAndTime)
                 .Skip(index * 3)
                 .Take(3)
                 .Select(r => new ReviewResponse()
                 {
                     Id = r.Id,
                     Rating = r.Rating,
-                    Date = r.Date,
+                    Date = r.DateAndTime,
                     Comment = r.Comment,
                     Reviewer = r.Reviewer
                 })

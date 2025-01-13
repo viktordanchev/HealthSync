@@ -15,7 +15,7 @@ namespace Infrastructure.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        public DayOfWeek Day { get; set; }
+        public DayOfWeek WeekDay { get; set; }
 
         [Required]
         public bool IsWorkDay { get; set; }

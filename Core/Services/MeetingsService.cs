@@ -20,7 +20,7 @@ namespace Core.Services
             var meeting = new Meeting()
             {
                 DoctorId = doctorId,
-                Date = date,
+                DateAndTime = date,
                 PatientId = patientId
             };
 
@@ -33,7 +33,7 @@ namespace Core.Services
             var meetings = await _context.Meetings
                 .AsNoTracking()
                 .Where(m => m.PatientId == userId)
-                .OrderBy(m => m.Date)
+                .OrderBy(m => m.DateAndTime)
                 .Select(m => new DoctorMeetingInfoResponse()
                 {
                     Id = m.Id,
@@ -41,7 +41,7 @@ namespace Core.Services
                     ImgUrl = m.Doctor.ImgUrl,
                     Hospital = m.Doctor.Hospital.Name,
                     HospitalAddress = m.Doctor.Hospital.Address,
-                    DateAndTime = m.Date.ToString("dd.MM.yyyy HH:mm")
+                    DateAndTime = m.DateAndTime.ToString("dd.MM.yyyy HH:mm")
                 })
                 .ToListAsync();
 

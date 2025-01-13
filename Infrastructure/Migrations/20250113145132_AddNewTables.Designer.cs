@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20250112184452_AddNewTables")]
+    [Migration("20250113145132_AddNewTables")]
     partial class AddNewTables
     {
         /// <inheritdoc />
@@ -195,7 +195,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("DateAndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DoctorId")
@@ -226,7 +226,7 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("DateAndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DoctorId")
@@ -271,9 +271,6 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
@@ -288,6 +285,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<TimeSpan>("Start")
                         .HasColumnType("time");
+
+                    b.Property<int>("WeekDay")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

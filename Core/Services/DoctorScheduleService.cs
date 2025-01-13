@@ -30,10 +30,10 @@ namespace Core.Services
                 .Where(d => d.Id == doctorId)
                 .Select(d => new
                 {
-                    WorkDay = d.WorkWeek.FirstOrDefault(w => w.Day == date.DayOfWeek),
+                    WorkDay = d.WorkWeek.FirstOrDefault(w => w.WeekDay == date.DayOfWeek),
                     Meetings = d.Meetings
-                        .Where(m => m.Date.Date == date.Date)
-                        .Select(m => m.Date.TimeOfDay)
+                        .Where(m => m.DateAndTime.Date == date.Date)
+                        .Select(m => m.DateAndTime.TimeOfDay)
                         .ToList()
                 })
                 .FirstAsync();
@@ -91,7 +91,7 @@ namespace Core.Services
                         .ToList(),
                     WorkWeekDaysOff = d.WorkWeek
                         .Where(wd => !wd.IsWorkDay)
-                        .Select(wd => wd.Day)
+                        .Select(wd => wd.WeekDay)
                         .ToList()
                 })
                 .FirstAsync();
@@ -120,13 +120,13 @@ namespace Core.Services
                     {
                         MeetingTimeMinutes = d.MeetingTimeMinutes,
                         AllMeetings = d.Doctor.Meetings
-                            .Where(m => m.Date.Month == month && m.Date.Year == year)
-                            .Select(m => m.Date),
+                            .Where(m => m.DateAndTime.Month == month && m.DateAndTime.Year == year)
+                            .Select(m => m.DateAndTime),
                         WeekDays = d.Doctor.WorkWeek
                             .Where(wk => wk.IsWorkDay)
                             .Select(wk => new
                             {
-                                Day = wk.Day,
+                                WeekDay = wk.WeekDay,
                                 WorkDayStart = wk.Start,
                                 WorkDayEnd = wk.End
                             })
@@ -140,7 +140,7 @@ namespace Core.Services
             foreach (var meetingDay in meetingDays)
             {
                 var allMeetingsByDay = shedule.AllMeetings.Where(am => am.Date == meetingDay).Count();
-                var dayOfWeek = shedule.WeekDays.FirstOrDefault(ww => ww.Day == meetingDay.DayOfWeek);
+                var dayOfWeek = shedule.WeekDays.FirstOrDefault(ww => ww.WeekDay == meetingDay.DayOfWeek);
                 var count = (dayOfWeek.WorkDayEnd - dayOfWeek.WorkDayStart).TotalMinutes / shedule.MeetingTimeMinutes + 1;
 
                 if (allMeetingsByDay != count)

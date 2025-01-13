@@ -27,13 +27,13 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "0558427d-c441-4b10-b34b-156a30f34def", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEIEuvBgD8NxCLRy9rvhTPuO/ndh+YVLtA9f6IuEgtFIj7akTZ4c62KGJS2EtsL2/FQ==", null, false, "976e7e7e-6c5a-4903-a677-d2fafbf11956", false, "m.marinova@mail.com" },
-                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "531f0a91-caed-4d94-99cc-2c3b07f469e0", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEHyv0E0x9DntqLIg7ZccjdUsj2jJ4/avIFIVXfCKX+TvAmY41Td6QUT2fPUKV7kN9Q==", null, false, "470d7f26-6278-40a3-83e5-64eb4c6ce945", false, "v.yankova@mail.com" },
-                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "45e3c21b-bc25-479d-bb3a-aa7eb6dda498", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEKwFq87N9++9b+ORtP1LsxqdxArRbj8c1+Ahnp/BWmaykolsxYfzXUw2mp03AzRwkQ==", null, false, "2e3e6d37-48ad-4396-b728-38dad2670ac1", false, "a.kirilov@mail.com" },
-                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "d61d9810-55aa-4028-b1f4-250d0f80aab2", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAECI09KV4cXLZKjK05RP4eZWAOqy8z3+5GTz5vwhKtsaD7tiI04gULuahtpKlAY3PZA==", null, false, "10c7c38b-1372-4606-923f-4b807cce973c", false, "k.conev@mail.com" },
-                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "8bdad55a-8a73-47fe-abff-6fa482dbe7b9", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEKwjaTdGPsoItRoDbel3CrsltFaX+hhdCceoxF0yiRK5rCqbKZs9ANc/uNktmVg84w==", null, false, "23448b7c-987a-48d9-b443-2b053dd60e8b", false, "i.ivanov@mail.com" },
-                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "760173c9-b5e4-4a42-b2e8-9e20a8ddae18", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEKG+HSukYNLjh08sRzZsJ5W+uNDTTMq1BCABUG0lnIVXbmhoNb4jbDtXcpbBIbAaWA==", null, false, "63e3665c-c4ae-4b2a-8b8d-a9fedd126b0c", false, "m.kirilova@mail.com" },
-                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "b7f45a71-3ba8-4e55-a559-94705ea2b75a", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEOWOssfvxwrkcF8s28VcDDHPvyaA8l0dLJTHYALOYQNqd3HqMu84WvkSH+mQUDDBjw==", null, false, "b71959ca-8389-4648-bca2-14b21b9eaf0e", false, "i.ivanova@mail.com" }
+                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "2aa40f3c-cf83-420c-921b-9994f58b7770", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEHdTc/dpHUUM0rKyPBt41L36gMnMKT7DUYA9Qzjf75BeoSMSFJPrHfPCCYvb2XQtew==", null, false, "fc00654f-b726-42c0-a367-03578ae4a56d", false, "m.marinova@mail.com" },
+                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "7532f6b3-ea5a-4830-8834-0833177d1465", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEArsHOahE31XJ59ndgAS6dj4mS7vBsg1GS2pXlDmRJXMvyyFTYdROvjEF7hRd6wobg==", null, false, "2049acca-6582-497a-ac47-26217d62075d", false, "v.yankova@mail.com" },
+                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "49b9c0d6-cca3-466d-b178-c46efff4ff8a", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAECc1Xj6wM64ZU1tHwNGaPSrR+cksfkpQIdb4rlLeYZkU56+c4rj61A0afsh5gaOuZA==", null, false, "ac68b60c-aead-4948-ba93-11aaa26a2a05", false, "a.kirilov@mail.com" },
+                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "ef03aa88-0710-4f87-aef1-1b2a241b5b9c", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEAcEGxrcCPIYIpIsmZVzdDw3b9RKvxxjvLX0Tc61rhcXdxluA/SFPs8AnYKEY/z7ug==", null, false, "cde2dd45-f95d-47f2-ad16-8925d9586797", false, "k.conev@mail.com" },
+                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "648fb64e-b70e-42ac-ab92-0a4917f65458", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEDdSbrQtmvqRfnra4bEzMWc6anrsUJ6CExGQc2wMHnftK3vt0iU4JouYhVRhV/W45g==", null, false, "acde88ff-4a98-4dfc-9af3-10b967a47b0f", false, "i.ivanov@mail.com" },
+                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "a2ee9da5-980a-414d-b5d6-31fe4361ab2a", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEJqCj2IajvNJyvuuXko8MbvHAgR1Sfe64Zi+z/uWM4Ju4bgx5KA0zuK/+pq8Nb9qWA==", null, false, "baff9ed0-4134-4a47-b1bb-e78027fe1c09", false, "m.kirilova@mail.com" },
+                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "3e9a4471-bcef-469f-989d-c963bca1b34c", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEF7gyu5fH+xHE/LwQ40w7JU24JpKj+ZeNOT5H/31Zl9Z/zu21T85aAoQfPbgXgfJYw==", null, false, "5a0315dc-a55c-4593-b72b-1660786abf5a", false, "i.ivanova@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -91,7 +91,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reviews",
-                columns: new[] { "Id", "Comment", "Date", "DoctorId", "Rating", "Reviewer" },
+                columns: new[] { "Id", "Comment", "DateAndTime", "DoctorId", "Rating", "Reviewer" },
                 values: new object[,]
                 {
                     { 1, "Dr. Ivanov went above and beyond in providing exceptional care. He took the time to listen to all my concerns, explained each step of the treatment, and made me feel at ease throughout the process. His professionalism, kindness, and dedication are truly appreciated. Highly recommended!", new DateTime(2024, 10, 14, 9, 0, 0, 0, DateTimeKind.Unspecified), 1, 5, "Aleks Petrov" },
@@ -107,16 +107,16 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "WorkWeek",
-                columns: new[] { "Id", "Day", "DoctorId", "End", "IsWorkDay", "MeetingTimeMinutes", "Start" },
+                columns: new[] { "Id", "DoctorId", "End", "IsWorkDay", "MeetingTimeMinutes", "Start", "WeekDay" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0) },
-                    { 2, 2, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 12, 30, 0, 0) },
-                    { 3, 3, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0) },
-                    { 4, 4, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 12, 30, 0, 0) },
-                    { 5, 5, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0) },
-                    { 6, 6, 1, new TimeSpan(0, 0, 0, 0, 0), false, 0, new TimeSpan(0, 0, 0, 0, 0) },
-                    { 7, 0, 1, new TimeSpan(0, 0, 0, 0, 0), false, 0, new TimeSpan(0, 0, 0, 0, 0) }
+                    { 1, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0), 1 },
+                    { 2, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 12, 30, 0, 0), 2 },
+                    { 3, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0), 3 },
+                    { 4, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 12, 30, 0, 0), 4 },
+                    { 5, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0), 5 },
+                    { 6, 1, new TimeSpan(0, 0, 0, 0, 0), false, 0, new TimeSpan(0, 0, 0, 0, 0), 6 },
+                    { 7, 1, new TimeSpan(0, 0, 0, 0, 0), false, 0, new TimeSpan(0, 0, 0, 0, 0), 0 }
                 });
         }
 
