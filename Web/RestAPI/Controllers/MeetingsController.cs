@@ -44,10 +44,10 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            if(await _meetingsService.IsUserHasMeetingAsync(request.UserId, request.DoctorId))
-            {
-                return BadRequest(new { Error = ExistingMeeting });
-            }
+            //if(await _meetingsService.isMeetingScheduled(request.UserId, request.DoctorId))
+            //{
+            //    return BadRequest(new { Error = ExistingMeeting });
+            //}
 
             await _meetingsService.AddDoctorMeetingAsync(request.DoctorId, date, User.FindFirstValue(ClaimTypes.NameIdentifier));
 

@@ -23,6 +23,7 @@ function UserMeetingsPage() {
                 console.error(error);
             } finally {
                 setIsLoading(false);
+                setIsDeleted(false);
             }
         };
 

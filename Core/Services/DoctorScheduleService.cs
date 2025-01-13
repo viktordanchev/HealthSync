@@ -60,7 +60,7 @@ namespace Core.Services
             var daysInMonth = DateTime.DaysInMonth(year, month);
             var monthSchedule = new List<MonthScheduleResponse>();
 
-            if (daysInMonth != daysOff.Count())
+            if (daysOff.Count() > 0)
             {
                 for (int day = 1; day <= daysInMonth; day++)
                 {

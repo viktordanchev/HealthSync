@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 function ReviewCard({ data }) {
     return (
         <article className="p-4 text-gray-700 bg-maincolor rounded-xl flex flex-col items-center shadow shadow-maincolor">
-            <p>{format(data.date, 'dd.MM.yyyy HH:mm')}</p>
+            <p>{format(data.dateAndTime, 'dd.MM.yyyy HH:mm')}</p>
             <hr className="border-e border-white w-full my-1" />
             <div className="w-full space-y-3">
                 <div className="flex justify-evenly sm:flex-col sm:space-y-3">

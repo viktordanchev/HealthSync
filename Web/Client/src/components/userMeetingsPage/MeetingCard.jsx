@@ -1,14 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../../services/apiRequest';
+import { format } from 'date-fns';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useMessage } from '../../contexts/MessageContext';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 function MeetingCard({ meeting, setIsDeleted }) {
-    const navigate = useNavigate();
     const { setIsLoading } = useLoading();
     const { showMessage } = useMessage();
     const { isStillAuth } = useAuthContext();
@@ -17,7 +16,6 @@ function MeetingCard({ meeting, setIsDeleted }) {
         const isAuth = await isStillAuth();
 
         if (!isAuth) {
-            navigate('/home');
             return;
         }
 
@@ -28,7 +26,7 @@ function MeetingCard({ meeting, setIsDeleted }) {
 
             if (response.message) {
                 showMessage(response.message, 'message');
-                setIsDeleted(!isDeleted);
+                setIsDeleted(true);
             }
         } catch (error) {
             console.error(error);
@@ -41,7 +39,7 @@ function MeetingCard({ meeting, setIsDeleted }) {
         <div className="bg-zinc-400 rounded-xl m-2 p-4 bg-opacity-75 shadow-xl shadow-gray-300 space-y-3 sm:m-0 sm:mb-4 sm:w-full">
             <div className="text-center text-xl flex justify-center items-center space-x-2">
                 <p className="font-bold">Meeting:</p>
-                <p>{meeting.dateAndTime}</p>
+                <p>{format(meeting.dateAndTime, 'dd.MM.yyyy HH:mm')}</p>
             </div>
             <hr className="border-e border-white w-full" />
             <div className="flex space-x-4 sm:flex-col sm:space-x-0 sm:space-y-4">

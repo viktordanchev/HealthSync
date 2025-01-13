@@ -42,7 +42,7 @@ namespace Core.Services
                 {
                     Id = r.Id,
                     Rating = r.Rating,
-                    Date = r.DateAndTime,
+                    DateAndTime = r.DateAndTime,
                     Comment = r.Comment,
                     Reviewer = r.Reviewer
                 })

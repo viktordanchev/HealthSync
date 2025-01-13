@@ -6,7 +6,7 @@
 
         public int Rating { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime DateAndTime { get; set; }
 
         public string Comment { get; set; } = string.Empty;
 

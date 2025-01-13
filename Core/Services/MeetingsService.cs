@@ -41,7 +41,7 @@ namespace Core.Services
                     ImgUrl = m.Doctor.ImgUrl,
                     Hospital = m.Doctor.Hospital.Name,
                     HospitalAddress = m.Doctor.Hospital.Address,
-                    DateAndTime = m.DateAndTime.ToString("dd.MM.yyyy HH:mm")
+                    DateAndTime = m.DateAndTime
                 })
                 .ToListAsync();
 
@@ -64,7 +64,7 @@ namespace Core.Services
             return meeting != null;
         }
 
-        public async Task<bool> IsUserHasMeetingAsync(string userId, int doctorId)
+        public async Task<bool> isMeetingScheduled(string userId, int doctorId)
         {
             var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.PatientId == userId && m.DoctorId == doctorId);
 

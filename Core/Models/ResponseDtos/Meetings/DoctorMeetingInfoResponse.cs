@@ -1,4 +1,6 @@
-﻿namespace Core.Models.ResponseDtos.Meetings
+﻿using Microsoft.VisualBasic;
+
+namespace Core.Models.ResponseDtos.Meetings
 {
     public class DoctorMeetingInfoResponse
     {
@@ -12,6 +14,6 @@
 
         public string HospitalAddress { get; set; } = null!;
 
-        public string DateAndTime { get; set; } = null!;
+        public DateTime DateAndTime { get; set; }
     }
 }
