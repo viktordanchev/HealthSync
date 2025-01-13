@@ -101,7 +101,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b54f2ed2-e313-4f03-809d-b951dd3a0429",
+                            ConcurrencyStamp = "8bdad55a-8a73-47fe-abff-6fa482dbe7b9",
                             Email = "i.ivanov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivan",
@@ -109,9 +109,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOV@MAIL.COM",
                             NormalizedUserName = "I.IVANOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE9fI8MpLjnKtmt2ULcIatIoZdrkE9mrzXMQ2TcJkjCJaRs90uk1grJMSaLXlzcLwg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKwjaTdGPsoItRoDbel3CrsltFaX+hhdCceoxF0yiRK5rCqbKZs9ANc/uNktmVg84w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "86e67a98-aee3-4910-af99-f22882dc2e4f",
+                            SecurityStamp = "23448b7c-987a-48d9-b443-2b053dd60e8b",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanov@mail.com"
                         },
@@ -119,7 +119,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d3dd8419-60f5-4a36-bc78-0b0fe7e692e6",
+                            ConcurrencyStamp = "0558427d-c441-4b10-b34b-156a30f34def",
                             Email = "m.marinova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Maria",
@@ -127,9 +127,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.MARINOVA@MAIL.COM",
                             NormalizedUserName = "M.MARINOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOc1YBJ/h2APChjPQ0RHN6w2AxR/SW/69+xJmSpkVVE8pn0sjV5XEEmuEiQLYrfMUA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIEuvBgD8NxCLRy9rvhTPuO/ndh+YVLtA9f6IuEgtFIj7akTZ4c62KGJS2EtsL2/FQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e90f3b17-f178-4a39-9ca9-c2d5682bb622",
+                            SecurityStamp = "976e7e7e-6c5a-4903-a677-d2fafbf11956",
                             TwoFactorEnabled = false,
                             UserName = "m.marinova@mail.com"
                         },
@@ -137,7 +137,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "88cd5a7b-01d8-49b4-8688-35cd23751532",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "06c9c641-c815-4689-83ce-c40b71e5fb00",
+                            ConcurrencyStamp = "45e3c21b-bc25-479d-bb3a-aa7eb6dda498",
                             Email = "a.kirilov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Aleks",
@@ -145,9 +145,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "A.KIRILOV@MAIL.COM",
                             NormalizedUserName = "A.KIRILOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENKePjjp6X8umq0sin4xpOO3zOaZ+7AdWK1m4o/vQU4K79NTRNvGQWyJHhofifKbrQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKwFq87N9++9b+ORtP1LsxqdxArRbj8c1+Ahnp/BWmaykolsxYfzXUw2mp03AzRwkQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f13cbf59-e1a6-42d8-bd36-1f8f92b7d198",
+                            SecurityStamp = "2e3e6d37-48ad-4396-b728-38dad2670ac1",
                             TwoFactorEnabled = false,
                             UserName = "a.kirilov@mail.com"
                         },
@@ -155,7 +155,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "152c9e40-5248-4060-9e2c-d93b6ad86466",
+                            ConcurrencyStamp = "d61d9810-55aa-4028-b1f4-250d0f80aab2",
                             Email = "k.conev@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Kiril",
@@ -163,9 +163,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "K.CONEV@MAIL.COM",
                             NormalizedUserName = "K.CONEV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJnGCXX+XC1pKp++/CDcdyuj/AgyQEHhrVuUm6mMQiJunTTldt+1elrwEv567D6b5A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECI09KV4cXLZKjK05RP4eZWAOqy8z3+5GTz5vwhKtsaD7tiI04gULuahtpKlAY3PZA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a5655114-4675-4220-947f-6169c9498cec",
+                            SecurityStamp = "10c7c38b-1372-4606-923f-4b807cce973c",
                             TwoFactorEnabled = false,
                             UserName = "k.conev@mail.com"
                         },
@@ -173,7 +173,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6280cf66-fcf1-47ce-935b-32549be39ed4",
+                            ConcurrencyStamp = "b7f45a71-3ba8-4e55-a559-94705ea2b75a",
                             Email = "i.ivanova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivana",
@@ -181,9 +181,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOVA@MAIL.COM",
                             NormalizedUserName = "I.IVANOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEB402r3XhZZDU+1yVz273Sxxikw+aQq9rx4xZTKftxu/1D7lEtrCrypAVfOO1nOjJA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOWOssfvxwrkcF8s28VcDDHPvyaA8l0dLJTHYALOYQNqd3HqMu84WvkSH+mQUDDBjw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "46b51fa8-c41f-4b38-8fa4-cac156b30eb5",
+                            SecurityStamp = "b71959ca-8389-4648-bca2-14b21b9eaf0e",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanova@mail.com"
                         },
@@ -191,7 +191,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dd61cf22-ade4-4eee-87f6-ebbaf6895d4d",
+                            ConcurrencyStamp = "760173c9-b5e4-4a42-b2e8-9e20a8ddae18",
                             Email = "m.kirilova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Monika",
@@ -199,9 +199,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.KIRILOVA@MAIL.COM",
                             NormalizedUserName = "M.KIRILOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFOc96cV3EpN2DF5N7T5P4DNhC3uK0nrSU9ItJUYa0tgV8uHggRKy/R5a+OcNbU+bg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKG+HSukYNLjh08sRzZsJ5W+uNDTTMq1BCABUG0lnIVXbmhoNb4jbDtXcpbBIbAaWA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "21102956-e072-4bb8-902f-12380a13a41e",
+                            SecurityStamp = "63e3665c-c4ae-4b2a-8b8d-a9fedd126b0c",
                             TwoFactorEnabled = false,
                             UserName = "m.kirilova@mail.com"
                         },
@@ -209,7 +209,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "78850da7-a0ff-42f3-a862-d162457910a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "11a87a05-4231-4e75-9c92-10767d5cdf46",
+                            ConcurrencyStamp = "531f0a91-caed-4d94-99cc-2c3b07f469e0",
                             Email = "v.yankova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Vanya",
@@ -217,9 +217,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "V.YANKOVA@MAIL.COM",
                             NormalizedUserName = "V.YANKOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM1rrSZzb9gr+3FNemtuh7gpk5AqMv6YSqdBVTL3j4b8kVGmE+6JunWnnFAV0yG56A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHyv0E0x9DntqLIg7ZccjdUsj2jJ4/avIFIVXfCKX+TvAmY41Td6QUT2fPUKV7kN9Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "709d91db-4aa5-4473-b4d2-13977ef9503f",
+                            SecurityStamp = "470d7f26-6278-40a3-83e5-64eb4c6ce945",
                             TwoFactorEnabled = false,
                             UserName = "v.yankova@mail.com"
                         });
@@ -286,9 +286,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<int>("MeetingTimeMinutes")
-                        .HasColumnType("int");
-
                     b.Property<int>("SpecialtyId")
                         .HasColumnType("int");
 
@@ -310,7 +307,6 @@ namespace Infrastructure.Migrations
                             IdentityId = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Ivan-Ivanov.jpg",
                             Information = "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care.",
-                            MeetingTimeMinutes = 30,
                             SpecialtyId = 1
                         },
                         new
@@ -319,7 +315,6 @@ namespace Infrastructure.Migrations
                             HospitalId = 1,
                             IdentityId = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Maria-Marinova.jpg",
-                            MeetingTimeMinutes = 30,
                             SpecialtyId = 2
                         },
                         new
@@ -328,7 +323,6 @@ namespace Infrastructure.Migrations
                             HospitalId = 1,
                             IdentityId = "88cd5a7b-01d8-49b4-8688-35cd23751532",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Aleks-Kirilov.jpg",
-                            MeetingTimeMinutes = 15,
                             SpecialtyId = 2
                         },
                         new
@@ -337,7 +331,6 @@ namespace Infrastructure.Migrations
                             HospitalId = 1,
                             IdentityId = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Kiril-Conev.jpg",
-                            MeetingTimeMinutes = 15,
                             SpecialtyId = 3
                         },
                         new
@@ -346,7 +339,6 @@ namespace Infrastructure.Migrations
                             HospitalId = 2,
                             IdentityId = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Ivana-Ivanova.jpg",
-                            MeetingTimeMinutes = 20,
                             SpecialtyId = 4
                         },
                         new
@@ -355,7 +347,6 @@ namespace Infrastructure.Migrations
                             HospitalId = 2,
                             IdentityId = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
                             ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Monika-Kirilova.jpg",
-                            MeetingTimeMinutes = 30,
                             SpecialtyId = 3
                         },
                         new
@@ -363,7 +354,6 @@ namespace Infrastructure.Migrations
                             Id = 7,
                             HospitalId = 2,
                             IdentityId = "78850da7-a0ff-42f3-a862-d162457910a0",
-                            MeetingTimeMinutes = 10,
                             SpecialtyId = 1
                         });
                 });
@@ -584,7 +574,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.WeekDay", b =>
+            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -604,6 +594,9 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsWorkDay")
                         .HasColumnType("bit");
 
+                    b.Property<int>("MeetingTimeMinutes")
+                        .HasColumnType("int");
+
                     b.Property<TimeSpan>("Start")
                         .HasColumnType("time");
 
@@ -611,7 +604,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("WeekDays");
+                    b.ToTable("WorkWeek");
 
                     b.HasData(
                         new
@@ -621,6 +614,7 @@ namespace Infrastructure.Migrations
                             DoctorId = 1,
                             End = new TimeSpan(0, 17, 30, 0, 0),
                             IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
                             Start = new TimeSpan(0, 9, 30, 0, 0)
                         },
                         new
@@ -630,6 +624,7 @@ namespace Infrastructure.Migrations
                             DoctorId = 1,
                             End = new TimeSpan(0, 17, 30, 0, 0),
                             IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
                             Start = new TimeSpan(0, 12, 30, 0, 0)
                         },
                         new
@@ -639,6 +634,7 @@ namespace Infrastructure.Migrations
                             DoctorId = 1,
                             End = new TimeSpan(0, 17, 30, 0, 0),
                             IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
                             Start = new TimeSpan(0, 9, 30, 0, 0)
                         },
                         new
@@ -648,6 +644,7 @@ namespace Infrastructure.Migrations
                             DoctorId = 1,
                             End = new TimeSpan(0, 17, 30, 0, 0),
                             IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
                             Start = new TimeSpan(0, 12, 30, 0, 0)
                         },
                         new
@@ -657,6 +654,7 @@ namespace Infrastructure.Migrations
                             DoctorId = 1,
                             End = new TimeSpan(0, 17, 30, 0, 0),
                             IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
                             Start = new TimeSpan(0, 9, 30, 0, 0)
                         },
                         new
@@ -666,6 +664,7 @@ namespace Infrastructure.Migrations
                             DoctorId = 1,
                             End = new TimeSpan(0, 0, 0, 0, 0),
                             IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
                             Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
@@ -675,6 +674,7 @@ namespace Infrastructure.Migrations
                             DoctorId = 1,
                             End = new TimeSpan(0, 0, 0, 0, 0),
                             IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
                             Start = new TimeSpan(0, 0, 0, 0, 0)
                         });
                 });
@@ -931,7 +931,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.WeekDay", b =>
+            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
                 {
                     b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
                         .WithMany("WorkWeek")

@@ -1,5 +1,4 @@
-﻿using Core.Models.DoctorSchedule;
-using Core.Models.ResponseDtos.DoctorSchedule;
+﻿using Core.Models.ResponseDtos.DoctorSchedule;
 using Core.Services.Contracts;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +17,10 @@ namespace Core.Services
         public async Task<bool> IsDayOffAsync(int doctorId, DateTime date)
         {
             var daysOff = await GetDaysOffAsync(doctorId, date.Month, date.Year);
+            var busyDays = await GetBusyDaysAsync(doctorId, date.Month, date.Year);
+            var isDayOff = daysOff.Contains(date) || busyDays.Contains(date) ? true : false;
 
-            return daysOff.Any(d => d.Date == date);
+            return isDayOff;
         }
 
         public async Task<IEnumerable<string>> GetAvailableMeetingsAsync(int doctorId, DateTime date)
@@ -27,13 +28,11 @@ namespace Core.Services
             var workTime = await _context.Doctors
                 .AsNoTracking()
                 .Where(d => d.Id == doctorId)
-                .Select(d => new DoctorWorkTimeModel()
+                .Select(d => new
                 {
-                    MeetingTimeMinutes = d.MeetingTimeMinutes,
-                    WorkDayStart = d.WorkWeek.First(wd => wd.Day == date.DayOfWeek).Start,
-                    WorkDayEnd = d.WorkWeek.First(wd => wd.Day == date.DayOfWeek).End,
+                    WorkDay = d.WorkWeek.FirstOrDefault(w => w.Day == date.DayOfWeek),
                     Meetings = d.Meetings
-                        .Where(m => m.Date.Date == date.Date)
+                        .Where(m => m.Date == date)
                         .Select(m => m.Date.TimeOfDay)
                         .ToList()
                 })
@@ -41,14 +40,14 @@ namespace Core.Services
 
             var availableMeetings = new List<string>();
 
-            while (workTime.WorkDayStart <= workTime.WorkDayEnd)
+            while (workTime.WorkDay.Start <= workTime.WorkDay.End)
             {
-                if (!workTime.Meetings.Contains(workTime.WorkDayStart))
+                if (!workTime.Meetings.Contains(workTime.WorkDay.Start))
                 {
-                    availableMeetings.Add($"{workTime.WorkDayStart.Hours:D2} : {workTime.WorkDayStart.Minutes:D2}");
+                    availableMeetings.Add($"{workTime.WorkDay.Start.Hours:D2} : {workTime.WorkDay.Start.Minutes:D2}");
                 }
 
-                workTime.WorkDayStart = workTime.WorkDayStart.Add(TimeSpan.FromMinutes(workTime.MeetingTimeMinutes));
+                workTime.WorkDay.Start = workTime.WorkDay.Start.Add(TimeSpan.FromMinutes(workTime.WorkDay.MeetingTimeMinutes));
             }
 
             return availableMeetings;
@@ -79,43 +78,34 @@ namespace Core.Services
             return monthSchedule;
         }
 
-        public async Task<bool> IsDateValidAsync(int doctorId, DateTime date)
-        {
-            var busyDays = await GetBusyDaysAsync(doctorId, date.Month, date.Year);
-            var daysOff = await GetDaysOffAsync(doctorId, date.Month, date.Year);
-            var isDateValid = daysOff.Contains(date) || busyDays.Contains(date) ? false : true;
-
-            return isDateValid;
-        }
-
         private async Task<IEnumerable<DateTime>> GetDaysOffAsync(int doctorId, int month, int year)
         {
-            var datesOffTask = _context.DaysOff
+            var monthDaysOff = await _context.Doctors
                 .AsNoTracking()
-                .Where(d => d.DoctorId == doctorId && d.Month == month)
-                .Select(d => new DateTime(DateTime.Now.Year, d.Month, d.Day))
-                .ToListAsync();
+                .Where(d => d.Id == doctorId)
+                .Select(d => new
+                {
+                    DaysOff = d.DaysOff
+                        .Where(doff => doff.Month == month)
+                        .Select(doff => new DateTime(DateTime.Now.Year, doff.Month, doff.Day))
+                        .ToList(),
+                    WorkWeekDaysOff = d.WorkWeek
+                        .Where(wd => !wd.IsWorkDay)
+                        .Select(wd => wd.Day)
+                        .ToList()
+                })
+                .FirstAsync();
 
-            var weeklyDaysOffTask = _context.WeekDays
-                .AsNoTracking()
-                .Where(wd => wd.DoctorId == doctorId & !wd.IsWorkDay)
-                .Select(wd => wd.Day)
-                .ToListAsync();
-
-            await Task.WhenAll(datesOffTask, weeklyDaysOffTask);
-
-            var datesOff = datesOffTask.Result;
-            var weeklyDaysOff = weeklyDaysOffTask.Result;
             var firstDateOfMonth = new DateTime(year, month, 1);
             var lastDateOfMonth = firstDateOfMonth.AddMonths(1).AddDays(-1);
 
             var weeklyDaysOffDates = Enumerable.Range(0, (lastDateOfMonth - firstDateOfMonth).Days + 1)
                              .Select(day => firstDateOfMonth.AddDays(day))
-                             .Where(date => weeklyDaysOff.Contains(date.DayOfWeek))
+                             .Where(date => monthDaysOff.WorkWeekDaysOff.Contains(date.DayOfWeek))
                              .ToList();
 
             var datesOffResult = new List<DateTime>();
-            datesOffResult.AddRange(datesOff);
+            datesOffResult.AddRange(monthDaysOff.DaysOff);
             datesOffResult.AddRange(weeklyDaysOffDates);
 
             return datesOffResult;
@@ -123,18 +113,18 @@ namespace Core.Services
 
         private async Task<IEnumerable<DateTime>> GetBusyDaysAsync(int doctorId, int month, int year)
         {
-            var shedule = await _context.Doctors
+            var shedule = await _context.WorkWeek
                     .AsNoTracking()
                     .Where(d => d.Id == doctorId)
-                    .Select(d => new MonthScheduleModel()
+                    .Select(d => new
                     {
                         MeetingTimeMinutes = d.MeetingTimeMinutes,
-                        AllMeetings = d.Meetings
+                        AllMeetings = d.Doctor.Meetings
                             .Where(m => m.Date.Month == month && m.Date.Year == year)
                             .Select(m => m.Date),
-                        WeekDays = d.WorkWeek
+                        WeekDays = d.Doctor.WorkWeek
                             .Where(wk => wk.IsWorkDay)
-                            .Select(wk => new WeekDayModel()
+                            .Select(wk => new
                             {
                                 Day = wk.Day,
                                 WorkDayStart = wk.Start,

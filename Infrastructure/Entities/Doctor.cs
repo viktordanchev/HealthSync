@@ -10,7 +10,7 @@ namespace Infrastructure.Entities
         {
             Reviews = new List<Review>();
             Meetings = new List<Meeting>();
-            WorkWeek = new List<WeekDay>();
+            WorkWeek = new List<WorkDay>();
             DaysOff = new List<DayOff>();
         }
 
@@ -39,8 +39,6 @@ namespace Infrastructure.Entities
 
         public string? ContactPhoneNumber { get; set; }
 
-        public int MeetingTimeMinutes { get; set; }
-
         public string? ImgUrl { get; set; }
 
         [MaxLength(InformationMaxLength)]
@@ -48,7 +46,7 @@ namespace Infrastructure.Entities
 
         public IEnumerable<Review> Reviews { get; set; }
         public IEnumerable<Meeting> Meetings { get; set; }
-        public IEnumerable<WeekDay> WorkWeek { get; set; }
+        public IEnumerable<WorkDay> WorkWeek { get; set; }
         public IEnumerable<DayOff> DaysOff { get; set; }
     }
 }

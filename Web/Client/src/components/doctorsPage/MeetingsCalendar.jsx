@@ -22,7 +22,7 @@ const MeetingsCalendar = ({ doctorId }) => {
 
             try {
                 const response = await apiRequest('doctors', 'getMonthSchedule', dto, undefined, 'POST', false);
-
+                
                 if (response.length > 0) {
                     const dates = response.map(item => ({
                         ...item,
@@ -93,12 +93,10 @@ const MeetingsCalendar = ({ doctorId }) => {
                             </div> :
                             <>
                                 <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
-                                    {new Date() <= new Date(currentYear, currentMonth) ?
+                                    {new Date() <= new Date(currentYear, currentMonth) &&
                                         <button onClick={handlePreviousMonth} className="w-1/3">
                                             Previous
-                                        </button> :
-                                        <div className="w-1/3">
-                                        </div>}
+                                        </button>}
                                     <div className="w-1/3 text-center flex justify-center space-x-1">
                                         <p>{monthNames[currentMonth]}</p>
                                         <p>{currentYear}</p>

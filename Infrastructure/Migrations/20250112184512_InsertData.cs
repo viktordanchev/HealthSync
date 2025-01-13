@@ -27,13 +27,13 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "d3dd8419-60f5-4a36-bc78-0b0fe7e692e6", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEOc1YBJ/h2APChjPQ0RHN6w2AxR/SW/69+xJmSpkVVE8pn0sjV5XEEmuEiQLYrfMUA==", null, false, "e90f3b17-f178-4a39-9ca9-c2d5682bb622", false, "m.marinova@mail.com" },
-                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "11a87a05-4231-4e75-9c92-10767d5cdf46", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEM1rrSZzb9gr+3FNemtuh7gpk5AqMv6YSqdBVTL3j4b8kVGmE+6JunWnnFAV0yG56A==", null, false, "709d91db-4aa5-4473-b4d2-13977ef9503f", false, "v.yankova@mail.com" },
-                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "06c9c641-c815-4689-83ce-c40b71e5fb00", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAENKePjjp6X8umq0sin4xpOO3zOaZ+7AdWK1m4o/vQU4K79NTRNvGQWyJHhofifKbrQ==", null, false, "f13cbf59-e1a6-42d8-bd36-1f8f92b7d198", false, "a.kirilov@mail.com" },
-                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "152c9e40-5248-4060-9e2c-d93b6ad86466", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEJnGCXX+XC1pKp++/CDcdyuj/AgyQEHhrVuUm6mMQiJunTTldt+1elrwEv567D6b5A==", null, false, "a5655114-4675-4220-947f-6169c9498cec", false, "k.conev@mail.com" },
-                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "b54f2ed2-e313-4f03-809d-b951dd3a0429", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEE9fI8MpLjnKtmt2ULcIatIoZdrkE9mrzXMQ2TcJkjCJaRs90uk1grJMSaLXlzcLwg==", null, false, "86e67a98-aee3-4910-af99-f22882dc2e4f", false, "i.ivanov@mail.com" },
-                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "dd61cf22-ade4-4eee-87f6-ebbaf6895d4d", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEFOc96cV3EpN2DF5N7T5P4DNhC3uK0nrSU9ItJUYa0tgV8uHggRKy/R5a+OcNbU+bg==", null, false, "21102956-e072-4bb8-902f-12380a13a41e", false, "m.kirilova@mail.com" },
-                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "6280cf66-fcf1-47ce-935b-32549be39ed4", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEB402r3XhZZDU+1yVz273Sxxikw+aQq9rx4xZTKftxu/1D7lEtrCrypAVfOO1nOjJA==", null, false, "46b51fa8-c41f-4b38-8fa4-cac156b30eb5", false, "i.ivanova@mail.com" }
+                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "0558427d-c441-4b10-b34b-156a30f34def", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEIEuvBgD8NxCLRy9rvhTPuO/ndh+YVLtA9f6IuEgtFIj7akTZ4c62KGJS2EtsL2/FQ==", null, false, "976e7e7e-6c5a-4903-a677-d2fafbf11956", false, "m.marinova@mail.com" },
+                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "531f0a91-caed-4d94-99cc-2c3b07f469e0", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEHyv0E0x9DntqLIg7ZccjdUsj2jJ4/avIFIVXfCKX+TvAmY41Td6QUT2fPUKV7kN9Q==", null, false, "470d7f26-6278-40a3-83e5-64eb4c6ce945", false, "v.yankova@mail.com" },
+                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "45e3c21b-bc25-479d-bb3a-aa7eb6dda498", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEKwFq87N9++9b+ORtP1LsxqdxArRbj8c1+Ahnp/BWmaykolsxYfzXUw2mp03AzRwkQ==", null, false, "2e3e6d37-48ad-4396-b728-38dad2670ac1", false, "a.kirilov@mail.com" },
+                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "d61d9810-55aa-4028-b1f4-250d0f80aab2", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAECI09KV4cXLZKjK05RP4eZWAOqy8z3+5GTz5vwhKtsaD7tiI04gULuahtpKlAY3PZA==", null, false, "10c7c38b-1372-4606-923f-4b807cce973c", false, "k.conev@mail.com" },
+                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "8bdad55a-8a73-47fe-abff-6fa482dbe7b9", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEKwjaTdGPsoItRoDbel3CrsltFaX+hhdCceoxF0yiRK5rCqbKZs9ANc/uNktmVg84w==", null, false, "23448b7c-987a-48d9-b443-2b053dd60e8b", false, "i.ivanov@mail.com" },
+                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "760173c9-b5e4-4a42-b2e8-9e20a8ddae18", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEKG+HSukYNLjh08sRzZsJ5W+uNDTTMq1BCABUG0lnIVXbmhoNb4jbDtXcpbBIbAaWA==", null, false, "63e3665c-c4ae-4b2a-8b8d-a9fedd126b0c", false, "m.kirilova@mail.com" },
+                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "b7f45a71-3ba8-4e55-a559-94705ea2b75a", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEOWOssfvxwrkcF8s28VcDDHPvyaA8l0dLJTHYALOYQNqd3HqMu84WvkSH+mQUDDBjw==", null, false, "b71959ca-8389-4648-bca2-14b21b9eaf0e", false, "i.ivanova@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -72,16 +72,16 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Doctors",
-                columns: new[] { "Id", "ContactEmail", "ContactPhoneNumber", "HospitalId", "IdentityId", "ImgUrl", "Information", "MeetingTimeMinutes", "SpecialtyId" },
+                columns: new[] { "Id", "ContactEmail", "ContactPhoneNumber", "HospitalId", "IdentityId", "ImgUrl", "Information", "SpecialtyId" },
                 values: new object[,]
                 {
-                    { 1, null, null, 1, "a3717562-385e-41ce-9eff-0f1b994e5548", "https://storage.cloud.google.com/healthsync/profile-images/Ivan-Ivanov.jpg", "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care.", 30, 1 },
-                    { 2, null, null, 1, "4d650e24-6b66-41e3-8391-efab8c31a1dd", "https://storage.cloud.google.com/healthsync/profile-images/Maria-Marinova.jpg", null, 30, 2 },
-                    { 3, null, null, 1, "88cd5a7b-01d8-49b4-8688-35cd23751532", "https://storage.cloud.google.com/healthsync/profile-images/Aleks-Kirilov.jpg", null, 15, 2 },
-                    { 4, null, null, 1, "95189f02-fb1a-4700-95e3-6146b8aa8b15", "https://storage.cloud.google.com/healthsync/profile-images/Kiril-Conev.jpg", null, 15, 3 },
-                    { 5, null, null, 2, "f37b43ca-86a2-4b11-972d-5e0569f4deb3", "https://storage.cloud.google.com/healthsync/profile-images/Ivana-Ivanova.jpg", null, 20, 4 },
-                    { 6, null, null, 2, "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", "https://storage.cloud.google.com/healthsync/profile-images/Monika-Kirilova.jpg", null, 30, 3 },
-                    { 7, null, null, 2, "78850da7-a0ff-42f3-a862-d162457910a0", null, null, 10, 1 }
+                    { 1, null, null, 1, "a3717562-385e-41ce-9eff-0f1b994e5548", "https://storage.cloud.google.com/healthsync/profile-images/Ivan-Ivanov.jpg", "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care.", 1 },
+                    { 2, null, null, 1, "4d650e24-6b66-41e3-8391-efab8c31a1dd", "https://storage.cloud.google.com/healthsync/profile-images/Maria-Marinova.jpg", null, 2 },
+                    { 3, null, null, 1, "88cd5a7b-01d8-49b4-8688-35cd23751532", "https://storage.cloud.google.com/healthsync/profile-images/Aleks-Kirilov.jpg", null, 2 },
+                    { 4, null, null, 1, "95189f02-fb1a-4700-95e3-6146b8aa8b15", "https://storage.cloud.google.com/healthsync/profile-images/Kiril-Conev.jpg", null, 3 },
+                    { 5, null, null, 2, "f37b43ca-86a2-4b11-972d-5e0569f4deb3", "https://storage.cloud.google.com/healthsync/profile-images/Ivana-Ivanova.jpg", null, 4 },
+                    { 6, null, null, 2, "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", "https://storage.cloud.google.com/healthsync/profile-images/Monika-Kirilova.jpg", null, 3 },
+                    { 7, null, null, 2, "78850da7-a0ff-42f3-a862-d162457910a0", null, null, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -106,17 +106,17 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "WeekDays",
-                columns: new[] { "Id", "Day", "DoctorId", "End", "IsWorkDay", "Start" },
+                table: "WorkWeek",
+                columns: new[] { "Id", "Day", "DoctorId", "End", "IsWorkDay", "MeetingTimeMinutes", "Start" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, new TimeSpan(0, 17, 30, 0, 0), true, new TimeSpan(0, 9, 30, 0, 0) },
-                    { 2, 2, 1, new TimeSpan(0, 17, 30, 0, 0), true, new TimeSpan(0, 12, 30, 0, 0) },
-                    { 3, 3, 1, new TimeSpan(0, 17, 30, 0, 0), true, new TimeSpan(0, 9, 30, 0, 0) },
-                    { 4, 4, 1, new TimeSpan(0, 17, 30, 0, 0), true, new TimeSpan(0, 12, 30, 0, 0) },
-                    { 5, 5, 1, new TimeSpan(0, 17, 30, 0, 0), true, new TimeSpan(0, 9, 30, 0, 0) },
-                    { 6, 6, 1, new TimeSpan(0, 0, 0, 0, 0), false, new TimeSpan(0, 0, 0, 0, 0) },
-                    { 7, 0, 1, new TimeSpan(0, 0, 0, 0, 0), false, new TimeSpan(0, 0, 0, 0, 0) }
+                    { 1, 1, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0) },
+                    { 2, 2, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 12, 30, 0, 0) },
+                    { 3, 3, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0) },
+                    { 4, 4, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 12, 30, 0, 0) },
+                    { 5, 5, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0) },
+                    { 6, 6, 1, new TimeSpan(0, 0, 0, 0, 0), false, 0, new TimeSpan(0, 0, 0, 0, 0) },
+                    { 7, 0, 1, new TimeSpan(0, 0, 0, 0, 0), false, 0, new TimeSpan(0, 0, 0, 0, 0) }
                 });
         }
 
@@ -239,37 +239,37 @@ namespace Infrastructure.Migrations
                 keyValue: 9);
 
             migrationBuilder.DeleteData(
-                table: "WeekDays",
+                table: "WorkWeek",
                 keyColumn: "Id",
                 keyValue: 1);
 
             migrationBuilder.DeleteData(
-                table: "WeekDays",
+                table: "WorkWeek",
                 keyColumn: "Id",
                 keyValue: 2);
 
             migrationBuilder.DeleteData(
-                table: "WeekDays",
+                table: "WorkWeek",
                 keyColumn: "Id",
                 keyValue: 3);
 
             migrationBuilder.DeleteData(
-                table: "WeekDays",
+                table: "WorkWeek",
                 keyColumn: "Id",
                 keyValue: 4);
 
             migrationBuilder.DeleteData(
-                table: "WeekDays",
+                table: "WorkWeek",
                 keyColumn: "Id",
                 keyValue: 5);
 
             migrationBuilder.DeleteData(
-                table: "WeekDays",
+                table: "WorkWeek",
                 keyColumn: "Id",
                 keyValue: 6);
 
             migrationBuilder.DeleteData(
-                table: "WeekDays",
+                table: "WorkWeek",
                 keyColumn: "Id",
                 keyValue: 7);
 

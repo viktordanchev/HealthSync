@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20250110185432_AddNewTables")]
+    [Migration("20250112184452_AddNewTables")]
     partial class AddNewTables
     {
         /// <inheritdoc />
@@ -152,9 +152,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<int>("MeetingTimeMinutes")
-                        .HasColumnType("int");
-
                     b.Property<int>("SpecialtyId")
                         .HasColumnType("int");
 
@@ -266,7 +263,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Specialties");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.WeekDay", b =>
+            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -286,6 +283,9 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsWorkDay")
                         .HasColumnType("bit");
 
+                    b.Property<int>("MeetingTimeMinutes")
+                        .HasColumnType("int");
+
                     b.Property<TimeSpan>("Start")
                         .HasColumnType("time");
 
@@ -293,7 +293,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("WeekDays");
+                    b.ToTable("WorkWeek");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -497,7 +497,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.WeekDay", b =>
+            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
                 {
                     b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
                         .WithMany("WorkWeek")

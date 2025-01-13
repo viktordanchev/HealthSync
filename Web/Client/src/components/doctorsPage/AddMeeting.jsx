@@ -16,14 +16,14 @@ function AddMeeting({ doctorId, date, setDate }) {
     const [isLoading, setIsLoading] = useState(false);
     const [meetingDate, setMeetingDate] = useState('');
     const [meetingTimes, setMeetingTimes] = useState([]);
-
+    
     useEffect(() => {
         const getMeetingTimes = async () => {
             const dto = {
                 doctorId: doctorId,
-                date: date.toISOString()
+                date: date
             };
-
+            
             try {
                 setIsLoading(true);
 

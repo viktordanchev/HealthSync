@@ -8,6 +8,6 @@ namespace RestAPI.Dtos.RequestDtos.Doctors
         public int DoctorId { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public string Date { get; set; } = null!;
     }
 }

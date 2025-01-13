@@ -67,7 +67,6 @@ namespace Infrastructure.Migrations
                     SpecialtyId = table.Column<int>(type: "int", nullable: false),
                     ContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false),
                     ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Information = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)
                 },
@@ -165,7 +164,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WeekDays",
+                name: "WorkWeek",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -174,13 +173,14 @@ namespace Infrastructure.Migrations
                     Day = table.Column<int>(type: "int", nullable: false),
                     IsWorkDay = table.Column<bool>(type: "bit", nullable: false),
                     Start = table.Column<TimeSpan>(type: "time", nullable: false),
-                    End = table.Column<TimeSpan>(type: "time", nullable: false)
+                    End = table.Column<TimeSpan>(type: "time", nullable: false),
+                    MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WeekDays", x => x.Id);
+                    table.PrimaryKey("PK_WorkWeek", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WeekDays_Doctors_DoctorId",
+                        name: "FK_WorkWeek_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
@@ -223,8 +223,8 @@ namespace Infrastructure.Migrations
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WeekDays_DoctorId",
-                table: "WeekDays",
+                name: "IX_WorkWeek_DoctorId",
+                table: "WorkWeek",
                 column: "DoctorId");
         }
 
@@ -241,7 +241,7 @@ namespace Infrastructure.Migrations
                 name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "WeekDays");
+                name: "WorkWeek");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

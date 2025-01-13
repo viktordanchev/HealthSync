@@ -74,13 +74,15 @@ namespace RestAPI.Controllers
         [HttpPost("getAvailableMeetingHours")]
         public async Task<IActionResult> GetAvailableMeetingHours([FromBody] GetAvailableMeetingHours request)
         {
+            var date = DateTime.Parse(request.Date);
+
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.Date))
+                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, date))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, request.Date);
+            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, date);
 
             return Ok(times);
         }
