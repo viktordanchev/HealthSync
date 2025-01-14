@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useAuthContext } from '../contexts/AuthContext';
@@ -6,6 +7,7 @@ import { useLoading } from '../contexts/LoadingContext';
 import apiRequest from '../services/apiRequest';
 
 function UserManage({ userName, userRoles }) {
+    const navigate = useNavigate();
     const { logout } = useAuthContext();
     const { setIsLoading } = useLoading();
     const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +20,7 @@ function UserManage({ userName, userRoles }) {
 
             if (response) {
                 logout();
+                navigate('/home');
             }
         } catch (error) {
             console.error(error);
