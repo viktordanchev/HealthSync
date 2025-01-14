@@ -139,5 +139,14 @@ namespace RestAPI.Controllers
                     Token = accessToken
                 });
         }
+
+        [HttpPost("getDoctorInfo")]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> GetDoctorInfo()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            return Ok();
+        }
     }
 }
