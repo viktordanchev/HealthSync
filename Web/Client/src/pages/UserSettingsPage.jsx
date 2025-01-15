@@ -46,7 +46,7 @@ function UserSettingsPage() {
     });
 
     useEffect(() => {
-        const receiveUserData = async () => {
+        const receiveData = async () => {
             try {
                 setIsLoadingOnReceive(true);
 
@@ -60,7 +60,7 @@ function UserSettingsPage() {
             }
         };
 
-        receiveUserData();
+        receiveData();
     }, []);
 
     const handleSubmit = async (values, { resetForm }) => {

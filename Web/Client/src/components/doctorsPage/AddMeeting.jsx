@@ -13,20 +13,18 @@ function AddMeeting({ doctorId, date, setDate }) {
     const { showMessage } = useMessage();
     const { isAuthenticated, isStillAuth } = useAuthContext();
     const [isTimeChoosed, setIsTimeChoosed] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [meetingDate, setMeetingDate] = useState('');
     const [meetingTimes, setMeetingTimes] = useState([]);
     
     useEffect(() => {
-        const getMeetingTimes = async () => {
+        const receiveData = async () => {
             const dto = {
                 doctorId: doctorId,
                 date: date
             };
             
             try {
-                setIsLoading(true);
-
                 const response = await apiRequest('doctors', 'getAvailableMeetingHours', dto, undefined, 'POST', false);
 
                 setMeetingTimes(response);
@@ -37,7 +35,7 @@ function AddMeeting({ doctorId, date, setDate }) {
             }
         };
 
-        getMeetingTimes();
+        receiveData();
     }, []);
 
     const handleConfirmMeetingButton = () => {

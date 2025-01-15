@@ -54,7 +54,7 @@ function DoctorsPage() {
     useEffect(() => {
         setLoading(true);
 
-        const receiveDoctors = async () => {
+        const receiveData = async () => {
             const dto = {
                 index: 0,
                 sorting: order,
@@ -66,13 +66,14 @@ function DoctorsPage() {
                 const response = await apiRequest('doctors', 'getDoctors', dto, localStorage.getItem('accessToken'), 'POST', false);
 
                 setDoctors(response);
-                setLoading(false);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
 
-        receiveDoctors();
+        receiveData();
     }, [order, search, filter]);
 
     return (

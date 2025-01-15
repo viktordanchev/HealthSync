@@ -12,7 +12,7 @@ function DoctorReviews({ doctorId }) {
     const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
-        const receiveReviews = async (doctorId) => {
+        const receiveData = async (doctorId) => {
             const dto = {
                 index: index,
                 doctorId: doctorId
@@ -20,21 +20,21 @@ function DoctorReviews({ doctorId }) {
 
             try {
                 const response = await apiRequest('reviews', 'getDoctorReviews', dto, undefined, 'POST', false);
-                
+
                 if (response.length != 0) {
                     setReviews(prevReviews => [...prevReviews, ...response]);
                 } else {
                     setHasMore(false);
                 }
-
-                setLoadingMore(false);
-                setIsLoading(false);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setLoadingMore(false);
+                setIsLoading(false);
             }
         };
 
-        receiveReviews(doctorId);
+        receiveData(doctorId);
     }, [index]);
 
     useEffect(() => {

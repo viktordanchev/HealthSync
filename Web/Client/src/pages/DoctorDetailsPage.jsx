@@ -15,7 +15,7 @@ function DoctorDetailsPage() {
     const doctorId = location.state?.doctorId;
 
     useEffect(() => {
-        const receiveDoctorDetails = async () => {
+        const receiveData = async () => {
             try {
                 const response = await apiRequest('doctors', 'getDoctorDetails', doctorId, undefined, 'POST', false);
 
@@ -29,7 +29,7 @@ function DoctorDetailsPage() {
         if (!doctorId) {
             navigate('/doctors');
         } else {
-            receiveDoctorDetails();
+            receiveData();
         }
     }, []);
 

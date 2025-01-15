@@ -130,11 +130,11 @@ namespace Core.Services
             return doctor != null;
         }
 
-        public async Task<DoctorInfoModel> GetDoctorPersonalInfo(string userId)
+        public async Task<DoctorPersonalInfoModel> GetDoctorPersonalInfoAsync(string userId)
         {
             var doctorInfo = await _context.Doctors
                 .Where(d => d.IdentityId == userId)
-                .Select(d => new DoctorInfoModel()
+                .Select(d => new DoctorPersonalInfoModel()
                 {
                     FirstName = d.Identity.FirstName,
                     LastName = d.Identity.LastName,

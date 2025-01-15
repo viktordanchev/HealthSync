@@ -29,7 +29,7 @@ function BecomeDoctorPage() {
     });
 
     useEffect(() => {
-        const receiveUserData = async () => {
+        const receiveData = async () => {
             try {
                 setIsLoadingOnReceive(true);
 
@@ -47,7 +47,7 @@ function BecomeDoctorPage() {
             }
         };
 
-        receiveUserData();
+        receiveData();
     }, []);
 
     const handleSubmit = async (values) => {

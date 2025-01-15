@@ -15,7 +15,7 @@ function DoctorsNavBar({ setOrder, setFilter, setSearch, setSearchParams }) {
         { id: '4', name: 'RatingDesc' }];
 
     useEffect(() => {
-        const receiveSpecialties = async () => {
+        const receiveData = async () => {
             try {
                 const response = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
 
@@ -28,7 +28,7 @@ function DoctorsNavBar({ setOrder, setFilter, setSearch, setSearchParams }) {
             }
         };
 
-        receiveSpecialties();
+        receiveData();
     }, []);
 
     const handleEnterPress = (event) => {

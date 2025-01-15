@@ -13,7 +13,7 @@ const MeetingsCalendar = ({ doctorId }) => {
     const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
     useEffect(() => {
-        const getDaysOff = async () => {
+        const receiveData = async () => {
             const dto = {
                 doctorId: doctorId,
                 month: currentMonth + 1,
@@ -39,7 +39,7 @@ const MeetingsCalendar = ({ doctorId }) => {
             }
         };
 
-        getDaysOff();
+        receiveData();
     }, [currentYear, currentMonth]);
 
     const generateCalendar = (year, month) => {

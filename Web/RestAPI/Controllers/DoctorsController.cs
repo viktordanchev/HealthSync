@@ -140,13 +140,15 @@ namespace RestAPI.Controllers
                 });
         }
 
-        [HttpPost("getDoctorInfo")]
+        [HttpGet("getDoctorInfo")]
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> GetDoctorInfo()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
-            return Ok();
+            var doctorInfo = await _doctorService.GetDoctorPersonalInfoAsync(userId);
+
+            return Ok(doctorInfo);
         }
     }
 }

@@ -10,7 +10,7 @@ function UserMeetingsPage() {
     const [meetings, setMeetings] = useState([]);
 
     useEffect(() => {
-        const receiveMeetings = async () => {
+        const receiveData = async () => {
             try {
                 setIsLoading(true);
 
@@ -27,7 +27,7 @@ function UserMeetingsPage() {
             }
         };
 
-        receiveMeetings();
+        receiveData();
     }, [isDeleted]);
 
     return (
