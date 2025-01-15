@@ -8,7 +8,7 @@
 
         public DateTime DateAndTime { get; set; }
 
-        public string Comment { get; set; } = string.Empty;
+        public string? Comment { get; set; }
 
         public string Reviewer { get; set; } = null!;
     }

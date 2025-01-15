@@ -6,12 +6,14 @@
 
         public string LastName { get; set; } = null!;
 
+        public string? ImgUrl { get; set; }
+
         public string Hospital { get; set; } = null!;
 
         public string Specialty { get; set; } = null!;
 
-        public string ContactEmail { get; set; } = string.Empty;
+        public string? ContactEmail { get; set; }
             
-        public string ContactPhoneNumber { get; set; } = string.Empty;
+        public string? ContactPhoneNumber { get; set; }
     }
 }

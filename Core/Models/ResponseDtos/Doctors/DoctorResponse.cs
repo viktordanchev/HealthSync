@@ -6,7 +6,7 @@
 
         public string Name { get; set; } = null!;
 
-        public string ImgUrl { get; set; } = string.Empty;
+        public string? ImgUrl { get; set; }
 
         public string Specialty { get; set; } = null!;
 

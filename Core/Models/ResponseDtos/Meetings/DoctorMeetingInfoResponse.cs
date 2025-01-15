@@ -8,7 +8,7 @@ namespace Core.Models.ResponseDtos.Meetings
 
         public string Name { get; set; } = null!;
 
-        public string ImgUrl { get; set; } = string.Empty;
+        public string? ImgUrl { get; set; }
 
         public string Hospital { get; set; } = null!;
 

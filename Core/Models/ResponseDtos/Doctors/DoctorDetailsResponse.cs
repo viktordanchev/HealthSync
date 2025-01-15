@@ -6,10 +6,10 @@
 
         public string HospitalAddress { get; set; } = null!;
 
-        public string Information { get; set; } = string.Empty;
+        public string? Information { get; set; }
 
-        public string ContactEmail { get; set; } = string.Empty;
+        public string? ContactEmail { get; set; }
 
-        public string ContactPhoneNumber { get; set; } = string.Empty;
+        public string? ContactPhoneNumber { get; set; }
     }
 }

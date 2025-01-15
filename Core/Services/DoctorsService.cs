@@ -138,6 +138,7 @@ namespace Core.Services
                 {
                     FirstName = d.Identity.FirstName,
                     LastName = d.Identity.LastName,
+                    ImgUrl = d.ImgUrl,
                     Hospital = d.Hospital.Name,
                     Specialty = d.Specialty.Type,
                     ContactEmail = d.ContactEmail,
