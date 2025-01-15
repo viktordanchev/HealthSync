@@ -129,5 +129,23 @@ namespace Core.Services
 
             return doctor != null;
         }
+
+        public async Task<DoctorInfoModel> GetDoctorPersonalInfo(string userId)
+        {
+            var doctorInfo = await _context.Doctors
+                .Where(d => d.IdentityId == userId)
+                .Select(d => new DoctorInfoModel()
+                {
+                    FirstName = d.Identity.FirstName,
+                    LastName = d.Identity.LastName,
+                    Hospital = d.Hospital.Name,
+                    Specialty = d.Specialty.Type,
+                    ContactEmail = d.ContactEmail,
+                    ContactPhoneNumber = d.ContactPhoneNumber
+                })
+                .FirstAsync();
+
+            return doctorInfo;
+        }
     }
 }
