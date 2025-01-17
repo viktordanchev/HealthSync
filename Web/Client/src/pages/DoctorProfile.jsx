@@ -8,12 +8,12 @@ function DoctorProfile() {
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [doctorData, setDoctorData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-
+    
     useEffect(() => {
         const receiveData = async () => {
             try {
                 const response = await apiRequest('doctors', 'getDoctorInfo', undefined, localStorage.getItem('accessToken'), 'GET', false);
-                
+
                 setDoctorData(response);
             } catch (error) {
                 console.error(error);
@@ -26,16 +26,19 @@ function DoctorProfile() {
     }, []);
 
     return (
-        <section className="text-gray-700 space-y-4 flex flex-col justify-center items-center">
+        <section className="mx-20 text-gray-700 space-y-4 flex flex-col justify-center items-center">
             <h2 className="text-center text-4xl font-thin underline-thin">Doctor Profile</h2>
             {isLoading ? <Loading type={'big'} /> :
                 <div className="flex space-x-6">
-                    <article className="p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
+                    <article className="p-14 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
                         <div className="flex flex-col items-center space-y-3">
-                            <ProfilePhoto setProfilePhoto={setProfilePhoto} />
+                            <ProfilePhoto
+                                setProfilePhoto={setProfilePhoto}
+                                currentImage={doctorData.imgUrl}
+                            />
                             <div className="flex flex-col items-center text-2xl">
-                                <p>ivanaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                                <p>ivan</p>
+                                <p>{doctorData.firstName}</p>
+                                <p>{doctorData.specialty}</p>
                             </div>
                         </div>
                         <hr className="border-e border-white w-full my-3" />
