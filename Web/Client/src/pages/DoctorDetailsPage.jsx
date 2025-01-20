@@ -2,9 +2,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import apiRequest from '../services/apiRequest';
 import Loading from '../components/Loading';
-import MeetingsCalendar from '../components/doctorsPage/MeetingsCalendar';
-import ReviewsSection from '../components/doctorsPage/ReviewsSection';
-import AddReview from '../components/doctorsPage/AddReview';
+import MeetingsCalendar from '../components/doctorDetailsPage/MeetingsCalendar';
+import ReviewsSection from '../components/doctorDetailsPage/ReviewsSection';
+import AddReview from '../components/doctorDetailsPage/AddReview';
 import doctorProfile from '../assets/images/doctor-profile.jpg';
 
 function DoctorDetailsPage() {
@@ -39,7 +39,7 @@ function DoctorDetailsPage() {
                 <section className="h-full flex space-x-6 mx-20 text-gray-700 lg:mx-16 lg:flex-col lg:space-x-0 lg:space-y-6 md:mx-0 md:flex-col md:space-x-0 md:space-y-6 sm:mx-0 sm:flex-col sm:space-x-0 sm:space-y-6">
                     <article className="w-1/4 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
                         <div className="flex flex-col items-center space-y-3">
-                            <div className="w-32 h-32 flex justify-center items-center bg-zinc-700 rounded-full border-2 border-maincolor">
+                            <div className="w-32 h-32 flex justify-center items-center bg-zinc-700 rounded-full">
                                 <img
                                     src={doctor.imgUrl ? doctor.imgUrl : doctorProfile}
                                     className="object-cover w-28 h-28 rounded-full"

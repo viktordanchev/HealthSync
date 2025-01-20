@@ -94,7 +94,7 @@ function BecomeDoctorPage() {
             <h2 className="text-center text-4xl font-thin underline-thin">Become part of us!</h2>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
                 <article className="w-2/3 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl space-y-4 md:w-full sm:w-full">
-                    <ProfilePhoto setProfilePhoto={setProfilePhoto} />
+                    <ProfilePhoto changePhoto={setProfilePhoto} />
                     <Formik
                         initialValues={{
                             firstName: userData.firstName,

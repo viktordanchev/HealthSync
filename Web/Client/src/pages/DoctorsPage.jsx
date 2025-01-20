@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import apiRequest from '../services/apiRequest';
 import DoctorCard from '../components/doctorsPage/DoctorCard';
 import Loading from '../components/Loading';
-import DoctorsNavBar from '../components/doctorsPage/DoctorsNavBar';
+import NavigationBar from '../components/doctorsPage/NavigationBar';
 
 function DoctorsPage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -11,10 +11,10 @@ function DoctorsPage() {
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('');
     const [doctors, setDoctors] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [specialties, setSpecialties] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    {/* This hook receives data from the query string */ }
-    useEffect(() => {
+    const receiveDataFromURL = () => {
         const orderFromQuery = searchParams.get('order');
         const filterFromQuery = searchParams.get('filter');
         const searchFromQuery = searchParams.get('search');
@@ -30,10 +30,9 @@ function DoctorsPage() {
         if (searchFromQuery) {
             setSearch(searchFromQuery);
         }
-    }, [searchParams]);
+    };
 
-    {/* This hook sets data in the query string */ }
-    useEffect(() => {
+    const setDataToURL = () => {
         const queryParams = {};
 
         if (order !== 'None') {
@@ -47,13 +46,11 @@ function DoctorsPage() {
         if (search) {
             queryParams.search = search.trim();
         }
-
+        
         setSearchParams(queryParams);
-    }, [order, search, filter]);
+    };
 
     useEffect(() => {
-        setLoading(true);
-
         const receiveData = async () => {
             const dto = {
                 index: 0,
@@ -61,42 +58,52 @@ function DoctorsPage() {
                 search: search,
                 filter: filter
             };
-
+            
             try {
-                const response = await apiRequest('doctors', 'getDoctors', dto, localStorage.getItem('accessToken'), 'POST', false);
+                const doctors = await apiRequest('doctors', 'getDoctors', dto, localStorage.getItem('accessToken'), 'POST', false);
+                const specialties = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
 
-                setDoctors(response);
+                setDoctors(doctors);
+                setSpecialties(specialties);
             } catch (error) {
                 console.error(error);
             } finally {
-                setLoading(false);
+                setIsLoading(false);
             }
         };
 
-        receiveData();
-    }, [order, search, filter]);
+        receiveDataFromURL();
+        setDataToURL();
+
+        if (searchParams.size === 0 ||
+            (searchParams.get('order') === order ||
+                searchParams.get('search') === search ||
+                searchParams.get('filter') === filter)
+        ) {
+            receiveData();
+        }
+    }, [searchParams]);
 
     return (
         <section className="mx-32 flex flex-col items-center space-y-6 text-gray-700 lg:mx-16 md:mx-0 sm:mx-0">
-            <DoctorsNavBar
-                order={order}
-                setOrder={setOrder}
-                filter={filter}
-                setFilter={setFilter}
-                setSearch={setSearch}
-                setSearchParams={setSearchParams}
-            />
-            {loading ? <Loading type={'big'} /> :
-                <article className="flex flex-wrap gap-4 justify-center w-full h-full">
-                    {doctors.length == 0 ?
-                        <div className="text-3xl">No doctors found!</div> :
-                        <>
-                            {doctors.map((doctor) => (
-                                <DoctorCard key={doctor.id} doctor={doctor} />
-                            ))}
-                        </>
-                    }
-                </article>}
+            {isLoading ? <Loading type={'big'} /> :
+                <>
+                    <NavigationBar
+                        searchParams={searchParams}
+                        setSearchParams={setSearchParams}
+                        specialties={specialties}
+                    />
+                    <article className="flex flex-wrap gap-4 justify-center w-full h-full">
+                        {doctors.length == 0 ?
+                            <div className="text-3xl">No doctors found!</div> :
+                            <>
+                                {doctors.map((doctor) => (
+                                    <DoctorCard key={doctor.id} doctor={doctor} />
+                                ))}
+                            </>
+                        }
+                    </article>
+                </>}
         </section>
     );
 }
