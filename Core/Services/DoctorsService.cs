@@ -136,8 +136,7 @@ namespace Core.Services
                 .Where(d => d.IdentityId == userId)
                 .Select(d => new DoctorPersonalInfoModel()
                 {
-                    FirstName = d.Identity.FirstName,
-                    LastName = d.Identity.LastName,
+                    Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
                     Hospital = d.Hospital.Name,
                     Specialty = d.Specialty.Type,
