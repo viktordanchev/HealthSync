@@ -19,7 +19,7 @@ import RegisterPage from './pages/RegisterPage';
 import UserMeetingsPage from './pages/UserMeetingsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
 import BecomeDoctorPage from './pages/BecomeDoctorPage';
-import DoctorProfile from './pages/DoctorProfile';
+import DoctorProfilePage from './pages/DoctorProfilePage';
 import DoctorDetailsPage from './pages/DoctorDetailsPage';
 import WorkSchedulePage from './pages/WorkSchedulePage';
 
@@ -76,7 +76,7 @@ function App() {
                                 <Route path="/doctors/:name/:specialty" element={<DoctorDetailsPage />} />
                                 <Route path="/meetings" element={<ProtectedRoute><UserMeetingsPage /></ProtectedRoute>} />
                                 <Route path="/becomeDoctor" element={<ProtectedRoute><BecomeDoctorPage /></ProtectedRoute>} />
-                                <Route path="/doctorProfile" element={<ProtectedRoute roleNeeded={'Doctor'}><DoctorProfile /></ProtectedRoute>} />
+                                <Route path="/doctorProfile" element={<ProtectedRoute roleNeeded={'Doctor'}><DoctorProfilePage /></ProtectedRoute>} />
                                 <Route path="/workSchedule" element={<ProtectedRoute roleNeeded={'Doctor'}><WorkSchedulePage /></ProtectedRoute>} />
                             </Routes>
                         </MessageProvider>
