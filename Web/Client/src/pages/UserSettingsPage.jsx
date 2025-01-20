@@ -116,7 +116,7 @@ function UserSettingsPage() {
                         validationSchema={validationSchema}
                         onSubmit={handleSubmit}
                     >
-                        {({ dirty, isValid, handleSubmit }) => (
+                        {({ dirty }) => (
                             <Form className="flex flex-col space-y-2 text-gray-700">
                                 <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
                                     <div className="w-1/2 sm:w-full">

@@ -1,25 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import ProfilePhoto from '../components/becomeDoctorPage/ProfilePhoto';
 import apiRequest from '../services/apiRequest';
+import { useAuthContext } from '../contexts/AuthContext';
+import { useLoading } from '../contexts/LoadingContext';
+import { useMessage } from '../contexts/MessageContext';
 import Loading from '../components/Loading';
+import ProfilePhoto from '../components/ProfilePhoto';
+import DropdownMenu from '../components/DropdownMenu';
 
 function DoctorProfilePage() {
+    const { isStillAuth } = useAuthContext();
+    const { showMessage } = useMessage();
+    const { setIsLoading } = useLoading();
     const [profilePhoto, setProfilePhoto] = useState(null);
+    const [isPhotoChanged, setIsPhotoChanged] = useState(false);
     const [doctorData, setDoctorData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingOnReceive, setIsLoadingOnReceive] = useState(true);
+    const [hospitals, setHospitals] = useState([]);
+    const [specialties, setSpecialties] = useState([]);
     
     useEffect(() => {
         const receiveData = async () => {
             try {
-                const response = await apiRequest('doctors', 'getDoctorInfo', undefined, localStorage.getItem('accessToken'), 'GET', false);
+                const doctorData = await apiRequest('doctors', 'getDoctorInfo', undefined, localStorage.getItem('accessToken'), 'GET', false);
+                const hospitals = await apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false);
+                const specialties = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
 
-                setDoctorData(response);
+                setDoctorData(doctorData);
+                setProfilePhoto(doctorData.imgUrl);
+                setHospitals(hospitals);
+                setSpecialties(specialties);
             } catch (error) {
                 console.error(error);
             } finally {
-                setIsLoading(false);
+                setIsLoadingOnReceive(false);
             }
         };
 
@@ -27,22 +42,40 @@ function DoctorProfilePage() {
     }, []);
 
     const handleSubmit = async (values) => {
+        const isAuth = await isStillAuth();
 
+        if (!isAuth) {
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handlePhotoChange = (photo) => {
+        setProfilePhoto(photo);
+        setIsPhotoChanged(true);
     };
 
     return (
         <section className="mx-20 text-gray-700 space-y-4 flex flex-col justify-center items-center">
             <h2 className="text-center text-4xl font-thin underline-thin">Doctor Profile</h2>
-            {isLoading ? <Loading type={'big'} /> :
+            {isLoadingOnReceive ? <Loading type={'big'} /> :
                 <div className="flex space-x-6">
                     <article className="p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
                         <div className="flex flex-col items-center space-y-3">
                             <ProfilePhoto
-                                setProfilePhoto={setProfilePhoto}
+                                changePhoto={(photo) => handlePhotoChange(photo)}
                                 currentImage={doctorData.imgUrl}
                             />
                             <div className="flex flex-col items-center text-2xl">
-                                <p>{doctorData.firstName}</p>
+                                <p>{doctorData.name}</p>
                                 <p>{doctorData.specialty}</p>
                             </div>
                         </div>
@@ -50,8 +83,6 @@ function DoctorProfilePage() {
                         <div>
                             <Formik
                                 initialValues={{
-                                    firstName: doctorData.firstName,
-                                    lastName: doctorData.lastName,
                                     contactEmail: doctorData.email || '',
                                     contactPhoneNumber: doctorData.phoneNumber || '',
                                     hospitalId: '',
@@ -60,28 +91,8 @@ function DoctorProfilePage() {
                                 
                                 onSubmit={handleSubmit}
                             >
-                                {({ setFieldValue }) => (
+                                {({ dirty, setFieldValue }) => (
                                     <Form className="flex flex-col space-y-2 text-gray-700">
-                                        <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
-                                            <div className="w-1/2 sm:w-full">
-                                                <label className="text-base font-bold">First name</label>
-                                                <Field
-                                                    className="opacity-75 rounded w-full py-1 px-2 text-gray-700 border-2 border-white cursor-default focus:outline-none"
-                                                    type="text"
-                                                    name="firstName"
-                                                    readOnly
-                                                />
-                                            </div>
-                                            <div className="w-1/2 sm:w-full">
-                                                <label className="text-base font-bold">Last name</label>
-                                                <Field
-                                                    className="opacity-75 rounded w-full py-1 px-2 text-gray-700 border-2 border-white cursor-default focus:outline-none"
-                                                    type="text"
-                                                    name="lastName"
-                                                    readOnly
-                                                />
-                                            </div>
-                                        </div>
                                         <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
                                             <div className="w-1/2 sm:w-full">
                                                 <label className="text-base font-bold">Contact email</label>
@@ -106,7 +117,7 @@ function DoctorProfilePage() {
                                             <label className="text-base font-bold">Choose Hospital</label>
                                             <DropdownMenu
                                                 options={hospitals}
-                                                optionType="All Hospitals"
+                                                optionType={doctorData.hospital}
                                                 setSelectedOption={(value) => setFieldValue('hospitalId', value)}
                                             />
                                             <ErrorMessage name="hospitalId" component="div" className="text-red-500 text-md" />
@@ -115,15 +126,21 @@ function DoctorProfilePage() {
                                             <label className="text-base font-bold">Choose Specialty</label>
                                             <DropdownMenu
                                                 options={specialties}
-                                                optionType="All Specialties"
+                                                optionType={doctorData.specialty}
                                                 setSelectedOption={(value) => setFieldValue('specialtyId', value)}
                                             />
                                             <ErrorMessage name="specialtyId" component="div" className="text-red-500 text-md" />
                                         </div>
                                         <div className="text-center pt-6">
                                             <button
-                                                className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
-                                                type="submit">
+                                                className={`bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded 
+                                        ${dirty || isPhotoChanged ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default'}`}
+                                                type="submit"
+                                                onClick={(e) => {
+                                                    if (!dirty && !isPhotoChanged) {
+                                                        e.preventDefault();
+                                                    }
+                                                }}>
                                                 Submit
                                             </button>
                                         </div>

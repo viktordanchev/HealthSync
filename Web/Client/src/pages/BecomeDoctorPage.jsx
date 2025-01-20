@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
-import DropdownMenu from '../components/becomeDoctorPage/DropdownMenu';
-import ProfilePhoto from '../components/becomeDoctorPage/ProfilePhoto';
-import Loading from '../components/Loading';
 import { validateContactEmail, validateHospital, validateSpecialty } from '../services/validationSchemas';
 import { useLoading } from '../contexts/LoadingContext';
 import { useMessage } from '../contexts/MessageContext';
 import { useAuthContext } from '../contexts/AuthContext';
+import Loading from '../components/Loading';
+import ProfilePhoto from '../components/ProfilePhoto';
+import DropdownMenu from '../components/DropdownMenu';
 
 function BecomeDoctorPage() {
     const navigate = useNavigate();

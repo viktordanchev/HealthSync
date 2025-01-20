@@ -43,7 +43,7 @@ function UserManage({ userName, userRoles }) {
                 </button>
             </div>
             <div
-                className={`absolute right-0 z-40 w-52 rounded-xl shadow-2xl shadow-gray-400 bg-white bg-opacity-100 transition-all duration-300 transform sm:w-full ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] pointer-events-none'
+                className={`absolute right-0 z-40 w-52 rounded-xl shadow-xl shadow-gray-300 bg-white bg-opacity-100 transition-all duration-300 transform sm:w-full ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] pointer-events-none'
                     }`}
             >
                 <ul className="text-center text-gray-700 text-xl">
