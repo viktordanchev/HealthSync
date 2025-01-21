@@ -20,6 +20,8 @@ const MeetingsCalendar = ({ doctorId }) => {
                 year: currentYear
             }
 
+            setIsLoading(true);
+
             try {
                 const response = await apiRequest('doctors', 'getMonthSchedule', dto, undefined, 'POST', false);
 

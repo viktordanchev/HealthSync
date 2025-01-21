@@ -74,10 +74,7 @@ function DoctorProfilePage() {
                                 changePhoto={(photo) => handlePhotoChange(photo)}
                                 currentImage={doctorData.imgUrl}
                             />
-                            <div className="flex flex-col items-center text-2xl">
-                                <p>{doctorData.name}</p>
-                                <p>{doctorData.specialty}</p>
-                            </div>
+                            <p className="text-2xl">{doctorData.name}</p>
                         </div>
                         <hr className="border-e border-white w-full my-3" />
                         <div>

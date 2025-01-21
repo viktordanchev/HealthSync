@@ -11,9 +11,9 @@ function UserMeetingsPage() {
 
     useEffect(() => {
         const receiveData = async () => {
-            try {
-                setIsLoading(true);
+            setIsLoading(true);
 
+            try {
                 const { userId } = jwtDecoder();
 
                 const response = await apiRequest('meetings', 'getUserMeetings', userId, localStorage.getItem('accessToken'), 'POST', false);

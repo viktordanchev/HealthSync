@@ -48,8 +48,6 @@ function UserSettingsPage() {
     useEffect(() => {
         const receiveData = async () => {
             try {
-                setIsLoadingOnReceive(true);
-
                 const response = await apiRequest('account', 'getUserData', undefined, localStorage.getItem('accessToken'), 'GET', false);
 
                 setUserData(response);

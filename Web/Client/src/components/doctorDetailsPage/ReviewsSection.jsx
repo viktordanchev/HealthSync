@@ -18,6 +18,8 @@ function DoctorReviews({ doctorId }) {
                 doctorId: doctorId
             };
 
+            setLoadingMore(true);
+
             try {
                 const response = await apiRequest('reviews', 'getDoctorReviews', dto, undefined, 'POST', false);
 
