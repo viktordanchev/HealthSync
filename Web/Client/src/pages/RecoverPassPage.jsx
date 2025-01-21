@@ -3,9 +3,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
-import { validatePassword, validateConfirmPassword } from '../services/validationSchemas';
 import { useMessage } from '../contexts/MessageContext';
 import { useLoading } from '../contexts/LoadingContext';
+import { authErrors } from "../constants/errors";
 import SendEmail from '../components/SendEmail';
 
 function RecoverPassPage() {
@@ -15,9 +15,13 @@ function RecoverPassPage() {
     const [searchParams] = useSearchParams();
     const token = searchParams.get('token') ? searchParams.get('token').replace(/ /g, '+') : undefined;
 
-    const validationPasswordSchema = Yup.object().shape({
-        password: validatePassword,
-        confirmPassword: validateConfirmPassword
+    const validationPasswordSchema = Yup.object({
+        password: Yup.string()
+            .min(6, authErrors.InvalidPass)
+            .required('Password' + authErrors.RequiredField),
+        confirmPassword: Yup.string()
+            .required('Confirm password' + authErrors.RequiredField)
+            .oneOf([Yup.ref('password'), null], authErrors.PassMatch)
     });
 
     const submitPassword = async (values) => {

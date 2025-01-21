@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
-import { validateFirstName, validateLastName, validateEmail, validatePassword, validateConfirmPassword, validateVrfCode } from '../services/validationSchemas';
 import { useMessage } from '../contexts/MessageContext';
 import { useLoading } from '../contexts/LoadingContext';
 import useTimer from '../hooks/useTimer';
+import { authErrors } from "../constants/errors";
 
 function RegisterPage() {
     const { secondsLeft, start } = useTimer();
@@ -15,12 +15,21 @@ function RegisterPage() {
     const navigate = useNavigate();
 
     const validationSchema = Yup.object({
-        firstName: validateFirstName,
-        lastName: validateLastName,
-        email: validateEmail,
-        vrfCode: validateVrfCode,
-        password: validatePassword,
-        confirmPassword: validateConfirmPassword
+        firstName: Yup.string()
+            .required('First name' + authErrors.RequiredField),
+        lastName: Yup.string()
+            .required('Last name' + authErrors.RequiredField),
+        email: Yup.string()
+            .email(authErrors.InvalidEmail)
+            .required('Email' + authErrors.RequiredField),
+        vrfCode: Yup.string()
+            .required('Verification code' + authErrors.RequiredField),
+        password: Yup.string()
+            .min(6, authErrors.InvalidPass)
+            .required('Password' + authErrors.RequiredField),
+        confirmPassword: Yup.string()
+            .required('Confirm password' + authErrors.RequiredField)
+            .oneOf([Yup.ref('password'), null], authErrors.PassMatch)
     });
 
     const handleRegister = async (values) => {

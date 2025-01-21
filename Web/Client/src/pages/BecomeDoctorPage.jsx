@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
-import { validateContactEmail, validateHospital, validateSpecialty } from '../services/validationSchemas';
 import { useLoading } from '../contexts/LoadingContext';
 import { useMessage } from '../contexts/MessageContext';
 import { useAuthContext } from '../contexts/AuthContext';
 import Loading from '../components/Loading';
 import ProfilePhoto from '../components/ProfilePhoto';
 import DropdownMenu from '../components/DropdownMenu';
+import { authErrors } from "../constants/errors";
 
 function BecomeDoctorPage() {
     const navigate = useNavigate();
@@ -23,9 +23,12 @@ function BecomeDoctorPage() {
     const [profilePhoto, setProfilePhoto] = useState(null);
 
     const validationSchema = Yup.object({
-        email: validateContactEmail,
-        hospitalId: validateHospital,
-        specialtyId: validateSpecialty
+        email: Yup.string()
+            .email(authErrors.InvalidEmail),
+        hospitalId: Yup.string()
+            .required('Hospital' + authErrors.RequiredField),
+        specialtyId: Yup.string()
+            .required('Specialty' + authErrors.RequiredField)
     });
 
     useEffect(() => {

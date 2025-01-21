@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { validateFirstName, validateLastName } from '../services/validationSchemas';
 import { authErrors } from "../constants/errors";
 import apiRequest from '../services/apiRequest';
 import { useLoading } from '../contexts/LoadingContext';
@@ -17,8 +16,10 @@ function UserSettingsPage() {
     const [isLoadingOnReceive, setIsLoadingOnReceive] = useState(true);
 
     const validationSchema = Yup.object({
-        firstName: validateFirstName,
-        lastName: validateLastName,
+        firstName: Yup.string()
+            .required('First name' + authErrors.RequiredField),
+        lastName: Yup.string()
+            .required('Last name' + authErrors.RequiredField),
         currentPassword: Yup.string().test(
             'currentPasswordRequired',
             'Current Password' + authErrors.RequiredField,

@@ -5,10 +5,10 @@ import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
-import { validateEmail, validateLoginPassword } from '../services/validationSchemas';
 import { useAuthContext } from '../contexts/AuthContext';
 import { useLoading } from '../contexts/LoadingContext';
 import { useMessage } from '../contexts/MessageContext';
+import { authErrors } from "../constants/errors";
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -18,8 +18,11 @@ function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
 
     const validationSchema = Yup.object({
-        email: validateEmail,
-        password: validateLoginPassword
+        email: Yup.string()
+            .email(authErrors.InvalidEmail)
+            .required('Email' + authErrors.RequiredField),
+        password: Yup.string()
+            .required('Password' + authErrors.RequiredField)
     });
 
     const handleLogin = async (values) => {

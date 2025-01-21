@@ -2,10 +2,10 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import apiRequest from '../services/apiRequest';
-import { validateEmail } from '../services/validationSchemas';
 import useTimer from '../hooks/useTimer';
 import { useMessage } from '../contexts/MessageContext';
 import { useLoading } from '../contexts/LoadingContext';
+import { authErrors } from '../constants/errors';
 
 function SendEmail({ type }) {
     const { showMessage } = useMessage();
@@ -23,7 +23,11 @@ function SendEmail({ type }) {
             throw new Error('Invalid action type');
     }
 
-    const validationEmailSchema = Yup.object().shape({ email: validateEmail });
+    const validationEmailSchema = Yup.object({
+        email: Yup.string()
+            .email(authErrors.InvalidEmail)
+            .required('Email' + authErrors.RequiredField)
+    });
 
     const sendEmail = async (values) => {
         try {
