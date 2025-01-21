@@ -13,42 +13,31 @@ function DoctorsPage() {
     const [doctors, setDoctors] = useState([]);
     const [specialties, setSpecialties] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    const receiveDataFromURL = () => {
+    
+    {/* This hook receives data from the query string */ }
+    useEffect(() => {
         const orderFromQuery = searchParams.get('order');
         const filterFromQuery = searchParams.get('filter');
         const searchFromQuery = searchParams.get('search');
-
+        
         if (orderFromQuery) {
             setOrder(orderFromQuery);
+        } else {
+            setOrder('None');
         }
 
         if (filterFromQuery) {
             setFilter(filterFromQuery);
+        } else {
+            setFilter('');
         }
 
         if (searchFromQuery) {
             setSearch(searchFromQuery);
+        } else {
+            setSearch('');
         }
-    };
-
-    const setDataToURL = () => {
-        const queryParams = {};
-
-        if (order !== 'None') {
-            queryParams.order = order;
-        }
-
-        if (filter) {
-            queryParams.filter = filter;
-        }
-
-        if (search) {
-            queryParams.search = search.trim();
-        }
-        
-        setSearchParams(queryParams);
-    };
+    }, [searchParams]);
 
     useEffect(() => {
         const receiveData = async () => {
@@ -58,7 +47,9 @@ function DoctorsPage() {
                 search: search,
                 filter: filter
             };
-            
+
+            setIsLoading(true);
+
             try {
                 const doctors = await apiRequest('doctors', 'getDoctors', dto, localStorage.getItem('accessToken'), 'POST', false);
                 const specialties = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
@@ -72,9 +63,6 @@ function DoctorsPage() {
             }
         };
 
-        receiveDataFromURL();
-        setDataToURL();
-
         if (searchParams.size === 0 ||
             (searchParams.get('order') === order ||
                 searchParams.get('search') === search ||
@@ -82,7 +70,7 @@ function DoctorsPage() {
         ) {
             receiveData();
         }
-    }, [searchParams]);
+    }, [order, filter, search]);
 
     return (
         <section className="mx-32 flex flex-col items-center space-y-6 text-gray-700 lg:mx-16 md:mx-0 sm:mx-0">
