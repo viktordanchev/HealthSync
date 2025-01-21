@@ -8,6 +8,8 @@ import { useMessage } from '../contexts/MessageContext';
 import Loading from '../components/Loading';
 import ProfilePhoto from '../components/ProfilePhoto';
 import DropdownMenu from '../components/DropdownMenu';
+import { authErrors } from "../constants/errors";
+import { doctorPersonalInfoMaxLength } from '../constants/data';
 
 function DoctorProfilePage() {
     const { isStillAuth } = useAuthContext();
@@ -19,13 +21,22 @@ function DoctorProfilePage() {
     const [isLoadingOnReceive, setIsLoadingOnReceive] = useState(true);
     const [hospitals, setHospitals] = useState([]);
     const [specialties, setSpecialties] = useState([]);
-    
+    const [personalInfoLenght, setPersonalInfoLenght] = useState(0);
+
+    const validationSchema = Yup.object({
+        email: Yup.string()
+            .email(authErrors.InvalidEmail)
+    });
+
     useEffect(() => {
         const receiveData = async () => {
             try {
                 const doctorData = await apiRequest('doctors', 'getDoctorInfo', undefined, localStorage.getItem('accessToken'), 'GET', false);
-                const hospitals = await apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false);
-                const specialties = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
+                let hospitals = await apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false);
+                let specialties = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
+
+                hospitals = hospitals.filter(h => h.id !== doctorData.hospitalId);
+                specialties = specialties.filter(s => s.id !== doctorData.specialtyId);
 
                 setDoctorData(doctorData);
                 setProfilePhoto(doctorData.imgUrl);
@@ -47,10 +58,11 @@ function DoctorProfilePage() {
         if (!isAuth) {
             return;
         }
-
+        
         try {
             setIsLoading(true);
 
+            await new Promise(res => setTimeout(res, 2000));
         } catch (error) {
             console.error(error);
         } finally {
@@ -83,9 +95,10 @@ function DoctorProfilePage() {
                                     contactEmail: doctorData.email || '',
                                     contactPhoneNumber: doctorData.phoneNumber || '',
                                     hospitalId: '',
-                                    specialtyId: ''
+                                    specialtyId: '',
+                                    personalInformation: ''
                                 }}
-                                
+                                validationSchema={validationSchema}
                                 onSubmit={handleSubmit}
                             >
                                 {({ dirty, setFieldValue }) => (
@@ -127,6 +140,23 @@ function DoctorProfilePage() {
                                                 setSelectedOption={(value) => setFieldValue('specialtyId', value)}
                                             />
                                             <ErrorMessage name="specialtyId" component="div" className="text-red-500 text-md" />
+                                        </div>
+                                        <div>
+                                            <label className="text-md font-bold">Personal information</label>
+                                            <div>
+                                                <Field
+                                                    className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                                    as="textarea"
+                                                    name="personalInformation"
+                                                    maxLength={doctorPersonalInfoMaxLength}
+                                                    onChange={(e) => {
+                                                        setPersonalInfoLenght(e.target.value.length);
+                                                        setFieldValue('personalInformation', e.target.value);
+                                                    }}
+                                                />
+                                                <p className="text-right text-sm">{personalInfoLenght}/{doctorPersonalInfoMaxLength}</p>
+                                            </div>
+                                            <ErrorMessage name="personalInformation" component="div" className="text-red-500 text-md" />
                                         </div>
                                         <div className="text-center pt-6">
                                             <button
