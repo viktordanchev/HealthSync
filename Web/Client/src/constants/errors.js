@@ -6,3 +6,5 @@ export const authErrors = {
 };
 
 export const fetchError = 'There was problem fetching the data!';
+
+export const maxLength = 'This field exceeds the maximum allowed characters.';
