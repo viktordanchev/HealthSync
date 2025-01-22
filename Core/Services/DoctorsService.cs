@@ -60,7 +60,7 @@ namespace Core.Services
             var doctor = await _context.Doctors
                 .AsNoTracking()
                 .Where(d => d.Id == doctorId)
-                .Select(d => new DoctorDetailsResponse() 
+                .Select(d => new DoctorDetailsResponse()
                 {
                     Id = d.Id,
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
@@ -138,8 +138,11 @@ namespace Core.Services
                 {
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
+                    HospitalId = d.HospitalId,
                     Hospital = d.Hospital.Name,
+                    SpecialtyId = d.SpecialtyId,
                     Specialty = d.Specialty.Type,
+                    PersonalInformation = d.Information,
                     ContactEmail = d.ContactEmail,
                     ContactPhoneNumber = d.ContactPhoneNumber
                 })
