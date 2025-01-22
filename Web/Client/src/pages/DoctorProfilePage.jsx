@@ -88,7 +88,7 @@ function DoctorProfilePage() {
             {isLoadingOnReceive ? <Loading type={'big'} /> :
                 <div className="flex space-x-6">
                     <article className="p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex lg:w-full md:w-full sm:w-full">
-                        <div className="space-y-3">
+                        <div className="space-y-3 w-1/3">
                             <div className="flex flex-col items-center space-y-3">
                                 <ProfilePhoto
                                     changePhoto={(photo) => handlePhotoChange(photo)}
