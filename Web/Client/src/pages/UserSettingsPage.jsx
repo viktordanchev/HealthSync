@@ -184,7 +184,7 @@ function UserSettingsPage() {
                                 </div>
                                 <div className="text-center pt-6">
                                     <button
-                                        className={`bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded 
+                                        className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded 
                                         ${dirty ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default'}`}
                                         type="submit"
                                         onClick={(e) => {

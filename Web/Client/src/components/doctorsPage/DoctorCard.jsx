@@ -15,7 +15,7 @@ function DoctorCard({ doctor }) {
                 src={doctor.imgUrl ? doctor.imgUrl : doctorProfile}
                 className="rounded-full object-cover w-20 h-20"
             />
-            <div className="text-center text-lg md:text-base sm:text-base">
+            <div className="text-center md:text-base sm:text-base">
                 <p>{doctor.name}</p>
                 <p className="font-bold">{doctor.specialty}</p>
             </div>
@@ -30,7 +30,7 @@ function DoctorCard({ doctor }) {
                 </div>
             </div>
             <button
-                className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-2 rounded"
+                className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded text-base hover:bg-white hover:text-blue-500"
                 onClick={() => navigate(`/doctors/${pathDoctorName}/${pathDoctorSpecialty}`, { state: { doctorId: doctor.id } })}
             >
                 Details

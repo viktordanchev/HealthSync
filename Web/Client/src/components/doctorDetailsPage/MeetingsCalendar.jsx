@@ -102,7 +102,7 @@ const MeetingsCalendar = ({ doctorId }) => {
                                 <>
                                     <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
                                         {new Date() <= new Date(currentYear, currentMonth) ?
-                                            <button onClick={handlePreviousMonth} className="w-1/3">
+                                            <button className="w-1/3" onClick={handlePreviousMonth}>
                                                 Previous
                                             </button> :
                                             <div className="w-1/3"></div>}
@@ -110,7 +110,7 @@ const MeetingsCalendar = ({ doctorId }) => {
                                             <p>{monthNames[currentMonth]}</p>
                                             <p>{currentYear}</p>
                                         </div>
-                                        <button onClick={handleNextMonth} className="w-1/3">Next</button>
+                                        <button className="w-1/3" onClick={handleNextMonth}>Next</button>
                                     </div>
                                     <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
                                         {daysOfWeek.map((day, index) => (

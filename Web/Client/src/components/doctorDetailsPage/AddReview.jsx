@@ -50,8 +50,8 @@ function AddReview({ doctorId }) {
         <div className="flex justify-center items-center">
             <div
                 onClick={handleAddReviewButton}
-                className={`${isOpen ? 'w-full h-80 rounded-xl bg-maincolor' : 'w-1/2 h-10 cursor-pointer rounded bg-blue-500 text-white text-lg font-bold py-1 text-center border-2 border-blue-500 hover:bg-white hover:text-blue-500'} transition-[width,height] duration-500 ease-in-out`}>
-                {!isOpen ? 'Add Review' :
+                className={`${isOpen ? 'w-full h-80 rounded-xl bg-maincolor' : 'w-1/4 h-9 cursor-pointer rounded bg-blue-500 text-white text-base font-medium py-1 text-center border-2 border-blue-500 hover:bg-white hover:text-blue-500 lg:w-1/3 sm:w-1/2'} transition-[width,height] duration-500 ease-in-out`}>
+                {!isOpen ? <p>Add Review</p> :
                     <div className="h-full flex flex-col justify-between items-center p-4">
                         <div className="w-full">
                             <p className="text-lg">Add Review</p>
@@ -64,7 +64,7 @@ function AddReview({ doctorId }) {
                                     {Array.from({ length: 5 }, (_, i) => (
                                         <svg
                                             key={i}
-                                            className={`w-6 h-6 cursor-pointer ${i === 0 ? 'text-yellow-400' : (i < rating ? 'text-yellow-400' : 'text-gray-300')}`}
+                                            className={`w-6 h-6 cursor-pointer ${i === 0 ? 'text-yellow-400' : (i < rating ? 'text-yellow-400' : 'text-gray-100')}`}
                                             aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="currentColor"
@@ -92,11 +92,12 @@ function AddReview({ doctorId }) {
                         </div>
                         <div className="w-full flex justify-evenly">
                             <button
+                                className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-4 rounded hover:bg-white hover:text-blue-500"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     addReview();
                                 }}
-                                className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-4 rounded">
+                                >
                                 Add
                             </button>
                             <button
@@ -104,7 +105,7 @@ function AddReview({ doctorId }) {
                                     e.stopPropagation();
                                     setIsOpen(false);
                                 }}
-                                className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-4 rounded">
+                                className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-medium py-1 px-4 rounded">
                                 Close
                             </button>
                         </div>

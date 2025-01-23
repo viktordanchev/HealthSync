@@ -100,14 +100,14 @@ function AddMeeting({ doctorId, date, setDate }) {
                     <p className="text-xl">{meetingDate}</p>
                     <div className="flex justify-evenly space-x-4 w-40 text-xl">
                         <button
+                            className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                             onClick={() => setIsTimeChoosed(false)}
-                            className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                         >
                             No
                         </button>
                         <button
+                            className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                             onClick={handleConfirmMeetingButton}
-                            className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                         >
                             Yes
                         </button>
