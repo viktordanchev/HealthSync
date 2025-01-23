@@ -11,6 +11,6 @@ namespace Core.Services.Contracts
         Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync();
         Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber, string? imgUrl);
         Task<bool> IsUserDoctorAsync(string userId);
-        Task<DoctorPersonalInfoModel> GetDoctorPersonalInfoAsync(string userId);
+        Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
     }
 }

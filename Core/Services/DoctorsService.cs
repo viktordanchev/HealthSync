@@ -130,11 +130,11 @@ namespace Core.Services
             return doctor != null;
         }
 
-        public async Task<DoctorPersonalInfoModel> GetDoctorPersonalInfoAsync(string userId)
+        public async Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId)
         {
             var doctorInfo = await _context.Doctors
                 .Where(d => d.IdentityId == userId)
-                .Select(d => new DoctorPersonalInfoModel()
+                .Select(d => new DoctorPersonalInfoResponse()
                 {
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
@@ -144,7 +144,18 @@ namespace Core.Services
                     Specialty = d.Specialty.Type,
                     PersonalInformation = d.Information,
                     ContactEmail = d.ContactEmail,
-                    ContactPhoneNumber = d.ContactPhoneNumber
+                    ContactPhoneNumber = d.ContactPhoneNumber,
+                    WeeklySchedule = d.WorkWeek
+                        .Select(wd => new WeekDayResponse()
+                        {
+                            Id = wd.Id,
+                            WeekDay = wd.WeekDay,
+                            IsWorkDay = wd.IsWorkDay,
+                            WorkDayStart = wd.Start,
+                            WorkDayEnd = wd.End,
+                            MeetingTimeMinutes = wd.MeetingTimeMinutes
+                        })
+                        .ToList()
                 })
                 .FirstAsync();
 
