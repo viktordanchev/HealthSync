@@ -59,7 +59,7 @@ function RegisterPage() {
             setIsLoading(true);
 
             const response = await apiRequest('account', 'sendVrfCode', email, undefined, 'POST', false);
-        
+
             if (response.error) {
                 showMessage(response.error, 'error');
             } else {
@@ -86,47 +86,47 @@ function RegisterPage() {
                     <Form className="flex flex-col space-y-2 text-gray-700">
                         <div className="flex flex-row space-x-4">
                             <div>
-                                <label className="text-md font-bold">First name</label>
+                                <label className="font-medium">First name</label>
                                 <Field
-                                    className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none"
+                                    className="rounded w-full py-1 px-2 border-2 border-white focus:border-blue-500 focus:outline-none"
                                     placeholder="Alex"
                                     type="text"
                                     name="firstName"
                                 />
                             </div>
                             <div>
-                                <label className="text-md font-bold">Last name</label>
+                                <label className="font-medium">Last name</label>
                                 <Field
-                                    className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none"
+                                    className="rounded w-full py-1 px-2 border-2 border-white focus:border-blue-500 focus:outline-none"
                                     placeholder="Ivanov"
                                     type="text"
                                     name="lastName"
                                 />
                             </div>
                         </div>
-                        <ErrorMessage name="firstName" component="div" className="text-red-500 text-md" />
-                        <ErrorMessage name="lastName" component="div" className="text-red-500 text-md" />
+                        <ErrorMessage name="firstName" component="div" className="text-red-500" />
+                        <ErrorMessage name="lastName" component="div" className="text-red-500" />
                         <div>
-                            <label className="text-md font-bold">Email</label>
+                            <label className="font-medium">Email</label>
                             <Field
-                                className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none"
+                                className="rounded w-full py-1 px-2 border-2 border-white focus:border-blue-500 focus:outline-none"
                                 placeholder="user@mail.com"
                                 type="email"
                                 name="email"
                             />
-                            <ErrorMessage name="email" component="div" className="text-red-500 text-md" />
+                            <ErrorMessage name="email" component="div" className="text-red-500" />
                         </div>
                         <div>
-                            <label className="text-md font-bold">Verification code</label>
+                            <label className="font-medium">Verification code</label>
                             <div className="flex">
                                 <Field
-                                    className="rounded-l w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none"
+                                    className="rounded-l w-full py-1 px-2 border-y-2 border-l-2 border-white focus:border-blue-500 focus:outline-none"
                                     type="text"
                                     name="vrfCode"
                                     maxLength="6"
                                 />
                                 <button
-                                    className={`w-1/2 bg-blue-500 border-2 border-blue-500 text-white font-bold rounded-r 
+                                    className={`w-1/2 bg-blue-500 border-2 border-blue-500 text-white font-medium rounded-r 
                                     ${secondsLeft > 0 ? 'cursor-not-allowed' : 'cursor-pointer hover:bg-white hover:text-blue-500'}`}
                                     disabled={secondsLeft > 0}
                                     type="button"
@@ -135,32 +135,37 @@ function RegisterPage() {
                                         sendVrfCode(values.email);
                                     }}
                                 >
-                                    {secondsLeft > 0 ? secondsLeft : 'Get code'}
+                                    {secondsLeft > 0 ?
+                                        <span className="flex justify-center space-x-1">
+                                            <p>Resend:</p>
+                                            <p className="font-normal">{secondsLeft}</p>
+                                        </span> :
+                                        <p>Get code</p>}
                                 </button>
                             </div>
-                            <ErrorMessage name="vrfCode" component="div" className="text-red-500 text-md" />
+                            <ErrorMessage name="vrfCode" component="div" className="text-red-500" />
                         </div>
                         <div>
-                            <label className="text-md font-bold">Password</label>
+                            <label className="font-medium">Password</label>
                             <Field
-                                className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none"
+                                className="rounded w-full py-1 px-2 border-2 border-white focus:border-blue-500 focus:outline-none"
                                 type="password"
                                 name="password"
                             />
-                            <ErrorMessage name="password" component="div" className="text-red-500 text-md" />
+                            <ErrorMessage name="password" component="div" className="text-red-500" />
                         </div>
                         <div>
-                            <label className="text-md font-bold">Confirm Password</label>
+                            <label className="font-medium">Confirm Password</label>
                             <Field
-                                className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none"
+                                className="rounded w-full py-1 px-2 border-2 border-white focus:border-blue-500 focus:outline-none"
                                 type="password"
                                 name="confirmPassword"
                             />
-                            <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-md" />
+                            <ErrorMessage name="confirmPassword" component="div" className="text-red-500" />
                         </div>
                         <div className="text-center pt-6">
                             <button
-                                className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
+                                className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                                 type="submit">
                                 Register
                             </button>

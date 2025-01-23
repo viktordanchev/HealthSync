@@ -55,24 +55,20 @@ function LoginPage() {
             >
                 <Form className="flex flex-col space-y-2 text-gray-700">
                     <div>
-                        <label className="text-md font-bold">
-                            Email
-                        </label>
+                        <label className="font-medium">Email</label>
                         <Field
-                            className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none"
+                            className="rounded w-full py-1 px-2 border-2 border-white focus:border-blue-500 focus:outline-none"
                             placeholder="user@mail.com"
                             type="email"
                             name="email"
                         />
-                        <ErrorMessage name="email" component="div" className="text-red-500 text-md" />
+                        <ErrorMessage name="email" component="div" className="text-red-500" />
                     </div>
                     <div>
-                        <label className="text-md font-bold">
-                            Password
-                        </label>
+                        <label className="font-medium">Password</label>
                         <div className="relative">
                             <Field
-                                className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:border-blue-500 focus:outline-none pr-8"
+                                className="rounded w-full py-1 px-2 border-2 border-white focus:border-blue-500 focus:outline-none pr-8"
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
                             />
@@ -82,7 +78,7 @@ function LoginPage() {
                                 onClick={() => setShowPassword(!showPassword)}
                             />
                         </div>
-                        <ErrorMessage name="password" component="div" className="text-red-500 text-md" />
+                        <ErrorMessage name="password" component="div" className="text-red-500" />
                     </div>
                     <div className="flex items-center justify-between">
                         <label className="inline-flex items-center cursor-pointer">
@@ -91,7 +87,7 @@ function LoginPage() {
                                 name="rememberMe"
                                 className="form-checkbox text-blue-600 cursor-pointer"
                             />
-                            <span className="ml-1 text-md text-white hover:text-gray-200">Remember me</span>
+                            <span className="ml-1 text-white hover:text-gray-200">Remember me</span>
                         </label>
                         <a href="/account/recoverPassword" className="inline-block align-baseline text-sm text-blue-600 underline hover:text-blue-800">
                             Forgot Password?
@@ -99,7 +95,7 @@ function LoginPage() {
                     </div>
                     <div className="text-center pt-6">
                         <button
-                            className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
+                            className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                             type="submit">
                             Sign In
                         </button>

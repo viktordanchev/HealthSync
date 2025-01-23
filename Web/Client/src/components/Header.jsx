@@ -80,10 +80,10 @@ const Header = () => {
                 <div className="flex justify-end space-x-4 w-52 md:hidden sm:hidden">
                     {isAuthenticated ? <UserManage userName={userName} userRoles={userRoles} /> :
                         <>
-                            <a href="/login" className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-2 px-3 rounded hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
+                            <a href="/login" className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-2 px-3 rounded hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
                                 Login
                             </a>
-                            <a href="/register" className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-2 px-3 rounded hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
+                            <a href="/register" className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-2 px-3 rounded hover:bg-white hover:text-blue-500 md:text-base sm:text-base">
                                 Register
                             </a>
                         </>}

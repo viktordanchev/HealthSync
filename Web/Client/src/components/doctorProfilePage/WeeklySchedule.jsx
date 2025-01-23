@@ -6,7 +6,9 @@ function WeeklySchedule({ weekDays }) {
         <div className="space-y-6 w-2/3">
             <h2 className="text-center text-3xl font-thin underline-thin">Weekly Schedule</h2>
             <div className="text-white flex justify-center items-center flex-wrap gap-3">
-                <WeekDayCard />
+                {weekDays.map((weekDay) => (
+                    <WeekDayCard key={weekDay.id} data={weekDay} />
+                ))}
             </div>
         </div>
     );

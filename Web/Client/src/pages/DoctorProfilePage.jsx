@@ -37,7 +37,7 @@ function DoctorProfilePage() {
                 const doctorData = await apiRequest('doctors', 'getDoctorInfo', undefined, localStorage.getItem('accessToken'), 'GET', false);
                 let hospitals = await apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false);
                 let specialties = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
-
+                
                 hospitals = hospitals.filter(h => h.id !== doctorData.hospitalId);
                 specialties = specialties.filter(s => s.id !== doctorData.specialtyId);
 
@@ -112,44 +112,44 @@ function DoctorProfilePage() {
                                         <Form className="flex flex-col space-y-2 text-gray-700">
                                             <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
                                                 <div className="w-1/2 sm:w-full">
-                                                    <label className="text-base font-bold">Contact email</label>
+                                                    <label className="font-medium">Contact email</label>
                                                     <Field
                                                         className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                                         type="email"
                                                         name="contactEmail"
                                                     />
-                                                    <ErrorMessage name="contactEmail" component="div" className="text-red-500 text-md" />
+                                                    <ErrorMessage name="contactEmail" component="div" className="text-red-500" />
                                                 </div>
                                                 <div className="w-1/2 sm:w-full">
-                                                    <label className="text-base font-bold">Phone number</label>
+                                                    <label className="font-medium">Phone number</label>
                                                     <Field
                                                         className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                                         type="tel"
                                                         name="contactPhoneNumber"
                                                     />
-                                                    <ErrorMessage name="contactPhoneNumber" component="div" className="text-red-500 text-md" />
+                                                    <ErrorMessage name="contactPhoneNumber" component="div" className="text-red-500" />
                                                 </div>
                                             </div>
                                             <div>
-                                                <label className="text-base font-bold">Choose Hospital</label>
+                                                <label className="font-medium">Choose Hospital</label>
                                                 <DropdownMenu
                                                     options={hospitals}
                                                     optionType={doctorData.hospital}
                                                     setSelectedOption={(value) => setFieldValue('hospitalId', value)}
                                                 />
-                                                <ErrorMessage name="hospitalId" component="div" className="text-red-500 text-md" />
+                                                <ErrorMessage name="hospitalId" component="div" className="text-red-500" />
                                             </div>
                                             <div>
-                                                <label className="text-base font-bold">Choose Specialty</label>
+                                                <label className="font-medium">Choose Specialty</label>
                                                 <DropdownMenu
                                                     options={specialties}
                                                     optionType={doctorData.specialty}
                                                     setSelectedOption={(value) => setFieldValue('specialtyId', value)}
                                                 />
-                                                <ErrorMessage name="specialtyId" component="div" className="text-red-500 text-md" />
+                                                <ErrorMessage name="specialtyId" component="div" className="text-red-500" />
                                             </div>
                                             <div>
-                                                <label className="text-md font-bold">Personal information</label>
+                                                <label className="font-medium">Personal information</label>
                                                 <div>
                                                     <Field
                                                         className="h-24 rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
@@ -163,7 +163,7 @@ function DoctorProfilePage() {
                                                     />
                                                     <p className="text-right text-sm">{personalInfoLenght}/{doctorPersonalInfoMaxLength}</p>
                                                 </div>
-                                                <ErrorMessage name="personalInformation" component="div" className="text-red-500 text-md" />
+                                                <ErrorMessage name="personalInformation" component="div" className="text-red-500" />
                                             </div>
                                             <div className="text-center pt-6">
                                                 <button
@@ -183,7 +183,7 @@ function DoctorProfilePage() {
                             </div>
                         </div>
                         <hr className="border-l border-white h-full mx-3" />
-                        <WeeklySchedule />
+                        <WeeklySchedule weekDays={doctorData.weeklySchedule} />
                     </article>
                 </div>}
         </section>

@@ -114,18 +114,18 @@ function BecomeDoctorPage() {
                             <Form className="flex flex-col space-y-2 text-gray-700">
                                 <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
                                     <div className="w-1/2 sm:w-full">
-                                        <label className="text-base font-bold">First name</label>
+                                        <label className="font-medium">First name</label>
                                         <Field
-                                            className="opacity-75 rounded w-full py-1 px-2 text-gray-700 border-2 border-white cursor-default focus:outline-none"
+                                            className="opacity-75 rounded w-full py-1 px-2 border-2 border-white cursor-default focus:outline-none"
                                             type="text"
                                             name="firstName"
                                             readOnly
                                         />
                                     </div>
                                     <div className="w-1/2 sm:w-full">
-                                        <label className="text-base font-bold">Last name</label>
+                                        <label className="font-medium">Last name</label>
                                         <Field
-                                            className="opacity-75 rounded w-full py-1 px-2 text-gray-700 border-2 border-white cursor-default focus:outline-none"
+                                            className="opacity-75 rounded w-full py-1 px-2 border-2 border-white cursor-default focus:outline-none"
                                             type="text"
                                             name="lastName"
                                             readOnly
@@ -134,41 +134,41 @@ function BecomeDoctorPage() {
                                 </div>
                                 <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
                                     <div className="w-1/2 sm:w-full">
-                                        <label className="text-base font-bold">Contact email</label>
+                                        <label className="font-medium">Contact email</label>
                                         <Field
-                                            className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                            className="rounded w-full py-1 px-2 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                             type="email"
                                             name="contactEmail"
                                         />
-                                        <ErrorMessage name="contactEmail" component="div" className="text-red-500 text-md" />
+                                        <ErrorMessage name="contactEmail" component="div" className="text-red-500" />
                                     </div>
                                     <div className="w-1/2 sm:w-full">
-                                        <label className="text-base font-bold">Phone number</label>
+                                        <label className="font-medium">Phone number</label>
                                         <Field
-                                            className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                            className="rounded w-full py-1 px-2 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                             type="tel"
                                             name="contactPhoneNumber"
                                         />
-                                        <ErrorMessage name="contactPhoneNumber" component="div" className="text-red-500 text-md" />
+                                        <ErrorMessage name="contactPhoneNumber" component="div" className="text-red-500" />
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="text-base font-bold">Choose Hospital</label>
+                                    <label className="font-medium">Choose Hospital</label>
                                     <DropdownMenu
                                         options={hospitals}
                                         optionType="All Hospitals"
                                         setSelectedOption={(value) => setFieldValue('hospitalId', value)}
                                     />
-                                    <ErrorMessage name="hospitalId" component="div" className="text-red-500 text-md" />
+                                    <ErrorMessage name="hospitalId" component="div" className="text-red-500" />
                                 </div>
                                 <div>
-                                    <label className="text-base font-bold">Choose Specialty</label>
+                                    <label className="font-medium">Choose Specialty</label>
                                     <DropdownMenu
                                         options={specialties}
                                         optionType="All Specialties"
                                         setSelectedOption={(value) => setFieldValue('specialtyId', value)}
                                     />
-                                    <ErrorMessage name="specialtyId" component="div" className="text-red-500 text-md" />
+                                    <ErrorMessage name="specialtyId" component="div" className="text-red-500" />
                                 </div>
                                 <div className="text-center pt-6">
                                     <button

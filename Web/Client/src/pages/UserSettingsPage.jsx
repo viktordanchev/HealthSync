@@ -119,68 +119,68 @@ function UserSettingsPage() {
                             <Form className="flex flex-col space-y-2 text-gray-700">
                                 <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
                                     <div className="w-1/2 sm:w-full">
-                                        <label className="text-md font-bold">First name</label>
+                                        <label className="font-medium">First name</label>
                                         <Field
-                                            className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                            className="rounded w-full py-1 px-2 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                             type="text"
                                             name="firstName"
                                         />
                                     </div>
                                     <div className="w-1/2 sm:w-full">
-                                        <label className="text-md font-bold">Last name</label>
+                                        <label className="font-medium">Last name</label>
                                         <Field
-                                            className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                            className="rounded w-full py-1 px-2 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                             type="text"
                                             name="lastName"
                                         />
                                     </div>
                                 </div>
-                                <ErrorMessage name="firstName" component="div" className="text-red-500 text-md" />
-                                <ErrorMessage name="lastName" component="div" className="text-red-500 text-md" />
+                                <ErrorMessage name="firstName" component="div" className="text-red-500" />
+                                <ErrorMessage name="lastName" component="div" className="text-red-500" />
                                 <div>
-                                    <label className="text-md font-bold">Email</label>
+                                    <label className="font-medium">Email</label>
                                     <Field
-                                        className="opacity-75 rounded w-full py-1 px-2 text-gray-700 border-2 border-white cursor-default focus:outline-none"
+                                        className="opacity-75 rounded w-full py-1 px-2 border-2 border-white cursor-default focus:outline-none"
                                         value={userData.email}
                                         title={userData.email}
                                         readOnly
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-md font-bold">Phone number</label>
+                                    <label className="font-medium">Phone number</label>
                                     <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                        className="rounded w-full py-1 px-2 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                         type="tel"
                                         name="phoneNumber"
                                     />
-                                    <ErrorMessage name="phoneNumber" component="div" className="text-red-500 text-md" />
+                                    <ErrorMessage name="phoneNumber" component="div" className="text-red-500" />
                                 </div>
                                 <div>
-                                    <label className="text-md font-bold">Current Password</label>
+                                    <label className="font-medium">Current Password</label>
                                     <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                        className="rounded w-full py-1 px-2 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                         type="password"
                                         name="currentPassword"
                                     />
-                                    <ErrorMessage name="currentPassword" component="div" className="text-red-500 text-md" />
+                                    <ErrorMessage name="currentPassword" component="div" className="text-red-500" />
                                 </div>
                                 <div>
-                                    <label className="text-md font-bold">New Password</label>
+                                    <label className="font-medium">New Password</label>
                                     <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                        className="rounded w-full py-1 px-2 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                         type="password"
                                         name="newPassword"
                                     />
-                                    <ErrorMessage name="newPassword" component="div" className="text-red-500 text-md" />
+                                    <ErrorMessage name="newPassword" component="div" className="text-red-500" />
                                 </div>
                                 <div>
-                                    <label className="text-md font-bold">Confirm Password</label>
+                                    <label className="font-medium">Confirm Password</label>
                                     <Field
-                                        className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                        className="rounded w-full py-1 px-2 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                         type="password"
                                         name="confirmPassword"
                                     />
-                                    <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-md" />
+                                    <ErrorMessage name="confirmPassword" component="div" className="text-red-500" />
                                 </div>
                                 <div className="text-center pt-6">
                                     <button

@@ -45,10 +45,10 @@ function HeaderResponsive({ isMenuOpen, isFixed, isAuthenticated, userName, user
                     </ul>
                 </div> :
                 <div className="flex flex-row justify-evenly">
-                    <a href="/login" className="w-1/3 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+                    <a href="/login" className="w-1/3 bg-blue-500 text-white text-center text-lg font-medium py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
                         Login
                     </a>
-                    <a href="/register" className="w-1/3 bg-blue-500 text-white text-center text-lg font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+                    <a href="/register" className="w-1/3 bg-blue-500 text-white text-center text-lg font-medium py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
                         Register
                     </a>
                 </div>}
