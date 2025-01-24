@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
                 setIsAuthenticated(false);
             }
         };
-
+        
         if (!isAuth && isTokenExist) {
             tryRefreshToken();
         }
