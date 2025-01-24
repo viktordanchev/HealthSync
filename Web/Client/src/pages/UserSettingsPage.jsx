@@ -107,7 +107,7 @@ function UserSettingsPage() {
                         initialValues={{
                             firstName: userData.firstName,
                             lastName: userData.lastName,
-                            phoneNumber: userData.phoneNumber,
+                            phoneNumber: userData.phoneNumber || '',
                             currentPassword: '',
                             newPassword: '',
                             confirmPassword: ''

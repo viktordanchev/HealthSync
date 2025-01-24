@@ -1,4 +1,5 @@
-import React from 'react';
+﻿import React from 'react';
+import Timepicker from './Timepicker';
 
 function WeekDayCard({ data }) {
     return (
@@ -19,6 +20,13 @@ function WeekDayCard({ data }) {
                     className="rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                     type="number"
                 />
+            </div>
+            <div>
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select time:</label>
+                <div className="flex space-x-2">
+                    <Timepicker />
+                    <Timepicker />
+                </div>
             </div>
         </div>
     );

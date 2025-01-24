@@ -24,11 +24,11 @@ function SessionMessage() {
                     </div>
                     <div className="w-full flex flex-row justify-evenly">
                         <a href="/login"
-                            className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-2 rounded"
+                            className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-medium py-1 px-2 rounded"
                             onClick={handleClose}>
                             Login
                         </a>
-                        <button className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-bold py-1 px-2 rounded"
+                        <button className="bg-blue-500 border-2 border-blue-500 hover:bg-white hover:text-blue-500 text-white font-medium py-1 px-2 rounded"
                             onClick={handleClose}>
                             Close
                         </button>
