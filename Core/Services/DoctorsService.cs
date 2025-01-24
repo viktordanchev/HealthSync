@@ -121,6 +121,8 @@ namespace Core.Services
 
             await _context.Doctors.AddAsync(doctor);
             await _context.SaveChangesAsync();
+
+            await GenerateDoctorWeekSchedule(doctor.Id);
         }
 
         public async Task<bool> IsUserDoctorAsync(string userId)
@@ -160,6 +162,24 @@ namespace Core.Services
                 .FirstAsync();
 
             return doctorInfo;
+        }
+
+        private async Task GenerateDoctorWeekSchedule(int doctorId)
+        {
+            var week = new List<WorkDay>();
+
+            for (int day = 0; day < 7; day++)
+            {
+                var workDay = new WorkDay()
+                {
+                    DoctorId = doctorId,
+                    WeekDay = (DayOfWeek)((day + 1) % 7),
+                    IsWorkDay = false
+                };
+            }
+
+            await _context.WorkWeek.AddRangeAsync(week);
+            await _context.SaveChangesAsync();
         }
     }
 }
