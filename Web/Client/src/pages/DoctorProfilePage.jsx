@@ -11,6 +11,7 @@ import DropdownMenu from '../components/DropdownMenu';
 import { authErrors, maxLength } from "../constants/errors";
 import { doctorPersonalInfoMaxLength } from '../constants/data';
 import WeeklySchedule from '../components/doctorProfilePage/WeeklySchedule';
+import DaysoffCalendar from '../components/doctorProfilePage/DaysoffCalendar';
 
 function DoctorProfilePage() {
     const { isStillAuth } = useAuthContext();
@@ -87,8 +88,8 @@ function DoctorProfilePage() {
             <h1 className="text-center text-4xl font-thin underline-thin">Doctor Profile</h1>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
                 <div className="flex space-x-6">
-                    <article className="p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex lg:w-full md:w-full sm:w-full">
-                        <div className="space-y-3 w-1/3">
+                    <article className="flex lg:w-full md:w-full sm:w-full">
+                        <div className="space-y-3 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl">
                             <div className="flex flex-col items-center space-y-3">
                                 <ProfilePhoto
                                     changePhoto={(photo) => handlePhotoChange(photo)}
@@ -152,7 +153,7 @@ function DoctorProfilePage() {
                                                 <label className="font-medium">Personal information</label>
                                                 <div>
                                                     <Field
-                                                        className="h-24 rounded w-full py-1 px-2 text-gray-700 border-2 border-white focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
+                                                        className="h-32 rounded w-full py-1 px-2 text-gray-700 border-2 border-white overflow-hidden focus:outline-none focus:shadow-lg focus:shadow-gray-400 focus:border-maincolor"
                                                         as="textarea"
                                                         name="personalInformation"
                                                         maxLength={doctorPersonalInfoMaxLength}
@@ -184,6 +185,8 @@ function DoctorProfilePage() {
                         </div>
                         <hr className="border-l border-white h-full mx-3" />
                         <WeeklySchedule weekDays={doctorData.weeklySchedule} />
+                        <hr className="border-l border-white h-full mx-3" />
+                        <DaysoffCalendar />
                     </article>
                 </div>}
         </section>
