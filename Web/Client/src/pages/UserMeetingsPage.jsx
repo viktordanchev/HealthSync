@@ -31,10 +31,9 @@ function UserMeetingsPage() {
     }, [isDeleted]);
 
     return (
-        <section className="text-gray-700 space-y-4 flex flex-col justify-center items-center">
-            <h2 className="text-center text-4xl font-thin underline-thin">My meetings</h2>
+        <>
             {isLoading ? <Loading type={'big'} /> :
-                <article className="flex flex-wrap justify-center">
+                <section className="text-gray-700 flex flex-wrap justify-center">
                     {meetings.length == 0 ?
                         <div className="text-3xl text-center">You have no active meetings.</div> :
                         <>
@@ -45,8 +44,8 @@ function UserMeetingsPage() {
                                     setIsDeleted={setIsDeleted} />
                             ))}
                         </>}
-                </article>}
-        </section>
+                </section>}
+        </>
     );
 }
 

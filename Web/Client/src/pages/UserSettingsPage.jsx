@@ -99,10 +99,9 @@ function UserSettingsPage() {
     };
 
     return (
-        <section className="text-gray-700 space-y-4 flex flex-col justify-center items-center">
-            <h2 className="text-center text-4xl font-thin underline-thin">Change settings</h2>
+        <>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
-                <article className="w-3/5 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl md:w-full sm:w-full">
+                <section className="w-96 text-gray-700 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl sm:w-full">
                     <Formik
                         initialValues={{
                             firstName: userData.firstName,
@@ -197,8 +196,8 @@ function UserSettingsPage() {
                                 </div>
                             </Form>)}
                     </Formik>
-                </article>}
-        </section>
+                </section>}
+        </>
     );
 }
 
