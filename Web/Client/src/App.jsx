@@ -9,6 +9,7 @@ import ParticlesBg from './components/ParticlesBg';
 import GuestOnly from './components/GuestOnly';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionMessage from './components/SessionMessage';
+import Loading from './components/Loading';
 
 import DoctorsPage from './pages/DoctorsPage';
 import HomePage from './pages/HomePage';

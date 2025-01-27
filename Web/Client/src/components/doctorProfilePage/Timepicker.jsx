@@ -11,7 +11,7 @@ const TimePicker = ({ time }) => {
     const minutesList = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, "0"));
 
     return (
-        <div className="relative bg-zinc-700 w-24 rounded-xl cursor-pointer text-white">
+        <div className="relative bg-zinc-700 w-24 rounded-xl cursor-pointer text-white sm:text-sm">
             <div className="py-2 px-3 flex justify-between items-center"
                 onClick={() => setIsOpen(!isOpen)}>
                 <p className="font-medium">
