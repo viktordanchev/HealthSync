@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu from '../DropdownMenu';
 
 function NavigationBar({ searchParams, setSearchParams, specialties }) {
-    const [isCleared, setIsCleared] = useState(false);
     const [searchOnChange, setSearchOnChange] = useState('');
     const orderTypes = [{ id: '1', name: 'NameAsc' },
-        { id: '2', name: 'NameDesc' },
-        { id: '3', name: 'RatingAsc' },
-        { id: '4', name: 'RatingDesc' }];
-    
+    { id: '2', name: 'NameDesc' },
+    { id: '3', name: 'RatingAsc' },
+    { id: '4', name: 'RatingDesc' }];
+
+    const setNewSearchParams = (key, value) => {
+        const currentParams = Object.fromEntries(searchParams);
+        setSearchParams({ ...currentParams, [key]: value });
+    };
+
     const handleEnterPress = (event) => {
         if (event.key === 'Enter') {
             handleSearch();
@@ -18,13 +22,12 @@ function NavigationBar({ searchParams, setSearchParams, specialties }) {
     };
 
     const handleSearch = () => {
-        setSearchParams({ search: searchOnChange });
+        setNewSearchParams('search', searchOnChange);
         setSearchOnChange('');
     };
 
     const handleClear = () => {
         setSearchParams({});
-        setIsCleared(!isCleared);
     };
 
     return (
@@ -34,16 +37,16 @@ function NavigationBar({ searchParams, setSearchParams, specialties }) {
                     className="bg-white h-9 px-4 rounded-full text-center hover:bg-gray-200"
                     onClick={handleClear}>Clear</button>
                 <DropdownMenu
+                    classes={"rounded-full"}
                     options={orderTypes}
                     optionType={searchParams.get('order') ? searchParams.get('order') : 'Order'}
-                    setSelectedOption={(value) => setSearchParams({ order: value})}
-                    isCleared={isCleared}
+                    setSelectedOption={(value) => setNewSearchParams('order', value.name)}
                 />
                 <DropdownMenu
+                    classes={"rounded-full"}
                     options={specialties}
                     optionType={searchParams.get('filter') ? searchParams.get('filter') : 'Filter'}
-                    setSelectedOption={(value) => setSearchParams({ filter: value })}
-                    isCleared={isCleared}
+                    setSelectedOption={(value) => setNewSearchParams('filter', value.name)}
                 />
             </div>
             <div className="flex items-center sm:w-full">

@@ -19,7 +19,7 @@ function DoctorsPage() {
         const orderFromQuery = searchParams.get('order');
         const filterFromQuery = searchParams.get('filter');
         const searchFromQuery = searchParams.get('search');
-        
+
         if (orderFromQuery) {
             setOrder(orderFromQuery);
         } else {

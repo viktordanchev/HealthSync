@@ -93,18 +93,20 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
                             <div>
                                 <label className="font-medium">Choose Hospital</label>
                                 <DropdownMenu
+                                    classes={"rounded"}
                                     options={hospitals}
                                     optionType={doctorData.hospital}
-                                    setSelectedOption={(value) => setFieldValue('hospitalId', value)}
+                                    setSelectedOption={(value) => setFieldValue('hospitalId', value.id)}
                                 />
                                 <ErrorMessage name="hospitalId" component="div" className="text-red-500" />
                             </div>
                             <div>
                                 <label className="font-medium">Choose Specialty</label>
                                 <DropdownMenu
+                                    classes={"rounded"}
                                     options={specialties}
                                     optionType={doctorData.specialty}
-                                    setSelectedOption={(value) => setFieldValue('specialtyId', value)}
+                                    setSelectedOption={(value) => setFieldValue('specialtyId', value.id)}
                                 />
                                 <ErrorMessage name="specialtyId" component="div" className="text-red-500" />
                             </div>
