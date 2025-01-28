@@ -50,8 +50,12 @@ function DaysoffCalendar() {
 
     return (
         <div className="h-80">
-            <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
-                <button className="w-1/3" onClick={handlePreviousMonth}>Previous</button>
+            <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor font-medium py-1">
+                {new Date() <= new Date(currentYear, currentMonth) ?
+                    <button className="w-1/3" onClick={handlePreviousMonth}>
+                        Previous
+                    </button> :
+                    <div className="w-1/3"></div>}
                 <div className="w-1/3 text-center flex justify-center space-x-1">
                     <p>{monthNames[currentMonth]}</p>
                     <p>{currentYear}</p>
@@ -60,10 +64,16 @@ function DaysoffCalendar() {
             </div>
             <div className="h-5/6 rounded-b-xl bg-white grid grid-cols-7 gap-2 text-center text-sm p-2">
                 {daysOfWeek.map((day, index) => (
-                    <div key={index} className="font-bold text-gray-700">{day}</div>
+                    <div key={index}>{day}</div>
                 ))}
                 {days.map((day, index) => (
-                    <div key={index} className="rounded-full flex items-center justify-center bg-gray-200 cursor-pointer hover:bg-gray-300">
+                    <div className={`rounded-full flex items-center justify-center 
+                    ${day && new Date() < day.date ? 'cursor-pointer hover:bg-gray-300' : 'opacity-35 cursor-default'}
+                    ${day && new Date().getDate() === day.date.getDate() &&
+                            new Date().getFullYear() === currentYear &&
+                            new Date().getMonth() === currentMonth
+                            ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                        key={index}>
                         <p>{day ? day.date.getDate() : ''}</p>
                     </div>
                 ))}

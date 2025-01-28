@@ -57,24 +57,20 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     const handlePreviousMonth = () => {
-        let newMonth = currentMonth - 1;
-
         if (newMonth < 0) {
             setCurrentMonth(11);
             setCurrentYear(currentYear - 1);
         } else {
-            setCurrentMonth(newMonth);
+            setCurrentMonth(currentMonth - 1);
         }
     };
 
     const handleNextMonth = () => {
-        let newMonth = currentMonth + 1;
-
         if (newMonth > 11) {
             setCurrentMonth(0);
             setCurrentYear(currentYear + 1);
         } else {
-            setCurrentMonth(newMonth);
+            setCurrentMonth(currentMonth + 1);
         }
     };
 
@@ -100,7 +96,7 @@ const MeetingsCalendar = ({ doctorId }) => {
                                     No working schedule provided yet
                                 </div> :
                                 <>
-                                    <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor py-1">
+                                    <div className="h-1/6 flex items-center rounded-t-xl justify-evenly bg-maincolor font-medium py-1">
                                         {new Date() <= new Date(currentYear, currentMonth) ?
                                             <button className="w-1/3" onClick={handlePreviousMonth}>
                                                 Previous
