@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import apiRequest from '../services/apiRequest';
 import Loading from '../components/Loading';
 import WeeklySchedule from '../components/doctorProfilePage/WeeklySchedule';
-import DaysoffCalendar from '../components/doctorProfilePage/DaysoffCalendar';
+import Daysoff from '../components/doctorProfilePage/Daysoff';
 import DoctorInfo from '../components/doctorProfilePage/DoctorInfo';
 
 function DoctorProfilePage() {
@@ -37,13 +37,15 @@ function DoctorProfilePage() {
     return (
         <>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
-                <section className="flex space-x-6 text-gray-700 md:flex-col md:space-x-0 md:space-y-6 sm:flex-col sm:space-x-0 sm:space-y-6">
-                    <DoctorInfo
-                        doctorData={doctorData}
-                        hospitals={hospitals}
-                        specialties={specialties} />
+                <section className="space-y-6 text-gray-700 mx-20 md:flex-col md:space-x-0 md:space-y-6 sm:flex-col sm:space-x-0 sm:space-y-6 sm:w-full">
+                    <div className="flex space-x-6">
+                        <DoctorInfo
+                            doctorData={doctorData}
+                            hospitals={hospitals}
+                            specialties={specialties} />
+                        <Daysoff />
+                    </div>
                     <WeeklySchedule weekDays={doctorData.weeklySchedule} />
-                    <DaysoffCalendar />
                 </section>}
         </>
     );

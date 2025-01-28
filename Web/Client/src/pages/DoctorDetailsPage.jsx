@@ -52,7 +52,7 @@ function DoctorDetailsPage() {
                         </div>
                         <hr className="border-e border-white w-full my-3" />
                         <div className="h-full flex flex-col justify-evenly space-y-3 lg:flex-row lg:space-y-0 lg:space-x-3 lg:w-full lg:h-40 md:flex-row md:space-y-0 md:space-x-3 md:w-full md:h-64 sm:h-96">
-                            <div className="h-1/2 w-full p-2 flex flex-col justify-evenly space-y-3 text-center bg-maincolor bg-opacity-100 rounded-xl lg:h-full md:h-full sm:h-full">
+                            <div className="h-1/2 w-full p-2 flex flex-col justify-evenly space-y-3 text-center border border-zinc-500 bg-opacity-65 bg-maincolor rounded-xl lg:h-full md:h-full sm:h-full">
                                 <p className="font-bold underline text-xl">Personal info</p>
                                 <div className="flex flex-row text-sm space-x-3">
                                     <div className="w-1/2">
@@ -65,7 +65,7 @@ function DoctorDetailsPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="h-1/2 w-full p-2 flex flex-col justify-evenly space-y-3 text-center bg-maincolor bg-opacity-65 rounded-xl lg:h-full md:h-full sm:h-full">
+                            <div className="h-1/2 w-full p-2 flex flex-col justify-evenly space-y-3 text-center bg-maincolor border border-zinc-500 bg-opacity-65 rounded-xl lg:h-full md:h-full sm:h-full">
                                 <p className="font-bold underline text-xl">Hospital</p>
                                 <div className="flex flex-row text-sm space-x-3">
                                     <div className="w-1/2">
@@ -93,8 +93,8 @@ function DoctorDetailsPage() {
                             </div>
                             <div className="w-1/2 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col justify-evenly space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Meetings</p>
-                                <p className="font-thin">You can schedule an appointment with this doctor on a day that is convenient for you.</p>
                                 <MeetingsCalendar doctorId={doctorId} />
+                                <p className="font-thin">You can schedule an appointment with this doctor on a day that is convenient for you.</p>
                             </div>
                         </div>
                     </article>

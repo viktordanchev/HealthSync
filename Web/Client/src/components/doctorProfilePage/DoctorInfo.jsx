@@ -48,7 +48,7 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
     };
 
     return (
-        <article className="space-y-3 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl sm:text-sm">
+        <article className="w-2/3 space-y-3 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl sm:text-sm">
             <div className="flex flex-col items-center">
                 <ProfilePhoto
                     changePhoto={(photo) => handlePhotoChange(photo)}
@@ -90,25 +90,27 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
                                     <ErrorMessage name="contactPhoneNumber" component="div" className="text-red-500" />
                                 </div>
                             </div>
-                            <div>
-                                <label className="font-medium">Choose Hospital</label>
-                                <DropdownMenu
-                                    classes={"rounded"}
-                                    options={hospitals}
-                                    optionType={doctorData.hospital}
-                                    setSelectedOption={(value) => setFieldValue('hospitalId', value.id)}
-                                />
-                                <ErrorMessage name="hospitalId" component="div" className="text-red-500" />
-                            </div>
-                            <div>
-                                <label className="font-medium">Choose Specialty</label>
-                                <DropdownMenu
-                                    classes={"rounded"}
-                                    options={specialties}
-                                    optionType={doctorData.specialty}
-                                    setSelectedOption={(value) => setFieldValue('specialtyId', value.id)}
-                                />
-                                <ErrorMessage name="specialtyId" component="div" className="text-red-500" />
+                            <div className="flex flex-row space-x-4 sm:flex-col sm:space-x-0 sm:space-y-2">
+                                <div className="w-1/2 sm:w-full">
+                                    <label className="font-medium">Choose Hospital</label>
+                                    <DropdownMenu
+                                        classes={"rounded"}
+                                        options={hospitals}
+                                        optionType={doctorData.hospital}
+                                        setSelectedOption={(value) => setFieldValue('hospitalId', value.id)}
+                                    />
+                                    <ErrorMessage name="hospitalId" component="div" className="text-red-500" />
+                                </div>
+                                <div className="w-1/2 sm:w-full">
+                                    <label className="font-medium">Choose Specialty</label>
+                                    <DropdownMenu
+                                        classes={"rounded"}
+                                        options={specialties}
+                                        optionType={doctorData.specialty}
+                                        setSelectedOption={(value) => setFieldValue('specialtyId', value.id)}
+                                    />
+                                    <ErrorMessage name="specialtyId" component="div" className="text-red-500" />
+                                </div>
                             </div>
                             <div>
                                 <label className="font-medium">Personal information</label>
