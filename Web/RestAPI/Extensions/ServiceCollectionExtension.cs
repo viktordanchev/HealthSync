@@ -79,13 +79,13 @@ namespace Server.Extensions
 
         public static void AddCorsExtension(this IServiceCollection services, IConfiguration config)
         {
-            var origin = config.GetValue<string>("AccessControlAllowOrigin");
+            var allowedOrigins = config.GetSection("AllowedOrigins").Get<string[]>();
 
             services.AddCors(options =>
             {
-                options.AddPolicy("Cors", builder =>
+                options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.WithOrigins(origin)
+                    builder.WithOrigins(allowedOrigins)
                            .AllowAnyMethod()
                            .AllowAnyHeader()
                            .AllowCredentials();
