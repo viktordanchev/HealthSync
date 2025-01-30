@@ -14,16 +14,18 @@ function DoctorProfilePage() {
     useEffect(() => {
         const receiveData = async () => {
             try {
-                const doctorData = await apiRequest('doctors', 'getDoctorInfo', undefined, localStorage.getItem('accessToken'), 'GET', false);
-                let hospitals = await apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false);
-                let specialties = await apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false);
+                const [doctorData, hospitals, specialties] = await Promise.all([
+                    apiRequest('doctors', 'getDoctorInfo', undefined, localStorage.getItem('accessToken'), 'GET', false),
+                    apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false),
+                    apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false)
+                ]);
 
-                hospitals = hospitals.filter(h => h.id !== doctorData.hospitalId);
-                specialties = specialties.filter(s => s.id !== doctorData.specialtyId);
+                let filteredHospitals = hospitals.filter(h => h.id !== doctorData.hospitalId);
+                let filteredSpecialties = specialties.filter(s => s.id !== doctorData.specialtyId);
 
                 setDoctorData(doctorData);
-                setHospitals(hospitals);
-                setSpecialties(specialties);
+                setHospitals(filteredHospitals);
+                setSpecialties(filteredSpecialties);
             } catch (error) {
                 console.error(error);
             } finally {

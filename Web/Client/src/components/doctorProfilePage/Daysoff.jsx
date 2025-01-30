@@ -7,7 +7,7 @@ function Daysoff() {
             <h2 className="text-3xl font-thin underline-thin text-gray-700 sm:text-2xl">Daysoff</h2>
             <div>
                 <DaysoffCalendar />
-                <p className="font-thin">From here you can </p>
+                <p className="text-sm">Here you can set your days off or adjust your working hours.</p>
             </div>
             <div>
                 <button

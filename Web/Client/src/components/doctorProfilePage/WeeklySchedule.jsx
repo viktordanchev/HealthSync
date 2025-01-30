@@ -10,10 +10,10 @@ function WeeklySchedule({ weekDays }) {
                     <WeekDayCard key={weekDay.id} data={weekDay} />
                 ))}
             </div>
-            <div>
-                <p className="text-xs">Start - Set time working day start</p>
-                <p className="text-xs">End - Set time working day end</p>
-                <p className="text-xs">Minutes - Set a meeting length in minutes</p>
+            <div className="text-sm">
+                <p>Start - Set time working day start</p>
+                <p>End - Set time working day end</p>
+                <p>Minutes - Set a meeting length in minutes</p>
             </div>
             <div>
                 <button

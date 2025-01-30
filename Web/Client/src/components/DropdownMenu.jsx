@@ -1,11 +1,27 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 function DropdownMenu({ classes, options, optionType, setSelectedOption }) {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState(optionType);
-    
+    const dropdownRef = useRef(null);
+
+    {/* This hook handles clicks outside the dropdown menu. */ }
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     const handleOptionClick = (option) => {
         setSelectedOption(option);
         setSelected(option.name);
@@ -13,7 +29,7 @@ function DropdownMenu({ classes, options, optionType, setSelectedOption }) {
     };
 
     return (
-        <div className="relative text-gray-700">
+        <div className="relative text-gray-700" ref={dropdownRef}>
             <div
                 className={`flex justify-between items-center space-x-2 py-1 px-2 border-2 border-white bg-white cursor-pointer
                 ${classes}`}
@@ -24,7 +40,7 @@ function DropdownMenu({ classes, options, optionType, setSelectedOption }) {
             </div>
             {isOpen && (
                 <ul
-                    className="absolute top-10 z-10 w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-auto"
+                    className="absolute top-10 z-10 w-full bg-white border border-zinc-500 rounded shadow-2xl shadow-gray-500 max-h-60 overflow-auto"
                 >
                     {options.map((option) => (
                         <li
