@@ -86,27 +86,6 @@ namespace Core.Services
             return doctor != null;
         }
 
-        public async Task<bool> IsSpecialtyExistAsync(int specialtyId)
-        {
-            var specialty = await _context.Specialties.FirstOrDefaultAsync(s => s.Id == specialtyId);
-
-            return specialty != null;
-        }
-
-        public async Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync()
-        {
-            var specialties = await _context.Specialties
-                .AsNoTracking()
-                .Select(s => new SpecialtyResponse()
-                {
-                    Id = s.Id,
-                    Name = s.Type
-                })
-                .ToListAsync();
-
-            return specialties;
-        }
-
         public async Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber, string? imgUrl)
         {
             var doctor = new Doctor()
@@ -122,7 +101,7 @@ namespace Core.Services
             await _context.Doctors.AddAsync(doctor);
             await _context.SaveChangesAsync();
 
-            await GenerateDoctorWeekSchedule(doctor.Id);
+            await GenerateEmptyDoctorWeekSchedule(doctor.Id);
         }
 
         public async Task<bool> IsUserDoctorAsync(string userId)
@@ -164,7 +143,7 @@ namespace Core.Services
             return doctorInfo;
         }
 
-        private async Task GenerateDoctorWeekSchedule(int doctorId)
+        private async Task GenerateEmptyDoctorWeekSchedule(int doctorId)
         {
             var week = new List<WorkDay>();
 
