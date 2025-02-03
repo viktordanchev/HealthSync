@@ -403,3 +403,4 @@ FodyWeavers.xsd
 /Web/RestAPI/Configs/gcp-credentials-service-account.json
 /Web/RestAPI/appsettings.json
 /Web/RestAPI/appsettings.Development.json
+/Infrastructure/Services/Configs/gcp-credentials-service-account.json
