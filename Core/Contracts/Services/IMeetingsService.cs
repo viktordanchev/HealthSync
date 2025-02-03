@@ -1,6 +1,6 @@
 ﻿using Core.Models.ResponseDtos.Meetings;
 
-namespace Core.Services.Contracts
+namespace Core.Contracts.Services
 {
     public interface IMeetingsService
     {

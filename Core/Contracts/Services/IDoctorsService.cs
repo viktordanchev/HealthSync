@@ -1,7 +1,6 @@
 ﻿using Core.Models.ResponseDtos.Doctors;
-using Core.Models.ResponseDtos.Specialties;
 
-namespace Core.Services.Contracts
+namespace Core.Contracts.Services
 {
     public interface IDoctorsService
     {
