@@ -10,9 +10,9 @@ namespace Infrastructure.Services
     /// </summary>
     public class EmailSenderService : IEmailSenderService
     {
-        private readonly EmailSenderConfigs _config;
+        private readonly EmailSenderConfig _config;
 
-        public EmailSenderService(IOptions<EmailSenderConfigs> options)
+        public EmailSenderService(IOptions<EmailSenderConfig> options)
         {
             _config = options.Value;
         }

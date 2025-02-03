@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Infrastructure.Services
+namespace Infrastructure.Services.Contracts
 {
     public interface IGoogleCloudStorageService
     {

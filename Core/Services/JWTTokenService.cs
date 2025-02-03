@@ -1,12 +1,13 @@
 ﻿using Core.Contracts.Services;
+using Core.Services.Configs;
 using Infrastructure.Database.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 
 namespace RestAPI.Services
 {
@@ -16,13 +17,16 @@ namespace RestAPI.Services
     public class JWTTokenService : IJWTTokenService
     {
         private UserManager<ApplicationUser> _userManager;
-        private IConfiguration _config;
+        private JWTTokenConfig _jwtTokenConfig;
+        private CookiesConfig _cookiesConfig;
 
         public JWTTokenService(UserManager<ApplicationUser> userManager,
-            IConfiguration config)
+            IOptions<JWTTokenConfig> jwtOptions,
+            IOptions<CookiesConfig> cookiesOptions)
         {
             _userManager = userManager;
-            _config = config;
+            _jwtTokenConfig = jwtOptions.Value;
+            _cookiesConfig = cookiesOptions.Value;
         }
 
         /// <summary>
@@ -30,9 +34,9 @@ namespace RestAPI.Services
         /// </summary>
         public string GenerateRefreshToken(string userId)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtTokenConfig.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var expireTime = int.Parse(_config["CookieSettings:RefreshJWTTokenMonths"]);
+            var expireTime = _cookiesConfig.RefreshJWTTokenMonths;
 
             var claims = new List<Claim>()
             {
@@ -41,8 +45,8 @@ namespace RestAPI.Services
             };
 
             var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
+                issuer: _jwtTokenConfig.Issuer,
+                audience: _jwtTokenConfig.Audience,
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: credentials);
@@ -55,9 +59,9 @@ namespace RestAPI.Services
         /// </summary>
         public async Task<string> GenerateAccessTokenAsync(string userId)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtTokenConfig.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var expireTime = int.Parse(_config["CookieSettings:AccessJWTTokenMinutes"]);
+            var expireTime = _cookiesConfig.AccessJWTTokenMinutes;
 
             var user = await _userManager.FindByIdAsync(userId);
 
@@ -74,8 +78,8 @@ namespace RestAPI.Services
             }
 
             var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
+                issuer: _jwtTokenConfig.Issuer,
+                audience: _jwtTokenConfig.Audience,
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: credentials);
