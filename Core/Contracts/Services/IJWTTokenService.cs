@@ -1,4 +1,6 @@
-﻿namespace RestAPI.Services.Contracts
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Core.Contracts.Services
 {
     public interface IJWTTokenService
     {
