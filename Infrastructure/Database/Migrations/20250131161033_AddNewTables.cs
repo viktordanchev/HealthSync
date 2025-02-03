@@ -115,6 +115,30 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DoctorWeekDays",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    WeekDay = table.Column<int>(type: "int", nullable: false),
+                    IsWorkDay = table.Column<bool>(type: "bit", nullable: false),
+                    Start = table.Column<TimeSpan>(type: "time", nullable: false),
+                    End = table.Column<TimeSpan>(type: "time", nullable: false),
+                    MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorWeekDays", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DoctorWeekDays_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Meetings",
                 columns: table => new
                 {
@@ -163,30 +187,6 @@ namespace Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "WorkWeek",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DoctorId = table.Column<int>(type: "int", nullable: false),
-                    WeekDay = table.Column<int>(type: "int", nullable: false),
-                    IsWorkDay = table.Column<bool>(type: "bit", nullable: false),
-                    Start = table.Column<TimeSpan>(type: "time", nullable: false),
-                    End = table.Column<TimeSpan>(type: "time", nullable: false),
-                    MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkWeek", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WorkWeek_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_DaysOff_DoctorId",
                 table: "DaysOff",
@@ -208,6 +208,11 @@ namespace Infrastructure.Migrations
                 column: "SpecialtyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DoctorWeekDays_DoctorId",
+                table: "DoctorWeekDays",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Meetings_DoctorId",
                 table: "Meetings",
                 column: "DoctorId");
@@ -221,11 +226,6 @@ namespace Infrastructure.Migrations
                 name: "IX_Reviews_DoctorId",
                 table: "Reviews",
                 column: "DoctorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkWeek_DoctorId",
-                table: "WorkWeek",
-                column: "DoctorId");
         }
 
         /// <inheritdoc />
@@ -235,13 +235,13 @@ namespace Infrastructure.Migrations
                 name: "DaysOff");
 
             migrationBuilder.DropTable(
+                name: "DoctorWeekDays");
+
+            migrationBuilder.DropTable(
                 name: "Meetings");
 
             migrationBuilder.DropTable(
                 name: "Reviews");
-
-            migrationBuilder.DropTable(
-                name: "WorkWeek");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

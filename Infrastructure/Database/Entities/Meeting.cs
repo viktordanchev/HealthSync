@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Infrastructure.Entities
+namespace Infrastructure.Database.Entities
 {
-    public class DayOff
+    public class Meeting
     {
         [Key]
         public int Id { get; set; }
@@ -15,9 +15,12 @@ namespace Infrastructure.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        public int Month { get; set; }
+        public string PatientId { get; set; } = null!;
+
+        [ForeignKey(nameof(PatientId))]
+        public ApplicationUser Patient { get; set; } = null!;
 
         [Required]
-        public int Day { get; set; }
+        public DateTime DateAndTime { get; set; }
     }
 }

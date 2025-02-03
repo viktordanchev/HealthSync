@@ -1,19 +1,19 @@
-﻿using Infrastructure.Entities;
+﻿using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Configurations
 {
-    public class WorkDayConfig : IEntityTypeConfiguration<WorkDay>
+    public class DoctorWeekDayConfig : IEntityTypeConfiguration<DoctorWeekDay>
     {
-        public void Configure(EntityTypeBuilder<WorkDay> builder)
+        public void Configure(EntityTypeBuilder<DoctorWeekDay> builder)
         {
             builder.HasData(SeedWorkDays());
         }
 
-        private WorkDay[] SeedWorkDays()
+        private DoctorWeekDay[] SeedWorkDays()
         {
-            var workDay1 = new WorkDay()
+            var workDay1 = new DoctorWeekDay()
             {
                 Id = 1,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -24,7 +24,7 @@ namespace Infrastructure.Configurations
                 MeetingTimeMinutes = 30
             };
 
-            var workDay2 = new WorkDay()
+            var workDay2 = new DoctorWeekDay()
             {
                 Id = 2,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -35,7 +35,7 @@ namespace Infrastructure.Configurations
                 MeetingTimeMinutes = 30
             };
 
-            var workDay3 = new WorkDay()
+            var workDay3 = new DoctorWeekDay()
             {
                 Id = 3,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -46,7 +46,7 @@ namespace Infrastructure.Configurations
                 MeetingTimeMinutes = 30
             };
 
-            var workDay4 = new WorkDay()
+            var workDay4 = new DoctorWeekDay()
             {
                 Id = 4,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -57,7 +57,7 @@ namespace Infrastructure.Configurations
                 MeetingTimeMinutes = 30
             };
 
-            var workDay5 = new WorkDay()
+            var workDay5 = new DoctorWeekDay()
             {
                 Id = 5,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -68,7 +68,7 @@ namespace Infrastructure.Configurations
                 MeetingTimeMinutes = 30
             };
 
-            var workDay6 = new WorkDay()
+            var workDay6 = new DoctorWeekDay()
             {
                 Id = 6,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -76,7 +76,7 @@ namespace Infrastructure.Configurations
                 IsWorkDay = false
             };
 
-            var workDay7 = new WorkDay()
+            var workDay7 = new DoctorWeekDay()
             {
                 Id = 7,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com

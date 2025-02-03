@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Infrastructure.Entities
+namespace Infrastructure.Database.Entities
 {
-    public class WorkDay
+    public class DayOff
     {
         [Key]
         public int Id { get; set; }
@@ -15,15 +15,9 @@ namespace Infrastructure.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        public DayOfWeek WeekDay { get; set; }
+        public int Month { get; set; }
 
         [Required]
-        public bool IsWorkDay { get; set; }
-
-        public TimeSpan Start { get; set; }
-
-        public TimeSpan End { get; set; }
-
-        public int MeetingTimeMinutes { get; set; }
+        public int Day { get; set; }
     }
 }

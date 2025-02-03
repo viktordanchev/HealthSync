@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using static Common.Constants.User;
 
-namespace Infrastructure.Entities
+namespace Infrastructure.Database.Entities
 {
     public class ApplicationUser : IdentityUser
     {

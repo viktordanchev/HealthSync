@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Infrastructure.Entities
+namespace Infrastructure.Database.Entities
 {
     public class Hospital
     {

@@ -1,5 +1,5 @@
 ﻿using Infrastructure.Configurations;
-using Infrastructure.Entities;
+using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +16,7 @@ namespace Infrastructure
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
-        public DbSet<WorkDay> WorkWeek { get; set; }
+        public DbSet<DoctorWeekDay> DoctorWeekDays { get; set; }
         public DbSet<DayOff> DaysOff { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -26,7 +26,7 @@ namespace Infrastructure
             builder.ApplyConfiguration(new HospitalConfig());
             builder.ApplyConfiguration(new DoctorConfig());
             builder.ApplyConfiguration(new ReviewConfig());
-            builder.ApplyConfiguration(new WorkDayConfig());
+            builder.ApplyConfiguration(new DoctorWeekDayConfig());
             builder.ApplyConfiguration(new DayOffConfig());
             builder.ApplyConfiguration(new IdentityRoleConfig());
             builder.ApplyConfiguration(new IdentityUserRoleConfig());

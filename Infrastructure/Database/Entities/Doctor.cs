@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using static Common.Constants.Doctors;
 
-namespace Infrastructure.Entities
+namespace Infrastructure.Database.Entities
 {
     public class Doctor
     {
@@ -10,7 +10,7 @@ namespace Infrastructure.Entities
         {
             Reviews = new List<Review>();
             Meetings = new List<Meeting>();
-            WorkWeek = new List<WorkDay>();
+            WorkWeek = new List<DoctorWeekDay>();
             DaysOff = new List<DayOff>();
         }
 
@@ -46,7 +46,7 @@ namespace Infrastructure.Entities
 
         public IEnumerable<Review> Reviews { get; set; }
         public IEnumerable<Meeting> Meetings { get; set; }
-        public IEnumerable<WorkDay> WorkWeek { get; set; }
+        public IEnumerable<DoctorWeekDay> WorkWeek { get; set; }
         public IEnumerable<DayOff> DaysOff { get; set; }
     }
 }

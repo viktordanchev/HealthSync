@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using static Common.Constants.Reviews;
 
-namespace Infrastructure.Entities
+namespace Infrastructure.Database.Entities
 {
     public class Review
     {

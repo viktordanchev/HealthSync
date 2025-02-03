@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20250113145132_AddNewTables")]
+    [Migration("20250131161033_AddNewTables")]
     partial class AddNewTables
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Infrastructure.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -100,7 +100,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.DayOff", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DayOff", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,7 +124,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("DaysOff");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Doctor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,7 +166,40 @@ namespace Infrastructure.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Hospital", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("End")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("IsWorkDay")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MeetingTimeMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("Start")
+                        .HasColumnType("time");
+
+                    b.Property<int>("WeekDay")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("DoctorWeekDays");
+                });
+
+            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +220,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Hospitals");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Meeting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -214,7 +247,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Meetings");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Review", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -246,7 +279,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Specialty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -261,39 +294,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Specialties");
-                });
-
-            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("End")
-                        .HasColumnType("time");
-
-                    b.Property<bool>("IsWorkDay")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MeetingTimeMinutes")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("Start")
-                        .HasColumnType("time");
-
-                    b.Property<int>("WeekDay")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.ToTable("WorkWeek");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -429,9 +429,9 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.DayOff", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DayOff", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                    b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
                         .WithMany("DaysOff")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -440,21 +440,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Doctor", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.Hospital", "Hospital")
+                    b.HasOne("Infrastructure.Database.Entities.Hospital", "Hospital")
                         .WithMany("Doctors")
                         .HasForeignKey("HospitalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Entities.ApplicationUser", "Identity")
+                    b.HasOne("Infrastructure.Database.Entities.ApplicationUser", "Identity")
                         .WithMany()
                         .HasForeignKey("IdentityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Entities.Specialty", "Specialty")
+                    b.HasOne("Infrastructure.Database.Entities.Specialty", "Specialty")
                         .WithMany("Doctors")
                         .HasForeignKey("SpecialtyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -467,15 +467,26 @@ namespace Infrastructure.Migrations
                     b.Navigation("Specialty");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Meeting", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                    b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
+                        .WithMany("WorkWeek")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("Infrastructure.Database.Entities.Meeting", b =>
+                {
+                    b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
                         .WithMany("Meetings")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Entities.ApplicationUser", "Patient")
+                    b.HasOne("Infrastructure.Database.Entities.ApplicationUser", "Patient")
                         .WithMany("Meetings")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -486,21 +497,10 @@ namespace Infrastructure.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Review", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Review", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
+                    b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
                         .WithMany("Reviews")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
-                });
-
-            modelBuilder.Entity("Infrastructure.Entities.WorkDay", b =>
-                {
-                    b.HasOne("Infrastructure.Entities.Doctor", "Doctor")
-                        .WithMany("WorkWeek")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -519,7 +519,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.ApplicationUser", null)
+                    b.HasOne("Infrastructure.Database.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -528,7 +528,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.ApplicationUser", null)
+                    b.HasOne("Infrastructure.Database.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -543,7 +543,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Entities.ApplicationUser", null)
+                    b.HasOne("Infrastructure.Database.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -552,19 +552,19 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.ApplicationUser", null)
+                    b.HasOne("Infrastructure.Database.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Meetings");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Doctor", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Doctor", b =>
                 {
                     b.Navigation("DaysOff");
 
@@ -575,12 +575,12 @@ namespace Infrastructure.Migrations
                     b.Navigation("WorkWeek");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Hospital", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
                 {
                     b.Navigation("Doctors");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Specialty", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Specialty", b =>
                 {
                     b.Navigation("Doctors");
                 });
