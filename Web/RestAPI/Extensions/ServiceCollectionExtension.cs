@@ -2,6 +2,8 @@
 using Core.Services;
 using Infrastructure;
 using Infrastructure.Database.Entities;
+using Infrastructure.Services;
+using Infrastructure.Services.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -115,12 +117,12 @@ namespace Server.Extensions
             services.AddTransient<IMemoryCacheService, MemoryCacheService>();
             services.AddScoped<IJWTTokenService, JWTTokenService>();
             services.AddSingleton<IGoogleCloudStorageService, GoogleCloudStorageService>();
-            services.AddScoped<IDoctorsService, DoctorsService>();
-            services.AddScoped<IMeetingsService, MeetingsService>();
-            services.AddScoped<IReviewsService, ReviewsService>();
-            services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
-            services.AddScoped<IHospitalsService, HospitalsService>();
-            services.AddScoped<ISpecialtiesService, SpecialtiesService>();
+            services.AddSingleton<IDoctorsService, DoctorsService>();
+            services.AddSingleton<IMeetingsService, MeetingsService>();
+            services.AddSingleton<IReviewsService, ReviewsService>();
+            services.AddSingleton<IDoctorScheduleService, DoctorScheduleService>();
+            services.AddSingleton<IHospitalsService, HospitalsService>();
+            services.AddSingleton<ISpecialtiesService, SpecialtiesService>();
         }
     }
 }

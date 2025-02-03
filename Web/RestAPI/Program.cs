@@ -1,3 +1,4 @@
+using Infrastructure.Services.Configs;
 using Server.Extensions;
 using System.Text.Json;
 
@@ -13,6 +14,7 @@ builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.AddServices();
 builder.Services.AddMemoryCache();
 builder.Services.Configure<JsonSerializerOptions>(options => new JsonSerializerOptions(JsonSerializerDefaults.Web));
+builder.Services.Configure<EmailSenderConfigs>(builder.Configuration.GetSection("EmailSettings"));
 
 var app = builder.Build();
 
