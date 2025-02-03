@@ -1,4 +1,4 @@
-﻿namespace RestAPI.Services.Contracts
+﻿namespace Infrastructure.Services
 {
     public interface IEmailSenderService
     {

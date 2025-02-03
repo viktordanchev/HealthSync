@@ -1,19 +1,20 @@
-﻿using RestAPI.Services.Contracts;
-using MimeKit;
+﻿using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Options;
+using Infrastructure.Services.Configs;
 
-namespace RestAPI.Services
+namespace Infrastructure.Services
 {
     /// <summary>
     /// This class is used for sending emails.
     /// </summary>
     public class EmailSenderService : IEmailSenderService
     {
-        private readonly IConfiguration _config;
-        
-        public EmailSenderService(IConfiguration config)
+        private readonly EmailSenderConfigs _config;
+
+        public EmailSenderService(IOptions<EmailSenderConfigs> options)
         {
-            _config = config;
+            _config = options.Value;
         }
 
         public async Task SendVrfCode(string toEmail, string vrfCode)
@@ -36,14 +37,14 @@ namespace RestAPI.Services
         private async Task SendEmailAsync(string toEmail, string subject, string htmlMessage)
         {
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(_config["EmailSettings:From"]));
+            email.From.Add(MailboxAddress.Parse(_config.From));
             email.To.Add(MailboxAddress.Parse(toEmail));
             email.Subject = subject;
             email.Body = new TextPart("html") { Text = htmlMessage };
 
             using var smtp = new SmtpClient();
-            await smtp.ConnectAsync(_config["EmailSettings:SmtpServer"], int.Parse(_config["EmailSettings:Port"]), MailKit.Security.SecureSocketOptions.StartTls);
-            await smtp.AuthenticateAsync(_config["EmailSettings:Username"], _config["EmailSettings:Password"]);
+            await smtp.ConnectAsync(_config.SmtpServer, _config.Port, MailKit.Security.SecureSocketOptions.StartTls);
+            await smtp.AuthenticateAsync(_config.Username, _config.Password);
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
         }

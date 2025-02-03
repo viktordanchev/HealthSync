@@ -1,8 +1,9 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Storage.V1;
-using RestAPI.Services.Contracts;
+using Microsoft.AspNetCore.Http;
+using Infrastructure.Services.Contracts;
 
-namespace RestAPI.Services
+namespace Infrastructure.Services
 {
     public class GoogleCloudStorageService : IGoogleCloudStorageService
     {
@@ -11,7 +12,7 @@ namespace RestAPI.Services
 
         public GoogleCloudStorageService()
         {
-            var credentials = GoogleCredential.FromFile("Configs/gcp-credentials-service-account.json");
+            var credentials = GoogleCredential.FromFile("Infrastructure/Configs/gcp-credentials-service-account.json");
             _storageClient = StorageClient.Create(credentials);
         }
 
