@@ -1,8 +1,10 @@
 ﻿using Core.Contracts.Services;
 using Core.Services;
+using Core.Services.Configs;
 using Infrastructure;
 using Infrastructure.Database.Entities;
 using Infrastructure.Services;
+using Infrastructure.Services.Configs;
 using Infrastructure.Services.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +15,7 @@ using RestAPI.Services;
 using RestAPI.Services.Contracts;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Server.Extensions
@@ -123,6 +126,14 @@ namespace Server.Extensions
             services.AddSingleton<IDoctorScheduleService, DoctorScheduleService>();
             services.AddSingleton<IHospitalsService, HospitalsService>();
             services.AddSingleton<ISpecialtiesService, SpecialtiesService>();
+        }
+
+        public static void AddConfigs(this IServiceCollection services, IConfiguration config)
+        {
+            services.Configure<JsonSerializerOptions>(options => new JsonSerializerOptions(JsonSerializerDefaults.Web));
+            services.Configure<EmailSenderConfig>(config.GetSection("EmailSettings"));
+            services.Configure<JWTTokenConfig>(config.GetSection("JWTToken"));
+            services.Configure<CookiesConfig>(config.GetSection("Cookies"));
         }
     }
 }
