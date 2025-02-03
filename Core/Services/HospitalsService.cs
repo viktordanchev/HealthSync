@@ -1,5 +1,5 @@
-﻿using Core.Models.ResponseDtos.Hospitals;
-using Core.Services.Contracts;
+﻿using Core.Contracts.Services;
+using Core.Models.ResponseDtos.Hospitals;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 

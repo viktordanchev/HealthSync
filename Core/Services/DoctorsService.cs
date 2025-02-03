@@ -1,7 +1,7 @@
-﻿using Core.Models.ResponseDtos.Doctors;
-using Core.Services.Contracts;
+﻿using Core.Contracts.Services;
+using Core.Models.ResponseDtos.Doctors;
 using Infrastructure;
-using Infrastructure.Entities;
+using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
@@ -145,11 +145,11 @@ namespace Core.Services
 
         private async Task GenerateEmptyDoctorWeekSchedule(int doctorId)
         {
-            var week = new List<WorkDay>();
+            var week = new List<DoctorWeekDay>();
 
             for (int day = 0; day < 7; day++)
             {
-                var workDay = new WorkDay()
+                var workDay = new DoctorWeekDay()
                 {
                     DoctorId = doctorId,
                     WeekDay = (DayOfWeek)((day + 1) % 7),
@@ -157,7 +157,7 @@ namespace Core.Services
                 };
             }
 
-            await _context.WorkWeek.AddRangeAsync(week);
+            await _context.DoctorWeekDays.AddRangeAsync(week);
             await _context.SaveChangesAsync();
         }
     }

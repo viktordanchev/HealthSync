@@ -1,5 +1,5 @@
-﻿using Core.Services.Contracts;
-using Infrastructure.Entities;
+﻿using Core.Contracts.Services;
+using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +21,7 @@ namespace RestAPI.Controllers
         private readonly IHospitalsService _hospitalsService;
         private readonly IGoogleCloudStorageService _GCSService;
         private readonly IJWTTokenService _jwtService;
+        private readonly ISpecialtiesService _specialtiesService;
 
         public DoctorsController(
             IDoctorsService doctorService,
@@ -28,7 +29,8 @@ namespace RestAPI.Controllers
             IHospitalsService hospitalsService,
             IGoogleCloudStorageService googleCloudStorage,
             UserManager<ApplicationUser> userManager,
-            IJWTTokenService jwtService)
+            IJWTTokenService jwtService,
+            ISpecialtiesService specialtiesService)
         {
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
@@ -36,6 +38,7 @@ namespace RestAPI.Controllers
             _GCSService = googleCloudStorage;
             _userManager = userManager;
             _jwtService = jwtService;
+            _specialtiesService = specialtiesService;
         }
 
         [HttpPost("getDoctors")]
@@ -66,7 +69,7 @@ namespace RestAPI.Controllers
         [HttpGet("getSpecialties")]
         public async Task<IActionResult> GetSpecialties()
         {
-            var specialties = await _doctorService.GetSpecialtiesAsync();
+            var specialties = await _specialtiesService.GetSpecialtiesAsync();
 
             return Ok(specialties);
         }
@@ -106,7 +109,7 @@ namespace RestAPI.Controllers
         {
             if (await _doctorService.IsUserDoctorAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)) ||
                 !await _hospitalsService.IsHospitalExistAsync(request.HospitalId) ||
-                !await _doctorService.IsSpecialtyExistAsync(request.SpecialtyId))
+                !await _specialtiesService.IsSpecialtyExistAsync(request.SpecialtyId))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }

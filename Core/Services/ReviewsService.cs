@@ -1,7 +1,7 @@
-﻿using Core.Models.ResponseDtos.Reviews;
-using Core.Services.Contracts;
+﻿using Core.Contracts.Services;
+using Core.Models.ResponseDtos.Reviews;
 using Infrastructure;
-using Infrastructure.Entities;
+using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services

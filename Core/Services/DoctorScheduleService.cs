@@ -1,5 +1,5 @@
-﻿using Core.Models.ResponseDtos.DoctorSchedule;
-using Core.Services.Contracts;
+﻿using Core.Contracts.Services;
+using Core.Models.ResponseDtos.DoctorSchedule;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -113,7 +113,7 @@ namespace Core.Services
 
         private async Task<IEnumerable<DateTime>> GetBusyDaysAsync(int doctorId, int month, int year)
         {
-            var shedule = await _context.WorkWeek
+            var shedule = await _context.DoctorWeekDays
                     .AsNoTracking()
                     .Where(d => d.Id == doctorId)
                     .Select(d => new

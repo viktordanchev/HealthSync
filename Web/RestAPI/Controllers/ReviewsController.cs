@@ -1,4 +1,4 @@
-﻿using Core.Services.Contracts;
+﻿using Core.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.Dtos.RequestDtos.Reviews;

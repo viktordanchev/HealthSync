@@ -1,4 +1,4 @@
-﻿using Core.Services.Contracts;
+﻿using Core.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RestAPI.Controllers

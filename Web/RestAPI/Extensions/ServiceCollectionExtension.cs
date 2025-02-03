@@ -1,7 +1,7 @@
-﻿using Core.Services;
-using Core.Services.Contracts;
+﻿using Core.Contracts.Services;
+using Core.Services;
 using Infrastructure;
-using Infrastructure.Entities;
+using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -120,6 +120,7 @@ namespace Server.Extensions
             services.AddScoped<IReviewsService, ReviewsService>();
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             services.AddScoped<IHospitalsService, HospitalsService>();
+            services.AddScoped<ISpecialtiesService, SpecialtiesService>();
         }
     }
 }

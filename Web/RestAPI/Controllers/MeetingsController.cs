@@ -1,5 +1,5 @@
-﻿using Core.Services.Contracts;
-using Infrastructure.Entities;
+﻿using Core.Contracts.Services;
+using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

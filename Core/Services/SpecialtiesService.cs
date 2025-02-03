@@ -1,5 +1,5 @@
-﻿using Core.Models.ResponseDtos.Specialties;
-using Core.Services.Contracts;
+﻿using Core.Contracts.Services;
+using Core.Models.ResponseDtos.Specialties;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
