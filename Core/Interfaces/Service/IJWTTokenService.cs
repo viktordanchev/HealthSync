@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Core.Contracts.Services
+namespace Core.Interfaces.Service
 {
     public interface IJWTTokenService
     {

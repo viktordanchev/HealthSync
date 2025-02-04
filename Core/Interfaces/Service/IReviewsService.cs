@@ -1,6 +1,6 @@
 ﻿using Core.Models.ResponseDtos.Reviews;
 
-namespace Core.Contracts.Services
+namespace Core.Interfaces.Service
 {
     public interface IReviewsService
     {

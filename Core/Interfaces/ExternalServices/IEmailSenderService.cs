@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Services
+﻿namespace Core.Interfaces.ExternalServices
 {
     public interface IEmailSenderService
     {

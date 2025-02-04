@@ -1,4 +1,4 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Interfaces.Service;
 using Core.Services.Configs;
 using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Http;

@@ -1,4 +1,4 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Interfaces.Service;
 using Core.Models.ResponseDtos.Specialties;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;

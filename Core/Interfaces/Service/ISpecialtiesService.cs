@@ -1,6 +1,6 @@
 ﻿using Core.Models.ResponseDtos.Specialties;
 
-namespace Core.Contracts.Services
+namespace Core.Interfaces.Service
 {
     public interface ISpecialtiesService
     {

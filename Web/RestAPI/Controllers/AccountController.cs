@@ -1,10 +1,10 @@
-﻿using Infrastructure.Database.Entities;
+﻿using Core.Interfaces.Service;
+using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.Dtos.RequestDtos.Account;
 using RestAPI.Dtos.ResponseDtos.Account;
-using RestAPI.Services.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using static Common.Errors;

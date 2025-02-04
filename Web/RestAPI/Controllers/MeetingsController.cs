@@ -1,4 +1,4 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Interfaces.Service;
 using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

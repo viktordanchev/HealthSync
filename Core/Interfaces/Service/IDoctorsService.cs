@@ -1,10 +1,11 @@
 ﻿using Core.Models.ResponseDtos.Doctors;
+using RestAPI.Dtos.RequestDtos.Doctors;
 
-namespace Core.Contracts.Services
+namespace Core.Interfaces.Service
 {
     public interface IDoctorsService
     {
-        Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(int index, string sorting, string filter, string search, string doctorIdentityId);
+        Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userIdentityId);
         Task<DoctorDetailsResponse> GetDoctorDetailsAsync(int doctorId);
         Task<bool> IsDoctorExistAsync(int doctorId);
         Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber, string? imgUrl);

@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Database.Repositories
 {
-    public class MeetingsRepository
+    public class MeetingsRepository : IMeetingsRepository
     {
     }
 }

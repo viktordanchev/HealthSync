@@ -1,4 +1,4 @@
-﻿namespace RestAPI.Services.Contracts
+﻿namespace Core.Interfaces.Service
 {
     public interface IMemoryCacheService
     {

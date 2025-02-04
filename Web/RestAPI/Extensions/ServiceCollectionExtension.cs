@@ -1,8 +1,9 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Interfaces.Service;
 using Core.Services;
 using Core.Services.Configs;
 using Infrastructure;
 using Infrastructure.Database.Entities;
+using Infrastructure.Database.Repositories;
 using Infrastructure.Services;
 using Infrastructure.Services.Configs;
 using Infrastructure.Services.Contracts;
@@ -12,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RestAPI.Filters;
 using RestAPI.Services;
-using RestAPI.Services.Contracts;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
@@ -118,14 +118,24 @@ namespace Server.Extensions
         {
             services.AddTransient<IEmailSenderService, EmailSenderService>();
             services.AddTransient<IMemoryCacheService, MemoryCacheService>();
-            services.AddScoped<IJWTTokenService, JWTTokenService>();
+            services.AddSingleton<IJWTTokenService, JWTTokenService>();
             services.AddSingleton<IGoogleCloudStorageService, GoogleCloudStorageService>();
-            services.AddSingleton<IDoctorsService, DoctorsService>();
-            services.AddSingleton<IMeetingsService, MeetingsService>();
-            services.AddSingleton<IReviewsService, ReviewsService>();
-            services.AddSingleton<IDoctorScheduleService, DoctorScheduleService>();
-            services.AddSingleton<IHospitalsService, HospitalsService>();
-            services.AddSingleton<ISpecialtiesService, SpecialtiesService>();
+            services.AddScoped<IDoctorsService, DoctorsService>();
+            services.AddScoped<IMeetingsService, MeetingsService>();
+            services.AddScoped<IReviewsService, ReviewsService>();
+            services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
+            services.AddScoped<IHospitalsService, HospitalsService>();
+            services.AddScoped<ISpecialtiesService, SpecialtiesService>();
+        }
+
+        public static void AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IDoctorsRepository, DoctorsRepository>();
+            services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
+            services.AddScoped<IHospitalsRepository, HospitalsRepository>();
+            services.AddScoped<IMeetingsRepository, MeetingsRepository>();
+            services.AddScoped<IReviewsRepository, ReviewsRepository>();
+            services.AddScoped<ISpecialtiesRepository, SpecialtiesRepository>();
         }
 
         public static void AddConfigs(this IServiceCollection services, IConfiguration config)

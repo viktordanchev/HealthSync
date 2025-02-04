@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using RestAPI.Services.Contracts;
+﻿using Core.Interfaces.Service;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace RestAPI.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Database.Repositories
+﻿namespace Core.Interfaces.Repository
 {
     public interface IReviewsRepository
     {

@@ -1,6 +1,6 @@
 ﻿using Core.Models.ResponseDtos.DoctorSchedule;
 
-namespace Core.Contracts.Services
+namespace Core.Interfaces.Service
 {
     public interface IDoctorScheduleService
     {

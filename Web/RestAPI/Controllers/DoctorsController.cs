@@ -1,10 +1,9 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Interfaces.Service;
 using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.Dtos.RequestDtos.Doctors;
-using RestAPI.Services.Contracts;
 using System.Security.Claims;
 using static Common.Errors;
 using static Common.Messages.Doctors;
@@ -19,7 +18,6 @@ namespace RestAPI.Controllers
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
         private readonly IHospitalsService _hospitalsService;
-        private readonly IGoogleCloudStorageService _GCSService;
         private readonly IJWTTokenService _jwtService;
         private readonly ISpecialtiesService _specialtiesService;
 
@@ -27,7 +25,6 @@ namespace RestAPI.Controllers
             IDoctorsService doctorService,
             IDoctorScheduleService doctorScheduleService,
             IHospitalsService hospitalsService,
-            IGoogleCloudStorageService googleCloudStorage,
             UserManager<ApplicationUser> userManager,
             IJWTTokenService jwtService,
             ISpecialtiesService specialtiesService)
@@ -44,10 +41,7 @@ namespace RestAPI.Controllers
         [HttpPost("getDoctors")]
         public async Task<IActionResult> GetDoctors([FromBody] GetDoctorsRequest request)
         {
-            var doctors = await _doctorService.GetDoctorsAsync(request.Index,
-                request.Sorting.ToString(),
-                request.Filter,
-                request.Search.Trim().ToLower(),
+            var doctors = await _doctorService.GetDoctorsAsync(request,
                 User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             return Ok(doctors);

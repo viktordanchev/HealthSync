@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Database.Repositories
 {
-    public class DoctorScheduleRepository
+    public class DoctorScheduleRepository : IDoctorScheduleRepository
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Database.Repositories
 {
-    public class ReviewsRepository
+    public class ReviewsRepository : IReviewsRepository
     {
     }
 }

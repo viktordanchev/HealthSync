@@ -10,6 +10,7 @@ builder.Services.AddIdentityExtension();
 builder.Services.AddJWTAuthentication(builder.Configuration);
 builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.AddServices();
+builder.Services.AddRepositories();
 builder.Services.AddMemoryCache();
 builder.Services.AddConfigs(builder.Configuration);
 

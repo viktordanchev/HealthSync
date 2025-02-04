@@ -1,17 +1,16 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Interfaces.Repository;
+using Core.Interfaces.Service;
 using Core.Models.ResponseDtos.DoctorSchedule;
-using Infrastructure;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
     public class DoctorScheduleService : IDoctorScheduleService
     {
-        private readonly HealthSyncDbContext _context;
+        private readonly IDoctorScheduleRepository _repository;
 
-        public DoctorScheduleService(HealthSyncDbContext context)
+        public DoctorScheduleService(IDoctorScheduleRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public async Task<bool> IsDayOffAsync(int doctorId, DateTime date)

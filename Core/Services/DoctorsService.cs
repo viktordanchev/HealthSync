@@ -1,42 +1,27 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Interfaces.ExternalServices;
+using Core.Interfaces.Repository;
+using Core.Interfaces.Service;
 using Core.Models.ResponseDtos.Doctors;
-using Infrastructure;
-using Infrastructure.Database.Entities;
-using Microsoft.EntityFrameworkCore;
+using RestAPI.Dtos.RequestDtos.Doctors;
 
 namespace Core.Services
 {
     public class DoctorsService : IDoctorsService
     {
-        private readonly HealthSyncDbContext _context;
+        private readonly IDoctorsRepository _repository;
+        private readonly IGoogleCloudStorageService _GCSService;
 
-        public DoctorsService(HealthSyncDbContext context)
+        public DoctorsService(IDoctorsRepository repository, IGoogleCloudStorageService gcsService)
         {
-            _context = context;
+            _repository = repository;
+            _GCSService = gcsService;
         }
 
-        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(int index, string sorting, string filter, string search, string doctorIdentityId)
+        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userIdentityId)
         {
-            var doctors = await _context.Doctors
-                .AsNoTracking()
-                .Where(d => ((string.IsNullOrEmpty(search) ||
-                    string.Concat(d.Identity.FirstName, " ", d.Identity.LastName).Contains(search)) &&
-                    (string.IsNullOrEmpty(filter) || d.Specialty.Type == filter)) &&
-                    d.IdentityId != doctorIdentityId)
-                .Skip(index * 10)
-                .Take(10)
-                .Select(d => new DoctorResponse()
-                {
-                    Id = d.Id,
-                    Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
-                    ImgUrl = d.ImgUrl,
-                    Specialty = d.Specialty.Type,
-                    Rating = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,
-                    TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
-                })
-                .ToListAsync();
+            var doctors = await _repository.GetDoctorsAsync(requestData, userIdentityId);
 
-            switch (sorting)
+            switch (requestData.Sorting.ToString())
             {
                 case "NameAsc":
                     doctors = doctors.OrderBy(d => d.Name).ToList();
@@ -86,15 +71,22 @@ namespace Core.Services
             return doctor != null;
         }
 
-        public async Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber, string? imgUrl)
+        public async Task AddDoctorAsync(BecomeDoctorRequest requestData, string userIdentityId)
         {
+            string? imgUrl = null;
+
+            if (requestData.ProfilePhoto != null)
+            {
+                imgUrl = await _GCSService.UploadProfileImageAsync(requestData.ProfilePhoto);
+            }
+
             var doctor = new Doctor()
             {
-                IdentityId = userId,
-                HospitalId = hospitalId,
-                SpecialtyId = specialtyId,
-                ContactEmail = contactEmail,
-                ContactPhoneNumber = contactPhoneNumber,
+                IdentityId = userIdentityId,
+                HospitalId = requestData.HospitalId,
+                SpecialtyId = requestData.SpecialtyId,
+                ContactEmail = requestData.ContactEmail,
+                ContactPhoneNumber = requestData.ContactPhoneNumber,
                 ImgUrl = imgUrl
             };
 

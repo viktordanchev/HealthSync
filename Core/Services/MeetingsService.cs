@@ -1,4 +1,4 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Interfaces.Service;
 using Core.Models.ResponseDtos.Meetings;
 using Infrastructure;
 using Infrastructure.Database.Entities;

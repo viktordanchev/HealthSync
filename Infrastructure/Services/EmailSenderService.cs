@@ -2,6 +2,7 @@
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using Infrastructure.Services.Configs;
+using Core.Interfaces.ExternalServices;
 
 namespace Infrastructure.Services
 {

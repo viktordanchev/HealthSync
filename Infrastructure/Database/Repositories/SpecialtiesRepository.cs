@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Database.Repositories
 {
-    public class SpecialtiesRepository
+    public class SpecialtiesRepository : ISpecialtiesRepository
     {
     }
 }

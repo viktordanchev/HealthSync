@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Database.Repositories
 {
-    public class HospitalsRepository
+    public class HospitalsRepository : IHospitalsRepository
     {
     }
 }
