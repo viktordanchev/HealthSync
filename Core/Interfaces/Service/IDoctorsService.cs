@@ -5,10 +5,10 @@ namespace Core.Interfaces.Service
 {
     public interface IDoctorsService
     {
-        Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userIdentityId);
+        Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userId);
         Task<DoctorDetailsResponse> GetDoctorDetailsAsync(int doctorId);
         Task<bool> IsDoctorExistAsync(int doctorId);
-        Task AddDoctorAsync(string userId, int hospitalId, int specialtyId, string contactEmail, string contactPhoneNumber, string? imgUrl);
+        Task AddDoctorAsync(BecomeDoctorRequest requestData, string userId);
         Task<bool> IsUserDoctorAsync(string userId);
         Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
     }

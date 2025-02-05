@@ -1,4 +1,4 @@
-﻿using RestAPI.Attributes;
+﻿using Core.Attributes;
 using System.ComponentModel.DataAnnotations;
 using static Common.Constants.User;
 

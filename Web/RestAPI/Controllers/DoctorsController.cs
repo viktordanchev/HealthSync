@@ -18,7 +18,7 @@ namespace RestAPI.Controllers
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
         private readonly IHospitalsService _hospitalsService;
-        private readonly IJWTTokenService _jwtService;
+        private readonly IJwtTokenService _jwtTokenService;
         private readonly ISpecialtiesService _specialtiesService;
 
         public DoctorsController(
@@ -26,15 +26,14 @@ namespace RestAPI.Controllers
             IDoctorScheduleService doctorScheduleService,
             IHospitalsService hospitalsService,
             UserManager<ApplicationUser> userManager,
-            IJWTTokenService jwtService,
+            IJwtTokenService jwtTokenService,
             ISpecialtiesService specialtiesService)
         {
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
             _hospitalsService = hospitalsService;
-            _GCSService = googleCloudStorage;
             _userManager = userManager;
-            _jwtService = jwtService;
+            _jwtTokenService = jwtTokenService;
             _specialtiesService = specialtiesService;
         }
 
@@ -108,26 +107,12 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            string? imgUrl = null;
-
-            if (request.ProfilePhoto != null)
-            {
-                imgUrl = await _GCSService.UploadProfileImageAsync(request.ProfilePhoto);
-            }
-
-            await _doctorService.AddDoctorAsync(
-                User.FindFirstValue(ClaimTypes.NameIdentifier),
-                request.HospitalId,
-                request.SpecialtyId,
-                request.ContactEmail,
-                request.ContactPhoneNumber,
-                imgUrl);
-
             var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+            await _doctorService.AddDoctorAsync(request, user.Id);
             await _userManager.AddToRoleAsync(user, "Doctor");
 
-            var accessToken = await _jwtService.GenerateAccessTokenAsync(user.Id);
+            var accessToken = await _jwtTokenService.GenerateAccessTokenAsync(user.Id);
 
             return Ok(
                 new

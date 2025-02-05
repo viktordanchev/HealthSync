@@ -1,36 +1,28 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.Interfaces.Repository;
+using Core.Interfaces.Service;
 using Core.Models.ResponseDtos.Specialties;
-using Infrastructure;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
     public class SpecialtiesService : ISpecialtiesService
     {
-        private readonly HealthSyncDbContext _context;
+        private readonly ISpecialtiesRepository _specialtiesRepo;
 
-        public SpecialtiesService(HealthSyncDbContext context)
+        public SpecialtiesService(ISpecialtiesRepository specialtiesRepo)
         {
-            _context = context;
+            _specialtiesRepo = specialtiesRepo;
         }
 
         public async Task<bool> IsSpecialtyExistAsync(int specialtyId)
         {
-            var specialty = await _context.Specialties.FirstOrDefaultAsync(s => s.Id == specialtyId);
+            var isSpecialtyExist = await _specialtiesRepo.IsSpecialtyExistAsync(specialtyId);
 
-            return specialty != null;
+            return isSpecialtyExist;
         }
 
         public async Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync()
         {
-            var specialties = await _context.Specialties
-                .AsNoTracking()
-                .Select(s => new SpecialtyResponse()
-                {
-                    Id = s.Id,
-                    Name = s.Type
-                })
-                .ToListAsync();
+            var specialties = await _specialtiesRepo.GetSpecialtiesAsync();
 
             return specialties;
         }

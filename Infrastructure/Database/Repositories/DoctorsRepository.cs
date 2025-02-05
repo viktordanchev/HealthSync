@@ -15,14 +15,14 @@ namespace Infrastructure.Database.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userIdentityId)
+        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userId)
         {
             var doctors = await _context.Doctors
                 .AsNoTracking()
                 .Where(d => ((string.IsNullOrEmpty(requestData.Search) ||
                     string.Concat(d.Identity.FirstName, " ", d.Identity.LastName).Contains(requestData.Search)) &&
                     (string.IsNullOrEmpty(requestData.Filter) || d.Specialty.Type == requestData.Filter)) &&
-                    d.IdentityId != userIdentityId)
+                    d.IdentityId != userId)
                 .Skip(requestData.Index * 10)
                 .Take(10)
                 .Select(d => new DoctorResponse()
@@ -70,11 +70,11 @@ namespace Infrastructure.Database.Repositories
             return doctor != null;
         }
 
-        public async Task AddDoctorAsync(BecomeDoctorRequest requestData, string userIdentityId, string imgUrl)
+        public async Task<int> AddDoctorAsync(BecomeDoctorRequest requestData, string userId, string imgUrl)
         {
             var doctor = new Doctor()
             {
-                IdentityId = userIdentityId,
+                IdentityId = userId,
                 HospitalId = requestData.HospitalId,
                 SpecialtyId = requestData.SpecialtyId,
                 ContactEmail = requestData.ContactEmail,
@@ -83,6 +83,65 @@ namespace Infrastructure.Database.Repositories
             };
 
             await _context.Doctors.AddAsync(doctor);
+            await _context.SaveChangesAsync();
+
+            return doctor.Id;
+        }
+
+        public async Task<bool> IsUserDoctorAsync(string userId)
+        {
+            var doctor = await _context.Doctors.FirstOrDefaultAsync(d => d.IdentityId == userId);
+
+            return doctor != null;
+        }
+
+        public async Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId)
+        {
+            var doctorInfo = await _context.Doctors
+                .Where(d => d.IdentityId == userId)
+                .Select(d => new DoctorPersonalInfoResponse()
+                {
+                    Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
+                    ImgUrl = d.ImgUrl,
+                    HospitalId = d.HospitalId,
+                    Hospital = d.Hospital.Name,
+                    SpecialtyId = d.SpecialtyId,
+                    Specialty = d.Specialty.Type,
+                    PersonalInformation = d.Information,
+                    ContactEmail = d.ContactEmail,
+                    ContactPhoneNumber = d.ContactPhoneNumber,
+                    WeeklySchedule = d.WorkWeek
+                        .Select(wd => new WeekDayResponse()
+                        {
+                            Id = wd.Id,
+                            WeekDay = wd.WeekDay,
+                            IsWorkDay = wd.IsWorkDay,
+                            WorkDayStart = wd.Start,
+                            WorkDayEnd = wd.End,
+                            MeetingTimeMinutes = wd.MeetingTimeMinutes
+                        })
+                        .ToList()
+                })
+                .FirstAsync();
+
+            return doctorInfo;
+        }
+
+        public async Task GenerateEmptyDoctorWeekSchedule(int doctorId)
+        {
+            var week = new List<DoctorWeekDay>();
+
+            for (int day = 0; day < 7; day++)
+            {
+                var workDay = new DoctorWeekDay()
+                {
+                    DoctorId = doctorId,
+                    WeekDay = (DayOfWeek)((day + 1) % 7),
+                    IsWorkDay = false
+                };
+            }
+
+            await _context.DoctorWeekDays.AddRangeAsync(week);
             await _context.SaveChangesAsync();
         }
     }

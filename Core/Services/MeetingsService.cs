@@ -1,74 +1,48 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.Interfaces.Repository;
+using Core.Interfaces.Service;
 using Core.Models.ResponseDtos.Meetings;
-using Infrastructure;
-using Infrastructure.Database.Entities;
-using Microsoft.EntityFrameworkCore;
+using RestAPI.Dtos.RequestDtos.Meetings;
 
 namespace Core.Services
 {
     public class MeetingsService : IMeetingsService
     {
-        private readonly HealthSyncDbContext _context;
+        private readonly IMeetingsRepository _meetingsRepo;
 
-        public MeetingsService(HealthSyncDbContext context)
+        public MeetingsService(IMeetingsRepository meetingsRepo)
         {
-            _context = context;
+            _meetingsRepo = meetingsRepo;
         }
 
-        public async Task AddDoctorMeetingAsync(int doctorId, DateTime date, string patientId)
+        public async Task AddDoctorMeetingAsync(AddMeetingRequest requestData)
         {
-            var meeting = new Meeting()
-            {
-                DoctorId = doctorId,
-                DateAndTime = date,
-                PatientId = patientId
-            };
-
-            await _context.Meetings.AddAsync(meeting);
-            await _context.SaveChangesAsync();
+            await _meetingsRepo.AddDoctorMeetingAsync(requestData);
         }
 
         public async Task<IEnumerable<DoctorMeetingInfoResponse>> GetUserMeetingsAsync(string userId)
         {
-            var meetings = await _context.Meetings
-                .AsNoTracking()
-                .Where(m => m.PatientId == userId)
-                .OrderBy(m => m.DateAndTime)
-                .Select(m => new DoctorMeetingInfoResponse()
-                {
-                    Id = m.Id,
-                    Name = $"{m.Doctor.Identity.FirstName} {m.Doctor.Identity.LastName}",
-                    ImgUrl = m.Doctor.ImgUrl,
-                    Hospital = m.Doctor.Hospital.Name,
-                    HospitalAddress = m.Doctor.Hospital.Address,
-                    DateAndTime = m.DateAndTime
-                })
-                .ToListAsync();
+            var meetings = await _meetingsRepo.GetUserMeetingsAsync(userId);
 
             return meetings;
         }
 
         public async Task DeleteMeetingAsync(int meetingId)
         {
-            var meeting = await _context.Meetings
-                .FirstAsync(m => m.Id == meetingId);
-
-            _context.Meetings.Remove(meeting);
-            await _context.SaveChangesAsync();
+            await _meetingsRepo.DeleteMeetingAsync(meetingId);
         }
 
         public async Task<bool> IsMeetingExistAsync(int meetingId)
         {
-            var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.Id == meetingId);
+            var ssMeetingExist = await _meetingsRepo.IsMeetingExistAsync(meetingId);
 
-            return meeting != null;
+            return ssMeetingExist;
         }
 
-        public async Task<bool> isMeetingScheduled(string userId, int doctorId)
+        public async Task<bool> isMeetingScheduled(string patientId, int doctorId)
         {
-            var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.PatientId == userId && m.DoctorId == doctorId);
+            var isMeetingScheduled = await _meetingsRepo.IsMeetingScheduled(patientId, doctorId);
 
-            return meeting != null;
+            return isMeetingScheduled;
         }
     }
 }

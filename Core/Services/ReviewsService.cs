@@ -1,52 +1,27 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.Interfaces.Repository;
+using Core.Interfaces.Service;
 using Core.Models.ResponseDtos.Reviews;
-using Infrastructure;
-using Infrastructure.Database.Entities;
-using Microsoft.EntityFrameworkCore;
+using RestAPI.Dtos.RequestDtos.Reviews;
 
 namespace Core.Services
 {
     public class ReviewsService : IReviewsService
     {
-        private readonly HealthSyncDbContext _context;
+        private readonly IReviewsRepository _reviewsRepo;
 
-        public ReviewsService(HealthSyncDbContext context)
+        public ReviewsService(IReviewsRepository reviewsRepo)
         {
-            _context = context;
+            _reviewsRepo = reviewsRepo;
         }
 
-        public async Task AddDoctorReviewAsync(int doctorId, int rating, string comment, string reviewer)
+        public async Task AddDoctorReviewAsync(AddReviewRequest requestData, string reviewer)
         {
-            var reveiew = new Review()
-            {
-                DoctorId = doctorId,
-                Rating = rating,
-                DateAndTime = DateTime.Now,
-                Comment = comment,
-                Reviewer = reviewer
-            };
-
-            await _context.Reviews.AddAsync(reveiew);
-            await _context.SaveChangesAsync();
+            await _reviewsRepo.AddDoctorReviewAsync(requestData, reviewer);
         }
 
-        public async Task<IEnumerable<ReviewResponse>> GetDoctorReviewsAsync(int index, int doctorId)
+        public async Task<IEnumerable<ReviewResponse>> GetDoctorReviewsAsync(GetReviewsRequest requestData)
         {
-            var reviews = await _context.Reviews
-                .AsNoTracking()
-                .Where(r => r.DoctorId == doctorId)
-                .OrderByDescending(r => r.DateAndTime)
-                .Skip(index * 3)
-                .Take(3)
-                .Select(r => new ReviewResponse()
-                {
-                    Id = r.Id,
-                    Rating = r.Rating,
-                    DateAndTime = r.DateAndTime,
-                    Comment = r.Comment,
-                    Reviewer = r.Reviewer
-                })
-                .ToListAsync();
+            var reviews = await _reviewsRepo.GetDoctorReviewsAsync(requestData);
 
             return reviews;
         }

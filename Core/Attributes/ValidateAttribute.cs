@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestAPI.Attributes
+namespace Core.Attributes
 {
     public class ValidateAttribute : ValidationAttribute
     {

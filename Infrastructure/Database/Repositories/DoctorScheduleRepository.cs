@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Database.Repositories
+﻿using Core.Interfaces.Repository;
+
+namespace Infrastructure.Database.Repositories
 {
     public class DoctorScheduleRepository : IDoctorScheduleRepository
     {

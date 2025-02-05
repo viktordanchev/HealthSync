@@ -1,38 +1,30 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.Interfaces.Repository;
+using Core.Interfaces.Service;
 using Core.Models.ResponseDtos.Hospitals;
-using Infrastructure;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
     public class HospitalsService : IHospitalsService
     {
-        private readonly HealthSyncDbContext _context;
+        private readonly IHospitalsRepository _hospitalsRepo;
 
-        public HospitalsService(HealthSyncDbContext context)
+        public HospitalsService(IHospitalsRepository hospitalsRepo)
         {
-            _context = context;
+            _hospitalsRepo = hospitalsRepo;
         }
 
         public async Task<IEnumerable<HospitalResponse>> GetHospitalsAsync()
         {
-            var hospitals = await _context.Hospitals
-                .AsNoTracking() 
-                .Select(h => new HospitalResponse()
-                {
-                    Id = h.Id,
-                    Name = h.Name
-                })
-                .ToListAsync();
+            var hospitals = await _hospitalsRepo.GetHospitalsAsync();
 
             return hospitals;
         }
 
         public async Task<bool> IsHospitalExistAsync(int hospitalId)
         {
-            var hospital = await _context.Hospitals.FirstOrDefaultAsync(h => h.Id == hospitalId);
+            var isHospitalExist = await _hospitalsRepo.IsHospitalExistAsync(hospitalId);
 
-            return hospital != null;
+            return isHospitalExist;
         }
     }
 }

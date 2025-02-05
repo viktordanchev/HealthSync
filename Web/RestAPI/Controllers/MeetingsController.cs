@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.Dtos.RequestDtos.Meetings;
-using System.Security.Claims;
 using static Common.Errors;
 using static Common.Errors.Meetings;
 using static Common.Messages.Meetings;
@@ -36,20 +35,18 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> AddDoctorMeeting([FromBody] AddMeetingRequest request)
         {
-            var date = DateTime.Parse(request.Date);
-
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, date))
+                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.DateAndTime))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            //if(await _meetingsService.isMeetingScheduled(request.UserId, request.DoctorId))
-            //{
-            //    return BadRequest(new { Error = ExistingMeeting });
-            //}
+            if(await _meetingsService.isMeetingScheduled(request.PatientId, request.DoctorId))
+            {
+                return BadRequest(new { Error = ExistingMeeting });
+            }
 
-            await _meetingsService.AddDoctorMeetingAsync(request.DoctorId, date, User.FindFirstValue(ClaimTypes.NameIdentifier));
+            await _meetingsService.AddDoctorMeetingAsync(request);
 
             return Ok(new { Message = AddedMeeting });
         }

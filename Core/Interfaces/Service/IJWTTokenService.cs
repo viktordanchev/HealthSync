@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Core.Interfaces.Service
+﻿namespace Core.Interfaces.Service
 {
-    public interface IJWTTokenService
+    public interface IJwtTokenService
     {
         string GenerateRefreshToken(string userId);
         Task<string> GenerateAccessTokenAsync(string userId);
-        void AppendRefreshTokenToCookie(HttpContext context, string token);
     }
 }

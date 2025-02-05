@@ -1,6 +1,6 @@
 ﻿namespace Core.Services.Configs
 {
-    public class JWTTokenConfig
+    public class JwtTokenConfig
     {
         public string Key { get; set; } = null!;
         public string Issuer { get; set; } = null!;

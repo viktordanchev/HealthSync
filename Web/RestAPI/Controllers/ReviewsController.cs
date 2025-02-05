@@ -30,7 +30,7 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var reviews = await _reviewsService.GetDoctorReviewsAsync(request.Index, request.DoctorId);
+            var reviews = await _reviewsService.GetDoctorReviewsAsync(request);
 
             return Ok(reviews);
         }
@@ -44,7 +44,7 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            await _reviewsService.AddDoctorReviewAsync(request.DoctorId, request.Rating, request.Comment, User.Identity.Name);
+            await _reviewsService.AddDoctorReviewAsync(request, User.Identity.Name);
 
             return Ok(new { Message = AddedReview });
         }

@@ -1,4 +1,6 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.Interfaces.ExternalServices;
+using Core.Interfaces.Repository;
+using Core.Interfaces.Service;
 using Core.Services;
 using Core.Services.Configs;
 using Infrastructure;
@@ -6,7 +8,6 @@ using Infrastructure.Database.Entities;
 using Infrastructure.Database.Repositories;
 using Infrastructure.Services;
 using Infrastructure.Services.Configs;
-using Infrastructure.Services.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -118,7 +119,7 @@ namespace Server.Extensions
         {
             services.AddTransient<IEmailSenderService, EmailSenderService>();
             services.AddTransient<IMemoryCacheService, MemoryCacheService>();
-            services.AddSingleton<IJWTTokenService, JWTTokenService>();
+            services.AddSingleton<IJwtTokenService, JwtTokenService>();
             services.AddSingleton<IGoogleCloudStorageService, GoogleCloudStorageService>();
             services.AddScoped<IDoctorsService, DoctorsService>();
             services.AddScoped<IMeetingsService, MeetingsService>();
@@ -142,7 +143,7 @@ namespace Server.Extensions
         {
             services.Configure<JsonSerializerOptions>(options => new JsonSerializerOptions(JsonSerializerDefaults.Web));
             services.Configure<EmailSenderConfig>(config.GetSection("EmailSettings"));
-            services.Configure<JWTTokenConfig>(config.GetSection("JWTToken"));
+            services.Configure<JwtTokenConfig>(config.GetSection("JwtToken"));
             services.Configure<CookiesConfig>(config.GetSection("Cookies"));
         }
     }

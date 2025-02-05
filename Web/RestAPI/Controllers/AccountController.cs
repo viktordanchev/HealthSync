@@ -1,4 +1,5 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.Interfaces.ExternalServices;
+using Core.Interfaces.Service;
 using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +20,7 @@ namespace HealthSync.Server.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
-        private IJWTTokenService _jwtService;
+        private IJwtTokenService _jwtTokenService;
         private IEmailSenderService _emailSender;
         private IMemoryCacheService _memoryCacheService;
         private readonly ILogger<AccountController> _logger;
@@ -27,14 +28,14 @@ namespace HealthSync.Server.Controllers
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IJWTTokenService jwtService,
+            IJwtTokenService jwtTokenService,
             IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _jwtService = jwtService;
+            _jwtTokenService = jwtTokenService;
             _emailSender = emailSender;
             _memoryCacheService = memoryCacheService;
             _logger = logger;
@@ -92,12 +93,21 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { Error = InvalidLoginData });
             }
 
-            var accessToken = await _jwtService.GenerateAccessTokenAsync(user.Id);
+            var accessToken = await _jwtTokenService.GenerateAccessTokenAsync(user.Id);
 
             if (request.RememberMe)
             {
-                var refreshToken = _jwtService.GenerateRefreshToken(user.Id);
-                _jwtService.AppendRefreshTokenToCookie(HttpContext, refreshToken);
+                var refreshToken = _jwtTokenService.GenerateRefreshToken(user.Id);
+
+                Response.Cookies.Append("refreshToken", refreshToken,
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    IsEssential = true,
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.Now.AddMinutes(5),
+                });
             }
 
             return Ok(new { Token = accessToken });
@@ -214,7 +224,7 @@ namespace HealthSync.Server.Controllers
 
             await _userManager.UpdateAsync(user);
 
-            var accessToken = await _jwtService.GenerateAccessTokenAsync(user.Id);
+            var accessToken = await _jwtTokenService.GenerateAccessTokenAsync(user.Id);
 
             return Ok(
                 new
@@ -236,7 +246,7 @@ namespace HealthSync.Server.Controllers
                 var jsonToken = handler.ReadJwtToken(refreshToken);
                 var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-                newAccessToken = await _jwtService.GenerateAccessTokenAsync(userId);
+                newAccessToken = await _jwtTokenService.GenerateAccessTokenAsync(userId);
             }
 
             return Ok(new { Token = newAccessToken });
