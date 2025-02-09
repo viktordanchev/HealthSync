@@ -1,8 +1,8 @@
-﻿using Core.Interfaces.Repository;
-using Core.Models.ResponseDtos.Reviews;
+﻿using Core.DTOs.RequestDtos.Reviews;
+using Core.DTOs.ResponseDtos.Reviews;
+using Core.Interfaces.Repository;
 using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using RestAPI.Dtos.RequestDtos.Reviews;
 
 namespace Infrastructure.Database.Repositories
 {

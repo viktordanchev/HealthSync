@@ -1,5 +1,5 @@
-﻿using Core.Interfaces.Repository;
-using Core.Models.ResponseDtos.Specialties;
+﻿using Core.DTOs.ResponseDtos.Specialties;
+using Core.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Repositories

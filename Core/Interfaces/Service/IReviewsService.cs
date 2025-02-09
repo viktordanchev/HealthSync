@@ -1,5 +1,5 @@
-﻿using Core.Models.ResponseDtos.Reviews;
-using RestAPI.Dtos.RequestDtos.Reviews;
+﻿using Core.DTOs.RequestDtos.Reviews;
+using Core.DTOs.ResponseDtos.Reviews;
 
 namespace Core.Interfaces.Service
 {

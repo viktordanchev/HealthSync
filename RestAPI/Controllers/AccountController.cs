@@ -1,14 +1,11 @@
-﻿using Core.Interfaces.ExternalServices;
+﻿using Core.DTOs.RequestDtos.Account;
+using Core.DTOs.ResponseDtos.Account;
+using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Service;
-using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.Dtos.RequestDtos.Account;
-using RestAPI.Dtos.ResponseDtos.Account;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using static Common.Errors;
 using static Common.Errors.Account;
 using static Common.Messages.Account;
 
@@ -18,23 +15,20 @@ namespace HealthSync.Server.Controllers
     [Route("account")]
     public class AccountController : ControllerBase
     {
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private IAccountService _accountService;
         private IJwtTokenService _jwtTokenService;
         private IEmailSenderService _emailSender;
         private IMemoryCacheService _memoryCacheService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            IAccountService accountService,
             IJwtTokenService jwtTokenService,
             IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,
             ILogger<AccountController> logger)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _accountService = accountService;
             _jwtTokenService = jwtTokenService;
             _emailSender = emailSender;
             _memoryCacheService = memoryCacheService;
@@ -44,9 +38,7 @@ namespace HealthSync.Server.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            var user = await _userManager.FindByEmailAsync(request.Email);
-
-            if (user != null)
+            if (!await _accountService.IsUserExistByEmailAsync(request.Email))
             {
                 return BadRequest(new { Error = UsedEmail });
             }
@@ -56,21 +48,7 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { Error = InvalidVrfCode });
             }
 
-            user = new ApplicationUser()
-            {
-                UserName = request.Email,
-                Email = request.Email,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                EmailConfirmed = true
-            };
-
-            var result = await _userManager.CreateAsync(user, request.Password);
-
-            if (!result.Succeeded)
-            {
-                return BadRequest(new { ServerError = InvalidRequest });
-            }
+            await _accountService.AddUserAsync(request);
 
             return NoContent();
         }
@@ -78,26 +56,17 @@ namespace HealthSync.Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            var user = await _userManager.FindByEmailAsync(request.Email);
-
-            if (user == null)
-            {
-                return Unauthorized(new { Error = InvalidLoginData });
-            }
-
-            var result = await _signInManager
-                .CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
-
-            if (!result.Succeeded)
+            if (!await _accountService.IsUserLoggedInAsync(request))
             {
                 return BadRequest(new { Error = InvalidLoginData });
             }
 
-            var accessToken = await _jwtTokenService.GenerateAccessTokenAsync(user.Id);
+            var userData = await _accountService.GetUserDataAsync(request.Email);
+            var accessToken = await _jwtTokenService.GenerateAccessTokenAsync(userData);
 
             if (request.RememberMe)
             {
-                var refreshToken = _jwtTokenService.GenerateRefreshToken(user.Id);
+                var refreshToken = _jwtTokenService.GenerateRefreshToken(userData.Id);
 
                 Response.Cookies.Append("refreshToken", refreshToken,
                 new CookieOptions
@@ -132,9 +101,7 @@ namespace HealthSync.Server.Controllers
         [HttpPost("sendVrfCode")]
         public async Task<IActionResult> SendVerificationCode([FromBody] string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-
-            if (user != null)
+            if (!await _accountService.IsUserExistByEmailAsync(email))
             {
                 return BadRequest(new { Error = UsedEmail });
             }
@@ -149,14 +116,12 @@ namespace HealthSync.Server.Controllers
         [HttpPost("sendRecoverPassEmail")]
         public async Task<IActionResult> SendRecoverPasswordEmail([FromBody] string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-
-            if (user == null)
+            if (!await _accountService.IsUserExistByEmailAsync(email))
             {
                 return BadRequest(new { Error = NotRegistered });
             }
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var token = await _accountService.GeneratePasswordResetTokenAsync(email);
             _memoryCacheService.Add(token, email, TimeSpan.FromMinutes(10));
             await _emailSender.SendPasswordRecoverLink(email, token);
 
@@ -171,8 +136,8 @@ namespace HealthSync.Server.Controllers
                 return BadRequest(new { Error = InvalidToken });
             }
 
-            var user = await _userManager.FindByEmailAsync(_memoryCacheService.GetValue(request.Token).ToString());
-            await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
+            var userEmail = _memoryCacheService.GetValue(request.Token);
+            await _accountService.ResetPasswordAsync(request, userEmail);
 
             return NoContent();
         }
@@ -182,15 +147,7 @@ namespace HealthSync.Server.Controllers
         public async Task<IActionResult> GetUserData()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = await _userManager.FindByIdAsync(userId);
-
-            var userData = new UserDataResponse()
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber
-            };
+            var userData = await _accountService.GetUserDataAsync(userId);
 
             return Ok(userData);
         }
@@ -200,7 +157,6 @@ namespace HealthSync.Server.Controllers
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = await _userManager.FindByIdAsync(userId);
 
             if (request.CurrentPassword != string.Empty)
             {
@@ -214,17 +170,12 @@ namespace HealthSync.Server.Controllers
                 {
                     return BadRequest(new { Error = SamePassword });
                 }
-
-                await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
             }
 
-            user.FirstName = request.FirstName;
-            user.LastName = request.LastName;
-            user.PhoneNumber = request.PhoneNumber;
+            await _accountService.UpdateUserDataAsync(request, userId);
 
-            await _userManager.UpdateAsync(user);
-
-            var accessToken = await _jwtTokenService.GenerateAccessTokenAsync(user.Id);
+            var userData = await _accountService.GetUserDataAsync(request.);
+            var accessToken = await _jwtTokenService.GenerateAccessTokenAsync(userData);
 
             return Ok(
                 new
@@ -244,9 +195,13 @@ namespace HealthSync.Server.Controllers
             {
                 var handler = new JwtSecurityTokenHandler();
                 var jsonToken = handler.ReadJwtToken(refreshToken);
-                var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-                newAccessToken = await _jwtTokenService.GenerateAccessTokenAsync(userId);
+                var userId = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+                var user = await _userManager.FindByIdAsync(userId);
+                var userName = $"{user.FirstName} {user.LastName}";
+                var userRole = await _userManager.GetRolesAsync(user);
+
+                newAccessToken = await _jwtTokenService.GenerateAccessTokenAsync(user.Id, userName, userRole);
             }
 
             return Ok(new { Token = newAccessToken });

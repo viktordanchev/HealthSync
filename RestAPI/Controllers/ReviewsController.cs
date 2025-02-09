@@ -1,7 +1,7 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.DTOs.RequestDtos.Reviews;
+using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.Dtos.RequestDtos.Reviews;
 using static Common.Errors;
 using static Common.Messages.Reviews;
 

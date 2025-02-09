@@ -1,8 +1,8 @@
-﻿using Core.Interfaces.Repository;
-using Core.Models.ResponseDtos.Meetings;
+﻿using Core.DTOs.RequestDtos.Meetings;
+using Core.DTOs.ResponseDtos.Meetings;
+using Core.Interfaces.Repository;
 using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using RestAPI.Dtos.RequestDtos.Meetings;
 
 namespace Infrastructure.Database.Repositories
 {

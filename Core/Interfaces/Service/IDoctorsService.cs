@@ -1,5 +1,5 @@
-﻿using Core.Models.ResponseDtos.Doctors;
-using RestAPI.Dtos.RequestDtos.Doctors;
+﻿using Core.DTOs.RequestDtos.Doctors;
+using Core.DTOs.ResponseDtos.Doctors;
 
 namespace Core.Interfaces.Service
 {

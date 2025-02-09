@@ -1,8 +1,8 @@
-﻿using Core.Interfaces.Repository;
-using Core.Models.ResponseDtos.Doctors;
+﻿using Core.DTOs.RequestDtos.Doctors;
+using Core.DTOs.ResponseDtos.Doctors;
+using Core.Interfaces.Repository;
 using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using RestAPI.Dtos.RequestDtos.Doctors;
 
 namespace Infrastructure.Database.Repositories
 {

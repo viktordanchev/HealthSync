@@ -1,6 +1,6 @@
-﻿using Core.Interfaces.Repository;
+﻿using Core.DTOs.ResponseDtos.Specialties;
+using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
-using Core.Models.ResponseDtos.Specialties;
 
 namespace Core.Services
 {

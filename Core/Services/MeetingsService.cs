@@ -1,7 +1,7 @@
-﻿using Core.Interfaces.Repository;
+﻿using Core.DTOs.RequestDtos.Meetings;
+using Core.DTOs.ResponseDtos.Meetings;
+using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
-using Core.Models.ResponseDtos.Meetings;
-using RestAPI.Dtos.RequestDtos.Meetings;
 
 namespace Core.Services
 {

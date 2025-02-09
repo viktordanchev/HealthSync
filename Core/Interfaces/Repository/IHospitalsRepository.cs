@@ -1,4 +1,4 @@
-﻿using Core.Models.ResponseDtos.Hospitals;
+﻿using Core.DTOs.ResponseDtos.Hospitals;
 
 namespace Core.Interfaces.Repository
 {

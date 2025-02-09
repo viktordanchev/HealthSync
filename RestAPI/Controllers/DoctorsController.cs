@@ -1,9 +1,9 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.DTOs.RequestDtos.Doctors;
+using Core.Interfaces.Service;
 using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.Dtos.RequestDtos.Doctors;
 using System.Security.Claims;
 using static Common.Errors;
 using static Common.Messages.Doctors;
@@ -70,30 +70,30 @@ namespace RestAPI.Controllers
         [HttpPost("getAvailableMeetingHours")]
         public async Task<IActionResult> GetAvailableMeetingHours([FromBody] GetAvailableMeetingHours request)
         {
-            var date = DateTime.Parse(request.Date);
+            //var date = DateTime.Parse(request.Date);
+            //
+            //if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
+            //    await _doctorScheduleService.IsDayOffAsync(request.DoctorId, date))
+            //{
+            //    return BadRequest(new { ServerError = InvalidRequest });
+            //}
+            //
+            //var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, date);
 
-            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, date))
-            {
-                return BadRequest(new { ServerError = InvalidRequest });
-            }
-
-            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, date);
-
-            return Ok(times);
+            return Ok();
         }
 
         [HttpPost("getMonthSchedule")]
         public async Task<IActionResult> GetMonthSchedule([FromBody] GetMonthScheduleRequest request)
         {
-            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
-            {
-                return BadRequest(new { ServerError = InvalidRequest });
-            }
+            //if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
+            //{
+            //    return BadRequest(new { ServerError = InvalidRequest });
+            //}
+            //
+            //var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request.DoctorId, request.Month, request.Year);
 
-            var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request.DoctorId, request.Month, request.Year);
-
-            return Ok(monthSchedule);
+            return Ok();
         }
 
         [HttpPost("becomeDoctor")]

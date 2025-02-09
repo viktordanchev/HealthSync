@@ -1,7 +1,7 @@
-﻿using Core.Interfaces.Repository;
+﻿using Core.DTOs.RequestDtos.Reviews;
+using Core.DTOs.ResponseDtos.Reviews;
+using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
-using Core.Models.ResponseDtos.Reviews;
-using RestAPI.Dtos.RequestDtos.Reviews;
 
 namespace Core.Services
 {

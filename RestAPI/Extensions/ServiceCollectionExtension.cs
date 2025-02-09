@@ -127,6 +127,7 @@ namespace Server.Extensions
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             services.AddScoped<IHospitalsService, HospitalsService>();
             services.AddScoped<ISpecialtiesService, SpecialtiesService>();
+            services.AddScoped<IAccountService, AccountService>();
         }
 
         public static void AddRepositories(this IServiceCollection services)

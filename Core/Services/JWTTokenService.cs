@@ -1,4 +1,5 @@
 ﻿using Core.Interfaces.Service;
+using Core.Models.Account;
 using Core.Services.Configs;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -51,7 +52,7 @@ namespace RestAPI.Services
         /// <summary>
         /// Generate JWT access token.
         /// </summary>
-        public async Task<string> GenerateAccessTokenAsync(string userId)
+        public async Task<string> GenerateAccessTokenAsync(UserDataModel userData)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtTokenConfig.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -59,11 +60,11 @@ namespace RestAPI.Services
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName)
+                new Claim(ClaimTypes.NameIdentifier, userData.Id),
+                new Claim(ClaimTypes.Name, userData.Name)
             };
 
-            foreach (var role in roles)
+            foreach (var role in userData.Roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }

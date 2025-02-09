@@ -1,9 +1,9 @@
-﻿using Core.Interfaces.Service;
+﻿using Core.DTOs.RequestDtos.Meetings;
+using Core.Interfaces.Service;
 using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.Dtos.RequestDtos.Meetings;
 using static Common.Errors;
 using static Common.Errors.Meetings;
 using static Common.Messages.Meetings;

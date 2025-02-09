@@ -1,4 +1,4 @@
-﻿using Core.Models.ResponseDtos.Specialties;
+﻿using Core.DTOs.ResponseDtos.Specialties;
 
 namespace Core.Interfaces.Service
 {

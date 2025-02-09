@@ -1,6 +1,6 @@
-﻿using Core.Interfaces.Repository;
+﻿using Core.DTOs.ResponseDtos.Hospitals;
+using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
-using Core.Models.ResponseDtos.Hospitals;
 
 namespace Core.Services
 {

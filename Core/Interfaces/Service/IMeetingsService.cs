@@ -1,5 +1,5 @@
-﻿using Core.Models.ResponseDtos.Meetings;
-using RestAPI.Dtos.RequestDtos.Meetings;
+﻿using Core.DTOs.RequestDtos.Meetings;
+using Core.DTOs.ResponseDtos.Meetings;
 
 namespace Core.Interfaces.Service
 {

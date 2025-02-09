@@ -1,8 +1,8 @@
-﻿using Core.Interfaces.ExternalServices;
+﻿using Core.DTOs.RequestDtos.Doctors;
+using Core.DTOs.ResponseDtos.Doctors;
+using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
-using Core.Models.ResponseDtos.Doctors;
-using RestAPI.Dtos.RequestDtos.Doctors;
 
 namespace Core.Services
 {
