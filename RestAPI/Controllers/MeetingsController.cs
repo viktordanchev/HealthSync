@@ -4,6 +4,7 @@ using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using static Common.Errors;
 using static Common.Errors.Meetings;
 using static Common.Messages.Meetings;
@@ -14,18 +15,18 @@ namespace RestAPI.Controllers
     [Route("meetings")]
     public class MeetingsController : ControllerBase
     {
-        private UserManager<ApplicationUser> _userManager;
+        private readonly IUserService _userService;
         private readonly IMeetingsService _meetingsService;
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
 
         public MeetingsController(
-            UserManager<ApplicationUser> userManager, 
+            IUserService userService,
             IMeetingsService meetingsService, 
             IDoctorsService doctorService, 
             IDoctorScheduleService doctorScheduleService)
         {
-            _userManager = userManager;
+            _userService = userService;
             _meetingsService = meetingsService;
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
@@ -51,18 +52,16 @@ namespace RestAPI.Controllers
             return Ok(new { Message = AddedMeeting });
         }
 
-        [HttpPost("getUserMeetings")]
+        [HttpGet("getUserMeetings")]
         [Authorize]
-        public async Task<IActionResult> GetUserMeetings([FromBody] string userId)
+        public async Task<IActionResult> GetUserMeetings()
         {
-            var user = _userManager.FindByIdAsync(userId);
-
-            if (user == null)
+            if (!await _userService.IsUserExistAsync(User.FindFirstValue(ClaimTypes.Email)))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var meetings = await _meetingsService.GetUserMeetingsAsync(userId);
+            var meetings = await _meetingsService.GetUserMeetingsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             return Ok(meetings);
         }

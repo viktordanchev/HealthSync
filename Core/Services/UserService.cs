@@ -1,4 +1,5 @@
 ﻿using Core.DTOs.RequestDtos.Account;
+using Core.DTOs.ResponseDtos.Account;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
 using Core.Models.Account;
@@ -9,14 +10,14 @@ namespace Core.Services
     {
         private readonly IUserRepository _userRepo;
 
-        public UserService(IUserRepository accountRepo)
+        public UserService(IUserRepository userRepo)
         {
-            _userRepo = accountRepo;
+            _userRepo = userRepo;
         }
 
-        public async Task<bool> IsUserExistByEmailAsync(string userEmail)
+        public async Task<bool> IsUserExistAsync(string userEmail)
         {
-            return await _userRepo.IsUserExistByEmailAsync(userEmail);
+            return await _userRepo.IsUserExistAsync(userEmail);
         }
 
         public async Task AddUserAsync(RegisterRequest requestData)
@@ -29,7 +30,12 @@ namespace Core.Services
             return await _userRepo.IsUserLoggedInAsync(requestData);
         }
 
-        public async Task<UserDataModel> GetUserDataAsync(string userEmail)
+        public async Task<UserClaimsModel> GetUserClaimsAsync(string userEmail)
+        {
+            return await _userRepo.GetUserClaimsAsync(userEmail);
+        }
+
+        public async Task<UserDataResponse> GetUserDataAsync(string userEmail)
         {
             return await _userRepo.GetUserDataAsync(userEmail);
         }
@@ -44,9 +50,9 @@ namespace Core.Services
             await _userRepo.ResetPasswordAsync(requestData, userEmail);
         }
 
-        public async Task UpdateUserDataAsync(UpdateUserRequest requestData, string userId)
+        public async Task UpdateUserDataAsync(UpdateUserRequest requestData, string userEmail)
         {
-            await _userRepo.UpdateUserDataAsync(requestData, userId);
+            await _userRepo.UpdateUserDataAsync(requestData, userEmail);
         }
     }
 }

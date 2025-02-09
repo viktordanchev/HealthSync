@@ -19,7 +19,7 @@ namespace Infrastructure.Database.Repositories
             _signInManager = signInManager;
         }
 
-        public async Task<bool> IsUserExistByEmailAsync(string userEmail)
+        public async Task<bool> IsUserExistAsync(string userEmail)
         {
             var user = await _userManager.FindByEmailAsync(userEmail);
 
@@ -48,14 +48,15 @@ namespace Infrastructure.Database.Repositories
             return result.Succeeded;
         }
 
-        public async Task<UserDataModel> GetUserDataAsync(string userEmail)
+        public async Task<UserClaimsModel> GetUserClaimsAsync(string userEmail)
         {
             var user = await _userManager.FindByEmailAsync(userEmail);
             var userRoles = await _userManager.GetRolesAsync(user);
 
-            var userData = new UserDataModel() 
+            var userData = new UserClaimsModel() 
             {
                 Id = user.Id,
+                Email = user.Email,
                 Name = $"{user.FirstName} {user.LastName}",
                 Roles = userRoles
             };
@@ -70,9 +71,9 @@ namespace Infrastructure.Database.Repositories
             await _userManager.ResetPasswordAsync(user, requestData.Token, requestData.Password);
         }
 
-        public async Task<UserDataResponse> GetUserDataByIdAsync(string userId)
+        public async Task<UserDataResponse> GetUserDataAsync(string userEmail)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByEmailAsync(userEmail);
 
             var userData = new UserDataResponse()
             {
@@ -99,9 +100,9 @@ namespace Infrastructure.Database.Repositories
             await _userManager.ResetPasswordAsync(user, requestData.Token, requestData.Password);
         }
 
-        public async Task UpdateUserDataAsync(UpdateUserRequest requestData, string userId)
+        public async Task UpdateUserDataAsync(UpdateUserRequest requestData, string userEmail)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByEmailAsync(userEmail);
 
             await _userManager.ChangePasswordAsync(user, requestData.CurrentPassword, requestData.NewPassword);
             user.FirstName = requestData.FirstName;

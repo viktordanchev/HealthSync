@@ -15,14 +15,14 @@ namespace Infrastructure.Database.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userId)
+        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail)
         {
             var doctors = await _context.Doctors
                 .AsNoTracking()
                 .Where(d => ((string.IsNullOrEmpty(requestData.Search) ||
                     string.Concat(d.Identity.FirstName, " ", d.Identity.LastName).Contains(requestData.Search)) &&
                     (string.IsNullOrEmpty(requestData.Filter) || d.Specialty.Type == requestData.Filter)) &&
-                    d.IdentityId != userId)
+                    d.Identity.Email != userEmail)
                 .Skip(requestData.Index * 10)
                 .Take(10)
                 .Select(d => new DoctorResponse()

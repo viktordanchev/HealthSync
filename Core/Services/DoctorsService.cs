@@ -17,9 +17,9 @@ namespace Core.Services
             _GCSService = gcsService;
         }
 
-        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userId)
+        public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail)
         {
-            var doctors = await _repository.GetDoctorsAsync(requestData, userId);
+            var doctors = await _repository.GetDoctorsAsync(requestData, userEmail);
 
             switch (requestData.Sorting.ToString())
             {

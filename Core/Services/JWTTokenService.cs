@@ -27,7 +27,7 @@ namespace RestAPI.Services
         /// <summary>
         /// Generate JWT refresh token.
         /// </summary>
-        public string GenerateRefreshToken(string userId)
+        public string GenerateRefreshToken()
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtTokenConfig.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -35,7 +35,6 @@ namespace RestAPI.Services
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, userId),
                 new Claim("JwtId", Guid.NewGuid().ToString()),
             };
 
@@ -52,7 +51,7 @@ namespace RestAPI.Services
         /// <summary>
         /// Generate JWT access token.
         /// </summary>
-        public async Task<string> GenerateAccessTokenAsync(UserDataModel userData)
+        public string GenerateAccessToken(UserClaimsModel userClaims)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtTokenConfig.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -60,11 +59,12 @@ namespace RestAPI.Services
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, userData.Id),
-                new Claim(ClaimTypes.Name, userData.Name)
+                new Claim(ClaimTypes.NameIdentifier, userClaims.Id),
+                new Claim(ClaimTypes.Email, userClaims.Email),
+                new Claim(ClaimTypes.Name, userClaims.Name)
             };
 
-            foreach (var role in userData.Roles)
+            foreach (var role in userClaims.Roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }

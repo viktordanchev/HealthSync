@@ -14,7 +14,6 @@ namespace RestAPI.Controllers
     [Route("doctors")]
     public class DoctorsController : ControllerBase
     {
-        private UserManager<ApplicationUser> _userManager;
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
         private readonly IHospitalsService _hospitalsService;
@@ -25,14 +24,12 @@ namespace RestAPI.Controllers
             IDoctorsService doctorService,
             IDoctorScheduleService doctorScheduleService,
             IHospitalsService hospitalsService,
-            UserManager<ApplicationUser> userManager,
             IJwtTokenService jwtTokenService,
             ISpecialtiesService specialtiesService)
         {
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
             _hospitalsService = hospitalsService;
-            _userManager = userManager;
             _jwtTokenService = jwtTokenService;
             _specialtiesService = specialtiesService;
         }
@@ -41,7 +38,7 @@ namespace RestAPI.Controllers
         public async Task<IActionResult> GetDoctors([FromBody] GetDoctorsRequest request)
         {
             var doctors = await _doctorService.GetDoctorsAsync(request,
-                User.FindFirstValue(ClaimTypes.NameIdentifier));
+                User.FindFirstValue(ClaimTypes.Email));
 
             return Ok(doctors);
         }
@@ -70,15 +67,15 @@ namespace RestAPI.Controllers
         [HttpPost("getAvailableMeetingHours")]
         public async Task<IActionResult> GetAvailableMeetingHours([FromBody] GetAvailableMeetingHours request)
         {
-            //var date = DateTime.Parse(request.Date);
-            //
-            //if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-            //    await _doctorScheduleService.IsDayOffAsync(request.DoctorId, date))
-            //{
-            //    return BadRequest(new { ServerError = InvalidRequest });
-            //}
-            //
-            //var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, date);
+            var date = DateTime.Parse(request.Date);
+            
+            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
+                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, date))
+            {
+                return BadRequest(new { ServerError = InvalidRequest });
+            }
+            
+            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, date);
 
             return Ok();
         }
@@ -86,12 +83,12 @@ namespace RestAPI.Controllers
         [HttpPost("getMonthSchedule")]
         public async Task<IActionResult> GetMonthSchedule([FromBody] GetMonthScheduleRequest request)
         {
-            //if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
-            //{
-            //    return BadRequest(new { ServerError = InvalidRequest });
-            //}
-            //
-            //var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request.DoctorId, request.Month, request.Year);
+            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
+            {
+                return BadRequest(new { ServerError = InvalidRequest });
+            }
+
+            var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request.DoctorId, request.Month, request.Year);
 
             return Ok();
         }
@@ -107,12 +104,9 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            await _doctorService.AddDoctorAsync(request, user.Id);
-            await _userManager.AddToRoleAsync(user, "Doctor");
-
-            var accessToken = await _jwtTokenService.GenerateAccessTokenAsync(user.Id);
+            await _doctorService.AddDoctorAsync(request, User.FindFirstValue(ClaimTypes.NameIdentifier));
+            
+            var accessToken = _jwtTokenService.GenerateAccessToken();
 
             return Ok(
                 new

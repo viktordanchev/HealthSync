@@ -5,7 +5,7 @@ namespace Core.Interfaces.Service
 {
     public interface IDoctorsService
     {
-        Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userId);
+        Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail);
         Task<DoctorDetailsResponse> GetDoctorDetailsAsync(int doctorId);
         Task<bool> IsDoctorExistAsync(int doctorId);
         Task AddDoctorAsync(BecomeDoctorRequest requestData, string userId);

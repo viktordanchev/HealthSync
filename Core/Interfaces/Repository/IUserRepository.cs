@@ -6,14 +6,14 @@ namespace Core.Interfaces.Repository
 {
     public interface IUserRepository
     {
-        Task<bool> IsUserExistByEmailAsync(string userEmail);
+        Task<bool> IsUserExistAsync(string userEmail);
         Task AddUserAsync(RegisterRequest requestData);
         Task<bool> IsUserLoggedInAsync(LoginRequest requestData);
-        Task<UserDataModel> GetUserDataAsync(string userEmail);
+        Task<UserClaimsModel> GetUserClaimsAsync(string userEmail);
         Task UpdateUserPassword(RecoverPasswordRequest requestData, string userEmail);
-        Task<UserDataResponse> GetUserDataByIdAsync(string userId);
+        Task<UserDataResponse> GetUserDataAsync(string userEmail);
         Task<string> GeneratePasswordResetTokenAsync(string userEmail);
         Task ResetPasswordAsync(RecoverPasswordRequest requestData, string userEmail);
-        Task UpdateUserDataAsync(UpdateUserRequest requestData, string userId);
+        Task UpdateUserDataAsync(UpdateUserRequest requestData, string userEmail);
     }
 }
