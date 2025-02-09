@@ -1,6 +1,5 @@
 ﻿using Core.DTOs.ResponseDtos.Hospitals;
 using Core.Interfaces.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Repositories
 {

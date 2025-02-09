@@ -1,7 +1,7 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Storage.V1;
-using Microsoft.AspNetCore.Http;
 using Core.Interfaces.ExternalServices;
+using Microsoft.AspNetCore.Http;
 
 namespace Infrastructure.Services
 {

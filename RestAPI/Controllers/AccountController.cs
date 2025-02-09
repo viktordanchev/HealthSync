@@ -1,5 +1,4 @@
 ﻿using Core.DTOs.RequestDtos.Account;
-using Core.DTOs.ResponseDtos.Account;
 using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -15,14 +14,14 @@ namespace HealthSync.Server.Controllers
     [Route("account")]
     public class AccountController : ControllerBase
     {
-        private IAccountService _accountService;
+        private IUserService _accountService;
         private IJwtTokenService _jwtTokenService;
         private IEmailSenderService _emailSender;
         private IMemoryCacheService _memoryCacheService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
-            IAccountService accountService,
+            IUserService accountService,
             IJwtTokenService jwtTokenService,
             IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,

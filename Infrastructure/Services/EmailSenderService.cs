@@ -1,6 +1,8 @@
 ﻿using Infrastructure.Services.Configs;
 using Core.Interfaces.ExternalServices;
 using Microsoft.Extensions.Options;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace Infrastructure.Services
 {

@@ -5,48 +5,48 @@ using Core.Models.Account;
 
 namespace Core.Services
 {
-    public class AccountService : IAccountService
+    public class UserService : IUserService
     {
-        private readonly IAccountRepository _accountRepo;
+        private readonly IUserRepository _userRepo;
 
-        public AccountService(IAccountRepository accountRepo)
+        public UserService(IUserRepository accountRepo)
         {
-            _accountRepo = accountRepo;
+            _userRepo = accountRepo;
         }
 
         public async Task<bool> IsUserExistByEmailAsync(string userEmail)
         {
-            return await _accountRepo.IsUserExistByEmailAsync(userEmail);
+            return await _userRepo.IsUserExistByEmailAsync(userEmail);
         }
 
         public async Task AddUserAsync(RegisterRequest requestData)
         {
-            await _accountRepo.AddUserAsync(requestData);
+            await _userRepo.AddUserAsync(requestData);
         }
 
         public async Task<bool> IsUserLoggedInAsync(LoginRequest requestData)
         {
-            return await _accountRepo.IsUserLoggedInAsync(requestData);
+            return await _userRepo.IsUserLoggedInAsync(requestData);
         }
 
         public async Task<UserDataModel> GetUserDataAsync(string userEmail)
         {
-            return await _accountRepo.GetUserDataAsync(userEmail);
+            return await _userRepo.GetUserDataAsync(userEmail);
         }
 
         public async Task<string> GeneratePasswordResetTokenAsync(string userEmail)
         {
-            return await _accountRepo.GeneratePasswordResetTokenAsync(userEmail);
+            return await _userRepo.GeneratePasswordResetTokenAsync(userEmail);
         }
 
         public async Task ResetPasswordAsync(RecoverPasswordRequest requestData, string userEmail)
         {
-            await _accountRepo.ResetPasswordAsync(requestData, userEmail);
+            await _userRepo.ResetPasswordAsync(requestData, userEmail);
         }
 
         public async Task UpdateUserDataAsync(UpdateUserRequest requestData, string userId)
         {
-            await _accountRepo.UpdateUserDataAsync(requestData, userId);
+            await _userRepo.UpdateUserDataAsync(requestData, userId);
         }
     }
 }

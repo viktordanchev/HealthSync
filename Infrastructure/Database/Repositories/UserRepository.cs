@@ -3,15 +3,16 @@ using Core.DTOs.ResponseDtos.Account;
 using Core.Interfaces.Repository;
 using Core.Models.Account;
 using Infrastructure.Database.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Database.Repositories
 {
-    public class AccountRepository : IAccountRepository
+    public class UserRepository : IUserRepository
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, 
+        public UserRepository(UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
