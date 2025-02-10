@@ -1,9 +1,12 @@
-﻿using Core.Models.DoctorSchedule;
+﻿using Core.DTOs.RequestDtos.Doctors;
+using Core.Models.DoctorSchedule;
 
 namespace Core.Interfaces.Repository
 {
     public interface IDoctorScheduleRepository
     {
-        Task<DoctorDailyScheduleModel> GetDoctorDailySchedule(int doctorId, DateTime dateAndTime);
+        Task<DoctorDailyScheduleModel> GetDoctorDailyScheduleAsync(int doctorId, DateTime dateAndTime);
+        Task<MonthlyDaysOffModel> GetMonthlyDaysOffAsync(int doctorId, int month);
+        Task<DoctorMonthlyBusyDaysModel> GetMonthlyBusyDaysAsync(int doctorId, int month, int year);
     }
 }
