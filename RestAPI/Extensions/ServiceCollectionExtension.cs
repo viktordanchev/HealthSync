@@ -26,6 +26,7 @@ namespace Server.Extensions
         public static void AddDbContextExtension(this IServiceCollection services, IConfiguration config)
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<HealthSyncDbContext>(options =>
                 options.UseSqlServer(connectionString));
         }
@@ -138,6 +139,7 @@ namespace Server.Extensions
             services.AddScoped<IMeetingsRepository, MeetingsRepository>();
             services.AddScoped<IReviewsRepository, ReviewsRepository>();
             services.AddScoped<ISpecialtiesRepository, SpecialtiesRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         public static void AddConfigs(this IServiceCollection services, IConfiguration config)

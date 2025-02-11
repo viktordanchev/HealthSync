@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace Core.Models.DoctorSchedule
+﻿namespace Core.Models.DoctorSchedule
 {
     public class MonthlyDaysOffModel
     {

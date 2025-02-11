@@ -1,5 +1,4 @@
-﻿using Core.DTOs.RequestDtos.Doctors;
-using Core.Interfaces.Repository;
+﻿using Core.Interfaces.Repository;
 using Core.Models.DoctorSchedule;
 using Microsoft.EntityFrameworkCore;
 

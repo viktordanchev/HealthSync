@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Configurations
+namespace Infrastructure.Database.Configs
 {
     public class ApplicationUserConfig : IEntityTypeConfiguration<ApplicationUser>
     {

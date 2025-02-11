@@ -8,6 +8,6 @@ namespace Core.DTOs.RequestDtos.Doctors
         public int DoctorId { get; set; }
 
         [Required]
-        public string Date { get; set; } = null!;
+        public DateTime DateAndTime { get; set; }
     }
 }

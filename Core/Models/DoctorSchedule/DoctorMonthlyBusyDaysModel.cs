@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Models.DoctorSchedule
+﻿namespace Core.Models.DoctorSchedule
 {
-    internal class DoctorMonthlyBusyDaysModel
+    public class DoctorMonthlyBusyDaysModel
     {
+        public DoctorMonthlyBusyDaysModel()
+        {
+            AllMeetings = new List<DateTime>();
+            WeekDays = new List<WorkDayModel>();
+        }
+
+        public IEnumerable<DateTime> AllMeetings { get; set; }
+        public IEnumerable<WorkDayModel> WeekDays { get; set; }
     }
 }

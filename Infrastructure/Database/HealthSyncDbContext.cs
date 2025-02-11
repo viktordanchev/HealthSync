@@ -1,4 +1,4 @@
-﻿using Infrastructure.Configurations;
+﻿using Infrastructure.Database.Configs;
 using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

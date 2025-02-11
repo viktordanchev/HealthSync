@@ -14,6 +14,7 @@ namespace RestAPI.Controllers
     [Route("doctors")]
     public class DoctorsController : ControllerBase
     {
+        private readonly IUserService _userService;
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
         private readonly IHospitalsService _hospitalsService;
@@ -21,12 +22,14 @@ namespace RestAPI.Controllers
         private readonly ISpecialtiesService _specialtiesService;
 
         public DoctorsController(
+            IUserService userService,
             IDoctorsService doctorService,
             IDoctorScheduleService doctorScheduleService,
             IHospitalsService hospitalsService,
             IJwtTokenService jwtTokenService,
             ISpecialtiesService specialtiesService)
         {
+            _userService = userService;
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
             _hospitalsService = hospitalsService;
@@ -66,16 +69,14 @@ namespace RestAPI.Controllers
 
         [HttpPost("getAvailableMeetingHours")]
         public async Task<IActionResult> GetAvailableMeetingHours([FromBody] GetAvailableMeetingHours request)
-        {
-            var date = DateTime.Parse(request.Date);
-            
+        {   
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, date))
+                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.DateAndTime))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
             
-            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, date);
+            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, request.DateAndTime);
 
             return Ok();
         }
@@ -88,7 +89,7 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request.DoctorId, request.Month, request.Year);
+            var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request);
 
             return Ok();
         }
@@ -106,7 +107,8 @@ namespace RestAPI.Controllers
 
             await _doctorService.AddDoctorAsync(request, User.FindFirstValue(ClaimTypes.NameIdentifier));
             
-            var accessToken = _jwtTokenService.GenerateAccessToken();
+            var userClaims = await _userService.GetUserClaimsAsync(User.FindFirstValue(ClaimTypes.Email));
+            var accessToken = _jwtTokenService.GenerateAccessToken(userClaims);
 
             return Ok(
                 new
