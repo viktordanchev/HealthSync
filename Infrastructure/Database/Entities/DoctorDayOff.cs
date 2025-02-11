@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Database.Entities
 {
-    public class Meeting
+    public class DoctorDayOff
     {
         [Key]
         public int Id { get; set; }
@@ -15,12 +15,18 @@ namespace Infrastructure.Database.Entities
         public Doctor Doctor { get; set; } = null!;
 
         [Required]
-        public string PatientId { get; set; } = null!;
-
-        [ForeignKey(nameof(PatientId))]
-        public ApplicationUser Patient { get; set; } = null!;
+        public int Month { get; set; }
 
         [Required]
-        public DateTime DateAndTime { get; set; }
+        public int Day { get; set; }
+
+        [Required]
+        public bool isWorkDay { get; set; }
+
+        public TimeOnly WorkDayStart { get; set; }
+
+        public TimeOnly WorkDayEnd { get; set; }
+
+        public int MeetingTimeMinutes { get; set; }
     }
 }

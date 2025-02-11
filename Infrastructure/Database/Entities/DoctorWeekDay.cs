@@ -20,9 +20,9 @@ namespace Infrastructure.Database.Entities
         [Required]
         public bool IsWorkDay { get; set; }
 
-        public TimeSpan Start { get; set; }
+        public TimeOnly WorkDayStart { get; set; }
 
-        public TimeSpan End { get; set; }
+        public TimeOnly WorkDayEnd { get; set; }
 
         public int MeetingTimeMinutes { get; set; }
     }

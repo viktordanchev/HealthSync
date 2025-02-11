@@ -19,8 +19,8 @@ namespace Infrastructure.Database.Configs
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 WeekDay = DayOfWeek.Monday,
                 IsWorkDay = true,
-                Start = new TimeSpan(9, 30, 0),
-                End = new TimeSpan(17, 30, 0),
+                WorkDayStart = new TimeOnly(9, 30),
+                WorkDayEnd = new TimeOnly(17, 30),
                 MeetingTimeMinutes = 30
             };
 
@@ -30,8 +30,8 @@ namespace Infrastructure.Database.Configs
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 WeekDay = DayOfWeek.Tuesday,
                 IsWorkDay = true,
-                Start = new TimeSpan(12, 30, 0),
-                End = new TimeSpan(17, 30, 0),
+                WorkDayStart = new TimeOnly(12, 30),
+                WorkDayEnd = new TimeOnly(17, 30),
                 MeetingTimeMinutes = 30
             };
 
@@ -41,8 +41,8 @@ namespace Infrastructure.Database.Configs
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 WeekDay = DayOfWeek.Wednesday,
                 IsWorkDay = true,
-                Start = new TimeSpan(9, 30, 0),
-                End = new TimeSpan(17, 30, 0),
+                WorkDayStart = new TimeOnly(9, 30),
+                WorkDayEnd = new TimeOnly(17, 30),
                 MeetingTimeMinutes = 30
             };
 
@@ -52,8 +52,8 @@ namespace Infrastructure.Database.Configs
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 WeekDay = DayOfWeek.Thursday,
                 IsWorkDay = true,
-                Start = new TimeSpan(12, 30, 0),
-                End = new TimeSpan(17, 30, 0),
+                WorkDayStart = new TimeOnly(12, 30),
+                WorkDayEnd = new TimeOnly(17, 30),
                 MeetingTimeMinutes = 30
             };
 
@@ -63,8 +63,8 @@ namespace Infrastructure.Database.Configs
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
                 WeekDay = DayOfWeek.Friday,
                 IsWorkDay = true,
-                Start = new TimeSpan(9, 30, 0),
-                End = new TimeSpan(17, 30, 0),
+                WorkDayStart = new TimeOnly(9, 30),
+                WorkDayEnd = new TimeOnly(17, 30),
                 MeetingTimeMinutes = 30
             };
 

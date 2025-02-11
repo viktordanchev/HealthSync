@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Configs
 {
-    public class MeetingConfig : IEntityTypeConfiguration<Meeting>
+    public class DoctorMeetingConfig : IEntityTypeConfiguration<DoctorMeeting>
     {
-        public void Configure(EntityTypeBuilder<Meeting> builder)
+        public void Configure(EntityTypeBuilder<DoctorMeeting> builder)
         {
             builder
                 .HasOne(m => m.Doctor)

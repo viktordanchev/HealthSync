@@ -29,14 +29,14 @@ namespace Core.Services
 
             var availableMeetings = new List<string>();
 
-            while (dailySchedule.WorkDay.Start <= dailySchedule.WorkDay.End)
+            while (dailySchedule.WorkDay.WorkDayStart <= dailySchedule.WorkDay.WorkDayEnd)
             {
-                if (!dailySchedule.Meetings.Contains(dailySchedule.WorkDay.Start))
+                if (!dailySchedule.Meetings.Contains(dailySchedule.WorkDay.WorkDayStart))
                 {
-                    availableMeetings.Add($"{dailySchedule.WorkDay.Start.Hours:D2} : {dailySchedule.WorkDay.Start.Minutes:D2}");
+                    availableMeetings.Add($"{dailySchedule.WorkDay.WorkDayStart.Hour:D2} : {dailySchedule.WorkDay.WorkDayStart.Minute:D2}");
                 }
 
-                dailySchedule.WorkDay.Start = dailySchedule.WorkDay.Start.Add(TimeSpan.FromMinutes(dailySchedule.WorkDay.MeetingTimeMinutes));
+                dailySchedule.WorkDay.WorkDayStart = dailySchedule.WorkDay.WorkDayStart.Add(TimeSpan.FromMinutes(dailySchedule.WorkDay.MeetingTimeMinutes));
             }
 
             return availableMeetings;
@@ -98,7 +98,7 @@ namespace Core.Services
             {
                 var allMeetingsByDay = monthlyBusyDays.AllMeetings.Where(am => am.Date == meetingDay).Count();
                 var dayOfWeek = monthlyBusyDays.WeekDays.FirstOrDefault(ww => ww.WeekDay == meetingDay.DayOfWeek);
-                var count = (dayOfWeek.End - dayOfWeek.Start).TotalMinutes / dayOfWeek.MeetingTimeMinutes + 1;
+                var count = (dayOfWeek.WorkDayEnd - dayOfWeek.WorkDayStart).TotalMinutes / dayOfWeek.MeetingTimeMinutes + 1;
         
                 if (allMeetingsByDay != count)
                 {

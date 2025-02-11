@@ -4,34 +4,34 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Configs
 {
-    public class SpecialtyConfig : IEntityTypeConfiguration<Specialty>
+    public class DoctorSpecialtyConfig : IEntityTypeConfiguration<DoctorSpecialty>
     {
-        public void Configure(EntityTypeBuilder<Specialty> builder)
+        public void Configure(EntityTypeBuilder<DoctorSpecialty> builder)
         {
             builder.HasData(SeedSpecialties());
         }
 
-        private Specialty[] SeedSpecialties()
+        private DoctorSpecialty[] SeedSpecialties()
         {
-            var specialty1 = new Specialty()
+            var specialty1 = new DoctorSpecialty()
             {
                 Id = 1,
                 Type = "Orthodontist"
             };
 
-            var specialty2 = new Specialty()
+            var specialty2 = new DoctorSpecialty()
             {
                 Id = 2,
                 Type = "Endocrinologist"
             };
 
-            var specialty3 = new Specialty()
+            var specialty3 = new DoctorSpecialty()
             {
                 Id = 3,
                 Type = "Cardiologist"
             };
 
-            var specialty4 = new Specialty()
+            var specialty4 = new DoctorSpecialty()
             {
                 Id = 4,
                 Type = "Neurologist"

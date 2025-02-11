@@ -17,20 +17,20 @@ namespace Infrastructure.Database.Repositories
 
         public async Task AddDoctorMeetingAsync(AddMeetingRequest requestData)
         {
-            var meeting = new Meeting()
+            var meeting = new DoctorMeeting()
             {
                 DoctorId = requestData.DoctorId,
                 DateAndTime = requestData.DateAndTime,
                 PatientId = requestData.PatientId
             };
 
-            await _context.Meetings.AddAsync(meeting);
+            await _context.DoctorsMeetings.AddAsync(meeting);
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<DoctorMeetingInfoResponse>> GetUserMeetingsAsync(string userId)
         {
-            var meetings = await _context.Meetings
+            var meetings = await _context.DoctorsMeetings
                 .AsNoTracking()
                 .Where(m => m.PatientId == userId)
                 .OrderBy(m => m.DateAndTime)
@@ -50,23 +50,23 @@ namespace Infrastructure.Database.Repositories
 
         public async Task DeleteMeetingAsync(int meetingId)
         {
-            var meeting = await _context.Meetings
+            var meeting = await _context.DoctorsMeetings
                 .FirstAsync(m => m.Id == meetingId);
 
-            _context.Meetings.Remove(meeting);
+            _context.DoctorsMeetings.Remove(meeting);
             await _context.SaveChangesAsync();
         }
 
         public async Task<bool> IsMeetingExistAsync(int meetingId)
         {
-            var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.Id == meetingId);
+            var meeting = await _context.DoctorsMeetings.FirstOrDefaultAsync(m => m.Id == meetingId);
 
             return meeting != null;
         }
 
         public async Task<bool> IsMeetingScheduled(string patientId, int doctorId)
         {
-            var meeting = await _context.Meetings.FirstOrDefaultAsync(m => m.PatientId == patientId && m.DoctorId == doctorId);
+            var meeting = await _context.DoctorsMeetings.FirstOrDefaultAsync(m => m.PatientId == patientId && m.DoctorId == doctorId);
 
             return meeting != null;
         }

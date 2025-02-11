@@ -116,8 +116,8 @@ namespace Infrastructure.Database.Repositories
                             Id = wd.Id,
                             WeekDay = wd.WeekDay,
                             IsWorkDay = wd.IsWorkDay,
-                            WorkDayStart = wd.Start,
-                            WorkDayEnd = wd.End,
+                            WorkDayStart = wd.WorkDayStart,
+                            WorkDayEnd = wd.WorkDayEnd,
                             MeetingTimeMinutes = wd.MeetingTimeMinutes
                         })
                         .ToList()
@@ -141,7 +141,7 @@ namespace Infrastructure.Database.Repositories
                 };
             }
 
-            await _context.DoctorWeekDays.AddRangeAsync(week);
+            await _context.DoctorsWeekDays.AddRangeAsync(week);
             await _context.SaveChangesAsync();
         }
     }

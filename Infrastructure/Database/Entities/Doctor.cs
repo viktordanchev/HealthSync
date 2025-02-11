@@ -8,10 +8,10 @@ namespace Infrastructure.Database.Entities
     {
         public Doctor()
         {
-            Reviews = new List<Review>();
-            Meetings = new List<Meeting>();
+            Reviews = new List<DoctorReview>();
+            Meetings = new List<DoctorMeeting>();
             WorkWeek = new List<DoctorWeekDay>();
-            DaysOff = new List<DayOff>();
+            DaysOff = new List<DoctorDayOff>();
         }
 
         [Key]
@@ -33,7 +33,7 @@ namespace Infrastructure.Database.Entities
         public int SpecialtyId { get; set; }
 
         [ForeignKey(nameof(SpecialtyId))]
-        public Specialty Specialty { get; set; } = null!;
+        public DoctorSpecialty Specialty { get; set; } = null!;
 
         public string? ContactEmail { get; set; }
 
@@ -44,9 +44,9 @@ namespace Infrastructure.Database.Entities
         [MaxLength(InformationMaxLength)]
         public string? Information { get; set; }
 
-        public IEnumerable<Review> Reviews { get; set; }
-        public IEnumerable<Meeting> Meetings { get; set; }
+        public IEnumerable<DoctorReview> Reviews { get; set; }
+        public IEnumerable<DoctorMeeting> Meetings { get; set; }
         public IEnumerable<DoctorWeekDay> WorkWeek { get; set; }
-        public IEnumerable<DayOff> DaysOff { get; set; }
+        public IEnumerable<DoctorDayOff> DaysOff { get; set; }
     }
 }

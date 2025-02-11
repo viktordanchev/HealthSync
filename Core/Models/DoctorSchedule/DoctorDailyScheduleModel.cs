@@ -4,10 +4,10 @@
     {
         public DoctorDailyScheduleModel()
         {
-            Meetings = new List<TimeSpan>();
+            Meetings = new List<TimeOnly>();
         }
 
         public WorkDayModel WorkDay { get; set; }
-        public IEnumerable<TimeSpan> Meetings { get; set; }
+        public IEnumerable<TimeOnly> Meetings { get; set; }
     }
 }

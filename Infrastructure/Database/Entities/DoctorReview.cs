@@ -4,7 +4,7 @@ using static Common.Constants.Reviews;
 
 namespace Infrastructure.Database.Entities
 {
-    public class Review
+    public class DoctorReview
     {
         [Key]
         public int Id { get; set; }

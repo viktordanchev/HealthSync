@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20250211085005_AddNewTables")]
+    [Migration("20250211162604_AddNewTables")]
     partial class AddNewTables
     {
         /// <inheritdoc />
@@ -100,30 +100,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.DayOff", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.ToTable("DaysOff");
-                });
-
             modelBuilder.Entity("Infrastructure.Database.Entities.Doctor", b =>
                 {
                     b.Property<int>("Id")
@@ -166,7 +142,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorDayOff", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -174,53 +150,35 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int>("Day")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("End")
-                        .HasColumnType("time");
-
-                    b.Property<bool>("IsWorkDay")
-                        .HasColumnType("bit");
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MeetingTimeMinutes")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("Start")
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("WorkDayEnd")
                         .HasColumnType("time");
 
-                    b.Property<int>("WeekDay")
-                        .HasColumnType("int");
+                    b.Property<TimeOnly>("WorkDayStart")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("isWorkDay")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorWeekDays");
+                    b.ToTable("DoctorsDaysOff");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hospitals");
-                });
-
-            modelBuilder.Entity("Infrastructure.Database.Entities.Meeting", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorMeeting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -244,10 +202,10 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Meetings");
+                    b.ToTable("DoctorsMeetings");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Review", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -276,10 +234,10 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("DoctorsReviews");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Specialty", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorSpecialty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -293,7 +251,61 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specialties");
+                    b.ToTable("DoctorSpecialties");
+                });
+
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsWorkDay")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MeetingTimeMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeekDay")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("WorkDayEnd")
+                        .HasColumnType("time");
+
+                    b.Property<TimeOnly>("WorkDayStart")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("DoctorsWeekDays");
+                });
+
+            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hospitals");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -429,17 +441,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.DayOff", b =>
-                {
-                    b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
-                        .WithMany("DaysOff")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
-                });
-
             modelBuilder.Entity("Infrastructure.Database.Entities.Doctor", b =>
                 {
                     b.HasOne("Infrastructure.Database.Entities.Hospital", "Hospital")
@@ -454,7 +455,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Database.Entities.Specialty", "Specialty")
+                    b.HasOne("Infrastructure.Database.Entities.DoctorSpecialty", "Specialty")
                         .WithMany("Doctors")
                         .HasForeignKey("SpecialtyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -467,10 +468,10 @@ namespace Infrastructure.Migrations
                     b.Navigation("Specialty");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorDayOff", b =>
                 {
                     b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
-                        .WithMany("WorkWeek")
+                        .WithMany("DaysOff")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -478,7 +479,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Meeting", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorMeeting", b =>
                 {
                     b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
                         .WithMany("Meetings")
@@ -497,10 +498,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Review", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorReview", b =>
                 {
                     b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
                         .WithMany("Reviews")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+                {
+                    b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
+                        .WithMany("WorkWeek")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -575,12 +587,12 @@ namespace Infrastructure.Migrations
                     b.Navigation("WorkWeek");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorSpecialty", b =>
                 {
                     b.Navigation("Doctors");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Specialty", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
                 {
                     b.Navigation("Doctors");
                 });

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20250211085024_InsertData")]
+    [Migration("20250211162619_InsertData")]
     partial class InsertData
     {
         /// <inheritdoc />
@@ -104,7 +104,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f159c27d-b06f-4bf4-9112-5aa5de439850",
+                            ConcurrencyStamp = "2b4f5d0e-d014-4168-9f62-32266e6049e3",
                             Email = "i.ivanov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivan",
@@ -112,9 +112,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOV@MAIL.COM",
                             NormalizedUserName = "I.IVANOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFO+FaAD9o5jq2bhPMxpiQEpwV3ayYda921Rmsx3XS5XEVVkDac0a34FYLuequNIrw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE7QfdUtuWeImXO7IQBdXpvKgppSozQinjSHdjo8rqD7vg2Oa6hrKofrz5HNrOFWlw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f9c86865-b1da-424e-a0e5-c83f10e12557",
+                            SecurityStamp = "053e126f-f0b7-4008-8125-d3b0bae6ceec",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanov@mail.com"
                         },
@@ -122,7 +122,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c6daba5-9eb3-461b-87e4-9eeb20b5e3b3",
+                            ConcurrencyStamp = "5d7817e6-41b0-4f0a-8d8f-c16f18d71259",
                             Email = "m.marinova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Maria",
@@ -130,9 +130,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.MARINOVA@MAIL.COM",
                             NormalizedUserName = "M.MARINOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEObLty1qjh0g86vxa6qzhAAPbwy+2exHo8+W1Lo1NtfEwPj4B81nh3MXSobMSPW6rA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH8GfayyDLkmKolcPZzvKGtmu6g7QFCtHSQ7t7Ky+HPutAJsS62mHAju68oWmnG7Gg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "06cd6367-3b91-44b6-8faf-ef5528f5c2df",
+                            SecurityStamp = "e0913b77-3a97-4471-bddb-dbc709c4453f",
                             TwoFactorEnabled = false,
                             UserName = "m.marinova@mail.com"
                         },
@@ -140,7 +140,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "88cd5a7b-01d8-49b4-8688-35cd23751532",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "38b529c9-26cf-4aac-a52d-c290edc2cef3",
+                            ConcurrencyStamp = "b5ddb8e5-09e2-43cf-a7f9-d9e9a8efadf7",
                             Email = "a.kirilov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Aleks",
@@ -148,9 +148,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "A.KIRILOV@MAIL.COM",
                             NormalizedUserName = "A.KIRILOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGRbTeoK4hHcX0Cwj2H/IP5U8+QR9T+EacGO4XbYn7Bf/AEKLRN94ULWwCq4RaZOIg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL/y742nb5tKO7rAktveiTXxmWys8UAn7b1sXzwGMTfEYKEVS463Znop5B0+J471QQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fae1e0ce-f1dc-4b24-a2ca-3cc5369289de",
+                            SecurityStamp = "9c8b210c-5024-4ee9-bbe0-c72e973ec55b",
                             TwoFactorEnabled = false,
                             UserName = "a.kirilov@mail.com"
                         },
@@ -158,7 +158,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "91ca0c80-659c-481f-8f90-0915a72e2003",
+                            ConcurrencyStamp = "bf1f4e16-3a50-4bd1-91b3-d9dad8d71f9e",
                             Email = "k.conev@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Kiril",
@@ -166,9 +166,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "K.CONEV@MAIL.COM",
                             NormalizedUserName = "K.CONEV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEB6tlWrigUfFyuZ5gyYqnwzVuQUfRsea8bj4kifxBfBvYL+KFnqIBLzUwt77jJnFYw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFFfBNcCCGSQf2UhHNospHjybx3v1GwwsB8XJHEuK4DAyTWqrhLybYKNMSJH3B2hsg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "70afccc8-e4fa-405a-807c-b969716b43fc",
+                            SecurityStamp = "bbcc5e0f-7d5a-47f6-8663-021b407a0f62",
                             TwoFactorEnabled = false,
                             UserName = "k.conev@mail.com"
                         },
@@ -176,7 +176,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "90e7c256-3abc-4aba-9f7a-fee7248fd15d",
+                            ConcurrencyStamp = "b2d3829b-3a37-49e2-a98e-8ee39d8b08be",
                             Email = "i.ivanova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivana",
@@ -184,9 +184,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOVA@MAIL.COM",
                             NormalizedUserName = "I.IVANOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBeHzdeU5wHsujV6FDVq38n33bGKaSdhb2+IOHkCBCVMWYu5+e+hh+YwxfEsG/W++Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ6ovUx2+2xIpynC05jWWfMJm616GXnmw6B5ZoIFOFSO2ABHWJTjq5LvhEe6AwQdjg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "00cd8ef9-2fb5-42b0-8c90-00c9619648c5",
+                            SecurityStamp = "f0a08bf4-34c8-4763-94a7-a7e188b5b2a9",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanova@mail.com"
                         },
@@ -194,7 +194,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0de0f45e-39e2-4d4f-91a7-695898f0bd0c",
+                            ConcurrencyStamp = "a4e9be69-a214-4dcb-ae2d-cb937be0bbaf",
                             Email = "m.kirilova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Monika",
@@ -202,9 +202,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.KIRILOVA@MAIL.COM",
                             NormalizedUserName = "M.KIRILOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKTxGT7dQ7lhzVUOmUNNr1x9q5o3a52nM7/oL9C6P7mW7P62v5pnpE0AM3Br1E8Zfw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGsNwKl2sqw8/EBLxO/18qeSshROxVJELNEvODv9AhZkTNbtFsYpxArP1IDPxlPjVw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ec921c3e-ea05-4ca1-b3bf-be521e36b754",
+                            SecurityStamp = "0d859979-eae0-4f26-a83d-239f452811d9",
                             TwoFactorEnabled = false,
                             UserName = "m.kirilova@mail.com"
                         },
@@ -212,7 +212,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "78850da7-a0ff-42f3-a862-d162457910a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8d96206e-0ba1-4db3-8d75-827cd9722957",
+                            ConcurrencyStamp = "5946bab8-b28c-4a7a-81af-c5b79648165b",
                             Email = "v.yankova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Vanya",
@@ -220,44 +220,11 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "V.YANKOVA@MAIL.COM",
                             NormalizedUserName = "V.YANKOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMvvFBJvRwLkR2ofVAQ0KX3YbhDhIdcRgsk9lPwUTu2/qiG1GUzA9+4zy0G3h1Y45w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHn12x0XfTVVu++ymEp3Svc9uV8cIzS/LuPAYQ+yih/28RdKFnnLyjTqOq+7+T4TWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4845a2bb-43b4-4e06-b0e1-3c19bd530c74",
+                            SecurityStamp = "b83e808d-78c8-432c-8f5a-dbb127fa525b",
                             TwoFactorEnabled = false,
                             UserName = "v.yankova@mail.com"
-                        });
-                });
-
-            modelBuilder.Entity("Infrastructure.Database.Entities.DayOff", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.ToTable("DaysOff");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Day = 25,
-                            DoctorId = 1,
-                            Month = 12
                         });
                 });
 
@@ -361,7 +328,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorDayOff", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -369,139 +336,48 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int>("Day")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("End")
-                        .HasColumnType("time");
-
-                    b.Property<bool>("IsWorkDay")
-                        .HasColumnType("bit");
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MeetingTimeMinutes")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("Start")
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("WorkDayEnd")
                         .HasColumnType("time");
 
-                    b.Property<int>("WeekDay")
-                        .HasColumnType("int");
+                    b.Property<TimeOnly>("WorkDayStart")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("isWorkDay")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorWeekDays");
+                    b.ToTable("DoctorsDaysOff");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            Day = 25,
                             DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            MeetingTimeMinutes = 30,
-                            Start = new TimeSpan(0, 9, 30, 0, 0),
-                            WeekDay = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            MeetingTimeMinutes = 30,
-                            Start = new TimeSpan(0, 12, 30, 0, 0),
-                            WeekDay = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            MeetingTimeMinutes = 30,
-                            Start = new TimeSpan(0, 9, 30, 0, 0),
-                            WeekDay = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            MeetingTimeMinutes = 30,
-                            Start = new TimeSpan(0, 12, 30, 0, 0),
-                            WeekDay = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 17, 30, 0, 0),
-                            IsWorkDay = true,
-                            MeetingTimeMinutes = 30,
-                            Start = new TimeSpan(0, 9, 30, 0, 0),
-                            WeekDay = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 0, 0, 0, 0),
-                            IsWorkDay = false,
                             MeetingTimeMinutes = 0,
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            WeekDay = 6
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DoctorId = 1,
-                            End = new TimeSpan(0, 0, 0, 0, 0),
-                            IsWorkDay = false,
-                            MeetingTimeMinutes = 0,
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            WeekDay = 0
+                            Month = 12,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0),
+                            isWorkDay = false
                         });
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hospitals");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "456 Sunrise Avenue, Clearwater, FL 33759, USA",
-                            Name = "Sunnybrook General Hospital"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "321 Maple Street, Boulder, CO 80301, USA",
-                            Name = "Pine Hills Medical Center"
-                        });
-                });
-
-            modelBuilder.Entity("Infrastructure.Database.Entities.Meeting", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorMeeting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -525,10 +401,10 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Meetings");
+                    b.ToTable("DoctorsMeetings");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Review", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -557,7 +433,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("DoctorsReviews");
 
                     b.HasData(
                         new
@@ -643,7 +519,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Specialty", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorSpecialty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -657,7 +533,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specialties");
+                    b.ToTable("DoctorSpecialties");
 
                     b.HasData(
                         new
@@ -679,6 +555,146 @@ namespace Infrastructure.Migrations
                         {
                             Id = 4,
                             Type = "Neurologist"
+                        });
+                });
+
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsWorkDay")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MeetingTimeMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeekDay")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("WorkDayEnd")
+                        .HasColumnType("time");
+
+                    b.Property<TimeOnly>("WorkDayStart")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("DoctorsWeekDays");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DoctorId = 1,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
+                            WeekDay = 1,
+                            WorkDayEnd = new TimeOnly(17, 30, 0),
+                            WorkDayStart = new TimeOnly(9, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DoctorId = 1,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
+                            WeekDay = 2,
+                            WorkDayEnd = new TimeOnly(17, 30, 0),
+                            WorkDayStart = new TimeOnly(12, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DoctorId = 1,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
+                            WeekDay = 3,
+                            WorkDayEnd = new TimeOnly(17, 30, 0),
+                            WorkDayStart = new TimeOnly(9, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DoctorId = 1,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
+                            WeekDay = 4,
+                            WorkDayEnd = new TimeOnly(17, 30, 0),
+                            WorkDayStart = new TimeOnly(12, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DoctorId = 1,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 30,
+                            WeekDay = 5,
+                            WorkDayEnd = new TimeOnly(17, 30, 0),
+                            WorkDayStart = new TimeOnly(9, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DoctorId = 1,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 6,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DoctorId = 1,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 0,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        });
+                });
+
+            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hospitals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "456 Sunrise Avenue, Clearwater, FL 33759, USA",
+                            Name = "Sunnybrook General Hospital"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "321 Maple Street, Boulder, CO 80301, USA",
+                            Name = "Pine Hills Medical Center"
                         });
                 });
 
@@ -866,17 +882,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.DayOff", b =>
-                {
-                    b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
-                        .WithMany("DaysOff")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
-                });
-
             modelBuilder.Entity("Infrastructure.Database.Entities.Doctor", b =>
                 {
                     b.HasOne("Infrastructure.Database.Entities.Hospital", "Hospital")
@@ -891,7 +896,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Database.Entities.Specialty", "Specialty")
+                    b.HasOne("Infrastructure.Database.Entities.DoctorSpecialty", "Specialty")
                         .WithMany("Doctors")
                         .HasForeignKey("SpecialtyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -904,10 +909,10 @@ namespace Infrastructure.Migrations
                     b.Navigation("Specialty");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorDayOff", b =>
                 {
                     b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
-                        .WithMany("WorkWeek")
+                        .WithMany("DaysOff")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -915,7 +920,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Meeting", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorMeeting", b =>
                 {
                     b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
                         .WithMany("Meetings")
@@ -934,10 +939,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Review", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorReview", b =>
                 {
                     b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
                         .WithMany("Reviews")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorWeekDay", b =>
+                {
+                    b.HasOne("Infrastructure.Database.Entities.Doctor", "Doctor")
+                        .WithMany("WorkWeek")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1012,12 +1028,12 @@ namespace Infrastructure.Migrations
                     b.Navigation("WorkWeek");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.DoctorSpecialty", b =>
                 {
                     b.Navigation("Doctors");
                 });
 
-            modelBuilder.Entity("Infrastructure.Database.Entities.Specialty", b =>
+            modelBuilder.Entity("Infrastructure.Database.Entities.Hospital", b =>
                 {
                     b.Navigation("Doctors");
                 });

@@ -4,21 +4,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Configs
 {
-    public class DayOffConfig : IEntityTypeConfiguration<DayOff>
+    public class DoctorDayOffConfig : IEntityTypeConfiguration<DoctorDayOff>
     {
-        public void Configure(EntityTypeBuilder<DayOff> builder)
+        public void Configure(EntityTypeBuilder<DoctorDayOff> builder)
         {
             builder.HasData(SeedDaysOff());
         }
 
-        private DayOff[] SeedDaysOff()
+        private DoctorDayOff[] SeedDaysOff()
         {
-            var dayOff1 = new DayOff()
+            var dayOff1 = new DoctorDayOff()
             {
                 Id = 1,
                 DoctorId = 1,
                 Month = 12,
                 Day = 25,
+                isWorkDay = false,
             };
 
             return [dayOff1];

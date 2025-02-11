@@ -17,7 +17,7 @@ namespace Infrastructure.Database.Repositories
 
         public async Task AddDoctorReviewAsync(AddReviewRequest requestData, string reviewer)
         {
-            var reveiew = new Review()
+            var reveiew = new DoctorReview()
             {
                 DoctorId = requestData.DoctorId,
                 Rating = requestData.Rating,
@@ -26,13 +26,13 @@ namespace Infrastructure.Database.Repositories
                 Reviewer = reviewer
             };
 
-            await _context.Reviews.AddAsync(reveiew);
+            await _context.DoctorsReviews.AddAsync(reveiew);
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ReviewResponse>> GetDoctorReviewsAsync(GetReviewsRequest requestData)
         {
-            var reviews = await _context.Reviews
+            var reviews = await _context.DoctorsReviews
                 .AsNoTracking()
                 .Where(r => r.DoctorId == requestData.DoctorId)
                 .OrderByDescending(r => r.DateAndTime)

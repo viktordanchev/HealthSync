@@ -2,9 +2,9 @@
 
 namespace Infrastructure.Database.Entities
 {
-    public class Specialty
+    public class DoctorSpecialty
     {
-        public Specialty()
+        public DoctorSpecialty()
         {
             Doctors = new List<Doctor>();
         }

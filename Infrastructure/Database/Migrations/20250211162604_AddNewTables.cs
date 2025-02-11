@@ -30,6 +30,19 @@ namespace Infrastructure.Migrations
                 oldType: "nvarchar(max)");
 
             migrationBuilder.CreateTable(
+                name: "DoctorSpecialties",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorSpecialties", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Hospitals",
                 columns: table => new
                 {
@@ -41,19 +54,6 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Hospitals", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Specialties",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Specialties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,58 +80,38 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Doctors_DoctorSpecialties_SpecialtyId",
+                        column: x => x.SpecialtyId,
+                        principalTable: "DoctorSpecialties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Doctors_Hospitals_HospitalId",
                         column: x => x.HospitalId,
                         principalTable: "Hospitals",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Doctors_Specialties_SpecialtyId",
-                        column: x => x.SpecialtyId,
-                        principalTable: "Specialties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DaysOff",
+                name: "DoctorsDaysOff",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
                     Month = table.Column<int>(type: "int", nullable: false),
-                    Day = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DaysOff", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DaysOff_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DoctorWeekDays",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DoctorId = table.Column<int>(type: "int", nullable: false),
-                    WeekDay = table.Column<int>(type: "int", nullable: false),
-                    IsWorkDay = table.Column<bool>(type: "bit", nullable: false),
-                    Start = table.Column<TimeSpan>(type: "time", nullable: false),
-                    End = table.Column<TimeSpan>(type: "time", nullable: false),
+                    Day = table.Column<int>(type: "int", nullable: false),
+                    isWorkDay = table.Column<bool>(type: "bit", nullable: false),
+                    WorkDayStart = table.Column<TimeOnly>(type: "time", nullable: false),
+                    WorkDayEnd = table.Column<TimeOnly>(type: "time", nullable: false),
                     MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DoctorWeekDays", x => x.Id);
+                    table.PrimaryKey("PK_DoctorsDaysOff", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DoctorWeekDays_Doctors_DoctorId",
+                        name: "FK_DoctorsDaysOff_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
@@ -139,7 +119,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Meetings",
+                name: "DoctorsMeetings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -150,14 +130,14 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Meetings", x => x.Id);
+                    table.PrimaryKey("PK_DoctorsMeetings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Meetings_AspNetUsers_PatientId",
+                        name: "FK_DoctorsMeetings_AspNetUsers_PatientId",
                         column: x => x.PatientId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Meetings_Doctors_DoctorId",
+                        name: "FK_DoctorsMeetings_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
@@ -165,7 +145,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reviews",
+                name: "DoctorsReviews",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -178,19 +158,38 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.PrimaryKey("PK_DoctorsReviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reviews_Doctors_DoctorId",
+                        name: "FK_DoctorsReviews_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_DaysOff_DoctorId",
-                table: "DaysOff",
-                column: "DoctorId");
+            migrationBuilder.CreateTable(
+                name: "DoctorsWeekDays",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    WeekDay = table.Column<int>(type: "int", nullable: false),
+                    IsWorkDay = table.Column<bool>(type: "bit", nullable: false),
+                    WorkDayStart = table.Column<TimeOnly>(type: "time", nullable: false),
+                    WorkDayEnd = table.Column<TimeOnly>(type: "time", nullable: false),
+                    MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorsWeekDays", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DoctorsWeekDays_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Doctors_HospitalId",
@@ -208,23 +207,28 @@ namespace Infrastructure.Migrations
                 column: "SpecialtyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DoctorWeekDays_DoctorId",
-                table: "DoctorWeekDays",
+                name: "IX_DoctorsDaysOff_DoctorId",
+                table: "DoctorsDaysOff",
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Meetings_DoctorId",
-                table: "Meetings",
+                name: "IX_DoctorsMeetings_DoctorId",
+                table: "DoctorsMeetings",
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Meetings_PatientId",
-                table: "Meetings",
+                name: "IX_DoctorsMeetings_PatientId",
+                table: "DoctorsMeetings",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_DoctorId",
-                table: "Reviews",
+                name: "IX_DoctorsReviews_DoctorId",
+                table: "DoctorsReviews",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DoctorsWeekDays_DoctorId",
+                table: "DoctorsWeekDays",
                 column: "DoctorId");
         }
 
@@ -232,25 +236,25 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DaysOff");
+                name: "DoctorsDaysOff");
 
             migrationBuilder.DropTable(
-                name: "DoctorWeekDays");
+                name: "DoctorsMeetings");
 
             migrationBuilder.DropTable(
-                name: "Meetings");
+                name: "DoctorsReviews");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "DoctorsWeekDays");
 
             migrationBuilder.DropTable(
                 name: "Doctors");
 
             migrationBuilder.DropTable(
-                name: "Hospitals");
+                name: "DoctorSpecialties");
 
             migrationBuilder.DropTable(
-                name: "Specialties");
+                name: "Hospitals");
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",

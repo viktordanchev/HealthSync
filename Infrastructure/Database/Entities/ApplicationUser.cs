@@ -8,7 +8,7 @@ namespace Infrastructure.Database.Entities
     {
         public ApplicationUser()
         {
-            Meetings = new List<Meeting>();
+            Meetings = new List<DoctorMeeting>();
         }
 
         [Required]
@@ -21,6 +21,6 @@ namespace Infrastructure.Database.Entities
         [MaxLength(NameMaxLength)]
         public string LastName { get; set; } = null!;
 
-        public IEnumerable<Meeting> Meetings { get; set; }
+        public IEnumerable<DoctorMeeting> Meetings { get; set; }
     }
 }

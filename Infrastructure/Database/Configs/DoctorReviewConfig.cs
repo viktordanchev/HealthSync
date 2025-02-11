@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Configs
 {
-    public class ReviewConfig : IEntityTypeConfiguration<Review>
+    public class DoctorReviewConfig : IEntityTypeConfiguration<DoctorReview>
     {
-        public void Configure(EntityTypeBuilder<Review> builder)
+        public void Configure(EntityTypeBuilder<DoctorReview> builder)
         {
             builder.HasData(SeedReviews());
         }
 
-        private Review[] SeedReviews()
+        private DoctorReview[] SeedReviews()
         {
-            var review1 = new Review()
+            var review1 = new DoctorReview()
             {
                 Id = 1,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -23,7 +23,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "Dr. Ivanov went above and beyond in providing exceptional care. He took the time to listen to all my concerns, explained each step of the treatment, and made me feel at ease throughout the process. His professionalism, kindness, and dedication are truly appreciated. Highly recommended!"
             };
 
-            var review2 = new Review()
+            var review2 = new DoctorReview()
             {
                 Id = 2,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -33,7 +33,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "Some of my questions felt unanswered clearer explanations would be appreciated."
             };
 
-            var review3 = new Review()
+            var review3 = new DoctorReview()
             {
                 Id = 3,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -43,7 +43,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "Your attention and compassion made a huge difference!"
             };
 
-            var review4 = new Review()
+            var review4 = new DoctorReview()
             {
                 Id = 4,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -53,7 +53,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "I’d appreciate simpler language for medical terms next time."
             };
 
-            var review5 = new Review()
+            var review5 = new DoctorReview()
             {
                 Id = 5,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -63,7 +63,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "Your dedication and support mean so much—thank you!"
             };
 
-            var review6 = new Review()
+            var review6 = new DoctorReview()
             {
                 Id = 6,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -73,7 +73,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "Your empathy and expertise are truly appreciated!"
             };
 
-            var review7 = new Review()
+            var review7 = new DoctorReview()
             {
                 Id = 7,
                 DoctorId = 1, //Ivan Ivanov, i.ivanov@mail.com
@@ -83,7 +83,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "More guidance on the next steps for my treatment would be helpful."
             };
 
-            var review8 = new Review()
+            var review8 = new DoctorReview()
             {
                 Id = 8,
                 DoctorId = 2, //Maria Marinova, m.marinova@mail.com
@@ -93,7 +93,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "Thank you for your exceptional care and expertise!"
             };
 
-            var review9 = new Review()
+            var review9 = new DoctorReview()
             {
                 Id = 9,
                 DoctorId = 2, //Maria Marinova, m.marinova@mail.com

@@ -24,14 +24,14 @@ namespace Infrastructure.Database.Repositories
                         .Where(w => w.WeekDay == dateAndTime.DayOfWeek)
                         .Select(wd => new WorkDayModel()
                         {
-                            Start = wd.Start,
-                            End = wd.End,
+                            WorkDayStart = wd.WorkDayStart,
+                            WorkDayEnd = wd.WorkDayEnd,
                             MeetingTimeMinutes = wd.MeetingTimeMinutes
                         })
                         .First(),
                     Meetings = d.Meetings
                         .Where(m => m.DateAndTime.Date == dateAndTime.Date)
-                        .Select(m => m.DateAndTime.TimeOfDay)
+                        .Select(m => new TimeOnly(m.DateAndTime.Hour, m.DateAndTime.Minute))
                         .ToList()
                 })
                 .FirstAsync();
@@ -62,7 +62,7 @@ namespace Infrastructure.Database.Repositories
 
         public async Task<DoctorMonthlyBusyDaysModel> GetMonthlyBusyDaysAsync(int doctorId, int month, int year)
         {
-            var monthlyBusyDays = await _context.DoctorWeekDays
+            var monthlyBusyDays = await _context.DoctorsWeekDays
             .AsNoTracking()
             .Where(d => d.Id == doctorId)
             .Select(d => new DoctorMonthlyBusyDaysModel()
@@ -74,8 +74,8 @@ namespace Infrastructure.Database.Repositories
                     .Where(wk => wk.IsWorkDay)
                     .Select(wk => new WorkDayModel()
                     {
-                        Start = wk.Start,
-                        End = wk.End,
+                        WorkDayStart = wk.WorkDayStart,
+                        WorkDayEnd = wk.WorkDayEnd,
                         WeekDay = wk.WeekDay,
                         MeetingTimeMinutes = wk.MeetingTimeMinutes
                     })

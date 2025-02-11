@@ -27,13 +27,24 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "7c6daba5-9eb3-461b-87e4-9eeb20b5e3b3", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEObLty1qjh0g86vxa6qzhAAPbwy+2exHo8+W1Lo1NtfEwPj4B81nh3MXSobMSPW6rA==", null, false, "06cd6367-3b91-44b6-8faf-ef5528f5c2df", false, "m.marinova@mail.com" },
-                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "8d96206e-0ba1-4db3-8d75-827cd9722957", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEMvvFBJvRwLkR2ofVAQ0KX3YbhDhIdcRgsk9lPwUTu2/qiG1GUzA9+4zy0G3h1Y45w==", null, false, "4845a2bb-43b4-4e06-b0e1-3c19bd530c74", false, "v.yankova@mail.com" },
-                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "38b529c9-26cf-4aac-a52d-c290edc2cef3", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEGRbTeoK4hHcX0Cwj2H/IP5U8+QR9T+EacGO4XbYn7Bf/AEKLRN94ULWwCq4RaZOIg==", null, false, "fae1e0ce-f1dc-4b24-a2ca-3cc5369289de", false, "a.kirilov@mail.com" },
-                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "91ca0c80-659c-481f-8f90-0915a72e2003", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEB6tlWrigUfFyuZ5gyYqnwzVuQUfRsea8bj4kifxBfBvYL+KFnqIBLzUwt77jJnFYw==", null, false, "70afccc8-e4fa-405a-807c-b969716b43fc", false, "k.conev@mail.com" },
-                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "f159c27d-b06f-4bf4-9112-5aa5de439850", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEFO+FaAD9o5jq2bhPMxpiQEpwV3ayYda921Rmsx3XS5XEVVkDac0a34FYLuequNIrw==", null, false, "f9c86865-b1da-424e-a0e5-c83f10e12557", false, "i.ivanov@mail.com" },
-                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "0de0f45e-39e2-4d4f-91a7-695898f0bd0c", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEKTxGT7dQ7lhzVUOmUNNr1x9q5o3a52nM7/oL9C6P7mW7P62v5pnpE0AM3Br1E8Zfw==", null, false, "ec921c3e-ea05-4ca1-b3bf-be521e36b754", false, "m.kirilova@mail.com" },
-                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "90e7c256-3abc-4aba-9f7a-fee7248fd15d", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEBeHzdeU5wHsujV6FDVq38n33bGKaSdhb2+IOHkCBCVMWYu5+e+hh+YwxfEsG/W++Q==", null, false, "00cd8ef9-2fb5-42b0-8c90-00c9619648c5", false, "i.ivanova@mail.com" }
+                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "5d7817e6-41b0-4f0a-8d8f-c16f18d71259", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEH8GfayyDLkmKolcPZzvKGtmu6g7QFCtHSQ7t7Ky+HPutAJsS62mHAju68oWmnG7Gg==", null, false, "e0913b77-3a97-4471-bddb-dbc709c4453f", false, "m.marinova@mail.com" },
+                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "5946bab8-b28c-4a7a-81af-c5b79648165b", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEHn12x0XfTVVu++ymEp3Svc9uV8cIzS/LuPAYQ+yih/28RdKFnnLyjTqOq+7+T4TWw==", null, false, "b83e808d-78c8-432c-8f5a-dbb127fa525b", false, "v.yankova@mail.com" },
+                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "b5ddb8e5-09e2-43cf-a7f9-d9e9a8efadf7", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEL/y742nb5tKO7rAktveiTXxmWys8UAn7b1sXzwGMTfEYKEVS463Znop5B0+J471QQ==", null, false, "9c8b210c-5024-4ee9-bbe0-c72e973ec55b", false, "a.kirilov@mail.com" },
+                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "bf1f4e16-3a50-4bd1-91b3-d9dad8d71f9e", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEFFfBNcCCGSQf2UhHNospHjybx3v1GwwsB8XJHEuK4DAyTWqrhLybYKNMSJH3B2hsg==", null, false, "bbcc5e0f-7d5a-47f6-8663-021b407a0f62", false, "k.conev@mail.com" },
+                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "2b4f5d0e-d014-4168-9f62-32266e6049e3", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEE7QfdUtuWeImXO7IQBdXpvKgppSozQinjSHdjo8rqD7vg2Oa6hrKofrz5HNrOFWlw==", null, false, "053e126f-f0b7-4008-8125-d3b0bae6ceec", false, "i.ivanov@mail.com" },
+                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "a4e9be69-a214-4dcb-ae2d-cb937be0bbaf", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEGsNwKl2sqw8/EBLxO/18qeSshROxVJELNEvODv9AhZkTNbtFsYpxArP1IDPxlPjVw==", null, false, "0d859979-eae0-4f26-a83d-239f452811d9", false, "m.kirilova@mail.com" },
+                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "b2d3829b-3a37-49e2-a98e-8ee39d8b08be", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEJ6ovUx2+2xIpynC05jWWfMJm616GXnmw6B5ZoIFOFSO2ABHWJTjq5LvhEe6AwQdjg==", null, false, "f0a08bf4-34c8-4763-94a7-a7e188b5b2a9", false, "i.ivanova@mail.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DoctorSpecialties",
+                columns: new[] { "Id", "Type" },
+                values: new object[,]
+                {
+                    { 1, "Orthodontist" },
+                    { 2, "Endocrinologist" },
+                    { 3, "Cardiologist" },
+                    { 4, "Neurologist" }
                 });
 
             migrationBuilder.InsertData(
@@ -43,17 +54,6 @@ namespace Infrastructure.Migrations
                 {
                     { 1, "456 Sunrise Avenue, Clearwater, FL 33759, USA", "Sunnybrook General Hospital" },
                     { 2, "321 Maple Street, Boulder, CO 80301, USA", "Pine Hills Medical Center" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Specialties",
-                columns: new[] { "Id", "Type" },
-                values: new object[,]
-                {
-                    { 1, "Orthodontist" },
-                    { 2, "Endocrinologist" },
-                    { 3, "Cardiologist" },
-                    { 4, "Neurologist" }
                 });
 
             migrationBuilder.InsertData(
@@ -85,26 +85,12 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "DaysOff",
-                columns: new[] { "Id", "Day", "DoctorId", "Month" },
-                values: new object[] { 1, 25, 1, 12 });
+                table: "DoctorsDaysOff",
+                columns: new[] { "Id", "Day", "DoctorId", "MeetingTimeMinutes", "Month", "WorkDayEnd", "WorkDayStart", "isWorkDay" },
+                values: new object[] { 1, 25, 1, 0, 12, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0), false });
 
             migrationBuilder.InsertData(
-                table: "DoctorWeekDays",
-                columns: new[] { "Id", "DoctorId", "End", "IsWorkDay", "MeetingTimeMinutes", "Start", "WeekDay" },
-                values: new object[,]
-                {
-                    { 1, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0), 1 },
-                    { 2, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 12, 30, 0, 0), 2 },
-                    { 3, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0), 3 },
-                    { 4, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 12, 30, 0, 0), 4 },
-                    { 5, 1, new TimeSpan(0, 17, 30, 0, 0), true, 30, new TimeSpan(0, 9, 30, 0, 0), 5 },
-                    { 6, 1, new TimeSpan(0, 0, 0, 0, 0), false, 0, new TimeSpan(0, 0, 0, 0, 0), 6 },
-                    { 7, 1, new TimeSpan(0, 0, 0, 0, 0), false, 0, new TimeSpan(0, 0, 0, 0, 0), 0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Reviews",
+                table: "DoctorsReviews",
                 columns: new[] { "Id", "Comment", "DateAndTime", "DoctorId", "Rating", "Reviewer" },
                 values: new object[,]
                 {
@@ -117,6 +103,20 @@ namespace Infrastructure.Migrations
                     { 7, "More guidance on the next steps for my treatment would be helpful.", new DateTime(2024, 6, 15, 22, 12, 0, 0, DateTimeKind.Unspecified), 1, 2, "Viktor Terziev" },
                     { 8, "Thank you for your exceptional care and expertise!", new DateTime(2024, 4, 2, 8, 2, 0, 0, DateTimeKind.Unspecified), 2, 5, "Yordan Angelov" },
                     { 9, "I couldn't be more pleased with the level of care I received. Your attentiveness, kindness, and expertise made a world of difference.", new DateTime(2022, 12, 12, 10, 43, 0, 0, DateTimeKind.Unspecified), 2, 5, "Kristian Ivanov" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DoctorsWeekDays",
+                columns: new[] { "Id", "DoctorId", "IsWorkDay", "MeetingTimeMinutes", "WeekDay", "WorkDayEnd", "WorkDayStart" },
+                values: new object[,]
+                {
+                    { 1, 1, true, 30, 1, new TimeOnly(17, 30, 0), new TimeOnly(9, 30, 0) },
+                    { 2, 1, true, 30, 2, new TimeOnly(17, 30, 0), new TimeOnly(12, 30, 0) },
+                    { 3, 1, true, 30, 3, new TimeOnly(17, 30, 0), new TimeOnly(9, 30, 0) },
+                    { 4, 1, true, 30, 4, new TimeOnly(17, 30, 0), new TimeOnly(12, 30, 0) },
+                    { 5, 1, true, 30, 5, new TimeOnly(17, 30, 0), new TimeOnly(9, 30, 0) },
+                    { 6, 1, false, 0, 6, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 7, 1, false, 0, 0, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) }
                 });
         }
 
@@ -164,114 +164,114 @@ namespace Infrastructure.Migrations
                 keyValues: new object[] { "a550b411-e5c7-407f-aaba-35161bab127e", "f37b43ca-86a2-4b11-972d-5e0569f4deb3" });
 
             migrationBuilder.DeleteData(
-                table: "DaysOff",
+                table: "Doctors",
+                keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DeleteData(
+                table: "Doctors",
+                keyColumn: "Id",
+                keyValue: 4);
+
+            migrationBuilder.DeleteData(
+                table: "Doctors",
+                keyColumn: "Id",
+                keyValue: 5);
+
+            migrationBuilder.DeleteData(
+                table: "Doctors",
+                keyColumn: "Id",
+                keyValue: 6);
+
+            migrationBuilder.DeleteData(
+                table: "Doctors",
+                keyColumn: "Id",
+                keyValue: 7);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorsDaysOff",
                 keyColumn: "Id",
                 keyValue: 1);
 
             migrationBuilder.DeleteData(
-                table: "DoctorWeekDays",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 1);
 
             migrationBuilder.DeleteData(
-                table: "DoctorWeekDays",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 2);
 
             migrationBuilder.DeleteData(
-                table: "DoctorWeekDays",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 3);
 
             migrationBuilder.DeleteData(
-                table: "DoctorWeekDays",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 4);
 
             migrationBuilder.DeleteData(
-                table: "DoctorWeekDays",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 5);
 
             migrationBuilder.DeleteData(
-                table: "DoctorWeekDays",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 6);
 
             migrationBuilder.DeleteData(
-                table: "DoctorWeekDays",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 7);
 
             migrationBuilder.DeleteData(
-                table: "Doctors",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Doctors",
-                keyColumn: "Id",
-                keyValue: 4);
-
-            migrationBuilder.DeleteData(
-                table: "Doctors",
-                keyColumn: "Id",
-                keyValue: 5);
-
-            migrationBuilder.DeleteData(
-                table: "Doctors",
-                keyColumn: "Id",
-                keyValue: 6);
-
-            migrationBuilder.DeleteData(
-                table: "Doctors",
-                keyColumn: "Id",
-                keyValue: 7);
-
-            migrationBuilder.DeleteData(
-                table: "Reviews",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Reviews",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Reviews",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Reviews",
-                keyColumn: "Id",
-                keyValue: 4);
-
-            migrationBuilder.DeleteData(
-                table: "Reviews",
-                keyColumn: "Id",
-                keyValue: 5);
-
-            migrationBuilder.DeleteData(
-                table: "Reviews",
-                keyColumn: "Id",
-                keyValue: 6);
-
-            migrationBuilder.DeleteData(
-                table: "Reviews",
-                keyColumn: "Id",
-                keyValue: 7);
-
-            migrationBuilder.DeleteData(
-                table: "Reviews",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 8);
 
             migrationBuilder.DeleteData(
-                table: "Reviews",
+                table: "DoctorsReviews",
                 keyColumn: "Id",
                 keyValue: 9);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorsWeekDays",
+                keyColumn: "Id",
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorsWeekDays",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorsWeekDays",
+                keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorsWeekDays",
+                keyColumn: "Id",
+                keyValue: 4);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorsWeekDays",
+                keyColumn: "Id",
+                keyValue: 5);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorsWeekDays",
+                keyColumn: "Id",
+                keyValue: 6);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorsWeekDays",
+                keyColumn: "Id",
+                keyValue: 7);
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
@@ -304,6 +304,16 @@ namespace Infrastructure.Migrations
                 keyValue: "f37b43ca-86a2-4b11-972d-5e0569f4deb3");
 
             migrationBuilder.DeleteData(
+                table: "DoctorSpecialties",
+                keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorSpecialties",
+                keyColumn: "Id",
+                keyValue: 4);
+
+            migrationBuilder.DeleteData(
                 table: "Doctors",
                 keyColumn: "Id",
                 keyValue: 1);
@@ -317,16 +327,6 @@ namespace Infrastructure.Migrations
                 table: "Hospitals",
                 keyColumn: "Id",
                 keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Specialties",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Specialties",
-                keyColumn: "Id",
-                keyValue: 4);
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
@@ -339,19 +339,19 @@ namespace Infrastructure.Migrations
                 keyValue: "a3717562-385e-41ce-9eff-0f1b994e5548");
 
             migrationBuilder.DeleteData(
+                table: "DoctorSpecialties",
+                keyColumn: "Id",
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "DoctorSpecialties",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
                 table: "Hospitals",
                 keyColumn: "Id",
                 keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Specialties",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Specialties",
-                keyColumn: "Id",
-                keyValue: 2);
         }
     }
 }
