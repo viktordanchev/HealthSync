@@ -13,7 +13,7 @@ namespace Infrastructure.Database.Repositories
             _context = context;
         }
 
-        public async Task<DoctorDailyScheduleModel> GetDoctorDailyScheduleAsync(int doctorId, DateTime dateAndTime)
+        public async Task<DoctorDailyScheduleModel> GetDoctorDailyScheduleAsync(int doctorId, DateTime date)
         {
             var dailySchedule = await _context.Doctors
                 .AsNoTracking()
@@ -21,7 +21,7 @@ namespace Infrastructure.Database.Repositories
                 .Select(d => new DoctorDailyScheduleModel()
                 {
                     WorkDay = d.WorkWeek
-                        .Where(w => w.WeekDay == dateAndTime.DayOfWeek)
+                        .Where(w => w.WeekDay == date.DayOfWeek)
                         .Select(wd => new WorkDayModel()
                         {
                             WorkDayStart = wd.WorkDayStart,
@@ -30,7 +30,7 @@ namespace Infrastructure.Database.Repositories
                         })
                         .First(),
                     Meetings = d.Meetings
-                        .Where(m => m.DateAndTime.Date == dateAndTime.Date)
+                        .Where(m => m.DateAndTime.Date == date.Date)
                         .Select(m => new TimeOnly(m.DateAndTime.Hour, m.DateAndTime.Minute))
                         .ToList()
                 })

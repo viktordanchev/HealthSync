@@ -16,16 +16,16 @@ namespace Core.Services
 
         public async Task<bool> IsDayOffAsync(int doctorId, DateTime date)
         {
-            var daysOff = await GetDaysOffAsync(doctorId, date.Month, date.Year);
+            var daysOff = await GetDaysOffAsync(doctorId, date.Month);
             var busyDays = await GetBusyDaysAsync(doctorId, date.Month, date.Year);
             var isDayOff = daysOff.Contains(date) || busyDays.Contains(date) ? true : false;
         
             return isDayOff;
         }
 
-        public async Task<IEnumerable<string>> GetAvailableMeetingsAsync(int doctorId, DateTime date)
+        public async Task<IEnumerable<string>> GetAvailableMeetingsAsync(GetAvailableMeetingHours requestData)
         {
-            var dailySchedule = await _repository.GetDoctorDailyScheduleAsync(doctorId, date);
+            var dailySchedule = await _repository.GetDoctorDailyScheduleAsync(requestData.DoctorId, requestData.Date);
 
             var availableMeetings = new List<string>();
 
@@ -44,8 +44,8 @@ namespace Core.Services
 
         public async Task<IEnumerable<MonthScheduleResponse>> GetMonthScheduleAsync(GetMonthScheduleRequest requestData)
         {
+            var daysOff = await GetDaysOffAsync(requestData.DoctorId, requestData.Month);
             var busyDays = await GetBusyDaysAsync(requestData.DoctorId, requestData.Month, requestData.Year);
-            var daysOff = await GetDaysOffAsync(requestData.DoctorId, requestData.Month, requestData.Year);
             var daysInMonth = DateTime.DaysInMonth(requestData.Year, requestData.Month);
             var monthSchedule = new List<MonthScheduleResponse>();
         
@@ -67,11 +67,11 @@ namespace Core.Services
             return monthSchedule;
         }
         
-        private async Task<IEnumerable<DateTime>> GetDaysOffAsync(int doctorId, int month, int year)
+        private async Task<IEnumerable<DateTime>> GetDaysOffAsync(int doctorId, int month)
         {
             var monthlyDaysOff = await _repository.GetMonthlyDaysOffAsync(doctorId, month);
         
-            var firstDateOfMonth = new DateTime(year, month, 1);
+            var firstDateOfMonth = new DateTime(DateTime.Now.Year, month, 1);
             var lastDateOfMonth = firstDateOfMonth.AddMonths(1).AddDays(-1);
         
             var weeklyDaysOffDates = Enumerable.Range(0, (lastDateOfMonth - firstDateOfMonth).Days + 1)
