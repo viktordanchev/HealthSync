@@ -57,7 +57,7 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     const handlePreviousMonth = () => {
-        if (newMonth < 0) {
+        if (currentMonth < 0) {
             setCurrentMonth(11);
             setCurrentYear(currentYear - 1);
         } else {
@@ -66,7 +66,7 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     const handleNextMonth = () => {
-        if (newMonth > 11) {
+        if (currentMonth > 11) {
             setCurrentMonth(0);
             setCurrentYear(currentYear + 1);
         } else {

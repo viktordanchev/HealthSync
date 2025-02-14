@@ -52,9 +52,9 @@ namespace RestAPI.Controllers
                 return BadRequest(new { ServerError = InvalidRequest });
             }
 
-            var doctor = await _doctorService.GetDoctorDetailsAsync(doctorId);
+            var doctorDetails = await _doctorService.GetDoctorDetailsAsync(doctorId);
 
-            return Ok(doctor);
+            return Ok(doctorDetails);
         }
 
         [HttpGet("getSpecialties")]
@@ -67,16 +67,18 @@ namespace RestAPI.Controllers
 
         [HttpPost("getAvailableMeetingHours")]
         public async Task<IActionResult> GetAvailableMeetingHours([FromBody] GetAvailableMeetingHours request)
-        {   
+        {
+            request.Date = request.Date.ToLocalTime();
+
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.DateAndTime))
+                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.Date))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
             
-            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, request.DateAndTime);
+            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request);
 
-            return Ok();
+            return Ok(times);
         }
 
         [HttpPost("getMonthSchedule")]
@@ -89,7 +91,7 @@ namespace RestAPI.Controllers
 
             var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request);
 
-            return Ok();
+            return Ok(monthSchedule);
         }
 
         [HttpPost("becomeDoctor")]
@@ -116,9 +118,9 @@ namespace RestAPI.Controllers
                 });
         }
 
-        [HttpGet("getDoctorInfo")]
+        [HttpGet("getDoctorProfileInfo")]
         [Authorize(Roles = "Doctor")]
-        public async Task<IActionResult> GetDoctorInfo()
+        public async Task<IActionResult> GetDoctorProfileInfo()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 

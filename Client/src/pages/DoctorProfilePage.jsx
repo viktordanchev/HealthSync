@@ -15,7 +15,7 @@ function DoctorProfilePage() {
         const receiveData = async () => {
             try {
                 const [doctorData, hospitals, specialties] = await Promise.all([
-                    apiRequest('doctors', 'getDoctorInfo', undefined, localStorage.getItem('accessToken'), 'GET', false),
+                    apiRequest('doctors', 'getDoctorProfileInfo', undefined, localStorage.getItem('accessToken'), 'GET', false),
                     apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false),
                     apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false)
                 ]);
