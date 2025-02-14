@@ -1,8 +1,6 @@
 ﻿using Core.DTOs.RequestDtos.Doctors;
 using Core.Interfaces.Service;
-using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static Common.Errors;

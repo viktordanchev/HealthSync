@@ -37,7 +37,7 @@ namespace RestAPI.Controllers
         public async Task<IActionResult> AddDoctorMeeting([FromBody] AddMeetingRequest request)
         {
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.DateAndTime))
+                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.Date))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
