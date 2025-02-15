@@ -93,8 +93,10 @@ function DoctorDetailsPage() {
                             </div>
                             <div className="w-1/2 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col justify-evenly space-y-3 text-center md:w-full sm:w-full">
                                 <p className="font-bold underline text-xl">Meetings</p>
-                                <MeetingsCalendar doctorId={doctorId} />
-                                <p className="text-sm">You can schedule an appointment with this doctor on a day that is convenient for you.</p>
+                                <div>
+                                    <MeetingsCalendar doctorId={doctorId} />
+                                    <p className="text-sm">You can schedule an appointment with this doctor on a day that is convenient for you.</p>
+                                </div>
                             </div>
                         </div>
                     </article>
