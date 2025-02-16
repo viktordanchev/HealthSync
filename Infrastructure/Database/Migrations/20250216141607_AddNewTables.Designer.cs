@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20250211162604_AddNewTables")]
+    [Migration("20250216141607_AddNewTables")]
     partial class AddNewTables
     {
         /// <inheritdoc />
@@ -156,20 +156,8 @@ namespace Infrastructure.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MeetingTimeMinutes")
-                        .HasColumnType("int");
-
                     b.Property<int>("Month")
                         .HasColumnType("int");
-
-                    b.Property<TimeOnly>("WorkDayEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeOnly>("WorkDayStart")
-                        .HasColumnType("time");
-
-                    b.Property<bool>("isWorkDay")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

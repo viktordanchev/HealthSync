@@ -19,14 +19,5 @@ namespace Infrastructure.Database.Entities
 
         [Required]
         public int Day { get; set; }
-
-        [Required]
-        public bool isWorkDay { get; set; }
-
-        public TimeOnly WorkDayStart { get; set; }
-
-        public TimeOnly WorkDayEnd { get; set; }
-
-        public int MeetingTimeMinutes { get; set; }
     }
 }

@@ -41,13 +41,9 @@ function DaysOffCalendar({ data }) {
     };
 
     const handleSelectDay = (day) => {
-        const dayOff =  {
+        const dayOff = {
             month: currentMonth + 1,
             day: day,
-            isWorkDay: false,
-            workDayStart: undefined,
-            workDayEnd: undefined,
-            meetingTimeMinutes: undefined
         };
 
         setDaysOff(prev =>
@@ -69,8 +65,7 @@ function DaysOffCalendar({ data }) {
                     <div key={index}>{day}</div>
                 ))}
                 {days.map((day, index) => (
-                    <p
-                        className={`rounded-full flex items-center justify-center 
+                    <p className={`rounded-full flex items-center justify-center 
                     ${day ? 'cursor-pointer' : 'opacity-45 cursor-default'}
                     ${day && daysOff.some(doff => doff.month === currentMonth + 1 && doff.day === day) ? 'bg-blue-500 hover:bg-blue-400 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
                         key={index}

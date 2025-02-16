@@ -19,7 +19,6 @@ namespace Infrastructure.Database.Configs
                 DoctorId = 1,
                 Month = 12,
                 Day = 25,
-                isWorkDay = false,
             };
 
             return [dayOff1];

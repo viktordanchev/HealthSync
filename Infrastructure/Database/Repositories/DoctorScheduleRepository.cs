@@ -69,10 +69,6 @@ namespace Infrastructure.Database.Repositories
                 {
                     Month = ddo.Month,
                     Day = ddo.Day,
-                    isWorkDay = ddo.isWorkDay,
-                    WorkDayStart = ddo.WorkDayStart,
-                    WorkDayEnd = ddo.WorkDayEnd,
-                    MeetingTimeMinutes = ddo.MeetingTimeMinutes
                 })
                 .ToListAsync();
 

@@ -101,11 +101,7 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
                     Month = table.Column<int>(type: "int", nullable: false),
-                    Day = table.Column<int>(type: "int", nullable: false),
-                    isWorkDay = table.Column<bool>(type: "bit", nullable: false),
-                    WorkDayStart = table.Column<TimeOnly>(type: "time", nullable: false),
-                    WorkDayEnd = table.Column<TimeOnly>(type: "time", nullable: false),
-                    MeetingTimeMinutes = table.Column<int>(type: "int", nullable: false)
+                    Day = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
