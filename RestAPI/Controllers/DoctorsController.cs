@@ -1,4 +1,5 @@
 ﻿using Core.DTOs.RequestDtos.Doctors;
+using Core.DTOs.ResponseDtos.DoctorSchedule;
 using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -134,6 +135,15 @@ namespace RestAPI.Controllers
             var daysOff = await _doctorScheduleService.GetAllDaysOffAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             return Ok(daysOff);
+        }
+
+        [HttpPost("updateDoctorDaysOff")]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> UpdateDoctorDaysOff([FromBody] IEnumerable<DayOffResponse> daysOff)
+        {
+            await _doctorScheduleService.UpdateDaysOffAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!, daysOff);
+
+            return Ok(new { Message = UpdatedDaysOff });
         }
     }
 }

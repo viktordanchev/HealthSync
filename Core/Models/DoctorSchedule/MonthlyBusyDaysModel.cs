@@ -1,8 +1,8 @@
 ﻿namespace Core.Models.DoctorSchedule
 {
-    public class DoctorMonthlyBusyDaysModel
+    public class MonthlyBusyDaysModel
     {
-        public DoctorMonthlyBusyDaysModel()
+        public MonthlyBusyDaysModel()
         {
             AllMeetings = new List<DateTime>();
             WeekDays = new List<WorkDayModel>();

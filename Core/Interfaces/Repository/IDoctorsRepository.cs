@@ -12,5 +12,6 @@ namespace Core.Interfaces.Repository
         Task<bool> IsUserDoctorAsync(string userId);
         Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
         Task GenerateEmptyDoctorWeekSchedule(int doctorId);
+        Task<int> GetDoctorIdAsync(string userId);
     }
 }

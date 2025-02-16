@@ -1,8 +1,8 @@
 ﻿namespace Core.Models.DoctorSchedule
 {
-    public class DoctorDailyScheduleModel
+    public class DailyScheduleModel
     {
-        public DoctorDailyScheduleModel()
+        public DailyScheduleModel()
         {
             Meetings = new List<TimeOnly>();
         }

@@ -1,6 +1,6 @@
-﻿namespace Core.Models.DoctorSchedule
+﻿namespace Core.DTOs.ResponseDtos.DoctorSchedule
 {
-    public class DoctorDayOffModel
+    public class DayOffResponse
     {
         public int Month { get; set; }
         public int Day { get; set; }

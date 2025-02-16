@@ -100,7 +100,7 @@ namespace Infrastructure.Database.Repositories
             var doctorInfo = await _context.Doctors
                 .Where(d => d.IdentityId == userId)
                 .Select(d => new DoctorPersonalInfoResponse()
-                {
+                { 
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
                     HospitalId = d.HospitalId,
@@ -143,6 +143,14 @@ namespace Infrastructure.Database.Repositories
 
             await _context.DoctorsWeekDays.AddRangeAsync(week);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> GetDoctorIdAsync(string userId)
+        {
+            var doctor = await _context.Doctors
+                .FirstAsync(d => d.IdentityId == userId);
+
+            return doctor.Id;
         }
     }
 }

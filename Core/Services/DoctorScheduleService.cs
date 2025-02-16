@@ -2,17 +2,18 @@
 using Core.DTOs.ResponseDtos.DoctorSchedule;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
-using Core.Models.DoctorSchedule;
 
 namespace Core.Services
 {
     public class DoctorScheduleService : IDoctorScheduleService
     {
-        private readonly IDoctorScheduleRepository _repository;
+        private readonly IDoctorScheduleRepository _doctorScheduleRepo;
+        private readonly IDoctorsRepository _doctorsRepo;
 
-        public DoctorScheduleService(IDoctorScheduleRepository repository)
+        public DoctorScheduleService(IDoctorScheduleRepository repository, IDoctorsRepository doctorsRepo)
         {
-            _repository = repository;
+            _doctorScheduleRepo = repository;
+            _doctorsRepo = doctorsRepo;
         }
 
         public async Task<bool> IsDayValidAsync(int doctorId, DateTime date)
@@ -26,7 +27,7 @@ namespace Core.Services
 
         public async Task<IEnumerable<string>> GetAvailableMeetingsAsync(GetAvailableMeetingHours requestData)
         {
-            var dailySchedule = await _repository.GetDoctorDailyScheduleAsync(requestData.DoctorId, requestData.Date);
+            var dailySchedule = await _doctorScheduleRepo.GetDailyScheduleAsync(requestData.DoctorId, requestData.Date);
 
             var availableMeetings = new List<string>();
 
@@ -68,14 +69,21 @@ namespace Core.Services
             return monthSchedule;
         }
 
-        public async Task<IEnumerable<DoctorDayOffModel>> GetAllDaysOffAsync(string userId)
+        public async Task<IEnumerable<DayOffResponse>> GetAllDaysOffAsync(string userId)
         {
-            return await _repository.GetAllDaysOffAsync(userId);
+            return await _doctorScheduleRepo.GetAllDaysOffAsync(userId);
         }
         
+        public async Task UpdateDaysOffAsync(string userId, IEnumerable<DayOffResponse> updatedDaysOff)
+        {
+            var doctorId = await _doctorsRepo.GetDoctorIdAsync(userId);
+
+            await _doctorScheduleRepo.UpdateDaysOffAsync(doctorId, updatedDaysOff);
+        }
+
         private async Task<IEnumerable<DateTime>> GetMonthlyDaysOffAsync(int doctorId, int month)
         {
-            var monthlyDaysOff = await _repository.GetMonthlyDaysOffAsync(doctorId, month);
+            var monthlyDaysOff = await _doctorScheduleRepo.GetMonthlyDaysOffAsync(doctorId, month);
         
             var firstDateOfMonth = new DateTime(DateTime.Now.Year, month, 1);
             var lastDateOfMonth = firstDateOfMonth.AddMonths(1).AddDays(-1);
@@ -94,7 +102,7 @@ namespace Core.Services
         
         private async Task<IEnumerable<DateTime>> GetBusyDaysAsync(int doctorId, int month, int year)
         {
-            var monthlyBusyDays = await _repository.GetMonthlyBusyDaysAsync(doctorId, month, year);
+            var monthlyBusyDays = await _doctorScheduleRepo.GetMonthlyBusyDaysAsync(doctorId, month, year);
         
             var meetingDays = monthlyBusyDays.AllMeetings
                 .Select(am => am.Date)

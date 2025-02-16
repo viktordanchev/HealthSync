@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-function DaysOffCalendar({ data }) {
+function DaysOffCalendar({ daysOff, setDaysOff }) {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-    const [daysOff, setDaysOff] = useState(data);
     const [days, setDays] = useState([]);
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -23,7 +22,7 @@ function DaysOffCalendar({ data }) {
 
         setDays(daysInMonth);
     }, [currentMonth]);
-
+    
     const handlePreviousMonth = () => {
         if (currentMonth === 0) {
             setCurrentMonth(11);
@@ -39,16 +38,16 @@ function DaysOffCalendar({ data }) {
             setCurrentMonth(currentMonth + 1);
         }
     };
-
+    
     const handleSelectDay = (day) => {
         const dayOff = {
             month: currentMonth + 1,
             day: day,
         };
-
+        
         setDaysOff(prev =>
             prev.some(doff => doff.month === currentMonth + 1 && doff.day === day)
-                ? prev.filter(doff => doff.month !== currentMonth + 1 && doff.day !== day)
+                ? prev.filter(doff => doff.month !== currentMonth + 1 || doff.day !== day)
                 : [...prev, dayOff]
         );   
     };

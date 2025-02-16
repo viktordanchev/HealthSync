@@ -1,5 +1,7 @@
-﻿using Core.Interfaces.Repository;
+﻿using Core.DTOs.ResponseDtos.DoctorSchedule;
+using Core.Interfaces.Repository;
 using Core.Models.DoctorSchedule;
+using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Repositories
@@ -13,12 +15,12 @@ namespace Infrastructure.Database.Repositories
             _context = context;
         }
 
-        public async Task<DoctorDailyScheduleModel> GetDoctorDailyScheduleAsync(int doctorId, DateTime date)
+        public async Task<DailyScheduleModel> GetDailyScheduleAsync(int doctorId, DateTime date)
         {
             var dailySchedule = await _context.Doctors
                 .AsNoTracking()
                 .Where(d => d.Id == doctorId)
-                .Select(d => new DoctorDailyScheduleModel()
+                .Select(d => new DailyScheduleModel()
                 {
                     WorkDay = d.WorkWeek
                         .Where(w => w.WeekDay == date.DayOfWeek)
@@ -60,12 +62,12 @@ namespace Infrastructure.Database.Repositories
             return monthlyDaysOff;
         }
 
-        public async Task<IEnumerable<DoctorDayOffModel>> GetAllDaysOffAsync(string userId)
+        public async Task<IEnumerable<DayOffResponse>> GetAllDaysOffAsync(string userId)
         {
             var daysOff = await _context.DoctorsDaysOff
                 .AsNoTracking()
                 .Where(ddo => ddo.Doctor.IdentityId == userId)
-                .Select(ddo => new DoctorDayOffModel()
+                .Select(ddo => new DayOffResponse()
                 {
                     Month = ddo.Month,
                     Day = ddo.Day,
@@ -75,12 +77,12 @@ namespace Infrastructure.Database.Repositories
             return daysOff;
         }
 
-        public async Task<DoctorMonthlyBusyDaysModel> GetMonthlyBusyDaysAsync(int doctorId, int month, int year)
+        public async Task<MonthlyBusyDaysModel> GetMonthlyBusyDaysAsync(int doctorId, int month, int year)
         {
             var monthlyBusyDays = await _context.DoctorsWeekDays
             .AsNoTracking()
             .Where(d => d.Id == doctorId)
-            .Select(d => new DoctorMonthlyBusyDaysModel()
+            .Select(d => new MonthlyBusyDaysModel()
             {
                 AllMeetings = d.Doctor.Meetings
                     .Where(m => m.DateAndTime.Month == month && m.DateAndTime.Year == year)
@@ -98,6 +100,30 @@ namespace Infrastructure.Database.Repositories
             .FirstAsync();
 
             return monthlyBusyDays;
+        }
+
+        public async Task UpdateDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> updatedDaysOff)
+        {
+            var daysOff = await _context.DoctorsDaysOff
+                .AsNoTracking()
+                .Where(doff => doff.DoctorId == doctorId)
+                .ToListAsync();
+
+            var newDaysOff = updatedDaysOff
+                .Where(udoff => !daysOff.Any(doff => udoff.Day == doff.Day && udoff.Month == doff.Month))
+                .Select(udoff => new DoctorDayOff() 
+                { 
+                    DoctorId = doctorId,
+                    Day = udoff.Day,
+                    Month = udoff.Month
+                })
+                .ToList();
+
+            var removeDaysOff = daysOff.Where(doff => !updatedDaysOff.Any(udoff => udoff.Day == doff.Day && udoff.Month == doff.Month)).ToList();
+            _context.DoctorsDaysOff.RemoveRange(removeDaysOff);
+
+            await _context.DoctorsDaysOff.AddRangeAsync(newDaysOff);
+            await _context.SaveChangesAsync();
         }
     }
 }

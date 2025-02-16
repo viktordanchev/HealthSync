@@ -23,6 +23,7 @@
         public static class Doctors
         {
             public const string RegisteredDoctor = "You are doctor now.";
+            public const string UpdatedDaysOff = "Days off updated successfully.";
         }
     }
 }
