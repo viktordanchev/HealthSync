@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import apiRequest from '../services/apiRequest';
 import Loading from '../components/Loading';
 import WeeklySchedule from '../components/doctorProfilePage/WeeklySchedule';
-import Daysoff from '../components/doctorProfilePage/Daysoff';
+import DaysOff from '../components/doctorProfilePage/DaysOff';
 import DoctorInfo from '../components/doctorProfilePage/DoctorInfo';
 
 function DoctorProfilePage() {
@@ -10,22 +10,25 @@ function DoctorProfilePage() {
     const [isLoadingOnReceive, setIsLoadingOnReceive] = useState(true);
     const [hospitals, setHospitals] = useState([]);
     const [specialties, setSpecialties] = useState([]);
+    const [daysOff, setDaysOff] = useState([]);
 
     useEffect(() => {
         const receiveData = async () => {
             try {
-                const [doctorData, hospitals, specialties] = await Promise.all([
+                const [doctorData, hospitals, specialties, daysOff] = await Promise.all([
                     apiRequest('doctors', 'getDoctorProfileInfo', undefined, localStorage.getItem('accessToken'), 'GET', false),
                     apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false),
-                    apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false)
+                    apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false),
+                    apiRequest('doctors', 'getDocotorDaysOff', undefined, localStorage.getItem('accessToken'), 'GET', false),
                 ]);
-
+                
                 let filteredHospitals = hospitals.filter(h => h.id !== doctorData.hospitalId);
                 let filteredSpecialties = specialties.filter(s => s.id !== doctorData.specialtyId);
 
                 setDoctorData(doctorData);
                 setHospitals(filteredHospitals);
                 setSpecialties(filteredSpecialties);
+                setDaysOff(daysOff);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -45,7 +48,7 @@ function DoctorProfilePage() {
                             doctorData={doctorData}
                             hospitals={hospitals}
                             specialties={specialties} />
-                        <Daysoff />
+                        <DaysOff data={daysOff} />
                     </div>
                     <WeeklySchedule weekDays={doctorData.weeklySchedule} />
                 </section>}

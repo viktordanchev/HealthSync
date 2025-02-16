@@ -1,12 +1,12 @@
-import React from 'react';
-import DaysoffCalendar from './DaysoffCalendar';
+﻿import React from 'react';
+import DaysOffCalendar from './DaysOffCalendar';
 
-function Daysoff() {
+function DaysOff({ data }) {
     return (
         <article className="w-1/3 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col justify-between space-y-4 text-center">
             <h2 className="text-3xl font-thin underline-thin text-gray-700 sm:text-2xl">Daysoff</h2>
             <div>
-                <DaysoffCalendar />
+                <DaysOffCalendar data={data} />
                 <p className="text-sm">Here you can set your days off or adjust your working hours.</p>
             </div>
             <div>
@@ -20,4 +20,4 @@ function Daysoff() {
     );
 }
 
-export default Daysoff;
+export default DaysOff;

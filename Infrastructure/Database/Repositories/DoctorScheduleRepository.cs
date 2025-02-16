@@ -60,6 +60,25 @@ namespace Infrastructure.Database.Repositories
             return monthlyDaysOff;
         }
 
+        public async Task<IEnumerable<DoctorDayOffModel>> GetAllDaysOffAsync(string userId)
+        {
+            var daysOff = await _context.DoctorsDaysOff
+                .AsNoTracking()
+                .Where(ddo => ddo.Doctor.IdentityId == userId)
+                .Select(ddo => new DoctorDayOffModel()
+                {
+                    Month = ddo.Month,
+                    Day = ddo.Day,
+                    isWorkDay = ddo.isWorkDay,
+                    WorkDayStart = ddo.WorkDayStart,
+                    WorkDayEnd = ddo.WorkDayEnd,
+                    MeetingTimeMinutes = ddo.MeetingTimeMinutes
+                })
+                .ToListAsync();
+
+            return daysOff;
+        }
+
         public async Task<DoctorMonthlyBusyDaysModel> GetMonthlyBusyDaysAsync(int doctorId, int month, int year)
         {
             var monthlyBusyDays = await _context.DoctorsWeekDays

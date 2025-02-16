@@ -71,7 +71,7 @@ namespace RestAPI.Controllers
             request.Date = request.Date.ToLocalTime();
 
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDayOffAsync(request.DoctorId, request.Date))
+                await _doctorScheduleService.IsDayValidAsync(request.DoctorId, request.Date))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
@@ -122,11 +122,18 @@ namespace RestAPI.Controllers
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> GetDoctorProfileInfo()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-
-            var doctorInfo = await _doctorService.GetDoctorPersonalInfoAsync(userId);
+            var doctorInfo = await _doctorService.GetDoctorPersonalInfoAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             return Ok(doctorInfo);
+        }
+
+        [HttpGet("getDocotorDaysOff")]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> GetDocotorDaysOff()
+        {
+            var daysOff = await _doctorScheduleService.GetAllDaysOffAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            return Ok(daysOff);
         }
     }
 }

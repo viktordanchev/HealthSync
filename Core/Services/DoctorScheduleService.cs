@@ -2,6 +2,7 @@
 using Core.DTOs.ResponseDtos.DoctorSchedule;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
+using Core.Models.DoctorSchedule;
 
 namespace Core.Services
 {
@@ -14,9 +15,9 @@ namespace Core.Services
             _repository = repository;
         }
 
-        public async Task<bool> IsDayOffAsync(int doctorId, DateTime date)
+        public async Task<bool> IsDayValidAsync(int doctorId, DateTime date)
         {
-            var daysOff = await GetDaysOffAsync(doctorId, date.Month);
+            var daysOff = await GetMonthlyDaysOffAsync(doctorId, date.Month);
             var busyDays = await GetBusyDaysAsync(doctorId, date.Month, date.Year);
             var isDayOff = daysOff.Contains(date) || busyDays.Contains(date) ? true : false;
         
@@ -44,7 +45,7 @@ namespace Core.Services
 
         public async Task<IEnumerable<MonthScheduleResponse>> GetMonthScheduleAsync(GetMonthScheduleRequest requestData)
         {
-            var daysOff = await GetDaysOffAsync(requestData.DoctorId, requestData.Month);
+            var daysOff = await GetMonthlyDaysOffAsync(requestData.DoctorId, requestData.Month);
             var busyDays = await GetBusyDaysAsync(requestData.DoctorId, requestData.Month, requestData.Year);
             var daysInMonth = DateTime.DaysInMonth(requestData.Year, requestData.Month);
             var monthSchedule = new List<MonthScheduleResponse>();
@@ -66,8 +67,13 @@ namespace Core.Services
         
             return monthSchedule;
         }
+
+        public async Task<IEnumerable<DoctorDayOffModel>> GetAllDaysOffAsync(string userId)
+        {
+            return await _repository.GetAllDaysOffAsync(userId);
+        }
         
-        private async Task<IEnumerable<DateTime>> GetDaysOffAsync(int doctorId, int month)
+        private async Task<IEnumerable<DateTime>> GetMonthlyDaysOffAsync(int doctorId, int month)
         {
             var monthlyDaysOff = await _repository.GetMonthlyDaysOffAsync(doctorId, month);
         

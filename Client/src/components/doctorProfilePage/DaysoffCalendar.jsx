@@ -1,33 +1,28 @@
 import React, { useState, useEffect } from 'react';
 
-function DaysoffCalendar() {
-    const [days, setDays] = useState([]);
+function DaysOffCalendar({ data }) {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-    const [daysOff, setDaysOff] = useState([]);
+    const [daysOff, setDaysOff] = useState(data);
+    const [days, setDays] = useState([]);
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     
     useEffect(() => {
-        generateDays(currentMonth, new Date().getFullYear());
-    }, [currentMonth]);
-
-    const generateDays = (month, year) => {
-        const firstDayOfMonth = new Date(year, month, 1);
-        const lastDayOfMonth = new Date(year, month + 1, 0);
-
+        const firstDayOfMonth = new Date(new Date().getFullYear(), currentMonth, 1);
+        const lastDayOfMonth = new Date(new Date().getFullYear(), currentMonth + 1, 0);
+        const startDay = (firstDayOfMonth.getDay() + 6) % 7;
         const daysInMonth = [];
 
-        const startDay = (firstDayOfMonth.getDay() + 6) % 7;
         for (let i = 0; i < startDay; i++) {
             daysInMonth.push(null);
         }
 
-        for (let date = 1; date <= lastDayOfMonth.getDate(); date++) {
-            daysInMonth.push({ date: new Date(year, month, date) });
+        for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
+            daysInMonth.push(day);
         }
 
         setDays(daysInMonth);
-    };
+    }, [currentMonth]);
 
     const handlePreviousMonth = () => {
         if (currentMonth === 0) {
@@ -45,12 +40,21 @@ function DaysoffCalendar() {
         }
     };
 
-    const handleSelectDate = (date) => {
+    const handleSelectDay = (day) => {
+        const dayOff =  {
+            month: currentMonth + 1,
+            day: day,
+            isWorkDay: false,
+            workDayStart: undefined,
+            workDayEnd: undefined,
+            meetingTimeMinutes: undefined
+        };
+
         setDaysOff(prev =>
-            prev.includes(date)
-                ? prev.filter(d => d !== date)
-                : [...prev, date]
-        );     
+            prev.some(doff => doff.month === currentMonth + 1 && doff.day === day)
+                ? prev.filter(doff => doff.month !== currentMonth + 1 && doff.day !== day)
+                : [...prev, dayOff]
+        );   
     };
 
     return (
@@ -68,11 +72,11 @@ function DaysoffCalendar() {
                     <p
                         className={`rounded-full flex items-center justify-center 
                     ${day ? 'cursor-pointer' : 'opacity-45 cursor-default'}
-                    ${day && daysOff.includes(day.date.getTime()) ? 'bg-blue-500 hover:bg-blue-300 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+                    ${day && daysOff.some(doff => doff.month === currentMonth + 1 && doff.day === day) ? 'bg-blue-500 hover:bg-blue-400 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
                         key={index}
-                        onClick={() => handleSelectDate(day.date.getTime())}
+                        onClick={() => handleSelectDay(day)}
                     >
-                        {day ? day.date.getDate() : ''}
+                        {day && day}
                     </p>
                 ))}
             </div>
@@ -80,4 +84,4 @@ function DaysoffCalendar() {
     );
 }
 
-export default DaysoffCalendar;
+export default DaysOffCalendar;
