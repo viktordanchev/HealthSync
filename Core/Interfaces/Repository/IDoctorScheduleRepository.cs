@@ -9,6 +9,7 @@ namespace Core.Interfaces.Repository
         Task<MonthlyDaysOffModel> GetMonthlyDaysOffAsync(int doctorId, int month);
         Task<IEnumerable<DayOffResponse>> GetAllDaysOffAsync(string userId);
         Task<MonthlyBusyDaysModel> GetMonthlyBusyDaysAsync(int doctorId, int month, int year);
-        Task UpdateDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> updatedDaysOff);
+        Task RemoveDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> daysOff);
+        Task AddDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> daysOff);
     }
 }

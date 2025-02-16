@@ -102,27 +102,30 @@ namespace Infrastructure.Database.Repositories
             return monthlyBusyDays;
         }
 
-        public async Task UpdateDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> updatedDaysOff)
+        public async Task RemoveDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> daysOff)
         {
-            var daysOff = await _context.DoctorsDaysOff
-                .AsNoTracking()
+            var daysOffInDb = await _context.DoctorsDaysOff
                 .Where(doff => doff.DoctorId == doctorId)
                 .ToListAsync();
 
-            var newDaysOff = updatedDaysOff
-                .Where(udoff => !daysOff.Any(doff => udoff.Day == doff.Day && udoff.Month == doff.Month))
-                .Select(udoff => new DoctorDayOff() 
-                { 
-                    DoctorId = doctorId,
-                    Day = udoff.Day,
-                    Month = udoff.Month
-                })
+            var daysOffToRemove = daysOffInDb
+                .Where(doff => daysOff.Any(r => r.Day == doff.Day && r.Month == doff.Month))
                 .ToList();
 
-            var removeDaysOff = daysOff.Where(doff => !updatedDaysOff.Any(udoff => udoff.Day == doff.Day && udoff.Month == doff.Month)).ToList();
-            _context.DoctorsDaysOff.RemoveRange(removeDaysOff);
+            _context.DoctorsDaysOff.RemoveRange(daysOffToRemove);
+            await _context.SaveChangesAsync();
+        }
 
-            await _context.DoctorsDaysOff.AddRangeAsync(newDaysOff);
+        public async Task AddDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> daysOff)
+        {
+            var daysOffToAdd = daysOff.Select(doff => new DoctorDayOff()
+            {
+                Day = doff.Day,
+                Month = doff.Month,
+                DoctorId = doctorId
+            });
+
+            await _context.DoctorsDaysOff.AddRangeAsync(daysOffToAdd);
             await _context.SaveChangesAsync();
         }
     }

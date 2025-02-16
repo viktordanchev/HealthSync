@@ -77,8 +77,23 @@ namespace Core.Services
         public async Task UpdateDaysOffAsync(string userId, IEnumerable<DayOffResponse> updatedDaysOff)
         {
             var doctorId = await _doctorsRepo.GetDoctorIdAsync(userId);
+            var daysOff = await _doctorScheduleRepo.GetAllDaysOffAsync(userId);
 
-            await _doctorScheduleRepo.UpdateDaysOffAsync(doctorId, updatedDaysOff);
+            var daysOffToAdd = updatedDaysOff
+                .Where(udoff => !daysOff.Any(doff => udoff.Day == doff.Day && udoff.Month == doff.Month))
+                .ToList();
+
+            if(daysOffToAdd.Any())
+            {
+                await _doctorScheduleRepo.AddDaysOffAsync(doctorId, daysOffToAdd);
+            }
+
+            var daysOffToRemove = daysOff.Where(doff => !updatedDaysOff.Any(udoff => udoff.Day == doff.Day && udoff.Month == doff.Month)).ToList();
+
+            if (daysOffToRemove.Any())
+            {
+                await _doctorScheduleRepo.RemoveDaysOffAsync(doctorId, daysOffToRemove);
+            }
         }
 
         private async Task<IEnumerable<DateTime>> GetMonthlyDaysOffAsync(int doctorId, int month)
