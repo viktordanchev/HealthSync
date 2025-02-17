@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import DaysOffCalendar from './DaysOffCalendar';
 import apiRequest from '../../services/apiRequest';
 import { useMessage } from '../../contexts/MessageContext';
@@ -8,6 +8,11 @@ function DaysOff({ data }) {
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
     const [daysOff, setDaysOff] = useState(data);
+    const [isChanged, setIsChanged] = useState(false);
+
+    useEffect(() => {
+        setIsChanged(JSON.stringify(daysOff) !== JSON.stringify(data));
+    }, [daysOff]);
 
     const handleSubmitChanges = async () => {
         try {
@@ -21,6 +26,8 @@ function DaysOff({ data }) {
         } finally {
             setIsLoading(false);
         }
+
+        setIsChanged(false);
     };
 
     return (
@@ -31,9 +38,16 @@ function DaysOff({ data }) {
                 <p className="text-sm">Here you can set your days off or adjust your working hours.</p>
             </div>
             <div>
-                <button className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded`}
+                <button className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded
+                    ${isChanged ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default'}`}
                     type="submit"
-                    onClick={handleSubmitChanges}>
+                    onClick={(e) => {
+                        if (!isChanged) {
+                            e.preventDefault();
+                        } else {
+                            handleSubmitChanges();
+                        }
+                    }}>
                     Save changes
                 </button>
             </div>
