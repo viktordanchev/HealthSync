@@ -1,8 +1,10 @@
-﻿using Core.DTOs.ResponseDtos.DoctorSchedule;
+﻿using Core.DTOs.RequestDtos.Doctors;
+using Core.DTOs.ResponseDtos.DoctorSchedule;
 using Core.Interfaces.Repository;
 using Core.Models.DoctorSchedule;
 using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using static Common.Constants;
 
 namespace Infrastructure.Database.Repositories
 {
@@ -41,27 +43,6 @@ namespace Infrastructure.Database.Repositories
             return dailySchedule;
         }
 
-        public async Task<MonthlyDaysOffModel> GetMonthlyDaysOffAsync(int doctorId, int month)
-        {
-            var monthlyDaysOff = await _context.Doctors
-                .AsNoTracking()
-                .Where(d => d.Id == doctorId)
-                .Select(d => new MonthlyDaysOffModel()
-                {
-                    DaysOff = d.DaysOff
-                        .Where(doff => doff.Month == month)
-                        .Select(doff => new DateTime(DateTime.Now.Year, doff.Month, doff.Day))
-                        .ToList(),
-                    WorkWeekDaysOff = d.WorkWeek
-                        .Where(wd => !wd.IsWorkDay)
-                        .Select(wd => wd.WeekDay)
-                        .ToList()
-                })
-                .FirstAsync();
-
-            return monthlyDaysOff;
-        }
-
         public async Task<IEnumerable<DayOffResponse>> GetAllDaysOffAsync(string userId)
         {
             var daysOff = await _context.DoctorsDaysOff
@@ -75,31 +56,6 @@ namespace Infrastructure.Database.Repositories
                 .ToListAsync();
 
             return daysOff;
-        }
-
-        public async Task<MonthlyBusyDaysModel> GetMonthlyBusyDaysAsync(int doctorId, int month, int year)
-        {
-            var monthlyBusyDays = await _context.DoctorsWeekDays
-            .AsNoTracking()
-            .Where(d => d.Id == doctorId)
-            .Select(d => new MonthlyBusyDaysModel()
-            {
-                AllMeetings = d.Doctor.Meetings
-                    .Where(m => m.DateAndTime.Month == month && m.DateAndTime.Year == year)
-                    .Select(m => m.DateAndTime),
-                WeekDays = d.Doctor.WorkWeek
-                    .Where(wk => wk.IsWorkDay)
-                    .Select(wk => new WorkDayModel()
-                    {
-                        WorkDayStart = wk.WorkDayStart,
-                        WorkDayEnd = wk.WorkDayEnd,
-                        WeekDay = wk.WeekDay,
-                        MeetingTimeMinutes = wk.MeetingTimeMinutes
-                    })
-            })
-            .FirstAsync();
-
-            return monthlyBusyDays;
         }
 
         public async Task RemoveDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> daysOff)
@@ -126,6 +82,67 @@ namespace Infrastructure.Database.Repositories
             });
 
             await _context.DoctorsDaysOff.AddRangeAsync(daysOffToAdd);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsDateValidAsync(int doctorId, DateTime date)
+        {
+            return !await _context.DoctorsDaysOff
+                .Join(_context.DoctorsWeekDays,
+                    ddoff => ddoff.DoctorId,
+                    dwd => dwd.DoctorId,
+                    (ddoff, dwd) => new { ddoff, dwd })
+                .Join(_context.DoctorsMeetings,
+                    result => result.ddoff.DoctorId,
+                    dm => dm.DoctorId,
+                    (result, dm) => new { result.ddoff, result.dwd, dm })
+                .Where(result => !result.dwd.IsWorkDay)
+                .AnyAsync(result => result.ddoff.DoctorId == doctorId
+                && result.ddoff.Day == date.Day
+                && result.ddoff.Month == date.Month
+                && result.dwd.WeekDay == date.DayOfWeek
+                && result.dm.DateAndTime == date);
+        }
+
+        public async Task<MonthlyUnavailableDaysModel> GetMonthlyUnavailableDaysAsync(GetMonthScheduleRequest requestData)
+        {
+            return await _context.Doctors
+                .Where(d => d.Id == requestData.DoctorId)
+                .Select(d => new MonthlyUnavailableDaysModel()
+                {
+                    DaysOff = d.DaysOff
+                        .Where(ddoff => ddoff.Month == requestData.Month)
+                        .Select(ddoff => new DateTime(requestData.Year, requestData.Month, ddoff.Day))
+                        .ToList(),
+                    BusyDays = d.Meetings
+                        .Where(m => m.DateAndTime.Month == requestData.Month && m.DateAndTime.Year == requestData.Year)
+                        .Select(m => m.DateAndTime)
+                        .ToList(),
+                    WeeklyDaysOff = d.WorkWeek
+                        .Where(ww => !ww.IsWorkDay)
+                        .Select(ww => ww.WeekDay)
+                        .ToList()
+                })
+            .FirstAsync();
+        }
+
+        public async Task UpdateWeeklySchedule(string userId, IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
+        {
+            var weekDays = await _context.DoctorsWeekDays
+                .Where(dwd => dwd.Doctor.IdentityId == userId
+                    && weeklySchedule.Any(d => d.WeekDay == dwd.WeekDay))
+                .ToListAsync();
+
+            foreach (var weekDay in weekDays)
+            {
+                var currentDay = weeklySchedule.First(d => d.WeekDay == weekDay.WeekDay);
+
+                weekDay.IsWorkDay = currentDay.IsWorkDay;
+                weekDay.WorkDayStart = currentDay.WorkDayStart;
+                weekDay.WorkDayEnd = currentDay.WorkDayEnd;
+                weekDay.MeetingTimeMinutes = currentDay.MeetingTimeMinutes;
+            }
+
             await _context.SaveChangesAsync();
         }
     }

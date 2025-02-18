@@ -24,6 +24,7 @@
         {
             public const string RegisteredDoctor = "You are doctor now.";
             public const string UpdatedDaysOff = "Days off updated successfully.";
+            public const string UpdatedWeeklySchedule = "Weekly schedule updated successfully.";
         }
     }
 }

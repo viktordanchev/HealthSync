@@ -1,5 +1,4 @@
 ﻿using Core.DTOs.RequestDtos.Doctors;
-using Core.DTOs.ResponseDtos.DoctorSchedule;
 using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -72,7 +71,7 @@ namespace RestAPI.Controllers
             request.Date = request.Date.ToLocalTime();
 
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDayValidAsync(request.DoctorId, request.Date))
+                await _doctorScheduleService.IsDateValidAsync(request.DoctorId, request.Date))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
@@ -137,13 +136,13 @@ namespace RestAPI.Controllers
             return Ok(daysOff);
         }
 
-        [HttpPost("updateDoctorDaysOff")]
+        [HttpPost("updateWeeklySchedule")]
         [Authorize(Roles = "Doctor")]
-        public async Task<IActionResult> UpdateDoctorDaysOff([FromBody] IEnumerable<DayOffResponse> daysOff)
+        public async Task<IActionResult> UpdateWeeklySchedule([FromBody] IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
         {
-            await _doctorScheduleService.UpdateDaysOffAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!, daysOff);
+            await _doctorScheduleService.UpdateWeeklySchedule(User.FindFirstValue(ClaimTypes.NameIdentifier)!, weeklySchedule);
 
-            return Ok(new { Message = UpdatedDaysOff });
+            return Ok(new { Message = UpdatedWeeklySchedule });
         }
     }
 }

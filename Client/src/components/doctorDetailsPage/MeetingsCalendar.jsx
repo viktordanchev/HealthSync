@@ -19,12 +19,12 @@ const MeetingsCalendar = ({ doctorId }) => {
                 month: currentMonth + 1,
                 year: currentYear
             }
-
-            setIsLoading(true);
-
+            
             try {
-                const response = await apiRequest('doctors', 'getMonthSchedule', dto, undefined, 'POST', false);
+                setIsLoading(true);
 
+                const response = await apiRequest('doctors', 'getMonthSchedule', dto, undefined, 'POST', false);
+                
                 if (response.length > 0) {
                     const dates = response.map(item => ({
                         ...item,
@@ -42,7 +42,7 @@ const MeetingsCalendar = ({ doctorId }) => {
         };
 
         receiveData();
-    }, [currentYear, currentMonth]);
+    }, [currentMonth]);
 
     const generateCalendar = (year, month) => {
         const firstDayOfMonth = new Date(year, month, 1);
@@ -57,7 +57,7 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     const handlePreviousMonth = () => {
-        if (currentMonth < 0) {
+        if (currentMonth === 0) {
             setCurrentMonth(11);
             setCurrentYear(currentYear - 1);
         } else {
@@ -66,7 +66,7 @@ const MeetingsCalendar = ({ doctorId }) => {
     };
 
     const handleNextMonth = () => {
-        if (currentMonth > 11) {
+        if (currentMonth === 11) {
             setCurrentMonth(0);
             setCurrentYear(currentYear + 1);
         } else {

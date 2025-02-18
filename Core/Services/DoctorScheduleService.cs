@@ -16,13 +16,9 @@ namespace Core.Services
             _doctorsRepo = doctorsRepo;
         }
 
-        public async Task<bool> IsDayValidAsync(int doctorId, DateTime date)
+        public async Task<bool> IsDateValidAsync(int doctorId, DateTime date)
         {
-            var daysOff = await GetMonthlyDaysOffAsync(doctorId, date.Month);
-            var busyDays = await GetBusyDaysAsync(doctorId, date.Month, date.Year);
-            var isDayOff = daysOff.Contains(date) || busyDays.Contains(date) ? true : false;
-        
-            return isDayOff;
+            return await _doctorScheduleRepo.IsDateValidAsync(doctorId, date);
         }
 
         public async Task<IEnumerable<string>> GetAvailableMeetingsAsync(GetAvailableMeetingHours requestData)
@@ -46,26 +42,23 @@ namespace Core.Services
 
         public async Task<IEnumerable<MonthScheduleResponse>> GetMonthScheduleAsync(GetMonthScheduleRequest requestData)
         {
-            var daysOff = await GetMonthlyDaysOffAsync(requestData.DoctorId, requestData.Month);
-            var busyDays = await GetBusyDaysAsync(requestData.DoctorId, requestData.Month, requestData.Year);
+            var unavailableDays = await _doctorScheduleRepo.GetMonthlyUnavailableDaysAsync(requestData);
             var daysInMonth = DateTime.DaysInMonth(requestData.Year, requestData.Month);
             var monthSchedule = new List<MonthScheduleResponse>();
-        
-            if (daysOff.Count() > 0)
+
+            if(!unavailableDays.WeeklyDaysOff.Any())
             {
                 for (int day = 1; day <= daysInMonth; day++)
                 {
                     var date = new DateTime(requestData.Year, requestData.Month, day);
-        
-                    var isAvailable =
-                        daysOff.Contains(date) ||
-                        busyDays.Contains(date)
-                        ? false : true;
-        
+                    var isAvailable = !(unavailableDays.BusyDays.Contains(date) ||
+                        unavailableDays.DaysOff.Contains(date) ||
+                        unavailableDays.WeeklyDaysOff.Contains(date.DayOfWeek));
+
                     monthSchedule.Add(new MonthScheduleResponse(date, isAvailable));
                 }
             }
-        
+
             return monthSchedule;
         }
 
@@ -73,7 +66,7 @@ namespace Core.Services
         {
             return await _doctorScheduleRepo.GetAllDaysOffAsync(userId);
         }
-        
+
         public async Task UpdateDaysOffAsync(string userId, IEnumerable<DayOffResponse> updatedDaysOff)
         {
             var doctorId = await _doctorsRepo.GetDoctorIdAsync(userId);
@@ -83,7 +76,7 @@ namespace Core.Services
                 .Where(udoff => !daysOff.Any(doff => udoff.Day == doff.Day && udoff.Month == doff.Month))
                 .ToList();
 
-            if(daysOffToAdd.Any())
+            if (daysOffToAdd.Any())
             {
                 await _doctorScheduleRepo.AddDaysOffAsync(doctorId, daysOffToAdd);
             }
@@ -96,46 +89,9 @@ namespace Core.Services
             }
         }
 
-        private async Task<IEnumerable<DateTime>> GetMonthlyDaysOffAsync(int doctorId, int month)
+        public async Task UpdateWeeklySchedule(string userId, IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
         {
-            var monthlyDaysOff = await _doctorScheduleRepo.GetMonthlyDaysOffAsync(doctorId, month);
-        
-            var firstDateOfMonth = new DateTime(DateTime.Now.Year, month, 1);
-            var lastDateOfMonth = firstDateOfMonth.AddMonths(1).AddDays(-1);
-        
-            var weeklyDaysOffDates = Enumerable.Range(0, (lastDateOfMonth - firstDateOfMonth).Days + 1)
-                             .Select(day => firstDateOfMonth.AddDays(day))
-                             .Where(date => monthlyDaysOff.WorkWeekDaysOff.Contains(date.DayOfWeek))
-                             .ToList();
-        
-            var datesOffResult = new List<DateTime>();
-            datesOffResult.AddRange(monthlyDaysOff.DaysOff);
-            datesOffResult.AddRange(weeklyDaysOffDates);
-        
-            return datesOffResult;
-        }
-        
-        private async Task<IEnumerable<DateTime>> GetBusyDaysAsync(int doctorId, int month, int year)
-        {
-            var monthlyBusyDays = await _doctorScheduleRepo.GetMonthlyBusyDaysAsync(doctorId, month, year);
-        
-            var meetingDays = monthlyBusyDays.AllMeetings
-                .Select(am => am.Date)
-                .ToHashSet();
-        
-            foreach (var meetingDay in meetingDays)
-            {
-                var allMeetingsByDay = monthlyBusyDays.AllMeetings.Where(am => am.Date == meetingDay).Count();
-                var dayOfWeek = monthlyBusyDays.WeekDays.FirstOrDefault(ww => ww.WeekDay == meetingDay.DayOfWeek);
-                var count = (dayOfWeek.WorkDayEnd - dayOfWeek.WorkDayStart).TotalMinutes / dayOfWeek.MeetingTimeMinutes + 1;
-        
-                if (allMeetingsByDay != count)
-                {
-                    meetingDays.Remove(meetingDay);
-                }
-            }
-        
-            return meetingDays;
+            await _doctorScheduleRepo.UpdateWeeklySchedule(userId, weeklySchedule);
         }
     }
 }

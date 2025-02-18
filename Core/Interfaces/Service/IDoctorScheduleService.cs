@@ -5,10 +5,11 @@ namespace Core.Interfaces.Service
 {
     public interface IDoctorScheduleService
     {
-        Task<bool> IsDayValidAsync(int doctorId, DateTime date);
+        Task<bool> IsDateValidAsync(int doctorId, DateTime date);
         Task<IEnumerable<string>> GetAvailableMeetingsAsync(GetAvailableMeetingHours requestData);
         Task<IEnumerable<MonthScheduleResponse>> GetMonthScheduleAsync(GetMonthScheduleRequest requestData);
         Task<IEnumerable<DayOffResponse>> GetAllDaysOffAsync(string userId);
         Task UpdateDaysOffAsync(string userId, IEnumerable<DayOffResponse> updatedDaysOff);
+        Task UpdateWeeklySchedule(string userId, IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule);
     }
 }
