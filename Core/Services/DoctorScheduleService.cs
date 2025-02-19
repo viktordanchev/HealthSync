@@ -16,14 +16,14 @@ namespace Core.Services
             _doctorsRepo = doctorsRepo;
         }
 
-        public async Task<bool> IsDateValidAsync(int doctorId, DateTime date)
+        public async Task<bool> IsDateUnavailableAsync(int doctorId, DateTime date)
         {
-            return await _doctorScheduleRepo.IsDateValidAsync(doctorId, date);
+            return await _doctorScheduleRepo.IsDateUnavailableAsync(doctorId, date);
         }
 
-        public async Task<IEnumerable<string>> GetAvailableMeetingsAsync(GetAvailableMeetingHours requestData)
+        public async Task<IEnumerable<string>> GetAvailableMeetingsAsync(int doctorId, DateTime date)
         {
-            var dailySchedule = await _doctorScheduleRepo.GetDailyScheduleAsync(requestData.DoctorId, requestData.Date);
+            var dailySchedule = await _doctorScheduleRepo.GetDailyScheduleAsync(doctorId, date);
 
             var availableMeetings = new List<string>();
 
@@ -46,7 +46,7 @@ namespace Core.Services
             var daysInMonth = DateTime.DaysInMonth(requestData.Year, requestData.Month);
             var monthSchedule = new List<MonthScheduleResponse>();
 
-            if(!unavailableDays.WeeklyDaysOff.Any())
+            if(unavailableDays.WeeklyDaysOff.Any())
             {
                 for (int day = 1; day <= daysInMonth; day++)
                 {

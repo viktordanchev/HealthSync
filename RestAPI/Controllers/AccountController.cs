@@ -157,7 +157,7 @@ namespace HealthSync.Server.Controllers
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
 
-            if (request.CurrentPassword == request.NewPassword)
+            if (!string.IsNullOrEmpty(request.CurrentPassword) && request.CurrentPassword == request.NewPassword)
             {
                 return BadRequest(new { Error = SamePassword });
             }

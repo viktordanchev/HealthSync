@@ -44,5 +44,24 @@ namespace Core.Services
 
             return isMeetingScheduled;
         }
+
+        public async Task<IEnumerable<DailyMeetingsResponse>> GetDoctorMeetingsAsync(string userId)
+        {
+            var allMeetings = await _meetingsRepo.GetDoctorMeetingsAsync(userId);
+
+            var dates = allMeetings.Select(d => d.DateAndTime.Date).ToHashSet();
+            var result = new List<DailyMeetingsResponse>(); 
+
+            foreach (var date in dates)
+            {
+                result.Add(new DailyMeetingsResponse() 
+                { 
+                    Date = date.ToString("dd.MM.yyyy"),
+                    DailyMeetings = allMeetings.Where(m => m.DateAndTime.Date == date)
+                });
+            }
+
+            return result;
+        }
     }
 }

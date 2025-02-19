@@ -4,7 +4,6 @@ using Core.Interfaces.Repository;
 using Core.Models.DoctorSchedule;
 using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using static Common.Constants;
 
 namespace Infrastructure.Database.Repositories
 {
@@ -85,23 +84,15 @@ namespace Infrastructure.Database.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> IsDateValidAsync(int doctorId, DateTime date)
+        public async Task<bool> IsDateUnavailableAsync(int doctorId, DateTime date)
         {
-            return !await _context.DoctorsDaysOff
-                .Join(_context.DoctorsWeekDays,
-                    ddoff => ddoff.DoctorId,
-                    dwd => dwd.DoctorId,
-                    (ddoff, dwd) => new { ddoff, dwd })
-                .Join(_context.DoctorsMeetings,
-                    result => result.ddoff.DoctorId,
-                    dm => dm.DoctorId,
-                    (result, dm) => new { result.ddoff, result.dwd, dm })
-                .Where(result => !result.dwd.IsWorkDay)
-                .AnyAsync(result => result.ddoff.DoctorId == doctorId
-                && result.ddoff.Day == date.Day
-                && result.ddoff.Month == date.Month
-                && result.dwd.WeekDay == date.DayOfWeek
-                && result.dm.DateAndTime == date);
+            return await _context.Doctors
+                .Where(d => d.Id == doctorId)
+                .AnyAsync(d => d.DaysOff.Any(ddoff => ddoff.Day == date.Day && ddoff.Month == date.Month)
+                || d.Meetings.Any(m => m.DateAndTime == date)
+                || d.WorkWeek
+                    .Where(wd => !wd.IsWorkDay)
+                    .Any(wd => wd.WeekDay == date.DayOfWeek));
         }
 
         public async Task<MonthlyUnavailableDaysModel> GetMonthlyUnavailableDaysAsync(GetMonthScheduleRequest requestData)

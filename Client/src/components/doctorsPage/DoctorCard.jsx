@@ -13,7 +13,7 @@ function DoctorCard({ doctor }) {
         >
             <img
                 src={doctor.imgUrl ? doctor.imgUrl : doctorProfile}
-                className="rounded-full object-cover w-20 h-20"
+                className="rounded-full object-cover w-20 h-20 border-4 border-zinc-700"
             />
             <div className="text-center md:text-base sm:text-base">
                 <p>{doctor.name}</p>

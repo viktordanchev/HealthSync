@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react';
 import apiRequest from '../services/apiRequest';
 import Loading from '../components/Loading';
 import MeetingCard from '../components/userMeetingsPage/MeetingCard';
-import jwtDecoder from '../services/jwtDecoder';
 
 function UserMeetingsPage() {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [isDeleted, setIsDeleted] = useState(false);
     const [meetings, setMeetings] = useState([]);
 
     useEffect(() => {
         const receiveData = async () => {
-            setIsLoading(true);
-
             try {
-                const { userId } = jwtDecoder();
+                setIsLoading(true);
 
-                const response = await apiRequest('meetings', 'getUserMeetings', userId, localStorage.getItem('accessToken'), 'POST', false);
+                const response = await apiRequest('meetings', 'getUserMeetings', undefined, localStorage.getItem('accessToken'), 'GET', false);
 
                 setMeetings(response);
             } catch (error) {

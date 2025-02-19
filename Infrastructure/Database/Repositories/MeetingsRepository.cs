@@ -20,7 +20,7 @@ namespace Infrastructure.Database.Repositories
             var meeting = new DoctorMeeting()
             {
                 DoctorId = requestData.DoctorId,
-                DateAndTime = requestData.DateAndTime,
+                DateAndTime = DateTime.Parse(requestData.DateAndTime),
                 PatientId = requestData.PatientId
             };
 
@@ -69,6 +69,22 @@ namespace Infrastructure.Database.Repositories
             var meeting = await _context.DoctorsMeetings.FirstOrDefaultAsync(m => m.PatientId == patientId && m.DoctorId == doctorId);
 
             return meeting != null;
+        }
+
+        public async Task<IEnumerable<DoctorMeetingResponse>> GetDoctorMeetingsAsync(string userId)
+        {
+            return await _context.DoctorsMeetings
+                .AsNoTracking()
+                .Where(dm => dm.Doctor.IdentityId == userId)
+                .Select(dm => new DoctorMeetingResponse() 
+                {
+                    Id = dm.Id,
+                    DateAndTime = dm.DateAndTime,
+                    PatientName = $"{dm.Patient.FirstName} {dm.Patient.LastName}",
+                    PatientPhoneNumber = dm.Patient.PhoneNumber
+                })
+                .OrderBy(dm => dm.DateAndTime)
+                .ToListAsync();
         }
     }
 }

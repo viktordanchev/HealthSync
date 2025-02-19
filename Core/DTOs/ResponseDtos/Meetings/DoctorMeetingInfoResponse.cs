@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace Core.DTOs.ResponseDtos.Meetings
+﻿namespace Core.DTOs.ResponseDtos.Meetings
 {
     public class DoctorMeetingInfoResponse
     {

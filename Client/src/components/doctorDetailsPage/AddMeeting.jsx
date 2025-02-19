@@ -7,6 +7,7 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import Loading from '../Loading';
 import { useMessage } from '../../contexts/MessageContext';
 import jwtDecoder from '../../services/jwtDecoder';
+import { format } from 'date-fns';
 
 function AddMeeting({ doctorId, date, setDate }) {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ function AddMeeting({ doctorId, date, setDate }) {
         const receiveData = async () => {
             const dto = {
                 doctorId: doctorId,
-                date: date
+                date: format(date, 'yyyy-MM-dd')
             };
             
             try {
@@ -68,8 +69,8 @@ function AddMeeting({ doctorId, date, setDate }) {
 
         const dto = {
             doctorId: doctorId,
-            date: date,
-            userId: userId
+            dateAndTime: format(date, 'yyyy-MM-dd HH:mm'),
+            patientId: userId
         };
         
         try {

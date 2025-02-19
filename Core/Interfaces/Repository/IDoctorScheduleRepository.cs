@@ -10,7 +10,7 @@ namespace Core.Interfaces.Repository
         Task<IEnumerable<DayOffResponse>> GetAllDaysOffAsync(string userId);
         Task RemoveDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> daysOff);
         Task AddDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> daysOff);
-        Task<bool> IsDateValidAsync(int doctorId, DateTime date);
+        Task<bool> IsDateUnavailableAsync(int doctorId, DateTime date);
         Task<MonthlyUnavailableDaysModel> GetMonthlyUnavailableDaysAsync(GetMonthScheduleRequest requestData);
         Task UpdateWeeklySchedule(string userId, IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule);
     }

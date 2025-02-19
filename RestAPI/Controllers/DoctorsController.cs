@@ -44,8 +44,8 @@ namespace RestAPI.Controllers
             return Ok(doctors);
         }
 
-        [HttpPost("getDoctorDetails")]
-        public async Task<IActionResult> GetDoctorDetails([FromBody] int doctorId)
+        [HttpPost("getDetails")]
+        public async Task<IActionResult> GetDetails([FromBody] int doctorId)
         {
             if (!await _doctorService.IsDoctorExistAsync(doctorId))
             {
@@ -68,15 +68,15 @@ namespace RestAPI.Controllers
         [HttpPost("getAvailableMeetingHours")]
         public async Task<IActionResult> GetAvailableMeetingHours([FromBody] GetAvailableMeetingHours request)
         {
-            request.Date = request.Date.ToLocalTime();
+            var dateParsed = DateTime.Parse(request.Date);
 
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDateValidAsync(request.DoctorId, request.Date))
+                await _doctorScheduleService.IsDateUnavailableAsync(request.DoctorId, dateParsed))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
             
-            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request);
+            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, dateParsed);
 
             return Ok(times);
         }
@@ -118,18 +118,18 @@ namespace RestAPI.Controllers
                 });
         }
 
-        [HttpGet("getDoctorProfileInfo")]
+        [HttpGet("getProfileInfo")]
         [Authorize(Roles = "Doctor")]
-        public async Task<IActionResult> GetDoctorProfileInfo()
+        public async Task<IActionResult> GetProfileInfo()
         {
             var doctorInfo = await _doctorService.GetDoctorPersonalInfoAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             return Ok(doctorInfo);
         }
 
-        [HttpGet("getDocotorDaysOff")]
+        [HttpGet("getDaysOff")]
         [Authorize(Roles = "Doctor")]
-        public async Task<IActionResult> GetDocotorDaysOff()
+        public async Task<IActionResult> GetDaysOff()
         {
             var daysOff = await _doctorScheduleService.GetAllDaysOffAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 

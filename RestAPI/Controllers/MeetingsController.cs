@@ -36,8 +36,10 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> AddDoctorMeeting([FromBody] AddMeetingRequest request)
         {
+            var dateAndTimeParsed = DateTime.Parse(request.DateAndTime);
+            
             if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDateValidAsync(request.DoctorId, request.DateAndTime))
+                await _doctorScheduleService.IsDateUnavailableAsync(request.DoctorId, dateAndTimeParsed))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
@@ -56,12 +58,7 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserMeetings()
         {
-            if (!await _userService.IsUserExistAsync(User.FindFirstValue(ClaimTypes.Email)))
-            {
-                return BadRequest(new { ServerError = InvalidRequest });
-            }
-
-            var meetings = await _meetingsService.GetUserMeetingsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var meetings = await _meetingsService.GetUserMeetingsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             return Ok(meetings);
         }
@@ -78,6 +75,15 @@ namespace RestAPI.Controllers
             await _meetingsService.DeleteMeetingAsync(meetingId);
 
             return Ok(new { Message = DeletedMeeting });
+        }
+
+        [HttpGet("getDoctorMeetings")]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> GetDoctorMeetings()
+        {
+            var meetings = await _meetingsService.GetDoctorMeetingsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            return Ok(meetings);
         }
     }
 }

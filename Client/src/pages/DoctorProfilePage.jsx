@@ -16,10 +16,10 @@ function DoctorProfilePage() {
         const receiveData = async () => {
             try {
                 const [doctorData, hospitals, specialties, daysOff] = await Promise.all([
-                    apiRequest('doctors', 'getDoctorProfileInfo', undefined, localStorage.getItem('accessToken'), 'GET', false),
+                    apiRequest('doctors', 'getProfileInfo', undefined, localStorage.getItem('accessToken'), 'GET', false),
                     apiRequest('hospitals', 'getHospitals', undefined, undefined, 'GET', false),
                     apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false),
-                    apiRequest('doctors', 'getDocotorDaysOff', undefined, localStorage.getItem('accessToken'), 'GET', false),
+                    apiRequest('doctors', 'getDaysOff', undefined, localStorage.getItem('accessToken'), 'GET', false),
                 ]);
                 
                 let filteredHospitals = hospitals.filter(h => h.id !== doctorData.hospitalId);

@@ -8,7 +8,7 @@ namespace Core.DTOs.RequestDtos.Meetings
         public int DoctorId { get; set; }
 
         [Required]
-        public DateTime DateAndTime { get; set; }
+        public string DateAndTime { get; set; } = null!;
 
         [Required]
         public string PatientId { get; set; } = null!;

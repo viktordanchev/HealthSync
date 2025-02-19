@@ -49,9 +49,7 @@ namespace Core.Services
 
         public async Task<bool> IsDoctorExistAsync(int doctorId)
         {
-            var isDoctorExist = await _repository.IsDoctorExistAsync(doctorId);
-
-            return isDoctorExist;
+            return await _repository.IsDoctorExistAsync(doctorId);
         }
 
         public async Task AddDoctorAsync(BecomeDoctorRequest requestData, string userId)

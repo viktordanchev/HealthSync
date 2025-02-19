@@ -10,5 +10,6 @@ namespace Core.Interfaces.Repository
         Task DeleteMeetingAsync(int meetingId);
         Task<bool> IsMeetingExistAsync(int meetingId);
         Task<bool> IsMeetingScheduled(string patientId, int doctorId);
+        Task<IEnumerable<DoctorMeetingResponse>> GetDoctorMeetingsAsync(string userId);
     }
 }
