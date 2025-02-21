@@ -10,7 +10,7 @@ function WorkSchedulePage() {
         const receiveData = async () => {
             try {
                 const response = await apiRequest('meetings', 'getDoctorMeetings', undefined, localStorage.getItem('accessToken'), 'GET', false);
-                console.log(response);
+                
                 setMeetings(response);
             } catch (error) {
                 console.error(error);
@@ -29,7 +29,9 @@ function WorkSchedulePage() {
                     {meetings.length === 0 ?
                         <div className="text-3xl text-center">There are no active meetings.</div> :
                         <>
-                            { }
+                            {meetings.map((meeting) => (
+                                <div className="border-b-2 border-maincolor">{meeting.date}</div>
+                            ))}
                         </>}
                 </section>}
         </>
