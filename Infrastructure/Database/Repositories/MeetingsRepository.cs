@@ -71,19 +71,19 @@ namespace Infrastructure.Database.Repositories
             return meeting != null;
         }
 
-        public async Task<IEnumerable<DoctorMeetingResponse>> GetDoctorMeetingsAsync(string userId)
+        public async Task<IEnumerable<DailyMeetingResponse>> GetDoctorMeetingsAsync(string userId)
         {
             return await _context.DoctorsMeetings
                 .AsNoTracking()
                 .Where(dm => dm.Doctor.IdentityId == userId)
-                .Select(dm => new DoctorMeetingResponse() 
+                .OrderBy(dm => dm.DateAndTime)
+                .Select(dm => new DailyMeetingResponse() 
                 {
                     Id = dm.Id,
                     DateAndTime = dm.DateAndTime,
                     PatientName = $"{dm.Patient.FirstName} {dm.Patient.LastName}",
                     PatientPhoneNumber = dm.Patient.PhoneNumber
                 })
-                .OrderBy(dm => dm.DateAndTime)
                 .ToListAsync();
         }
     }

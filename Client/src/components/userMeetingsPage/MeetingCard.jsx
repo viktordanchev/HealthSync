@@ -45,8 +45,8 @@ function MeetingCard({ meeting, setIsDeleted }) {
             <div className="flex space-x-4 sm:flex-col sm:space-x-0 sm:space-y-4">
                 <div className="flex flex-col items-center">
                     <img
+                        className="object-cover w-24 h-24 rounded-full border-4 border-zinc-700"
                         src={meeting.imgUrl ? meeting.imgUrl : '/profile.jpg'}
-                        className="object-cover w-24 h-24 rounded-full"
                     />
                     <p className="text-center text-xl">{meeting.name}</p>
                 </div>

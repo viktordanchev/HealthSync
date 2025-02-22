@@ -45,16 +45,16 @@ namespace Core.Services
             return isMeetingScheduled;
         }
 
-        public async Task<IEnumerable<DailyMeetingsResponse>> GetDoctorMeetingsAsync(string userId)
+        public async Task<IEnumerable<DoctorMeetingResponse>> GetDoctorMeetingsAsync(string userId)
         {
             var allMeetings = await _meetingsRepo.GetDoctorMeetingsAsync(userId);
 
             var dates = allMeetings.Select(d => d.DateAndTime.Date).ToHashSet();
-            var result = new List<DailyMeetingsResponse>(); 
+            var result = new List<DoctorMeetingResponse>(); 
 
             foreach (var date in dates)
             {
-                result.Add(new DailyMeetingsResponse() 
+                result.Add(new DoctorMeetingResponse() 
                 { 
                     Date = date.ToString("dd.MM.yyyy"),
                     DailyMeetings = allMeetings.Where(m => m.DateAndTime.Date == date)

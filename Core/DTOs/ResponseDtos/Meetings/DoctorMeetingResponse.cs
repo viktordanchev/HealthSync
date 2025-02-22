@@ -2,9 +2,12 @@
 {
     public class DoctorMeetingResponse
     {
-        public int Id { get; set; }
-        public DateTime DateAndTime { get; set; }
-        public string PatientName { get; set; } = null!;
-        public string? PatientPhoneNumber { get; set; }
+        public DoctorMeetingResponse()
+        {
+            DailyMeetings = new List<DailyMeetingResponse>();
+        }
+
+        public string Date { get; set; } = null!;
+        public IEnumerable<DailyMeetingResponse> DailyMeetings { get; set; }
     }
 }
