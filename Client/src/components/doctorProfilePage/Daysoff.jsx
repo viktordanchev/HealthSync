@@ -31,7 +31,7 @@ function DaysOff({ data }) {
     };
 
     return (
-        <article className="w-1/3 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col justify-between space-y-4 text-center">
+        <article className="w-1/3 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col justify-between space-y-4 text-center lg:w-full md:w-full sm:w-full">
             <h2 className="text-3xl font-thin underline-thin text-gray-700 sm:text-2xl">Daysoff</h2>
             <div>
                 <DaysOffCalendar daysOff={daysOff} setDaysOff={setDaysOff} />

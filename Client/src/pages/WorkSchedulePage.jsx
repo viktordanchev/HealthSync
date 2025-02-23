@@ -36,13 +36,13 @@ function WorkSchedulePage() {
     return (
         <>
             {isLoading ? <Loading type={'big'} /> :
-                <section className="px-64 w-full text-gray-700 space-y-4 flex flex-col justify-center items-center">
+                <section className="px-64 w-full text-gray-700 space-y-4 flex flex-col justify-center items-center lg:px-32 md:px-8 sm:px-0">
                     {meetings.length === 0 ?
-                        <div className="text-3xl text-center">There are no active meetings.</div> :
+                        <div className="text-3xl text-center md:text-2xl sm:text-xl">There are no active meetings.</div> :
                         <>
                             {meetings.map((meeting, index) => (
                                 <div key={index} className="w-full flex flex-col space-y-2">
-                                    <div className="cursor-pointer flex justify-between border-b-2 border-zinc-700 text-2xl"
+                                    <div className="cursor-pointer flex justify-between border-b-2 border-zinc-700 text-2xl sm:text-xl"
                                         onClick={() => handleOpen(meeting.date)}>
                                         <p>{meeting.date}</p>
                                         <p><FontAwesomeIcon icon={openDates[meeting.date] ? faCaretUp : faCaretDown} /></p>

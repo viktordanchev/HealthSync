@@ -48,7 +48,7 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
     };
 
     return (
-        <article className="w-2/3 space-y-3 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl sm:text-sm">
+        <article className="w-2/3 space-y-3 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl lg:w-full md:w-full sm:w-full sm:text-sm">
             <div className="flex flex-col items-center">
                 <ProfilePhoto
                     changePhoto={(photo) => handlePhotoChange(photo)}

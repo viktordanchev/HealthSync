@@ -32,7 +32,7 @@ function HeaderResponsive({ isMenuOpen, isFixed, isAuthenticated, userName, user
                     <p className="text-center">{userName}</p>
                     <ul className="flex flex-col items-center space-y-3">
                         <li>
-                            <a href={`${userRoles.includes('Doctor') ? '/home' : '/becomeDoctor'}`}>
+                            <a href={`${userRoles.includes('Doctor') ? '/doctorProfile' : '/becomeDoctor'}`}>
                                 {`${userRoles.includes('Doctor') ? 'Doctor profile' : 'Become a Doctor'}`}
                             </a>
                         </li>

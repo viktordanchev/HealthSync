@@ -42,8 +42,8 @@ function DoctorProfilePage() {
     return (
         <>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
-                <section className="space-y-6 text-gray-700 mx-20 md:flex-col md:space-x-0 md:space-y-6 sm:flex-col sm:space-x-0 sm:space-y-6 sm:w-full">
-                    <div className="flex space-x-6">
+                <section className="space-y-6 text-gray-700 mx-20 md:mx-8 md:flex-col md:space-x-0 md:space-y-6 sm:mx-0 sm:flex-col sm:space-x-0 sm:space-y-6">
+                    <div className="flex space-x-6 lg:flex-col lg:space-x-0 lg:space-y-6 md:flex-col md:space-x-0 md:space-y-6 sm:flex-col sm:space-x-0 sm:space-y-6">
                         <DoctorInfo
                             doctorData={doctorData}
                             hospitals={hospitals}
