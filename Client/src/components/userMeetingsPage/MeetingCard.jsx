@@ -36,7 +36,7 @@ function MeetingCard({ meeting, setIsDeleted }) {
     };
 
     return (
-        <div className="bg-zinc-400 rounded-xl m-2 p-4 bg-opacity-75 shadow-xl shadow-gray-300 space-y-3 sm:m-0 sm:mb-4 sm:w-full">
+        <div className="border border-zinc-500 bg-zinc-400 rounded-xl m-2 p-4 bg-opacity-75 shadow-xl shadow-gray-300 space-y-3 sm:m-0 sm:mb-4 sm:w-full">
             <div className="text-center text-xl flex justify-center items-center space-x-2">
                 <p className="font-bold">Meeting:</p>
                 <p>{format(meeting.dateAndTime, 'dd.MM.yyyy HH:mm')}</p>
@@ -45,7 +45,7 @@ function MeetingCard({ meeting, setIsDeleted }) {
             <div className="flex space-x-4 sm:flex-col sm:space-x-0 sm:space-y-4">
                 <div className="flex flex-col items-center">
                     <img
-                        className="object-cover w-24 h-24 rounded-full border-4 border-zinc-700"
+                        className="object-cover w-24 h-24 rounded-full border-2 border-zinc-700"
                         src={meeting.imgUrl ? meeting.imgUrl : '/profile.jpg'}
                     />
                     <p className="text-center text-xl">{meeting.name}</p>

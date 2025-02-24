@@ -3,9 +3,9 @@ import { format } from 'date-fns';
 
 function DailySchedule({ data }) {
     return (
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center bg-maincolor rounded-xl p-4 bg-opacity-25 border border-zinc-500">
             {data.map((meeting) => (
-                <div key={meeting.id} className="bg-zinc-400 rounded-xl m-2 p-4 bg-opacity-75 shadow-xl shadow-gray-300 space-y-2 text-lg sm:text-base sm:m-0 sm:mb-4 sm:w-full">
+                <div key={meeting.id} className="bg-zinc-400 rounded-xl m-2 p-4 bg-opacity-75 shadow-lg shadow-gray-400 space-y-2 text-lg sm:text-base sm:m-0 sm:mb-4 sm:w-full">
                     <div className="text-center flex justify-center items-center space-x-2">
                         <p className="font-bold">Time:</p>
                         <p>{format(meeting.dateAndTime, 'HH:mm')}</p>

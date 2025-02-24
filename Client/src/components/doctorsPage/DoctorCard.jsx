@@ -8,12 +8,10 @@ function DoctorCard({ doctor }) {
     const pathDoctorSpecialty = doctor.specialty.toLowerCase().replace(/\s+/g, '-');
 
     return (
-        <article
-            className="bg-zinc-400 rounded-xl p-4 flex flex-col justify-between items-center space-y-2 text-gray-700 w-64 h-80 bg-opacity-75 shadow-xl shadow-gray-300 text-lg sm:m-0 sm:w-full"
-        >
+        <article className="border border-zinc-500 bg-zinc-400 rounded-xl p-4 flex flex-col justify-between items-center space-y-2 text-gray-700 w-64 h-80 bg-opacity-75 shadow-xl shadow-gray-300 text-lg sm:m-0 sm:w-full">
             <img
                 src={doctor.imgUrl ? doctor.imgUrl : doctorProfile}
-                className="rounded-full object-cover w-20 h-20 border-4 border-zinc-700"
+                className="rounded-full object-cover w-20 h-20 border-2 border-zinc-700"
             />
             <div className="text-center md:text-base sm:text-base">
                 <p>{doctor.name}</p>

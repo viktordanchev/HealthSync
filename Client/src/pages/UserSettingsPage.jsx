@@ -101,7 +101,7 @@ function UserSettingsPage() {
     return (
         <>
             {isLoadingOnReceive ? <Loading type={'big'} /> :
-                <section className="w-96 text-gray-700 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl sm:w-full">
+                <section className="w-96 border border-zinc-500 text-gray-700 p-8 bg-zinc-400 bg-opacity-75 shadow-2xl shadow-gray-400 rounded-xl sm:w-full">
                     <Formik
                         initialValues={{
                             firstName: userData.firstName,
