@@ -119,15 +119,16 @@ namespace Infrastructure.Database.Repositories
 
         public async Task UpdateWeeklySchedule(string userId, IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
         {
-            var weekDays = await _context.DoctorsWeekDays
-                .Where(dwd => dwd.Doctor.IdentityId == userId
-                    && weeklySchedule.Any(d => d.WeekDay == dwd.WeekDay))
-                .ToListAsync();
+            var weekDaysIds = weeklySchedule.Select(d => d.Id);
 
+            var weekDays = await _context.DoctorsWeekDays
+                .Where(dwd => weekDaysIds.Contains(dwd.Id))
+                .ToListAsync();
+            
             foreach (var weekDay in weekDays)
             {
-                var currentDay = weeklySchedule.First(d => d.WeekDay == weekDay.WeekDay);
-
+                var currentDay = weeklySchedule.First(d => d.Id == weekDay.Id);
+            
                 weekDay.IsWorkDay = currentDay.IsWorkDay;
                 weekDay.WorkDayStart = currentDay.WorkDayStart;
                 weekDay.WorkDayEnd = currentDay.WorkDayEnd;
