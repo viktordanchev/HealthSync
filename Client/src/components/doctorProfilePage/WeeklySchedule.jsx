@@ -1,11 +1,26 @@
 ﻿import React, { useState } from 'react';
 import WeekDayCard from './WeekDayCard';
+import apiRequest from '../../services/apiRequest';
+import { useLoading } from '../../contexts/LoadingContext';
+import { useMessage } from '../../contexts/MessageContext';
 
 function WeeklySchedule({ weekDays }) {
-    const [changedWeekDays, setChangedWeekDays] = useState(weekDays);
+    const [changedWeekDays, setChangedWeekDays] = useState([]);
+    const { setIsLoading } = useLoading();
+    const { showMessage } = useMessage();
+    
+    const handleSubmit = async () => {
+        try {
+            setIsLoading(true);
 
-    const handleSubmit = () => {
-        console.log(weekDays);
+            const response = await apiRequest('doctors', 'updateWeeklySchedule', changedWeekDays, localStorage.getItem('accessToken'), 'POST', false);
+
+            showMessage(response.message, 'message');
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -13,7 +28,10 @@ function WeeklySchedule({ weekDays }) {
             <h2 className="text-3xl font-thin underline-thin text-gray-700 sm:text-2xl">Weekly Schedule</h2>
             <div className="flex justify-center flex-wrap gap-2">
                 {weekDays.map((weekDay) => (
-                    <WeekDayCard key={weekDay.id} data={weekDay} />
+                    <WeekDayCard
+                        key={weekDay.id}
+                        data={weekDay}
+                        setChanges={setChangedWeekDays} />
                 ))}
             </div>
             <div className="text-sm">
@@ -23,9 +41,16 @@ function WeeklySchedule({ weekDays }) {
             </div>
             <div>
                 <button
-                    className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded`}
+                    className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded 
+                    ${changedWeekDays.length > 0 ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default'}`}
                     type="submit"
-                    onClick={handleSubmit}>
+                    onClick={(e) => {
+                        if (changedWeekDays.length === 0) {
+                            e.preventDefault();
+                        } else {
+                            handleSubmit();
+                        }
+                    }}>
                     Save changes
                 </button>
             </div>

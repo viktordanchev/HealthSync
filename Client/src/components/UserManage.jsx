@@ -59,17 +59,17 @@ function UserManage({ userName, userRoles }) {
             <div className={`absolute right-0 z-40 w-52 rounded-xl shadow-xl shadow-gray-300 bg-white bg-opacity-100 transition-all duration-300 transform sm:w-full ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px] pointer-events-none'
                     }`}>
                 <ul className="text-center text-gray-700 text-xl">
-                    <li className="py-3 rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
+                    <li className="rounded-t-xl border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
                         <a
-                            className="block"
+                            className="block py-3"
                             href={`${userRoles.includes('Doctor') ? '/doctorProfile' : '/becomeDoctor'}`}
                         >
                             {`${userRoles.includes('Doctor') ? 'Doctor profile' : 'Become a Doctor'}`}
                         </a>
                     </li>
-                    <li className="py-3 border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
+                    <li className="border-b border-zinc-500 cursor-pointer hover:bg-gray-200">
                         <a
-                            className="block"
+                            className="block py-3"
                             href="/account/settings"
                         >
                             Settings
