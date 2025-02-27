@@ -14,14 +14,13 @@ function WeekDayCard({ data, setChanges }) {
                 if (prevDays.some(day => day.id === data.id)) {
                     return prevDays.map((day) =>
                         day.id === data.id
-                            ? {
-                                id: data.id,
-                                isWorkDay,
-                                workDayStart: start,
-                                workDayEnd: end,
-                                meetingTimeMinutes: minutes
-                            }
-                            : day
+                        && {
+                            id: data.id,
+                            isWorkDay,
+                            workDayStart: start,
+                            workDayEnd: end,
+                            meetingTimeMinutes: minutes
+                        }
                     );
                 } else {
                     return [...prevDays,
@@ -31,8 +30,7 @@ function WeekDayCard({ data, setChanges }) {
                         workDayStart: start,
                         workDayEnd: end,
                         meetingTimeMinutes: minutes
-                    }
-                    ];
+                    }];
                 }
             });
         } else {

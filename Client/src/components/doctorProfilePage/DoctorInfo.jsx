@@ -15,7 +15,7 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
     const { setIsLoading } = useLoading();
     const [profilePhoto, setProfilePhoto] = useState(doctorData.imgUrl);
     const [isPhotoChanged, setIsPhotoChanged] = useState(false);
-    const [personalInfoLenght, setPersonalInfoLenght] = useState(doctorData.personalInformation.length);
+    const [personalInfoLenght, setPersonalInfoLenght] = useState(doctorData.personalInformation ? doctorData.personalInformation.length : 0);
 
     const validationSchema = Yup.object({
         email: Yup.string()

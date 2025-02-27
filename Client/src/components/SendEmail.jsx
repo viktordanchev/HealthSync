@@ -77,10 +77,16 @@ function SendEmail({ type }) {
                     </div>
                     <div className="flex justify-evenly pt-6">
                         <button
+                            className={`bg-blue-500 border-2 border-blue-500 text-white font-medium rounded py-1 px-2
+                                    ${secondsLeft > 0 ? 'cursor-not-allowed' : 'cursor-pointer hover:bg-white hover:text-blue-500'}`}
                             disabled={secondsLeft > 0}
-                            className="bg-blue-500 border-2 border-blue-500 text-white font-bold py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                             type="submit">
-                            {secondsLeft > 0 ? secondsLeft : "Send"}
+                            {secondsLeft > 0 ?
+                                <span className="flex justify-center space-x-1">
+                                    <p>Resend:</p>
+                                    <p className="font-normal">{secondsLeft}</p>
+                                </span> :
+                                <p>Send</p>}
                         </button>
                     </div>
                 </Form>
