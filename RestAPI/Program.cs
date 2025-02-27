@@ -1,3 +1,4 @@
+using RestAPI.SignalR;
 using Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddServices();
 builder.Services.AddRepositories();
 builder.Services.AddMemoryCache();
 builder.Services.AddConfigs(builder.Configuration);
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -26,6 +28,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapHub<ChatHub>("/chathub");
 
 app.UseCors("CorsPolicy");
 
