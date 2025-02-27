@@ -37,17 +37,17 @@ namespace HealthSync.Server.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            if (!await _userService.IsUserExistAsync(request.Email))
-            {
-                return BadRequest(new { Error = UsedEmail });
-            }
-
             if (!_memoryCacheService.isExist(request.VrfCode.ToLower()))
             {
                 return BadRequest(new { Error = InvalidVrfCode });
             }
 
-            await _userService.AddUserAsync(request);
+            var isAdded = await _userService.AddUserAsync(request);
+
+            if (!isAdded)
+            {
+                return BadRequest(new { Error = UsedEmail });
+            }
 
             return NoContent();
         }
@@ -55,7 +55,7 @@ namespace HealthSync.Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            if (!await _userService.IsUserLoggedInAsync(request))
+            if (!await _userService.IsUserLoginDataValidAsync(request))
             {
                 return BadRequest(new { Error = InvalidLoginData });
             }
@@ -100,14 +100,13 @@ namespace HealthSync.Server.Controllers
         [HttpPost("sendVrfCode")]
         public async Task<IActionResult> SendVerificationCode([FromBody] string email)
         {
-            if (!await _userService.IsUserExistAsync(email))
-            {
-                return BadRequest(new { Error = UsedEmail });
-            }
-
             var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
-            _memoryCacheService.Add(token.ToLower(), email, TimeSpan.FromMinutes(1));
-            await _emailSender.SendVrfCode(email, token);
+            var isSended = await _emailSender.SendVrfCode(email, token);
+
+            if (isSended)
+            {
+                _memoryCacheService.Add(token.ToLower(), email, TimeSpan.FromMinutes(1));
+            }
 
             return Ok(new { Message = NewVrfCode });
         }
@@ -115,14 +114,13 @@ namespace HealthSync.Server.Controllers
         [HttpPost("sendRecoverPassEmail")]
         public async Task<IActionResult> SendRecoverPasswordEmail([FromBody] string email)
         {
-            if (!await _userService.IsUserExistAsync(email))
-            {
-                return BadRequest(new { Error = NotRegistered });
-            }
-
             var token = await _userService.GeneratePasswordResetTokenAsync(email);
-            _memoryCacheService.Add(token, email, TimeSpan.FromMinutes(10));
-            await _emailSender.SendPasswordRecoverLink(email, token);
+            var isSended = await _emailSender.SendPasswordRecoverLink(email, token);
+
+            if (isSended)
+            {
+                _memoryCacheService.Add(token, email, TimeSpan.FromMinutes(10));
+            }
 
             return Ok(new { Message = SendedPassRecoverLink });
         }
@@ -145,8 +143,7 @@ namespace HealthSync.Server.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserData()
         {
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var userData = await _userService.GetUserDataAsync(userEmail);
+            var userData = await _userService.GetUserDataAsync(User.FindFirstValue(ClaimTypes.Email)!);
 
             return Ok(userData);
         }
@@ -155,12 +152,12 @@ namespace HealthSync.Server.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
         {
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-
             if (!string.IsNullOrEmpty(request.CurrentPassword) && request.CurrentPassword == request.NewPassword)
             {
                 return BadRequest(new { Error = SamePassword });
             }
+
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
 
             await _userService.UpdateUserDataAsync(request, userEmail);
 

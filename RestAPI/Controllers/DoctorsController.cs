@@ -15,7 +15,6 @@ namespace RestAPI.Controllers
         private readonly IUserService _userService;
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
-        private readonly IHospitalsService _hospitalsService;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly ISpecialtiesService _specialtiesService;
 
@@ -23,14 +22,12 @@ namespace RestAPI.Controllers
             IUserService userService,
             IDoctorsService doctorService,
             IDoctorScheduleService doctorScheduleService,
-            IHospitalsService hospitalsService,
             IJwtTokenService jwtTokenService,
             ISpecialtiesService specialtiesService)
         {
             _userService = userService;
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
-            _hospitalsService = hospitalsService;
             _jwtTokenService = jwtTokenService;
             _specialtiesService = specialtiesService;
         }
@@ -47,14 +44,15 @@ namespace RestAPI.Controllers
         [HttpPost("getDetails")]
         public async Task<IActionResult> GetDetails([FromBody] int doctorId)
         {
-            if (!await _doctorService.IsDoctorExistAsync(doctorId))
+            try
+            {
+                var doctorDetails = await _doctorService.GetDoctorDetailsAsync(doctorId);
+                return Ok(doctorDetails);
+            }
+            catch (Exception exception)
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
-
-            var doctorDetails = await _doctorService.GetDoctorDetailsAsync(doctorId);
-
-            return Ok(doctorDetails);
         }
 
         [HttpGet("getSpecialties")]
@@ -70,52 +68,58 @@ namespace RestAPI.Controllers
         {
             var dateParsed = DateTime.Parse(request.Date);
 
-            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDateUnavailableAsync(request.DoctorId, dateParsed))
+            try
+            {
+                if (await _doctorScheduleService.IsDateUnavailableAsync(request.DoctorId, dateParsed))
+                {
+                    return BadRequest(new { ServerError = InvalidRequest });
+                }
+
+                var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, dateParsed);
+                return Ok(times);
+            }
+            catch (Exception exception)
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
-            
-            var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, dateParsed);
-
-            return Ok(times);
         }
 
         [HttpPost("getMonthSchedule")]
         public async Task<IActionResult> GetMonthSchedule([FromBody] GetMonthScheduleRequest request)
         {
-            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId))
+            try
+            {
+                var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request);
+                return Ok(monthSchedule);
+            }
+            catch (Exception exception)
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
-
-            var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request);
-
-            return Ok(monthSchedule);
         }
 
         [HttpPost("becomeDoctor")]
         [Authorize]
         public async Task<IActionResult> BecomeDoctor([FromForm] BecomeDoctorRequest request)
         {
-            if (await _doctorService.IsUserDoctorAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)) ||
-                !await _hospitalsService.IsHospitalExistAsync(request.HospitalId) ||
-                !await _specialtiesService.IsSpecialtyExistAsync(request.SpecialtyId))
+            try
+            {
+                await _doctorService.AddDoctorAsync(request, User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                var userClaims = await _userService.GetUserClaimsAsync(User.FindFirstValue(ClaimTypes.Email));
+                var accessToken = _jwtTokenService.GenerateAccessToken(userClaims);
+
+                return Ok(
+                    new
+                    {
+                        Message = RegisteredDoctor,
+                        Token = accessToken
+                    });
+            }
+            catch (Exception exception)
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
-
-            await _doctorService.AddDoctorAsync(request, User.FindFirstValue(ClaimTypes.NameIdentifier));
-            
-            var userClaims = await _userService.GetUserClaimsAsync(User.FindFirstValue(ClaimTypes.Email));
-            var accessToken = _jwtTokenService.GenerateAccessToken(userClaims);
-
-            return Ok(
-                new
-                {
-                    Message = RegisteredDoctor,
-                    Token = accessToken
-                });
         }
 
         [HttpGet("getProfileInfo")]
@@ -140,7 +144,7 @@ namespace RestAPI.Controllers
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> UpdateWeeklySchedule([FromBody] IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
         {
-            await _doctorScheduleService.UpdateWeeklySchedule(User.FindFirstValue(ClaimTypes.NameIdentifier)!, weeklySchedule);
+            await _doctorScheduleService.UpdateWeeklySchedule(weeklySchedule);
 
             return Ok(new { Message = UpdatedWeeklySchedule });
         }

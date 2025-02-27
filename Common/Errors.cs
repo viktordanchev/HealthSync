@@ -11,7 +11,7 @@
             public const string InvalidCurrentPassword = "Wrong current password!";
             public const string PasswordMatch = "Confirm password field need to match password!";
             public const string SamePassword = "New password cannot match the current password!";
-            public const string UsedEmail = "User with this email already exist!";
+            public const string UsedEmail = "This email is already taken!";
             public const string InvalidLoginData = "Invalid email or password!";
             public const string NotRegistered = "No account found with this email address!";
             public const string InvalidVrfCode = "Invalid verification code!";

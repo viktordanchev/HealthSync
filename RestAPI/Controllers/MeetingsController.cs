@@ -38,8 +38,7 @@ namespace RestAPI.Controllers
         {
             var dateAndTimeParsed = DateTime.Parse(request.DateAndTime);
             
-            if (!await _doctorService.IsDoctorExistAsync(request.DoctorId) ||
-                await _doctorScheduleService.IsDateUnavailableAsync(request.DoctorId, dateAndTimeParsed))
+            if (await _doctorScheduleService.IsDateUnavailableAsync(request.DoctorId, dateAndTimeParsed))
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
