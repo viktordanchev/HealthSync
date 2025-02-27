@@ -19,14 +19,7 @@ namespace Infrastructure.Database.Repositories
             _signInManager = signInManager;
         }
 
-        public async Task<bool> IsUserExistAsync(string userEmail)
-        {
-            var user = await _userManager.FindByEmailAsync(userEmail);
-
-            return user != null;
-        }
-
-        public async Task AddUserAsync(RegisterRequest requestData)
+        public async Task<bool> AddUserAsync(RegisterRequest requestData)
         {
             var newUser = new ApplicationUser()
             {
@@ -37,10 +30,12 @@ namespace Infrastructure.Database.Repositories
                 EmailConfirmed = true
             };
 
-            await _userManager.CreateAsync(newUser, requestData.Password);
+            var result = await _userManager.CreateAsync(newUser, requestData.Password);
+
+            return result.Succeeded;
         }
 
-        public async Task<bool> IsUserLoggedInAsync(LoginRequest requestData)
+        public async Task<bool> IsUserLoginDataValidAsync(LoginRequest requestData)
         {
             var result = await _signInManager
                 .PasswordSignInAsync(requestData.Email, requestData.Password, false, lockoutOnFailure: false);
@@ -89,8 +84,14 @@ namespace Infrastructure.Database.Repositories
         public async Task<string> GeneratePasswordResetTokenAsync(string userEmail)
         {
             var user = await _userManager.FindByEmailAsync(userEmail);
+            var result = string.Empty;
 
-            return await _userManager.GeneratePasswordResetTokenAsync(user);
+            if(user != null)
+            {
+                result = await _userManager.GeneratePasswordResetTokenAsync(user);
+            }
+
+            return result;
         }
 
         public async Task ResetPasswordAsync(RecoverPasswordRequest requestData, string userEmail)

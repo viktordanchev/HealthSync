@@ -7,9 +7,7 @@ namespace Core.Interfaces.Repository
     {
         Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail);
         Task<DoctorDetailsResponse> GetDoctorDetailsAsync(int doctorId);
-        Task<bool> IsDoctorExistAsync(int doctorId);
         Task<int> AddDoctorAsync(BecomeDoctorRequest requestData, string userId, string imgUrl);
-        Task<bool> IsUserDoctorAsync(string userId);
         Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
         Task GenerateEmptyDoctorWeekSchedule(int doctorId);
         Task<int> GetDoctorIdAsync(string userId);

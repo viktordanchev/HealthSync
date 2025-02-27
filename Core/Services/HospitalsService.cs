@@ -19,12 +19,5 @@ namespace Core.Services
 
             return hospitals;
         }
-
-        public async Task<bool> IsHospitalExistAsync(int hospitalId)
-        {
-            var isHospitalExist = await _hospitalsRepo.IsHospitalExistAsync(hospitalId);
-
-            return isHospitalExist;
-        }
     }
 }

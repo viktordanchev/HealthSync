@@ -12,6 +12,6 @@ namespace Core.Interfaces.Repository
         Task AddDaysOffAsync(int doctorId, IEnumerable<DayOffResponse> daysOff);
         Task<bool> IsDateUnavailableAsync(int doctorId, DateTime date);
         Task<MonthlyUnavailableDaysModel> GetMonthlyUnavailableDaysAsync(GetMonthScheduleRequest requestData);
-        Task UpdateWeeklySchedule(string userId, IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule);
+        Task UpdateWeeklySchedule(IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule);
     }
 }

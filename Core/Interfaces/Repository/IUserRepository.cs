@@ -6,9 +6,8 @@ namespace Core.Interfaces.Repository
 {
     public interface IUserRepository
     {
-        Task<bool> IsUserExistAsync(string userEmail);
-        Task AddUserAsync(RegisterRequest requestData);
-        Task<bool> IsUserLoggedInAsync(LoginRequest requestData);
+        Task<bool> AddUserAsync(RegisterRequest requestData);
+        Task<bool> IsUserLoginDataValidAsync(LoginRequest requestData);
         Task<UserClaimsModel> GetUserClaimsAsync(string userEmail);
         Task UpdateUserPassword(RecoverPasswordRequest requestData, string userEmail);
         Task<UserDataResponse> GetUserDataAsync(string userEmail);

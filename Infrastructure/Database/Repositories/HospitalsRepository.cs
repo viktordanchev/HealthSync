@@ -26,12 +26,5 @@ namespace Infrastructure.Database.Repositories
 
             return hospitals;
         }
-
-        public async Task<bool> IsHospitalExistAsync(int hospitalId)
-        {
-            var hospital = await _context.Hospitals.FirstOrDefaultAsync(h => h.Id == hospitalId);
-
-            return hospital != null;
-        }
     }
 }

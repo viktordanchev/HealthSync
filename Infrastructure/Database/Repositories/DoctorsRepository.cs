@@ -63,13 +63,6 @@ namespace Infrastructure.Database.Repositories
             return doctorDetails;
         }
 
-        public async Task<bool> IsDoctorExistAsync(int doctorId)
-        {
-            var doctor = await _context.Doctors.FirstOrDefaultAsync(d => d.Id == doctorId);
-
-            return doctor != null;
-        }
-
         public async Task<int> AddDoctorAsync(BecomeDoctorRequest requestData, string userId, string imgUrl)
         {
             var doctor = new Doctor()
@@ -86,13 +79,6 @@ namespace Infrastructure.Database.Repositories
             await _context.SaveChangesAsync();
 
             return doctor.Id;
-        }
-
-        public async Task<bool> IsUserDoctorAsync(string userId)
-        {
-            var doctor = await _context.Doctors.FirstOrDefaultAsync(d => d.IdentityId == userId);
-
-            return doctor != null;
         }
 
         public async Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId)

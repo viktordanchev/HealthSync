@@ -6,9 +6,8 @@ namespace Core.Interfaces.Service
 {
     public interface IUserService
     {
-        Task<bool> IsUserExistAsync(string userEmail);
-        Task AddUserAsync(RegisterRequest requestData);
-        Task<bool> IsUserLoggedInAsync(LoginRequest requestData);
+        Task<bool> AddUserAsync(RegisterRequest requestData);
+        Task<bool> IsUserLoginDataValidAsync(LoginRequest requestData);
         Task<UserClaimsModel> GetUserClaimsAsync(string userEmail);
         Task<UserDataResponse> GetUserDataAsync(string userEmail);
         Task<string> GeneratePasswordResetTokenAsync(string userEmail);

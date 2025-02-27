@@ -15,19 +15,14 @@ namespace Core.Services
             _userRepo = userRepo;
         }
 
-        public async Task<bool> IsUserExistAsync(string userEmail)
+        public async Task<bool> AddUserAsync(RegisterRequest requestData)
         {
-            return await _userRepo.IsUserExistAsync(userEmail);
+            return await _userRepo.AddUserAsync(requestData);
         }
 
-        public async Task AddUserAsync(RegisterRequest requestData)
+        public async Task<bool> IsUserLoginDataValidAsync(LoginRequest requestData)
         {
-            await _userRepo.AddUserAsync(requestData);
-        }
-
-        public async Task<bool> IsUserLoggedInAsync(LoginRequest requestData)
-        {
-            return await _userRepo.IsUserLoggedInAsync(requestData);
+            return await _userRepo.IsUserLoginDataValidAsync(requestData);
         }
 
         public async Task<UserClaimsModel> GetUserClaimsAsync(string userEmail)

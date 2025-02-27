@@ -117,7 +117,7 @@ namespace Infrastructure.Database.Repositories
             .FirstAsync();
         }
 
-        public async Task UpdateWeeklySchedule(string userId, IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
+        public async Task UpdateWeeklySchedule(IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
         {
             var weekDaysIds = weeklySchedule.Select(d => d.Id);
 

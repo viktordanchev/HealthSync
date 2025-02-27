@@ -13,13 +13,6 @@ namespace Core.Services
             _specialtiesRepo = specialtiesRepo;
         }
 
-        public async Task<bool> IsSpecialtyExistAsync(int specialtyId)
-        {
-            var isSpecialtyExist = await _specialtiesRepo.IsSpecialtyExistAsync(specialtyId);
-
-            return isSpecialtyExist;
-        }
-
         public async Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync()
         {
             var specialties = await _specialtiesRepo.GetSpecialtiesAsync();

@@ -47,11 +47,6 @@ namespace Core.Services
             return doctor;
         }
 
-        public async Task<bool> IsDoctorExistAsync(int doctorId)
-        {
-            return await _repository.IsDoctorExistAsync(doctorId);
-        }
-
         public async Task AddDoctorAsync(BecomeDoctorRequest requestData, string userId)
         {
             var imgUrl = await _GCSService.UploadProfileImageAsync(requestData.ProfilePhoto);
@@ -59,13 +54,6 @@ namespace Core.Services
             var doctorId = await _repository.AddDoctorAsync(requestData, userId, imgUrl);
 
             await _repository.GenerateEmptyDoctorWeekSchedule(doctorId);
-        }
-
-        public async Task<bool> IsUserDoctorAsync(string userId)
-        {
-            var isUserDoctor = await _repository.IsUserDoctorAsync(userId);
-
-            return isUserDoctor;
         }
 
         public async Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId)

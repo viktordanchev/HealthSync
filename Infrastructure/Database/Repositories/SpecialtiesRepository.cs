@@ -13,13 +13,6 @@ namespace Infrastructure.Database.Repositories
             _context = context;
         }
 
-        public async Task<bool> IsSpecialtyExistAsync(int specialtyId)
-        {
-            var specialty = await _context.DoctorSpecialties.FirstOrDefaultAsync(s => s.Id == specialtyId);
-
-            return specialty != null;
-        }
-
         public async Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync()
         {
             var specialties = await _context.DoctorSpecialties

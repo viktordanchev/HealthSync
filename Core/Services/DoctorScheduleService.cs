@@ -89,9 +89,9 @@ namespace Core.Services
             }
         }
 
-        public async Task UpdateWeeklySchedule(string userId, IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
+        public async Task UpdateWeeklySchedule(IEnumerable<UpdateWeeklyScheduleRequest> weeklySchedule)
         {
-            await _doctorScheduleRepo.UpdateWeeklySchedule(userId, weeklySchedule);
+            await _doctorScheduleRepo.UpdateWeeklySchedule(weeklySchedule);
         }
     }
 }
