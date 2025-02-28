@@ -31,13 +31,6 @@ namespace Core.Services
             await _meetingsRepo.DeleteMeetingAsync(meetingId);
         }
 
-        public async Task<bool> IsMeetingExistAsync(int meetingId)
-        {
-            var ssMeetingExist = await _meetingsRepo.IsMeetingExistAsync(meetingId);
-
-            return ssMeetingExist;
-        }
-
         public async Task<bool> isMeetingScheduled(string patientId, int doctorId)
         {
             var isMeetingScheduled = await _meetingsRepo.IsMeetingScheduled(patientId, doctorId);

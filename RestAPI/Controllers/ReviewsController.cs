@@ -11,14 +11,11 @@ namespace RestAPI.Controllers
     [Route("reviews")]
     public class ReviewsController : ControllerBase
     {
-        private readonly IDoctorsService _doctorService;
         private readonly IReviewsService _reviewsService;
 
         public ReviewsController(
-            IDoctorsService doctorService,
             IReviewsService reviewsService)
         {
-            _doctorService = doctorService;
             _reviewsService = reviewsService;
         }
 
@@ -28,9 +25,10 @@ namespace RestAPI.Controllers
             try
             {
                 var reviews = await _reviewsService.GetDoctorReviewsAsync(request);
+
                 return Ok(reviews);
             }
-            catch (Exception exception)
+            catch
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
@@ -43,9 +41,10 @@ namespace RestAPI.Controllers
             try
             {
                 await _reviewsService.AddDoctorReviewAsync(request, User.Identity.Name);
+
                 return Ok(new { Message = AddedReview });
             }
-            catch (Exception exception)
+            catch
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }

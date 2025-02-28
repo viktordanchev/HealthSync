@@ -49,7 +49,7 @@ namespace RestAPI.Controllers
                 var doctorDetails = await _doctorService.GetDoctorDetailsAsync(doctorId);
                 return Ok(doctorDetails);
             }
-            catch (Exception exception)
+            catch
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
@@ -70,7 +70,7 @@ namespace RestAPI.Controllers
 
             try
             {
-                if (await _doctorScheduleService.IsDateUnavailableAsync(request.DoctorId, dateParsed))
+                if (await _doctorScheduleService.IsDateUnavailableAsync(request.DoctorId, dateParsed) || DateTime.Now.Date > dateParsed)
                 {
                     return BadRequest(new { ServerError = InvalidRequest });
                 }
@@ -78,7 +78,7 @@ namespace RestAPI.Controllers
                 var times = await _doctorScheduleService.GetAvailableMeetingsAsync(request.DoctorId, dateParsed);
                 return Ok(times);
             }
-            catch (Exception exception)
+            catch
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
@@ -92,7 +92,7 @@ namespace RestAPI.Controllers
                 var monthSchedule = await _doctorScheduleService.GetMonthScheduleAsync(request);
                 return Ok(monthSchedule);
             }
-            catch (Exception exception)
+            catch
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
@@ -116,7 +116,7 @@ namespace RestAPI.Controllers
                         Token = accessToken
                     });
             }
-            catch (Exception exception)
+            catch
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }

@@ -1,27 +1,16 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import apiRequest from '../services/apiRequest';
-import useTimer from '../hooks/useTimer';
-import { useMessage } from '../contexts/MessageContext';
-import { useLoading } from '../contexts/LoadingContext';
-import { authErrors } from '../constants/errors';
+import apiRequest from '../../services/apiRequest';
+import useTimer from '../../hooks/useTimer';
+import { useMessage } from '../../contexts/MessageContext';
+import { useLoading } from '../../contexts/LoadingContext';
+import { authErrors } from '../../constants/errors';
 
-function SendEmail({ type }) {
+function SendEmail() {
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
     const { secondsLeft, start } = useTimer();
-    let action;
-    let typeText;
-
-    switch (type) {
-        case 'recoverPass':
-            action = 'sendRecoverPassEmail';
-            typeText = 'Recover password';
-            break;
-        default:
-            throw new Error('Invalid action type');
-    }
 
     const validationEmailSchema = Yup.object({
         email: Yup.string()
@@ -33,7 +22,7 @@ function SendEmail({ type }) {
         try {
             setIsLoading(true);
 
-            const response = await apiRequest('account', action, values.email, undefined, 'POST', false);
+            const response = await apiRequest('account', 'sendRecoverPassEmail', values.email, undefined, 'POST', false);
 
             if (response.error) {
                 showMessage(response.error, 'error');
@@ -54,7 +43,7 @@ function SendEmail({ type }) {
         <section className="w-80 bg-maincolor rounded-xl shadow-2xl shadow-gray-400 px-8 py-8 sm:w-full">
             <div className="text-3xl text-center text-white flex flex-col">
                 <p>Send</p>
-                <p className="font-thin">{typeText}</p>
+                <p className="font-thin">Recover password</p>
             </div>
             <hr className="my-4" />
             <Formik

@@ -8,7 +8,6 @@ namespace Core.Interfaces.Service
         Task AddDoctorMeetingAsync(AddMeetingRequest requestData);
         Task<IEnumerable<DoctorMeetingInfoResponse>> GetUserMeetingsAsync(string userId);
         Task DeleteMeetingAsync(int meetingId);
-        Task<bool> IsMeetingExistAsync(int meetingId);
         Task<bool> isMeetingScheduled(string userId, int doctorId);
         Task<IEnumerable<DoctorMeetingResponse>> GetDoctorMeetingsAsync(string userId);
     }

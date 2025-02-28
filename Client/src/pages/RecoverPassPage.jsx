@@ -6,7 +6,7 @@ import apiRequest from '../services/apiRequest';
 import { useMessage } from '../contexts/MessageContext';
 import { useLoading } from '../contexts/LoadingContext';
 import { authErrors } from "../constants/errors";
-import SendEmail from '../components/SendEmail';
+import SendEmail from '../components/recoverPassPage/SendEmail';
 
 function RecoverPassPage() {
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ function RecoverPassPage() {
 
     return (
         <>
-            {!token ? <SendEmail type={'recoverPass'} /> :
+            {!token ? <SendEmail /> :
                 <>
                     <section className="w-80 bg-maincolor rounded-xl shadow-2xl shadow-gray-400 px-8 py-8 sm:w-full">
                         <p className="text-3xl text-center text-white">Recover password</p>

@@ -1,8 +1,6 @@
 ﻿using Core.DTOs.RequestDtos.Meetings;
 using Core.Interfaces.Service;
-using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static Common.Errors;
@@ -15,20 +13,14 @@ namespace RestAPI.Controllers
     [Route("meetings")]
     public class MeetingsController : ControllerBase
     {
-        private readonly IUserService _userService;
         private readonly IMeetingsService _meetingsService;
-        private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
 
         public MeetingsController(
-            IUserService userService,
-            IMeetingsService meetingsService, 
-            IDoctorsService doctorService, 
+            IMeetingsService meetingsService,  
             IDoctorScheduleService doctorScheduleService)
         {
-            _userService = userService;
             _meetingsService = meetingsService;
-            _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
         }
 
@@ -66,14 +58,16 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteMeeting([FromBody] int meetingId)
         {
-            if (!await _meetingsService.IsMeetingExistAsync(meetingId))
+            try
+            {
+                await _meetingsService.DeleteMeetingAsync(meetingId);
+
+                return Ok(new { Message = DeletedMeeting });
+            }
+            catch
             {
                 return BadRequest(new { ServerError = InvalidRequest });
             }
-
-            await _meetingsService.DeleteMeetingAsync(meetingId);
-
-            return Ok(new { Message = DeletedMeeting });
         }
 
         [HttpGet("getDoctorMeetings")]

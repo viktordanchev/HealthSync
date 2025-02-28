@@ -1,5 +1,6 @@
 ﻿using Core.DTOs.RequestDtos.Doctors;
 using Core.DTOs.ResponseDtos.Doctors;
+using Core.DTOs.ResponseDtos.Specialties;
 using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
@@ -8,18 +9,22 @@ namespace Core.Services
 {
     public class DoctorsService : IDoctorsService
     {
-        private readonly IDoctorsRepository _repository;
+        private readonly IDoctorsRepository _doctorsRepository;
+        private readonly ISpecialtiesRepository _specialtiesRepo;
         private readonly IGoogleCloudStorageService _GCSService;
 
-        public DoctorsService(IDoctorsRepository repository, IGoogleCloudStorageService gcsService)
+        public DoctorsService(IDoctorsRepository repository,
+            ISpecialtiesRepository specialtiesRepo, 
+            IGoogleCloudStorageService gcsService)
         {
-            _repository = repository;
+            _doctorsRepository = repository;
+            _specialtiesRepo = specialtiesRepo;
             _GCSService = gcsService;
         }
 
         public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail)
         {
-            var doctors = await _repository.GetDoctorsAsync(requestData, userEmail);
+            var doctors = await _doctorsRepository.GetDoctorsAsync(requestData, userEmail);
 
             switch (requestData.Sorting.ToString())
             {
@@ -42,7 +47,7 @@ namespace Core.Services
 
         public async Task<DoctorDetailsResponse> GetDoctorDetailsAsync(int doctorId)
         {
-            var doctor = await _repository.GetDoctorDetailsAsync(doctorId);
+            var doctor = await _doctorsRepository.GetDoctorDetailsAsync(doctorId);
 
             return doctor;
         }
@@ -51,16 +56,23 @@ namespace Core.Services
         {
             var imgUrl = await _GCSService.UploadProfileImageAsync(requestData.ProfilePhoto);
 
-            var doctorId = await _repository.AddDoctorAsync(requestData, userId, imgUrl);
+            var doctorId = await _doctorsRepository.AddDoctorAsync(requestData, userId, imgUrl);
 
-            await _repository.GenerateEmptyDoctorWeekSchedule(doctorId);
+            await _doctorsRepository.GenerateEmptyDoctorWeekSchedule(doctorId);
         }
 
         public async Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId)
         {
-            var doctorInfo = await _repository.GetDoctorPersonalInfoAsync(userId);
+            var doctorInfo = await _doctorsRepository.GetDoctorPersonalInfoAsync(userId);
 
             return doctorInfo;
+        }
+
+        public async Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync()
+        {
+            var specialties = await _specialtiesRepo.GetSpecialtiesAsync();
+
+            return specialties;
         }
     }
 }

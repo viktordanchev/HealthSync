@@ -57,13 +57,6 @@ namespace Infrastructure.Database.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> IsMeetingExistAsync(int meetingId)
-        {
-            var meeting = await _context.DoctorsMeetings.FirstOrDefaultAsync(m => m.Id == meetingId);
-
-            return meeting != null;
-        }
-
         public async Task<bool> IsMeetingScheduled(string patientId, int doctorId)
         {
             var meeting = await _context.DoctorsMeetings.FirstOrDefaultAsync(m => m.PatientId == patientId && m.DoctorId == doctorId);
