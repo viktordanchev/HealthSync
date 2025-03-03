@@ -1,4 +1,5 @@
 ﻿using Core.DTOs.RequestDtos.Doctors;
+using Core.DTOs.ResponseDtos.DoctorSchedule;
 using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,20 +17,17 @@ namespace RestAPI.Controllers
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
         private readonly IJwtTokenService _jwtTokenService;
-        private readonly ISpecialtiesService _specialtiesService;
 
         public DoctorsController(
             IUserService userService,
             IDoctorsService doctorService,
             IDoctorScheduleService doctorScheduleService,
-            IJwtTokenService jwtTokenService,
-            ISpecialtiesService specialtiesService)
+            IJwtTokenService jwtTokenService)
         {
             _userService = userService;
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
             _jwtTokenService = jwtTokenService;
-            _specialtiesService = specialtiesService;
         }
 
         [HttpPost("getDoctors")]
@@ -58,7 +56,7 @@ namespace RestAPI.Controllers
         [HttpGet("getSpecialties")]
         public async Task<IActionResult> GetSpecialties()
         {
-            var specialties = await _specialtiesService.GetSpecialtiesAsync();
+            var specialties = await _doctorService.GetSpecialtiesAsync();
 
             return Ok(specialties);
         }
@@ -147,6 +145,15 @@ namespace RestAPI.Controllers
             await _doctorScheduleService.UpdateWeeklySchedule(weeklySchedule);
 
             return Ok(new { Message = UpdatedWeeklySchedule });
+        }
+
+        [HttpPost("updateDaysOff")]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> UpdateDaysOff([FromBody] IEnumerable<DayOffResponse> daysOff)
+        {
+            await _doctorScheduleService.UpdateDaysOffAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!, daysOff);
+
+            return Ok(new { Message = UpdatedDaysOff });
         }
     }
 }

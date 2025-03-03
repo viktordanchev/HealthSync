@@ -55,10 +55,7 @@ function BecomeDoctorPage() {
 
     const handleSubmit = async (values) => {
         const isAuth = await isStillAuth();
-
-        if (!isAuth) {
-            return;
-        }
+        if (!isAuth) return;
 
         try {
             const formData = new FormData();

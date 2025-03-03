@@ -59,11 +59,7 @@ function AddMeeting({ doctorId, date, setDate }) {
 
     const confirmMeeting = async () => {
         const isAuth = await isStillAuth();
-
-        if (!isAuth) {
-            navigate('/home');
-            return;
-        }
+        if (!isAuth) return;
 
         const { userId } = jwtDecoder();
 

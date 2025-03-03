@@ -51,9 +51,7 @@ function RegisterPage() {
     };
 
     const sendVrfCode = async (email) => {
-        if (!email) {
-            return;
-        }
+        if (!email) return;
 
         try {
             setIsLoading(true);
@@ -74,7 +72,7 @@ function RegisterPage() {
     };
 
     return (
-        <section className="w-96 bg-maincolor rounded-xl shadow-2xl shadow-gray-400 px-8 py-8 sm:w-full">
+        <section className="w-96 border border-zinc-500 bg-maincolor rounded-xl shadow-2xl shadow-gray-400 px-8 py-8 sm:w-full">
             <p className="text-3xl text-center text-white">Register</p>
             <hr className="my-4" />
             <Formik

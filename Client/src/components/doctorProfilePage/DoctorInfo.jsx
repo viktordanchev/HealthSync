@@ -26,10 +26,7 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
 
     const handleSubmit = async (values) => {
         const isAuth = await isStillAuth();
-
-        if (!isAuth) {
-            return;
-        }
+        if (!isAuth) return;
 
         try {
             setIsLoading(true);

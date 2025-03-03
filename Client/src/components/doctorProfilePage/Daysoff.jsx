@@ -3,10 +3,12 @@ import DaysOffCalendar from './DaysOffCalendar';
 import apiRequest from '../../services/apiRequest';
 import { useMessage } from '../../contexts/MessageContext';
 import { useLoading } from '../../contexts/LoadingContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 function DaysOff({ data }) {
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
+    const { isStillAuth } = useAuthContext();
     const [daysOff, setDaysOff] = useState(data);
     const [isChanged, setIsChanged] = useState(false);
 
@@ -15,10 +17,13 @@ function DaysOff({ data }) {
     }, [daysOff]);
 
     const handleSubmitChanges = async () => {
+        const isAuth = await isStillAuth();
+        if (!isAuth) return;
+
         try {
             setIsLoading(true);
 
-            const response = await apiRequest('doctors', 'updateDoctorDaysOff', daysOff, localStorage.getItem('accessToken'), 'POST', false);
+            const response = await apiRequest('doctors', 'updateDaysOff', daysOff, localStorage.getItem('accessToken'), 'POST', false);
 
             showMessage(response.message, 'message');
         } catch (error) {

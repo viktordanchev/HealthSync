@@ -16,7 +16,7 @@ function LoginPage() {
     const { setIsLoading } = useLoading();
     const { showMessage } = useMessage();
     const [showPassword, setShowPassword] = useState(false);
-
+    
     const validationSchema = Yup.object({
         email: Yup.string()
             .email(authErrors.InvalidEmail)
@@ -45,7 +45,7 @@ function LoginPage() {
     };
 
     return (
-        <section className="w-80 bg-maincolor rounded-xl shadow-2xl shadow-gray-400 px-8 py-8 sm:w-full">
+        <section className="w-80 border border-zinc-500 bg-maincolor rounded-xl shadow-2xl shadow-gray-400 px-8 py-8 sm:w-full">
             <p className="text-3xl text-center text-white">Login</p>
             <hr className="my-4" />
             <Formik

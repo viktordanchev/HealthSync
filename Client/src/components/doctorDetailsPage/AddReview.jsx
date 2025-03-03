@@ -24,11 +24,7 @@ function AddReview({ doctorId }) {
 
     const addReview = async () => {
         const isAuth = await isStillAuth();
-
-        if (!isAuth) {
-            navigate('/home');
-            return;
-        }
+        if (!isAuth) return;
 
         const dto = {
             doctorId: doctorId,

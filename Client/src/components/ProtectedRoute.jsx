@@ -5,9 +5,9 @@ import jwtDecoder from '../services/jwtDecoder';
 import RestrictedPage from '../pages/RestrictedPage';
 
 function ProtectedRoute({ children, roleNeeded = null }) {
-    const { isAuthenticated } = useAuthContext();
-
-    if (!isAuthenticated) {
+    const { isAuthenticated, isSessionEnd } = useAuthContext();
+    
+    if (!isAuthenticated && !isSessionEnd) {
         return <Navigate to="/login" replace />;
     }
     

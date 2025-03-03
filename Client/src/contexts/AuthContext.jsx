@@ -1,4 +1,5 @@
 ﻿import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useRefreshToken from '../hooks/useRefreshToken';
 import { useLoading } from '../contexts/LoadingContext';
@@ -7,6 +8,7 @@ import Loading from '../components/Loading';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const navigate = useNavigate();
     const { setIsLoading } = useLoading();
     const isAuth = useAuth();
     const { refreshAccessToken } = useRefreshToken();
@@ -14,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(isAuth);
     const [isSessionEnd, setIsSessionEnd] = useState(false);
     const [isAuthLoading, setIsAuthLoading] = useState(false);
-
+    
     useEffect(() => {
         const tryRefreshToken = async () => {
             setIsAuthLoading(true);
@@ -52,27 +54,30 @@ export const AuthProvider = ({ children }) => {
     };
 
     const isStillAuth = async () => {
-        let isStill = false;
+        let IsStill = false;
         const isAuth = useAuth();
 
-        if (!isAuth && isTokenExist) {
+        if (!isAuth) {
             setIsLoading(true);
 
+            await new Promise(res => setTimeout(res, 2000));
             const isRefreshed = await refreshAccessToken();
 
             setIsLoading(false);
 
             if (isRefreshed) {
-                isStill = true;
+                IsStill = true;
             }
         } else {
-            isStill = true;
+            IsStill = true;
         }
 
-        setIsSessionEnd(!isStill && isTokenExist);
-        setIsAuthenticated(isStill && isTokenExist);
+        setIsSessionEnd(!IsStill);
+        setIsAuthenticated(IsStill);
 
-        return isStill && isTokenExist;
+        if (!IsStill) navigate('/home');
+
+        return IsStill;
     };
 
     return (
