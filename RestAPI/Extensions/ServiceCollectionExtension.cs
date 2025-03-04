@@ -128,6 +128,7 @@ namespace Server.Extensions
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             services.AddScoped<IHospitalsService, HospitalsService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IChatService, ChatService>();
         }
 
         public static void AddRepositories(this IServiceCollection services)
@@ -139,6 +140,7 @@ namespace Server.Extensions
             services.AddScoped<IReviewsRepository, ReviewsRepository>();
             services.AddScoped<ISpecialtiesRepository, SpecialtiesRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IChatRepository, ChatRepository>();
         }
 
         public static void AddConfigs(this IServiceCollection services, IConfiguration config)

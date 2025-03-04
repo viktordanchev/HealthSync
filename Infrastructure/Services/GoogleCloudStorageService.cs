@@ -16,11 +16,11 @@ namespace Infrastructure.Services
             _storageClient = StorageClient.Create(credentials);
         }
 
-        public async Task<string> UploadProfileImageAsync(IFormFile file)
+        public async Task<string> UploadProfileImageAsync(IFormFile file, string directory)
         {
             var fileName = Path.GetFileName(file.FileName);
             var uniqueFileName = $"{Guid.NewGuid()}-{fileName}";
-            var destinationPath = $"profile-images/{uniqueFileName}";
+            var destinationPath = $"{directory}/{uniqueFileName}";
 
             using (var stream = file.OpenReadStream())
             {
@@ -32,7 +32,7 @@ namespace Infrastructure.Services
                 );
             }
 
-            return $"https://storage.cloud.google.com/healthsync/profile-images/{uniqueFileName}";
+            return $"https://storage.cloud.google.com/healthsync/{destinationPath}";
         }
 
         private async Task UploadFileAsync(string bucketName, string destinationPath, string contentType, Stream fileStream)

@@ -30,6 +30,21 @@ namespace Infrastructure.Migrations
                 oldType: "nvarchar(max)");
 
             migrationBuilder.CreateTable(
+                name: "ChatMessages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SenderId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatMessages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DoctorSpecialties",
                 columns: table => new
                 {
@@ -54,6 +69,26 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Hospitals", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MessageImages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MessageId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MessageImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MessageImages_ChatMessages_MessageId",
+                        column: x => x.MessageId,
+                        principalTable: "ChatMessages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,6 +261,11 @@ namespace Infrastructure.Migrations
                 name: "IX_DoctorsWeekDays_DoctorId",
                 table: "DoctorsWeekDays",
                 column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessageImages_MessageId",
+                table: "MessageImages",
+                column: "MessageId");
         }
 
         /// <inheritdoc />
@@ -244,7 +284,13 @@ namespace Infrastructure.Migrations
                 name: "DoctorsWeekDays");
 
             migrationBuilder.DropTable(
+                name: "MessageImages");
+
+            migrationBuilder.DropTable(
                 name: "Doctors");
+
+            migrationBuilder.DropTable(
+                name: "ChatMessages");
 
             migrationBuilder.DropTable(
                 name: "DoctorSpecialties");

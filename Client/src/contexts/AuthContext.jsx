@@ -46,7 +46,10 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         localStorage.removeItem('accessToken');
+
         setIsAuthenticated(false);
+
+        navigate('/home');
     };
 
     const update = (token) => {
@@ -60,7 +63,6 @@ export const AuthProvider = ({ children }) => {
         if (!isAuth) {
             setIsLoading(true);
 
-            await new Promise(res => setTimeout(res, 2000));
             const isRefreshed = await refreshAccessToken();
 
             setIsLoading(false);

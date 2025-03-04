@@ -4,6 +4,6 @@ namespace Core.Interfaces.ExternalServices
 {
     public interface IGoogleCloudStorageService
     {
-        Task<string> UploadProfileImageAsync(IFormFile file);
+        Task<string> UploadProfileImageAsync(IFormFile file, string directory);
     }
 }

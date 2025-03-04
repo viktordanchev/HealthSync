@@ -9,7 +9,7 @@ import ParticlesBg from './components/ParticlesBg';
 import GuestOnly from './components/GuestOnly';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionMessage from './components/SessionMessage';
-import Loading from './components/Loading';
+import Chat from './components/Chat';
 
 import DoctorsPage from './pages/DoctorsPage';
 import HomePage from './pages/HomePage';
@@ -81,10 +81,11 @@ function App() {
                                 <Route path="/workSchedule" element={<ProtectedRoute roleNeeded={'Doctor'}><WorkSchedulePage /></ProtectedRoute>} />
                             </Routes>
                         </MessageProvider>
+                        <Chat />
                         <button
                             onClick={scrollToTop}
-                            className={`fixed bottom-16 right-16 bg-zinc-600 h-16 w-16 rounded-full shadow-xl hover:bg-zinc-500 transition-opacity duration-300 md:bottom-12 md:right-12 md:h-14 md:w-14 sm:bottom-8 sm:right-8 sm:h-11 sm:w-11 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                            <FontAwesomeIcon icon={faAngleUp} className="text-white text-4xl md:text-3xl sm:text-xl" />
+                            className={`fixed bottom-36 right-16 bg-zinc-600 h-16 w-16 rounded-full shadow-xl hover:bg-zinc-500 transition-opacity duration-300 md:bottom-28 md:right-12 md:h-14 md:w-14 sm:bottom-24 sm:right-8 sm:h-12 sm:w-12 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                            <FontAwesomeIcon icon={faAngleUp} className="text-white text-4xl md:text-3xl sm:text-2xl" />
                         </button>
                     </main>
                     <Footer />

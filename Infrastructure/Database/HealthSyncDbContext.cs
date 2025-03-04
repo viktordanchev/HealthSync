@@ -18,6 +18,8 @@ namespace Infrastructure
         public DbSet<DoctorSpecialty> DoctorSpecialties { get; set; }
         public DbSet<DoctorWeekDay> DoctorsWeekDays { get; set; }
         public DbSet<DoctorDayOff> DoctorsDaysOff { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<MessageImage> MessageImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,12 +1,25 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Core.DTOs.RequestDtos.ChatHub;
+using Core.Interfaces.Service;
+using Infrastructure.Database.Entities;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace RestAPI.SignalR
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(string user, string message)
+        private readonly IChatService _chatService;
+
+        public ChatHub(IChatService chatService)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            _chatService = chatService;
+        }
+
+        public async Task SendMessage(AddMessageRequest request)
+        {
+            await _chatService.AddMessage(request);
+
+            await Clients.User(request.ReceiverId).SendAsync("ReceiveMessage", request.SenderId, request.Message);
         }
     }
 }

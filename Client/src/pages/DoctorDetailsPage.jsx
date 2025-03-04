@@ -11,6 +11,7 @@ function DoctorDetailsPage() {
     const navigate = useNavigate();
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(true);
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
     const [doctor, setDoctor] = useState({});
     const doctorId = location.state?.doctorId;
 
@@ -40,8 +41,9 @@ function DoctorDetailsPage() {
                     <article className="w-1/4 border border-zinc-500 p-4 bg-zinc-400 bg-opacity-75 shadow-xl shadow-gray-300 rounded-xl flex flex-col items-center lg:w-full md:w-full sm:w-full">
                         <div className="flex flex-col items-center space-y-3">
                             <img
-                                src={doctor.imgUrl ? doctor.imgUrl : doctorProfile}
                                 className="object-cover w-28 h-28 border-2 border-zinc-700 rounded-full"
+                                src={isImageLoaded && doctor.imgUrl ? doctor.imgUrl : doctorProfile}
+                                onLoad={() => setIsImageLoaded(true)}
                             />
                             <div className="flex flex-col items-center text-2xl">
                                 <p>{doctor.name}</p>

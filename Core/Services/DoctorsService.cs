@@ -1,4 +1,5 @@
-﻿using Core.DTOs.RequestDtos.Doctors;
+﻿using Core.Constants;
+using Core.DTOs.RequestDtos.Doctors;
 using Core.DTOs.ResponseDtos.Doctors;
 using Core.DTOs.ResponseDtos.Specialties;
 using Core.Interfaces.ExternalServices;
@@ -54,7 +55,7 @@ namespace Core.Services
 
         public async Task AddDoctorAsync(BecomeDoctorRequest requestData, string userId)
         {
-            var imgUrl = await _GCSService.UploadProfileImageAsync(requestData.ProfilePhoto);
+            var imgUrl = await _GCSService.UploadProfileImageAsync(requestData.ProfilePhoto, GoogleStorageConstants.ProfileImages);
 
             var doctorId = await _doctorsRepository.AddDoctorAsync(requestData, userId, imgUrl);
 
