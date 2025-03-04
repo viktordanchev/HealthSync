@@ -6,8 +6,10 @@ import MeetingsCalendar from '../components/doctorDetailsPage/MeetingsCalendar';
 import ReviewsSection from '../components/doctorDetailsPage/ReviewsSection';
 import AddReview from '../components/doctorDetailsPage/AddReview';
 import doctorProfile from '../assets/images/doctor-profile.jpg';
+import { useChat } from '../contexts/ChatContext';
 
 function DoctorDetailsPage() {
+    const { openChat } = useChat();
     const navigate = useNavigate();
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +51,11 @@ function DoctorDetailsPage() {
                                 <p>{doctor.name}</p>
                                 <p>{doctor.specialty}</p>
                             </div>
+                            <button
+                                className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
+                                onClick={() => openChat(location.state?.doctorIdentityId, doctor.name)}>
+                                Message me
+                            </button>
                         </div>
                         <hr className="border-e border-white w-full my-3" />
                         <div className="h-full flex flex-col justify-evenly space-y-3 lg:flex-row lg:space-y-0 lg:space-x-3 lg:w-full lg:h-40 md:flex-row md:space-y-0 md:space-x-3 md:w-full md:h-64 sm:h-96">

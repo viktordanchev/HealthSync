@@ -28,6 +28,7 @@ namespace Infrastructure.Database.Repositories
                 .Select(d => new DoctorResponse()
                 {
                     Id = d.Id,
+                    IdentityId = d.IdentityId,
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
                     Specialty = d.Specialty.Type,

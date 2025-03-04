@@ -1,8 +1,6 @@
 ﻿using Core.DTOs.RequestDtos.ChatHub;
 using Core.Interfaces.Service;
-using Infrastructure.Database.Entities;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
 
 namespace RestAPI.SignalR
 {

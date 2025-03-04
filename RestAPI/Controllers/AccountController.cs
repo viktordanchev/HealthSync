@@ -1,4 +1,5 @@
 ﻿using Core.DTOs.RequestDtos.Account;
+using Core.DTOs.ResponseDtos.Account;
 using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +19,7 @@ namespace HealthSync.Server.Controllers
         private IJwtTokenService _jwtTokenService;
         private IEmailSenderService _emailSender;
         private IMemoryCacheService _memoryCacheService;
+        private IChatService _chatService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
@@ -25,12 +27,14 @@ namespace HealthSync.Server.Controllers
             IJwtTokenService jwtTokenService,
             IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,
+            IChatService chatService,
             ILogger<AccountController> logger)
         {
             _userService = userService;
             _jwtTokenService = jwtTokenService;
             _emailSender = emailSender;
             _memoryCacheService = memoryCacheService;
+            _chatService = chatService;
             _logger = logger;
         }
 
@@ -190,6 +194,15 @@ namespace HealthSync.Server.Controllers
             }
 
             return Ok(new { Token = newAccessToken });
+        }
+
+        [HttpPost("getChatHistory")]
+        [Authorize]
+        public async Task<IActionResult> GetChatHistory([FromBody] GetChatHistoryRequest request)
+        {
+            var history = await _chatService.GetChatHistory(request);
+
+            return Ok(history);
         }
     }
 }

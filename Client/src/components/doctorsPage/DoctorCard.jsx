@@ -13,7 +13,7 @@ function DoctorCard({ doctor }) {
             <img
                 className="rounded-full object-cover w-20 h-20 border-2 border-zinc-700"
                 src={isImageLoaded && doctor.imgUrl ? doctor.imgUrl : doctorProfile}
-                onLoad={() => setIsImageLoaded(true)}/>
+                onLoad={() => setIsImageLoaded(true)} />
             <div className="text-center md:text-base sm:text-base">
                 <p>{doctor.name}</p>
                 <p className="font-bold">{doctor.specialty}</p>
@@ -30,7 +30,7 @@ function DoctorCard({ doctor }) {
             </div>
             <button
                 className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded text-base hover:bg-white hover:text-blue-500"
-                onClick={() => navigate(`/doctors/${pathDoctorName}/${pathDoctorSpecialty}`, { state: { doctorId: doctor.id } })}
+                onClick={() => navigate(`/doctors/${pathDoctorName}/${pathDoctorSpecialty}`, { state: { doctorId: doctor.id, doctorIdentityId: doctor.identityId } })}
             >
                 Details
             </button>

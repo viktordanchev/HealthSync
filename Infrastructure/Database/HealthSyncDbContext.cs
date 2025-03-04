@@ -33,6 +33,7 @@ namespace Infrastructure
             builder.ApplyConfiguration(new IdentityRoleConfig());
             builder.ApplyConfiguration(new IdentityUserRoleConfig());
             builder.ApplyConfiguration(new DoctorMeetingConfig());
+            builder.ApplyConfiguration(new ChatMessageConfig());
 
             base.OnModelCreating(builder);
         }
