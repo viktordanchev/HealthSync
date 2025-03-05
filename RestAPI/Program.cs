@@ -29,7 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapHub<ChatHub>("/chathub");
+app.MapHub<ChatHub>("/chat");
 
 app.UseCors("CorsPolicy");
 

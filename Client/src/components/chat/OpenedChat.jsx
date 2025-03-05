@@ -11,20 +11,20 @@ import { useChat } from '../../contexts/ChatContext';
 function OpenedChat() {
     const { isStart, closeChat, getReceiverData } = useChat();
     const { isStillAuth } = useAuthContext();
+    const { userId } = jwtDecoder();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const connection = new signalR.HubConnectionBuilder()
-        .withUrl("https://localhost:7080/chathub")
+        .withUrl("https://localhost:7080/chat")
         .withAutomaticReconnect()
         .build();
 
     useEffect(() => {
         const receiveData = async () => {
-            const { userId } = jwtDecoder();
             const dto = {
                 senderId: userId,
-                receiverId: sessionStorage.getItem('receiverId')
+                receiverId: JSON.parse(sessionStorage.getItem('chatData')).receiverId
             };
 
             try {
@@ -42,8 +42,14 @@ function OpenedChat() {
     }, []);
 
     const sendMessage = async () => {
+        const dto = {
+            senderId: userId,
+            receiverId: JSON.parse(sessionStorage.getItem('chatData')).receiverId,
+            message: message
+        };
+
         await connection.start();
-        await connection.invoke("SendMessage", "User1", message);
+        await connection.invoke("SendMessage", dto);
         setMessage("");
     };
 
