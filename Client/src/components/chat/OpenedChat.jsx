@@ -10,7 +10,7 @@ import { useChat } from '../../contexts/ChatContext';
 
 function OpenedChat() {
     const { isStart, closeChat, getReceiverData } = useChat();
-    const { isAuthenticated } = useAuthContext();
+    const { isStillAuth } = useAuthContext();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +63,7 @@ function OpenedChat() {
         const newChat = getReceiverData();
         const existingChats = JSON.parse(sessionStorage.getItem('allChats'))
             .filter(chat => chat.receiverId !== newChat.receiverId);
-        console.log(existingChats);
+        
         sessionStorage.setItem('allChats', JSON.stringify(existingChats));
 
         closeChat();
@@ -72,12 +72,9 @@ function OpenedChat() {
     return (
         <>
             {isStart &&
-                <div className="fixed bottom-16 right-16 h-96 w-72 shadow-2xl shadow-gray-400 rounded-xl bg-gray-200 bg-opacity-85 border border-zinc-500">
-                    <div className="h-[10%] flex justify-between items-center text-zinc-600 bg-maincolor rounded-t-xl py-1 px-2">
-                        <div className="flex space-x-1">
-                            <p className=" font-medium">To:</p>
-                            <p className="text-zinc-700">{getReceiverData().receiverName}</p>
-                        </div>
+                <div className="fixed bottom-16 right-16 h-96 w-72 shadow-2xl shadow-gray-400 rounded-xl bg-gray-200 bg-opacity-85 border border-zinc-500 sm:bottom-0 sm:right-0 sm:h-full sm:w-full sm:bg-opacity-100 sm:rounded-none sm:z-50">
+                    <div className="h-[10%] flex justify-between items-center text-zinc-600 bg-maincolor rounded-t-xl py-1 px-2 sm:rounded-t-none">
+                        <p className="font-medium">To: {getReceiverData().receiverName}</p>
                         <div className="flex justify-end space-x-2">
                             <FontAwesomeIcon
                                 className="text-2xl cursor-pointer"
