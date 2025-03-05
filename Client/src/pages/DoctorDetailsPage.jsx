@@ -1,5 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import apiRequest from '../services/apiRequest';
 import Loading from '../components/Loading';
 import MeetingsCalendar from '../components/doctorDetailsPage/MeetingsCalendar';
@@ -7,11 +9,13 @@ import ReviewsSection from '../components/doctorDetailsPage/ReviewsSection';
 import AddReview from '../components/doctorDetailsPage/AddReview';
 import doctorProfile from '../assets/images/doctor-profile.jpg';
 import { useChat } from '../contexts/ChatContext';
+import { useAuthContext } from '../contexts/AuthContext';
 
 function DoctorDetailsPage() {
-    const { openChat } = useChat();
     const navigate = useNavigate();
     const location = useLocation();
+    const { openChat } = useChat();
+    const { isAuthenticated } = useAuthContext();
     const [isLoading, setIsLoading] = useState(true);
     const [isImageLoaded, setIsImageLoaded] = useState(false);
     const [doctor, setDoctor] = useState({});
@@ -36,6 +40,14 @@ function DoctorDetailsPage() {
         }
     }, []);
 
+    const handleTextMe = () => {
+        if (isAuthenticated) {
+            openChat(location.state?.doctorIdentityId, doctor.name);
+        } else {
+            navigate('/login');
+        }
+    };
+
     return (
         <>
             {isLoading ? <Loading type={'big'} /> :
@@ -52,9 +64,11 @@ function DoctorDetailsPage() {
                                 <p>{doctor.specialty}</p>
                             </div>
                             <button
-                                className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
-                                onClick={() => openChat(location.state?.doctorIdentityId, doctor.name)}>
-                                Message me
+                                className="group flex justify-between items-center space-x-2 bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded-full hover:bg-white hover:text-blue-500"
+                                onClick={handleTextMe}>
+                                <FontAwesomeIcon icon={faMessage} className="cursor-pointer text-white text-lg group-hover:text-blue-500" />
+                                <hr className="border-r border-white h-full group-hover:border-blue-500" />
+                                <p className="group-hover:text-blue-500">Text me</p>
                             </button>
                         </div>
                         <hr className="border-e border-white w-full my-3" />
