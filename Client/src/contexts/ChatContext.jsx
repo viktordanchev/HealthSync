@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const ChatContext = createContext();
 
 export function ChatProvider({ children }) {
-    const [isStart, setIsStart] = useState(false);
+    const [isStarted, setIsStart] = useState(false);
     
     const closeChat = () => {
         setIsStart(false);
@@ -26,7 +26,7 @@ export function ChatProvider({ children }) {
     };
 
     return (
-        <ChatContext.Provider value={{ isStart, openChat, closeChat, getReceiverData }}>
+        <ChatContext.Provider value={{ isStarted, openChat, closeChat, getReceiverData }}>
             {children}
         </ChatContext.Provider>
     );

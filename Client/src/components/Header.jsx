@@ -15,8 +15,8 @@ const Header = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            const { claimName, roles } = jwtDecoder();
-            const splitedName = claimName.split(' ')
+            const { userName, roles } = jwtDecoder();
+            const splitedName = userName.split(' ')
                 .map((part, index) => {
                     if (index === 0) {
                         return `${part.charAt(0)}.`;

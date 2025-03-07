@@ -29,8 +29,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapHub<ChatHub>("/chat");
-
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
@@ -39,5 +37,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
+
+app.MapHub<ChatHub>("/chat");
 
 app.Run();

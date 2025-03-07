@@ -7,7 +7,7 @@ import { useAuthContext } from '../../contexts/AuthContext';
 
 function Chat() {
     const { isAuthenticated } = useAuthContext();
-    const { isStart, openChat } = useChat();
+    const { isStarted, openChat } = useChat();
     const [isOpen, setIsOpen] = useState(false);
     const [chats, setChats] = useState([]);
 
@@ -24,7 +24,7 @@ function Chat() {
 
     return (
         <>
-            {isAuthenticated && isStart ? <OpenedChat /> :
+            {isAuthenticated && isStarted ? <OpenedChat /> :
                 <>{!isOpen ? <button className="fixed bottom-16 right-16 border border-zinc-500 flex items-center justify-center bg-blue-500 h-16 w-16 rounded-full shadow-xl transition-opacity duration-300 hover:bg-blue-600 md:bottom-12 md:right-12 md:h-14 md:w-14 sm:bottom-8 sm:right-8 sm:h-12 sm:w-12"
                     onClick={() => setIsOpen(true)}>
                     <FontAwesomeIcon icon={faMessage} className="cursor-pointer text-white text-2xl sm:text-lg" />
@@ -40,7 +40,7 @@ function Chat() {
                         {chats.length > 0 ?
                             <ul className="max-h-[90%] space-y-2 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thumb-zinc-500 scrollbar-track-transparent">
                                 {chats.map((chat, index) => (
-                                    <li key={index} className="cursor-pointer border border-zinc-500 rounded-xl h-12 flex justify-between items-center p-4"
+                                    <li key={index} className="cursor-pointer border border-zinc-500 rounded h-12 flex justify-between items-center p-4"
                                         onClick={() => openNewChat(chat)}>
                                         <p className="text-zinc-700">{chat.receiverName}</p>
                                         <FontAwesomeIcon className="text-2xl text-zinc-600" icon={faAngleRight} />

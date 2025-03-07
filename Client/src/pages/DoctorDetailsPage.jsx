@@ -64,7 +64,7 @@ function DoctorDetailsPage() {
                                 <p>{doctor.specialty}</p>
                             </div>
                             <button
-                                className="group flex justify-between items-center space-x-2 bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded-full hover:bg-white hover:text-blue-500"
+                                className="group flex justify-between items-center space-x-2 bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
                                 onClick={handleTextMe}>
                                 <FontAwesomeIcon icon={faMessage} className="cursor-pointer text-white text-base group-hover:text-blue-500" />
                                 <hr className="border-r border-white h-full group-hover:border-blue-500" />
