@@ -7,6 +7,7 @@
             ImgUrls = new List<string>();
         }
 
+        public string SenderId { get; set; } = null!;
         public string Sender { get; set; } = null!;
         public string Receiver { get; set; } = null!;
         public DateTime DateAndTime { get; set; }

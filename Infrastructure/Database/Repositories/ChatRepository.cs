@@ -23,7 +23,7 @@ namespace Infrastructure.Database.Repositories
                 SenderId = requestData.SenderId,
                 ReceiverId = requestData.ReceiverId,
                 Message = requestData.Message,
-                DateAndTime = DateTime.Now
+                DateAndTime = DateTime.Parse(requestData.DateAndTime)
             });
             await _context.SaveChangesAsync();
         }
@@ -32,9 +32,11 @@ namespace Infrastructure.Database.Repositories
         {
             var history = await _context.ChatMessages
                 .AsNoTracking()
-                .Where(cm => cm.SenderId == requestData.SenderId && cm.ReceiverId == requestData.ReceiverId)
-                .Select(cm => new ChatMessageResponse() 
-                { 
+                .Where(cm => cm.SenderId == requestData.SenderId && cm.ReceiverId == requestData.ReceiverId ||
+                    cm.SenderId == requestData.ReceiverId && cm.ReceiverId == requestData.SenderId)
+                .Select(cm => new ChatMessageResponse()
+                {
+                    SenderId = cm.SenderId,
                     Sender = $"{cm.Sender.FirstName} {cm.Sender.LastName}",
                     Receiver = $"{cm.Receiver.FirstName} {cm.Receiver.LastName}",
                     DateAndTime = cm.DateAndTime,

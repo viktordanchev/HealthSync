@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as signalR from "@microsoft/signalr";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faPaperPlane, faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -7,15 +7,23 @@ import Loading from '../Loading';
 import apiRequest from '../../services/apiRequest';
 import jwtDecoder from '../../services/jwtDecoder';
 import { useChat } from '../../contexts/ChatContext';
+import { format } from 'date-fns';
 
 function OpenedChat() {
+    const containerRef = useRef(null);
     const { isStarted, closeChat, getReceiverData } = useChat();
     const { isStillAuth } = useAuthContext();
     const { userId } = jwtDecoder();
     const [messageHistory, setMessageHistory] = useState([]);
     const [message, setMessage] = useState("");
     const [connection, setConnection] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    }, [messageHistory]);
 
     useEffect(() => {
         const startConnection = async () => {
@@ -25,8 +33,8 @@ function OpenedChat() {
                 })
                 .build();
 
-            conn.on("ReceiveMessage", (userId, message) => {
-                setMessageHistory(prevMessages => [...prevMessages, { userId, message }]);
+            conn.on("ReceiveMessage", (senderId, message, dateAndTime) => {
+                setMessageHistory(prevMessages => [...prevMessages, { senderId, message, dateAndTime: dateAndTime }]);
             });
 
             await conn.start();
@@ -36,7 +44,9 @@ function OpenedChat() {
         startConnection();
 
         return () => {
-            connection.stop();
+            if (connection) {
+                connection.stop();
+            }
         };
     }, []);
 
@@ -46,10 +56,10 @@ function OpenedChat() {
                 senderId: userId,
                 receiverId: getReceiverData().receiverId
             };
-    
+
             try {
                 const response = await apiRequest('account', 'getChatHistory', dto, localStorage.getItem('accessToken'), 'POST', false);
-                
+
                 setMessageHistory(response);
             } catch (error) {
                 console.error(error);
@@ -57,7 +67,7 @@ function OpenedChat() {
                 setIsLoading(false);
             }
         };
-    
+
         receiveData();
     }, []);
 
@@ -65,7 +75,8 @@ function OpenedChat() {
         const dto = {
             senderId: userId,
             receiverId: getReceiverData().receiverId,
-            message: message
+            message: message,
+            dateAndTime: new Date()
         };
 
         await connection.invoke("SendMessage", dto);
@@ -85,11 +96,13 @@ function OpenedChat() {
     };
 
     const removeChat = () => {
-        const newChat = getReceiverData();
-        const existingChats = JSON.parse(sessionStorage.getItem('allChats'))
-            .filter(chat => chat.receiverId !== newChat.receiverId);
+        if (sessionStorage.getItem('allChats')) {
+            const newChat = getReceiverData();
+            const existingChats = JSON.parse(sessionStorage.getItem('allChats'))
+                .filter(chat => chat.receiverId !== newChat.receiverId);
 
-        sessionStorage.setItem('allChats', JSON.stringify(existingChats));
+            sessionStorage.setItem('allChats', JSON.stringify(existingChats));
+        }
 
         closeChat();
     };
@@ -112,11 +125,18 @@ function OpenedChat() {
                         </div>
                     </div>
                     <div className="h-[90%] flex flex-col justify-between space-y-2 p-2">
-                        <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thumb-zinc-500 scrollbar-track-transparent border border-zinc-500 rounded p-2">
+                        <div className="h-full space-y-3 flex flex-col overflow-y-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thumb-zinc-500 scrollbar-track-transparent border border-zinc-500 rounded p-2"
+                            ref={containerRef}>
                             {isLoading ? <Loading type={'small'} /> :
                                 <>
                                     {messageHistory.map((msg, index) => (
-                                        <p key={index}>{msg.userId}:{msg.message}</p>
+                                        <React.Fragment key={index}>
+                                            {(index === 0 || format(msg.dateAndTime, 'dd.MM.yyyy') !== format(messageHistory[index - 1].dateAndTime, 'dd.MM.yyyy')) && (<p className="text-center border-b border-black">{format(msg.dateAndTime, 'dd.MM.yyyy')}</p>)}
+                                            <div className={`max-w-[70%] px-2 py-1 rounded-xl break-words whitespace-pre-wrap flex flex-col ${userId === msg.senderId ? 'self-end bg-blue-500' : 'self-start bg-gray-400'}`}>
+                                                <p>{msg.message}</p>
+                                                <p className="text-xs self-end">{format(msg.dateAndTime, 'HH:mm')}</p>
+                                            </div>
+                                        </React.Fragment>
                                     ))}
                                 </>}
                         </div>

@@ -12,5 +12,8 @@ namespace Core.DTOs.RequestDtos.ChatHub
 
         [Required]
         public string Message { get; set; } = null!;
+
+        [Required]
+        public string DateAndTime { get; set; } = null!;
     }
 }
