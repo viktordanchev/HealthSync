@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+﻿import React, { useEffect, useState, useRef, useCallback } from 'react';
 import * as signalR from "@microsoft/signalr";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faPaperPlane, faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,7 @@ import apiRequest from '../../services/apiRequest';
 import jwtDecoder from '../../services/jwtDecoder';
 import { useChat } from '../../contexts/ChatContext';
 import { format } from 'date-fns';
+import { debounce } from "lodash";
 
 function OpenedChat() {
     const containerRef = useRef(null);
@@ -18,6 +19,7 @@ function OpenedChat() {
     const [message, setMessage] = useState("");
     const [connection, setConnection] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isUserTyping, setIsUserTyping] = useState(false);
 
     useEffect(() => {
         if (containerRef.current) {
@@ -27,24 +29,29 @@ function OpenedChat() {
 
     useEffect(() => {
         const startConnection = async () => {
-            const conn = new signalR.HubConnectionBuilder()
+            const newConnection = new signalR.HubConnectionBuilder()
                 .withUrl('https://localhost:7080/chat', {
                     accessTokenFactory: () => localStorage.getItem('accessToken')
                 })
                 .build();
 
-            conn.on("ReceiveMessage", (senderId, message, dateAndTime) => {
+            newConnection.on("ReceiveMessage", (senderId, message, dateAndTime) => {
                 setMessageHistory(prevMessages => [...prevMessages, { senderId, message, dateAndTime: dateAndTime }]);
+                setIsUserTyping(false);
             });
 
-            await conn.start();
-            setConnection(conn);
+            newConnection.on("UserTyping", (isTyping) => {
+                setIsUserTyping(isTyping);
+            });
+
+            await newConnection.start();
+            setConnection(newConnection);
         };
 
         startConnection();
 
         return () => {
-            if (connection) {
+            if (connection != null) {
                 connection.stop();
             }
         };
@@ -107,6 +114,10 @@ function OpenedChat() {
         closeChat();
     };
 
+    const sendTypingNotification = async (messageLength) => {
+        await connection.invoke("TypingNotification", getReceiverData().receiverId, messageLength > 0 ? true : false);
+    };
+
     return (
         <>
             {isStarted &&
@@ -139,6 +150,12 @@ function OpenedChat() {
                                         </React.Fragment>
                                     ))}
                                 </>}
+                            {isUserTyping &&
+                                <div className="flex items-center space-x-1 rounded-xl bg-gray-400 p-3 self-start">
+                                    <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce"></div>
+                                    <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }}></div>
+                                    <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style={{ animationDelay: '0.6s' }}></div>
+                                </div>}
                         </div>
                         <div className="flex space-x-2 justify-between bg-white rounded-full px-3 py-1 border border-blue-500">
                             <input
@@ -146,7 +163,10 @@ function OpenedChat() {
                                 placeholder="Message..."
                                 type="text"
                                 value={message}
-                                onChange={(e) => setMessage(e.target.value)} />
+                                onChange={(e) => {
+                                    setMessage(e.target.value);
+                                    sendTypingNotification(e.target.value.length);
+                                }} />
                             <button
                                 className="cursor-pointer flex justify-center items-center"
                                 onClick={sendMessage}>

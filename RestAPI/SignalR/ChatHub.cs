@@ -29,6 +29,14 @@ namespace RestAPI.SignalR
             }
         }
 
+        public async Task TypingNotification(string receiverId, bool isTyping)
+        {
+            if (_connections.TryGetValue(receiverId, out var connectionId))
+            {
+                await Clients.Client(connectionId).SendAsync("UserTyping", isTyping);
+            }
+        }
+
         public override Task OnConnectedAsync()
         {
             _connections[Context.UserIdentifier] = Context.ConnectionId;
