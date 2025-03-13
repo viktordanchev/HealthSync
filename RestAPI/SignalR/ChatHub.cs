@@ -21,15 +21,13 @@ namespace RestAPI.SignalR
         {
             await _chatService.AddMessage(request);
 
-            await Clients.Caller.SendAsync("ReceiveMessage", request.SenderId, request.Message, request.DateAndTime);
-
             if (_connections.TryGetValue(request.ReceiverId, out var connectionId))
             {
                 await Clients.Client(connectionId).SendAsync("ReceiveMessage", request.SenderId, request.Message, request.DateAndTime);
             }
         }
 
-        public async Task TypingNotification(string receiverId, bool isTyping)
+        public async Task SenderTyping(string receiverId, bool isTyping)
         {
             if (_connections.TryGetValue(receiverId, out var connectionId))
             {

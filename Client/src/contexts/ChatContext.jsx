@@ -3,16 +3,16 @@ import { createContext, useContext, useState } from 'react';
 const ChatContext = createContext();
 
 export function ChatProvider({ children }) {
-    const [isStarted, setIsStart] = useState(false);
+    const [isStarted, setIsStarted] = useState(false);
     
     const closeChat = () => {
-        setIsStart(false);
+        setIsStarted(false);
         sessionStorage.removeItem('chatData');
     };
 
     const openChat = (receiverId, receiverName) => {
-        setIsStart(true);
-
+        setIsStarted(true);
+       
         const chatData = {
             receiverId: receiverId,
             receiverName: receiverName
