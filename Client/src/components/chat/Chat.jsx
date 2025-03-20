@@ -48,7 +48,7 @@ function Chat() {
                     onClick={() => setIsOpen(true)}>
                     <FontAwesomeIcon icon={faMessage} className="cursor-pointer text-white text-2xl sm:text-lg" />
                 </button> :
-                    <div className="fixed bottom-16 right-16 h-96 w-72 shadow-2xl shadow-gray-400 rounded-xl bg-gray-200 bg-opacity-85 border border-zinc-500 sm:bottom-0 sm:right-0 sm:h-full sm:w-full sm:bg-opacity-100 sm:rounded-none sm:z-50">
+                    <div className="fixed z-20 bottom-16 right-16 h-96 w-72 shadow-2xl shadow-gray-400 rounded-xl bg-gray-200 bg-opacity-85 border border-zinc-500 sm:bottom-0 sm:right-0 sm:h-full sm:w-full sm:bg-opacity-100 sm:rounded-none sm:z-50">
                         <div className="h-[10%] flex justify-between items-center bg-maincolor rounded-t-xl space-x-2 py-1 px-2 text-zinc-600 sm:rounded-t-none">
                             <p className="font-medium">{isStarted ? `To: ${getReceiverData().receiverName}` : 'Messages'}</p>
                             <div className="flex justify-end space-x-2">

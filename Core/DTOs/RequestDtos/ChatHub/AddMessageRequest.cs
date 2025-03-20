@@ -1,9 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.DTOs.RequestDtos.ChatHub
 {
     public class AddMessageRequest
     {
+        public AddMessageRequest()
+        {
+            Images = new List<string>();
+        }
+
         [Required]
         public string SenderId { get; set; } = null!;
 
@@ -15,5 +21,7 @@ namespace Core.DTOs.RequestDtos.ChatHub
 
         [Required]
         public string DateAndTime { get; set; } = null!;
+
+        public IEnumerable<string> Images { get; set; }
     }
 }

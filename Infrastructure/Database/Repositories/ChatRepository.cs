@@ -16,16 +16,20 @@ namespace Infrastructure.Database.Repositories
             _context = context;
         }
 
-        public async Task AddMessage(AddMessageRequest requestData)
+        public async Task<int> AddMessage(AddMessageRequest requestData)
         {
-            await _context.ChatMessages.AddAsync(new ChatMessage()
+            var newMessage = new ChatMessage()
             {
                 SenderId = requestData.SenderId,
                 ReceiverId = requestData.ReceiverId,
                 Message = requestData.Message,
                 DateAndTime = DateTime.Parse(requestData.DateAndTime)
-            });
+            };
+
+            await _context.ChatMessages.AddAsync(newMessage);
             await _context.SaveChangesAsync();
+
+            return newMessage.Id;
         }
 
         public async Task<IEnumerable<ChatMessageResponse>> GetChatHistory(GetChatHistoryRequest requestData)
@@ -47,6 +51,23 @@ namespace Infrastructure.Database.Repositories
                 .ToListAsync();
 
             return history;
+        }
+
+        public async Task AddImagesAsync(int messageId, IEnumerable<string> imgUrls)
+        {
+            var data = new List<MessageImage>();
+
+            foreach (var img in imgUrls)
+            {
+                data.Add(new MessageImage()
+                {
+                    ImageUrl = img,
+                    MessageId = messageId
+                });
+            }
+
+            await _context.MessageImages.AddRangeAsync(data);
+            await _context.SaveChangesAsync();
         }
     }
 }

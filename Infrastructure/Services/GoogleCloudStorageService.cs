@@ -16,7 +16,7 @@ namespace Infrastructure.Services
             _storageClient = StorageClient.Create(credentials);
         }
 
-        public async Task<string> UploadProfileImageAsync(IFormFile file, string directory)
+        public async Task<string> UploadImageAsync(IFormFile file, string directory)
         {
             var fileName = Path.GetFileName(file.FileName);
             var uniqueFileName = $"{Guid.NewGuid()}-{fileName}";

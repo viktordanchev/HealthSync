@@ -6,7 +6,8 @@ namespace Core.Interfaces.Repository
 {
     public interface IChatRepository
     {
-        Task AddMessage(AddMessageRequest requestData);
+        Task<int> AddMessage(AddMessageRequest requestData);
         Task<IEnumerable<ChatMessageResponse>> GetChatHistory(GetChatHistoryRequest requestData);
+        Task AddImagesAsync(int messageId, IEnumerable<string> imgUrls);
     }
 }

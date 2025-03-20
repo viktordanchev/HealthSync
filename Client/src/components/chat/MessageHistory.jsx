@@ -6,6 +6,7 @@ import Loading from '../Loading';
 import apiRequest from '../../services/apiRequest';
 import { format } from 'date-fns';
 import jwtDecoder from '../../services/jwtDecoder';
+import ImageMessage from './ImageMessage';
 
 function MessageHistory({ messages, updateMessages, isSenderTyping, containerRef, isMessageReceived, setIsMessageReceived }) {
     const { getReceiverData } = useChat();
@@ -79,7 +80,12 @@ function MessageHistory({ messages, updateMessages, isSenderTyping, containerRef
                         {messages.map((msg, index) => (
                             <React.Fragment key={index}>
                                 {(index === 0 || format(msg.dateAndTime, 'dd.MM.yyyy') !== format(messages[index - 1].dateAndTime, 'dd.MM.yyyy')) && (<p className="text-xs text-zinc-600 text-center">{format(msg.dateAndTime, 'dd.MM.yyyy')}</p>)}
-                                <div className={`max-w-[70%] px-2 py-1 rounded-xl break-words whitespace-pre-wrap flex flex-col ${userId === msg.senderId ? 'self-end bg-blue-500' : 'self-start bg-gray-400'}`}>
+                                <div className={`max-w-[70%] p-2 rounded-xl break-words whitespace-pre-wrap flex flex-col space-y-1 ${userId === msg.senderId ? 'self-end bg-blue-500' : 'self-start bg-gray-400'}`}>
+                                    <div className="flex flex-wrap gap-2">
+                                        {msg.imgUrls.map((img, index) => (
+                                            <ImageMessage key={index} image={img} />
+                                        ))}
+                                    </div>
                                     <p>{msg.message}</p>
                                     <p className="text-xs self-end">{format(msg.dateAndTime, 'HH:mm')}</p>
                                 </div>

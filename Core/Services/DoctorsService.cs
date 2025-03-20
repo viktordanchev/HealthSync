@@ -55,7 +55,7 @@ namespace Core.Services
 
         public async Task AddDoctorAsync(BecomeDoctorRequest requestData, string userId)
         {
-            var imgUrl = await _GCSService.UploadProfileImageAsync(requestData.ProfilePhoto, GoogleStorageConstants.ProfileImages);
+            var imgUrl = await _GCSService.UploadImageAsync(requestData.ProfilePhoto, GoogleStorageConstants.ProfileImages);
 
             var doctorId = await _doctorsRepository.AddDoctorAsync(requestData, userId, imgUrl);
 
