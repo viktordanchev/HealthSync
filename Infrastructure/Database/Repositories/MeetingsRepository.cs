@@ -74,6 +74,7 @@ namespace Infrastructure.Database.Repositories
                 {
                     Id = dm.Id,
                     DateAndTime = dm.DateAndTime,
+                    PatientId = dm.PatientId,
                     PatientName = $"{dm.Patient.FirstName} {dm.Patient.LastName}",
                     PatientPhoneNumber = dm.Patient.PhoneNumber
                 })

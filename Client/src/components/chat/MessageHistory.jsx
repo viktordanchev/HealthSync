@@ -13,7 +13,7 @@ function MessageHistory({ messages, updateMessages, isSenderTyping, containerRef
     const { userId } = jwtDecoder();
     const [isLoading, setIsLoading] = useState(true);
     const [isAtBottom, setIsAtBottom] = useState(true);
-    
+
     {/* This hook handles receiving the message history. */ }
     useEffect(() => {
         const receiveData = async () => {

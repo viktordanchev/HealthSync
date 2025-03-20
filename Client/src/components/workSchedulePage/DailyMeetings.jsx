@@ -1,7 +1,16 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
+import { useChat } from '../../contexts/ChatContext';
 
 function DailySchedule({ data }) {
+    const { openChat } = useChat();
+
+    const handleTextMe = (patientId, patientName) => {
+        openChat(patientId, patientName);
+    };
+
     return (
         <div className="flex flex-wrap justify-center bg-maincolor rounded-xl p-4 bg-opacity-25 border border-zinc-500">
             {data.map((meeting) => (
@@ -20,6 +29,12 @@ function DailySchedule({ data }) {
                             <p className="font-bold">Contact:</p>
                             <p>{meeting.patientPhoneNumber !== null ? meeting.patientPhoneNumber : 'Missing'}</p>
                         </div>
+                        <button
+                            className="mt-2 group flex justify-between items-center space-x-2 bg-blue-500 border-2 border-blue-500 text-white text-base font-base py-1 px-2 rounded hover:bg-white hover:text-blue-500"
+                            onClick={() => handleTextMe(meeting.patientId, meeting.patientName)}>
+                            <FontAwesomeIcon icon={faMessage} className="cursor-pointer text-white text-base group-hover:text-blue-500" />
+                            <p className="group-hover:text-blue-500">Text me</p>
+                        </button>
                     </div>
                 </div>
             ))}

@@ -30,30 +30,32 @@ function SendMessage({ connection, updateMessages }) {
     };
 
     const sendMessage = async () => {
-        let imgUrls;
+        let imgUrls = [];
 
-        try {
-            const formData = new FormData();
+        if (images.length > 0) {
+            try {
+                const formData = new FormData();
 
-            images.forEach((img) => {
-                formData.append('images', img.file);
-            });
-            
-            setIsLoading(true);
+                images.forEach((img) => {
+                    formData.append('images', img.file);
+                });
 
-            const response = await fetch('https://localhost:7080/account/uploadImage', {
-                method: 'POST',
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
-                },
-                body: formData,
-            });
+                setIsLoading(true);
+                await new Promise(res => setTimeout(res, 2000));
+                const response = await fetch('https://localhost:7080/account/uploadImage', {
+                    method: 'POST',
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                    body: formData,
+                });
 
-            imgUrls = await response.json();
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
+                imgUrls = await response.json();
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
+            }
         }
 
         const dto = {
@@ -68,11 +70,12 @@ function SendMessage({ connection, updateMessages }) {
             senderId: dto.senderId,
             message: dto.message,
             dateAndTime: dto.dateAndTime,
-            images: images
+            images: dto.images
         }]);
 
         await connection.invoke("SendMessage", dto);
         setMessage('');
+        setImages([]);
     };
 
     const sendTyping = async (messageLength) => {
