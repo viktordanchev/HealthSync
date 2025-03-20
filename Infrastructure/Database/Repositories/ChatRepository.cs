@@ -45,7 +45,7 @@ namespace Infrastructure.Database.Repositories
                     Receiver = $"{cm.Receiver.FirstName} {cm.Receiver.LastName}",
                     DateAndTime = cm.DateAndTime,
                     Message = cm.Message,
-                    ImgUrls = cm.Images
+                    Images = cm.Images
                         .Select(i => i.ImageUrl)
                 })
                 .ToListAsync();

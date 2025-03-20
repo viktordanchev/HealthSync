@@ -209,9 +209,9 @@ namespace HealthSync.Server.Controllers
         [Authorize]
         public async Task<IActionResult> UploadImage([FromForm] IEnumerable<IFormFile> images)
         {
-            var imgs = await _chatService.UploadImageAsync(images);
+            var imageUrls = await _chatService.UploadImageAsync(images);
 
-            return Ok(imgs);
+            return Ok(imageUrls);
         }
     }
 }

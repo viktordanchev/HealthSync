@@ -23,7 +23,7 @@ namespace RestAPI.SignalR
 
             if (_connections.TryGetValue(request.ReceiverId, out var connectionId))
             {
-                await Clients.Client(connectionId).SendAsync("ReceiveMessage", request.SenderId, request.Message, request.DateAndTime);
+                await Clients.Client(connectionId).SendAsync("ReceiveMessage", request.SenderId, request.Message, request.DateAndTime, request.Images);
             }
         }
 

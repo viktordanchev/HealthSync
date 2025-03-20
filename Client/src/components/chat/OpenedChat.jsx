@@ -20,10 +20,10 @@ function OpenedChat() {
                 })
                 .build();
 
-            newConnection.on("ReceiveMessage", (senderId, message, dateAndTime) => {
-                setMessageHistory(prevMessages => [...prevMessages, { senderId, message, dateAndTime: dateAndTime }]);
+            newConnection.on("ReceiveMessage", (senderId, message, dateAndTime, images) => {
+                setMessageHistory(prevMessages => [...prevMessages, { senderId, message, dateAndTime, images }]);
                 setIsSenderTyping(false);
-
+                
                 const { scrollTop, clientHeight, scrollHeight } = messageHistoryRef.current;
 
                 if (scrollTop + clientHeight < scrollHeight - 10) {

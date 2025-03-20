@@ -17,7 +17,7 @@ function ImageMessage({ image }) {
             )}
             <button className={`group relative ${isImageZoomed && 'cursor-default'}`}
                 onClick={() => setIsImageZoomed(true)}>
-                <img className={`rounded transform transition-transform duration-300 ${isImageZoomed ? 'z-40 w-1/4 h-auto fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:w-1/2 md:w-1/2 sm:w-1/2' : 'w-16 h-16 group-hover:opacity-35'}`}
+                <img className={`shadow shadow-gray-500 rounded transform transition-transform duration-300 ${isImageZoomed ? 'z-40 w-1/4 h-auto fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:w-1/2 md:w-1/2 sm:w-1/2' : 'w-16 h-16 group-hover:opacity-35'}`}
                     src={isImageLoaded ? image : noImage}
                     onLoad={() => setIsImageLoaded(true)} />
                 {!isImageZoomed && (

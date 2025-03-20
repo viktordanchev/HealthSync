@@ -13,7 +13,7 @@ function MessageHistory({ messages, updateMessages, isSenderTyping, containerRef
     const { userId } = jwtDecoder();
     const [isLoading, setIsLoading] = useState(true);
     const [isAtBottom, setIsAtBottom] = useState(true);
-
+    
     {/* This hook handles receiving the message history. */ }
     useEffect(() => {
         const receiveData = async () => {
@@ -81,8 +81,8 @@ function MessageHistory({ messages, updateMessages, isSenderTyping, containerRef
                             <React.Fragment key={index}>
                                 {(index === 0 || format(msg.dateAndTime, 'dd.MM.yyyy') !== format(messages[index - 1].dateAndTime, 'dd.MM.yyyy')) && (<p className="text-xs text-zinc-600 text-center">{format(msg.dateAndTime, 'dd.MM.yyyy')}</p>)}
                                 <div className={`max-w-[70%] p-2 rounded-xl break-words whitespace-pre-wrap flex flex-col space-y-1 ${userId === msg.senderId ? 'self-end bg-blue-500' : 'self-start bg-gray-400'}`}>
-                                    <div className="flex flex-wrap gap-2">
-                                        {msg.imgUrls.map((img, index) => (
+                                    <div className="flex flex-wrap justify-center gap-2">
+                                        {msg.images.map((img, index) => (
                                             <ImageMessage key={index} image={img} />
                                         ))}
                                     </div>

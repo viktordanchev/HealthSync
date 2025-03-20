@@ -4,7 +4,7 @@
     {
         public ChatMessageResponse()
         {
-            ImgUrls = new List<string>();
+            Images = new List<string>();
         }
 
         public string SenderId { get; set; } = null!;
@@ -12,6 +12,6 @@
         public string Receiver { get; set; } = null!;
         public DateTime DateAndTime { get; set; }
         public string? Message { get; set; }
-        public IEnumerable<string> ImgUrls { get; set; }
+        public IEnumerable<string> Images { get; set; }
     }
 }
