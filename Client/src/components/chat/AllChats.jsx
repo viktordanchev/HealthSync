@@ -27,7 +27,7 @@ function AllChats() {
                             <FontAwesomeIcon className="text-2xl text-zinc-600" icon={faAngleRight} />
                         </li>
                     ))}
-                </ul> : <p className="text-xl text-center">No active chats.</p>}
+                </ul> : <p className="text-xl font-light text-center">No active chats.</p>}
         </>
     );
 };
