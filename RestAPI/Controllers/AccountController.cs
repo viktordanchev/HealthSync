@@ -1,5 +1,4 @@
 ﻿using Core.DTOs.RequestDtos.Account;
-using Core.DTOs.ResponseDtos.Account;
 using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +19,7 @@ namespace HealthSync.Server.Controllers
         private IEmailSenderService _emailSender;
         private IMemoryCacheService _memoryCacheService;
         private IChatService _chatService;
+        private readonly IConfiguration _configs;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
@@ -28,6 +28,7 @@ namespace HealthSync.Server.Controllers
             IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,
             IChatService chatService,
+            IConfiguration configs,
             ILogger<AccountController> logger)
         {
             _userService = userService;
@@ -35,6 +36,7 @@ namespace HealthSync.Server.Controllers
             _emailSender = emailSender;
             _memoryCacheService = memoryCacheService;
             _chatService = chatService;
+            _configs = configs;
             _logger = logger;
         }
 
@@ -78,7 +80,7 @@ namespace HealthSync.Server.Controllers
                     Secure = true,
                     IsEssential = true,
                     SameSite = SameSiteMode.None,
-                    Expires = DateTime.Now.AddMinutes(5),
+                    Expires = DateTime.Now.AddMonths(int.Parse(_configs["Cookies:RefreshJWTTokenMonths"])),
                 });
             }
 
