@@ -18,9 +18,9 @@ function Loading({ type }) {
     return (
         <div className="h-full w-full flex items-center justify-center">
             <div className="flex space-x-3">
-                <div className={`${width} ${height} bg-blue-500 animate-grow`}></div>
-                <div className={`${width} ${height} bg-blue-500 animate-grow`} style={{ animationDelay: '0.4s' }}></div>
-                <div className={`${width} ${height} bg-blue-500 animate-grow`} style={{ animationDelay: '0.8s' }}></div>
+                <div className={`${width} ${height} bg-blue-600 animate-grow`}></div>
+                <div className={`${width} ${height} bg-blue-600 animate-grow`} style={{ animationDelay: '0.4s' }}></div>
+                <div className={`${width} ${height} bg-blue-600 animate-grow`} style={{ animationDelay: '0.8s' }}></div>
             </div>
         </div>
     );
