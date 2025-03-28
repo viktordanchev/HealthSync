@@ -9,7 +9,7 @@ function WorkSchedulePage() {
     const [meetings, setMeetings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [openDates, setOpenDates] = useState({});
-    console.log('da')
+    
     useEffect(() => {
         const receiveData = async () => {
             try {

@@ -52,7 +52,7 @@ function NavigationBar({ searchParams, setSearchParams, specialties }) {
             <div className="flex items-center sm:w-full">
                 <input
                     placeholder="Search doctor..."
-                    className="text-lg rounded-s-3xl bg-white h-9 p-4 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:w-full"
+                    className="text-lg border border-r-0 border-white rounded-s-3xl bg-white h-9 p-4 focus:outline-none focus:border-blue-500 sm:w-full"
                     value={searchOnChange}
                     onChange={(e) => setSearchOnChange(e.target.value)}
                     onKeyDown={handleEnterPress}
