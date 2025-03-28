@@ -12,8 +12,8 @@ function ProtectedRoute({ children, roleNeeded = null }) {
 
     if (roleNeeded) {
         const { roles } = jwtDecoder();
-
-        if (!roles.includes(roleNeeded)) return <RestrictedPage />;
+        
+        if (!roles || !roles.includes(roleNeeded)) return <RestrictedPage />;
     }
 
     return React.cloneElement(children);

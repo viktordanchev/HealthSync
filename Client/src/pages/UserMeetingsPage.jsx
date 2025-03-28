@@ -32,7 +32,7 @@ function UserMeetingsPage() {
             {isLoading ? <Loading type={'big'} /> :
                 <section className="text-gray-700 flex flex-wrap justify-center">
                     {meetings.length == 0 ?
-                        <div className="text-3xl text-center md:text-2xl sm:text-xl">You have no active meetings.</div> :
+                        <div className="text-3xl text-center font-light md:text-2xl sm:text-xl">You have no active meetings.</div> :
                         <>
                             {meetings.map((meeting) => (
                                 <MeetingCard

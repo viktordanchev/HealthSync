@@ -20,7 +20,6 @@ namespace HealthSync.Server.Controllers
         private IMemoryCacheService _memoryCacheService;
         private IChatService _chatService;
         private readonly IConfiguration _configs;
-        private readonly ILogger<AccountController> _logger;
 
         public AccountController(
             IUserService userService,
@@ -28,8 +27,7 @@ namespace HealthSync.Server.Controllers
             IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,
             IChatService chatService,
-            IConfiguration configs,
-            ILogger<AccountController> logger)
+            IConfiguration configs)
         {
             _userService = userService;
             _jwtTokenService = jwtTokenService;
@@ -37,7 +35,6 @@ namespace HealthSync.Server.Controllers
             _memoryCacheService = memoryCacheService;
             _chatService = chatService;
             _configs = configs;
-            _logger = logger;
         }
 
         [HttpPost("register")]

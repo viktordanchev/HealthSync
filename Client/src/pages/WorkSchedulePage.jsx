@@ -9,7 +9,7 @@ function WorkSchedulePage() {
     const [meetings, setMeetings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [openDates, setOpenDates] = useState({});
-
+    console.log('da')
     useEffect(() => {
         const receiveData = async () => {
             try {
@@ -38,7 +38,7 @@ function WorkSchedulePage() {
             {isLoading ? <Loading type={'big'} /> :
                 <section className="px-64 w-full text-gray-700 space-y-4 flex flex-col justify-center items-center lg:px-32 md:px-8 sm:px-0">
                     {meetings.length === 0 ?
-                        <div className="text-3xl text-center md:text-2xl sm:text-xl">There are no active meetings.</div> :
+                        <div className="text-3xl text-center font-light md:text-2xl sm:text-xl">There are no active meetings.</div> :
                         <>
                             {meetings.map((meeting, index) => (
                                 <div key={index} className="w-full flex flex-col space-y-2">

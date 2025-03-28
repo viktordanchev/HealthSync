@@ -29,7 +29,6 @@ function LoginPage() {
         try {
             setIsLoading(true);
 
-            await new Promise(res => setTimeout(res, 30000));
             const response = await apiRequest('account', 'login', values, undefined, 'POST', true);
 
             if (response.token) {
