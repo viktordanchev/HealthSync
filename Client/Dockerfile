@@ -1,15 +1,13 @@
-﻿FROM node AS build
+﻿FROM node:alpine AS build
 
-WORKDIR /app/Client
+WORKDIR /app
 
-COPY package.json .
+COPY ./Client/package*.json ./
 
 RUN npm install
 
 COPY . .
 
-RUN npm run build
+EXPOSE 5173
 
-EXPOSE 3000
-
-CMD [ "serve", "-s", "dist" ]
+CMD ["npm", "run", "dev"]

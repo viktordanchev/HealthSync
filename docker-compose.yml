@@ -1,31 +1,39 @@
+name: healthsync
 services:
   restapi:
     build:
-      context: ./Web/RestAPI
-      dockerfile: Dockerfile
-    container_name: healthsync-restapi
+      context: .
+      dockerfile: RestAPI/Dockerfile
+    image: healthsync-restapi
+    container_name: restapi
     ports:
-      - "5000:80"
+      - "8081:8081"
+      - "8080:8080"
     depends_on:
       - sql_server
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_HTTP_PORTS=8080
     networks:
       - app-network
 
-  client:
+  frontend:
     build:
-      context: ./Web/Client
-      dockerfile: Dockerfile
-    container_name: healthsync-client
+      context: .
+      dockerfile: Client/Dockerfile
+    image: healthsync-frontend
+    container_name: frontend
     ports:
-      - "3000:80"
+      - "5173:5173"
+    depends_on:
+      - restapi
     networks:
       - app-network
 
   sql_server:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
-    container_name: healthsync-sql-server
+    container_name: database
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=mlEVg137l73S7YNH
