@@ -9,8 +9,6 @@ services:
     ports:
       - "8081:8081"
       - "8080:8080"
-    depends_on:
-      - sql_server
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTPS_PORTS=8081
@@ -22,6 +20,8 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro 
       - ./Infrastructure/Services/Configs/gcp-credentials-service-account.json:/app/Infrastructure/Services/Configs/gcp-credentials-service-account.json:ro
+    depends_on:
+      - sqlserver
 
   frontend:
     build:
@@ -36,12 +36,12 @@ services:
     networks:
       - app-network
 
-  sql_server:
+  sqlserver:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: database
     environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=mlEVg137l73S7YNH
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "mlEVg137l73S7YNH"
     ports:
       - "1433:1433"
     networks:
