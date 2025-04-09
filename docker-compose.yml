@@ -7,18 +7,13 @@ services:
     image: healthsync-restapi
     container_name: restapi
     ports:
-      - "8081:8081"
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTPS_PORTS=8081
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=123456
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/healthsync.pfx
     networks:
       - app-network
     volumes:
-      - ~/.aspnet/https:/https:ro 
       - ./Infrastructure/Services/Configs/gcp-credentials-service-account.json:/app/Infrastructure/Services/Configs/gcp-credentials-service-account.json:ro
     depends_on:
       - sqlserver
