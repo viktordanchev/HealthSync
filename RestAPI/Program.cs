@@ -25,15 +25,16 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(o =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    o.SwaggerEndpoint("/swagger/v1/swagger.json", "HealthSync API v1");
+    o.RoutePrefix = string.Empty;
+});
 
-    using var scope = app.Services.CreateScope();
-    var db = scope.ServiceProvider.GetRequiredService<HealthSyncDbContext>();
-    await db.Database.MigrateAsync();
-}
+using var scope = app.Services.CreateScope();
+var db = scope.ServiceProvider.GetRequiredService<HealthSyncDbContext>();
+await db.Database.MigrateAsync();
 
 app.UseCors("CorsPolicy");
 

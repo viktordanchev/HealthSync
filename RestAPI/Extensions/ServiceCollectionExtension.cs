@@ -25,7 +25,7 @@ namespace Server.Extensions
     {
         public static void AddDbContextExtension(this IServiceCollection services, IConfiguration config)
         {
-            var connectionString = config.GetConnectionString("DefaultConnection");
+            var connectionString = config.GetConnectionString("AzureConnection");
 
             services.AddDbContext<HealthSyncDbContext>(options =>
                 options.UseSqlServer(connectionString));
