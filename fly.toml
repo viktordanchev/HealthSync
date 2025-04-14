@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for healthsync-restapi on 2025-04-13T16:09:43+03:00
+# fly.toml app configuration file generated for healthsync-restapi on 2025-04-14T09:30:37+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,14 +7,13 @@ app = 'healthsync-restapi'
 primary_region = 'fra'
 
 [build]
-  dockerfile = 'RestAPI/Dockerfile'
 
-[[services]]
-  protocol = 'tcp'
+[http_service]
   internal_port = 8080
+  force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
-  ports = []
+  min_machines_running = 0
   processes = ['app']
 
 [[vm]]

@@ -2,10 +2,10 @@
 
 WORKDIR /app
 
-COPY ./Client/package*.json ./
+COPY ./package*.json ./
 RUN npm install
 
-COPY Client ./
+COPY ./ ./
 
 EXPOSE 5173
 

@@ -12,10 +12,7 @@ namespace Infrastructure.Services
 
         public GoogleCloudStorageService()
         {
-            string basePath = Directory.GetCurrentDirectory();
-            string relativePath = Path.Combine("Infrastructure", "Services", "Configs", "gcp-credentials-service-account.json");
-            string credentialsPath = Path.Combine(basePath, relativePath);
-            var credentials = GoogleCredential.FromFile(relativePath);
+            var credentials = GoogleCredential.FromFile("./Infrastructure/Services/Configs/gcp-credentials-service-account.json");
             _storageClient = StorageClient.Create(credentials);
         }
         

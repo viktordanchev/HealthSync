@@ -1,32 +1,20 @@
-# fly.toml app configuration file generated for healthsync-restapi on 2025-04-09T18:17:35+03:00
+# fly.toml app configuration file generated for healthsync-client on 2025-04-14T08:44:15+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'healthsync-restapi'
+app = 'healthsync-client'
 primary_region = 'fra'
 
 [build]
 
 [http_service]
-  internal_port = 8080
+  internal_port = 5173
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
-
-[[services]]
-  internal_port = 8080
-  protocol = "tcp"
-
-  [[services.ports]]
-    port = 80
-    handlers = ["http"]
-
-  [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
 
 [[vm]]
   memory = '1gb'
