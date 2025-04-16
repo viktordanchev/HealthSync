@@ -12,7 +12,8 @@ namespace Infrastructure.Services
 
         public GoogleCloudStorageService()
         {
-            var credentials = GoogleCredential.FromFile("./Infrastructure/Services/Configs/gcp-credentials-service-account.json");
+            var jsonCredentials = Environment.GetEnvironmentVariable("GCP_CREDENTIALS");
+            var credentials = GoogleCredential.FromJson(jsonCredentials);
             _storageClient = StorageClient.Create(credentials);
         }
         
