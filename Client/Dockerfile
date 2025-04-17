@@ -8,7 +8,7 @@ WORKDIR /app
 COPY Client/package*.json ./
 
 # Инсталираме зависимостите
-RUN npm install --production
+RUN npm install
 
 # Копираме целия клиентски код
 COPY Client/ ./
