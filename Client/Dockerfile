@@ -10,6 +10,8 @@ COPY Client/ ./
 
 RUN npm run build
 
+RUN ls -la /app/build
+
 FROM nginx:alpine
 
 COPY --from=build /app/build /usr/share/nginx/html
