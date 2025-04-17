@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersExtension();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContextExtension(builder.Configuration);
+builder.Services.AddDbContextExtension(builder.Configuration, builder.Environment);
 builder.Services.AddIdentityExtension();
 builder.Services.AddJWTAuthentication(builder.Configuration);
 builder.Services.AddCorsExtension(builder.Configuration);
