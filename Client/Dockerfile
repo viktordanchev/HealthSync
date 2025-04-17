@@ -4,19 +4,20 @@ FROM node:alpine AS build
 # Създаваме работната директория
 WORKDIR /app
 
-# Копираме само файловете, необходими за инсталация на зависимостите
-COPY Client/package*.json ./
+# Копираме само необходимите файлове от package.json в контейнера
+COPY Client/package.json ./    # Без да използваме * за всички пакети, които са необходими
+COPY Client/package-lock.json ./  # Ако има този файл
 
 # Инсталираме зависимостите
-RUN npm install
+RUN npm install --production
 
-# Копираме целия клиентски код
-COPY Client/ ./
+# Копираме целия клиентски код в контейнера
+COPY Client/ ./  # Копираме целия код от Client в контейнера
 
 # Създаваме production build на React приложението
 RUN npm run build
 
-# Преглеждаме съдържанието на директорията /app, за да видим дали има build
+# Проверяваме съдържанието на /app, за да видим дали има build директория
 RUN ls -la /app
 
 # Започваме да обслужваме приложението чрез static файловете
