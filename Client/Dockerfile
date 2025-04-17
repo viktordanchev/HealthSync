@@ -1,16 +1,10 @@
 ﻿FROM node:alpine AS build
 
 WORKDIR /app
-
-COPY Client/package.json ./
-COPY Client/package-lock.json ./
+COPY Client/package*.json ./
 RUN npm install
-
 COPY Client/ ./
-
 RUN npm run build
-
-RUN ls -la /app/dist
 
 FROM nginx:alpine
 
