@@ -68,7 +68,7 @@ function BecomeDoctorPage() {
             setIsLoading(true);
 
             const token = localStorage.getItem('accessToken');
-            const response = await fetch('https://healthsync-restapi.up.railway.app/doctors/becomeDoctor', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}`, {
                 method: 'POST',
                 headers: {
                     "Authorization": `Bearer ${token}`,

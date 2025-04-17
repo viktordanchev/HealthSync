@@ -15,7 +15,7 @@ function OpenedChat() {
     useEffect(() => {
         const startConnection = async () => {
             const newConnection = new signalR.HubConnectionBuilder()
-                .withUrl('https://healthsync-restapi.up.railway.app/chat', {
+                .withUrl(`${import.meta.env.VITE_API_URL}/chat`, {
                     accessTokenFactory: () => localStorage.getItem('accessToken')
                 })
                 .build();

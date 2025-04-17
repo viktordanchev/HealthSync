@@ -1,6 +1,6 @@
 ﻿import { fetchError } from '../constants/errors';
 
-const url = 'https://healthsync-restapi.up.railway.app';
+const url = import.meta.env.VITE_API_URL;
 const headers = { 'Content-Type': 'application/json' };
 
 async function apiRequest(controller, action, values, jwtToken, method, credentials) {

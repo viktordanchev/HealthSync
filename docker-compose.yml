@@ -21,7 +21,7 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: Client/Dockerfile
+      dockerfile: Client/Dockerfile.dev
     image: healthsync-frontend
     container_name: frontend
     ports:
