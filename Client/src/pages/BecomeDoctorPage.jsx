@@ -68,7 +68,7 @@ function BecomeDoctorPage() {
             setIsLoading(true);
 
             const token = localStorage.getItem('accessToken');
-            const response = await fetch('http://localhost:8080/doctors/becomeDoctor', {
+            const response = await fetch('https://healthsync-restapi.up.railway.app/doctors/becomeDoctor', {
                 method: 'POST',
                 headers: {
                     "Authorization": `Bearer ${token}`,

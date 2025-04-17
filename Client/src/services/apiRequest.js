@@ -1,6 +1,6 @@
 ﻿import { fetchError } from '../constants/errors';
 
-const url = 'https://healthsync-restapi.fly.dev';
+const url = 'https://healthsync-restapi.up.railway.app';
 const headers = { 'Content-Type': 'application/json' };
 
 async function apiRequest(controller, action, values, jwtToken, method, credentials) {
