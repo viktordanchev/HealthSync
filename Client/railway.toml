@@ -1,4 +1,4 @@
 [build]
 builder = "DOCKERFILE"
-dockerfilePath = "Client/Dockerfile"
-buildContext = "Client"
+dockerfilePath = "Dockerfile"
+buildContext = "."
