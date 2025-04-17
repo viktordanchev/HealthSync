@@ -2,6 +2,7 @@
 using Google.Cloud.Storage.V1;
 using Core.Interfaces.ExternalServices;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 
 namespace Infrastructure.Services
 {
@@ -10,10 +11,20 @@ namespace Infrastructure.Services
         private readonly string _bucketName = "healthsync";
         private readonly StorageClient _storageClient;
 
-        public GoogleCloudStorageService()
+        public GoogleCloudStorageService(IHostEnvironment environment)
         {
-            var jsonCredentials = Environment.GetEnvironmentVariable("GCP_CREDENTIALS");
-            var credentials = GoogleCredential.FromJson(jsonCredentials);
+            GoogleCredential credentials;
+
+            if (environment.IsDevelopment())
+            {
+                credentials = GoogleCredential.FromFile("app/Infrastructure/Services/Configs/gcp-credentials-service-account.json");
+            }
+            else
+            {
+                var jsonCredentials = Environment.GetEnvironmentVariable("GCP_CREDENTIALS");
+                credentials = GoogleCredential.FromJson(jsonCredentials);
+            }
+                
             _storageClient = StorageClient.Create(credentials);
         }
         
