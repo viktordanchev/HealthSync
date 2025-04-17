@@ -5,7 +5,7 @@ WORKDIR /app
 COPY Client/package.json ./
 COPY Client/package-lock.json ./
 
-RUN npm install --production
+RUN npm install
 
 COPY Client/ ./
 
