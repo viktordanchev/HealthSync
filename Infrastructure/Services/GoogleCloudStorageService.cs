@@ -17,7 +17,7 @@ namespace Infrastructure.Services
 
             if (environment.IsDevelopment())
             {
-                credentials = GoogleCredential.FromFile("app/Infrastructure/Services/Configs/gcp-credentials-service-account.json");
+                credentials = GoogleCredential.FromFile("Infrastructure/Services/Configs/gcp-credentials-service-account.json");
             }
             else
             {
