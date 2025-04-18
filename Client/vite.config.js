@@ -7,5 +7,10 @@ export default defineConfig({
     server: {
         host: '0.0.0.0',
         port: 5173,
+        allowedHosts: [
+            'healthsync-client.fly.dev',
+            'localhost',
+            '0.0.0.0'
+        ]
     }
 })
