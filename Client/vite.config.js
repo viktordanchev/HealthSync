@@ -8,7 +8,7 @@ export default defineConfig({
         host: '0.0.0.0',
         port: 5173,
         allowedHosts: [
-            'healthsync-client.fly.dev',
+            'healthsync-client.up.railway.app',
             'localhost',
             '0.0.0.0'
         ]
