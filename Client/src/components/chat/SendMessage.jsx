@@ -42,7 +42,7 @@ function SendMessage({ connection, updateMessages }) {
 
                 setIsLoading(true);
                 await new Promise(res => setTimeout(res, 2000));
-                const response = await fetch('https://healthsync-restapi.fly.dev/account/uploadImage', {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/account/uploadImage`, {
                     method: 'POST',
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
