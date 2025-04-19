@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import DaysOffCalendar from './DaysoffCalendar';
+import DaysOffCalendar from './DaysOffCalendar';
 import apiRequest from '../../services/apiRequest';
 import { useMessage } from '../../contexts/MessageContext';
 import { useLoading } from '../../contexts/LoadingContext';
