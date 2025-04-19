@@ -8,7 +8,7 @@ namespace Core.Interfaces.Service
     {
         Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail);
         Task<DoctorDetailsResponse> GetDoctorDetailsAsync(int doctorId);
-        Task AddDoctorAsync(BecomeDoctorRequest requestData, string userId);
+        Task AddDoctorAsync(ProfileInfoRequest requestData, string userId);
         Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
         Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync();
     }

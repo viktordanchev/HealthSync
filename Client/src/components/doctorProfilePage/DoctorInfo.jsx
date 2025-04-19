@@ -8,6 +8,7 @@ import { useLoading } from '../../contexts/LoadingContext';
 import { useMessage } from '../../contexts/MessageContext';
 import ProfilePhoto from '../../components/ProfilePhoto';
 import DropdownMenu from '../../components/DropdownMenu';
+import apiRequest from '../../services/apiRequest';
 
 function DoctorInfo({ doctorData, hospitals, specialties }) {
     const { isStillAuth } = useAuthContext();
@@ -31,7 +32,9 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
         try {
             setIsLoading(true);
 
-            await new Promise(res => setTimeout(res, 2000));
+            const response = await apiRequest('doctors', 'updateProfileInfo', values, localStorage.getItem('accessToken'), 'POST', false);
+
+            showMessage(response.message, 'message');
         } catch (error) {
             console.error(error);
         } finally {

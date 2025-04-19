@@ -2,7 +2,7 @@
 import apiRequest from '../services/apiRequest';
 import Loading from '../components/Loading';
 import WeeklySchedule from '../components/doctorProfilePage/WeeklySchedule';
-import DaysOff from '../components/doctorProfilePage/Daysoff';
+import DaysOff from '../components/doctorProfilePage/DaysOff';
 import DoctorInfo from '../components/doctorProfilePage/DoctorInfo';
 
 function DoctorProfilePage() {

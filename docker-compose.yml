@@ -13,8 +13,6 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
     networks:
       - app-network
-    volumes:
-      - ./Infrastructure/Services/Configs/gcp-credentials-service-account.json:/app/Infrastructure/Services/Configs/gcp-credentials-service-account.json:ro
     depends_on:
       - sqlserver
 

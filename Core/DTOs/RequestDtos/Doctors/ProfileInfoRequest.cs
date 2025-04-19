@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.DTOs.RequestDtos.Doctors
 {
-    public class BecomeDoctorRequest
+    public class ProfileInfoRequest
     {
         private string? contactEmail;
         private string? contactPhoneNumber;

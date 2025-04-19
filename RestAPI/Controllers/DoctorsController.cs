@@ -98,7 +98,7 @@ namespace RestAPI.Controllers
 
         [HttpPost("becomeDoctor")]
         [Authorize]
-        public async Task<IActionResult> BecomeDoctor([FromForm] BecomeDoctorRequest request)
+        public async Task<IActionResult> BecomeDoctor([FromForm] ProfileInfoRequest request)
         {
             try
             {
@@ -154,6 +154,13 @@ namespace RestAPI.Controllers
             await _doctorScheduleService.UpdateDaysOffAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)!, daysOff);
 
             return Ok(new { Message = UpdatedDaysOff });
+        }
+
+        [HttpPost("updateProfileInfo")]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> UpdateProfileInfo([FromBody] ProfileInfoRequest data)
+        {
+            return Ok();
         }
     }
 }

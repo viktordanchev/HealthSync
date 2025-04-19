@@ -12,15 +12,15 @@ namespace Core.Services
     {
         private readonly IDoctorsRepository _doctorsRepository;
         private readonly ISpecialtiesRepository _specialtiesRepo;
-        private readonly IGoogleCloudStorageService _GCSService;
+        private readonly IBlobStorageServiceService _BlobStorageService;
 
         public DoctorsService(IDoctorsRepository repository,
             ISpecialtiesRepository specialtiesRepo, 
-            IGoogleCloudStorageService gcsService)
+            IBlobStorageServiceService blobStorageService)
         {
             _doctorsRepository = repository;
             _specialtiesRepo = specialtiesRepo;
-            _GCSService = gcsService;
+            _BlobStorageService = blobStorageService;
         }
 
         public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail)
@@ -53,9 +53,9 @@ namespace Core.Services
             return doctor;
         }
 
-        public async Task AddDoctorAsync(BecomeDoctorRequest requestData, string userId)
+        public async Task AddDoctorAsync(ProfileInfoRequest requestData, string userId)
         {
-            var imgUrl = await _GCSService.UploadImageAsync(requestData.ProfilePhoto, GoogleStorageConstants.ProfileImages);
+            var imgUrl = await _BlobStorageService.UploadImageAsync(requestData.ProfilePhoto, BlobStorageContainers.ProfileImages);
 
             var doctorId = await _doctorsRepository.AddDoctorAsync(requestData, userId, imgUrl);
 

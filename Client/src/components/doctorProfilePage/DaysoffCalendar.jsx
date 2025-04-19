@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function DaysoffCalendar({ daysOff, setDaysOff }) {
+function DaysOffCalendar({ daysOff, setDaysOff }) {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [days, setDays] = useState([]);
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -78,4 +78,4 @@ function DaysoffCalendar({ daysOff, setDaysOff }) {
     );
 }
 
-export default DaysoffCalendar;
+export default DaysOffCalendar;

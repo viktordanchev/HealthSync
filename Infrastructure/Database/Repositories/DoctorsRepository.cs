@@ -64,7 +64,7 @@ namespace Infrastructure.Database.Repositories
             return doctorDetails;
         }
 
-        public async Task<int> AddDoctorAsync(BecomeDoctorRequest requestData, string userId, string imgUrl)
+        public async Task<int> AddDoctorAsync(ProfileInfoRequest requestData, string userId, string imgUrl)
         {
             var doctor = new Doctor()
             {

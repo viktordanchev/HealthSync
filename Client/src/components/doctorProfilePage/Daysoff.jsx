@@ -1,11 +1,11 @@
 ﻿import React, { useState, useEffect } from 'react';
-import DaysoffCalendar from './DaysoffCalendar';
+import DaysOffCalendar from './DaysOffCalendar';
 import apiRequest from '../../services/apiRequest';
 import { useMessage } from '../../contexts/MessageContext';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useAuthContext } from '../../contexts/AuthContext';
 
-function Daysoff({ data }) {
+function DaysOff({ data }) {
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
     const { isStillAuth } = useAuthContext();
@@ -60,4 +60,4 @@ function Daysoff({ data }) {
     );
 }
 
-export default Daysoff;
+export default DaysOff;

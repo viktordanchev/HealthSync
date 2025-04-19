@@ -12,12 +12,12 @@ namespace Core.Services
     public class ChatService : IChatService
     {
         private readonly IChatRepository _chatRepo;
-        private readonly IGoogleCloudStorageService _GCSService;
+        private readonly IBlobStorageServiceService _BlobStorageService;
 
-        public ChatService(IChatRepository chatRepo, IGoogleCloudStorageService gcsService)
+        public ChatService(IChatRepository chatRepo, IBlobStorageServiceService blobStorageService)
         {
             _chatRepo = chatRepo;
-            _GCSService = gcsService;
+            _BlobStorageService = blobStorageService;
         }
 
         public async Task AddMessage(AddMessageRequest requestData)
@@ -38,7 +38,7 @@ namespace Core.Services
 
             foreach (var img in images)
             {
-                imgUrls.Add(await _GCSService.UploadImageAsync(img, GoogleStorageConstants.ChatImages));
+                imgUrls.Add(await _BlobStorageService.UploadImageAsync(img, BlobStorageContainers.ChatImages));
             }
 
             return imgUrls;
