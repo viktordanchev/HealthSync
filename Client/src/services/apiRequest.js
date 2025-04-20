@@ -1,7 +1,6 @@
 ﻿import { fetchError } from '../constants/errors';
 
-const url = import.meta.env.VITE_API_URL;
-console.log(url);
+const apiUrl = import.meta.env.VITE_API_URL;
 const headers = { 'Content-Type': 'application/json' };
 
 async function apiRequest(controller, action, values, jwtToken, method, credentials) {
@@ -23,7 +22,7 @@ async function apiRequest(controller, action, values, jwtToken, method, credenti
     }
 
     try {
-        const response = await fetch(`${url}/${controller}/${action}`, requestOptions);
+        const response = await fetch(`${apiUrl}/${controller}/${action}`, requestOptions);
         if (response.status >= 500) {
             throw new Error(fetchError);
         }
