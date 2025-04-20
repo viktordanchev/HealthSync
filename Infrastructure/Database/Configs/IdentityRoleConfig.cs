@@ -15,7 +15,7 @@ namespace Infrastructure.Database.Configs
         {
             var role1 = new IdentityRole()
             {
-                Id = "a550b411-e5c7-407f-aaba-35161bab127e",
+                Id = "87ac5db3-1586-4580-8037-ed108b66a9b1",
                 Name = "Doctor",
                 NormalizedName = "DOCTOR"
             };
