@@ -101,7 +101,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cdb3e6c4-006f-4202-a45e-b0d256fc494c",
+                            ConcurrencyStamp = "84857d97-f105-475f-aa55-b51f37d4cbb2",
                             Email = "i.ivanov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivan",
@@ -109,9 +109,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOV@MAIL.COM",
                             NormalizedUserName = "I.IVANOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFf4J7C+1QPwczZLAA5wGKpvGcS9dwxz7MhXlmqoWuDAqMaNBW5swB9+K81NEa/zfQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECgEG8WGDUlCRepLNVxyELJpcf7Nr8kZA0JL/V2xfb9W2zufJYQuvmOwzrN4/llXJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "594cfb7a-09ed-490f-a0bb-0ae01e0bf59c",
+                            SecurityStamp = "4c83518f-c2e1-4dc7-89db-938fc864a59a",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanov@mail.com"
                         },
@@ -119,7 +119,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c5abe0a-90a0-4a2f-8d40-1d161bf8a53c",
+                            ConcurrencyStamp = "faa9188e-5d81-44d3-a084-cf3054eb17f5",
                             Email = "m.marinova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Maria",
@@ -127,9 +127,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.MARINOVA@MAIL.COM",
                             NormalizedUserName = "M.MARINOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPGuGU6pqRSGWxyqQJtMTAO1zQ3LeZTMiQtzChBMhOYxwFtm6OQOtd4StI5ooEqitg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAPQUCMvcHIJPFuvQ654i+KLvSQxW4djh74g/klKqTypqnQ9LYDMWiERdXFK4Dikig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7b1e35d0-c45c-43b0-ae36-bf668f7e8c6a",
+                            SecurityStamp = "9d0d1dc5-96af-4747-8844-d2a06bb366a9",
                             TwoFactorEnabled = false,
                             UserName = "m.marinova@mail.com"
                         },
@@ -137,7 +137,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "88cd5a7b-01d8-49b4-8688-35cd23751532",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "59376bad-9631-48a3-a917-3e7b6ca12a1f",
+                            ConcurrencyStamp = "38170b2c-fd6b-49a3-bdc4-2f182fe99c52",
                             Email = "a.kirilov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Aleks",
@@ -145,9 +145,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "A.KIRILOV@MAIL.COM",
                             NormalizedUserName = "A.KIRILOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMelOHmTI65jEN2yQEfV2x2sNtnaZGijS6fMLSWiXl/N1GdoQm7d29Dqu9qfT3fLgg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGuArkAhwHwaA73tSaYZPyEYESmFGpOrElK/x1xxMtgGflPAeq6md/TAbDA9Vbp62w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3a034a3f-1277-4eb6-9b3b-1a1112c53ba6",
+                            SecurityStamp = "14bd74e2-09cd-4093-b11c-857b9fb47900",
                             TwoFactorEnabled = false,
                             UserName = "a.kirilov@mail.com"
                         },
@@ -155,7 +155,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c1683f9-4a00-48a3-a749-c68f1d547db9",
+                            ConcurrencyStamp = "5d6e9443-ac56-42e2-b377-a78bf0cce116",
                             Email = "k.conev@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Kiril",
@@ -163,9 +163,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "K.CONEV@MAIL.COM",
                             NormalizedUserName = "K.CONEV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIc2fINBR8xTnAB3Mimr4e601MwcOYLKmWf5q5WKmATSwIS0LHM0ylBrCk43elCSvg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBY1XJNtB9mOvBEV0WKRbpgf5jZgCxPJuMXEt7w2I2hdY1F5b5WdMbYQ8e28f1tK4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ed15dc08-8541-457b-9830-48a0cb9e5b18",
+                            SecurityStamp = "29124b25-9238-4e21-b011-9fc3ec25927d",
                             TwoFactorEnabled = false,
                             UserName = "k.conev@mail.com"
                         },
@@ -173,7 +173,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b7a912e-83d5-489a-8f09-a81d7a0aefca",
+                            ConcurrencyStamp = "28f53598-8706-42c2-be73-f342e784db1e",
                             Email = "i.ivanova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivana",
@@ -181,9 +181,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOVA@MAIL.COM",
                             NormalizedUserName = "I.IVANOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECwwAg0FF8THlZyXSgfKjxTT1OZQmALlrFBmowDQ70dSCwhdcNc2BNJ9wSO+CbgxQQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFtjeh0+a/b6GJ3pr03B8jr65HRmaSOJQNNKG+cY2N4z0CLqPNEBZiemk9ye6Uq3aw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cf89699b-2f53-4ac0-9c14-544fd1a022a2",
+                            SecurityStamp = "96565516-e2cc-45aa-be06-bb5663975132",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanova@mail.com"
                         },
@@ -191,7 +191,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4e6bf105-e0a0-4fb6-8e75-932c4a591648",
+                            ConcurrencyStamp = "2d1556e5-e070-4d67-9a78-11af8f7ddc63",
                             Email = "m.kirilova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Monika",
@@ -199,9 +199,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.KIRILOVA@MAIL.COM",
                             NormalizedUserName = "M.KIRILOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIepwCr63BKrjwJApE/sm2s1J/IZxqJYR6zhMr7YifHX+nENZitCSCOj/5TWmFks7Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELX5BqiSiyOOrQeLDz3py5XjLVgJIRb/wK+iNNdyxqz61ODqs6qbtGheeUnAkVW45g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7905ec7-863c-4b15-bd85-9f7874eb0d51",
+                            SecurityStamp = "c551c3a7-d2d3-4d7a-83d4-a2d81b6d2844",
                             TwoFactorEnabled = false,
                             UserName = "m.kirilova@mail.com"
                         },
@@ -209,7 +209,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "78850da7-a0ff-42f3-a862-d162457910a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c4c178ab-5cc9-4d01-ba7e-a854d13e30c7",
+                            ConcurrencyStamp = "c95b0ba0-0b23-4097-9499-1dda237c87ad",
                             Email = "v.yankova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Vanya",
@@ -217,9 +217,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "V.YANKOVA@MAIL.COM",
                             NormalizedUserName = "V.YANKOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMtxz8JJDyBDuRBlLdens3nJvci8qVAhD7IFSsHsFln201LoJ4clmMs/ogR32uVQAQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEqHosKDBjvnyg05nJHSsLAgA4nd9et3iRQdqKPP5/RLKaFHEPlTRGKVlpnSe80ciw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d6da154f-942c-492c-8929-1e27530c6a9e",
+                            SecurityStamp = "1893ef9d-bda0-474e-b5f0-a637c7a97d23",
                             TwoFactorEnabled = false,
                             UserName = "v.yankova@mail.com"
                         });
@@ -303,7 +303,7 @@ namespace Infrastructure.Migrations
                             Id = 1,
                             HospitalId = 1,
                             IdentityId = "a3717562-385e-41ce-9eff-0f1b994e5548",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Ivan-Ivanov.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Ivan-Ivanov.jpg",
                             Information = "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care.",
                             SpecialtyId = 1
                         },
@@ -312,7 +312,7 @@ namespace Infrastructure.Migrations
                             Id = 2,
                             HospitalId = 1,
                             IdentityId = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Maria-Marinova.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Maria-Marinova.jpg",
                             SpecialtyId = 2
                         },
                         new
@@ -320,7 +320,7 @@ namespace Infrastructure.Migrations
                             Id = 3,
                             HospitalId = 1,
                             IdentityId = "88cd5a7b-01d8-49b4-8688-35cd23751532",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Aleks-Kirilov.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Aleks-Kirilov.jpg",
                             SpecialtyId = 2
                         },
                         new
@@ -328,7 +328,7 @@ namespace Infrastructure.Migrations
                             Id = 4,
                             HospitalId = 1,
                             IdentityId = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Kiril-Conev.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Kiril-Conev.jpg",
                             SpecialtyId = 3
                         },
                         new
@@ -336,7 +336,7 @@ namespace Infrastructure.Migrations
                             Id = 5,
                             HospitalId = 2,
                             IdentityId = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Ivana-Ivanova.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Ivana-Ivanova.jpg",
                             SpecialtyId = 4
                         },
                         new
@@ -344,7 +344,7 @@ namespace Infrastructure.Migrations
                             Id = 6,
                             HospitalId = 2,
                             IdentityId = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
-                            ImgUrl = "https://storage.cloud.google.com/healthsync/profile-images/Monika-Kirilova.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Monika-Kirilova.jpg",
                             SpecialtyId = 3
                         },
                         new
