@@ -22,7 +22,7 @@ async function apiRequest(controller, action, values, jwtToken, method, credenti
     }
 
     try {
-        const response = await fetch(`https://healthsync-restapi.up.railway.app/${controller}/${action}`, requestOptions);
+        const response = await fetch(`${url}/${controller}/${action}`, requestOptions);
         if (response.status >= 500) {
             throw new Error(fetchError);
         }
