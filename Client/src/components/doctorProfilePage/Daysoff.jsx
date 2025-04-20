@@ -5,7 +5,7 @@ import { useMessage } from '../../contexts/MessageContext';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useAuthContext } from '../../contexts/AuthContext';
 
-function DaysOff({ data }) {
+function DaysOff({ dataa }) {
     const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
     const { isStillAuth } = useAuthContext();
