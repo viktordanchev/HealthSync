@@ -11,7 +11,6 @@ function TopRatedDoctors() {
     useEffect(() => {
         const receiveData = async () => {
             try {
-                await new Promise((resolve) => setTimeout(resolve, 1500));
                 const doctors = await apiRequest('doctors', 'getTopDoctors', undefined, undefined, 'GET', false);
 
                 setDoctors(doctors);
