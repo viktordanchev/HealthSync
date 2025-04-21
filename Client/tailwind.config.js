@@ -31,7 +31,7 @@ module.exports = {
             animation: {
                 grow: 'grow 1.2s ease-in-out infinite',
                 'bounce-left-right': 'bounceLeftRight 0.2s ease-in-out 3',
-                bounce: "bounce 1s infinite"
+                bounce: 'bounce 1s infinite'
             },
             keyframes: {
                 grow: {

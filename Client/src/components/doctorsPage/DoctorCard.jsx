@@ -21,7 +21,7 @@ function DoctorCard({ doctor }) {
             <div className="w-full flex justify-evenly text-gray-700">
                 <div className="flex flex-col items-center">
                     <p>Rating</p>
-                    <p className="font-bold">{doctor.rating > 0 ? doctor.rating : 0} / 5</p>
+                    <p className="font-bold">{doctor.rating} / 5</p>
                 </div>
                 <div className="flex flex-col items-center">
                     <p>Reviews</p>

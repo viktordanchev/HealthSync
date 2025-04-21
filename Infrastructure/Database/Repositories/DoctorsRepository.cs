@@ -3,16 +3,19 @@ using Core.DTOs.ResponseDtos.Doctors;
 using Core.Interfaces.Repository;
 using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace Infrastructure.Database.Repositories
 {
     public class DoctorsRepository : IDoctorsRepository
     {
         private readonly HealthSyncDbContext _context;
+        private readonly bool _isDevEnvironment;
 
-        public DoctorsRepository(HealthSyncDbContext context)
+        public DoctorsRepository(HealthSyncDbContext context, IHostEnvironment environment)
         {
             _context = context;
+            _isDevEnvironment = environment.EnvironmentName == "Development";
         }
 
         public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail)
@@ -30,7 +33,7 @@ namespace Infrastructure.Database.Repositories
                     Id = d.Id,
                     IdentityId = d.IdentityId,
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
-                    ImgUrl = d.ImgUrl,
+                    ImgUrl = _isDevEnvironment ? null : d.ImgUrl,
                     Specialty = d.Specialty.Type,
                     Rating = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,
                     TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
@@ -87,7 +90,7 @@ namespace Infrastructure.Database.Repositories
             var doctorInfo = await _context.Doctors
                 .Where(d => d.IdentityId == userId)
                 .Select(d => new DoctorPersonalInfoResponse()
-                { 
+                {
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = d.ImgUrl,
                     HospitalId = d.HospitalId,
@@ -138,6 +141,23 @@ namespace Infrastructure.Database.Repositories
                 .FirstAsync(d => d.IdentityId == userId);
 
             return doctor.Id;
+        }
+
+        public async Task<IEnumerable<DoctorResponse>> GetTopDoctorsAsync()
+        {
+            return await _context.Doctors
+                .AsNoTracking()
+                .Select(d => new DoctorResponse()
+                {
+                    Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
+                    ImgUrl = _isDevEnvironment ? null : d.ImgUrl,
+                    Specialty = d.Specialty.Type,
+                    Rating = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,
+                    TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
+                })
+                .OrderByDescending(d => d.Rating)
+                .Take(3)
+                .ToListAsync();
         }
     }
 }

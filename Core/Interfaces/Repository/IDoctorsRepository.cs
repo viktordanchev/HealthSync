@@ -11,5 +11,6 @@ namespace Core.Interfaces.Repository
         Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
         Task GenerateEmptyDoctorWeekSchedule(int doctorId);
         Task<int> GetDoctorIdAsync(string userId);
+        Task<IEnumerable<DoctorResponse>> GetTopDoctorsAsync();
     }
 }

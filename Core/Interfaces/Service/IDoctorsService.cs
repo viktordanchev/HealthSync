@@ -11,5 +11,6 @@ namespace Core.Interfaces.Service
         Task AddDoctorAsync(ProfileInfoRequest requestData, string userId);
         Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
         Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync();
+        Task<IEnumerable<DoctorResponse>> GetTopDoctorsAsync();
     }
 }

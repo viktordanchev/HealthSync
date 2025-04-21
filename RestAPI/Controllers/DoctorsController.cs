@@ -162,5 +162,13 @@ namespace RestAPI.Controllers
         {
             return Ok();
         }
+
+        [HttpGet("getTopDoctors")]
+        public async Task<IActionResult> GetTopDoctors()
+        {
+            var doctors = await _doctorService.GetTopDoctorsAsync();
+
+            return Ok(doctors);
+        }
     }
 }

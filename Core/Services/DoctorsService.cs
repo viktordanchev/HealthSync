@@ -5,6 +5,7 @@ using Core.DTOs.ResponseDtos.Specialties;
 using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
+using static Common.Constants;
 
 namespace Core.Services
 {
@@ -15,7 +16,7 @@ namespace Core.Services
         private readonly IBlobStorageServiceService _BlobStorageService;
 
         public DoctorsService(IDoctorsRepository repository,
-            ISpecialtiesRepository specialtiesRepo, 
+            ISpecialtiesRepository specialtiesRepo,
             IBlobStorageServiceService blobStorageService)
         {
             _doctorsRepository = repository;
@@ -74,6 +75,18 @@ namespace Core.Services
             var specialties = await _specialtiesRepo.GetSpecialtiesAsync();
 
             return specialties;
+        }
+
+        public async Task<IEnumerable<DoctorResponse>> GetTopDoctorsAsync()
+        {
+            var doctors = (await _doctorsRepository.GetTopDoctorsAsync()).ToList();
+            
+            if (doctors.Count() >= 2)
+            {
+                (doctors[0], doctors[1]) = (doctors[1], doctors[0]);
+            }
+
+            return doctors;
         }
     }
 }
