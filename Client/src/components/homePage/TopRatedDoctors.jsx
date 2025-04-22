@@ -1,9 +1,11 @@
 ﻿import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import doctorProfile from '../../assets/images/doctor-profile.jpg';
 import apiRequest from '../../services/apiRequest';
 import Loading from '../Loading';
 
 function TopRatedDoctors() {
+    const navigate = useNavigate();
     const [isImageLoaded, setIsImageLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [doctors, setDoctors] = useState([]);
@@ -68,9 +70,8 @@ function TopRatedDoctors() {
                 <h2 className="text-2xl font-bold mb-4">Are You a Doctor?</h2>
                 <p>If you're a doctor looking to elevate your career and connect with more patients, our platform is the right place for you. Join us and grow with a trusted medical community.</p>
                 <div className="text-center pt-6">
-                    <button
-                        className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
-                        type="submit">
+                    <button className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
+                        onClick={() => navigate("/becomeDoctor")}>
                         Join Us
                     </button>
                 </div>

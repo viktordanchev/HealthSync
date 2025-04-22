@@ -79,8 +79,8 @@ function App() {
                                     <Route path="/doctors/:name/:specialty" element={<DoctorDetailsPage />} />
                                     <Route path="/meetings" element={<ProtectedRoute><UserMeetingsPage /></ProtectedRoute>} />
                                     <Route path="/becomeDoctor" element={<ProtectedRoute><BecomeDoctorPage /></ProtectedRoute>} />
-                                    <Route path="/doctorProfile" element={<ProtectedRoute roleNeeded={'Doctor'}><DoctorProfilePage /></ProtectedRoute>} />
-                                    <Route path="/workSchedule" element={<ProtectedRoute roleNeeded={'Doctor'}><WorkSchedulePage /></ProtectedRoute>} />
+                                    <Route path="/doctorProfile" element={<ProtectedRoute role={'Doctor'}><DoctorProfilePage /></ProtectedRoute>} />
+                                    <Route path="/workSchedule" element={<ProtectedRoute role={'Doctor'}><WorkSchedulePage /></ProtectedRoute>} />
                                 </Routes>
                             </MessageProvider>
                             <Chat />
