@@ -6,6 +6,7 @@ using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
 using static Common.Constants;
+using static Common.Messages;
 
 namespace Core.Services
 {
@@ -27,6 +28,7 @@ namespace Core.Services
         public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail)
         {
             var doctors = await _doctorsRepository.GetDoctorsAsync(requestData, userEmail);
+            doctors.ToList().ForEach(d => d.Rating = Math.Round(d.Rating, 1));
 
             switch (requestData.Sorting.ToString())
             {
@@ -50,6 +52,7 @@ namespace Core.Services
         public async Task<DoctorDetailsResponse> GetDoctorDetailsAsync(int doctorId)
         {
             var doctor = await _doctorsRepository.GetDoctorDetailsAsync(doctorId);
+            doctor.Rating = Math.Round(doctor.Rating, 1);
 
             return doctor;
         }
