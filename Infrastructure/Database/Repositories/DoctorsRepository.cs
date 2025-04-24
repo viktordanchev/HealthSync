@@ -159,5 +159,17 @@ namespace Infrastructure.Database.Repositories
                 .Take(3)
                 .ToListAsync();
         }
+
+        public async Task UpdateProfileInfo(ProfileInfoRequest requestData, string userId)
+        {
+            var doctor = await _context.Doctors.FirstAsync(d => d.IdentityId == userId);
+
+            doctor.ContactEmail = requestData.ContactEmail;
+            doctor.ContactPhoneNumber = requestData.ContactPhoneNumber;
+            doctor.HospitalId = requestData.HospitalId;
+            doctor.SpecialtyId = requestData.SpecialtyId;
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

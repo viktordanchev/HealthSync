@@ -5,8 +5,6 @@ using Core.DTOs.ResponseDtos.Specialties;
 using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
-using static Common.Constants;
-using static Common.Messages;
 
 namespace Core.Services
 {
@@ -59,7 +57,7 @@ namespace Core.Services
 
         public async Task AddDoctorAsync(ProfileInfoRequest requestData, string userId)
         {
-            var imgUrl = await _BlobStorageService.UploadImageAsync(requestData.ProfilePhoto, BlobStorageContainers.ProfileImages);
+            var imgUrl = await _BlobStorageService.UploadProfileImageAsync(requestData.ProfilePhoto, BlobStorageContainers.ProfileImages, userId);
 
             var doctorId = await _doctorsRepository.AddDoctorAsync(requestData, userId, imgUrl);
 
@@ -82,15 +80,20 @@ namespace Core.Services
 
         public async Task<IEnumerable<DoctorResponse>> GetTopDoctorsAsync()
         {
-            var doctors = (await _doctorsRepository.GetTopDoctorsAsync()).ToList();
-            doctors.ForEach(d => d.Rating = Math.Round(d.Rating, 1));
-
-            if (doctors.Count() >= 2)
-            {
-                (doctors[0], doctors[1]) = (doctors[1], doctors[0]);
-            }
+            var doctors = await _doctorsRepository.GetTopDoctorsAsync();
+            doctors.ToList().ForEach(d => d.Rating = Math.Round(d.Rating, 1));
 
             return doctors;
+        }
+
+        public async Task UpdateProfileInfo(ProfileInfoRequest requestData, string userId)
+        {
+            if(await _BlobStorageService.DeleteProfileImageAsync(userId, BlobStorageContainers.ProfileImages))
+            {
+                await _BlobStorageService.UploadProfileImageAsync(requestData.ProfilePhoto, BlobStorageContainers.ProfileImages, userId);
+            }
+
+            await _doctorsRepository.UpdateProfileInfo(requestData, userId);
         }
     }
 }

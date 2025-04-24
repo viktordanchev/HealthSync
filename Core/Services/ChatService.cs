@@ -20,11 +20,9 @@ namespace Core.Services
             _BlobStorageService = blobStorageService;
         }
 
-        public async Task AddMessage(AddMessageRequest requestData)
+        public async Task<int> AddMessage(AddMessageRequest requestData)
         {
-            var messageId = await _chatRepo.AddMessage(requestData);
-
-            await _chatRepo.AddImagesAsync(messageId, requestData.Images);
+            return await _chatRepo.AddMessage(requestData);
         }
 
         public async Task<IEnumerable<ChatMessageResponse>> GetChatHistory(GetChatHistoryRequest requestData)
@@ -32,16 +30,9 @@ namespace Core.Services
             return await _chatRepo.GetChatHistory(requestData);
         }
 
-        public async Task<IEnumerable<string>> UploadImageAsync(IEnumerable<IFormFile> images)
+        public async Task<IEnumerable<string>> UploadImagesAsync(IEnumerable<IFormFile> images)
         {
-            var imgUrls = new List<string>();
-
-            foreach (var img in images)
-            {
-                imgUrls.Add(await _BlobStorageService.UploadImageAsync(img, BlobStorageContainers.ChatImages));
-            }
-
-            return imgUrls;
+            return await _BlobStorageService.UploadChatImagesAsync(images, BlobStorageContainers.ChatImages);
         }
     }
 }

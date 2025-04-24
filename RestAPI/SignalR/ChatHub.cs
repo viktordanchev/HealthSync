@@ -19,11 +19,12 @@ namespace RestAPI.SignalR
 
         public async Task SendMessage(AddMessageRequest request)
         {
-            await _chatService.AddMessage(request);
+            var messageId = await _chatService.AddMessage(request);
+            var images = await _chatService.UploadImagesAsync(request.Images);
 
             if (_connections.TryGetValue(request.ReceiverId, out var connectionId))
             {
-                await Clients.Client(connectionId).SendAsync("ReceiveMessage", request.SenderId, request.Message, request.DateAndTime, request.Images);
+                await Clients.Client(connectionId).SendAsync("ReceiveMessage", request.SenderId, request.Message, request.DateAndTime, images);
             }
         }
 

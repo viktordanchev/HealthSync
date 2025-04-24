@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPaperclip, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useChat } from '../../contexts/ChatContext';
-import { useAuthContext } from '../../contexts/AuthContext';
 import jwtDecoder from '../../services/jwtDecoder';
-import { useLoading } from '../../contexts/LoadingContext';
 
 function SendMessage({ connection, updateMessages }) {
     const { getReceiverData } = useChat();
-    const { setIsLoading } = useLoading();
     const { userId } = jwtDecoder();
     const [message, setMessage] = useState('');
     const [images, setImages] = useState([]);
@@ -30,42 +27,14 @@ function SendMessage({ connection, updateMessages }) {
     };
 
     const sendMessage = async () => {
-        let imgUrls = [];
-
-        if (images.length > 0) {
-            try {
-                const formData = new FormData();
-
-                images.forEach((img) => {
-                    formData.append('images', img.file);
-                });
-
-                setIsLoading(true);
-                await new Promise(res => setTimeout(res, 2000));
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/account/uploadImage`, {
-                    method: 'POST',
-                    headers: {
-                        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
-                    },
-                    body: formData,
-                });
-
-                imgUrls = await response.json();
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
         const dto = {
             senderId: userId,
             receiverId: getReceiverData().receiverId,
             message: message,
             dateAndTime: new Date(),
-            images: imgUrls
+            images: images.map((img) => img.file)
         };
-        
+
         updateMessages(prevMessages => [...prevMessages, {
             senderId: dto.senderId,
             message: dto.message,

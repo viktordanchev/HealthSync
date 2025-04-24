@@ -14,13 +14,33 @@ namespace Infrastructure.Services
             _connectionString = configuration["AzureStorage:ConnectionString"]!;
         }
 
-        public async Task<string> UploadImageAsync(IFormFile file, string container)
+        public async Task<IEnumerable<string>> UploadChatImagesAsync(IEnumerable<IFormFile> files, string container)
         {
             BlobServiceClient blobServiceClient = new BlobServiceClient(_connectionString);
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(container);
 
-            var fileName = $"{Guid.NewGuid()}-{Path.GetFileName(file.FileName)}";
-            BlobClient blobClient = containerClient.GetBlobClient(fileName);
+            List<string> imgUrls = new List<string>();
+
+            foreach (var file in files)
+            {
+                BlobClient blobClient = containerClient.GetBlobClient(Guid.NewGuid().ToString());
+
+                using (var stream = file.OpenReadStream())
+                {
+                    await blobClient.UploadAsync(stream, overwrite: true);
+                }
+
+                imgUrls.Add(blobClient.Uri.AbsoluteUri);
+            }
+
+            return imgUrls;
+        }
+
+        public async Task<string> UploadProfileImageAsync(IFormFile file, string container, string userId)
+        {
+            BlobServiceClient blobServiceClient = new BlobServiceClient(_connectionString);
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(container);
+            BlobClient blobClient = containerClient.GetBlobClient(userId);
 
             using (var stream = file.OpenReadStream())
             {
@@ -28,6 +48,24 @@ namespace Infrastructure.Services
             }
 
             return blobClient.Uri.AbsoluteUri;
+        }
+
+        public async Task<bool> DeleteProfileImageAsync(string fileName, string container)
+        {
+            try
+            {
+                BlobServiceClient blobServiceClient = new BlobServiceClient(_connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(container);
+                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+
+                await blobClient.DeleteIfExistsAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

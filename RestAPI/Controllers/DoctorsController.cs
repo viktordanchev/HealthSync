@@ -160,6 +160,8 @@ namespace RestAPI.Controllers
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> UpdateProfileInfo([FromBody] ProfileInfoRequest data)
         {
+            await _doctorService.UpdateProfileInfo(data, User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
             return Ok();
         }
 
