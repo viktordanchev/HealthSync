@@ -80,7 +80,8 @@ namespace Core.Services
         public async Task<IEnumerable<DoctorResponse>> GetTopDoctorsAsync()
         {
             var doctors = (await _doctorsRepository.GetTopDoctorsAsync()).ToList();
-            
+            doctors.ForEach(d => d.Rating = Math.Round(d.Rating, 1));
+
             if (doctors.Count() >= 2)
             {
                 (doctors[0], doctors[1]) = (doctors[1], doctors[0]);
