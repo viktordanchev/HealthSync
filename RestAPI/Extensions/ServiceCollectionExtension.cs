@@ -1,4 +1,8 @@
-﻿using Core.Interfaces.ExternalServices;
+﻿using System.Security.Claims;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
 using Core.Services;
@@ -14,10 +18,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RestAPI.Filters;
 using RestAPI.Services;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Server.Extensions
 {
@@ -27,10 +27,10 @@ namespace Server.Extensions
         {
             var connectionString = environment.IsDevelopment()
                 ? config.GetConnectionString("LocalConnection")
-                : config.GetConnectionString("AzureConnection");
+                : config.GetConnectionString("RailwayConnection");
 
             services.AddDbContext<HealthSyncDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseNpgsql(connectionString));
         }
 
         public static void AddIdentityExtension(this IServiceCollection services)

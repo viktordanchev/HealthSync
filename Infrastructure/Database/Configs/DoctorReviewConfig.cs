@@ -8,6 +8,10 @@ namespace Infrastructure.Database.Configs
     {
         public void Configure(EntityTypeBuilder<DoctorReview> builder)
         {
+            builder
+                .Property(dr => dr.DateAndTime)
+                .HasColumnType("timestamp without time zone");
+
             builder.HasData(SeedReviews());
         }
 

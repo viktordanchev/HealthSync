@@ -17,6 +17,10 @@ namespace Infrastructure.Database.Configs
                 .HasOne(cm => cm.Receiver)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .Property(cm => cm.DateAndTime)
+                .HasColumnType("timestamp without time zone");
         }
     }
 }

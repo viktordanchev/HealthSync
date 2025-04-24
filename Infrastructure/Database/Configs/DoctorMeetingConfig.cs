@@ -17,6 +17,10 @@ namespace Infrastructure.Database.Configs
                 .HasOne(m => m.Patient)
                 .WithMany(p => p.Meetings)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .Property(dm => dm.DateAndTime)
+                .HasColumnType("timestamp without time zone");
         }
     }
 }

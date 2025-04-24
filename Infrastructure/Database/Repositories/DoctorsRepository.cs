@@ -152,7 +152,7 @@ namespace Infrastructure.Database.Repositories
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
                     ImgUrl = _isDevEnvironment ? null : d.ImgUrl,
                     Specialty = d.Specialty.Type,
-                    Rating = d.Reviews.Any() ? Math.Round(d.Reviews.Average(r => r.Rating), 1) : 0,
+                    Rating = d.Reviews.Any() ? d.Reviews.Average(r => r.Rating) : 0,
                     TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
                 })
                 .OrderByDescending(d => d.Rating)

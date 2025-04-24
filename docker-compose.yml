@@ -14,7 +14,7 @@ services:
     networks:
       - app-network
     depends_on:
-      - sqlserver
+      - postgresql
 
   frontend:
     build:
@@ -35,14 +35,15 @@ services:
     networks:
       - app-network
 
-  sqlserver:
-    image: "mcr.microsoft.com/mssql/server:2022-latest"
+  postgresql:
+    image: postgres:15
     container_name: database
     environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "mlEVg137l73S7YNH"
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: mlEVg137l73S7YNH
+      POSTGRES_DB: healthsync
     ports:
-      - "1433:1433"
+      - "5432:5432"
     networks:
       - app-network
 
