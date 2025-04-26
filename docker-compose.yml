@@ -3,7 +3,7 @@ services:
   restapi:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     image: healthsync-restapi
     container_name: restapi
     ports:

@@ -3,19 +3,16 @@ using Core.DTOs.ResponseDtos.Doctors;
 using Core.Interfaces.Repository;
 using Infrastructure.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 
 namespace Infrastructure.Database.Repositories
 {
     public class DoctorsRepository : IDoctorsRepository
     {
         private readonly HealthSyncDbContext _context;
-        private readonly bool _isDevEnvironment;
 
-        public DoctorsRepository(HealthSyncDbContext context, IHostEnvironment environment)
+        public DoctorsRepository(HealthSyncDbContext context)
         {
             _context = context;
-            _isDevEnvironment = environment.EnvironmentName == "Development";
         }
 
         public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail)
@@ -33,7 +30,7 @@ namespace Infrastructure.Database.Repositories
                     Id = d.Id,
                     IdentityId = d.IdentityId,
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
-                    ImgUrl = _isDevEnvironment ? null : d.ImgUrl,
+                    ImgUrl = d.ImgUrl,
                     Specialty = d.Specialty.Type,
                     Rating = d.Reviews.Any() ? d.Reviews.Average(r => r.Rating) : 0,
                     TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
@@ -67,7 +64,7 @@ namespace Infrastructure.Database.Repositories
             return doctorDetails;
         }
 
-        public async Task<int> AddDoctorAsync(ProfileInfoRequest requestData, string userId, string imgUrl)
+        public async Task<int> AddDoctorAsync(ProfileInfoRequest requestData, string userId)
         {
             var doctor = new Doctor()
             {
@@ -76,7 +73,7 @@ namespace Infrastructure.Database.Repositories
                 SpecialtyId = requestData.SpecialtyId,
                 ContactEmail = requestData.ContactEmail,
                 ContactPhoneNumber = requestData.ContactPhoneNumber,
-                ImgUrl = imgUrl
+                ImgUrl = requestData.ProfileImage
             };
 
             await _context.Doctors.AddAsync(doctor);
@@ -150,7 +147,7 @@ namespace Infrastructure.Database.Repositories
                 .Select(d => new DoctorResponse()
                 {
                     Name = $"{d.Identity.FirstName} {d.Identity.LastName}",
-                    ImgUrl = _isDevEnvironment ? null : d.ImgUrl,
+                    ImgUrl = d.ImgUrl,
                     Specialty = d.Specialty.Type,
                     Rating = d.Reviews.Any() ? d.Reviews.Average(r => r.Rating) : 0,
                     TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
@@ -160,7 +157,7 @@ namespace Infrastructure.Database.Repositories
                 .ToListAsync();
         }
 
-        public async Task UpdateProfileInfo(ProfileInfoRequest requestData, string userId)
+        public async Task UpdateProfileInfoAsync(ProfileInfoRequest requestData, string userId)
         {
             var doctor = await _context.Doctors.FirstAsync(d => d.IdentityId == userId);
 
@@ -168,6 +165,7 @@ namespace Infrastructure.Database.Repositories
             doctor.ContactPhoneNumber = requestData.ContactPhoneNumber;
             doctor.HospitalId = requestData.HospitalId;
             doctor.SpecialtyId = requestData.SpecialtyId;
+            doctor.Information = requestData.PersonalInformation;
 
             await _context.SaveChangesAsync();
         }

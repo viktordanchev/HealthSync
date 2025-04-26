@@ -58,28 +58,29 @@ function BecomeDoctorPage() {
         if (!isAuth) return;
 
         try {
-            const formData = new FormData();
-            formData.append('profilePhoto', profilePhoto);
-            formData.append('contactEmail', values.contactEmail);
-            formData.append('contactPhoneNumber', values.contactPhoneNumber);
-            formData.append('hospitalId', values.hospitalId);
-            formData.append('specialtyId', values.specialtyId);
-            
             setIsLoading(true);
 
-            const token = localStorage.getItem('accessToken');
-            const response = await fetch(`${import.meta.env.VITE_API_URL}`, {
+            const formData = new FormData();
+            formData.append('profileImage', profilePhoto);
+
+            const formDataResponse = await fetch(`${import.meta.env.VITE_API_URL}/doctors/updateProfileImage`, {
                 method: 'POST',
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
                 },
                 body: formData,
             });
 
-            const data = await response.json();
+            const data = await formDataResponse.json();
+            const updatedValues = {
+                ...values,
+                profileImage: data.imageUrl
+            };
 
-            update(data.token);
-            showMessage(data.message, 'message');
+            const response = await apiRequest('doctors', 'becomeDoctor', updatedValues, localStorage.getItem('accessToken'), 'POST', false);
+
+            update(response.token);
+            showMessage(response.message, 'message');
 
             navigate('/home');
         } catch (error) {

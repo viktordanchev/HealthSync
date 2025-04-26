@@ -1,9 +1,9 @@
-﻿using Core.DTOs.RequestDtos.Doctors;
+﻿using System.Security.Claims;
+using Core.DTOs.RequestDtos.Doctors;
 using Core.DTOs.ResponseDtos.DoctorSchedule;
 using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using static Common.Errors;
 using static Common.Messages.Doctors;
 
@@ -98,7 +98,7 @@ namespace RestAPI.Controllers
 
         [HttpPost("becomeDoctor")]
         [Authorize]
-        public async Task<IActionResult> BecomeDoctor([FromForm] ProfileInfoRequest request)
+        public async Task<IActionResult> BecomeDoctor([FromBody] ProfileInfoRequest request)
         {
             try
             {
@@ -160,9 +160,9 @@ namespace RestAPI.Controllers
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> UpdateProfileInfo([FromBody] ProfileInfoRequest data)
         {
-            await _doctorService.UpdateProfileInfo(data, User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            await _doctorService.UpdateProfileInfoAsync(data, User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
-            return Ok();
+            return Ok(new { Message = UpdatedProfileInfo });
         }
 
         [HttpGet("getTopDoctors")]
@@ -171,6 +171,22 @@ namespace RestAPI.Controllers
             var doctors = await _doctorService.GetTopDoctorsAsync();
 
             return Ok(doctors);
+        }
+
+        [HttpPost("updateProfileImage")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateProfileImage(IFormFile profileImage)
+        {
+            try
+            {
+                var imageUrl = await _doctorService.UpdateProfileImageAsync(profileImage, User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                
+                return Ok(new { ImageUrl = imageUrl });
+            }
+            catch
+            {
+                return BadRequest(new { ServerError = InvalidRequest });
+            }
         }
     }
 }

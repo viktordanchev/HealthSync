@@ -1,6 +1,7 @@
 ﻿using Core.DTOs.RequestDtos.Doctors;
 using Core.DTOs.ResponseDtos.Doctors;
 using Core.DTOs.ResponseDtos.Specialties;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Interfaces.Service
 {
@@ -12,6 +13,7 @@ namespace Core.Interfaces.Service
         Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
         Task<IEnumerable<SpecialtyResponse>> GetSpecialtiesAsync();
         Task<IEnumerable<DoctorResponse>> GetTopDoctorsAsync();
-        Task UpdateProfileInfo(ProfileInfoRequest requestData, string userId);
+        Task UpdateProfileInfoAsync(ProfileInfoRequest requestData, string userId);
+        Task<string> UpdateProfileImageAsync(IFormFile file, string userId);
     }
 }

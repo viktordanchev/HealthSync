@@ -7,11 +7,11 @@ namespace Core.Interfaces.Repository
     {
         Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail);
         Task<DoctorDetailsResponse> GetDoctorDetailsAsync(int doctorId);
-        Task<int> AddDoctorAsync(ProfileInfoRequest requestData, string userId, string imgUrl);
+        Task<int> AddDoctorAsync(ProfileInfoRequest requestData, string userId);
         Task<DoctorPersonalInfoResponse> GetDoctorPersonalInfoAsync(string userId);
         Task GenerateEmptyDoctorWeekSchedule(int doctorId);
         Task<int> GetDoctorIdAsync(string userId);
         Task<IEnumerable<DoctorResponse>> GetTopDoctorsAsync();
-        Task UpdateProfileInfo(ProfileInfoRequest requestData, string userId);
+        Task UpdateProfileInfoAsync(ProfileInfoRequest requestData, string userId);
     }
 }

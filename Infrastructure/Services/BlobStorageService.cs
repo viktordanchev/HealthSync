@@ -40,7 +40,9 @@ namespace Infrastructure.Services
         {
             BlobServiceClient blobServiceClient = new BlobServiceClient(_connectionString);
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(container);
-            BlobClient blobClient = containerClient.GetBlobClient(userId);
+
+            var fileName = $"{userId}{Path.GetExtension(file.FileName)}";
+            BlobClient blobClient = containerClient.GetBlobClient(fileName);
 
             using (var stream = file.OpenReadStream())
             {
@@ -50,22 +52,15 @@ namespace Infrastructure.Services
             return blobClient.Uri.AbsoluteUri;
         }
 
-        public async Task<bool> DeleteProfileImageAsync(string fileName, string container)
+        public async Task DeleteProfileImageAsync(IFormFile file, string container, string userId)
         {
-            try
-            {
-                BlobServiceClient blobServiceClient = new BlobServiceClient(_connectionString);
-                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(container);
-                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+            BlobServiceClient blobServiceClient = new BlobServiceClient(_connectionString);
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(container);
 
-                await blobClient.DeleteIfExistsAsync();
+            var fileName = $"{userId}{Path.GetExtension(file.FileName)}";
+            BlobClient blobClient = containerClient.GetBlobClient(fileName);
 
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            await blobClient.DeleteIfExistsAsync();
         }
     }
 }

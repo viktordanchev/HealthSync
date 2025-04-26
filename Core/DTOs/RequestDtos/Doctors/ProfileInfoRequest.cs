@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Core.DTOs.RequestDtos.Doctors
 {
@@ -34,6 +33,8 @@ namespace Core.DTOs.RequestDtos.Doctors
         [Required]
         public int SpecialtyId { get; set; }
 
-        public IFormFile? ProfilePhoto { get; set; }
+        public string? ProfileImage { get; set; }
+
+        public string? PersonalInformation { get; set; }
     }
 }

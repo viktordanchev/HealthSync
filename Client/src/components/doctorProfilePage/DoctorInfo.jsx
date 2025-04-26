@@ -31,10 +31,21 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
 
         try {
             setIsLoading(true);
+            
+            const formData = new FormData();
+            formData.append('profileImage', profilePhoto);
+            const [responseFromFetch, responseFromApiRequest] = await Promise.all([
+                await fetch(`${import.meta.env.VITE_API_URL}/doctors/updateProfileImage`, {
+                    method: 'POST',
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                    body: formData,
+                }),
+                apiRequest('doctors', 'updateProfileInfo', values, localStorage.getItem('accessToken'), 'POST', false)
+            ]);
 
-            const response = await apiRequest('doctors', 'updateProfileInfo', values, localStorage.getItem('accessToken'), 'POST', false);
-
-            showMessage(response.message, 'message');
+            showMessage(responseFromApiRequest.message, 'message');
         } catch (error) {
             console.error(error);
         } finally {
@@ -61,8 +72,8 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
                     initialValues={{
                         contactEmail: doctorData.email || '',
                         contactPhoneNumber: doctorData.phoneNumber || '',
-                        hospitalId: '',
-                        specialtyId: '',
+                        hospitalId: doctorData.hospitalId || '',
+                        specialtyId: doctorData.specialtyId || '',
                         personalInformation: doctorData.personalInformation || ''
                     }}
                     validationSchema={validationSchema}
