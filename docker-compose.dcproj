@@ -7,7 +7,7 @@
     <ProjectGuid>8f2dfee6-6dc2-46eb-9758-c1f1c2b4695b</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>RestAPI</DockerServiceName>
+    <DockerServiceName>healthsync</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
