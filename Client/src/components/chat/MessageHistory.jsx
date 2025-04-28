@@ -24,7 +24,7 @@ function MessageHistory({ messages, updateMessages, isSenderTyping, containerRef
 
             try {
                 const response = await apiRequest('account', 'getChatHistory', dto, localStorage.getItem('accessToken'), 'POST', false);
-                
+
                 updateMessages(response);
             } catch (error) {
                 console.error(error);
@@ -80,12 +80,13 @@ function MessageHistory({ messages, updateMessages, isSenderTyping, containerRef
                         {messages.map((msg, index) => (
                             <React.Fragment key={index}>
                                 {(index === 0 || format(msg.dateAndTime, 'dd.MM.yyyy') !== format(messages[index - 1].dateAndTime, 'dd.MM.yyyy')) && (<p className="text-xs text-zinc-600 text-center">{format(msg.dateAndTime, 'dd.MM.yyyy')}</p>)}
-                                <div className={`max-w-[70%] p-2 rounded-xl break-words whitespace-pre-wrap flex flex-col space-y-1 ${userId === msg.senderId ? 'self-end bg-blue-500' : 'self-start bg-gray-400'}`}>
-                                    <div className="flex flex-wrap justify-center gap-2">
-                                        {msg.images.map((img, index) => (
-                                            <ImageMessage key={index} image={img} />
-                                        ))}
-                                    </div>
+                                <div className={`max-w-[70%] px-2 py-1 rounded-xl break-words whitespace-pre-wrap flex flex-col ${userId === msg.senderId ? 'self-end bg-blue-500' : 'self-start bg-gray-400'}`}>
+                                    {msg.images.length > 0 &&
+                                        <div className="flex flex-wrap justify-center my-1 gap-2">
+                                            {msg.images.map((img, index) => (
+                                                <ImageMessage key={index} image={img} />
+                                            ))}
+                                        </div>}
                                     <p>{msg.message}</p>
                                     <p className="text-xs self-end">{format(msg.dateAndTime, 'HH:mm')}</p>
                                 </div>
