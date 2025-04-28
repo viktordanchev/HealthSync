@@ -1,6 +1,8 @@
-﻿using Core.DTOs.RequestDtos.Account;
+﻿using Core.Constants;
+using Core.DTOs.RequestDtos.Account;
 using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Service;
+using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,6 +20,7 @@ namespace HealthSync.Server.Controllers
         private IJwtTokenService _jwtTokenService;
         private IEmailSenderService _emailSender;
         private IMemoryCacheService _memoryCacheService;
+        private IBlobStorageServiceService _blobStorageServiceService;
         private IChatService _chatService;
         private readonly IConfiguration _configs;
 
@@ -26,6 +29,7 @@ namespace HealthSync.Server.Controllers
             IJwtTokenService jwtTokenService,
             IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,
+            IBlobStorageServiceService blobStorageServiceService,
             IChatService chatService,
             IConfiguration configs)
         {
@@ -33,6 +37,7 @@ namespace HealthSync.Server.Controllers
             _jwtTokenService = jwtTokenService;
             _emailSender = emailSender;
             _memoryCacheService = memoryCacheService;
+            _blobStorageServiceService = blobStorageServiceService;
             _chatService = chatService;
             _configs = configs;
         }
@@ -202,6 +207,15 @@ namespace HealthSync.Server.Controllers
             var history = await _chatService.GetChatHistory(request);
 
             return Ok(history);
+        }
+
+        [HttpPost("uploadChatImages")]
+        [Authorize]
+        public async Task<IActionResult> UploadChatImages([FromForm] IEnumerable<IFormFile> images)
+        {
+            var imageUrls = await _blobStorageServiceService.UploadChatImagesAsync(images, BlobStorageContainers.ChatImages);
+
+            return Ok(imageUrls);
         }
     }
 }

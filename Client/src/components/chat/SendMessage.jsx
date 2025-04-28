@@ -27,19 +27,43 @@ function SendMessage({ connection, updateMessages }) {
     };
 
     const sendMessage = async () => {
+        let imgUrls = [];
+
+        if (images.length > 0) {
+            try {
+                const formData = new FormData();
+
+                images.forEach((img) => {
+                    formData.append('images', img.file);
+                });
+
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/account/uploadChatImages`, {
+                    method: 'POST',
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                    body: formData,
+                });
+
+                imgUrls = await response.json();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        
         const dto = {
             senderId: userId,
             receiverId: getReceiverData().receiverId,
             message: message,
             dateAndTime: new Date(),
-            images: images.map((img) => img.file)
+            imageUrls: imgUrls
         };
 
         updateMessages(prevMessages => [...prevMessages, {
             senderId: dto.senderId,
             message: dto.message,
             dateAndTime: dto.dateAndTime,
-            images: dto.images
+            images: dto.imageUrls
         }]);
 
         await connection.invoke("SendMessage", dto);
@@ -53,6 +77,12 @@ function SendMessage({ connection, updateMessages }) {
 
     const removeImage = (img) => {
         setImages((prev) => prev.filter(currImg => currImg.imgUrl !== img));
+    }
+
+    const handleEnterPress = (event) => {
+        if (event.key === 'Enter' && (message || images.length > 0)) {
+            sendMessage();
+        }
     }
 
     return (
@@ -72,25 +102,25 @@ function SendMessage({ connection, updateMessages }) {
             <div className="flex space-x-2 justify-between">
                 <label className="text-zinc-600 flex items-center justify-center text-base cursor-pointer opacity-100 transition-opacity duration-200 group-hover:opacity-100 sm:opacity-100">
                     <FontAwesomeIcon icon={faPaperclip} />
-                    <input
-                        type="file"
+                    <input type="file"
                         accept="image/png, image/jpg, image/jpeg"
                         className="hidden"
                         onChange={addImage}
+                        onKeyDown={handleEnterPress}
                     />
                 </label>
-                <input
-                    className="w-full focus:outline-none"
+                <input className="w-full focus:outline-none"
                     placeholder="Message..."
                     type="text"
                     value={message}
+                    onKeyDown={handleEnterPress}
                     onChange={(e) => {
                         setMessage(e.target.value);
                         sendTyping(e.target.value.length);
                     }} />
-                <button
-                    className="cursor-pointer flex justify-center items-center"
-                    onClick={sendMessage}>
+                <button className="cursor-pointer flex justify-center items-center"
+                    onClick={sendMessage}
+                    disabled={!message && images.length === 0}>
                     <FontAwesomeIcon className="text-zinc-600" icon={faPaperPlane} />
                 </button>
             </div>

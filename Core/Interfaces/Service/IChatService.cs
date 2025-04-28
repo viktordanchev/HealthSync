@@ -1,7 +1,6 @@
 ﻿using Core.DTOs.RequestDtos.Account;
 using Core.DTOs.RequestDtos.ChatHub;
 using Core.DTOs.ResponseDtos.Account;
-using Microsoft.AspNetCore.Http;
 
 namespace Core.Interfaces.Service
 {
@@ -9,6 +8,6 @@ namespace Core.Interfaces.Service
     {
         Task<int> AddMessage(AddMessageRequest requestData);
         Task<IEnumerable<ChatMessageResponse>> GetChatHistory(GetChatHistoryRequest requestData);
-        Task<IEnumerable<string>> UploadImagesAsync(IEnumerable<IFormFile> images);
+        Task UploadImagesAsync(int messageId, IEnumerable<string> imageUrls);
     }
 }

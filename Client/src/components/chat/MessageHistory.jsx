@@ -24,7 +24,7 @@ function MessageHistory({ messages, updateMessages, isSenderTyping, containerRef
 
             try {
                 const response = await apiRequest('account', 'getChatHistory', dto, localStorage.getItem('accessToken'), 'POST', false);
-
+                
                 updateMessages(response);
             } catch (error) {
                 console.error(error);
