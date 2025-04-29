@@ -1,6 +1,6 @@
 # HealthSync
-https://healthsync-client.up.railway.app
-API - https://healthsync-restapi.up.railway.app
+Client - https://healthsync-client.up.railway.app
+API (Swagger) - https://healthsync-restapi.up.railway.app
 
 ## Accounts
 | Email | Password |
@@ -12,3 +12,7 @@ API - https://healthsync-restapi.up.railway.app
 | i.ivanova@mail.com | 123456 |
 | m.kirilova@mail.com | 123456 |
 | v.yankova@mail.com | 123456 |
+
+## Functionality
+- Chat
+  - We have integrated chat communication with SignalR Framework. You can send not only messages, but photos too. 
