@@ -3,6 +3,7 @@ using Core.Interfaces.ExternalServices;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Hosting;
 
 namespace Infrastructure.Services
 {
@@ -12,10 +13,12 @@ namespace Infrastructure.Services
     public class EmailSenderService : IEmailSenderService
     {
         private readonly EmailSenderConfig _config;
+        private readonly IHostEnvironment _environment;
 
-        public EmailSenderService(IOptions<EmailSenderConfig> options)
+        public EmailSenderService(IOptions<EmailSenderConfig> options, IHostEnvironment environment)
         {
             _config = options.Value;
+            _environment = environment;
         }
 
         public async Task<bool> SendVrfCode(string toEmail, string vrfCode)
@@ -28,8 +31,12 @@ namespace Infrastructure.Services
 
         public async Task<bool> SendPasswordRecoverLink(string toEmail, string token)
         {
+            var baseUrl = _environment.IsDevelopment()
+                ? "http://localhost:5173"
+                : "https://healthsync-client.up.railway.app";
+
             var subject = "Password recover!";
-            var message = $"<a href='https://localhost:5173/account/recoverPassword?token={token}' style='display: inline-block; padding: 10px 20px; background-color: #01bfa5; color: white; text-decoration: none; border-radius: 0.75rem; font-size: 16px;'>Recover Password</a>";
+            var message = $"<a href='{baseUrl}/account/recoverPassword?token={token}' style='display: inline-block; padding: 10px 20px; background-color: #01bfa5; color: white; text-decoration: none; border-radius: 0.75rem; font-size: 16px;'>Recover Password</a>";
 
             return await SendEmailAsync(toEmail, subject, message);
         }
