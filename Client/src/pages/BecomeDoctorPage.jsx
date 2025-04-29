@@ -56,7 +56,7 @@ function BecomeDoctorPage() {
     const handleSubmit = async (values) => {
         const isAuth = await isStillAuth();
         if (!isAuth) return;
-
+        console.log(values);
         try {
             setIsLoading(true);
 
@@ -157,7 +157,7 @@ function BecomeDoctorPage() {
                                     <DropdownMenu
                                         options={hospitals}
                                         optionType="All Hospitals"
-                                        setSelectedOption={(value) => setFieldValue('hospitalId', value)}
+                                        setSelectedOption={(value) => setFieldValue('hospitalId', value.id)}
                                     />
                                     <ErrorMessage name="hospitalId" component="div" className="text-red-500" />
                                 </div>
@@ -166,7 +166,7 @@ function BecomeDoctorPage() {
                                     <DropdownMenu
                                         options={specialties}
                                         optionType="All Specialties"
-                                        setSelectedOption={(value) => setFieldValue('specialtyId', value)}
+                                        setSelectedOption={(value) => setFieldValue('specialtyId', value.id)}
                                     />
                                     <ErrorMessage name="specialtyId" component="div" className="text-red-500" />
                                 </div>

@@ -15,5 +15,6 @@ namespace Core.Interfaces.Repository
         Task ResetPasswordAsync(RecoverPasswordRequest requestData, string userEmail);
         Task UpdateUserDataAsync(UpdateUserRequest requestData, string userEmail);
         Task<bool> IsUserExistAsync(string email);
+        Task AssignUserRoleAsync(string userId, string role);
     }
 }

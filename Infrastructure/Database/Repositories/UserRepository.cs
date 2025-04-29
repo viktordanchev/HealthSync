@@ -118,5 +118,11 @@ namespace Infrastructure.Database.Repositories
             var user = await _userManager.FindByEmailAsync(email);
             return user != null;
         }
+
+        public async Task AssignUserRoleAsync(string userId, string role)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            await _userManager.AddToRoleAsync(user!, role);
+        }
     }
 }

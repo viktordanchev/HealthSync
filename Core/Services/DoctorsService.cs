@@ -13,14 +13,17 @@ namespace Core.Services
     {
         private readonly IDoctorsRepository _doctorsRepository;
         private readonly ISpecialtiesRepository _specialtiesRepo;
+        private readonly IUserRepository _userRepo;
         private readonly IBlobStorageServiceService _BlobStorageService;
 
         public DoctorsService(IDoctorsRepository repository,
             ISpecialtiesRepository specialtiesRepo,
+            IUserRepository userRepo,
             IBlobStorageServiceService blobStorageService)
         {
             _doctorsRepository = repository;
             _specialtiesRepo = specialtiesRepo;
+            _userRepo = userRepo;
             _BlobStorageService = blobStorageService;
         }
 
@@ -59,6 +62,7 @@ namespace Core.Services
         public async Task AddDoctorAsync(ProfileInfoRequest requestData, string userId)
         {
             var doctorId = await _doctorsRepository.AddDoctorAsync(requestData, userId);
+            await _userRepo.AssignUserRoleAsync(userId, "Doctor");
 
             await _doctorsRepository.GenerateEmptyDoctorWeekSchedule(doctorId);
         }
