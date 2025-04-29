@@ -13,7 +13,7 @@ export function MessageProvider({ children }) {
         
         setTimeout(() => {
             setMessage('');
-        }, 3000);
+        }, 5000);
     };
 
     return (
