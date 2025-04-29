@@ -49,5 +49,10 @@ namespace Core.Services
         {
             await _userRepo.UpdateUserDataAsync(requestData, userEmail);
         }
+
+        public async Task<bool> IsUserExistAsync(string email)
+        {
+            return await _userRepo.IsUserExistAsync(email);
+        }
     }
 }

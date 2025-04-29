@@ -112,5 +112,11 @@ namespace Infrastructure.Database.Repositories
 
             await _userManager.UpdateAsync(user);
         }
+
+        public async Task<bool> IsUserExistAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user != null;
+        }
     }
 }

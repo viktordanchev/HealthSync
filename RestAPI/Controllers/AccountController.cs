@@ -108,6 +108,11 @@ namespace HealthSync.Server.Controllers
         [HttpPost("sendVrfCode")]
         public async Task<IActionResult> SendVerificationCode([FromBody] string email)
         {
+            if(await _userService.IsUserExistAsync(email))
+            {
+                return BadRequest(new { Error = UsedEmail });
+            }
+
             var token = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
             var isSended = await _emailSender.SendVrfCode(email, token);
 

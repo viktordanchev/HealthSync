@@ -13,5 +13,6 @@ namespace Core.Interfaces.Service
         Task<string> GeneratePasswordResetTokenAsync(string userEmail);
         Task ResetPasswordAsync(RecoverPasswordRequest requestData, string userEmail);
         Task UpdateUserDataAsync(UpdateUserRequest requestData, string userEmail);
+        Task<bool> IsUserExistAsync(string email);
     }
 }
