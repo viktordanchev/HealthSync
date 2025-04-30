@@ -10,8 +10,13 @@ namespace Core.DTOs.RequestDtos.Doctors
         [Required]
         public bool IsWorkDay { get; set; }
 
+        [Required]
         public TimeOnly WorkDayStart { get; set; }
+
+        [Required]
         public TimeOnly WorkDayEnd { get; set; }
+
+        [Required]
         public int MeetingTimeMinutes { get; set; }
     }
 }

@@ -10,6 +10,17 @@ function WeeklySchedule({ weekDays }) {
     const { showMessage } = useMessage();
     
     const handleSubmit = async () => {
+
+        const invalidDays = changedWeekDays.filter(day =>
+            day.isWorkDay &&
+            (!day.workDayStart || !day.workDayEnd || !day.meetingTimeMinutes || day.meetingTimeMinutes <= 0 || day.meetingTimeMinutes > 60)
+        );
+
+        if (invalidDays.length > 0) {
+            showMessage('Please fill start, end times and meeting duration for all working days', 'error');
+            return;
+        }
+
         try {
             setIsLoading(true);
            
