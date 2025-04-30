@@ -1,12 +1,11 @@
-﻿using Core.Constants;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Core.Constants;
 using Core.DTOs.RequestDtos.Account;
 using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Service;
-using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using static Common.Errors.Account;
 using static Common.Messages.Account;
 

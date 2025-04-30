@@ -1,20 +1,36 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 const TimePicker = ({ time, setTime }) => {
+    const dropdownRef = useRef(null);
     const [hours, setHours] = useState(time.split(':')[0]);
     const [minutes, setMinutes] = useState(time.split(':')[1]);
     const [isOpen, setIsOpen] = useState(false);
     const hoursList = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0"));
     const minutesList = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, "0"));
 
+    {/* This hook handles clicks outside the dropdown menu. */ }
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     useEffect(() => {
         setTime(`${hours}:${minutes}:00`);
     }, [hours, minutes]);
 
     return (
-        <div className="relative bg-zinc-700 w-24 rounded-xl cursor-pointer text-white text-sm">
+        <div className="relative bg-zinc-700 w-24 rounded-xl cursor-pointer text-white text-sm" ref={dropdownRef}>
             <div className="py-2 px-3 flex justify-between items-center"
                 onClick={() => setIsOpen(!isOpen)}>
                 <p className="font-medium">

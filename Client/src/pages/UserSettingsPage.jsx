@@ -65,7 +65,7 @@ function UserSettingsPage() {
     const handleSubmit = async (values, { resetForm }) => {
         const isAuth = await isStillAuth();
         if (!isAuth) return;
-
+        
         try {
             setIsLoading(true);
 
@@ -181,13 +181,8 @@ function UserSettingsPage() {
                                 <div className="text-center pt-6">
                                     <button
                                         className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded 
-                                        ${dirty ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default'}`}
-                                        type="submit"
-                                        onClick={(e) => {
-                                            if (!dirty) {
-                                                e.preventDefault();
-                                            }
-                                        }}                                    >
+                                        ${dirty ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default pointer-events-none'}`}
+                                        type="submit">
                                         Submit
                                     </button>
                                 </div>

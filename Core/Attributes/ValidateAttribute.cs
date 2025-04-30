@@ -15,7 +15,7 @@ namespace Core.Attributes
         {
             var dependentValue = validationContext.ObjectType.GetProperty(_dependentProperty)?.GetValue(validationContext.ObjectInstance);
             
-            if (string.IsNullOrEmpty(dependentValue?.ToString()) || string.IsNullOrEmpty(value?.ToString()))
+            if (dependentValue?.ToString() != value?.ToString())
             {
                 return new ValidationResult(string.Empty);
             }

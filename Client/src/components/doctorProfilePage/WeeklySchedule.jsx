@@ -1,24 +1,25 @@
 ﻿import React, { useState } from 'react';
 import WeekDayCard from './WeekDayCard';
 import apiRequest from '../../services/apiRequest';
-import { useLoading } from '../../contexts/LoadingContext';
 import { useMessage } from '../../contexts/MessageContext';
+import { useLoading } from '../../contexts/LoadingContext';
 
 function WeeklySchedule({ weekDays }) {
-    const [changedWeekDays, setChangedWeekDays] = useState([]);
     const { setIsLoading } = useLoading();
+    const [changedWeekDays, setChangedWeekDays] = useState([]);
     const { showMessage } = useMessage();
     
     const handleSubmit = async () => {
         try {
             setIsLoading(true);
-
+           
             const response = await apiRequest('doctors', 'updateWeeklySchedule', changedWeekDays, localStorage.getItem('accessToken'), 'POST', false);
 
             showMessage(response.message, 'message');
         } catch (error) {
             console.error(error);
         } finally {
+            setChangedWeekDays([]);
             setIsLoading(false);
         }
     };
@@ -42,15 +43,9 @@ function WeeklySchedule({ weekDays }) {
             <div>
                 <button
                     className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded 
-                    ${changedWeekDays.length > 0 ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default'}`}
+                    ${changedWeekDays.length > 0 ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default pointer-events-none'}`}
                     type="submit"
-                    onClick={(e) => {
-                        if (changedWeekDays.length === 0) {
-                            e.preventDefault();
-                        } else {
-                            handleSubmit();
-                        }
-                    }}>
+                    onClick={handleSubmit}>
                     Save changes
                 </button>
             </div>

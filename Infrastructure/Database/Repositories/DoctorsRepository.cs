@@ -126,6 +126,8 @@ namespace Infrastructure.Database.Repositories
                     WeekDay = (DayOfWeek)((day + 1) % 7),
                     IsWorkDay = false
                 };
+
+                week.Add(workDay);
             }
 
             await _context.DoctorsWeekDays.AddRangeAsync(week);

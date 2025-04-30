@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import DaysOffCalendar from './DaysOffCalendar';
 import apiRequest from '../../services/apiRequest';
 import { useMessage } from '../../contexts/MessageContext';
-import { useLoading } from '../../contexts/LoadingContext';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useLoading } from '../../contexts/LoadingContext';
 
 function DaysOff({ data }) {
-    const { showMessage } = useMessage();
     const { setIsLoading } = useLoading();
+    const { showMessage } = useMessage();
     const { isStillAuth } = useAuthContext();
     const [daysOff, setDaysOff] = useState(data);
     const [isChanged, setIsChanged] = useState(false);
@@ -29,10 +29,9 @@ function DaysOff({ data }) {
         } catch (error) {
             console.error(error);
         } finally {
+            setIsChanged(false);
             setIsLoading(false);
         }
-
-        setIsChanged(false);
     };
 
     return (
@@ -44,15 +43,9 @@ function DaysOff({ data }) {
             </div>
             <div>
                 <button className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded
-                    ${isChanged ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default'}`}
+                    ${isChanged ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default pointer-events-none'}`}
                     type="submit"
-                    onClick={(e) => {
-                        if (!isChanged) {
-                            e.preventDefault();
-                        } else {
-                            handleSubmitChanges();
-                        }
-                    }}>
+                    onClick={handleSubmitChanges}>
                     Save changes
                 </button>
             </div>

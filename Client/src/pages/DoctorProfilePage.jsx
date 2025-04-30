@@ -7,6 +7,7 @@ import DoctorInfo from '../components/doctorProfilePage/DoctorInfo';
 
 function DoctorProfilePage() {
     const [doctorData, setDoctorData] = useState(null);
+    const [isUp, setIsUp] = useState(false);
     const [isLoadingOnReceive, setIsLoadingOnReceive] = useState(true);
     const [hospitals, setHospitals] = useState([]);
     const [specialties, setSpecialties] = useState([]);
@@ -21,7 +22,7 @@ function DoctorProfilePage() {
                     apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false),
                     apiRequest('doctors', 'getDaysOff', undefined, localStorage.getItem('accessToken'), 'GET', false),
                 ]);
-                
+
                 let filteredHospitals = hospitals.filter(h => h.id !== doctorData.hospitalId);
                 let filteredSpecialties = specialties.filter(s => s.id !== doctorData.specialtyId);
 
@@ -37,7 +38,7 @@ function DoctorProfilePage() {
         };
 
         receiveData();
-    }, []);
+    }, [isUp]);
 
     return (
         <>
@@ -47,7 +48,9 @@ function DoctorProfilePage() {
                         <DoctorInfo
                             doctorData={doctorData}
                             hospitals={hospitals}
-                            specialties={specialties} />
+                            specialties={specialties}
+                            setIsUp={setIsUp}
+                        />
                         <DaysOff data={daysOff} />
                     </div>
                     <WeeklySchedule weekDays={doctorData.weeklySchedule} />

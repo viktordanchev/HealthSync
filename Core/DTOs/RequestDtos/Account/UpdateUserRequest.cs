@@ -33,6 +33,6 @@ namespace Core.DTOs.RequestDtos.Account
         public string NewPassword { get; set; } = string.Empty;
 
         [Compare("NewPassword")]
-        public string ConfirmPassword { get; set; } = null!;
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

@@ -4,20 +4,20 @@ import * as Yup from 'yup';
 import { authErrors, maxLength } from "../../constants/errors";
 import { doctorPersonalInfoMaxLength } from '../../constants/data';
 import { useAuthContext } from '../../contexts/AuthContext';
-import { useLoading } from '../../contexts/LoadingContext';
 import { useMessage } from '../../contexts/MessageContext';
+import { useLoading } from '../../contexts/LoadingContext';
 import ProfilePhoto from '../../components/ProfilePhoto';
 import DropdownMenu from '../../components/DropdownMenu';
 import apiRequest from '../../services/apiRequest';
 
 function DoctorInfo({ doctorData, hospitals, specialties }) {
+    const { setIsLoading } = useLoading();
     const { isStillAuth } = useAuthContext();
     const { showMessage } = useMessage();
-    const { setIsLoading } = useLoading();
     const [profilePhoto, setProfilePhoto] = useState(doctorData.imgUrl);
     const [isPhotoChanged, setIsPhotoChanged] = useState(false);
     const [personalInfoLenght, setPersonalInfoLenght] = useState(doctorData.personalInformation ? doctorData.personalInformation.length : 0);
-
+    
     const validationSchema = Yup.object({
         email: Yup.string()
             .email(authErrors.InvalidEmail),
@@ -25,30 +25,42 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
             .max(doctorPersonalInfoMaxLength, maxLength)
     });
 
-    const handleSubmit = async (values) => {
+    const handleSubmit = async (values, { resetForm }) => {
         const isAuth = await isStillAuth();
         if (!isAuth) return;
 
         try {
             setIsLoading(true);
-            
-            const formData = new FormData();
-            formData.append('profileImage', profilePhoto);
-            const [responseFromFetch, responseFromApiRequest] = await Promise.all([
-                await fetch(`${import.meta.env.VITE_API_URL}/doctors/updateProfileImage`, {
+
+            const updatedValues = {
+                ...values,
+                profileImage: ''
+            };
+
+            if (profilePhoto) {
+                const formData = new FormData();
+                formData.append('profileImage', profilePhoto);
+
+                const formDataResponse = await fetch(`${import.meta.env.VITE_API_URL}/doctors/updateProfileImage`, {
                     method: 'POST',
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
                     },
                     body: formData,
-                }),
-                apiRequest('doctors', 'updateProfileInfo', values, localStorage.getItem('accessToken'), 'POST', false)
-            ]);
+                });
 
-            showMessage(responseFromApiRequest.message, 'message');
+                const data = await formDataResponse.json();
+                updatedValues.profileImage = data.imageUrl;
+            }
+
+            const response = await apiRequest('doctors', 'updateProfileInfo', values, localStorage.getItem('accessToken'), 'POST', false);
+
+            showMessage(response.message, 'message');
         } catch (error) {
             console.error(error);
         } finally {
+            resetForm();
+            setIsPhotoChanged(false);
             setIsLoading(false);
         }
     };
@@ -141,15 +153,9 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
                                 <ErrorMessage name="personalInformation" component="div" className="text-red-500" />
                             </div>
                             <div className="text-center pt-6">
-                                <button
-                                    className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded 
-                                        ${dirty || isPhotoChanged ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default'}`}
-                                    type="submit"
-                                    onClick={(e) => {
-                                        if (!dirty && !isPhotoChanged) {
-                                            e.preventDefault();
-                                        }
-                                    }}>
+                                <button className={`bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded 
+                                        ${dirty || isPhotoChanged ? 'hover:bg-white hover:text-blue-500' : 'opacity-75 cursor-default pointer-events-none'}`}
+                                    type="submit">
                                     Save changes
                                 </button>
                             </div>

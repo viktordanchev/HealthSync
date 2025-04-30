@@ -56,26 +56,30 @@ function BecomeDoctorPage() {
     const handleSubmit = async (values) => {
         const isAuth = await isStillAuth();
         if (!isAuth) return;
-        console.log(values);
+
+        const updatedValues = {
+            ...values,
+            profileImage: ''
+        };
+
         try {
             setIsLoading(true);
 
-            const formData = new FormData();
-            formData.append('profileImage', profilePhoto);
+            if (profilePhoto) {
+                const formData = new FormData();
+                formData.append('profileImage', profilePhoto);
 
-            const formDataResponse = await fetch(`${import.meta.env.VITE_API_URL}/doctors/updateProfileImage`, {
-                method: 'POST',
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
-                },
-                body: formData,
-            });
+                const formDataResponse = await fetch(`${import.meta.env.VITE_API_URL}/doctors/updateProfileImage`, {
+                    method: 'POST',
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                    body: formData,
+                });
 
-            const data = await formDataResponse.json();
-            const updatedValues = {
-                ...values,
-                profileImage: data.imageUrl
-            };
+                const data = await formDataResponse.json();
+                updatedValues.profileImage = data.imageUrl;
+            }
 
             const response = await apiRequest('doctors', 'becomeDoctor', updatedValues, localStorage.getItem('accessToken'), 'POST', false);
 
