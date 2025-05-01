@@ -22,7 +22,7 @@ function DoctorProfilePage() {
                     apiRequest('doctors', 'getSpecialties', undefined, undefined, 'GET', false),
                     apiRequest('doctors', 'getDaysOff', undefined, localStorage.getItem('accessToken'), 'GET', false),
                 ]);
-
+                
                 let filteredHospitals = hospitals.filter(h => h.id !== doctorData.hospitalId);
                 let filteredSpecialties = specialties.filter(s => s.id !== doctorData.specialtyId);
 

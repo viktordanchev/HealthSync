@@ -14,11 +14,11 @@ namespace Core.Attributes
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             var currentValue = (TimeOnly?)value;
-            currentValue = currentValue!.Value.AddHours(1); 
 
             var property = validationContext.ObjectType.GetProperty(_comparisonProperty);
 
             var comparisonValue = (TimeOnly?)property.GetValue(validationContext.ObjectInstance);
+            comparisonValue = comparisonValue!.Value.AddHours(1);
 
             if (currentValue < comparisonValue)
             {

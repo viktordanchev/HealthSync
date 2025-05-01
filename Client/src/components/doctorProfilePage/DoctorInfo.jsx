@@ -37,7 +37,7 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
                 profileImage: ''
             };
 
-            if (profilePhoto) {
+            if (isPhotoChanged) {
                 const formData = new FormData();
                 formData.append('profileImage', profilePhoto);
 
@@ -82,8 +82,8 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
             <div>
                 <Formik
                     initialValues={{
-                        contactEmail: doctorData.email || '',
-                        contactPhoneNumber: doctorData.phoneNumber || '',
+                        contactEmail: doctorData.contactEmail || '',
+                        contactPhoneNumber: doctorData.contactPhoneNumber || '',
                         hospitalId: doctorData.hospitalId || '',
                         specialtyId: doctorData.specialtyId || '',
                         personalInformation: doctorData.personalInformation || ''

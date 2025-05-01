@@ -35,7 +35,7 @@ function DropdownMenu({ classes, options, optionType, setSelectedOption }) {
                 ${classes}`}
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <span className="overflow-hidden text-ellipsis whitespace-nowrap md:max-w-80 sm:max-w-44">{selected}</span>
+                <span className="truncate">{selected}</span>
                 <FontAwesomeIcon icon={isOpen ? faAngleUp : faAngleDown} />
             </div>
             {isOpen && (
@@ -46,7 +46,7 @@ function DropdownMenu({ classes, options, optionType, setSelectedOption }) {
                         <li
                             key={option.id}
                             title={option.name}
-                            className="p-2 hover:bg-gray-200 cursor-pointer text-ellipsis overflow-hidden whitespace-nowrap"
+                            className="p-2 hover:bg-gray-200 cursor-pointer truncate"
                             onClick={() => handleOptionClick(option)}
                         >
                             {option.name}

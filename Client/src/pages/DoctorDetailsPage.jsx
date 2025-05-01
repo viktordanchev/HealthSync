@@ -81,7 +81,7 @@ function DoctorDetailsPage() {
                                     </div>
                                     <div className="w-1/2">
                                         <p className="text-base font-bold">Email</p>
-                                        <p>{doctor.contactEmail ? doctor.contactEmail : 'Missing'}</p>
+                                        <p className="break-words">{doctor.contactEmail ? doctor.contactEmail : 'Missing'}</p>
                                     </div>
                                 </div>
                             </div>
