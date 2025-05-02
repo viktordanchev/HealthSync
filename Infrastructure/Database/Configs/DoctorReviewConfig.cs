@@ -117,7 +117,7 @@ namespace Infrastructure.Database.Configs
                 Comment = "Thank you for your exceptional care and expertise!"
             };
 
-            return [ivanIvanov1, ivanIvanov2, ivanIvanov3, ivanIvanov4, ivanIvanov5, ivanIvanov6, mariaMarinova1, mariaMarinova2, aleksKirilov1];
+            return [ivanIvanov1, ivanIvanov2, ivanIvanov3, ivanIvanov4, ivanIvanov5, ivanIvanov6, ivanIvanov7, mariaMarinova1, mariaMarinova2, aleksKirilov1];
         }
     }
 }

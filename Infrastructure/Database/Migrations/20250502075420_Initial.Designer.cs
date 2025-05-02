@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HealthSyncDbContext))]
-    [Migration("20250424133433_Initial")]
+    [Migration("20250502075420_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -103,7 +103,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "995069ff-c10d-402d-bfd6-75058d99dddb",
+                            ConcurrencyStamp = "5e9b9eb9-0ed4-4051-af7d-0fea842041c3",
                             Email = "i.ivanov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivan",
@@ -111,9 +111,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOV@MAIL.COM",
                             NormalizedUserName = "I.IVANOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENAaVT2lz9YwLOW8Q0It3oYs9tb6tH/OSv6bcQ1614zndTZN/mgHk31XBYtNvk9kUQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPToz3vdvu26mAvn/hENl9CrOqqBTiGnJ/JVvp3JViR0h6hcOGPdGR1LUtj8E5zXwA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8aed1cc0-deb1-4107-aecf-2d7407a3c618",
+                            SecurityStamp = "365be671-bf5e-4b7e-840a-1947b97514da",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanov@mail.com"
                         },
@@ -121,7 +121,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d00ed0e-4f10-42a5-9e1f-aace562e5b08",
+                            ConcurrencyStamp = "183852b2-7fb0-404e-9d0f-01103dff2c0a",
                             Email = "m.marinova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Maria",
@@ -129,9 +129,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.MARINOVA@MAIL.COM",
                             NormalizedUserName = "M.MARINOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM/ObRSIaOUtuVIy+mZW7uPTugAJqq1H9Ps/ZSzLXzmWYwrHO4YCR3QxKBl1qg6jrA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFoqTAw2yQ/iQMPYA2/JGHWKMsiK+gZ520dQEaSy5gr5Aa2TDec3gTnB62vZ01oulw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1978a642-3f8b-4487-b463-3713ba0215da",
+                            SecurityStamp = "e391fc79-6ba1-4403-8610-6922f8bddd50",
                             TwoFactorEnabled = false,
                             UserName = "m.marinova@mail.com"
                         },
@@ -139,7 +139,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "88cd5a7b-01d8-49b4-8688-35cd23751532",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca470e85-7a74-494a-a4df-409127b71ba6",
+                            ConcurrencyStamp = "25453aef-9d58-4757-82cc-5fd3d9ad0714",
                             Email = "a.kirilov@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Aleks",
@@ -147,9 +147,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "A.KIRILOV@MAIL.COM",
                             NormalizedUserName = "A.KIRILOV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFNXJeH5+IGixemPR2LPQZ7/XYMwzKRVUy2+65QaBevoVnV0y8VUVurSMfwbcKSUOQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKLpfjbPr3xcQ4OT+ZO2o+TbDz6Aoc98ZLYP6erZMn5i6ojr54eBCBxXLOdTqHy3Xw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f4df6499-6872-4340-b060-b1ecf694c241",
+                            SecurityStamp = "76d3b694-4c92-488e-b640-bd7d087a9186",
                             TwoFactorEnabled = false,
                             UserName = "a.kirilov@mail.com"
                         },
@@ -157,7 +157,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c22405ac-fd59-47b7-8fc8-aebf8800c00b",
+                            ConcurrencyStamp = "3add8d92-daa8-4f38-ba0c-43507fc52f8c",
                             Email = "k.conev@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Kiril",
@@ -165,9 +165,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "K.CONEV@MAIL.COM",
                             NormalizedUserName = "K.CONEV@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIZFLWBU0GBfLa5GICwHNk3BlKUD0mpmaOlcqZV3yzPDfXyD2xXxSja3U7LCpxLBxQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMhj5cBPrVfJDv0QI4lSSae8mxL0wUWpaBRz3VNjcXVHghq4EPZ8D8kRdlj7HV9/Eg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dd9fae9c-3a67-48f6-a653-79e01bc76573",
+                            SecurityStamp = "fed8dda5-d07e-4176-8031-f460e3ffd145",
                             TwoFactorEnabled = false,
                             UserName = "k.conev@mail.com"
                         },
@@ -175,7 +175,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6118dee0-7bf8-4d78-b9dc-b98d7ad26e12",
+                            ConcurrencyStamp = "cca9dd8b-2339-4fd9-8a19-8e845b259e0e",
                             Email = "i.ivanova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Ivana",
@@ -183,9 +183,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOVA@MAIL.COM",
                             NormalizedUserName = "I.IVANOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ3oIqB21qLJ6Mvg6scuYDNO2vC1tNPwViruXzZJSsQxMjknwwyYRc0fSM6PnhwDKA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEcPmawhhasIdD+BeSOA/V4YK2NYMNURTMj6n3ufrLJ5zCqs2rtCQzkhyLJencLO1w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e241922a-5eb1-4e93-8b90-60e3ae1b9b63",
+                            SecurityStamp = "4f5d4e00-fed0-4cb3-b60e-eb65f444a602",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanova@mail.com"
                         },
@@ -193,7 +193,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c082968f-4898-4ee0-a302-b9a47da035ba",
+                            ConcurrencyStamp = "699c6705-0fe3-42af-8381-5568c54086db",
                             Email = "m.kirilova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Monika",
@@ -201,9 +201,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.KIRILOVA@MAIL.COM",
                             NormalizedUserName = "M.KIRILOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA3j5DqCUBZNbq5KpwIhoWJFfKwjd05MCzfggMehSSr7GcnvIrQlyEL/mlnuNuzSQw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELvPn5upjUlzESJSYJStjjqdfXQHyKuH/S8AQGJRtW1lXpR1d/tPcCSZTVE2BrGK1Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2233b87b-051f-4165-982d-8b51851c9a42",
+                            SecurityStamp = "1beb54dc-b91e-42da-9b45-d1150c7d597e",
                             TwoFactorEnabled = false,
                             UserName = "m.kirilova@mail.com"
                         },
@@ -211,7 +211,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "78850da7-a0ff-42f3-a862-d162457910a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "486a5e98-4e4e-4420-b891-079c715c4b93",
+                            ConcurrencyStamp = "2122ef41-6ca1-4c94-a83f-8f6ad35b35b9",
                             Email = "v.yankova@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Vanya",
@@ -219,9 +219,9 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "V.YANKOVA@MAIL.COM",
                             NormalizedUserName = "V.YANKOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOSQ+MZW2XJUwLUN0OH3UGtR1Asjh+e4MjCstHL8Tec8BCkHBUlapSh9RP3QLsXSzQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPNjNVeofJHRv22jj+Q61Xvfhg/BsIFZ5CclLEMqKM46E9Fa0XVdGfU7xOzW5Y/39Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "39055533-3038-4f0f-97de-fa0e3ee6e726",
+                            SecurityStamp = "35832bdc-5177-493e-bf0c-e5cba53fa8d8",
                             TwoFactorEnabled = false,
                             UserName = "v.yankova@mail.com"
                         });
@@ -305,7 +305,7 @@ namespace Infrastructure.Migrations
                             Id = 1,
                             HospitalId = 1,
                             IdentityId = "a3717562-385e-41ce-9eff-0f1b994e5548",
-                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Ivan-Ivanov.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/a3717562-385e-41ce-9eff-0f1b994e5548.jpg",
                             Information = "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care.",
                             SpecialtyId = 1
                         },
@@ -314,7 +314,8 @@ namespace Infrastructure.Migrations
                             Id = 2,
                             HospitalId = 1,
                             IdentityId = "4d650e24-6b66-41e3-8391-efab8c31a1dd",
-                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Maria-Marinova.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/4d650e24-6b66-41e3-8391-efab8c31a1dd.jpg",
+                            Information = "I graduated from the Medical University of Sofia and have been practicing medicine for over 12 years. Throughout my career, I have focused on internal medicine, always striving to offer thorough and personalized care. I believe in building strong relationships with my patients to ensure long-term health and well-being.",
                             SpecialtyId = 2
                         },
                         new
@@ -322,7 +323,8 @@ namespace Infrastructure.Migrations
                             Id = 3,
                             HospitalId = 1,
                             IdentityId = "88cd5a7b-01d8-49b4-8688-35cd23751532",
-                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Aleks-Kirilov.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/88cd5a7b-01d8-49b4-8688-35cd23751532.jpg",
+                            Information = "I am a dedicated endocrinologist with a passion for helping patients manage their hormonal health. I graduated from Sofia Medical University and completed my residency in endocrinology at the same institution. With over 8 years of experience, I specialize in treating conditions such as diabetes, thyroid disorders, and adrenal gland issues. My approach to patient care is holistic, focusing on both medical treatment and lifestyle modifications to achieve optimal health outcomes. I am committed to staying updated with the latest advancements in endocrinology to provide the best care possible.",
                             SpecialtyId = 2
                         },
                         new
@@ -330,7 +332,8 @@ namespace Infrastructure.Migrations
                             Id = 4,
                             HospitalId = 1,
                             IdentityId = "95189f02-fb1a-4700-95e3-6146b8aa8b15",
-                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Kiril-Conev.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/95189f02-fb1a-4700-95e3-6146b8aa8b15.jpg",
+                            Information = "I am a cardiologist with a strong commitment to patient care and education. I graduated from Sofia Medical University and completed my residency in cardiology at the same institution. With over 10 years of experience, I specialize in diagnosing and treating various heart conditions, including hypertension, coronary artery disease, and heart failure. My approach to patient care emphasizes prevention and lifestyle modifications, and I work closely with my patients to develop personalized treatment plans. I am dedicated to staying current with the latest advancements in cardiology to provide the best possible care.",
                             SpecialtyId = 3
                         },
                         new
@@ -338,7 +341,8 @@ namespace Infrastructure.Migrations
                             Id = 5,
                             HospitalId = 2,
                             IdentityId = "f37b43ca-86a2-4b11-972d-5e0569f4deb3",
-                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Ivana-Ivanova.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/f37b43ca-86a2-4b11-972d-5e0569f4deb3.jpg",
+                            Information = "I am a neurologist with a passion for understanding the complexities of the human brain and nervous system. I graduated from Sofia Medical University and completed my residency in neurology at the same institution. With over 7 years of experience, I specialize in diagnosing and treating neurological disorders such as epilepsy, multiple sclerosis, and migraines. My approach to patient care is comprehensive, focusing on both medical treatment and lifestyle modifications to improve overall health. I am committed to providing compassionate care and staying updated with the latest advancements in neurology.",
                             SpecialtyId = 4
                         },
                         new
@@ -346,7 +350,8 @@ namespace Infrastructure.Migrations
                             Id = 6,
                             HospitalId = 2,
                             IdentityId = "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35",
-                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/Monika-Kirilova.jpg",
+                            ImgUrl = "https://healthsyncstorage.blob.core.windows.net/profile-images/d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35.jpg",
+                            Information = "I am a cardiologist with a strong commitment to patient care and education. I graduated from Sofia Medical University and completed my residency in cardiology at the same institution. With over 10 years of experience, I specialize in diagnosing and treating various heart conditions, including hypertension, coronary artery disease, and heart failure. My approach to patient care emphasizes prevention and lifestyle modifications, and I work closely with my patients to develop personalized treatment plans. I am dedicated to staying current with the latest advancements in cardiology to provide the best possible care.",
                             SpecialtyId = 3
                         },
                         new
@@ -530,6 +535,15 @@ namespace Infrastructure.Migrations
                             DoctorId = 2,
                             Rating = 5,
                             Reviewer = "Kristian Ivanov"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Comment = "Thank you for your exceptional care and expertise!",
+                            DateAndTime = new DateTime(2020, 7, 12, 16, 42, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 3,
+                            Rating = 5,
+                            Reviewer = "Kristian Ivanov"
                         });
                 });
 
@@ -669,6 +683,356 @@ namespace Infrastructure.Migrations
                         {
                             Id = 7,
                             DoctorId = 1,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 0,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DoctorId = 2,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 1,
+                            WorkDayEnd = new TimeOnly(16, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DoctorId = 2,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 2,
+                            WorkDayEnd = new TimeOnly(16, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DoctorId = 2,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 3,
+                            WorkDayEnd = new TimeOnly(16, 0, 0),
+                            WorkDayStart = new TimeOnly(11, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DoctorId = 2,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 4,
+                            WorkDayEnd = new TimeOnly(16, 0, 0),
+                            WorkDayStart = new TimeOnly(11, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DoctorId = 2,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 5,
+                            WorkDayEnd = new TimeOnly(16, 0, 0),
+                            WorkDayStart = new TimeOnly(11, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DoctorId = 2,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 6,
+                            WorkDayEnd = new TimeOnly(16, 0, 0),
+                            WorkDayStart = new TimeOnly(11, 30, 0)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            DoctorId = 2,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 0,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            DoctorId = 3,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 10,
+                            WeekDay = 1,
+                            WorkDayEnd = new TimeOnly(17, 0, 0),
+                            WorkDayStart = new TimeOnly(9, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            DoctorId = 3,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 10,
+                            WeekDay = 2,
+                            WorkDayEnd = new TimeOnly(17, 0, 0),
+                            WorkDayStart = new TimeOnly(9, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            DoctorId = 3,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 10,
+                            WeekDay = 3,
+                            WorkDayEnd = new TimeOnly(17, 0, 0),
+                            WorkDayStart = new TimeOnly(9, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            DoctorId = 3,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 4,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            DoctorId = 3,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 5,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            DoctorId = 3,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 6,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            DoctorId = 3,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 0,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            DoctorId = 4,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 45,
+                            WeekDay = 1,
+                            WorkDayEnd = new TimeOnly(22, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            DoctorId = 4,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 45,
+                            WeekDay = 2,
+                            WorkDayEnd = new TimeOnly(22, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            DoctorId = 4,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 45,
+                            WeekDay = 3,
+                            WorkDayEnd = new TimeOnly(22, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            DoctorId = 4,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 45,
+                            WeekDay = 4,
+                            WorkDayEnd = new TimeOnly(22, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            DoctorId = 4,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 45,
+                            WeekDay = 5,
+                            WorkDayEnd = new TimeOnly(22, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            DoctorId = 4,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 6,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            DoctorId = 4,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 0,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            DoctorId = 5,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 1,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            DoctorId = 5,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 2,
+                            WorkDayEnd = new TimeOnly(6, 0, 0),
+                            WorkDayStart = new TimeOnly(23, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            DoctorId = 5,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 3,
+                            WorkDayEnd = new TimeOnly(6, 0, 0),
+                            WorkDayStart = new TimeOnly(23, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            DoctorId = 5,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 4,
+                            WorkDayEnd = new TimeOnly(17, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 33,
+                            DoctorId = 5,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 15,
+                            WeekDay = 5,
+                            WorkDayEnd = new TimeOnly(17, 0, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 34,
+                            DoctorId = 5,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 6,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 35,
+                            DoctorId = 5,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 0,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 36,
+                            DoctorId = 6,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 60,
+                            WeekDay = 1,
+                            WorkDayEnd = new TimeOnly(20, 30, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 37,
+                            DoctorId = 6,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 60,
+                            WeekDay = 2,
+                            WorkDayEnd = new TimeOnly(20, 30, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 38,
+                            DoctorId = 6,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 60,
+                            WeekDay = 3,
+                            WorkDayEnd = new TimeOnly(20, 30, 0),
+                            WorkDayStart = new TimeOnly(10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 39,
+                            DoctorId = 6,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 60,
+                            WeekDay = 4,
+                            WorkDayEnd = new TimeOnly(20, 30, 0),
+                            WorkDayStart = new TimeOnly(12, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 40,
+                            DoctorId = 6,
+                            IsWorkDay = true,
+                            MeetingTimeMinutes = 60,
+                            WeekDay = 5,
+                            WorkDayEnd = new TimeOnly(20, 30, 0),
+                            WorkDayStart = new TimeOnly(12, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 41,
+                            DoctorId = 6,
+                            IsWorkDay = false,
+                            MeetingTimeMinutes = 0,
+                            WeekDay = 6,
+                            WorkDayEnd = new TimeOnly(0, 0, 0),
+                            WorkDayStart = new TimeOnly(0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 42,
+                            DoctorId = 6,
                             IsWorkDay = false,
                             MeetingTimeMinutes = 0,
                             WeekDay = 0,

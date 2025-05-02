@@ -379,13 +379,13 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "0d00ed0e-4f10-42a5-9e1f-aace562e5b08", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEM/ObRSIaOUtuVIy+mZW7uPTugAJqq1H9Ps/ZSzLXzmWYwrHO4YCR3QxKBl1qg6jrA==", null, false, "1978a642-3f8b-4487-b463-3713ba0215da", false, "m.marinova@mail.com" },
-                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "486a5e98-4e4e-4420-b891-079c715c4b93", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEOSQ+MZW2XJUwLUN0OH3UGtR1Asjh+e4MjCstHL8Tec8BCkHBUlapSh9RP3QLsXSzQ==", null, false, "39055533-3038-4f0f-97de-fa0e3ee6e726", false, "v.yankova@mail.com" },
-                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "ca470e85-7a74-494a-a4df-409127b71ba6", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEFNXJeH5+IGixemPR2LPQZ7/XYMwzKRVUy2+65QaBevoVnV0y8VUVurSMfwbcKSUOQ==", null, false, "f4df6499-6872-4340-b060-b1ecf694c241", false, "a.kirilov@mail.com" },
-                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "c22405ac-fd59-47b7-8fc8-aebf8800c00b", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEIZFLWBU0GBfLa5GICwHNk3BlKUD0mpmaOlcqZV3yzPDfXyD2xXxSja3U7LCpxLBxQ==", null, false, "dd9fae9c-3a67-48f6-a653-79e01bc76573", false, "k.conev@mail.com" },
-                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "995069ff-c10d-402d-bfd6-75058d99dddb", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAENAaVT2lz9YwLOW8Q0It3oYs9tb6tH/OSv6bcQ1614zndTZN/mgHk31XBYtNvk9kUQ==", null, false, "8aed1cc0-deb1-4107-aecf-2d7407a3c618", false, "i.ivanov@mail.com" },
-                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "c082968f-4898-4ee0-a302-b9a47da035ba", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAEA3j5DqCUBZNbq5KpwIhoWJFfKwjd05MCzfggMehSSr7GcnvIrQlyEL/mlnuNuzSQw==", null, false, "2233b87b-051f-4165-982d-8b51851c9a42", false, "m.kirilova@mail.com" },
-                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "6118dee0-7bf8-4d78-b9dc-b98d7ad26e12", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEJ3oIqB21qLJ6Mvg6scuYDNO2vC1tNPwViruXzZJSsQxMjknwwyYRc0fSM6PnhwDKA==", null, false, "e241922a-5eb1-4e93-8b90-60e3ae1b9b63", false, "i.ivanova@mail.com" }
+                    { "4d650e24-6b66-41e3-8391-efab8c31a1dd", 0, "183852b2-7fb0-404e-9d0f-01103dff2c0a", "m.marinova@mail.com", true, "Maria", "Marinova", false, null, "M.MARINOVA@MAIL.COM", "M.MARINOVA@MAIL.COM", "AQAAAAIAAYagAAAAEFoqTAw2yQ/iQMPYA2/JGHWKMsiK+gZ520dQEaSy5gr5Aa2TDec3gTnB62vZ01oulw==", null, false, "e391fc79-6ba1-4403-8610-6922f8bddd50", false, "m.marinova@mail.com" },
+                    { "78850da7-a0ff-42f3-a862-d162457910a0", 0, "2122ef41-6ca1-4c94-a83f-8f6ad35b35b9", "v.yankova@mail.com", true, "Vanya", "Yankova", false, null, "V.YANKOVA@MAIL.COM", "V.YANKOVA@MAIL.COM", "AQAAAAIAAYagAAAAEPNjNVeofJHRv22jj+Q61Xvfhg/BsIFZ5CclLEMqKM46E9Fa0XVdGfU7xOzW5Y/39Q==", null, false, "35832bdc-5177-493e-bf0c-e5cba53fa8d8", false, "v.yankova@mail.com" },
+                    { "88cd5a7b-01d8-49b4-8688-35cd23751532", 0, "25453aef-9d58-4757-82cc-5fd3d9ad0714", "a.kirilov@mail.com", true, "Aleks", "Kirilov", false, null, "A.KIRILOV@MAIL.COM", "A.KIRILOV@MAIL.COM", "AQAAAAIAAYagAAAAEKLpfjbPr3xcQ4OT+ZO2o+TbDz6Aoc98ZLYP6erZMn5i6ojr54eBCBxXLOdTqHy3Xw==", null, false, "76d3b694-4c92-488e-b640-bd7d087a9186", false, "a.kirilov@mail.com" },
+                    { "95189f02-fb1a-4700-95e3-6146b8aa8b15", 0, "3add8d92-daa8-4f38-ba0c-43507fc52f8c", "k.conev@mail.com", true, "Kiril", "Conev", false, null, "K.CONEV@MAIL.COM", "K.CONEV@MAIL.COM", "AQAAAAIAAYagAAAAEMhj5cBPrVfJDv0QI4lSSae8mxL0wUWpaBRz3VNjcXVHghq4EPZ8D8kRdlj7HV9/Eg==", null, false, "fed8dda5-d07e-4176-8031-f460e3ffd145", false, "k.conev@mail.com" },
+                    { "a3717562-385e-41ce-9eff-0f1b994e5548", 0, "5e9b9eb9-0ed4-4051-af7d-0fea842041c3", "i.ivanov@mail.com", true, "Ivan", "Ivanov", false, null, "I.IVANOV@MAIL.COM", "I.IVANOV@MAIL.COM", "AQAAAAIAAYagAAAAEPToz3vdvu26mAvn/hENl9CrOqqBTiGnJ/JVvp3JViR0h6hcOGPdGR1LUtj8E5zXwA==", null, false, "365be671-bf5e-4b7e-840a-1947b97514da", false, "i.ivanov@mail.com" },
+                    { "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", 0, "699c6705-0fe3-42af-8381-5568c54086db", "m.kirilova@mail.com", true, "Monika", "Kirilova", false, null, "M.KIRILOVA@MAIL.COM", "M.KIRILOVA@MAIL.COM", "AQAAAAIAAYagAAAAELvPn5upjUlzESJSYJStjjqdfXQHyKuH/S8AQGJRtW1lXpR1d/tPcCSZTVE2BrGK1Q==", null, false, "1beb54dc-b91e-42da-9b45-d1150c7d597e", false, "m.kirilova@mail.com" },
+                    { "f37b43ca-86a2-4b11-972d-5e0569f4deb3", 0, "cca9dd8b-2339-4fd9-8a19-8e845b259e0e", "i.ivanova@mail.com", true, "Ivana", "Ivanova", false, null, "I.IVANOVA@MAIL.COM", "I.IVANOVA@MAIL.COM", "AQAAAAIAAYagAAAAEEcPmawhhasIdD+BeSOA/V4YK2NYMNURTMj6n3ufrLJ5zCqs2rtCQzkhyLJencLO1w==", null, false, "4f5d4e00-fed0-4cb3-b60e-eb65f444a602", false, "i.ivanova@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -427,12 +427,12 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "ContactEmail", "ContactPhoneNumber", "HospitalId", "IdentityId", "ImgUrl", "Information", "SpecialtyId" },
                 values: new object[,]
                 {
-                    { 1, null, null, 1, "a3717562-385e-41ce-9eff-0f1b994e5548", "https://healthsyncstorage.blob.core.windows.net/profile-images/Ivan-Ivanov.jpg", "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care.", 1 },
-                    { 2, null, null, 1, "4d650e24-6b66-41e3-8391-efab8c31a1dd", "https://healthsyncstorage.blob.core.windows.net/profile-images/Maria-Marinova.jpg", null, 2 },
-                    { 3, null, null, 1, "88cd5a7b-01d8-49b4-8688-35cd23751532", "https://healthsyncstorage.blob.core.windows.net/profile-images/Aleks-Kirilov.jpg", null, 2 },
-                    { 4, null, null, 1, "95189f02-fb1a-4700-95e3-6146b8aa8b15", "https://healthsyncstorage.blob.core.windows.net/profile-images/Kiril-Conev.jpg", null, 3 },
-                    { 5, null, null, 2, "f37b43ca-86a2-4b11-972d-5e0569f4deb3", "https://healthsyncstorage.blob.core.windows.net/profile-images/Ivana-Ivanova.jpg", null, 4 },
-                    { 6, null, null, 2, "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", "https://healthsyncstorage.blob.core.windows.net/profile-images/Monika-Kirilova.jpg", null, 3 },
+                    { 1, null, null, 1, "a3717562-385e-41ce-9eff-0f1b994e5548", "https://healthsyncstorage.blob.core.windows.net/profile-images/a3717562-385e-41ce-9eff-0f1b994e5548.jpg", "I am Dr. Ivan Ivanov, an orthodontist with over 10 years of experience. I earned my Doctor of Dental Medicine (DMD) degree from Sofia Medical University, where I also completed my orthodontic specialization. I have worked in various reputable dental clinics, providing treatments such as braces, clear aligners, and other advanced orthodontic procedures for patients of all ages. I focus on delivering personalized care, creating treatment plans tailored to each patient’s specific needs. I hold certifications in advanced orthodontic techniques and regularly attend courses to stay updated with the latest advancements in the field. My goal is to ensure that every patient receives the best possible outcome. Known for my compassionate approach and attention to detail, I strive to help my patients achieve healthier, more beautiful smiles. My dedication to patient satisfaction and passion for orthodontics have earned me a solid reputation in the field, making me a trusted choice for care.", 1 },
+                    { 2, null, null, 1, "4d650e24-6b66-41e3-8391-efab8c31a1dd", "https://healthsyncstorage.blob.core.windows.net/profile-images/4d650e24-6b66-41e3-8391-efab8c31a1dd.jpg", "I graduated from the Medical University of Sofia and have been practicing medicine for over 12 years. Throughout my career, I have focused on internal medicine, always striving to offer thorough and personalized care. I believe in building strong relationships with my patients to ensure long-term health and well-being.", 2 },
+                    { 3, null, null, 1, "88cd5a7b-01d8-49b4-8688-35cd23751532", "https://healthsyncstorage.blob.core.windows.net/profile-images/88cd5a7b-01d8-49b4-8688-35cd23751532.jpg", "I am a dedicated endocrinologist with a passion for helping patients manage their hormonal health. I graduated from Sofia Medical University and completed my residency in endocrinology at the same institution. With over 8 years of experience, I specialize in treating conditions such as diabetes, thyroid disorders, and adrenal gland issues. My approach to patient care is holistic, focusing on both medical treatment and lifestyle modifications to achieve optimal health outcomes. I am committed to staying updated with the latest advancements in endocrinology to provide the best care possible.", 2 },
+                    { 4, null, null, 1, "95189f02-fb1a-4700-95e3-6146b8aa8b15", "https://healthsyncstorage.blob.core.windows.net/profile-images/95189f02-fb1a-4700-95e3-6146b8aa8b15.jpg", "I am a cardiologist with a strong commitment to patient care and education. I graduated from Sofia Medical University and completed my residency in cardiology at the same institution. With over 10 years of experience, I specialize in diagnosing and treating various heart conditions, including hypertension, coronary artery disease, and heart failure. My approach to patient care emphasizes prevention and lifestyle modifications, and I work closely with my patients to develop personalized treatment plans. I am dedicated to staying current with the latest advancements in cardiology to provide the best possible care.", 3 },
+                    { 5, null, null, 2, "f37b43ca-86a2-4b11-972d-5e0569f4deb3", "https://healthsyncstorage.blob.core.windows.net/profile-images/f37b43ca-86a2-4b11-972d-5e0569f4deb3.jpg", "I am a neurologist with a passion for understanding the complexities of the human brain and nervous system. I graduated from Sofia Medical University and completed my residency in neurology at the same institution. With over 7 years of experience, I specialize in diagnosing and treating neurological disorders such as epilepsy, multiple sclerosis, and migraines. My approach to patient care is comprehensive, focusing on both medical treatment and lifestyle modifications to improve overall health. I am committed to providing compassionate care and staying updated with the latest advancements in neurology.", 4 },
+                    { 6, null, null, 2, "d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35", "https://healthsyncstorage.blob.core.windows.net/profile-images/d99b0dbf-6a91-4dc0-a29e-9ffd46f79d35.jpg", "I am a cardiologist with a strong commitment to patient care and education. I graduated from Sofia Medical University and completed my residency in cardiology at the same institution. With over 10 years of experience, I specialize in diagnosing and treating various heart conditions, including hypertension, coronary artery disease, and heart failure. My approach to patient care emphasizes prevention and lifestyle modifications, and I work closely with my patients to develop personalized treatment plans. I am dedicated to staying current with the latest advancements in cardiology to provide the best possible care.", 3 },
                     { 7, null, null, 2, "78850da7-a0ff-42f3-a862-d162457910a0", null, null, 1 }
                 });
 
@@ -454,7 +454,8 @@ namespace Infrastructure.Migrations
                     { 6, "Your empathy and expertise are truly appreciated!", new DateTime(2024, 8, 4, 7, 0, 0, 0, DateTimeKind.Unspecified), 1, 5, "Kristian Ivanov" },
                     { 7, "More guidance on the next steps for my treatment would be helpful.", new DateTime(2024, 6, 15, 22, 12, 0, 0, DateTimeKind.Unspecified), 1, 2, "Viktor Terziev" },
                     { 8, "Thank you for your exceptional care and expertise!", new DateTime(2024, 4, 2, 8, 2, 0, 0, DateTimeKind.Unspecified), 2, 5, "Yordan Angelov" },
-                    { 9, "I couldn't be more pleased with the level of care I received. Your attentiveness, kindness, and expertise made a world of difference.", new DateTime(2022, 12, 12, 10, 43, 0, 0, DateTimeKind.Unspecified), 2, 5, "Kristian Ivanov" }
+                    { 9, "I couldn't be more pleased with the level of care I received. Your attentiveness, kindness, and expertise made a world of difference.", new DateTime(2022, 12, 12, 10, 43, 0, 0, DateTimeKind.Unspecified), 2, 5, "Kristian Ivanov" },
+                    { 10, "Thank you for your exceptional care and expertise!", new DateTime(2020, 7, 12, 16, 42, 0, 0, DateTimeKind.Unspecified), 3, 5, "Kristian Ivanov" }
                 });
 
             migrationBuilder.InsertData(
@@ -468,7 +469,42 @@ namespace Infrastructure.Migrations
                     { 4, 1, true, 30, 4, new TimeOnly(17, 30, 0), new TimeOnly(12, 30, 0) },
                     { 5, 1, true, 30, 5, new TimeOnly(17, 30, 0), new TimeOnly(9, 30, 0) },
                     { 6, 1, false, 0, 6, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
-                    { 7, 1, false, 0, 0, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) }
+                    { 7, 1, false, 0, 0, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 8, 2, true, 15, 1, new TimeOnly(16, 0, 0), new TimeOnly(10, 30, 0) },
+                    { 9, 2, true, 15, 2, new TimeOnly(16, 0, 0), new TimeOnly(10, 30, 0) },
+                    { 10, 2, true, 15, 3, new TimeOnly(16, 0, 0), new TimeOnly(11, 30, 0) },
+                    { 11, 2, true, 15, 4, new TimeOnly(16, 0, 0), new TimeOnly(11, 30, 0) },
+                    { 12, 2, true, 15, 5, new TimeOnly(16, 0, 0), new TimeOnly(11, 30, 0) },
+                    { 13, 2, true, 15, 6, new TimeOnly(16, 0, 0), new TimeOnly(11, 30, 0) },
+                    { 14, 2, false, 0, 0, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 15, 3, true, 10, 1, new TimeOnly(17, 0, 0), new TimeOnly(9, 0, 0) },
+                    { 16, 3, true, 10, 2, new TimeOnly(17, 0, 0), new TimeOnly(9, 0, 0) },
+                    { 17, 3, true, 10, 3, new TimeOnly(17, 0, 0), new TimeOnly(9, 0, 0) },
+                    { 18, 3, false, 0, 4, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 19, 3, false, 0, 5, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 20, 3, false, 0, 6, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 21, 3, false, 0, 0, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 22, 4, true, 45, 1, new TimeOnly(22, 0, 0), new TimeOnly(10, 0, 0) },
+                    { 23, 4, true, 45, 2, new TimeOnly(22, 0, 0), new TimeOnly(10, 0, 0) },
+                    { 24, 4, true, 45, 3, new TimeOnly(22, 0, 0), new TimeOnly(10, 0, 0) },
+                    { 25, 4, true, 45, 4, new TimeOnly(22, 0, 0), new TimeOnly(10, 0, 0) },
+                    { 26, 4, true, 45, 5, new TimeOnly(22, 0, 0), new TimeOnly(10, 0, 0) },
+                    { 27, 4, false, 0, 6, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 28, 4, false, 0, 0, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 29, 5, false, 0, 1, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 30, 5, true, 15, 2, new TimeOnly(6, 0, 0), new TimeOnly(23, 0, 0) },
+                    { 31, 5, true, 15, 3, new TimeOnly(6, 0, 0), new TimeOnly(23, 0, 0) },
+                    { 32, 5, true, 15, 4, new TimeOnly(17, 0, 0), new TimeOnly(10, 0, 0) },
+                    { 33, 5, true, 15, 5, new TimeOnly(17, 0, 0), new TimeOnly(10, 0, 0) },
+                    { 34, 5, false, 0, 6, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 35, 5, false, 0, 0, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 36, 6, true, 60, 1, new TimeOnly(20, 30, 0), new TimeOnly(10, 0, 0) },
+                    { 37, 6, true, 60, 2, new TimeOnly(20, 30, 0), new TimeOnly(10, 0, 0) },
+                    { 38, 6, true, 60, 3, new TimeOnly(20, 30, 0), new TimeOnly(10, 0, 0) },
+                    { 39, 6, true, 60, 4, new TimeOnly(20, 30, 0), new TimeOnly(12, 0, 0) },
+                    { 40, 6, true, 60, 5, new TimeOnly(20, 30, 0), new TimeOnly(12, 0, 0) },
+                    { 41, 6, false, 0, 6, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) },
+                    { 42, 6, false, 0, 0, new TimeOnly(0, 0, 0), new TimeOnly(0, 0, 0) }
                 });
 
             migrationBuilder.CreateIndex(

@@ -155,6 +155,7 @@ namespace Infrastructure.Database.Repositories
                     TotalReviews = d.Reviews.Where(r => r.DoctorId == d.Id).Count()
                 })
                 .OrderByDescending(d => d.Rating)
+                .ThenByDescending(d => d.TotalReviews)
                 .Take(3)
                 .ToListAsync();
         }
