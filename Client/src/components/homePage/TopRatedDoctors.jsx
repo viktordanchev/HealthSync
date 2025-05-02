@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import doctorProfile from '../../assets/images/doctor-profile.jpg';
 import apiRequest from '../../services/apiRequest';
 import Loading from '../Loading';
+import jwtDecoder from '../../services/jwtDecoder';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 function TopRatedDoctors() {
     const navigate = useNavigate();
+    const { isAuthenticated } = useAuthContext();
     const [isImageLoaded, setIsImageLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [doctors, setDoctors] = useState([]);
@@ -25,6 +28,19 @@ function TopRatedDoctors() {
 
         receiveData();
     }, []);
+
+    const handleJoinUs = () => {
+        if (isAuthenticated) {
+            const { roles } = jwtDecoder();
+
+            if (roles && roles.includes('Doctor')) {
+                navigate('/doctorProfile');
+                return;
+            }
+        }
+
+        navigate('/becomeDoctor');
+    };
 
     return (
         <section className="w-full h-full px-32 flex space-x-6 text-gray-700 lg:px-6 md:px-0 md:flex-col md:space-x-0 md:space-y-6 sm:px-0 sm:flex-col sm:space-x-0 sm:space-y-6">
@@ -71,7 +87,7 @@ function TopRatedDoctors() {
                 <p>If you're a doctor looking to elevate your career and connect with more patients, our platform is the right place for you. Join us and grow with a trusted medical community.</p>
                 <div className="text-center pt-6">
                     <button className="bg-blue-500 border-2 border-blue-500 text-white font-medium py-1 px-2 rounded hover:bg-white hover:text-blue-500"
-                        onClick={() => navigate("/becomeDoctor")}>
+                        onClick={handleJoinUs}>
                         Join Us
                     </button>
                 </div>
