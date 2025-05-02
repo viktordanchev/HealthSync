@@ -19,7 +19,7 @@ namespace HealthSync.Server.Controllers
         private IJwtTokenService _jwtTokenService;
         private IEmailSenderService _emailSender;
         private IMemoryCacheService _memoryCacheService;
-        private IBlobStorageServiceService _blobStorageServiceService;
+        private IBlobStorageService _blobStorageServiceService;
         private IChatService _chatService;
         private readonly IConfiguration _configs;
 
@@ -28,7 +28,7 @@ namespace HealthSync.Server.Controllers
             IJwtTokenService jwtTokenService,
             IEmailSenderService emailSender,
             IMemoryCacheService memoryCacheService,
-            IBlobStorageServiceService blobStorageServiceService,
+            IBlobStorageService blobStorageServiceService,
             IChatService chatService,
             IConfiguration configs)
         {

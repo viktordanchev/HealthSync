@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Services
 {
-    public class BlobStorageService : IBlobStorageServiceService
+    public class BlobStorageService : IBlobStorageService
     {
         private readonly string _connectionString;
 
@@ -52,13 +52,13 @@ namespace Infrastructure.Services
             return blobClient.Uri.AbsoluteUri;
         }
 
-        public async Task DeleteProfileImageAsync(IFormFile file, string container, string userId)
+        public async Task DeleteProfileImageAsync(string imageUrl, string container)
         {
+            var uri = new Uri(imageUrl);
+            
             BlobServiceClient blobServiceClient = new BlobServiceClient(_connectionString);
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(container);
-
-            var fileName = $"{userId}{Path.GetExtension(file.FileName)}";
-            BlobClient blobClient = containerClient.GetBlobClient(fileName);
+            BlobClient blobClient = containerClient.GetBlobClient(Path.GetFileName(uri.LocalPath));
 
             await blobClient.DeleteIfExistsAsync();
         }

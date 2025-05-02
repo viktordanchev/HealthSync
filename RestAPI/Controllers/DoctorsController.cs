@@ -1,6 +1,8 @@
 ﻿using System.Security.Claims;
+using Core.Constants;
 using Core.DTOs.RequestDtos.Doctors;
 using Core.DTOs.ResponseDtos.DoctorSchedule;
+using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,17 +19,20 @@ namespace RestAPI.Controllers
         private readonly IDoctorsService _doctorService;
         private readonly IDoctorScheduleService _doctorScheduleService;
         private readonly IJwtTokenService _jwtTokenService;
+        private readonly IBlobStorageService _blobStorageService;
 
         public DoctorsController(
             IUserService userService,
             IDoctorsService doctorService,
             IDoctorScheduleService doctorScheduleService,
-            IJwtTokenService jwtTokenService)
+            IJwtTokenService jwtTokenService,
+            IBlobStorageService blobStorageService)
         {
             _userService = userService;
             _doctorService = doctorService;
             _doctorScheduleService = doctorScheduleService;
             _jwtTokenService = jwtTokenService;
+            _blobStorageService = blobStorageService;
         }
 
         [HttpPost("getDoctors")]
@@ -174,13 +179,23 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost("updateProfileImage")]
-        [Consumes("multipart/form-data")]
-        public async Task<IActionResult> UpdateProfileImage(IFormFile profileImage)
+        public async Task<IActionResult> UpdateProfileImage([FromForm] UpdateProfileImageRequest data)
         {
             try
             {
-                var imageUrl = await _doctorService.UpdateProfileImageAsync(profileImage, User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                
+                var imageUrl = string.Empty;
+
+                if (data.ProfileImage != null) 
+                {
+                    imageUrl = await _blobStorageService.UploadProfileImageAsync(data.ProfileImage!,
+                        BlobStorageContainers.ProfileImages,
+                        User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                }
+                else
+                {
+                    await _blobStorageService.DeleteProfileImageAsync(data.OldProfileImageUrl!, BlobStorageContainers.ProfileImages);
+                }
+
                 return Ok(new { ImageUrl = imageUrl });
             }
             catch

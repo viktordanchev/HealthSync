@@ -1,11 +1,8 @@
-﻿using Core.Constants;
-using Core.DTOs.RequestDtos.Doctors;
+﻿using Core.DTOs.RequestDtos.Doctors;
 using Core.DTOs.ResponseDtos.Doctors;
 using Core.DTOs.ResponseDtos.Specialties;
-using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Service;
-using Microsoft.AspNetCore.Http;
 
 namespace Core.Services
 {
@@ -14,17 +11,14 @@ namespace Core.Services
         private readonly IDoctorsRepository _doctorsRepository;
         private readonly ISpecialtiesRepository _specialtiesRepo;
         private readonly IUserRepository _userRepo;
-        private readonly IBlobStorageServiceService _BlobStorageService;
 
         public DoctorsService(IDoctorsRepository repository,
             ISpecialtiesRepository specialtiesRepo,
-            IUserRepository userRepo,
-            IBlobStorageServiceService blobStorageService)
+            IUserRepository userRepo)
         {
             _doctorsRepository = repository;
             _specialtiesRepo = specialtiesRepo;
             _userRepo = userRepo;
-            _BlobStorageService = blobStorageService;
         }
 
         public async Task<IEnumerable<DoctorResponse>> GetDoctorsAsync(GetDoctorsRequest requestData, string userEmail)
@@ -95,13 +89,6 @@ namespace Core.Services
         public async Task UpdateProfileInfoAsync(ProfileInfoRequest requestData, string userId)
         {
             await _doctorsRepository.UpdateProfileInfoAsync(requestData, userId);
-        }
-
-        public async Task<string> UpdateProfileImageAsync(IFormFile file, string userId)
-        {
-            await _BlobStorageService.DeleteProfileImageAsync(file, BlobStorageContainers.ProfileImages, userId);
-
-            return await _BlobStorageService.UploadProfileImageAsync(file, BlobStorageContainers.ProfileImages, userId);
         }
     }
 }

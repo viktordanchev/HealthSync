@@ -39,8 +39,9 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
 
             if (isPhotoChanged) {
                 const formData = new FormData();
-                formData.append('profileImage', profilePhoto);
-
+                formData.append('OldProfileImageUrl', doctorData.imgUrl);
+                formData.append('ProfileImage', profilePhoto);
+                
                 const formDataResponse = await fetch(`${import.meta.env.VITE_API_URL}/doctors/updateProfileImage`, {
                     method: 'POST',
                     headers: {
@@ -48,7 +49,7 @@ function DoctorInfo({ doctorData, hospitals, specialties }) {
                     },
                     body: formData,
                 });
-
+                
                 const data = await formDataResponse.json();
                 updatedValues.profileImage = data.imageUrl;
             }

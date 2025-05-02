@@ -135,7 +135,7 @@ namespace Server.Extensions
             services.AddTransient<IEmailSenderService, EmailSenderService>();
             services.AddTransient<IMemoryCacheService, MemoryCacheService>();
             services.AddSingleton<IJwtTokenService, JwtTokenService>();
-            services.AddSingleton<IBlobStorageServiceService, BlobStorageService>();
+            services.AddSingleton<IBlobStorageService, BlobStorageService>();
             services.AddScoped<IDoctorsService, DoctorsService>();
             services.AddScoped<IMeetingsService, MeetingsService>();
             services.AddScoped<IReviewsService, ReviewsService>();
