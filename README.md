@@ -26,7 +26,7 @@
     <img src="https://github.com/user-attachments/assets/a2f723b7-df45-4297-bcbe-88ae32388840" width="250" height="300"><br>
     <p>Example of chat message with photo</p>
    </div>
-- Emails Sender - You will receive emails from: viktordanchev03@gmail.com - my personal email. I am using it, because i have to pay for domain if i want to use another.
+- Emails Sender - You will receive emails from: viktordanchev03@gmail.com - my personal email. I am using it, because i don't want to pay for domain.
   - When you try to make registration you will receive email for verification code.
   - For recover password you will receive reset link.
 
