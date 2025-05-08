@@ -23,7 +23,7 @@ namespace Infrastructure.Services
 
             foreach (var file in files)
             {
-                BlobClient blobClient = containerClient.GetBlobClient(Guid.NewGuid().ToString());
+                BlobClient blobClient = containerClient.GetBlobClient($"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}");
 
                 using (var stream = file.OpenReadStream())
                 {
