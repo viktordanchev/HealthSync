@@ -32,10 +32,8 @@ function NavigationBar({ searchParams, setSearchParams, specialties }) {
 
     return (
         <article className="rounded-full bg-maincolor p-2 flex justify-between items-center space-x-6 shadow-lg shadow-gray-300 md:flex-col md:py-2 md:rounded-xl md:space-y-2 md:space-x-0 sm:w-full sm:flex-col sm:py-2 sm:rounded-xl sm:space-y-2 sm:space-x-0">
-            <div className="flex justify-between space-x-2 md:justify-between sm:w-full sm:flex-col sm:space-x-0 sm:space-y-2">
-                <button
-                    className="bg-white h-9 px-4 rounded-full text-center hover:bg-gray-200"
-                    onClick={handleClear}>Clear</button>
+            <div className="w-72 flex justify-between space-x-2 md:justify-between sm:w-full sm:flex-col sm:space-x-0 sm:space-y-2">
+                <button className="bg-white h-9 px-4 rounded-full text-center hover:bg-gray-200" onClick={handleClear}>Clear</button>
                 <DropdownMenu
                     classes={"rounded-full"}
                     options={orderTypes}

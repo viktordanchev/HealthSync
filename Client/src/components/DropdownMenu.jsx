@@ -29,20 +29,20 @@ function DropdownMenu({ classes, options, optionType, setSelectedOption }) {
     };
 
     return (
-        <div className="relative text-gray-700" ref={dropdownRef}>
+        <div className="relative text-gray-700 w-full" ref={dropdownRef}>
             <div className={`flex justify-between items-center space-x-2 py-1 px-2 border-2 border-white bg-white cursor-pointer
                 ${classes}`}
                 onClick={() => setIsOpen(!isOpen)}>
-                <span className="w-0 flex-grow overflow-hidden whitespace-nowrap text-ellipsis" title={selected}>{selected}</span>
+                <span className="w-0 flex-grow overflow-hidden whitespace-nowrap text-ellipsis text-center" title={selected}>{selected}</span>
                 <FontAwesomeIcon icon={isOpen ? faAngleUp : faAngleDown} />
             </div>
             {isOpen && (
-                <ul className="absolute top-10 z-10 w-full bg-white border border-zinc-500 rounded shadow-2xl shadow-gray-500 max-h-60 overflow-auto">
+                <ul className="absolute left-1/2 top-10 -translate-x-1/2 z-10 min-w-full bg-white border border-zinc-500 rounded shadow-2xl shadow-gray-500 max-h-60 overflow-auto">
                     {options.map((option) => (
                         <li
                             key={option.id}
                             title={option.name}
-                            className="p-2 hover:bg-gray-200 cursor-pointer truncate"
+                            className="p-2 hover:bg-gray-200 cursor-pointer"
                             onClick={() => handleOptionClick(option)}
                         >
                             {option.name}
