@@ -44,7 +44,7 @@ function Chat() {
     return (
         <>
             {isAuthenticated && <>
-                {!isOpen ? <button className="fixed bottom-16 right-16 border border-zinc-500 flex items-center justify-center bg-blue-500 h-16 w-16 rounded-full shadow-xl transition-opacity duration-300 hover:bg-blue-600 md:bottom-12 md:right-12 md:h-14 md:w-14 sm:bottom-8 sm:right-8 sm:h-12 sm:w-12"
+                {!isOpen ? <button className="fixed bottom-6 right-6 border border-zinc-500 flex items-center justify-center bg-blue-500 h-16 w-16 rounded-full shadow-xl transition-opacity duration-300 hover:bg-blue-600 md:h-14 md:w-14 sm:h-12 sm:w-12"
                     onClick={() => setIsOpen(true)}>
                     <FontAwesomeIcon icon={faMessage} className="cursor-pointer text-white text-2xl sm:text-lg" />
                 </button> :

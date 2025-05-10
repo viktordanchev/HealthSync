@@ -86,7 +86,7 @@ function App() {
                             <Chat />
                             <button
                                 onClick={scrollToTop}
-                                className={`fixed bottom-36 right-16 bg-zinc-600 h-16 w-16 rounded-full shadow-xl hover:bg-zinc-500 transition-opacity duration-300 md:bottom-28 md:right-12 md:h-14 md:w-14 sm:bottom-24 sm:right-8 sm:h-12 sm:w-12 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                                className={`fixed bottom-24 right-6 bg-zinc-600 h-16 w-16 rounded-full shadow-xl hover:bg-zinc-500 transition-opacity duration-300 md:h-14 md:w-14 sm:bottom-20 sm:h-12 sm:w-12 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                                 <FontAwesomeIcon icon={faAngleUp} className="text-white text-4xl md:text-3xl sm:text-2xl" />
                             </button>
                         </main>
